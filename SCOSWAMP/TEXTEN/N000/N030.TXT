@@ -8,4 +8,4 @@ mud: you find yourself stuck. You struggle, manage to surface, breathless.
 attempt a move, but it's futile. The jaws close; the pain is brief. Your
 adventure ends in the reptile's stomach.
 
-MU +MORT.MB
+MU +DEATH.MB

@@ -12,6 +12,6 @@ Mistress. She greets you and calls you by your name.
 
    "Which sorcerer do you serve?" she asks.
 
-C 023 Pompatarte
-C 164 Gayolard
-C 288 Stratagus
+CI .P 023 Pompatarte
+CI .G 164 Gayolard
+CI .S 288 Stratagus

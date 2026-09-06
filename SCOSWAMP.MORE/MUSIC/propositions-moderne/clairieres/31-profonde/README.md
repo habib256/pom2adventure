@@ -1,6 +1,6 @@
 # Clairière 31 — La rivière profonde (`hub` 044)
 
-**`PROFONDE.MB.BIN` — 1 894 octets, 49,7 s, boucle, avec batterie.**
+**`DEEPWATER.MB.BIN` — 1 894 octets, 49,7 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
@@ -11,7 +11,7 @@
 | 254 | la Pierre de Flétrissure : l'arbre s'abat, fait pont, puis se décompose dans le courant |
 | 370 | la Pierre de Glace : un pont solide se forme à la surface |
 
-Zone de référence : **`riviere`** (`RIVIERE.MB`, *Le Pont sur la Croupie*).
+Zone de référence : **`riviere`** (`RIVER.MB`, *Le Pont sur la Croupie*).
 
 ## La pièce
 
@@ -81,6 +81,6 @@ stéréo 59/41.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/31-profonde
 python3 profonde.py
-python3 ../../../midi_to_mb.py profonde.mid PROFONDE.MB.BIN \
+python3 ../../../midi_to_mb.py profonde.mid DEEPWATER.MB.BIN \
     --bpm 136 --max 2304 --wav PROFONDE.wav
 ```

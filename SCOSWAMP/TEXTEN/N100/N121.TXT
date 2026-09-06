@@ -4,7 +4,7 @@ T 121 The Crossroads
 
    Which will you choose?
 
-MU CROISEMENT.MB
+MU CROSSROADS.MB
 C 170 Go north
 C 014 Go south
 C 275 Go east

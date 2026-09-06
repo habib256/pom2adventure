@@ -7,7 +7,7 @@ et sa massue ne vous frappe que rarement.
    Lorsqu'elle atteint son but, cependant, vous perdez 4 points d'ENDURANCE au
 lieu de 2 en raison de la puissance du coup. Aussi, faites attention !
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 12 GEANT
 MD 4
 MS 6

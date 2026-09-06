@@ -100,7 +100,7 @@ std::vector<std::uint8_t> encode(const std::vector<std::uint8_t>& raw) {
         const auto begin = i; i += run;
         while (i < raw.size() && i - begin < 128) {
             run = 1; while (i + run < raw.size() && raw[i + run] == raw[i] && run < 130) ++run;
-            if (run >= 3) break; i += run;
+            if (run >= 3) break; i += std::min(run, 128 - (i - begin));
         }
         out.push_back(std::uint8_t(i - begin - 1));
         out.insert(out.end(), raw.begin() + begin, raw.begin() + i);
@@ -120,7 +120,87 @@ std::vector<std::uint8_t> preview(const std::vector<std::uint8_t>& pair,
 }
 }
 
+// Stable machine interface for the local workshop. Options are validated by
+// its recipe reader; the legacy convert command deliberately keeps its defaults.
+int importImage(int argc, char** argv) {
+    if (argc != 8) return 2;
+    hgrpaint::ImportOptions opt;
+    int model = 1;
+    std::ifstream settings(argv[4]);
+    std::string key; double value;
+    if (!settings) return 2;
+    while (settings >> key >> value) {
+        if (key == "brightness") opt.brightness=value;
+        else if (key == "contrast") opt.contrast=value;
+        else if (key == "gamma") opt.gamma=value;
+        else if (key == "colourNoise") opt.chromaWeight=6.0-value*5.2;
+        else if (key == "diffusion") opt.diffusion=value;
+        else if (key == "dither") opt.dither=value!=0;
+        else if (key == "stretch") opt.stretch=value!=0;
+        else if (key == "kernel") opt.kernel=value ? hgrpaint::DitherKernel::JarvisMod : hgrpaint::DitherKernel::FloydSteinberg;
+        else if (key == "model") model=value;
+        else if (key == "cropX0") opt.cropX0=value;
+        else if (key == "cropY0") opt.cropY0=value;
+        else if (key == "cropX1") opt.cropX1=value;
+        else if (key == "cropY1") opt.cropY1=value;
+        else return 2;
+    }
+    if (!settings.eof() || model<0 || model>3) return 2;
+    const bool hgr=std::string(argv[3])=="hgr";
+    if (!hgr && std::string(argv[3])!="dhgr") return 2;
+    int w,h,n; auto* rgba=stbi_load(argv[2],&w,&h,&n,4);
+    if (!rgba) return 1;
+    // The block quantiser's fit uses square 140px cells. In DHGR those
+    // cells are twice as wide: letterbox the source in visual 280:192 space
+    // before its exact resampling/quantisation, otherwise fit squashes it.
+    std::vector<uint8_t> padded;
+    auto* input=rgba;
+    if (!hgr && model==1 && !opt.stretch) {
+        const bool crop=opt.cropX1>opt.cropX0 && opt.cropY1>opt.cropY0;
+        const int x0=crop?std::clamp(opt.cropX0,0,w-1):0;
+        const int y0=crop?std::clamp(opt.cropY0,0,h-1):0;
+        const int cw=(crop?std::clamp(opt.cropX1,x0+1,w):w)-x0;
+        const int ch=(crop?std::clamp(opt.cropY1,y0+1,h):h)-y0;
+        const int pw=std::max(cw,(ch*35+23)/24), ph=std::max(ch,(cw*24+34)/35);
+        padded.assign(static_cast<size_t>(pw)*ph*4,0);
+        for(int yy=0;yy<ch;yy++)
+            std::copy_n(rgba+((y0+yy)*w+x0)*4,cw*4,
+                        padded.data()+(((ph-ch)/2+yy)*pw+(pw-cw)/2)*4);
+        w=pw;h=ph;input=padded.data();opt.stretch=true;
+        opt.cropX0=opt.cropY0=opt.cropX1=opt.cropY1=0;
+    }
+    std::vector<uint8_t> raw(hgr?kHgrBytes:kDhgrBytes);
+    if (hgr) hgrpaint::imageToHgrPage(input,w,h,opt,raw.data());
+    else if (model==0) hgrpaint::imageToDhgrPage560(input,w,h,opt,raw.data());
+    else if (model==2) hgrpaint::imageToDhgrMonoPage(input,w,h,opt,raw.data());
+    else if (model==3) hgrpaint::imageToDhgrPage560Ntsc(input,w,h,opt,raw.data());
+    else hgrpaint::imageToDhgrPage(input,w,h,opt,raw.data());
+    stbi_image_free(rgba);
+    if (!writeFile(argv[5],hgr?raw:encode(raw))) return 1;
+    // Full dot resolution, decoded by POM2's own ColorNTSC scanline path.
+    const int pw=hgr?280:560;
+    std::vector<uint32_t> pixels(pw*192);
+    for (int y=0;y<192;y++) {
+        auto* row=pixels.data()+y*pw;
+        const auto base=hgrOffset(0,y);
+        if (hgr) hgrpaint::hgrDecodeScanlineRgb(raw.data()+base,row);
+        else if (model==2) {
+            for (int x=0;x<560;x++) {
+                const auto byte=raw[base+((x/7)&1)*8192+(x/14)];
+                row[x]=(byte&(1<<(x%7)))?0xffffffff:0xff000000;
+            }
+        } else hgrpaint::dhgrDecodeScanlineRgb(raw.data()+base,raw.data()+8192+base,row);
+    }
+    if (!stbi_write_png(argv[6],pw,192,4,pixels.data(),pw*4)) return 1;
+    if (!hgr) {
+        const auto rgb=preview(raw,kPaletteChatMauve);
+        if (!stbi_write_png(argv[7],280,192,3,rgb.data(),280*3)) return 1;
+    } else if (!stbi_write_png(argv[7],pw,192,4,pixels.data(),pw*4)) return 1;
+    return 0;
+}
+
 int main(int argc, char** argv) {
+    if (argc>1 && std::string(argv[1])=="import") return importImage(argc,argv);
     if (argc>=3 && std::string(argv[1])=="validate") {
         std::vector<std::uint8_t> packed,raw;
         if(!readFile(argv[2],packed)||!decode(packed,raw)){std::cerr<<"invalid DHRR v1 stream\n";return 1;}

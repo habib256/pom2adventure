@@ -45,7 +45,7 @@ tonique est le procede de la zone.
 A'(8).
 
     python3 arene.py && python3 ../../../midi_to_mb.py arene.mid \\
-        ARENE.MB.BIN --bpm 164 --max 2304 --wav ARENE.wav
+        ARENA.MB.BIN --bpm 164 --max 2304 --wav ARENE.wav
 """
 import sys
 from pathlib import Path

@@ -17,6 +17,6 @@ pour vous aider ?" interroge-t-il. Vous lui parlez de votre mission.
    Au service de quel Sorcier vous etes-vous mis ?
 
 GX CAPE
-C 244 Gayolard
-C 317 Stratagus
-C 103 Pompatarte
+CI .G 244 Gayolard
+CI .S 317 Stratagus
+CI .P 103 Pompatarte

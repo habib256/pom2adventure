@@ -8,5 +8,5 @@ you notice that only one path leads there: the one you took.
 
    You greet the Garden Master and retrace your steps westward.
 
-MU JARDINS.MB
+MU GARDENS.MB
 C 363 Return westward

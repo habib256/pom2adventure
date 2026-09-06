@@ -6,4 +6,7 @@ visibly furious, but without being seriously harmed.
    You will now have to fight them, but their total STAMINA is reduced by 2
 points before the start of combat.
 
-C 028 Face the Sword Trees
+MU +BATTLE.MB
+M 9 10 SWORD TREES
+MI 028
+MV 362

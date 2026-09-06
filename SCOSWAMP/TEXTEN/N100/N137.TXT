@@ -7,7 +7,7 @@ T 137 Return Facing the Slime
    Otherwise, it blocks your way again, and any wounds you may have dealt it
 have healed in the meantime. You must weigh once more the best way out.
 
-MU VASE.MB
+MU MUD.MB
 C 153 Continue your journey
 C 085 Run away
 C 257 Try to jump over it

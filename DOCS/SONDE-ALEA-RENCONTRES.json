@@ -1,0 +1,126 @@
+[
+  {
+    "delay": 0,
+    "key": "F",
+    "state": "1db50000",
+    "hero": {
+      "hab": 9,
+      "hab0": 9,
+      "end": 20,
+      "end0": 20,
+      "cha": 9,
+      "cha0": 9,
+      "gold": 20,
+      "bonus": 0,
+      "stones": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "objects": 1,
+      "amulets": 0
+    }
+  },
+  {
+    "delay": 0.3,
+    "key": "F",
+    "state": "3e2b0000",
+    "hero": {
+      "hab": 8,
+      "hab0": 8,
+      "end": 16,
+      "end0": 16,
+      "cha": 9,
+      "cha0": 9,
+      "gold": 20,
+      "bonus": 0,
+      "stones": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "objects": 1,
+      "amulets": 0
+    }
+  },
+  {
+    "delay": 0.7,
+    "key": "F",
+    "state": "872a0000",
+    "hero": {
+      "hab": 10,
+      "hab0": 10,
+      "end": 21,
+      "end0": 21,
+      "cha": 7,
+      "cha0": 7,
+      "gold": 20,
+      "bonus": 0,
+      "stones": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "objects": 1,
+      "amulets": 0
+    }
+  },
+  {
+    "delay": 0,
+    "key": "f",
+    "state": "92a90000",
+    "hero": {
+      "hab": 8,
+      "hab0": 8,
+      "end": 21,
+      "end0": 21,
+      "cha": 7,
+      "cha0": 7,
+      "gold": 20,
+      "bonus": 0,
+      "stones": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "objects": 1,
+      "amulets": 0
+    }
+  }
+]

@@ -34,7 +34,7 @@ Re phrygien, 138 a la noire, 26 mesures a 4/4, 45,2 s.
 Forme intro(4) - A(8) - B(8) - A'(6).
 
     python3 vase.py && python3 ../../../midi_to_mb.py vase.mid \\
-        VASE.MB.BIN --bpm 138 --max 2304 --wav VASE.wav
+        MUD.MB.BIN --bpm 138 --max 2304 --wav VASE.wav
 """
 import sys
 from pathlib import Path

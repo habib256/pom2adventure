@@ -1,14 +1,19 @@
-Canyons de Cristal de Virelia
-------------------------------
+T 012 Han Seul et Chewpaca
 
-De hautes parois de cristal s'elevent comme des tuyaux d'orgue.
-Le vent les fait chanter avec des tons purs.
-Des eclats scintillent sur le sol du canyon.
-L'air est frais et tres clair.
+   Le contrebandier au gilet ne leve pas les yeux de ses billets. "Si
+c'est pour un autographe, c'est cinquante. Si c'est pour un transport,
+c'est deux mille et je ne demande pas ce qu'il y a dans la caisse."
 
-Tenez-vous pres d'un mur sur et cadrez les chants a l'arriere.
-Ne touchez pas les eclats detaches a mains nues.
+   A cote de lui, le copilote poilu occupe deux chaises et une partie de
+la troisieme. Il grogne une phrase de trois syllabes. Han Seul traduit
+sans se retourner : "Il dit bonjour." Le copilote grogne quatorze
+syllabes de plus. "Il dit bonjour."
 
-C 002 Retour aux forets de Sylvaria Prime
-C 008 Visiter la cite du vent d'Aeolis
-C 010 Naviguer sur la mer
+   Chewpaca tient sa patte gauche serree contre lui, tres discretement,
+comme on tient une chose qui fait mal quand personne ne regarde.
+
+   Sous la table, un sac de croquettes pour chat, enorme, incongru.
+
+C 018 Acheter le sac de croquettes
+C 015 Demander a voir la patte
+C 010 Retourner dans la salle

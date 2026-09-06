@@ -12,7 +12,7 @@ superieure, vous subirez une blessure selon les regles habituelles.
    Si vous tuez l'une des deux grenouilles, le combat se poursuit contre
 l'autre selon les regles normales.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 5 6 PREMIERE GRENOUILLE
 M 6 5 DEUXIEME GRENOUILLE
 MV 230

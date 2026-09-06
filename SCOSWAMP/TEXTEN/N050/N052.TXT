@@ -11,4 +11,4 @@ be taking too great a risk," he objects.
 
    END OF ADVENTURE.
 
-MU +MORT.MB
+MU +DEATH.MB

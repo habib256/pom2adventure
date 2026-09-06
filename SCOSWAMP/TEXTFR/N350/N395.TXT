@@ -10,8 +10,9 @@ fermer l'oeil. Vous perdez ainsi 1 point d'ENDURANCE.
 
    Qu'allez-vous faire a present ?
 
+E OR -1
 E ENDURANCE -1
 C 116 Vous enfouir la tete sous l'oreiller
 C 236 Descendre en brandissant votre epee
-C 078 Aller a la "Lance Tordue"
-C 289 Aller au "Cheval Volant de Tancrede"
+CG 1 078 Aller a la "Lance Tordue" (1 Piece d'Or)
+CG 1 289 Aller au "Cheval Volant de Tancrede" (1 Piece d'Or)

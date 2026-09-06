@@ -1,0 +1,16 @@
+T 020 The Gloom Star Hangar
+
+   The Convertible sets down in a hangar the size of a cathedral, under a
+thousand dead-eyed floodlights. Everywhere, soldiers in white armour march in
+step and miss the turn. This is the Gloom Star, the worst-lit battle station
+in the galaxy: no window, no reflection, not one decent key light. A
+nightmare for a content creator.
+
+   At the foot of the ramp, two troupers are checking passes with touching
+seriousness. One of them is holding the list upside down.
+
+   -- Halt! Identify yourself!
+
+CI UNIF 022 March down the ramp, helmet screwed on
+CN UNIF 021 Smile, wave and try the charm
+C 003 Lift off again while there is still time

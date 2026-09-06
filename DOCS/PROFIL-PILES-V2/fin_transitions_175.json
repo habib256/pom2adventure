@@ -1,0 +1,10 @@
+{
+  "scenario": "fin_transitions_175",
+  "assertions": 21,
+  "failures": [],
+  "seconds": 14.08965802192688,
+  "maxima": {
+    "hardware": 57,
+    "c_call": 82
+  }
+}

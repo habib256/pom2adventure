@@ -1,0 +1,155 @@
+{
+  "id": "SPACETRIP",
+  "titre": "Space Trip",
+  "commentaire": [
+    "Le second jeu du depot, decrit pour le meme lecteur. Depuis la Partie 1",
+    "« Notre Univers » (voir SPACETRIP.MORE/BIBLE.md), SPACETRIP ecrit ses pages",
+    "au FORMAT DE SCOSWAMP -- T, V, G, GX, C, CI, CN, GU -- parce qu'un jeu",
+    "d'etapes, d'enigmes et d'objets ne tient pas avec la seule directive C.",
+    "Le sac a dos y est le fil de selfies du heros.",
+    "",
+    "Ce qui reste propre a SPACETRIP tient ici : textes a plat dans TXTFR/,",
+    "images HGR brutes de 8192 octets, pas de carte, pas de Feuille d'Aventure,",
+    "pas de Pierres. Son moteur Apple II (SPACETRIP/spacetrip.c) lit ce meme",
+    "sous-ensemble de directives."
+  ],
+  "moteur": {
+    "colonnes": 80,
+    "lignes": 24,
+    "ligneTexte0": 1,
+    "lignesTexte": 18,
+    "ligneLieu": 19,
+    "ligneChoix0": 20,
+    "maxChoix": 5,
+    "maxAdversaires": 0,
+    "pageMax": 99,
+    "pageDepart": 1,
+    "feuille": false
+  },
+  "langues": [
+    {
+      "code": "FR",
+      "nom": "Francais"
+    },
+    {
+      "code": "EN",
+      "nom": "English"
+    }
+  ],
+  "bucket": 0,
+  "titrePage": {
+    "source": "directive-T"
+  },
+  "assets": {
+    "texte": "SPACETRIP/TXT{LANG}/{PAGE}.TXT",
+    "objets": "SPACETRIP/OBJ{LANG}.TXT"
+  },
+  "messages": {
+    "FR": {
+      "M_TOUCHES": "ESPACE=VUE  A-E=CHOIX  I=CHAINE  Q=QUITTER",
+      "M_K_CONTINUER": "continuer",
+      "M_ESPACE_CONTINUER": "[ESPACE] continuer",
+      "M_MORT_RECOMMENCER": "[R] recommencer le voyage",
+      "M_K_SAC": "votre chaine",
+      "M_SAC_A_DOS": "@COSMOSELFIE -- vos selfies et votre materiel",
+      "M_AUCUNE_PIERRE_MAGIQUE": "Rien encore. Pas un selfie, pas un objet. Douze abonnes.",
+      "M_UNE_PIERRE_SE": "[I/ESC] fermer",
+      "M_PIERRE_ABSENTE": "Il vous manque quelque chose pour ca."
+    },
+    "EN": {
+      "M_TOUCHES": "SPACE=VIEW  A-E=CHOICE  I=CHANNEL  Q=QUIT",
+      "M_K_CONTINUER": "continue",
+      "M_ESPACE_CONTINUER": "[SPACE] continue",
+      "M_MORT_RECOMMENCER": "[R] start the trip again",
+      "M_K_SAC": "your channel",
+      "M_SAC_A_DOS": "@COSMOSELFIE -- your selfies and your gear",
+      "M_AUCUNE_PIERRE_MAGIQUE": "Nothing yet. Not one selfie, not one item. Twelve followers.",
+      "M_UNE_PIERRE_SE": "[I/ESC] close",
+      "M_PIERRE_ABSENTE": "You are missing something for that."
+    }
+  },
+  "images": [
+    {
+      "id": "master",
+      "nom": "Master (avant HGR)",
+      "type": "png",
+      "chemin": "SPACETRIP.MORE/GENERATED/{IMG}.png",
+      "note": "Le master pulp genere depuis SPACETRIP.MORE/manifest.jsonl ; la conversion HGR en sort IMG/{IMG}.HGR.BIN."
+    },
+    {
+      "id": "hgr",
+      "nom": "HGR du disque (280x192)",
+      "type": "hgr-brut",
+      "chemin": "SPACETRIP/IMG/{IMG}.HGR.BIN",
+      "note": "Page HGR brute, sans en-tete ni compression : le format de ce jeu-la."
+    },
+    {
+      "id": "preview-hgr",
+      "nom": "Apercu PNG HGR",
+      "type": "png",
+      "chemin": "SPACETRIP.MORE/HGR-PREVIEW/{IMG}.png",
+      "note": "L'apercu que SPACETRIP.MORE/TOOLS/convert_images.sh depose a cote du .HGR.BIN."
+    }
+  ],
+  "directives": [
+    {
+      "jeton": "GX",
+      "troisieme": " ",
+      "effetEntree": true,
+      "aide": "retire un objet ou un drapeau"
+    },
+    {
+      "jeton": "G",
+      "troisieme": "*",
+      "effetEntree": true,
+      "aide": "donne un objet ou pose un drapeau"
+    },
+    {
+      "jeton": "CI",
+      "troisieme": " ",
+      "effetEntree": false,
+      "aide": "choix conditionne a la possession"
+    },
+    {
+      "jeton": "CN",
+      "troisieme": " ",
+      "effetEntree": false,
+      "aide": "choix conditionne a l'absence"
+    },
+    {
+      "jeton": "GU",
+      "troisieme": " ",
+      "effetEntree": false,
+      "aide": "choix qui exige et CONSOMME un objet"
+    },
+    {
+      "jeton": "V",
+      "troisieme": "*",
+      "effetEntree": true,
+      "aide": "deja venu : detour vers <id>, les autres pages du lieu suivent"
+    },
+    {
+      "jeton": "T",
+      "troisieme": "*",
+      "effetEntree": false,
+      "aide": "titre de la page"
+    },
+    {
+      "jeton": "C",
+      "troisieme": "*",
+      "effetEntree": false,
+      "aide": "choix : <id> <libelle>"
+    }
+  ],
+  "pierres": [],
+  "amulettes": [],
+  "objetsSpeciaux": {
+    "epeeMagique": "",
+    "anneauBoussole": ""
+  },
+  "directivesCommentaire": [
+    "Le sous-ensemble de SCOSWAMP que SPACETRIP emploie, dans l'ordre qui fait",
+    "foi : GX devant G, sinon 'G ' avalerait 'GX'. Le moteur Apple II de",
+    "SPACETRIP lit exactement ces huit-la et rien d'autre."
+  ]
+}

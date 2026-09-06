@@ -13,4 +13,4 @@ leurs arbaletes sur votre poitrine.
 fleches vous transpercent le corps. Vous vous ecroulez sur le sol, tue sur le
 coup. C'est ainsi que se termine votre aventure.
 
-MU +MORT.MB
+MU +DEATH.MB

@@ -1,4 +1,5 @@
 T 210 Retour a la clairiere maudite
+AC
 
    Vous retrouvez la clairiere ou la Bete Immonde vous avait attaque. Le sol
 porte encore les traces du combat, couvert de griffures et de terre remuee.
@@ -6,6 +7,6 @@ porte encore les traces du combat, couvert de griffures et de terre remuee.
    Un silence lourd pese entre les arbres, comme si le lieu retenait son
 souffle, attendant votre decision.
 
-MU BETE.MB
-C 243 Si la creature est morte et que le lieu est sur
-C 143 Si la Bete Immonde vit encore dans la clairiere
+MU BEAST.MB
+CV 125 243 Si la creature est morte et que le lieu est sur
+CX 125 143 Si la Bete Immonde vit encore dans la clairiere

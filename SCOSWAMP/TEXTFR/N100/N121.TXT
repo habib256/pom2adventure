@@ -4,7 +4,7 @@ T 121 Le croisement
 
    Laquelle allez-vous choisir ?
 
-MU CROISEMENT.MB
+MU CROSSROADS.MB
 C 170 Aller vers le nord
 C 014 Aller vers le sud
 C 275 Aller vers l'est

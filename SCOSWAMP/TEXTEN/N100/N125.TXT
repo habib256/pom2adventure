@@ -6,5 +6,5 @@ stone, as a memento of this tough fight.
    You look for another path to leave the clearing, but there is none. You
 must leave by the path by which you came.
 
-MU BETE.MB
+MU BEAST.MB
 C 279 Go back eastward

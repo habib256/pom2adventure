@@ -1,14 +1,18 @@
-Comet Boardwalk
-----------------
+T 004 The inner sector
 
-Here you arrive on a small comet near perihelion.
-Jets of gas roar from cracks in the ice.
-A secure boardwalk follows the ridge above a bright tail.
-The light is harsh and the shadows are sharp.
+   The inner sector: trade lanes, stations that smell of fried grease, and
+enough witnesses to make any small mistake go galactic before you have
+finished making it.
 
-This is a perfect place for a bold selfie with the tail behind you.
-Keep your boots locked to the deck during outgassing bursts.
+   Four beacons answer your ping. The Cantina of Mos Ugly, which serves a
+drink the law calls fuel. The Gloom Star, an artificial moon that is not a
+moon. The freighter Nostalgo, silent for eleven months. And the Orbital
+Dump, where the universe throws away what it regrets.
 
-C 001 Return to base
-C 005 Float among the mountains of Myria
-C 009 Surf to Tethys Station
+   The Convertible is waiting for a heading.
+
+C 010 The Cantina of Mos Ugly
+C 020 The Gloom Star
+C 030 The freighter Nostalgo
+C 080 The Orbital Dump
+C 003 Stay in the cockpit

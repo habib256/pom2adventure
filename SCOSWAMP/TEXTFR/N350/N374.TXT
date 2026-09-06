@@ -5,7 +5,7 @@ T 374 Magie contre la Bete Immonde
    Quel sortilege allez-vous lui lancer ?
 
 GU GR 228 Croissance
-C 299 Terreur
-C 060 Illusion
-C 160 Amitie
+CU TERREUR 299 Terreur
+CU ILLUSION 060 Illusion
+CU AMITIE 160 Amitie
 C 011 Aucun de ceux-ci

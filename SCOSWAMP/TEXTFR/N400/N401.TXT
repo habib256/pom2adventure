@@ -9,4 +9,4 @@ rien de chaleureux, et a la vue de ce qu'il tient dans les mains, vous vous
 mettez a trembler de tous vos membres. Inutile de preciser que votre aventure
 est terminee.
 
-MU +MORT.MB
+MU +DEATH.MB

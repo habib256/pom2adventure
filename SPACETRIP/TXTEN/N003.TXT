@@ -1,15 +1,12 @@
-Supermassive Black Hole
-------------------------
+T 003 The cockpit of the Convertible
 
-Here you are facing the ultimate cosmic abyss: Sagittarius A*, the
-supermassive black hole at the heart of our galaxy! Its dark silhouette
-stands majestically against the backdrop of an incandescent accretion disk.
-The titanic gravitational forces distort space-time itself.
+   The star chart turns slowly. The ring light of the Holophone is
+waiting. Somewhere a million followers are waiting too, and do not know
+it.
 
-The spectacle is breathtaking. Be careful, however, not to get too
-close to the event horizon, or your selfie might end up stretched
-to the end of time!
+   Where do you go?
 
-C 001 Return to base
-C 006 Visit the magnetar aurora dome
-C 013 Approach the ancient gate of Kalyx
+C 004 Course for the inner sector
+C 005 Course for the outer sector
+C 006 Open your channel
+C 090 Call the Vortex Sponsor

@@ -1,6 +1,6 @@
 # Clairière 15 — Le pont sur la rivière Croupie
 
-**`PONT.MB.BIN` — 1 946 octets, 40,8 s, boucle.**
+**`BRIDGE.MB.BIN` — 1 946 octets, 40,8 s, boucle.**
 
 ## La clairière
 
@@ -9,7 +9,7 @@
 | `hub` | **045** |
 | Pages | 138 (l'arrivée), 045 (le pont suspect), 101 (le vieux pont) |
 | Case | (3,3) |
-| Zone de référence | `riviere` (`RIVIERE.MB`) |
+| Zone de référence | `riviere` (`RIVER.MB`) |
 | Sorties | N → 331, S → 303 |
 
 **Le seul passage nord ⇄ sud du Marais** (`CARTOGRAPHIE.md` § 1) : douze
@@ -97,6 +97,6 @@ Le tempo passe de 150 à **154** : la marche a besoin d'aller quelque part.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/15-pont
 python3 pont.py
-python3 ../../../midi_to_mb.py pont.mid PONT.MB.BIN \
+python3 ../../../midi_to_mb.py pont.mid BRIDGE.MB.BIN \
     --bpm 154 --max 2304 --wav PONT.wav
 ```

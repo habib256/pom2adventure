@@ -1,0 +1,14 @@
+T 061 Chagrin se mouche
+
+   Vous depliez la serviette de bain et vous la lui posez sur les genoux. Le
+robot la regarde pendant six secondes -- une eternite, pour lui.
+
+   "Une serviette. Personne ne m'avait jamais donne de serviette." Il se
+mouche dedans bruyamment, ce qui pose plusieurs questions d'anatomie, puis il
+la plie en huit et la garde.
+
+   "Je reste profondement malheureux", precise-t-il en se poussant contre la
+paroi. "Mais passez. Vraiment. Passez."
+
+G .CHAG
+C 062 Longer le couloir blanc jusqu'a l'oeil rouge

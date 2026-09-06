@@ -1,0 +1,18 @@
+T 068 Maison repond
+V 067
+
+   Vous devissez la pile de l'Holophone et vous la glissez dans son montage :
+un tourne-disque casse, un parapluie et une scie circulaire. Personne ne sait
+pourquoi ca marche. Ca marche.
+
+   L'index s'allume plein feu. La reserve devient rouge. Une voix minuscule
+sort du parapluie, tres lointaine, tres nette, et dit quelque chose dans une
+langue de flute.
+
+   Le petit bonhomme gris se met a pleurer, se serre contre vous et leve son
+doigt allume au-dessus de vos deux tetes : le plus bel eclairage de votre
+carriere.
+
+G S4
+C 062 Ressortir dans le couloir blanc
+C 003 Regagner le Cabriolet

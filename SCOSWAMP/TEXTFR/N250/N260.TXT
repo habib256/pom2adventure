@@ -11,4 +11,4 @@ dernier regard vers la Maitresse revele son regret. Les oiseaux s'eloignent;
 il est deja trop tard : vous sombrez. Votre corps cede; vos forces vous
 abandonnent; l'aventure s'acheve. FIN DE L'AVENTURE.
 
-MU +MORT.MB
+MU +DEATH.MB

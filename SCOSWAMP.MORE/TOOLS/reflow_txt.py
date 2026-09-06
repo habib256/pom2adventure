@@ -66,7 +66,8 @@ RULE = re.compile(r"^[-=_*~#]{4,}\s*$")
 # L'ordre de l'alternance FAIT FOI : `M` avant `MV` avalerait la ligne MV et
 # wrap() la replierait dans le corps. Les deux lettres passent donc devant la
 # lettre seule du meme prefixe, ici comme dans classify_line.
-DIRECTIVE = re.compile(r"^(MD|MS|MI|MV|MB|MU|M|E0|ED|E|PC|PD|PO|PX|P|TR|CF|CP|CU|CI|CN|CA|CL|CE|CS|DV|GU|GX|GA|G|V)(?: |$)")
+DIRECTIVE = re.compile(r"^(AC|MM|MF|MR|MD|MS|MI|MV|MB|MU|M|E0|ED|EH|E|PC|PD|PO|PS|PX|P|TR|CF|CP|CU|CI|CN|CV|CX|CG|CB|CT|CA|CL|CE|CS|DV|GU|GX|GA|G|VR|V)(?: |$)")
+CHOICE = re.compile(r"^(C|CF|CP|CU|CI|CN|CV|CX|CG|CB|CT|CA|GU) ")
 LEGACY_TITLE = re.compile(r"^\s*(\d{1,3})\s*:\s*(.+?)\s*$")
 
 # ── Derivation des combats depuis la prose ──────────────────────────────────
@@ -588,7 +589,7 @@ def _cut(text, m):
 
 def derive_revisit(body, choices, directives):
     """Rend (corps, choix, ligne V) pour une clairiere a description double."""
-    if any(d.startswith("V ") for d in directives):
+    if any(d.startswith(("V ", "VR ", "AC")) for d in directives):
         return body, choices, None
     text = "\n".join(body)
     m = REVISIT.search(text)
@@ -706,13 +707,20 @@ def choice_rows(choices):
         rows += 1
     return rows
 
-def render(scene_id, title, body, choices, directives):
+def render(scene_id, title, body, choices, directives, mechanics_order=None):
+    if mechanics_order is not None:
+        # Reflow only the prose. Preserve the relative order of effects and
+        # choices, including conditional choices and the flee directive.
+        return "\n".join([f"T {scene_id:03d} {title}"] +
+                [line for line in mechanics_order if line.startswith(("V ", "VR ", "AC"))] +
+                [""] + body + [""] +
+                [line for line in mechanics_order if not line.startswith(("V ", "VR ", "AC"))]) + "\n"
     out = [f"T {scene_id:03d} {title}"]
     # La ligne V passe devant tout : le moteur court-circuite la page des
     # qu'il la lit, et une ligne E placee avant elle serait appliquee pour
     # rien -- une seconde fois, en fait, puisqu'on est deja passe par la.
-    out += [d for d in directives if d.startswith("V ")]
-    directives = [d for d in directives if not d.startswith("V ")]
+    out += [d for d in directives if d.startswith(("V ", "VR ", "AC"))]
+    directives = [d for d in directives if not d.startswith(("V ", "VR ", "AC"))]
     out += [""]
     out += body
     out.append("")
@@ -839,19 +847,58 @@ def main():
                 # MI <page> : l'image empruntee doit exister, load_foe_image
                 # retombant sans un mot sur celle de la page -- c'est-a-dire
                 # sur le bug qu'on vient de corriger.
+                if parts[0] in ("CG", "CB"):
+                    maximum = 1 if parts[0] == "CB" else 255
+                    valid = (len(parts) >= 4 and all(v.isdigit() for v in parts[1:3]) and
+                             0 <= int(parts[1]) <= maximum and int(parts[2]) < 424)
+                    if not valid:
+                        problems.append(f"{f}: {parts[0]} attend valeur (0..{maximum}), destination et titre")
+                    else:
+                        pg = int(parts[2])
+                        if not (root / lang / f"N{pg // 50 * 50:03}" / f"N{pg:03}.TXT").exists():
+                            problems.append(f"{f}: {parts[0]} reference une page absente : {pg:03}")
+                if parts[0] == "CT":
+                    valid = (len(parts) >= 5 and all(v.isdigit() for v in parts[1:4]) and
+                             0 <= int(parts[1]) <= int(parts[2]) <= 15 and int(parts[3]) < 424)
+                    if not valid:
+                        problems.append(f"{f}: CT attend min max (0..15), destination et titre")
+                    else:
+                        pg = int(parts[3])
+                        if not (root / lang / f"N{pg // 50 * 50:03}" / f"N{pg:03}.TXT").exists():
+                            problems.append(f"{f}: CT reference une page absente : {pg:03}")
+                if parts[0] == "MM" and (len(parts) != 2 or parts[1] not in ("0", "1")):
+                    problems.append(f"{f}: MM exige 0 ou 1")
+                if parts[0] == "MF":
+                    if len(parts) != 2 or not parts[1].isdigit() or not 0 <= int(parts[1]) <= 255:
+                        problems.append(f"{f}: MF exige un nombre d’assauts entre 0 et 255")
+                if parts[0] == "MR":
+                    if len(parts) != 3 or not all(v.isdigit() and 0 < int(v) <= 255 for v in parts[1:]):
+                        problems.append(f"{f}: MR exige gain et maximum entre 1 et 255")
                 if parts[0] == "MI":
                     pg = int(parts[1]) if len(parts) == 2 and parts[1].isdigit() else -1
-                    img = root / "IMG" / ("N%03d" % (pg // 50 * 50)) / ("B%03d.RLE.BIN" % pg)
+                    img = root / "DHGR" / ("N%03d" % (pg // 50 * 50)) / ("B%03d.RLE.BIN" % pg)
                     if pg < 0:
                         problems.append(f"{f}: ligne MI mal formee {d!r}")
                     elif not img.exists():
                         problems.append(f"{f}: MI {pg:03d} : pas de "
-                                        f"IMG/N{pg // 50 * 50:03d}/B{pg:03d}.RLE.BIN")
+                                        f"DHGR/N{pg // 50 * 50:03d}/B{pg:03d}.RLE.BIN")
                 if parts[0] in ("E", "E0", "CE", "ED") and len(parts) > 1 \
                         and parts[1] not in CARAC_WORDS:
                     problems.append(f"{f}: {parts[0]} sur un mot inconnu "
                                     f"{parts[1]!r} (attendu : "
                                     f"{', '.join(sorted(CARAC_WORDS))})")
+                if parts[0] in ("CV", "CX"):
+                    refs = parts[1].split(",") if len(parts) > 1 else []
+                    valid = (len(parts) >= 4 and refs and
+                             all(re.fullmatch(r"!?[0-9]+", v) and int(v.lstrip("!")) < 424 for v in refs) and
+                             parts[2].isdigit() and int(parts[2]) < 424)
+                    if not valid:
+                        problems.append(f"{f}: CV/CX attend des pages separees par virgule (! = non visitee), une destination et un titre")
+                    else:
+                        for pg in [int(v.lstrip("!")) for v in refs] + [int(parts[2])]:
+                            target = root / lang / f"N{pg // 50 * 50:03}" / f"N{pg:03}.TXT"
+                            if not target.exists():
+                                problems.append(f"{f}: CV/CX reference une page absente : {pg:03}")
                 # E0 deplace un TOTAL DE DEPART : l'OR et le BONUS n'en ont
                 # pas, et character_shift0 ne verifie rien -- il indexerait
                 # hors de sa table. C'est ici qu'on refuse.
@@ -863,7 +910,7 @@ def main():
                 if parts[0] in ("G", "GX", "CI", "CN", "GU") and len(parts) > 1:
                     keys = {"ANNEAU", "CAPE", "CH", "AI", "FI", "BA",
                             "EP", "BJ", "CO", "PL", "GR",
-                            ".T", "LOUP", "FLEUR",
+                            ".T", ".G", ".P", ".S", ".D", "LOUP", "FLEUR",
                             "OISEAU", "ARAIGNEE", "GRENOUILLE", "FAUX"}
                     if parts[1] not in keys:
                         problems.append(f"{f}: objet/amulette inconnu {parts[1]!r}")
@@ -873,16 +920,17 @@ def main():
                 # zero et le moteur testerait la page 000. La liste est libre
                 # en longueur, mais entierement numerique, sans doublon, et
                 # sans la page qui la porte -- que classify_line teste deja.
-                if parts[0] == "V":
+                if parts[0] in ("V", "VR"):
                     nums = parts[1:]
-                    if not nums or not all(x.isdigit() for x in nums):
+                    if len(nums) < (2 if parts[0] == "VR" else 1) or not all(x.isdigit() for x in nums):
                         problems.append(f"{f}: ligne V mal formee {d!r} "
                                         "(attendu : des numeros de page)")
                     else:
                         v = [int(x) for x in nums]
-                        if len(set(v)) != len(v):
+                        proofs = v[1:] if parts[0] == "VR" else v
+                        if len(set(proofs)) != len(proofs):
                             problems.append(f"{f}: ligne V avec un doublon {d!r}")
-                        if sid in v:
+                        if sid in v and parts[0] == "V":
                             problems.append(f"{f}: ligne V citant sa propre "
                                             f"page {sid:03d}")
             if len(choices) > MAX_CHOICES:
@@ -913,7 +961,10 @@ def main():
                 problems.append(f"{f}: titre {len(title)} car. > 60")
             if words(w) != words(body):
                 problems.append(f"{f}: LE TEXTE A CHANGE")
-            new = render(sid, title, w, choices, directives)
+            order = None if derive else [line.rstrip() for line in
+                    f.read_text(encoding="utf-8").splitlines()
+                    if DIRECTIVE.match(line) or CHOICE.match(line)]
+            new = render(sid, title, w, choices, directives, order)
             if new != f.read_text(encoding="utf-8", errors="replace"):
                 changed += 1
                 if apply: f.write_text(new, encoding="utf-8")
@@ -939,12 +990,12 @@ def main():
             # bug corrige le 2026-08-29 pour CU/CL/PC, et le lot pose des MV
             # et des ED dans les deux langues.
             KEEP = {"M": 3, "MD": 2, "MS": 2, "MV": None, "MU": None, "CL": None,
-                    "MI": None,
+                    "MI": None, "MR": None, "MF": None, "MM": None,
                     "CF": 2, "PC": 3, "CU": 3, "CP": 3, "E": None,
-                    "ED": None, "V": None, "E0": None, "CE": None,
+                    "ED": None, "V": None, "VR": None, "E0": None, "CE": None,
                     "CS": None, "DV": None, "MB": None, "G": None,
                     "GX": None, "GA": None, "CI": 3, "CN": 3,
-                    "GU": 3, "CA": 4, "PD": None, "PO": None, "PX": None,
+                    "GU": 3, "CA": 4, "CT": 4, "CG": 3, "CB": 3, "PD": None, "PO": None, "PX": None,
                     "TR": None}
 
             def mechanics(dirs):
@@ -993,4 +1044,5 @@ def main():
     print(f"problemes : {len(problems)}")
     for p in problems[:40]: print("  " + p)
 
-main()
+if __name__ == "__main__":
+    main()

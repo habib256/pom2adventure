@@ -1,14 +1,16 @@
-Porte de Trou de Ver de Kalyx
-------------------------------
+T 007 La Rediffusion
 
-Un anneau ancien flotte au-dessus d'une lune sombre.
-Des etincelles froides rampent le long de son rebord interieur.
-Les pilotes laissent des offrandes de petits charmes metalliques.
-La porte bourdonne d'une note profonde et patiente.
+   Le pilote automatique du Cabriolet a une seule qualite : il ne vous
+abandonne jamais. Il vous ramasse, vous rentre, vous pose sur le siege et
+coupe la musique.
 
-Visez votre selfie pour que l'anneau encadre votre tete.
-N'activez pas le noyau sans plan de vol.
+   Vous n'etes pas mort. Vous etes pire : vous etes en rediffusion. Le
+direct a tout filme, l'Holophone n'a pas tremble une seconde, et le
+passage ou vous criez en tournant sur vous-meme est deja monte en boucle.
 
-C 003 Retour au trou noir supermassif
-C 010 Revenir a la mer miroir
-C 014 Traverser l'ano
+   Vos abonnes ont adore. Il y en a treize, maintenant.
+
+   Vous avez toujours tout votre materiel. On ne perd rien, dans ce
+metier, sauf la face.
+
+C 003 Reprendre les commandes

@@ -1,0 +1,16 @@
+T 026 Selfie with Lord Vapour
+V 028
+
+   You kill the flash. The room stays black; the only light comes from the
+red diodes of the helmet, lighting you both from below like two children with
+a torch under a blanket.
+
+   -- There, says Lord Vapour. Kuh-hooo. That is a beautiful light.
+
+   He rests a gloved hand on your shoulder. The shot is perfect: menacing,
+warm, badly framed. You have your first legend.
+
+   -- Do not tag me. Kuh-hooo. Actually, do tag me.
+
+G S1
+C 003 Head back down to the hangar and the Convertible

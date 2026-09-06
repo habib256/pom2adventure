@@ -1,0 +1,17 @@
+SERV Bath towel
+PILE Holophone battery
+CROQ Cat kibble
+UNIF Trouper armour
+EPIC Vial of Spice
+PASS Press pass
+S1 Selfie: Lord Vapour
+S2 Selfie: Mr. Spork
+S3 Selfie: the Dune Worm
+S4 Selfie: Weetee
+S5 Selfie: Barbastella
+S6 Selfie: the Cargo Beast
+.CHAG
+.CAL
+.BIZZ
+.RIPL
+.MING

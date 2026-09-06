@@ -1,0 +1,17 @@
+T 099 Nobody Around To See It
+
+   You glance back over your shoulder out of reflex, the way you look for a
+witness.
+
+   The hangar is empty. No white and red rocket, no jutting chin, no twelve
+cameramen. Nowhere in the universe is Bizz Lightspan watching this happen to
+you, and that leaves a small ridiculous pang you will admit to nobody.
+
+   You raise the Holophone towards the blue cabin and press.
+
+   Twelve followers. Twelve people in the whole universe get to see this
+first. Which is, all things considered, quite a decent statistic.
+
+   -- Shall we? says Doctor Which.
+
+C 096 Step in for good

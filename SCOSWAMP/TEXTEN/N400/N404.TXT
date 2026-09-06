@@ -8,7 +8,7 @@ the west, a dark path disappears behind damp trunks. To the east, a lighter
 trail seems to wind through tall grass. To the south, the passage you arrived
 by remains usable.
 
-MU RONDPOINT.MB
+MU ROUNDABOUT.MB
 C 398 Take the path sinking to the west
 C 105 Follow the grassy trail to the east
 C 208 Retrace your steps along the southern path

@@ -10,6 +10,6 @@ petits, vert fonce, avec des branches qui ressemblent a des bras.
 arbres se meuvent et convergent vers vous. Vous etes attaque par des
 ARBRES-EPEES ! Ils vous encerclent et preparent leur assaut.
 
-MU ARBRESEPEES.MB
+MU SWORDTREES.MB
 C 028 Combattre les Arbres-Epees a l'epee
 C 203 Recourir a la magie pour vous defendre

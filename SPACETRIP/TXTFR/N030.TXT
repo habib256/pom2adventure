@@ -1,0 +1,19 @@
+T 030 Le cargo Nostalgo
+
+   Le Nostalgo derive, moteurs eteints, tous feux morts. Vous vous arrimez a
+son flanc et vous entrez. A l'interieur, les tubes du plafond clignotent une
+fois toutes les trois secondes. Quand ils s'allument, tout au fond de la
+coursive, quelque chose de grand recule dans le noir. Quand ils s'eteignent,
+ca revient d'un pas.
+
+   Sur une caisse, un appareil abandonne bipe tout seul, patiemment.
+
+   Deux yeux jaunes vous observent depuis une conduite : un chat roux, la
+queue en point d'interrogation.
+
+   -- Miaou, dit le chat, qui n'a aucune idee de ce qu'il declenche.
+
+CI .RIPL 032 Rejoindre Ripleigh, qui vous attend a la passerelle
+GU CROQ 032 Secouer le sac de croquettes
+CN CROQ 031 Appeler gentiment : minou, minou
+C 003 Ressortir tant que la coursive est vide

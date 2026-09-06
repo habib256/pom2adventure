@@ -7,7 +7,7 @@ under the trees.
 
    Do you follow it or ignore it?
 
-MU FEUFOLLET.MB
+MU WILLOWISP.MB
 C 072 Follow the Will-o'-the-Wisp westward
 C 336 Ignore it and go south
 C 121 Ignore it and take the eastern road

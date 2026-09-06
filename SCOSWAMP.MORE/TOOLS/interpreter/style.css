@@ -1,0 +1,192 @@
+/* style.css -- deux moities : la machine a gauche, l'atelier a droite.
+ *
+ * L'ecran de gauche est en 80 colonnes de chasse fixe, sur fond sombre : ce
+ * n'est pas de la nostalgie, c'est la seule facon de voir qu'une ligne
+ * deborde -- 80 colonnes ici, 80 colonnes la-bas. */
+
+:root {
+  color-scheme: dark;
+  --fond: #14161a;
+  --fond2: #1c2027;
+  --trait: #2d333d;
+  --texte: #d9dee7;
+  --doux: #8b95a5;
+  --accent: #7fd6a4;
+  --chaud: #e8b171;
+  --rouge: #e0736b;
+  --mono: "SF Mono", Menlo, Consolas, monospace;
+  --corps: 13px;
+}
+
+* { box-sizing: border-box; }
+
+/* Le `[hidden] { display: none }` du navigateur perd contre n'importe quelle
+ * regle de classe -- une regle d'attribut est moins specifique. Deux fois il
+ * a coute cher : l'ecran modal restait peint par-dessus la page (un voile
+ * sombre qui avalait les clics), et la toile DHGR masquee restait dans le
+ * flux a cote du master, qu'elle decentrait. Une ligne, et il gagne toujours. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+kbd, code, pre, .ecran, .source, .carte { font-family: var(--mono); }
+
+/* ── L'accueil : quel jeu, quelles donnees, quelle langue ───────────── */
+
+.accueil {
+  position: fixed; inset: 0; z-index: 20; overflow: auto;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; padding: 32px; background: var(--fond);
+}
+.accueil h1 { margin: 0; font-size: 20px; font-weight: 600; }
+.accueil .sous { margin: 0; color: var(--doux); }
+.accueil pre { font-size: 12px; line-height: 1.3; color: var(--accent); margin: 0; }
+.accueil button {
+  font: inherit; padding: 8px 18px;
+  background: var(--fond2); color: var(--texte);
+  border: 1px solid var(--trait); border-radius: 6px; cursor: pointer;
+}
+.accueil button:hover { border-color: var(--accent); }
+.accueil .langues { display: flex; gap: 12px; }
+.accueil .retour { background: none; border-color: transparent; color: var(--doux); }
+
+/* Une carte par jeu : ce que le descripteur en dit, et rien de plus -- le
+ * code ne connait aucun des deux titres. */
+.jeux { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.jeu {
+  display: block; text-align: left; width: 320px; padding: 16px 18px !important;
+  border-radius: 8px !important;
+}
+.jeu strong { display: block; font-size: 15px; margin-bottom: 2px; }
+.jeu .cle { color: var(--doux); font-family: var(--mono); font-size: 11px; }
+.jeu ul { margin: 10px 0 0; padding-left: 16px; color: var(--doux); font-size: 12px; }
+
+/* La source des donnees : le volume que la machine demarre, ou l'arborescence
+ * que l'on edite. Ce n'est pas un detail de confort -- entre les deux il y a
+ * un empaquetage, et tant qu'il n'a pas tourne elles different. */
+.accueil .source { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.accueil .source label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+.accueil .source .etat { color: var(--doux); font-size: 12px; margin: 4px 0 0; }
+
+/* ── Le cadre ───────────────────────────────────────────────────────── */
+
+.app { display: flex; flex-direction: column; height: 100vh; }
+
+.barre {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 8px 12px; border-bottom: 1px solid var(--trait); background: var(--fond2);
+}
+.barre .sep { flex: 0 0 1px; height: 18px; background: var(--trait); }
+.barre label { color: var(--doux); display: flex; align-items: center; gap: 6px; }
+.barre input, .barre select, .barre button {
+  font: inherit; background: var(--fond); color: var(--texte);
+  border: 1px solid var(--trait); border-radius: 4px; padding: 3px 6px;
+}
+.barre input[type=number] { width: 5.5em; }
+.barre button { cursor: pointer; }
+.etat { color: var(--doux); font-size: 12px; }
+/* Le depot a change depuis l'empaquetage : la machine ne lira pas ca. */
+.etat.alerte { color: var(--chaud); }
+
+/* La colonne de gauche fait EXACTEMENT 80 colonnes de chasse fixe : c'est la
+ * largeur de l'ecran de la machine, elle n'a aucune raison d'en prendre plus.
+ * Le `ch` se mesure dans la police de l'element, d'ou la fonte monospace
+ * posee ici et non seulement sur .ecran -- et tout ce qui reste de la fenetre
+ * va a l'image, qui elle gagne a etre grande. */
+main { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; padding: 12px; flex: 1; min-height: 0; }
+.gauche, .droite { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.gauche { font: var(--corps)/1.32 var(--mono); width: calc(80ch + 22px); }
+.droite { overflow: auto; }
+
+/* Sous 1100 px l'ecran ne tient plus a cote de l'image : on empile. */
+@media (max-width: 1100px) {
+  main { grid-template-columns: minmax(0, 1fr); }
+  .gauche { width: 100%; }
+}
+
+/* ── L'ecran 80 colonnes ────────────────────────────────────────────── */
+
+/* Une grille de 80 x 24 cellules, comme la machine. Les barres, les jauges
+ * et les touches sont des runs de cellules en video inverse : le meme
+ * mecanisme que `revers(1)` sur l'Apple II, et non un fond CSS pose sur une
+ * ligne entiere. */
+.ecran {
+  background: #0b0d10; border: 1px solid var(--trait); border-radius: 6px;
+  padding: 8px 10px; font-size: var(--corps); line-height: 1.32; white-space: pre;
+  overflow-x: auto;
+}
+.ecran .ligne { min-height: 1.32em; }
+.ecran .inv { background: var(--texte); color: #0b0d10; }
+
+/* Ce qui repond a une touche repond aussi au clic. Discret au repos -- la
+ * machine ne souligne rien -- et franc au survol. */
+.ecran .cliquable { cursor: pointer; }
+.ecran .cliquable:hover { background: var(--accent); color: #0b0d10; }
+.ecran .inv.cliquable:hover { background: var(--chaud); color: #0b0d10; }
+
+/* ── L'atelier ──────────────────────────────────────────────────────── */
+
+.cartouche { background: var(--fond2); border: 1px solid var(--trait); border-radius: 6px; padding: 10px; }
+.cartouche .titre, .cartouche h4 { color: var(--doux); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin: 0 0 6px; }
+.entete { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.entete select { font: inherit; background: var(--fond); color: var(--texte); border: 1px solid var(--trait); border-radius: 4px; padding: 3px 6px; }
+
+.imageBoite { position: relative; background: #000; border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.imageBoite canvas, .imageBoite img {
+  display: block; width: auto; height: auto;
+  max-width: 100%; max-height: min(62vh, 640px);
+  image-rendering: pixelated;
+}
+/* 280 x 192 sur un ecran 4/3 : les pixels DHGR ne sont pas carres, et c'est
+ * la machine qui les etire. La toile fait donc de meme. */
+.imageBoite canvas { aspect-ratio: 4 / 3; }
+.vide { color: var(--doux); font-size: 12px; padding: 12px; text-align: center; }
+/* Un cartouche vide garde ses marges : 24 px de padding sur un texte absent,
+ * et l'image d'a cote n'est plus au milieu. */
+.imageBoite .vide:empty { display: none; }
+
+.carac { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.carac span:first-child { width: 9em; color: var(--doux); }
+.carac b { color: var(--texte); width: 2em; text-align: right; }
+.carac i { color: var(--doux); font-style: normal; width: 3em; }
+.barre2 { flex: 1; height: 6px; background: var(--fond); border-radius: 3px; overflow: hidden; }
+.barre2 span { display: block; height: 100%; background: var(--accent); }
+.menus { color: var(--chaud); font-size: 12px; margin-top: 6px; }
+
+.onglets { display: flex; gap: 4px; margin-bottom: 8px; }
+.onglets button {
+  font: inherit; font-size: 12px; padding: 3px 10px; cursor: pointer;
+  background: transparent; color: var(--doux);
+  border: 1px solid var(--trait); border-radius: 4px;
+}
+.onglets button.actif { color: var(--fond); background: var(--accent); border-color: var(--accent); }
+.panneau { max-height: 42vh; overflow: auto; font-size: 12px; }
+
+.trace { display: grid; grid-template-columns: 3em 1fr; gap: 4px 8px; padding: 4px 0; border-bottom: 1px solid var(--trait); }
+.trace code { color: var(--accent); }
+.trace .ligne2 { color: var(--doux); font-family: "SF Mono", Menlo, monospace; word-break: break-word; }
+.trace em { grid-column: 2; color: var(--chaud); font-style: normal; }
+
+.source { white-space: pre-wrap; word-break: break-word; margin: 0; line-height: 1.4; }
+.source .dir { color: var(--accent); }
+
+.colonnes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.panneau ul { margin: 0 0 8px; padding-left: 16px; }
+.panneau li.vide, .panneau .vide { color: var(--doux); list-style: none; margin-left: -16px; }
+.panneau em { color: var(--doux); font-style: normal; }
+
+.dirs { border-collapse: collapse; width: 100%; }
+.dirs th { text-align: left; color: var(--doux); font-weight: normal; border-bottom: 1px solid var(--trait); }
+.dirs td { border-bottom: 1px solid var(--trait); padding: 2px 6px 2px 0; vertical-align: top; }
+.dirs code { color: var(--accent); }
+
+/* Les ecrans modaux -- le sac, la carte, l'aide, la Feuille, les
+ * sauvegardes, le choix des Pierres -- ne sont plus des fenetres flottantes :
+ * ils se peignent dans la grille 80 x 24, comme sur la machine, qui n'a
+ * qu'un ecran et le repeint en entier. Il n'y a donc plus de calque par
+ * dessus la page -- et plus de voile. */

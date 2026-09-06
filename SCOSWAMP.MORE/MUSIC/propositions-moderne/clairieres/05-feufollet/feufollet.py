@@ -35,7 +35,7 @@ Sol mineur eolien, 154 a la noire, 26 mesures a 4/4, 40,5 s.
 Forme intro(4) - A(8) - B(8) - A'(6).
 
     python3 feufollet.py && python3 ../../../midi_to_mb.py feufollet.mid \\
-        FEUFOLLET.MB.BIN --bpm 154 --max 2304 --wav FEUFOLLET.wav
+        WILLOWISP.MB.BIN --bpm 154 --max 2304 --wav FEUFOLLET.wav
 """
 import sys
 from pathlib import Path

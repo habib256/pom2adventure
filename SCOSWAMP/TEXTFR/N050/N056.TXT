@@ -8,5 +8,5 @@ conduit dans la bibliotheque ou Pompatarte est assis, en toge.
 rapporte une carte permettant d'atteindre Courbensaule?" La question est
 directe; il attend une reponse precise.
 
-C 158 Oui, je suis alle jusqu'a Courbensaule
-C 008 Non, je ne l'ai pas trouvee
+CV 280 158 Oui, je suis alle jusqu'a Courbensaule
+CX 280 008 Non, je ne l'ai pas trouvee

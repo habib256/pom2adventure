@@ -5,4 +5,9 @@ T 346 Pierre de Terreur sur les Orques
    L'un d'eux se met a hurler, lache ses armes et s'enfuit dans les marecages.
 Mais les deux autres avancent vers vous et vous devrez les combattre.
 
-C 281 Combattre les deux Orques
+MU +BATTLE.MB
+M 6 7 PREMIER ORQUE
+MI 281
+M 7 7 DEUXIEME ORQUE
+MI 281
+MV 135

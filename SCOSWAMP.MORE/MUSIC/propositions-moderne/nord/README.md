@@ -1,6 +1,6 @@
 # Zone `nord` — les huit clairières au nord de la rivière
 
-**`MARAISNO.MB.BIN` — 2 262 octets, 45,1 s, boucle.** Tampon de zone (2 304 o), 42 octets de marge.
+**`NORTHSWAMP.MB.BIN` — 2 262 octets, 45,1 s, boucle.** Tampon de zone (2 304 o), 42 octets de marge.
 
 ## Ce que la zone couvre
 
@@ -59,6 +59,6 @@ Mesuré par `../verifier.py` — c'est l'attribution réelle de
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/nord
 python3 nord.py
-python3 ../../midi_to_mb.py nord.mid MARAISNO.MB.BIN \
+python3 ../../midi_to_mb.py nord.mid NORTHSWAMP.MB.BIN \
     --bpm 150 --max 2304 --wav MARAISNO.wav
 ```

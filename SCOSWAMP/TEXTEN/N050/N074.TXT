@@ -4,7 +4,7 @@ T 074 The Spider Master
 
    But which one to choose?
 
-CU AMITIE 361 Use the Friendship Stone
 CU MALEDICTION 261 Use the Curse Stone
 CU FEU 113 Use the Fire Stone
+CU AMITIE 361 Use the Friendship Stone
 C 144 Don't use these Stones and make another choice

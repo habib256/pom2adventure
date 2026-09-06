@@ -45,7 +45,7 @@ tenus qui a cede la place — le bourdon de tonique est le procede de la zone.
 A'(6) l'eclat.
 
     python3 cristal.py && python3 ../../../midi_to_mb.py cristal.mid \\
-        CRISTAL.MB.BIN --bpm 156 --max 2304 --wav CRISTAL.wav
+        CRYSTAL.MB.BIN --bpm 156 --max 2304 --wav CRISTAL.wav
 """
 import sys
 from pathlib import Path

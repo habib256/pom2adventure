@@ -7,5 +7,5 @@ Marais.
 combattre avec le total d'ENDURANCE qu'ils avaient lorsque vous les avez
 quittes.
 
-MU ORQUES.MB
+MU ORCS.MB
 C 281 Combattre les Orques

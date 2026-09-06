@@ -4,7 +4,7 @@ T 348 Quatre chemins
 
    Dans quelle direction souhaitez-vous aller ?
 
-MU LICORNE.MB
+MU UNICORN.MB
 C 094 Au nord
 C 157 Au sud
 C 010 A l'est

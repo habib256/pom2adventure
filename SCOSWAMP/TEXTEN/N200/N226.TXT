@@ -6,7 +6,7 @@ is greedy. He awaits a concrete answer.
 
    What do you tell him according to what you've brought back?
 
-MU TOUR.MB
+MU TOWER.MB
 CA 0 0 054 I didn't manage to obtain any Amulets
 CA 1 2 007 I bring back one or two
 CA 3 6 194 I bring back three or more

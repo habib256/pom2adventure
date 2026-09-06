@@ -6,6 +6,6 @@ bassin ainsi que le reste de la clairiere.
    Un gros Lezard vient boire a l'eau du bassin, puis s'en retourne d'une
 demarche chaloupee. Vous ne voyez rien d'autre qui merite d'etre note.
 
-MU CRISTAL.MB
+MU CRYSTAL.MB
 C 047 Quitter la clairiere
 C 077 Boire a votre tour

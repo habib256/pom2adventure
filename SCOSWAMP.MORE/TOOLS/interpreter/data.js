@@ -10,19 +10,96 @@
  * fichier MAP. Rien n'est recopie ici.
  */
 
+import { VolumeProDOS, cheminVolume } from './prodos.js';
+
 /* La racine du depot, deduite de l'emplacement de ce module : le lecteur vit
- * dans SCOSWAMP.MORE/TOOLS/interpreter/, trois crans sous la racine. */
-export const ROOT = new URL('../../../', import.meta.url);
+ * dans SCOSWAMP.MORE/TOOLS/interpreter/, trois crans sous la racine.
+ *
+ * `globalThis.RACINE_DONNEES` la remplace : c'est la couture par laquelle un
+ * banc d'essai sans navigateur (node, fetch branche sur le disque) monte les
+ * memes modules. Le moteur ne connait pas d'autre chemin que celui-la. */
+export const ROOT = globalThis.RACINE_DONNEES
+  ? new URL(globalThis.RACINE_DONNEES)
+  : new URL('../../../', import.meta.url);
 
 export function url(p) { return new URL(p, ROOT).href; }
 
-async function get(p, bin) {
+/* ── D'ou viennent les octets ─────────────────────────────────────────────
+ *
+ * Deux sources, et la difference compte. L'ARBORESCENCE du depot est ce qu'on
+ * edite ; le VOLUME ProDOS (dist/SCOSWAMP.HDV) est ce que la machine demarre.
+ * Entre les deux il y a un empaquetage, et tant qu'il n'a pas tourne les deux
+ * different. L'atelier lit le volume par defaut -- « exactement les memes
+ * donnees que l'implementation Apple II » veut dire les memes octets, pas les
+ * memes fichiers a peu pres.
+ *
+ * Ce que le volume ne porte pas (les masters d'avant conversion, l'ordre des
+ * messages qui vit dans SRC/messages.h) est lu dans l'arborescence, et le
+ * lecteur le DIT plutot que de faire comme si de rien n'etait. */
+let source = { type: 'arbre', volume: null, racine: '', horsVolume: new Set() };
+
+export async function ouvrirVolume(proj) {
+  if (!proj.volume) throw new Error('ce jeu ne declare pas de volume');
+  const r = await fetch(url(proj.volume));
+  if (!r.ok) throw new Error(`${proj.volume} : HTTP ${r.status}`);
+  const v = new VolumeProDOS(new Uint8Array(await r.arrayBuffer()));
+  source = { type: 'volume', volume: v, racine: proj.racineVolume || '', horsVolume: new Set() };
+  return v;
+}
+
+export function utiliserArbre() {
+  source = { type: 'arbre', volume: null, racine: '', horsVolume: new Set() };
+}
+
+export function etatSource() {
+  return {
+    type: source.type,
+    nom: source.volume ? source.volume.nom : '',
+    fichiers: source.volume ? source.volume.fichiers.size : 0,
+    horsVolume: [...source.horsVolume],
+  };
+}
+
+const LATIN1 = new TextDecoder('latin1');
+
+/* `volume: false` force la lecture dans l'arborescence : c'est le cas des
+ * masters d'avant conversion, qui n'ont RIEN a faire sur le volume -- les y
+ * chercher et signaler leur absence serait un faux probleme. */
+async function get(p, bin, o = {}) {
+  let horsVolume = false;
+  if (source.type === 'volume' && o.volume !== false) {
+    const octets = source.volume.lire(cheminVolume(p, source.racine));
+    if (octets) return bin ? octets : LATIN1.decode(octets);
+    horsVolume = true;    /* absent du volume : on retombe sur l'arborescence */
+  }
   const r = await fetch(url(p));
+  /* On ne note que ce qui existe VRAIMENT ailleurs : un fichier absent des
+   * deux cotes n'est pas « hors volume », il n'est nulle part -- et la boucle
+   * du verificateur, qui sonde toutes les pages jusqu'a pageMax, en produit
+   * par dizaines. */
   if (!r.ok) throw new Error(`${p} : HTTP ${r.status}`);
+  if (horsVolume) source.horsVolume.add(p);
   return bin ? new Uint8Array(await r.arrayBuffer()) : r.text();
 }
-export const getText = (p) => get(p, false);
-export const getBytes = (p) => get(p, true);
+export const getText = (p, o) => get(p, false, o);
+export const getBytes = (p, o) => get(p, true, o);
+
+/* Le volume est-il a jour pour ce fichier-la ? Rend 'identique', 'different',
+ * 'absent' ou null si l'on ne lit pas le volume. C'est la question que se pose
+ * l'auteur qui vient d'editer une page : est-ce que la machine la verra ? */
+export async function comparerAuDepot(p) {
+  if (source.type !== 'volume') return null;
+  const surVolume = source.volume.lire(cheminVolume(p, source.racine));
+  if (!surVolume) return 'absent';
+  try {
+    const r = await fetch(url(p));
+    if (!r.ok) return 'absent';
+    const surDisque = new Uint8Array(await r.arrayBuffer());
+    if (surDisque.length !== surVolume.length) return 'different';
+    for (let i = 0; i < surDisque.length; i++) if (surDisque[i] !== surVolume[i]) return 'different';
+    return 'identique';
+  } catch { return 'absent'; }
+}
 
 export async function exists(p) {
   try { const r = await fetch(url(p), { method: 'HEAD' }); return r.ok; } catch { return false; }
@@ -41,10 +118,10 @@ export function bucketOf(proj, id) {
 
 export function fill(proj, gabarit, { lang, id, img } = {}) {
   return gabarit
-    .replace('{LANG}', lang || 'FR')
-    .replace('{BUCKET}', id === undefined ? '' : bucketOf(proj, id))
-    .replace('{PAGE}', id === undefined ? '' : 'N' + pad3(id))
-    .replace('{IMG}', img || '');
+    .replaceAll('{LANG}', lang || 'FR')
+    .replaceAll('{BUCKET}', id === undefined ? '' : bucketOf(proj, id))
+    .replaceAll('{PAGE}', id === undefined ? '' : 'N' + pad3(id))
+    .replaceAll('{IMG}', img || '');
 }
 
 export const pagePath = (proj, lang, id) => fill(proj, proj.assets.texte, { lang, id });
@@ -54,7 +131,14 @@ export const pagePath = (proj, lang, id) => fill(proj, proj.assets.texte, { lang
 export async function loadProject(nom) {
   const r = await fetch(new URL(nom, import.meta.url).href);
   if (!r.ok) throw new Error(`descripteur ${nom} introuvable`);
-  return r.json();
+  const proj = await r.json();
+  if (proj.rulesSource) {
+    const rules = await fetch(url(proj.rulesSource));
+    if (!rules.ok) throw new Error(`regles ${proj.rulesSource} introuvables`);
+    proj.rules = await rules.json();
+    if (proj.rules.schema !== 1) throw new Error('schema de regles non pris en charge');
+  }
+  return proj;
 }
 
 /* ── Les catalogues d'une langue ──────────────────────────────────────── */
@@ -77,32 +161,46 @@ function parseEnum(header) {
   return bloc.split(',').map((s) => s.trim()).filter((s) => /^M_[A-Z0-9_]+$/.test(s));
 }
 
-/* Le formateur minimal de cfmt() : %u, %s, %c dans l'ordre, %% litteral. */
+/* Le formateur minimal de cfmt() : %u, %s, %c dans l'ordre, largeur comprise
+ * (%2u, %-12s), %% litteral. Les catalogues du jeu s'en servent partout. */
 export function fmt(s, ...args) {
   let i = 0;
-  return String(s).replace(/%%|%-?\d*[usc]/g, (m) => (m === '%%' ? '%' : String(args[i++] ?? '')));
+  return String(s).replace(/%%|%(-?)(\d*)([usc])/g, (m, gauche, larg) => {
+    if (m === '%%') return '%';
+    const v = String(args[i++] ?? '');
+    const n = parseInt(larg, 10) || 0;
+    if (v.length >= n) return v;
+    return gauche ? v + ' '.repeat(n - v.length) : ' '.repeat(n - v.length) + v;
+  });
 }
 
+/* Un jeu peut n'avoir ni catalogue d'objets ni catalogue de messages -- ce
+ * sont des fichiers de SCOSWAMP, pas une obligation du format. Le descripteur
+ * fournit alors ses propres libelles, et ce qui manque manque en clair : un
+ * message inconnu s'affiche sous son nom plutot que de disparaitre. */
 export async function loadCatalogs(proj, lang) {
   const a = proj.assets;
-  const [objTxt, msgTxt, header] = await Promise.all([
-    getText(fill(proj, a.objets, { lang })),
-    getText(fill(proj, a.messages, { lang })),
-    getText(a.messagesEnum),
-  ]);
-  const noms = parseEnum(header);
-  const lignes = msgTxt.split(/\r?\n/);
-  const table = {};
-  noms.forEach((n, i) => { table[n] = lignes[i] ?? ''; });
-  return {
-    objets: parseObjets(objTxt),
-    messages: table,
-    msg: (n, ...args) => fmt(table[n] ?? n, ...args),
-  };
+  const objets = a.objets ? parseObjets(await getText(fill(proj, a.objets, { lang }))) : (proj.objets || []);
+  let table = (proj.messages && proj.messages[lang]) || {};
+  if (a.messages && a.messagesEnum) {
+    const [msgTxt, header] = await Promise.all([
+      getText(fill(proj, a.messages, { lang })),
+      /* L'ORDRE des messages n'est pas une donnee du volume : il est compile
+       * dans le binaire (l'enumeration de SRC/messages.h). On le lit donc
+       * toujours dans l'arborescence -- c'est la meme verite, a la meme
+       * source que le jeu. Les CHAINES, elles, viennent du volume. */
+      getText(a.messagesEnum, { volume: false }),
+    ]);
+    const lignes = msgTxt.split(/\r?\n/);
+    table = {};
+    parseEnum(header).forEach((n, i) => { table[n] = lignes[i] ?? ''; });
+  }
+  return { objets, messages: table, msg: (n, ...args) => fmt(table[n] ?? n, ...args) };
 }
 
-export async function loadTexteEcran(proj, lang, cle) {
-  try { return await getText(fill(proj, proj.assets[cle], { lang })); }
+export async function loadTexteEcran(proj, lang, cle, o) {
+  if (!proj.assets[cle]) return '';
+  try { return await getText(fill(proj, proj.assets[cle], { lang }), o); }
   catch { return ''; }
 }
 
@@ -139,6 +237,7 @@ function parseBlocLangue(b, off, nclr, namew) {
 }
 
 export async function loadMap(proj) {
+  if (!proj.assets.carte) return null;
   let b;
   try { b = await getBytes(proj.assets.carte); } catch { return null; }
   if (b.length < 20 || b[0] !== 77 || b[1] !== 65 || b[2] !== 80) return null;

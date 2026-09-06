@@ -1,10 +1,8 @@
 T 289 Tancred's Flying Horse
 
-   The Forest Guards told you that "Tancred's Flying Horse" was the least
-expensive of the three inns and so that's where you decided to spend the
-night. The room price is very reasonable indeed since they only ask you half a
-Gold Piece. You go up to bed and fall asleep as soon as you've put your head
-on the pillow.
+   The Forest Guards told you about "Tancred's Flying Horse". You decide to
+spend the night there. You pay 1 Gold Piece for the room, then go up to bed
+and fall asleep as soon as your head touches the pillow.
 
    In the middle of the night, however, a burning sensation on your finger
 wakes you abruptly. The Copper Ring is warning you that danger threatens. You
@@ -16,6 +14,7 @@ STAMINA points. Alas! your night thief took two possessions from your bag,
 starting with any Magic Stones lying on top. The Copper Ring remained on your
 finger. You now leave the inn to resume your path. Test your Luck.
 
+E OR -1
 PD
 E ENDURANCE +2
 CL 150 343

@@ -1,0 +1,19 @@
+T 022 Le couloir numero gris
+
+   -- Circulez, dit le trouffion sans lever les yeux.
+
+   Vous circulez. L'armure a deux tailles de trop : vous marchez comme un
+ascenseur en panne. Le couloir est gris, la moquette est grise, l'air est
+gris. Sur une cloison, un panneau de service que personne n'a lu depuis dix
+ans :
+
+   VIDE-ORDURES. TRAPPE UN : four a plasma. TRAPPE DEUX : ventilation,
+   courant d'air froid. TRAPPE TROIS : broyeur secondaire.
+
+   Un trouffion passe en grelottant. "C'est encore la deux qui souffle",
+grogne-t-il. "On gele au poste depuis lundi."
+
+   Bruit de bottes. Une patrouille arrive. Beaucoup de bottes.
+
+C 023 Plonger dans le vide-ordures
+C 003 Faire demi-tour vers le Cabriolet

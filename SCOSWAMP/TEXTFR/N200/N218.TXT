@@ -7,7 +7,7 @@ sud et a l'est sous les arbres.
 
    Le suivez-vous ou l'ignorez-vous ?
 
-MU FEUFOLLET.MB
+MU WILLOWISP.MB
 C 072 Suivre le Feu Follet vers l'ouest
 C 336 L'ignorer et partir vers le sud
 C 121 L'ignorer et prendre la route de l'est

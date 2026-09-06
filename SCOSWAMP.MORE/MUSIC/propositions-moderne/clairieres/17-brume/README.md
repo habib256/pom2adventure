@@ -1,6 +1,6 @@
 # Clairière 17 — La brume fétide
 
-**`BRUME.MB.BIN` — 1 399 octets, 41,5 s, boucle.**
+**`MIST.MB.BIN` — 1 399 octets, 41,5 s, boucle.**
 
 ## La clairière
 
@@ -9,7 +9,7 @@
 | `hub` | **094** |
 | Pages | 094 |
 | Case | (1,4) |
-| Zone de référence | `sud` (`MARAISUD.MB`) |
+| Zone de référence | `sud` (`SOUTHSWAMP.MB`) |
 | Sorties | N → 295 (la Rivière Croupie), S → 320 (la Licorne) |
 | Effet | `E ENDURANCE -2` — on la traverse toujours, on la paie toujours |
 
@@ -93,6 +93,6 @@ zone `sud`.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/17-brume
 python3 brume.py
-python3 ../../../midi_to_mb.py brume.mid BRUME.MB.BIN \
+python3 ../../../midi_to_mb.py brume.mid MIST.MB.BIN \
     --bpm 128 --max 2304 --wav BRUME.wav
 ```

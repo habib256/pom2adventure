@@ -1,6 +1,6 @@
 # Clairière 34 — Pierres et tronc creux (`hub` 390)
 
-**`TRONC.MB.BIN` — 2 006 octets, 45,1 s, boucle, avec batterie.**
+**`LOG.MB.BIN` — 2 006 octets, 45,1 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
@@ -10,7 +10,7 @@
 | 330 | le retour : « le sentier est calme, mais vous savez que le tronc a déjà abrité autre chose que des ossements » |
 | 390 | les trois sentiers marécageux, tous peu sûrs |
 
-Zone de référence : **`sud`** (`MARAISUD.MB`, *Sentiers Verts*).
+Zone de référence : **`sud`** (`SOUTHSWAMP.MB`, *Sentiers Verts*).
 
 ## La pièce
 
@@ -78,6 +78,6 @@ stéréo 60/40.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/34-tronc
 python3 tronc.py
-python3 ../../../midi_to_mb.py tronc.mid TRONC.MB.BIN \
+python3 ../../../midi_to_mb.py tronc.mid LOG.MB.BIN \
     --bpm 150 --max 2304 --wav TRONC.wav
 ```

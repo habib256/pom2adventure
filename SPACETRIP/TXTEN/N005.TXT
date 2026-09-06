@@ -1,14 +1,17 @@
-Floating Mountains of Myria
-----------------------------
+T 005 The outer sector
 
-Gravity here is playful.
-Stone islands drift on gentle updrafts over a calm valley.
-Bridges of rope connect platforms that move a little each hour.
-Gliders circle like slow birds.
+   Out here the charts go vague, then poetic, then wrong. Two suns argue
+over the horizon of a planet that has no horizon.
 
-A wide ledge offers a safe selfie with peaks behind you.
-Do not jump between islands without a line.
+   Four beacons all the same. The starship Surprise, exploring things
+nobody asked to have explored. Arrakoss, a planet made of sand and nothing
+else. Station CAL 9000, whose computer always answers politely. And Mungo,
+where a goateed emperor runs arena fights and expects presents.
 
-C 002 Return to Sylvaria Prime forests
-C 006 Watch auroras near the magnetar dome
-C 008 Fly to the wind city of Aeolis
+   The Convertible is waiting for a heading.
+
+C 040 The starship Surprise
+C 050 The planet Arrakoss
+C 060 Station CAL 9000
+C 070 The planet Mungo
+C 003 Stay in the cockpit

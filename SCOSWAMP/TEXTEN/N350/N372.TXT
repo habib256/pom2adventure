@@ -11,4 +11,4 @@ the room pointing their crossbows at your chest.
 the arrows pierce your body. You collapse on the floor, killed instantly. Thus
 ends your adventure.
 
-MU +MORT.MB
+MU +DEATH.MB

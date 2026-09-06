@@ -6,4 +6,5 @@ T 306 Le Patrouilleur furieux
 recuperes depuis, grace a une Pierre Magique d'ENDURANCE dont il a fait usage
 sur lui-meme. Il vous faut le combattre a nouveau.
 
+MR 255 10
 C 378 Combattre le Patrouilleur

@@ -11,4 +11,4 @@ try to kill him.
    What do you do?
 
 C 229 Believe the Giant and leave in peace
-C 366 Continue the fight to try to kill the Giant
+C 420 Continue the fight to try to kill the Giant

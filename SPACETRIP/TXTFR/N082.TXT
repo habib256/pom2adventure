@@ -1,0 +1,20 @@
+T 082 Le tri de Trolley
+
+   Le petit robot leve ses jumelles vers vous, les fait pivoter, et emet
+un bip qui ressemble beaucoup a de la joie. Il tape sur trois bacs :
+METAL. ORGANIQUE. PRECIEUX.
+
+   Puis il pose trois choses devant vous. Un ressort rouille. Un sandwich
+fossilise, dur comme une tuile. Un trognon de fruit martien, dont les
+pepins sont encore humides.
+
+   Il bipe une regle, lentement, pour que vous compreniez bien : chez lui,
+PRECIEUX ne veut pas dire cher. Precieux veut dire ce qui vit encore. Dans
+une decharge, tout le reste se remplace.
+
+   Il attend. Il a toute l'eternite et vous n'avez que le direct.
+
+C 085 Metal le ressort, organique le sandwich, precieux le trognon
+C 086 Metal le ressort, organique le trognon, precieux le sandwich
+C 086 Metal le sandwich, organique le ressort, precieux le trognon
+C 081 Reculer sans rien trier

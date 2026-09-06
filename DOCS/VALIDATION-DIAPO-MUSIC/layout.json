@@ -1,0 +1,19 @@
+{
+  "checks": [
+    "SCOSWAMP/TEXTFR/HELPFR.TXT",
+    "SCOSWAMP/TEXTFR/MSGFR.TXT",
+    "SCOSWAMP/TEXTFR/OBJFR.TXT",
+    "SCOSWAMP/TEXTEN/HELPEN.TXT",
+    "SCOSWAMP/TEXTEN/MSGEN.TXT",
+    "SCOSWAMP/TEXTEN/OBJEN.TXT"
+  ],
+  "root": [
+    "MAP",
+    "PRODOS",
+    "SCOSWAMP",
+    "SCOSWAMP.SYSTEM",
+    "TITLE"
+  ],
+  "files": 1370,
+  "failures": []
+}

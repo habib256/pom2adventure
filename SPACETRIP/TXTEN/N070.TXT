@@ -1,0 +1,18 @@
+T 070 The court of Emperor Mingus
+
+   Mungo is a planet of red marble, gongs and draughts. Two guards in
+finned helmets march you up to a throne six metres high.
+
+   Emperor Mingus looks you over across a fan collar that rises higher than
+his head. Pointed beard, thin smile, lacquered nails.
+
+   "One does not come before me without a present," he says. "It is written
+everywhere. Well: it would be written everywhere if I had any walls."
+
+   Behind the throne a purple hanging stirs by itself. A draught means a
+shaft, and that shaft runs down to the hangars.
+
+CI .MING 071 Greet the Emperor, who already knows you
+GU EPIC 072 Offer the vial of Spice in both hands
+CN EPIC 073 Bow very low with empty hands
+C 003 Back away towards the Convertible

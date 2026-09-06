@@ -17,6 +17,6 @@ assures you it doesn't hide new traps.
 grip your sword, ready to choose the path that will allow you to leave this
 clearing without losing your strength. Danger is tangible.
 
-MU RONDPOINT.MB
+MU ROUNDABOUT.MB
 C 058 Carefully cross the clearing to another path
 C 091 Try to jump across the marshy zone

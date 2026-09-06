@@ -20,7 +20,7 @@ courant se resserre, puis croches a nouveau.
 28 mesures a 4/4, 53,8 s — la plus longue boucle du dossier.
 
     python3 riviere.py && python3 ../../midi_to_mb.py riviere.mid \\
-        RIVIERE.MB.BIN --bpm 125 --max 2304 --wav RIVIERE.wav
+        RIVER.MB.BIN --bpm 125 --max 2304 --wav RIVIERE.wav
 """
 import sys
 from pathlib import Path

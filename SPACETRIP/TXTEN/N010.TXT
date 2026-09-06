@@ -1,14 +1,21 @@
-Mirror Sea of Epsilon
-----------------------
+T 010 The Cantina of Mos Ugly
 
-The ocean here is flat as glass.
-Stars reflect so well it feels like flying in space.
-Low islands carry black sand and pale towers.
-Waves move in slow, long breaths.
+   The door breathes out warm air that smells of fuel, wet fur and regret.
+It is dark in exactly the way that defeats every camera ever built.
 
-A pier offers a perfect selfie that shows two skies.
-Step softly to keep the surface smooth.
+   A three-horn band plays the only tune it knows. At the bar a four-armed
+barman lines up glasses. At a low table a smuggler in a waistcoat counts
+banknotes across from a hairy copilot who growls. At the back, two
+ridge-browed Klingers are looking for a reason. Under the VIP canopy,
+twelve camera operators surround a chrome chin.
 
-C 007 Return to the crystal canyons
-C 011 Cross the binary sun dunes
-C 013 Approach the gate of Kalyx
+   Three Martian tourists photograph the napkin dispenser.
+
+   The ring light of the Holophone comes on. The whole room turns round.
+The whole room holds it against you.
+
+C 011 Go to the bar
+C 012 The smuggler's table
+C 013 The VIP canopy
+C 014 The back of the room
+C 003 Back to the Convertible

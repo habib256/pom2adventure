@@ -1,0 +1,16 @@
+ANNEAU Anneau de Cuivre
+CAPE Cape Rouge
+CH Chaine d'Or
+AI Aimant d'Or
+FI Fiole scellee
+BA Baie d'Antherique
+EP Epee Magique
+BJ Bijou Violet
+CO Corne de Licorne
+PL Plumes de Perroquet
+GR Graines d'Arbre-Epee
+.T
+.G
+.P
+.S
+.D

@@ -8,7 +8,7 @@ creatures hide in its bed?
 
    What will you do faced with this obstacle?
 
-MU PROFONDE.MB
+MU DEEPWATER.MB
 CU GLACE 370 Use a Magic Ice Stone
 CU FLETRISSURE 254 Use a Magic Withering Stone
 C 044 Cross the stream on foot with caution

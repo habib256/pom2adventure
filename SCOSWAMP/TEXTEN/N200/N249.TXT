@@ -6,7 +6,7 @@ point, then reach the clearing anyway.
 
    Apply the immediate effect before continuing. Where will you go next?
 
-MU FEUFOLLET.MB
+MU WILLOWISP.MB
 CE HABILETE 0 -1
 C 336 Take the southern direction
 C 121 Take the eastern direction

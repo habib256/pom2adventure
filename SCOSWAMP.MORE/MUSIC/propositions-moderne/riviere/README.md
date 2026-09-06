@@ -1,6 +1,6 @@
 # Zone `riviere` — la rivière Croupie et son pont
 
-**`RIVIERE.MB.BIN` — 1 964 octets, 54,0 s, boucle.** Tampon de zone (2 304 o), 340 octets de marge. **Sans batterie** : six voix de hauteur.
+**`RIVER.MB.BIN` — 1 964 octets, 54,0 s, boucle.** Tampon de zone (2 304 o), 340 octets de marge. **Sans batterie** : six voix de hauteur.
 
 ## Ce que la zone couvre
 
@@ -57,6 +57,6 @@ Mesuré par `../verifier.py` — c'est l'attribution réelle de
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/riviere
 python3 riviere.py
-python3 ../../midi_to_mb.py riviere.mid RIVIERE.MB.BIN \
+python3 ../../midi_to_mb.py riviere.mid RIVER.MB.BIN \
     --bpm 125 --max 2304 --wav RIVIERE.wav
 ```

@@ -1,0 +1,16 @@
+T 042 Teleported, more or less
+
+   The world glitters, a soft hiss climbs, and there you are on a bright
+disc in a white room. A very calm officer studies you. Pointed ears, one
+eyebrow raised by a millimetre, the look of someone who finished the
+arithmetic before you arrived.
+
+   "Welcome aboard. Transfer successful at ninety-two per cent."
+
+   You look down. Your left boot is still on the planet below. The foot is
+here. The eyebrow climbs a second millimetre.
+
+   "Fascinating," he says.
+
+C 043 Limp after him with as much dignity as you can
+C 047 Demand your boot back from the transporter first

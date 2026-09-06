@@ -10,4 +10,4 @@ try again one day?
 
    END OF ADVENTURE.
 
-MU +MORT.MB
+MU +DEATH.MB

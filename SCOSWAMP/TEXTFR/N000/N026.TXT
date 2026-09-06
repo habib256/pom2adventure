@@ -8,7 +8,7 @@ est tres pointue et enduite d'une substance verdatre.
 supplementaire (3 au lieu de 2). Le combat sera rude: mesurez vos forces et
 votre endurance.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 6 MAITRE DES ARAIGNEES
 MD 3
 MV 354

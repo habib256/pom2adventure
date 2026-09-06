@@ -1,0 +1,16 @@
+T 077 The neighbour in the box
+
+   She does not look at you. She looks at the hanging. Vinyl suit, white
+boots, a belt of heavy buckles, the calm of a statue.
+
+   "Barbastella," she says. "I leave tonight. This palace has exactly one
+way out that the guards do not watch, and I cannot take it alone: someone
+has to hold the hatch. Do you know where it is?"
+
+   At last she turns her head towards you.
+
+   "Tell me. Get it wrong and I go without you."
+
+C 078 The purple hanging by the throne, and its rubbish shaft
+C 076 The great gate the beasts are brought in through
+C 076 The Emperor's balcony, by climbing the columns

@@ -8,6 +8,6 @@ un sous-bois plus calme et plus sombre.
 
    Que faites-vous?
 
-MU ARAIGNEES.MB
+MU SPIDERS.MB
 C 388 Prendre le chemin du nord
 C 105 Prendre le chemin du sud

@@ -7,7 +7,7 @@ its mark.
    When it does, however, you lose 4 STAMINA points instead of 2, such is the
 power of the blow. So take care!
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 12 GIANT
 MD 4
 MS 6

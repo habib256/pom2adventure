@@ -29,7 +29,7 @@ Ce qui a change a la revision :
 26 mesures a 4/4, 43,3 s. Forme intro(2) - A(8) - B(8) - A'(8).
 
     python3 jardins.py && python3 ../../../midi_to_mb.py jardins.mid \\
-        JARDINS.MB.BIN --bpm 144 --max 2304 --wav JARDINS.wav
+        GARDENS.MB.BIN --bpm 144 --max 2304 --wav JARDINS.wav
 """
 import sys
 from pathlib import Path

@@ -1,0 +1,19 @@
+T 084 The white armour
+V 089
+
+   The armour sits against a dead engine, helmet down, as though it had
+been waiting eleven years for a relief shift. It is empty. That armour
+always was a little empty.
+
+   You take it apart piece by piece. The chest plate is scratched by
+something that missed from a very long way off. The helmet gives a field
+of view of twelve degrees, which explains an enormous amount.
+
+   You put it on. The boots are too big, the gloves are too big,
+everything is too big, and yet in a badly lit corridor nobody will see the
+difference. Nobody ever looks at those people.
+
+   You salute the shell. It does not answer.
+
+G UNIF
+C 081 Back into the rubbish

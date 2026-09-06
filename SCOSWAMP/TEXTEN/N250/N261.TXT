@@ -9,6 +9,6 @@ as many STAMINA points as the number obtained. If you survive, the Giant
 Spider attacks you. You cannot flee; you must fight to the death.
 
 ED ENDURANCE -1
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 8 9 GIANT SPIDER
 MV 354

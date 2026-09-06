@@ -1,0 +1,10 @@
+{
+  "scenario": "sac_combat",
+  "assertions": 26,
+  "failures": [],
+  "seconds": 15.97905421257019,
+  "maxima": {
+    "hardware": 58,
+    "c_call": 81
+  }
+}

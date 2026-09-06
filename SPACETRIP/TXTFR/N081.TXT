@@ -1,0 +1,20 @@
+T 081 La Decharge Orbitale
+
+   Un anneau de detritus large comme une lune, en orbite lente autour de
+rien. L'univers entier vient jeter ici ce qu'il regrette : des vaisseaux,
+des meubles, des modes, des chaines mortes.
+
+   Vous vous posez sur une plaque de tole qui fut peut-etre une aile. La
+gravite est molle. Vous rebondissez un peu a chaque pas, ce qui rend tout
+plus solennel et beaucoup plus ridicule.
+
+   Trois choses depassent des ordures. Un petit robot compacteur aux yeux
+en jumelles, qui trie avec une patience de saint. Un module de bien-etre
+ecrase comme une canette. Et une carcasse d'armure blanche, assise contre
+un moteur mort, dans la pose de quelqu'un qui attendait.
+
+C 082 Le petit robot trieur
+C 083 Le module de bien-etre
+C 084 L'armure blanche
+C 087 La benne des chaines mortes
+C 003 Retour au Cabriolet

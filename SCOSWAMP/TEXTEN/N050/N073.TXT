@@ -1,4 +1,5 @@
 T 073 The Nest in the Tree
+VR 202 073
 
    Test your Luck. If you are Unlucky, you fall and lose 2 STAMINA points, but
 you nevertheless manage to climb up to the nest. If you are Lucky, you reach

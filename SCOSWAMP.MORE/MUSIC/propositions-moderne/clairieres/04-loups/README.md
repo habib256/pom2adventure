@@ -1,6 +1,6 @@
 # Clairière 4 — Les deux loups (`hub` 232, case 4,0)
 
-**`LOUPS.MB.BIN` — 2 253 octets, 38,4 s, boucle.**
+**`WOLVES.MB.BIN` — 2 253 octets, 38,4 s, boucle.**
 
 ## Les pages
 
@@ -85,6 +85,6 @@ crue.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/04-loups
 python3 loups.py
-python3 ../../../midi_to_mb.py loups.mid LOUPS.MB.BIN \
+python3 ../../../midi_to_mb.py loups.mid WOLVES.MB.BIN \
     --bpm 172 --max 2304 --wav LOUPS.wav
 ```

@@ -73,7 +73,7 @@ Le programme s'attend à cette arborescence relative :
   ├── BASIC.SYSTEM.SYS    (ProDOS BASIC.SYSTEM)
   ├── PRODOS.SYS          (noyau ProDOS)
   ├── STARTUP.BAS         (script de démarrage optionnel)
-  ├── IMG/
+  ├── DHGR/
   │   ├── N000/           (scènes 0-49)
   │   │   ├── N000.RLE.BIN
   │   │   ├── N001.RLE.BIN

@@ -1,6 +1,6 @@
 # Clairière 2 — Le Patrouilleur vert (`hub` 234, case 2,0)
 
-**`PATROUIL.MB.BIN` — 2 185 octets, 41,5 s, boucle.**
+**`PATROLLER.MB.BIN` — 2 185 octets, 41,5 s, boucle.**
 
 ## Les pages
 
@@ -88,6 +88,6 @@ secondes, exactement comme l'ostinato de la zone.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/02-patrouil
 python3 patrouil.py
-python3 ../../../midi_to_mb.py patrouil.mid PATROUIL.MB.BIN \
+python3 ../../../midi_to_mb.py patrouil.mid PATROLLER.MB.BIN \
     --bpm 162 --max 2304 --wav PATROUIL.wav
 ```

@@ -3,6 +3,6 @@ T 270 Deux sentiers
    Deux sentiers permettent de quitter la clairiere : l'un va vers le nord,
 l'autre vers l'ouest. Choisissez votre direction avec prudence.
 
-MU SABLES.MB
+MU QUICKSAND.MB
 C 275 Prendre le sentier vers le nord
 C 331 Prendre le sentier vers l'ouest

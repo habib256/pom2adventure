@@ -5,7 +5,7 @@ marecageux et peu surs.
 
    Dans quelle direction souhaitez-vous aller ?
 
-MU TRONC.MB
+MU LOG.MB
 C 144 Au nord
 C 209 A l'est
 C 195 A l'ouest

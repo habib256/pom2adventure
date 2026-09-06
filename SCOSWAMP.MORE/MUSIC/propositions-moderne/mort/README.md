@@ -1,6 +1,6 @@
 # Zone `mort` — surcouche, 11 pages et l'écran `game_over`
 
-**`MORT.MB.BIN` — 673 octets, 31,0 s, `--no-loop`.**
+**`DEATH.MB.BIN` — 673 octets, 31,0 s, `--no-loop`.**
 
 Surcouche : tampon de 1 280 octets, 607 de marge — la pièce la plus au large du dossier. **Sans batterie** : six voix de hauteur.
 
@@ -58,6 +58,6 @@ Mesuré par `../verifier.py` — c'est l'attribution réelle de
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/mort
 python3 mort.py
-python3 ../../midi_to_mb.py mort.mid MORT.MB.BIN \
+python3 ../../midi_to_mb.py mort.mid DEATH.MB.BIN \
     --bpm 125 --no-loop --max 1280 --wav MORT.wav
 ```

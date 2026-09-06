@@ -1,4 +1,5 @@
 T 382 Return to the Quicksand
+VR 270 421
 
    You realize you've returned to the Quicksand clearing, but this time, you
 won't let yourself be surprised. You have two solutions if you wish to resort
@@ -13,7 +14,8 @@ on which you can walk safely. This path will remain there permanently and you
 can therefore use it again if you ever pass through this clearing again. If
 you have one or the other of these Magic Stones, you can make use of it.
 
-MU SABLES.MB
-C 270 Use a Magic Stone
+MU QUICKSAND.MB
+CU GLACE 270 Freeze the Sand with an Ice Stone
+CU CROISSANCE 421 Grow a path with a Growth Stone
 C 190 Try to jump over the Sand
 C 223 Turn back

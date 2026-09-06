@@ -1,14 +1,16 @@
-Wormhole Gate of Kalyx
------------------------
+T 007 The Replay
 
-An ancient ring floats above a dim moon.
-Cold sparks crawl along its inner rim.
-Pilots leave offerings of small metal charms.
-The gate hums with a deep, patient note.
+   The autopilot of the Convertible has exactly one virtue: it never
+leaves you behind. It scoops you up, flies you home, drops you in the seat
+and turns the music off.
 
-Aim your selfie so the ring frames your head.
-Do not activate the core without a flight plan.
+   You are not dead. You are worse: you are on replay. The live feed
+caught everything, the Holophone did not shake once, and the part where
+you scream while spinning on your own axis is already cut into a loop.
 
-C 003 Return to the supermassive black hole
-C 010 Return to the mirror sea
-C 014 Cross the temporal anoma
+   Your followers loved it. There are thirteen of them now.
+
+   You still have all your gear. Nothing is ever lost in this job, except
+face.
+
+C 003 Take the controls again

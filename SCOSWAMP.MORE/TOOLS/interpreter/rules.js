@@ -109,6 +109,29 @@ export function characterRoll(c) {
 export function hasObject(c, o) { return o >= 0 && o < OBJ_COUNT() && !!(c.objects & (1 << o)); }
 export function giveObject(c, o) { if (o >= 0 && o < OBJ_COUNT()) c.objects |= (1 << o); }
 export function takeObject(c, o) { if (o >= 0 && o < OBJ_COUNT()) c.objects &= ~(1 << o); }
+
+export function migrateSavedFlags(hero, mem, rules) {
+  const rows = [];
+  for (const group of rules?.save_migrations || []) {
+    if (!group.when_none.length || new Set(group.when_none).size !== group.when_none.length)
+      throw new Error('la migration exige des drapeaux distincts');
+    let mask = 0;
+    for (const key of group.when_none) {
+      const id = objectFromName(key);
+      if (id === OBJ_COUNT()) throw new Error(`drapeau inconnu : ${key}`);
+      mask |= 1 << id;
+    }
+    if (!group.first_visited.length) throw new Error('migration vide');
+    for (const branch of group.first_visited) {
+      if (!Number.isInteger(branch.page) || branch.page < 0 || branch.page > 65535 ||
+          !group.when_none.includes(branch.give)) throw new Error('branche de migration invalide');
+      rows.push({ mask, page: branch.page, id: objectFromName(branch.give) });
+    }
+  }
+  for (const row of rows) {
+    if (!(hero.objects & row.mask) && sceneVisited(mem, row.page)) giveObject(hero, row.id);
+  }
+}
 export function hasAmulet(c, a) { return a >= 0 && a < AMULET_COUNT() && !!(c.amulets & (1 << a)); }
 export function giveAmulet(c, a) { if (a >= 0 && a < AMULET_COUNT()) c.amulets |= (1 << a); }
 export function amuletCount(c) {
@@ -132,11 +155,38 @@ function adjust(c, k, k0, d) {
   c[k] = v;
 }
 export function adjustHab(c, d) { adjust(c, 'hab', 'hab0', d); }
-export function adjustEnd(c, d) { adjust(c, 'end', 'end0', d); }
+export function adjustEnd(c, d) {
+  if (c.end <= 0 && d > 0) return; // La mort ne peut pas etre annulee par un soin.
+  adjust(c, 'end', 'end0', d);
+}
 export function adjustCha(c, d) { adjust(c, 'cha', 'cha0', d); }
 /* L'or n'a pas de plafond -- le livre n'en pose aucun -- mais il a le meme
  * plancher : on ne paie pas ce qu'on n'a pas. */
 export function adjustGold(c, d) { c.gold = Math.max(0, c.gold + d); }
+
+// The policy selects eligible goods; catalogue order defines consumption
+// order, objects before amulets. Validate everything before changing the bag.
+export function tradeInventory(c, policy) {
+  if (policy === undefined) return {count: 0, categories: 'N'};
+  if (!policy || typeof policy !== 'object') throw new Error('invalid trade policy');
+  const {objects, amulets, limit, categories} = policy;
+  if (!Array.isArray(objects) || new Set(objects).size !== objects.length ||
+      !objects.every(k => typeof k === 'string') || typeof amulets !== 'boolean' ||
+      !Number.isInteger(limit) || limit < 0 || limit > 255 ||
+      typeof categories !== 'string' || !/^[NBM]{1,2}$/.test(categories) ||
+      new Set(categories).size !== categories.length) throw new Error('invalid trade policy');
+  let mask = 0;
+  for (const key of objects) {
+    const id = objectFromName(key);
+    if (id === OBJ_COUNT() || cat.objets[id].cle !== key) throw new Error(`unknown trade object: ${key}`);
+    mask |= 1 << id;
+  }
+  let bits = c.objects & mask, count = 0;
+  while (bits && count < limit) { bits &= bits - 1; count++; }
+  c.objects = (c.objects & ~mask) | bits;
+  while (amulets && c.amulets && count < limit) { c.amulets &= c.amulets - 1; count++; }
+  return {count, categories};
+}
 
 /* Variation du TOTAL DE DEPART, valeur courante comprise. En perte elle est
  * definitive (page 87), en gain elle releve le plafond (page 155).
@@ -183,6 +233,7 @@ export function combatRound(c, m) {
     heroForce: d + e + c.hab,
     outcome: 0,
   };
+  if (c.hab && hasObject(c, objectFromName('.D'))) r.heroForce--;
   if (hasObject(c, objectFromName('EP'))) r.heroForce += c.weaponBonus;
   r.outcome = r.heroForce > r.monsterForce ? ROUND_HERO_HITS
             : r.heroForce < r.monsterForce ? ROUND_MONSTER_HITS
@@ -229,11 +280,23 @@ export function newMemory() {
 
 function slotOf(mem, zone) { return mem.seen.findIndex((s) => s.scene === zone); }
 
+export function monsterZoneKey(app) {
+  return app.mapHere >= 0 ? app.mapHere + 1 : 0x100 + app.currentScene;
+}
+export function monsterRecover(mem, zone, amount, maximum) {
+  const i = slotOf(mem, zone);
+  if (i < 0 || !mem.seen[i].end || mem.seen[i].end >= maximum) return;
+  mem.seen[i].end = Math.min(maximum, mem.seen[i].end + amount);
+}
+
 export function monsterEnter(mem, zone, foes, count) {
   const i = slotOf(mem, zone);
   if (i < 0) return 0;                    /* jamais combattu ici */
-  const idx = mem.seen[i].index;
-  if (idx >= count) return count;         /* toute la file est tombee */
+  let idx = mem.seen[i].index;
+  if (idx >= count) {
+    if (idx !== count || !mem.seen[i].end) return count;
+    idx--;
+  }
   foes[idx].end = mem.seen[i].end;
   if (monsterIsBeaten(foes[idx])) return idx + 1;
   return idx;
@@ -263,7 +326,7 @@ export function hasStone(c, s) { return s >= 0 && s < STONE_COUNT() ? c.stones[s
 /* "Vous avez le droit d'utiliser les pierres d'ENDURANCE, d'HABILETE et de
  * CHANCE a tout moment, SAUF au cours d'un combat [...] sitot que le premier
  * coup a ete donne." Les trois premieres du catalogue sont celles-la. */
-export function stoneUsable(s, inCombat) { return !inCombat || s > 2; }
+export function stoneUsable(s, inCombat) { return inCombat !== 2 && (!inCombat || s > 2); }
 
 export const STONE_USE_OK = 0, STONE_USE_NONE = 1, STONE_USE_FORBIDDEN = 2;
 
@@ -287,6 +350,10 @@ export function stoneUse(c, s, inCombat) {
 
 /* PD / PO : "on vous prend n biens". Les Pierres partent en premier, puis les
  * objets VISIBLES sauf l'Anneau de Cuivre (bit 0), puis les amulettes. */
+export function hasPayableItem(c) {
+  return !!((c.objects & ((1 << cat.hidden0) - 2)) || c.amulets || c.stones.some(n => n > 0));
+}
+
 export function loseItems(c, n) {
   const STEALABLE = (1 << cat.hidden0) - 2;
   while (n) {

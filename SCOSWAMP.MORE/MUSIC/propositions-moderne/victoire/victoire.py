@@ -23,7 +23,7 @@ QUESTION ET REPONSE mesures 4 et 12. 16 mesures a 4/4, 25,6 s.
 **Sans boucle** (`--no-loop`).
 
     python3 victoire.py && python3 ../../midi_to_mb.py victoire.mid \\
-        VICTOIRE.MB.BIN --bpm 150 --no-loop --max 1280 --wav VICTOIRE.wav
+        VICTORY.MB.BIN --bpm 150 --no-loop --max 1280 --wav VICTOIRE.wav
 """
 import sys
 from pathlib import Path

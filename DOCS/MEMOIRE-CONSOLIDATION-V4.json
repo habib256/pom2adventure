@@ -1,0 +1,6069 @@
+{
+  "binary_bytes": 32470,
+  "binary_sha256": "87b5de4e48a7405d2f21b0b1a80f7b751eef3b3a3eefa22ec0726aac0a0f4230",
+  "hdv_sha256": "127011da70d48eaabd109e372defd201906f68bc80039624acba0c78c943e0ec",
+  "compiler": "cc65 V2.18 - N/A",
+  "himem": 48896,
+  "c_stack_reserved": 384,
+  "heap_start": 46138,
+  "heap_end_exclusive": 48512,
+  "heap_bytes": 2374,
+  "segments": {
+    "ZEROPAGE": {
+      "start": 128,
+      "end_exclusive": 154,
+      "size": 26
+    },
+    "MAPBSS": {
+      "start": 3072,
+      "end_exclusive": 4084,
+      "size": 1012
+    },
+    "LOWBSS": {
+      "start": 4096,
+      "end_exclusive": 8159,
+      "size": 4063
+    },
+    "STARTUP": {
+      "start": 16384,
+      "end_exclusive": 16436,
+      "size": 52
+    },
+    "LOWCODE": {
+      "start": 16436,
+      "end_exclusive": 16527,
+      "size": 91
+    },
+    "CODE": {
+      "start": 16527,
+      "end_exclusive": 43220,
+      "size": 26693
+    },
+    "RODATA": {
+      "start": 43220,
+      "end_exclusive": 45219,
+      "size": 1999
+    },
+    "DATA": {
+      "start": 45219,
+      "end_exclusive": 45438,
+      "size": 219
+    },
+    "INIT": {
+      "start": 45438,
+      "end_exclusive": 45532,
+      "size": 94
+    },
+    "BSS": {
+      "start": 45532,
+      "end_exclusive": 46138,
+      "size": 606
+    },
+    "ONCE": {
+      "start": 45532,
+      "end_exclusive": 45782,
+      "size": 250
+    },
+    "LC": {
+      "start": 54272,
+      "end_exclusive": 57344,
+      "size": 3072
+    }
+  },
+  "modules": {
+    "scoswamp.o": {
+      "CODE": {
+        "offset": 0,
+        "size": 16519
+      },
+      "RODATA": {
+        "offset": 0,
+        "size": 822
+      },
+      "BSS": {
+        "offset": 0,
+        "size": 223
+      },
+      "DATA": {
+        "offset": 0,
+        "size": 2
+      },
+      "LC": {
+        "offset": 0,
+        "size": 2238
+      },
+      "LOWBSS": {
+        "offset": 0,
+        "size": 2028
+      },
+      "MAPBSS": {
+        "offset": 0,
+        "size": 959
+      }
+    },
+    "paths.o": {
+      "CODE": {
+        "offset": 16519,
+        "size": 251
+      },
+      "RODATA": {
+        "offset": 822,
+        "size": 5
+      },
+      "BSS": {
+        "offset": 223,
+        "size": 2
+      }
+    },
+    "memory_swap.o": {
+      "CODE": {
+        "offset": 16770,
+        "size": 100
+      },
+      "DATA": {
+        "offset": 2,
+        "size": 1
+      }
+    },
+    "rules.o": {
+      "CODE": {
+        "offset": 16870,
+        "size": 3382
+      },
+      "RODATA": {
+        "offset": 827,
+        "size": 801
+      },
+      "BSS": {
+        "offset": 225,
+        "size": 57
+      },
+      "LC": {
+        "offset": 2238,
+        "size": 834
+      },
+      "LOWBSS": {
+        "offset": 2028,
+        "size": 160
+      },
+      "MAPBSS": {
+        "offset": 959,
+        "size": 53
+      }
+    },
+    "dice.o": {
+      "CODE": {
+        "offset": 20252,
+        "size": 251
+      },
+      "BSS": {
+        "offset": 282,
+        "size": 3
+      },
+      "DATA": {
+        "offset": 3,
+        "size": 4
+      }
+    },
+    "messages.o": {
+      "CODE": {
+        "offset": 20503,
+        "size": 529
+      },
+      "RODATA": {
+        "offset": 1628,
+        "size": 24
+      },
+      "BSS": {
+        "offset": 285,
+        "size": 13
+      },
+      "LOWBSS": {
+        "offset": 2188,
+        "size": 1747
+      }
+    },
+    "hgr_loader.o": {
+      "CODE": {
+        "offset": 21032,
+        "size": 373
+      },
+      "RODATA": {
+        "offset": 1652,
+        "size": 11
+      },
+      "BSS": {
+        "offset": 298,
+        "size": 10
+      },
+      "LOWBSS": {
+        "offset": 3935,
+        "size": 128
+      }
+    },
+    "sfx.o": {
+      "CODE": {
+        "offset": 21405,
+        "size": 194
+      },
+      "BSS": {
+        "offset": 308,
+        "size": 3
+      }
+    },
+    "music.o": {
+      "CODE": {
+        "offset": 21599,
+        "size": 1089
+      },
+      "RODATA": {
+        "offset": 1663,
+        "size": 132
+      },
+      "BSS": {
+        "offset": 311,
+        "size": 286
+      }
+    },
+    "mli_safe.o": {
+      "DATA": {
+        "offset": 7,
+        "size": 54
+      }
+    },
+    "apple2enh-iobuf-0800.o": {
+      "CODE": {
+        "offset": 22688,
+        "size": 54
+      },
+      "DATA": {
+        "offset": 61,
+        "size": 8
+      },
+      "ONCE": {
+        "offset": 0,
+        "size": 21
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(_cursor.o)": {
+      "BSS": {
+        "offset": 597,
+        "size": 1
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(_cwd.o)": {
+      "INIT": {
+        "offset": 0,
+        "size": 65
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(_directerrno.o)": {
+      "CODE": {
+        "offset": 22742,
+        "size": 9
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(_fdesc.o)": {
+      "CODE": {
+        "offset": 22751,
+        "size": 29
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(_file.o)": {
+      "DATA": {
+        "offset": 69,
+        "size": 30
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(_fopen.o)": {
+      "CODE": {
+        "offset": 22780,
+        "size": 123
+      },
+      "BSS": {
+        "offset": 598,
+        "size": 2
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(_mappederrno.o)": {
+      "CODE": {
+        "offset": 22903,
+        "size": 15
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(_oserror.o)": {
+      "BSS": {
+        "offset": 600,
+        "size": 1
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(_seterrno.o)": {
+      "CODE": {
+        "offset": 22918,
+        "size": 9
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(add.o)": {
+      "CODE": {
+        "offset": 22927,
+        "size": 24
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(addeqsp.o)": {
+      "CODE": {
+        "offset": 22951,
+        "size": 17
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(addysp.o)": {
+      "CODE": {
+        "offset": 22968,
+        "size": 14
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(and.o)": {
+      "CODE": {
+        "offset": 22982,
+        "size": 15
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(aslax1.o)": {
+      "CODE": {
+        "offset": 22997,
+        "size": 8
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(aslax2.o)": {
+      "CODE": {
+        "offset": 23005,
+        "size": 11
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(aslax3.o)": {
+      "CODE": {
+        "offset": 23016,
+        "size": 14
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(aslax4.o)": {
+      "CODE": {
+        "offset": 23030,
+        "size": 17
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(asrax1.o)": {
+      "CODE": {
+        "offset": 23047,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(atoi.o)": {
+      "CODE": {
+        "offset": 23057,
+        "size": 145
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(axlong.o)": {
+      "CODE": {
+        "offset": 23202,
+        "size": 13
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(bneg.o)": {
+      "CODE": {
+        "offset": 23215,
+        "size": 14
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(callirq.o)": {
+      "DATA": {
+        "offset": 99,
+        "size": 30
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(callmain.o)": {
+      "CODE": {
+        "offset": 23229,
+        "size": 23
+      },
+      "DATA": {
+        "offset": 129,
+        "size": 4
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(cclear.o)": {
+      "CODE": {
+        "offset": 23252,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(cgetc.o)": {
+      "CODE": {
+        "offset": 23262,
+        "size": 45
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(chdir.o)": {
+      "CODE": {
+        "offset": 23307,
+        "size": 6
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(chline.o)": {
+      "CODE": {
+        "offset": 23313,
+        "size": 25
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(close.o)": {
+      "CODE": {
+        "offset": 23338,
+        "size": 28
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(clrscr.o)": {},
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(compl.o)": {
+      "CODE": {
+        "offset": 23366,
+        "size": 9
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(condes.o)": {
+      "CODE": {
+        "offset": 23375,
+        "size": 12
+      },
+      "DATA": {
+        "offset": 133,
+        "size": 37
+      },
+      "ONCE": {
+        "offset": 21,
+        "size": 12
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(cout.o)": {
+      "LOWCODE": {
+        "offset": 0,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(cputc.o)": {
+      "CODE": {
+        "offset": 23387,
+        "size": 91
+      },
+      "ONCE": {
+        "offset": 33,
+        "size": 7
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(cputs.o)": {
+      "CODE": {
+        "offset": 23478,
+        "size": 35
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(crt0.o)": {
+      "CODE": {
+        "offset": 23513,
+        "size": 18
+      },
+      "RODATA": {
+        "offset": 1795,
+        "size": 7
+      },
+      "DATA": {
+        "offset": 170,
+        "size": 3
+      },
+      "STARTUP": {
+        "offset": 0,
+        "size": 52
+      },
+      "ONCE": {
+        "offset": 40,
+        "size": 106
+      },
+      "INIT": {
+        "offset": 65,
+        "size": 29
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(ctype.o)": {
+      "RODATA": {
+        "offset": 1802,
+        "size": 139
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(ctypemask.o)": {
+      "CODE": {
+        "offset": 23531,
+        "size": 30
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(decax1.o)": {
+      "CODE": {
+        "offset": 23561,
+        "size": 7
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(decaxy.o)": {
+      "CODE": {
+        "offset": 23568,
+        "size": 9
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(decsp1.o)": {
+      "CODE": {
+        "offset": 23577,
+        "size": 9
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(decsp4.o)": {
+      "CODE": {
+        "offset": 23586,
+        "size": 13
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(dosdetect.o)": {
+      "DATA": {
+        "offset": 173,
+        "size": 1
+      },
+      "ONCE": {
+        "offset": 146,
+        "size": 20
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(enter.o)": {
+      "CODE": {
+        "offset": 23599,
+        "size": 14
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(eq.o)": {
+      "CODE": {
+        "offset": 23613,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(errno.o)": {
+      "BSS": {
+        "offset": 601,
+        "size": 2
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(fclose.o)": {
+      "CODE": {
+        "offset": 23623,
+        "size": 34
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(fgetc.o)": {
+      "CODE": {
+        "offset": 23657,
+        "size": 132
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(fgets.o)": {
+      "CODE": {
+        "offset": 23789,
+        "size": 170
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(filedes.o)": {
+      "CODE": {
+        "offset": 23959,
+        "size": 22
+      },
+      "DATA": {
+        "offset": 174,
+        "size": 32
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(filename.o)": {
+      "CODE": {
+        "offset": 23981,
+        "size": 108
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(fmisc.o)": {
+      "CODE": {
+        "offset": 24089,
+        "size": 68
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(fopen.o)": {
+      "CODE": {
+        "offset": 24157,
+        "size": 24
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(fread.o)": {
+      "CODE": {
+        "offset": 24181,
+        "size": 211
+      },
+      "BSS": {
+        "offset": 603,
+        "size": 3
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(gotoxy.o)": {
+      "CODE": {
+        "offset": 24392,
+        "size": 17
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(home.o)": {
+      "LOWCODE": {
+        "offset": 10,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(icmp.o)": {
+      "CODE": {
+        "offset": 24409,
+        "size": 46
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incax2.o)": {
+      "CODE": {
+        "offset": 24455,
+        "size": 7
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incax3.o)": {
+      "CODE": {
+        "offset": 24462,
+        "size": 5
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incax5.o)": {
+      "CODE": {
+        "offset": 24467,
+        "size": 5
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incaxy.o)": {
+      "CODE": {
+        "offset": 24472,
+        "size": 11
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incsp1.o)": {
+      "CODE": {
+        "offset": 24483,
+        "size": 7
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incsp2.o)": {
+      "CODE": {
+        "offset": 24490,
+        "size": 21
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incsp3.o)": {
+      "CODE": {
+        "offset": 24511,
+        "size": 5
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incsp4.o)": {
+      "CODE": {
+        "offset": 24516,
+        "size": 5
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incsp5.o)": {
+      "CODE": {
+        "offset": 24521,
+        "size": 5
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incsp6.o)": {
+      "CODE": {
+        "offset": 24526,
+        "size": 5
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incsp7.o)": {
+      "CODE": {
+        "offset": 24531,
+        "size": 5
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(incsp8.o)": {
+      "CODE": {
+        "offset": 24536,
+        "size": 5
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(initcwd.o)": {
+      "CODE": {
+        "offset": 24541,
+        "size": 44
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(irq.o)": {
+      "CODE": {
+        "offset": 24585,
+        "size": 15
+      },
+      "DATA": {
+        "offset": 206,
+        "size": 4
+      },
+      "ONCE": {
+        "offset": 166,
+        "size": 56
+      },
+      "LOWCODE": {
+        "offset": 20,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(kbhit.o)": {
+      "CODE": {
+        "offset": 24600,
+        "size": 9
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(ladd.o)": {
+      "CODE": {
+        "offset": 24609,
+        "size": 36
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(land.o)": {
+      "CODE": {
+        "offset": 24645,
+        "size": 33
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(lcmp.o)": {
+      "CODE": {
+        "offset": 24678,
+        "size": 59
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(ldai.o)": {
+      "CODE": {
+        "offset": 24737,
+        "size": 12
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(ldaxi.o)": {
+      "CODE": {
+        "offset": 24749,
+        "size": 13
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(ldaxsp.o)": {
+      "CODE": {
+        "offset": 24762,
+        "size": 9
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(leaaxsp.o)": {
+      "CODE": {
+        "offset": 24771,
+        "size": 12
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(leave.o)": {
+      "CODE": {
+        "offset": 24783,
+        "size": 27
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(leq.o)": {
+      "CODE": {
+        "offset": 24810,
+        "size": 6
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(lmul.o)": {
+      "CODE": {
+        "offset": 24816,
+        "size": 89
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(lneg.o)": {
+      "CODE": {
+        "offset": 24905,
+        "size": 30
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(lpush.o)": {
+      "CODE": {
+        "offset": 24935,
+        "size": 30
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(makebool.o)": {
+      "CODE": {
+        "offset": 24965,
+        "size": 44
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(memcmp.o)": {
+      "CODE": {
+        "offset": 25009,
+        "size": 54
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(memcpy.o)": {
+      "CODE": {
+        "offset": 25063,
+        "size": 60
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(memmove.o)": {
+      "CODE": {
+        "offset": 25123,
+        "size": 80
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(memset.o)": {
+      "CODE": {
+        "offset": 25203,
+        "size": 93
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(mul.o)": {
+      "CODE": {
+        "offset": 25296,
+        "size": 69
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(mul8.o)": {
+      "CODE": {
+        "offset": 25365,
+        "size": 58
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(mulax10.o)": {
+      "CODE": {
+        "offset": 25423,
+        "size": 25
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(negabs.o)": {
+      "CODE": {
+        "offset": 25448,
+        "size": 18
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(open.o)": {
+      "CODE": {
+        "offset": 25466,
+        "size": 249
+      },
+      "DATA": {
+        "offset": 210,
+        "size": 9
+      },
+      "ONCE": {
+        "offset": 222,
+        "size": 9
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(or.o)": {
+      "CODE": {
+        "offset": 25715,
+        "size": 17
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(oserror.o)": {
+      "CODE": {
+        "offset": 25732,
+        "size": 22
+      },
+      "RODATA": {
+        "offset": 1941,
+        "size": 50
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(popa.o)": {
+      "CODE": {
+        "offset": 25754,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(popptr1.o)": {
+      "CODE": {
+        "offset": 25764,
+        "size": 14
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(pusha.o)": {
+      "CODE": {
+        "offset": 25778,
+        "size": 22
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(pushax.o)": {
+      "CODE": {
+        "offset": 25800,
+        "size": 26
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(pushw.o)": {
+      "CODE": {
+        "offset": 25826,
+        "size": 15
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(pushwsp.o)": {
+      "CODE": {
+        "offset": 25841,
+        "size": 28
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(rdkey.o)": {
+      "LOWCODE": {
+        "offset": 30,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(read.o)": {
+      "CODE": {
+        "offset": 25869,
+        "size": 90
+      },
+      "ONCE": {
+        "offset": 231,
+        "size": 5
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(regswap2.o)": {
+      "CODE": {
+        "offset": 25959,
+        "size": 22
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(return0.o)": {
+      "CODE": {
+        "offset": 25981,
+        "size": 4
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(revers.o)": {
+      "CODE": {
+        "offset": 25985,
+        "size": 19
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(rwcommon.o)": {
+      "CODE": {
+        "offset": 26004,
+        "size": 61
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(shl.o)": {
+      "CODE": {
+        "offset": 26065,
+        "size": 48
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(shrax3.o)": {
+      "CODE": {
+        "offset": 26113,
+        "size": 14
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(staspidx.o)": {
+      "CODE": {
+        "offset": 26127,
+        "size": 22
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(staxsp.o)": {
+      "CODE": {
+        "offset": 26149,
+        "size": 11
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(staxspi.o)": {
+      "CODE": {
+        "offset": 26160,
+        "size": 26
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(strchr.o)": {
+      "CODE": {
+        "offset": 26186,
+        "size": 37
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(strcmp.o)": {
+      "CODE": {
+        "offset": 26223,
+        "size": 33
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(strlen.o)": {
+      "CODE": {
+        "offset": 26256,
+        "size": 22
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(strncpy.o)": {
+      "CODE": {
+        "offset": 26278,
+        "size": 68
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(sub.o)": {
+      "CODE": {
+        "offset": 26346,
+        "size": 20
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(subeqsp.o)": {
+      "CODE": {
+        "offset": 26366,
+        "size": 21
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(subysp.o)": {
+      "CODE": {
+        "offset": 26387,
+        "size": 13
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(syschdir.o)": {
+      "CODE": {
+        "offset": 26400,
+        "size": 31
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(udiv.o)": {
+      "CODE": {
+        "offset": 26431,
+        "size": 79
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(uge.o)": {
+      "CODE": {
+        "offset": 26510,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(ule.o)": {
+      "CODE": {
+        "offset": 26520,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(umod.o)": {
+      "CODE": {
+        "offset": 26530,
+        "size": 17
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(videomode.o)": {
+      "LOWCODE": {
+        "offset": 40,
+        "size": 41
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(vtabz.o)": {
+      "LOWCODE": {
+        "offset": 81,
+        "size": 10
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(wherex.o)": {
+      "CODE": {
+        "offset": 26547,
+        "size": 5
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(write.o)": {
+      "CODE": {
+        "offset": 26552,
+        "size": 106
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(zerobss.o)": {
+      "CODE": {
+        "offset": 26658,
+        "size": 35
+      }
+    },
+    "/opt/homebrew/Cellar/cc65/2.19/share/cc65/lib/apple2enh.lib(zeropage.o)": {
+      "ZEROPAGE": {
+        "offset": 0,
+        "size": 26
+      }
+    },
+    "[linker tables]": {
+      "RODATA": {
+        "offset": 1991,
+        "size": 8
+      },
+      "ONCE": {
+        "offset": 236,
+        "size": 14
+      }
+    }
+  },
+  "functions": [
+    {
+      "name": "_classify_line",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 6799,
+      "calls": [
+        "_take_word",
+        "_object_from_name",
+        "_character_take_object",
+        "_take_uint",
+        "_character_trade_amulets",
+        "_amulet_from_name",
+        "_character_give_amulet",
+        "_character_give_object",
+        "_push_object_choice",
+        "_scene_visited",
+        "_push_choice",
+        "_lose_items",
+        "_monster_zone_key",
+        "_monster_recover",
+        "_strncpy",
+        "_monster_init",
+        "_carac_of",
+        "_atoi",
+        "_character_shift0",
+        "_take_int",
+        "_luck_test",
+        "_carac_apply",
+        "_stone_from_name",
+        "_character_give_stone",
+        "_msg"
+      ],
+      "size": 3541,
+      "start": 23326,
+      "end_exclusive": 26867
+    },
+    {
+      "name": "_run_combat",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 13945,
+      "calls": [
+        "_render_title_bar",
+        "_show_fighters",
+        "_row_blank",
+        "_gotoxy",
+        "_msg",
+        "_cfmt",
+        "_put_roll",
+        "_put_verdict",
+        "_cputs",
+        "_pad_to",
+        "_msg_space",
+        "_put_key",
+        "_put_tag",
+        "_cgetc",
+        "_cycle_video_mode",
+        "_show_inventory",
+        "_open_map",
+        "_prompt_luck",
+        "_combat_flee",
+        "_print_at",
+        "_monster_zone_key",
+        "_monster_remember",
+        "_wait_space_at",
+        "_set_video_mode",
+        "_music_stop",
+        "_music_switch",
+        "_combat_apply",
+        "_sfx_beat",
+        "_monster_is_beaten",
+        "_sfx_fall",
+        "_load_foe_image",
+        "_sfx_death",
+        "_combat_round",
+        "_sfx_dodge",
+        "_sfx_hit",
+        "_sfx_hurt"
+      ],
+      "size": 1395,
+      "start": 30472,
+      "end_exclusive": 31867
+    },
+    {
+      "name": "_show_map",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 12512,
+      "calls": [
+        "_set_video_mode",
+        "_wipe",
+        "_map_seen",
+        "_revers",
+        "_gotoxy",
+        "_cputc",
+        "_map_str",
+        "_cfmt",
+        "_pad_to",
+        "_map_voisin",
+        "_map_trait",
+        "_cputs",
+        "_cputsxy",
+        "_cgetc"
+      ],
+      "size": 1335,
+      "start": 29039,
+      "end_exclusive": 30374
+    },
+    {
+      "name": "_show_inventory",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11749,
+      "calls": [
+        "_set_video_mode",
+        "_wipe",
+        "_render_title_bar",
+        "_gotoxy",
+        "_msg",
+        "_cfmt",
+        "_is_fr",
+        "_stone_name",
+        "_stone_kind",
+        "_stone_usable",
+        "_character_has_object",
+        "_object_name",
+        "_character_has_amulet",
+        "_amulet_name",
+        "_cputs",
+        "_print_at",
+        "_cgetc",
+        "_clear_bottom",
+        "_stone_use",
+        "_msg_continue",
+        "_wait_key_at",
+        "_render_scene"
+      ],
+      "size": 763,
+      "start": 28276,
+      "end_exclusive": 29039
+    },
+    {
+      "name": "_cfmt",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 3244,
+      "calls": [
+        "_emit",
+        "_strlen",
+        "_pad_spaces"
+      ],
+      "size": 608,
+      "start": 19771,
+      "end_exclusive": 20379
+    },
+    {
+      "name": "_load_scene",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 136,
+      "calls": [
+        "_map_of_page",
+        "_display_scene_text",
+        "_music_switch",
+        "_strcmp",
+        "_music_for_clearing",
+        "_character_is_dead",
+        "_msg_continue",
+        "_wait_key_at",
+        "_die_and_restart",
+        "_scene_mark_visited",
+        "_run_dice_roll",
+        "_render_scene",
+        "_run_stat_test",
+        "_run_luck_test",
+        "_load_hgr_image_as",
+        "_choose_stones",
+        "_monster_seal",
+        "_monster_zone_key",
+        "_monster_enter",
+        "_load_foe_image",
+        "_run_combat"
+      ],
+      "size": 600,
+      "start": 16663,
+      "end_exclusive": 17263
+    },
+    {
+      "name": "_handle_user_input",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 15816,
+      "calls": [
+        "_cycle_video_mode",
+        "_show_inventory",
+        "_die_and_restart",
+        "_show_help",
+        "_show_saves",
+        "_monster_memory_reset",
+        "_scene_memory_reset",
+        "_open_map",
+        "_render_scene",
+        "_confirm_quit",
+        "_choice_available",
+        "_clear_bottom",
+        "_msg",
+        "_print_at",
+        "_msg_continue",
+        "_wait_key_at",
+        "_stone_use",
+        "_character_give_stone",
+        "_character_take_object",
+        "_roll_character",
+        "_load_scene"
+      ],
+      "size": 540,
+      "start": 32343,
+      "end_exclusive": 32883
+    },
+    {
+      "name": "_parse_text_file",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 10340,
+      "calls": [
+        "_build_paths",
+        "_oops",
+        "_set_video_mode",
+        "_videomode",
+        "_clrscr",
+        "_is_fr",
+        "_enter_asset_dir",
+        "_fopen",
+        "_fread",
+        "_fclose",
+        "_classify_line",
+        "_render_scene"
+      ],
+      "size": 537,
+      "start": 26867,
+      "end_exclusive": 27404
+    },
+    {
+      "name": "_choice_available",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 4297,
+      "calls": [
+        "_character_has_stone",
+        "_character_has_object",
+        "_character_has_amulet",
+        "_character_amulet_count"
+      ],
+      "size": 501,
+      "start": 20824,
+      "end_exclusive": 21325
+    },
+    {
+      "name": "_messages_load",
+      "module": "messages.o",
+      "segment": "CODE",
+      "offset": 0,
+      "calls": [
+        "_chdir",
+        "_fopen",
+        "_fread",
+        "_fclose"
+      ],
+      "size": 466,
+      "start": 37030,
+      "end_exclusive": 37496
+    },
+    {
+      "name": "_choose_stones",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 1555,
+      "calls": [
+        "_set_video_mode",
+        "_wipe",
+        "_render_title_bar",
+        "_stone_kind",
+        "_strchr",
+        "_gotoxy",
+        "_is_fr",
+        "_stone_name",
+        "_cfmt",
+        "_msg",
+        "_pad_to",
+        "_cputs",
+        "_cgetc",
+        "_cycle_video_mode",
+        "_character_give_stone"
+      ],
+      "size": 362,
+      "start": 55827,
+      "end_exclusive": 56189
+    },
+    {
+      "name": "_map_load",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 5200,
+      "calls": [
+        "_chdir",
+        "_fopen",
+        "_fread",
+        "_memcmp",
+        "_load_u16",
+        "_is_fr",
+        "_fclose"
+      ],
+      "size": 353,
+      "start": 21727,
+      "end_exclusive": 22080
+    },
+    {
+      "name": "_music_load",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 2390,
+      "calls": [
+        "_chdir",
+        "_fopen",
+        "_fread",
+        "_memcmp",
+        "_music_store",
+        "_ferror",
+        "_fclose"
+      ],
+      "size": 346,
+      "start": 18917,
+      "end_exclusive": 19263
+    },
+    {
+      "name": "_show_saves",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 736,
+      "calls": [
+        "_set_video_mode",
+        "_wipe",
+        "_render_title_bar",
+        "_msg",
+        "_print_at",
+        "_slot_title",
+        "_gotoxy",
+        "_cfmt",
+        "_cgetc",
+        "_save_game",
+        "_msg_continue",
+        "_wait_key_at",
+        "_load_game",
+        "_is_fr",
+        "_messages_load",
+        "_map_load"
+      ],
+      "size": 321,
+      "start": 17263,
+      "end_exclusive": 17584
+    },
+    {
+      "name": "_map_voisin",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 361,
+      "calls": [],
+      "size": 302,
+      "start": 54633,
+      "end_exclusive": 54935
+    },
+    {
+      "name": "_unpack_save",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 0,
+      "calls": [
+        "_memcmp",
+        "_save_checksum",
+        "_load_u16",
+        "_memcpy",
+        "_scene_memory_import",
+        "_monster_memory_import",
+        "_migrate_saved_flags"
+      ],
+      "size": 295,
+      "start": 54272,
+      "end_exclusive": 54567
+    },
+    {
+      "name": "_pack_save",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 1248,
+      "calls": [
+        "_strlen",
+        "_memmove",
+        "__bzero",
+        "_save_u16",
+        "_memcpy",
+        "_scene_memory_export",
+        "_monster_memory_export",
+        "_save_checksum"
+      ],
+      "size": 291,
+      "start": 17775,
+      "end_exclusive": 18066
+    },
+    {
+      "name": "_load_game",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 1815,
+      "calls": [
+        "_enter_save",
+        "_fopen",
+        "_fread",
+        "_fgetc",
+        "_ferror",
+        "_fclose",
+        "_load_u16",
+        "_unpack_save"
+      ],
+      "size": 279,
+      "start": 18342,
+      "end_exclusive": 18621
+    },
+    {
+      "name": "_render_choices",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 4933,
+      "calls": [
+        "_pair_fits",
+        "_gotoxy",
+        "_choice_tag",
+        "_cfmt"
+      ],
+      "size": 267,
+      "start": 21460,
+      "end_exclusive": 21727
+    },
+    {
+      "name": "_render_title_bar",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 4035,
+      "calls": [
+        "_strlen",
+        "_memcpy",
+        "_is_fr",
+        "_cfmt",
+        "_msg",
+        "_revers",
+        "_cputsxy"
+      ],
+      "size": 262,
+      "start": 20562,
+      "end_exclusive": 20824
+    },
+    {
+      "name": "_render_place",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 5950,
+      "calls": [
+        "_revers",
+        "_gotoxy",
+        "_pad_to",
+        "_map_of_page",
+        "_map_seen",
+        "_map_str",
+        "_cfmt",
+        "_is_fr",
+        "_strlen",
+        "_cputs"
+      ],
+      "size": 262,
+      "start": 22477,
+      "end_exclusive": 22739
+    },
+    {
+      "name": "_show_help",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 15340,
+      "calls": [
+        "_set_video_mode",
+        "_wipe",
+        "_render_title_bar",
+        "_chdir",
+        "_msg",
+        "_fopen",
+        "_print_at",
+        "_cputsxy",
+        "_fgets",
+        "_fclose",
+        "_msg_continue",
+        "_wait_key_at",
+        "_render_scene"
+      ],
+      "size": 262,
+      "start": 31867,
+      "end_exclusive": 32129
+    },
+    {
+      "name": "_stone_use",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2780,
+      "calls": [
+        "_stone_usable",
+        "_half_round_up",
+        "_character_adjust_hab",
+        "_character_adjust_cha",
+        "_roll_d6",
+        "_character_adjust_end"
+      ],
+      "size": 258,
+      "start": 36177,
+      "end_exclusive": 36435
+    },
+    {
+      "name": "_combat_apply",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 1334,
+      "calls": [
+        "_luck_test",
+        "_character_adjust_end"
+      ],
+      "size": 257,
+      "start": 34731,
+      "end_exclusive": 34988
+    },
+    {
+      "name": "_combat_round",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 1096,
+      "calls": [
+        "_roll_d6",
+        "_memcpy"
+      ],
+      "size": 238,
+      "start": 34493,
+      "end_exclusive": 34731
+    },
+    {
+      "name": "_monster_enter",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 1877,
+      "calls": [
+        "_slot_of",
+        "_monster_is_beaten"
+      ],
+      "size": 234,
+      "start": 35274,
+      "end_exclusive": 35508
+    },
+    {
+      "name": "_roll_character",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 2021,
+      "calls": [
+        "_character_roll",
+        "_set_video_mode",
+        "_videomode",
+        "_wipe",
+        "_render_title_bar",
+        "_gotoxy",
+        "_msg",
+        "_cputs",
+        "_cfmt",
+        "_wait_key_at"
+      ],
+      "size": 217,
+      "start": 56293,
+      "end_exclusive": 56510
+    },
+    {
+      "name": "_run_luck_test",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 1072,
+      "calls": [
+        "_gotoxy",
+        "_msg",
+        "_cfmt",
+        "_pad_to",
+        "_cgetc",
+        "_roll_2d6",
+        "_row_blank",
+        "_print_at",
+        "_character_adjust_end",
+        "_render_title_bar",
+        "_msg_continue",
+        "_wait_key_at"
+      ],
+      "size": 199,
+      "start": 55344,
+      "end_exclusive": 55543
+    },
+    {
+      "name": "_character_roll",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 361,
+      "calls": [
+        "_roll_d6",
+        "_roll_2d6"
+      ],
+      "size": 197,
+      "start": 33758,
+      "end_exclusive": 33955
+    },
+    {
+      "name": "_show_fighters",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11466,
+      "calls": [
+        "_gotoxy",
+        "_msg",
+        "_put_fighter",
+        "_pad_to",
+        "_cfmt"
+      ],
+      "size": 190,
+      "start": 27993,
+      "end_exclusive": 28183
+    },
+    {
+      "name": "_lose_items",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 6616,
+      "calls": [],
+      "size": 183,
+      "start": 23143,
+      "end_exclusive": 23326
+    },
+    {
+      "name": "_hgr_rle_load",
+      "module": "hgr_loader.o",
+      "segment": "CODE",
+      "offset": 191,
+      "calls": [
+        "_fopen",
+        "_fclose"
+      ],
+      "size": 182,
+      "start": 37750,
+      "end_exclusive": 37932
+    },
+    {
+      "name": "_put_scene",
+      "module": "paths.o",
+      "segment": "CODE",
+      "offset": 0,
+      "calls": [],
+      "size": 177,
+      "start": 33046,
+      "end_exclusive": 33223
+    },
+    {
+      "name": "_slot_title",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 2094,
+      "calls": [
+        "_enter_save",
+        "_fopen",
+        "_fread",
+        "_memcmp",
+        "_memcpy",
+        "_fclose"
+      ],
+      "size": 171,
+      "start": 18621,
+      "end_exclusive": 18792
+    },
+    {
+      "name": "_monster_recover",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 1708,
+      "calls": [
+        "_slot_of"
+      ],
+      "size": 169,
+      "start": 35105,
+      "end_exclusive": 35274
+    },
+    {
+      "name": "_main",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 16356,
+      "calls": [
+        "__bzero",
+        "_monster_memory_reset",
+        "_scene_memory_reset",
+        "_chdir",
+        "_clrscr",
+        "_oops",
+        "_select_language",
+        "_messages_load",
+        "_map_load",
+        "_music_detect",
+        "_load_scene",
+        "_msg",
+        "_print_at",
+        "_cgetc",
+        "_handle_user_input"
+      ],
+      "size": 163,
+      "start": 32883,
+      "end_exclusive": 33046
+    },
+    {
+      "name": "_run_dice_roll",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 1271,
+      "calls": [
+        "_msg",
+        "_print_at",
+        "_row_blank",
+        "_cgetc",
+        "_roll_d6",
+        "_gotoxy",
+        "_cfmt",
+        "_pad_to",
+        "_carac_apply",
+        "_render_title_bar",
+        "_msg_continue",
+        "_wait_key_at"
+      ],
+      "size": 159,
+      "start": 55543,
+      "end_exclusive": 55702
+    },
+    {
+      "name": "_put_fighter",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11157,
+      "calls": [
+        "_revers",
+        "_cputc",
+        "_is_fr",
+        "_cfmt",
+        "_put_gauge"
+      ],
+      "size": 157,
+      "start": 27684,
+      "end_exclusive": 27841
+    },
+    {
+      "name": "_take_uint",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 663,
+      "calls": [],
+      "size": 156,
+      "start": 54935,
+      "end_exclusive": 55091
+    },
+    {
+      "name": "_confirm_quit",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 3894,
+      "calls": [
+        "_clear_bottom",
+        "_gotoxy",
+        "_is_fr",
+        "_cputs",
+        "_pad_to",
+        "_cgetc",
+        "_set_video_mode",
+        "_videomode",
+        "_clrscr",
+        "_exit",
+        "_render_scene"
+      ],
+      "size": 141,
+      "start": 20421,
+      "end_exclusive": 20562
+    },
+    {
+      "name": "_map_of_page",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 5553,
+      "calls": [],
+      "size": 138,
+      "start": 22080,
+      "end_exclusive": 22218
+    },
+    {
+      "name": "_push_choice",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 6391,
+      "calls": [],
+      "size": 138,
+      "start": 22918,
+      "end_exclusive": 23056
+    },
+    {
+      "name": "_monster_remember",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2111,
+      "calls": [
+        "_slot_of"
+      ],
+      "size": 135,
+      "start": 35508,
+      "end_exclusive": 35643
+    },
+    {
+      "name": "_character_give_stone",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2526,
+      "calls": [],
+      "size": 132,
+      "start": 35923,
+      "end_exclusive": 36055
+    },
+    {
+      "name": "_map_seen",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 5691,
+      "calls": [
+        "_scene_visited"
+      ],
+      "size": 129,
+      "start": 22218,
+      "end_exclusive": 22347
+    },
+    {
+      "name": "_take_int",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 819,
+      "calls": [
+        "_take_uint"
+      ],
+      "size": 127,
+      "start": 55091,
+      "end_exclusive": 55218
+    },
+    {
+      "name": "_take_word",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 946,
+      "calls": [],
+      "size": 126,
+      "start": 55218,
+      "end_exclusive": 55344
+    },
+    {
+      "name": "_run_stat_test",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 1430,
+      "calls": [
+        "_msg",
+        "_print_at",
+        "_row_blank",
+        "_cgetc",
+        "_roll_2d6",
+        "_carac_value",
+        "_gotoxy",
+        "_cfmt",
+        "_pad_to",
+        "_msg_continue",
+        "_wait_key_at"
+      ],
+      "size": 125,
+      "start": 55702,
+      "end_exclusive": 55827
+    },
+    {
+      "name": "_put_gauge",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 10972,
+      "calls": [
+        "_cputc",
+        "_revers"
+      ],
+      "size": 121,
+      "start": 27499,
+      "end_exclusive": 27620
+    },
+    {
+      "name": "_carac_apply",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 6272,
+      "calls": [
+        "_character_adjust_end",
+        "_character_adjust_hab",
+        "_character_adjust_cha",
+        "_character_adjust_gold"
+      ],
+      "size": 119,
+      "start": 22799,
+      "end_exclusive": 22918
+    },
+    {
+      "name": "_stone_from_name",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 132,
+      "calls": [
+        "_same_name"
+      ],
+      "size": 118,
+      "start": 33529,
+      "end_exclusive": 33647
+    },
+    {
+      "name": "_same_name",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 3077,
+      "calls": [
+        "_upcase"
+      ],
+      "size": 118,
+      "start": 36474,
+      "end_exclusive": 36592
+    },
+    {
+      "name": "_enter_asset_dir",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 2273,
+      "calls": [
+        "_chdir",
+        "_put_scene"
+      ],
+      "size": 117,
+      "start": 18800,
+      "end_exclusive": 18917
+    },
+    {
+      "name": "_music_switch",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 2743,
+      "calls": [
+        "_music_fade_out",
+        "_music_load",
+        "_music_fade_in",
+        "_music_settle",
+        "_music_stop",
+        "_music_pause",
+        "_music_select",
+        "_music_set_loop",
+        "_music_play",
+        "_memcpy"
+      ],
+      "size": 113,
+      "start": 19270,
+      "end_exclusive": 19383
+    },
+    {
+      "name": "_character_shift0",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 745,
+      "calls": [
+        "_adjust"
+      ],
+      "size": 112,
+      "start": 34142,
+      "end_exclusive": 34254
+    },
+    {
+      "name": "_migrate_saved_flags",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 1539,
+      "calls": [
+        "_scene_visited"
+      ],
+      "size": 108,
+      "start": 18066,
+      "end_exclusive": 18174
+    },
+    {
+      "name": "_combat_flee",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 1591,
+      "calls": [
+        "_luck_test",
+        "_character_adjust_end"
+      ],
+      "size": 105,
+      "start": 34988,
+      "end_exclusive": 35093
+    },
+    {
+      "name": "_game_over",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 1917,
+      "calls": [
+        "_set_video_mode",
+        "_wipe",
+        "_gotoxy",
+        "_msg",
+        "_cputs",
+        "_print_at",
+        "_cgetc",
+        "_show_saves",
+        "_confirm_quit"
+      ],
+      "size": 104,
+      "start": 56189,
+      "end_exclusive": 56293
+    },
+    {
+      "name": "_save_game",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 1713,
+      "calls": [
+        "_pack_save",
+        "_enter_save",
+        "_open",
+        "_write",
+        "_close"
+      ],
+      "size": 102,
+      "start": 18240,
+      "end_exclusive": 18342
+    },
+    {
+      "name": "_pair_fits",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 4833,
+      "calls": [
+        "_strlen"
+      ],
+      "size": 100,
+      "start": 21360,
+      "end_exclusive": 21460
+    },
+    {
+      "name": "_music_for_clearing",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 2856,
+      "calls": [
+        "_music_fade_out",
+        "_music_settle",
+        "_music_stop",
+        "_music_switch"
+      ],
+      "size": 98,
+      "start": 19383,
+      "end_exclusive": 19481
+    },
+    {
+      "name": "_display_language_selection",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 15666,
+      "calls": [
+        "_videomode",
+        "_clrscr",
+        "_fopen",
+        "_cputs",
+        "_cputc",
+        "_fgets",
+        "_fclose"
+      ],
+      "size": 95,
+      "start": 32193,
+      "end_exclusive": 32288
+    },
+    {
+      "name": "_load_foe_image",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 3039,
+      "calls": [
+        "_load_hgr_image_as"
+      ],
+      "size": 93,
+      "start": 19566,
+      "end_exclusive": 19659
+    },
+    {
+      "name": "_amulet_from_name",
+      "module": "rules.o",
+      "segment": "LC",
+      "offset": 383,
+      "calls": [
+        "_same_name"
+      ],
+      "size": 93,
+      "start": 56893,
+      "end_exclusive": 56986
+    },
+    {
+      "name": "_map_trait",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 5859,
+      "calls": [
+        "_gotoxy",
+        "_cputc"
+      ],
+      "size": 91,
+      "start": 22386,
+      "end_exclusive": 22477
+    },
+    {
+      "name": "_next16",
+      "module": "dice.o",
+      "segment": "CODE",
+      "offset": 162,
+      "calls": [],
+      "size": 89,
+      "start": 36941,
+      "end_exclusive": 37030
+    },
+    {
+      "name": "_adjust",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 3195,
+      "calls": [],
+      "size": 88,
+      "start": 36592,
+      "end_exclusive": 36680
+    },
+    {
+      "name": "_push_object_choice",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 6529,
+      "calls": [
+        "_push_choice"
+      ],
+      "size": 87,
+      "start": 23056,
+      "end_exclusive": 23143
+    },
+    {
+      "name": "_load_hgr_image_as",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 2954,
+      "calls": [
+        "_build_paths",
+        "_enter_asset_dir",
+        "_hgr_rle_load"
+      ],
+      "size": 85,
+      "start": 19481,
+      "end_exclusive": 19566
+    },
+    {
+      "name": "_object_from_name",
+      "module": "rules.o",
+      "segment": "LC",
+      "offset": 215,
+      "calls": [
+        "_same_name"
+      ],
+      "size": 85,
+      "start": 56725,
+      "end_exclusive": 56810
+    },
+    {
+      "name": "_object_name",
+      "module": "rules.o",
+      "segment": "LC",
+      "offset": 132,
+      "calls": [],
+      "size": 83,
+      "start": 56642,
+      "end_exclusive": 56725
+    },
+    {
+      "name": "_amulet_name",
+      "module": "rules.o",
+      "segment": "LC",
+      "offset": 300,
+      "calls": [],
+      "size": 83,
+      "start": 56810,
+      "end_exclusive": 56893
+    },
+    {
+      "name": "_stone_name",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 49,
+      "calls": [],
+      "size": 83,
+      "start": 33446,
+      "end_exclusive": 33529
+    },
+    {
+      "name": "_monster_init",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 952,
+      "calls": [],
+      "size": 82,
+      "start": 34349,
+      "end_exclusive": 34431
+    },
+    {
+      "name": "_slot_of",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 3283,
+      "calls": [],
+      "size": 82,
+      "start": 36680,
+      "end_exclusive": 36762
+    },
+    {
+      "name": "_put_roll",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11314,
+      "calls": [
+        "_gotoxy",
+        "_cfmt",
+        "_pad_to"
+      ],
+      "size": 77,
+      "start": 27841,
+      "end_exclusive": 27918
+    },
+    {
+      "name": "_character_has_object",
+      "module": "rules.o",
+      "segment": "LC",
+      "offset": 621,
+      "calls": [],
+      "size": 77,
+      "start": 57131,
+      "end_exclusive": 57208
+    },
+    {
+      "name": "refill",
+      "module": "hgr_loader.o",
+      "segment": "CODE",
+      "offset": 0,
+      "calls": [
+        "_fread"
+      ],
+      "size": 76,
+      "start": 37559,
+      "end_exclusive": 37635
+    },
+    {
+      "name": "_luck_test",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 877,
+      "calls": [
+        "_roll_2d6"
+      ],
+      "size": 75,
+      "start": 34274,
+      "end_exclusive": 34349
+    },
+    {
+      "name": "_build_paths",
+      "module": "paths.o",
+      "segment": "CODE",
+      "offset": 177,
+      "calls": [
+        "_put_scene",
+        "_memcpy"
+      ],
+      "size": 74,
+      "start": 33223,
+      "end_exclusive": 33297
+    },
+    {
+      "name": "_character_take_object",
+      "module": "rules.o",
+      "segment": "LC",
+      "offset": 547,
+      "calls": [],
+      "size": 74,
+      "start": 57057,
+      "end_exclusive": 57131
+    },
+    {
+      "name": "_render_scene",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 0,
+      "calls": [
+        "_wipe",
+        "_render_title_bar",
+        "_cputsxy",
+        "_render_place",
+        "_render_choices"
+      ],
+      "size": 73,
+      "start": 16527,
+      "end_exclusive": 16600
+    },
+    {
+      "name": "_dice_seed",
+      "module": "dice.o",
+      "segment": "CODE",
+      "offset": 0,
+      "calls": [],
+      "size": 73,
+      "start": 36779,
+      "end_exclusive": 36852
+    },
+    {
+      "name": "_character_give_object",
+      "module": "rules.o",
+      "segment": "LC",
+      "offset": 476,
+      "calls": [],
+      "size": 71,
+      "start": 56986,
+      "end_exclusive": 57057
+    },
+    {
+      "name": "_character_has_amulet",
+      "module": "rules.o",
+      "segment": "LC",
+      "offset": 764,
+      "calls": [],
+      "size": 70,
+      "start": 57274,
+      "end_exclusive": 57344
+    },
+    {
+      "name": "_character_adjust_gold",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 675,
+      "calls": [],
+      "size": 70,
+      "start": 34072,
+      "end_exclusive": 34142
+    },
+    {
+      "name": "_save_checksum",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 1180,
+      "calls": [],
+      "size": 68,
+      "start": 17707,
+      "end_exclusive": 17775
+    },
+    {
+      "name": "_scene_visited",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2296,
+      "calls": [],
+      "size": 67,
+      "start": 35693,
+      "end_exclusive": 35760
+    },
+    {
+      "name": "_scene_mark_visited",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2363,
+      "calls": [],
+      "size": 67,
+      "start": 35760,
+      "end_exclusive": 35827
+    },
+    {
+      "name": "_enter_save",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 1647,
+      "calls": [
+        "_chdir"
+      ],
+      "size": 66,
+      "start": 18174,
+      "end_exclusive": 18240
+    },
+    {
+      "name": "_map_str",
+      "module": "scoswamp.o",
+      "segment": "LC",
+      "offset": 295,
+      "calls": [],
+      "size": 66,
+      "start": 54567,
+      "end_exclusive": 54633
+    },
+    {
+      "name": "_character_give_amulet",
+      "module": "rules.o",
+      "segment": "LC",
+      "offset": 698,
+      "calls": [],
+      "size": 66,
+      "start": 57208,
+      "end_exclusive": 57274
+    },
+    {
+      "name": "_open_map",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 13847,
+      "calls": [
+        "_character_has_object",
+        "_clear_bottom",
+        "_map_str",
+        "_print_at",
+        "_msg_continue",
+        "_wait_key_at",
+        "_show_map"
+      ],
+      "size": 65,
+      "start": 30374,
+      "end_exclusive": 30439
+    },
+    {
+      "name": "_die_and_restart",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 15602,
+      "calls": [
+        "_strcmp",
+        "_music_stop",
+        "_music_switch",
+        "_game_over",
+        "_monster_memory_reset",
+        "_scene_memory_reset"
+      ],
+      "size": 64,
+      "start": 32129,
+      "end_exclusive": 32193
+    },
+    {
+      "name": "_character_has_stone",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2658,
+      "calls": [],
+      "size": 63,
+      "start": 36055,
+      "end_exclusive": 36118
+    },
+    {
+      "name": "_msg",
+      "module": "messages.o",
+      "segment": "CODE",
+      "offset": 466,
+      "calls": [],
+      "size": 63,
+      "start": 37496,
+      "end_exclusive": 37559
+    },
+    {
+      "name": "_carac_of",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 6212,
+      "calls": [],
+      "size": 60,
+      "start": 22739,
+      "end_exclusive": 22799
+    },
+    {
+      "name": "_stone_usable",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2721,
+      "calls": [],
+      "size": 59,
+      "start": 36118,
+      "end_exclusive": 36177
+    },
+    {
+      "name": "_dice_seed_from_keypress",
+      "module": "dice.o",
+      "segment": "CODE",
+      "offset": 103,
+      "calls": [
+        "_kbhit",
+        "_cgetc",
+        "_dice_seed"
+      ],
+      "size": 59,
+      "start": 36882,
+      "end_exclusive": 36941
+    },
+    {
+      "name": "_character_trade_amulets",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 303,
+      "calls": [
+        "_character_amulet_count",
+        "_character_adjust_gold"
+      ],
+      "size": 58,
+      "start": 33700,
+      "end_exclusive": 33758
+    },
+    {
+      "name": "_save_u16",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 1086,
+      "calls": [],
+      "size": 57,
+      "start": 17613,
+      "end_exclusive": 17670
+    },
+    {
+      "name": "_select_language",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 15761,
+      "calls": [
+        "_display_language_selection",
+        "_dice_seed_from_keypress"
+      ],
+      "size": 55,
+      "start": 32288,
+      "end_exclusive": 32343
+    },
+    {
+      "name": "_character_amulet_count",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 250,
+      "calls": [],
+      "size": 53,
+      "start": 33647,
+      "end_exclusive": 33700
+    },
+    {
+      "name": "_scene_memory_reset",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2246,
+      "calls": [],
+      "size": 50,
+      "start": 35643,
+      "end_exclusive": 35693
+    },
+    {
+      "name": "_stone_kind",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 0,
+      "calls": [],
+      "size": 49,
+      "start": 33397,
+      "end_exclusive": 33446
+    },
+    {
+      "name": "_prompt_luck",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11418,
+      "calls": [
+        "_gotoxy",
+        "_msg_space",
+        "_msg",
+        "_put_key",
+        "_pad_to"
+      ],
+      "size": 48,
+      "start": 27945,
+      "end_exclusive": 27993
+    },
+    {
+      "name": "_set_video_mode",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 3132,
+      "calls": [
+        "_switch_to_text",
+        "_switch_to_hgr",
+        "_switch_to_mixed"
+      ],
+      "size": 44,
+      "start": 19659,
+      "end_exclusive": 19703
+    },
+    {
+      "name": "_emit",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 3176,
+      "calls": [
+        "_cputc"
+      ],
+      "size": 44,
+      "start": 19703,
+      "end_exclusive": 19747
+    },
+    {
+      "name": "sweep",
+      "module": "sfx.o",
+      "segment": "CODE",
+      "offset": 21,
+      "calls": [],
+      "size": 44,
+      "start": 37953,
+      "end_exclusive": 37997
+    },
+    {
+      "name": "_oops",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 3852,
+      "calls": [
+        "_cputs",
+        "_cfmt",
+        "_cgetc"
+      ],
+      "size": 42,
+      "start": 20379,
+      "end_exclusive": 20421
+    },
+    {
+      "name": "_character_adjust_end",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 593,
+      "calls": [
+        "_adjust"
+      ],
+      "size": 41,
+      "start": 33990,
+      "end_exclusive": 34031
+    },
+    {
+      "name": "_character_adjust_cha",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 634,
+      "calls": [
+        "_adjust"
+      ],
+      "size": 41,
+      "start": 34031,
+      "end_exclusive": 34072
+    },
+    {
+      "name": "get_byte",
+      "module": "hgr_loader.o",
+      "segment": "CODE",
+      "offset": 76,
+      "calls": [],
+      "size": 41,
+      "start": 37635,
+      "end_exclusive": 37676
+    },
+    {
+      "name": "_wait_space_at",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11709,
+      "calls": [
+        "_gotoxy",
+        "_msg_space",
+        "_put_key",
+        "_pad_to",
+        "_cgetc"
+      ],
+      "size": 40,
+      "start": 28236,
+      "end_exclusive": 28276
+    },
+    {
+      "name": "_wipe",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 5820,
+      "calls": [
+        "_cclearxy",
+        "_gotoxy"
+      ],
+      "size": 39,
+      "start": 22347,
+      "end_exclusive": 22386
+    },
+    {
+      "name": "_enter_graphics",
+      "module": "memory_swap.o",
+      "segment": "CODE",
+      "offset": 0,
+      "calls": [],
+      "size": 39,
+      "start": 33297,
+      "end_exclusive": 33336
+    },
+    {
+      "name": "_upcase",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 3038,
+      "calls": [],
+      "size": 39,
+      "start": 36435,
+      "end_exclusive": 36474
+    },
+    {
+      "name": "_load_u16",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 1143,
+      "calls": [],
+      "size": 37,
+      "start": 17670,
+      "end_exclusive": 17707
+    },
+    {
+      "name": "_monster_is_beaten",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 1060,
+      "calls": [],
+      "size": 36,
+      "start": 34457,
+      "end_exclusive": 34493
+    },
+    {
+      "name": "_choice_tag",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 4798,
+      "calls": [
+        "_choice_available"
+      ],
+      "size": 35,
+      "start": 21325,
+      "end_exclusive": 21360
+    },
+    {
+      "name": "_character_adjust_hab",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 558,
+      "calls": [
+        "_adjust"
+      ],
+      "size": 35,
+      "start": 33955,
+      "end_exclusive": 33990
+    },
+    {
+      "name": "_clear_bottom",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 73,
+      "calls": [
+        "_cclearxy"
+      ],
+      "size": 34,
+      "start": 16600,
+      "end_exclusive": 16634
+    },
+    {
+      "name": "_cycle_video_mode",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 10891,
+      "calls": [
+        "_set_video_mode"
+      ],
+      "size": 33,
+      "start": 27418,
+      "end_exclusive": 27451
+    },
+    {
+      "name": "_put_tag",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11093,
+      "calls": [
+        "_revers",
+        "_cfmt"
+      ],
+      "size": 33,
+      "start": 27620,
+      "end_exclusive": 27653
+    },
+    {
+      "name": "_carac_value",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 13912,
+      "calls": [],
+      "size": 33,
+      "start": 30439,
+      "end_exclusive": 30472
+    },
+    {
+      "name": "advance_dst",
+      "module": "hgr_loader.o",
+      "segment": "CODE",
+      "offset": 117,
+      "calls": [],
+      "size": 32,
+      "start": 37676,
+      "end_exclusive": 37708
+    },
+    {
+      "name": "_put_key",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11126,
+      "calls": [
+        "_put_tag",
+        "_cfmt"
+      ],
+      "size": 31,
+      "start": 27653,
+      "end_exclusive": 27684
+    },
+    {
+      "name": "_pad_to",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 107,
+      "calls": [
+        "_wherex",
+        "_cputc"
+      ],
+      "size": 29,
+      "start": 16634,
+      "end_exclusive": 16663
+    },
+    {
+      "name": "_monster_zone_key",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 1057,
+      "calls": [],
+      "size": 29,
+      "start": 17584,
+      "end_exclusive": 17613
+    },
+    {
+      "name": "_print_at",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11656,
+      "calls": [
+        "_gotoxy",
+        "_cputs",
+        "_pad_to"
+      ],
+      "size": 29,
+      "start": 28183,
+      "end_exclusive": 28212
+    },
+    {
+      "name": "_put_verdict",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11391,
+      "calls": [
+        "_gotoxy",
+        "_cputs",
+        "_pad_to"
+      ],
+      "size": 27,
+      "start": 27918,
+      "end_exclusive": 27945
+    },
+    {
+      "name": "_monster_seal",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 1034,
+      "calls": [],
+      "size": 26,
+      "start": 34431,
+      "end_exclusive": 34457
+    },
+    {
+      "name": "restore_80store",
+      "module": "hgr_loader.o",
+      "segment": "CODE",
+      "offset": 149,
+      "calls": [],
+      "size": 26,
+      "start": 37708,
+      "end_exclusive": 37734
+    },
+    {
+      "name": "_sfx_fall",
+      "module": "sfx.o",
+      "segment": "CODE",
+      "offset": 145,
+      "calls": [],
+      "size": 26,
+      "start": 38077,
+      "end_exclusive": 38103
+    },
+    {
+      "name": "_scene_memory_import",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2453,
+      "calls": [
+        "_memcpy"
+      ],
+      "size": 25,
+      "start": 35850,
+      "end_exclusive": 35875
+    },
+    {
+      "name": "_monster_memory_import",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2501,
+      "calls": [
+        "_memcpy"
+      ],
+      "size": 25,
+      "start": 35898,
+      "end_exclusive": 35923
+    },
+    {
+      "name": "_pad_spaces",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 3220,
+      "calls": [
+        "_emit"
+      ],
+      "size": 24,
+      "start": 19747,
+      "end_exclusive": 19771
+    },
+    {
+      "name": "_wait_key_at",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 11685,
+      "calls": [
+        "_print_at",
+        "_cgetc"
+      ],
+      "size": 24,
+      "start": 28212,
+      "end_exclusive": 28236
+    },
+    {
+      "name": "_row_blank",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 10949,
+      "calls": [
+        "_gotoxy",
+        "_pad_to"
+      ],
+      "size": 23,
+      "start": 27476,
+      "end_exclusive": 27499
+    },
+    {
+      "name": "_scene_memory_export",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2430,
+      "calls": [
+        "_memcpy"
+      ],
+      "size": 23,
+      "start": 35827,
+      "end_exclusive": 35850
+    },
+    {
+      "name": "_monster_memory_export",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 2478,
+      "calls": [
+        "_memcpy"
+      ],
+      "size": 23,
+      "start": 35875,
+      "end_exclusive": 35898
+    },
+    {
+      "name": "_sfx_death",
+      "module": "sfx.o",
+      "segment": "CODE",
+      "offset": 171,
+      "calls": [],
+      "size": 23,
+      "start": 38103,
+      "end_exclusive": 38126
+    },
+    {
+      "name": "_switch_to_mixed",
+      "module": "memory_swap.o",
+      "segment": "CODE",
+      "offset": 51,
+      "calls": [
+        "_enter_graphics"
+      ],
+      "size": 22,
+      "start": 33348,
+      "end_exclusive": 33370
+    },
+    {
+      "name": "_switch_to_text",
+      "module": "memory_swap.o",
+      "segment": "CODE",
+      "offset": 73,
+      "calls": [],
+      "size": 21,
+      "start": 33370,
+      "end_exclusive": 33391
+    },
+    {
+      "name": "tone",
+      "module": "sfx.o",
+      "segment": "CODE",
+      "offset": 0,
+      "calls": [],
+      "size": 21,
+      "start": 37932,
+      "end_exclusive": 37953
+    },
+    {
+      "name": "_sfx_hurt",
+      "module": "sfx.o",
+      "segment": "CODE",
+      "offset": 103,
+      "calls": [],
+      "size": 21,
+      "start": 38035,
+      "end_exclusive": 38056
+    },
+    {
+      "name": "_sfx_dodge",
+      "module": "sfx.o",
+      "segment": "CODE",
+      "offset": 124,
+      "calls": [],
+      "size": 21,
+      "start": 38056,
+      "end_exclusive": 38077
+    },
+    {
+      "name": "_character_is_dead",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 857,
+      "calls": [],
+      "size": 20,
+      "start": 34254,
+      "end_exclusive": 34274
+    },
+    {
+      "name": "_msg_space",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 10930,
+      "calls": [
+        "_is_fr"
+      ],
+      "size": 19,
+      "start": 27457,
+      "end_exclusive": 27476
+    },
+    {
+      "name": "_half_round_up",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 3365,
+      "calls": [],
+      "size": 17,
+      "start": 36762,
+      "end_exclusive": 36779
+    },
+    {
+      "name": "close_fail",
+      "module": "hgr_loader.o",
+      "segment": "CODE",
+      "offset": 175,
+      "calls": [
+        "_fclose"
+      ],
+      "size": 16,
+      "start": 37734,
+      "end_exclusive": 37750
+    },
+    {
+      "name": "_sfx_hit",
+      "module": "sfx.o",
+      "segment": "CODE",
+      "offset": 87,
+      "calls": [],
+      "size": 16,
+      "start": 38019,
+      "end_exclusive": 38035
+    },
+    {
+      "name": "_roll_d6",
+      "module": "dice.o",
+      "segment": "CODE",
+      "offset": 73,
+      "calls": [
+        "_next16"
+      ],
+      "size": 15,
+      "start": 36852,
+      "end_exclusive": 36867
+    },
+    {
+      "name": "_roll_2d6",
+      "module": "dice.o",
+      "segment": "CODE",
+      "offset": 88,
+      "calls": [
+        "_roll_d6"
+      ],
+      "size": 15,
+      "start": 36867,
+      "end_exclusive": 36882
+    },
+    {
+      "name": "_display_scene_text",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 10877,
+      "calls": [
+        "_parse_text_file"
+      ],
+      "size": 14,
+      "start": 27404,
+      "end_exclusive": 27418
+    },
+    {
+      "name": "_switch_to_hgr",
+      "module": "memory_swap.o",
+      "segment": "CODE",
+      "offset": 39,
+      "calls": [
+        "_enter_graphics"
+      ],
+      "size": 12,
+      "start": 33336,
+      "end_exclusive": 33348
+    },
+    {
+      "name": "_monster_memory_reset",
+      "module": "rules.o",
+      "segment": "CODE",
+      "offset": 1696,
+      "calls": [],
+      "size": 12,
+      "start": 35093,
+      "end_exclusive": 35105
+    },
+    {
+      "name": "_sfx_beat",
+      "module": "sfx.o",
+      "segment": "CODE",
+      "offset": 65,
+      "calls": [],
+      "size": 11,
+      "start": 37997,
+      "end_exclusive": 38008
+    },
+    {
+      "name": "gap",
+      "module": "sfx.o",
+      "segment": "CODE",
+      "offset": 76,
+      "calls": [],
+      "size": 11,
+      "start": 38008,
+      "end_exclusive": 38019
+    },
+    {
+      "name": "_is_fr",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 2265,
+      "calls": [],
+      "size": 8,
+      "start": 18792,
+      "end_exclusive": 18800
+    },
+    {
+      "name": "_music_settle",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 2736,
+      "calls": [
+        "_music_fading"
+      ],
+      "size": 7,
+      "start": 19263,
+      "end_exclusive": 19270
+    },
+    {
+      "name": "_msg_continue",
+      "module": "scoswamp.o",
+      "segment": "CODE",
+      "offset": 10924,
+      "calls": [
+        "_msg"
+      ],
+      "size": 6,
+      "start": 27451,
+      "end_exclusive": 27457
+    },
+    {
+      "name": "_get_current_mode",
+      "module": "memory_swap.o",
+      "segment": "CODE",
+      "offset": 94,
+      "calls": [],
+      "size": 6,
+      "start": 33391,
+      "end_exclusive": 33397
+    }
+  ],
+  "allocations": [
+    {
+      "name": "_pool",
+      "module": "messages.o",
+      "segment": "LOWBSS",
+      "offset": 0,
+      "size": 1635,
+      "start": 6284,
+      "end_exclusive": 7919
+    },
+    {
+      "name": "_file_buffer",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 238,
+      "size": 1280,
+      "start": 4334,
+      "end_exclusive": 5614
+    },
+    {
+      "name": "_map_data",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 0,
+      "size": 884,
+      "start": 3072,
+      "end_exclusive": 3956
+    },
+    {
+      "name": "_music_buf",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 0,
+      "size": 256,
+      "start": 45843,
+      "end_exclusive": 46099
+    },
+    {
+      "name": "_app",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 0,
+      "size": 238,
+      "start": 4096,
+      "end_exclusive": 4334
+    },
+    {
+      "name": "_map_pages",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 1667,
+      "size": 230,
+      "start": 5763,
+      "end_exclusive": 5993
+    },
+    {
+      "name": "_seen",
+      "module": "rules.o",
+      "segment": "LOWBSS",
+      "offset": 0,
+      "size": 160,
+      "start": 6124,
+      "end_exclusive": 6284
+    },
+    {
+      "name": "packed_data",
+      "module": "hgr_loader.o",
+      "segment": "LOWBSS",
+      "offset": 0,
+      "size": 128,
+      "start": 8031,
+      "end_exclusive": 8159
+    },
+    {
+      "name": "_slot",
+      "module": "messages.o",
+      "segment": "LOWBSS",
+      "offset": 1635,
+      "size": 112,
+      "start": 7919,
+      "end_exclusive": 8031
+    },
+    {
+      "name": "_title_bar",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 1586,
+      "size": 81,
+      "start": 5682,
+      "end_exclusive": 5763
+    },
+    {
+      "name": "_visited",
+      "module": "rules.o",
+      "segment": "MAPBSS",
+      "offset": 0,
+      "size": 53,
+      "start": 4031,
+      "end_exclusive": 4084
+    },
+    {
+      "name": "_slot_title::L0181",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 886,
+      "size": 40,
+      "start": 3958,
+      "end_exclusive": 3998
+    },
+    {
+      "name": "_render_title_bar::L0390",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 1966,
+      "size": 40,
+      "start": 6062,
+      "end_exclusive": 6102
+    },
+    {
+      "name": "_body_lines",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 1518,
+      "size": 36,
+      "start": 5614,
+      "end_exclusive": 5650
+    },
+    {
+      "name": "_map_vu",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 1897,
+      "size": 35,
+      "start": 5993,
+      "end_exclusive": 6028
+    },
+    {
+      "name": "_show_saves::L11EA",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 1932,
+      "size": 32,
+      "start": 6028,
+      "end_exclusive": 6060
+    },
+    {
+      "name": "mliparam",
+      "module": "mli_safe.o",
+      "segment": "DATA",
+      "offset": 36,
+      "size": 18,
+      "start": 45262,
+      "end_exclusive": 45280
+    },
+    {
+      "name": "_music_cur",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 1554,
+      "size": 16,
+      "start": 5650,
+      "end_exclusive": 5666
+    },
+    {
+      "name": "_music_zone",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 1570,
+      "size": 16,
+      "start": 5666,
+      "end_exclusive": 5682
+    },
+    {
+      "name": "_show_inventory::L0B67",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 2009,
+      "size": 12,
+      "start": 6105,
+      "end_exclusive": 6117
+    },
+    {
+      "name": "_choose_stones::L0E46",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 941,
+      "size": 12,
+      "start": 4013,
+      "end_exclusive": 4025
+    },
+    {
+      "name": "_run_combat::L0EB8",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 201,
+      "size": 7,
+      "start": 45733,
+      "end_exclusive": 45740
+    },
+    {
+      "name": "_combat_round::L0229",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 24,
+      "size": 7,
+      "start": 45781,
+      "end_exclusive": 45788
+    },
+    {
+      "name": "_cfmt::L02BC",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 928,
+      "size": 6,
+      "start": 4000,
+      "end_exclusive": 4006
+    },
+    {
+      "name": "saved",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 263,
+      "size": 6,
+      "start": 46106,
+      "end_exclusive": 46112
+    },
+    {
+      "name": "vols",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 269,
+      "size": 6,
+      "start": 46112,
+      "end_exclusive": 46118
+    },
+    {
+      "name": "amps",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 278,
+      "size": 6,
+      "start": 46121,
+      "end_exclusive": 46127
+    },
+    {
+      "name": "_enter_asset_dir::L01B3",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 38,
+      "size": 5,
+      "start": 45570,
+      "end_exclusive": 45575
+    },
+    {
+      "name": "_scene_title",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 1,
+      "size": 2,
+      "start": 45533,
+      "end_exclusive": 45535
+    },
+    {
+      "name": "_foe_shown",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 6,
+      "size": 2,
+      "start": 45538,
+      "end_exclusive": 45540
+    },
+    {
+      "name": "_fmt_out",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 9,
+      "size": 2,
+      "start": 45541,
+      "end_exclusive": 45543
+    },
+    {
+      "name": "_save_checksum::L0037",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 17,
+      "size": 2,
+      "start": 45549,
+      "end_exclusive": 45551
+    },
+    {
+      "name": "_pack_save::L004E",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 20,
+      "size": 2,
+      "start": 45552,
+      "end_exclusive": 45554
+    },
+    {
+      "name": "_migrate_saved_flags::L00A3",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 23,
+      "size": 2,
+      "start": 45555,
+      "end_exclusive": 45557
+    },
+    {
+      "name": "_unpack_save::L00C0",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 26,
+      "size": 2,
+      "start": 45558,
+      "end_exclusive": 45560
+    },
+    {
+      "name": "_unpack_save::L00C1",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 28,
+      "size": 2,
+      "start": 45560,
+      "end_exclusive": 45562
+    },
+    {
+      "name": "_save_game::L0120",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 30,
+      "size": 2,
+      "start": 45562,
+      "end_exclusive": 45564
+    },
+    {
+      "name": "_load_game::L013E",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 33,
+      "size": 2,
+      "start": 45565,
+      "end_exclusive": 45567
+    },
+    {
+      "name": "_load_game::L0140",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 36,
+      "size": 2,
+      "start": 45568,
+      "end_exclusive": 45570
+    },
+    {
+      "name": "_slot_title::L017F",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 884,
+      "size": 2,
+      "start": 3956,
+      "end_exclusive": 3958
+    },
+    {
+      "name": "_enter_asset_dir::L01B4",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 43,
+      "size": 2,
+      "start": 45575,
+      "end_exclusive": 45577
+    },
+    {
+      "name": "_music_load::L01D2",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 45,
+      "size": 2,
+      "start": 45577,
+      "end_exclusive": 45579
+    },
+    {
+      "name": "_music_load::L01D3",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 47,
+      "size": 2,
+      "start": 45579,
+      "end_exclusive": 45581
+    },
+    {
+      "name": "_music_load::L01D4",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 49,
+      "size": 2,
+      "start": 45581,
+      "end_exclusive": 45583
+    },
+    {
+      "name": "_music_load::L01D6",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 51,
+      "size": 2,
+      "start": 45583,
+      "end_exclusive": 45585
+    },
+    {
+      "name": "_music_load::L01DC",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 53,
+      "size": 2,
+      "start": 45585,
+      "end_exclusive": 45587
+    },
+    {
+      "name": "_music_for_clearing::L024F",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 57,
+      "size": 2,
+      "start": 45589,
+      "end_exclusive": 45591
+    },
+    {
+      "name": "_load_foe_image::L0282",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 59,
+      "size": 2,
+      "start": 45591,
+      "end_exclusive": 45593
+    },
+    {
+      "name": "_cfmt::L02BA",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 926,
+      "size": 2,
+      "start": 3998,
+      "end_exclusive": 4000
+    },
+    {
+      "name": "_cfmt::L031D",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 939,
+      "size": 2,
+      "start": 4011,
+      "end_exclusive": 4013
+    },
+    {
+      "name": "_render_title_bar::L03C4",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 2007,
+      "size": 2,
+      "start": 6103,
+      "end_exclusive": 6105
+    },
+    {
+      "name": "_choice_available::L03D8",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 62,
+      "size": 2,
+      "start": 45594,
+      "end_exclusive": 45596
+    },
+    {
+      "name": "_map_str::L04AB",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 70,
+      "size": 2,
+      "start": 45602,
+      "end_exclusive": 45604
+    },
+    {
+      "name": "_map_load::L04BE",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 72,
+      "size": 2,
+      "start": 45604,
+      "end_exclusive": 45606
+    },
+    {
+      "name": "_map_load::L04BF",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 74,
+      "size": 2,
+      "start": 45606,
+      "end_exclusive": 45608
+    },
+    {
+      "name": "_map_of_page::L0511",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 77,
+      "size": 2,
+      "start": 45609,
+      "end_exclusive": 45611
+    },
+    {
+      "name": "_map_of_page::L0513",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 79,
+      "size": 2,
+      "start": 45611,
+      "end_exclusive": 45613
+    },
+    {
+      "name": "_map_seen::L052D",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 82,
+      "size": 2,
+      "start": 45614,
+      "end_exclusive": 45616
+    },
+    {
+      "name": "_map_seen::L052F",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 84,
+      "size": 2,
+      "start": 45616,
+      "end_exclusive": 45618
+    },
+    {
+      "name": "_map_voisin::L0557",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 86,
+      "size": 2,
+      "start": 45618,
+      "end_exclusive": 45620
+    },
+    {
+      "name": "_render_place::L05D1",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 94,
+      "size": 2,
+      "start": 45626,
+      "end_exclusive": 45628
+    },
+    {
+      "name": "_take_uint::L0631",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 97,
+      "size": 2,
+      "start": 45629,
+      "end_exclusive": 45631
+    },
+    {
+      "name": "_take_int::L0648",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 99,
+      "size": 2,
+      "start": 45631,
+      "end_exclusive": 45633
+    },
+    {
+      "name": "_take_int::L0649",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 101,
+      "size": 2,
+      "start": 45633,
+      "end_exclusive": 45635
+    },
+    {
+      "name": "_push_choice::L06B1",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 103,
+      "size": 2,
+      "start": 45635,
+      "end_exclusive": 45637
+    },
+    {
+      "name": "_push_object_choice::L06C4",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 105,
+      "size": 2,
+      "start": 45637,
+      "end_exclusive": 45639
+    },
+    {
+      "name": "_lose_items::L06D5",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 108,
+      "size": 2,
+      "start": 45640,
+      "end_exclusive": 45642
+    },
+    {
+      "name": "_classify_line::L0704",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 110,
+      "size": 2,
+      "start": 45642,
+      "end_exclusive": 45644
+    },
+    {
+      "name": "_classify_line::L0705",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 112,
+      "size": 2,
+      "start": 45644,
+      "end_exclusive": 45646
+    },
+    {
+      "name": "_classify_line::L0706",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 114,
+      "size": 2,
+      "start": 45646,
+      "end_exclusive": 45648
+    },
+    {
+      "name": "_classify_line::L0707",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 116,
+      "size": 2,
+      "start": 45648,
+      "end_exclusive": 45650
+    },
+    {
+      "name": "_classify_line::L0708",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 118,
+      "size": 2,
+      "start": 45650,
+      "end_exclusive": 45652
+    },
+    {
+      "name": "_classify_line::L074E",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 124,
+      "size": 2,
+      "start": 45656,
+      "end_exclusive": 45658
+    },
+    {
+      "name": "_classify_line::L0764",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 126,
+      "size": 2,
+      "start": 45658,
+      "end_exclusive": 45660
+    },
+    {
+      "name": "_classify_line::L0765",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 128,
+      "size": 2,
+      "start": 45660,
+      "end_exclusive": 45662
+    },
+    {
+      "name": "_classify_line::L07A0",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 131,
+      "size": 2,
+      "start": 45663,
+      "end_exclusive": 45665
+    },
+    {
+      "name": "_classify_line::L07A1",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 133,
+      "size": 2,
+      "start": 45665,
+      "end_exclusive": 45667
+    },
+    {
+      "name": "_classify_line::L07BC",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 135,
+      "size": 2,
+      "start": 45667,
+      "end_exclusive": 45669
+    },
+    {
+      "name": "_classify_line::L081D",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 137,
+      "size": 2,
+      "start": 45669,
+      "end_exclusive": 45671
+    },
+    {
+      "name": "_classify_line::L089E",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 139,
+      "size": 2,
+      "start": 45671,
+      "end_exclusive": 45673
+    },
+    {
+      "name": "_classify_line::L08CA",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 141,
+      "size": 2,
+      "start": 45673,
+      "end_exclusive": 45675
+    },
+    {
+      "name": "_classify_line::L08CB",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 143,
+      "size": 2,
+      "start": 45675,
+      "end_exclusive": 45677
+    },
+    {
+      "name": "_classify_line::L0911",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 145,
+      "size": 2,
+      "start": 45677,
+      "end_exclusive": 45679
+    },
+    {
+      "name": "_classify_line::L091C",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 147,
+      "size": 2,
+      "start": 45679,
+      "end_exclusive": 45681
+    },
+    {
+      "name": "_classify_line::L094F",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 149,
+      "size": 2,
+      "start": 45681,
+      "end_exclusive": 45683
+    },
+    {
+      "name": "_parse_text_file::L09E3",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 151,
+      "size": 2,
+      "start": 45683,
+      "end_exclusive": 45685
+    },
+    {
+      "name": "_parse_text_file::L09E4",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 153,
+      "size": 2,
+      "start": 45685,
+      "end_exclusive": 45687
+    },
+    {
+      "name": "_parse_text_file::L09E5",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 155,
+      "size": 2,
+      "start": 45687,
+      "end_exclusive": 45689
+    },
+    {
+      "name": "_parse_text_file::L09E6",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 157,
+      "size": 2,
+      "start": 45689,
+      "end_exclusive": 45691
+    },
+    {
+      "name": "_parse_text_file::L09E7",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 159,
+      "size": 2,
+      "start": 45691,
+      "end_exclusive": 45693
+    },
+    {
+      "name": "_show_fighters::L0B17",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 165,
+      "size": 2,
+      "start": 45697,
+      "end_exclusive": 45699
+    },
+    {
+      "name": "_show_inventory::L0B6D",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 2026,
+      "size": 2,
+      "start": 6122,
+      "end_exclusive": 6124
+    },
+    {
+      "name": "_show_map::L0C25",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 167,
+      "size": 2,
+      "start": 45699,
+      "end_exclusive": 45701
+    },
+    {
+      "name": "_show_map::L0C26",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 169,
+      "size": 2,
+      "start": 45701,
+      "end_exclusive": 45703
+    },
+    {
+      "name": "_show_map::L0C27",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 171,
+      "size": 2,
+      "start": 45703,
+      "end_exclusive": 45705
+    },
+    {
+      "name": "_show_map::L0C28",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 173,
+      "size": 2,
+      "start": 45705,
+      "end_exclusive": 45707
+    },
+    {
+      "name": "_choose_stones::L0E4A",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 956,
+      "size": 2,
+      "start": 4028,
+      "end_exclusive": 4030
+    },
+    {
+      "name": "_show_help::L1033",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 209,
+      "size": 2,
+      "start": 45741,
+      "end_exclusive": 45743
+    },
+    {
+      "name": "_display_language_selection::L11B0",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 214,
+      "size": 2,
+      "start": 45746,
+      "end_exclusive": 45748
+    },
+    {
+      "name": "_handle_user_input::L124F",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 218,
+      "size": 2,
+      "start": 45750,
+      "end_exclusive": 45752
+    },
+    {
+      "name": "_main::L12F0",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 221,
+      "size": 2,
+      "start": 45753,
+      "end_exclusive": 45755
+    },
+    {
+      "name": "_object_from_name::L0108",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 0,
+      "size": 2,
+      "start": 45757,
+      "end_exclusive": 45759
+    },
+    {
+      "name": "_amulet_from_name::L0128",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 2,
+      "size": 2,
+      "start": 45759,
+      "end_exclusive": 45761
+    },
+    {
+      "name": "_stone_from_name::L013C",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 4,
+      "size": 2,
+      "start": 45761,
+      "end_exclusive": 45763
+    },
+    {
+      "name": "_character_roll::L0153",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 9,
+      "size": 2,
+      "start": 45766,
+      "end_exclusive": 45768
+    },
+    {
+      "name": "_character_adjust_gold::L01DF",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 11,
+      "size": 2,
+      "start": 45768,
+      "end_exclusive": 45770
+    },
+    {
+      "name": "_character_shift0::L01EE",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 13,
+      "size": 2,
+      "start": 45770,
+      "end_exclusive": 45772
+    },
+    {
+      "name": "_character_shift0::L01F2",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 15,
+      "size": 2,
+      "start": 45772,
+      "end_exclusive": 45774
+    },
+    {
+      "name": "_luck_test::L0206",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 18,
+      "size": 2,
+      "start": 45775,
+      "end_exclusive": 45777
+    },
+    {
+      "name": "_combat_apply::L0254",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 31,
+      "size": 2,
+      "start": 45788,
+      "end_exclusive": 45790
+    },
+    {
+      "name": "_combat_apply::L0256",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 33,
+      "size": 2,
+      "start": 45790,
+      "end_exclusive": 45792
+    },
+    {
+      "name": "_combat_flee::L0284",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 35,
+      "size": 2,
+      "start": 45792,
+      "end_exclusive": 45794
+    },
+    {
+      "name": "_combat_flee::L0286",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 37,
+      "size": 2,
+      "start": 45794,
+      "end_exclusive": 45796
+    },
+    {
+      "name": "_monster_recover::L02B2",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 39,
+      "size": 2,
+      "start": 45796,
+      "end_exclusive": 45798
+    },
+    {
+      "name": "_monster_recover::L02B5",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 41,
+      "size": 2,
+      "start": 45798,
+      "end_exclusive": 45800
+    },
+    {
+      "name": "_monster_enter::L02C7",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 43,
+      "size": 2,
+      "start": 45800,
+      "end_exclusive": 45802
+    },
+    {
+      "name": "_monster_enter::L02CA",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 45,
+      "size": 2,
+      "start": 45802,
+      "end_exclusive": 45804
+    },
+    {
+      "name": "_monster_remember::L02E6",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 47,
+      "size": 2,
+      "start": 45804,
+      "end_exclusive": 45806
+    },
+    {
+      "name": "_scene_memory_reset::L0309",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 49,
+      "size": 2,
+      "start": 45806,
+      "end_exclusive": 45808
+    },
+    {
+      "name": "_character_give_stone::L033A",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 51,
+      "size": 2,
+      "start": 45808,
+      "end_exclusive": 45810
+    },
+    {
+      "name": "_adjust::L01C3",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 53,
+      "size": 2,
+      "start": 45810,
+      "end_exclusive": 45812
+    },
+    {
+      "name": "_slot_of::L02A1",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 55,
+      "size": 2,
+      "start": 45812,
+      "end_exclusive": 45814
+    },
+    {
+      "name": "_dice_seed_from_keypress::L001A",
+      "module": "dice.o",
+      "segment": "BSS",
+      "offset": 0,
+      "size": 2,
+      "start": 45814,
+      "end_exclusive": 45816
+    },
+    {
+      "name": "_ready",
+      "module": "messages.o",
+      "segment": "BSS",
+      "offset": 0,
+      "size": 2,
+      "start": 45817,
+      "end_exclusive": 45819
+    },
+    {
+      "name": "_messages_load::L0006",
+      "module": "messages.o",
+      "segment": "BSS",
+      "offset": 2,
+      "size": 2,
+      "start": 45819,
+      "end_exclusive": 45821
+    },
+    {
+      "name": "_messages_load::L0007",
+      "module": "messages.o",
+      "segment": "BSS",
+      "offset": 4,
+      "size": 2,
+      "start": 45821,
+      "end_exclusive": 45823
+    },
+    {
+      "name": "_messages_load::L0008",
+      "module": "messages.o",
+      "segment": "BSS",
+      "offset": 6,
+      "size": 2,
+      "start": 45823,
+      "end_exclusive": 45825
+    },
+    {
+      "name": "_messages_load::L0009",
+      "module": "messages.o",
+      "segment": "BSS",
+      "offset": 8,
+      "size": 2,
+      "start": 45825,
+      "end_exclusive": 45827
+    },
+    {
+      "name": "_messages_load::L000A",
+      "module": "messages.o",
+      "segment": "BSS",
+      "offset": 10,
+      "size": 2,
+      "start": 45827,
+      "end_exclusive": 45829
+    },
+    {
+      "name": "file_ptr",
+      "module": "hgr_loader.o",
+      "segment": "BSS",
+      "offset": 0,
+      "size": 2,
+      "start": 45830,
+      "end_exclusive": 45832
+    },
+    {
+      "name": "remaining",
+      "module": "hgr_loader.o",
+      "segment": "BSS",
+      "offset": 5,
+      "size": 2,
+      "start": 45835,
+      "end_exclusive": 45837
+    },
+    {
+      "name": "saved_dst",
+      "module": "hgr_loader.o",
+      "segment": "BSS",
+      "offset": 7,
+      "size": 2,
+      "start": 45837,
+      "end_exclusive": 45839
+    },
+    {
+      "name": "mix",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 284,
+      "size": 2,
+      "start": 46127,
+      "end_exclusive": 46129
+    },
+    {
+      "name": "_restoring",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 0,
+      "size": 1,
+      "start": 45532,
+      "end_exclusive": 45533
+    },
+    {
+      "name": "_body_count",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 3,
+      "size": 1,
+      "start": 45535,
+      "end_exclusive": 45536
+    },
+    {
+      "name": "_music_slot",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 4,
+      "size": 1,
+      "start": 45536,
+      "end_exclusive": 45537
+    },
+    {
+      "name": "_cur_half",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 5,
+      "size": 1,
+      "start": 45537,
+      "end_exclusive": 45538
+    },
+    {
+      "name": "_flee_after",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 8,
+      "size": 1,
+      "start": 45540,
+      "end_exclusive": 45541
+    },
+    {
+      "name": "_map_ready",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 11,
+      "size": 1,
+      "start": 45543,
+      "end_exclusive": 45544
+    },
+    {
+      "name": "_render_scene::L061A",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 12,
+      "size": 1,
+      "start": 45544,
+      "end_exclusive": 45545
+    },
+    {
+      "name": "_render_scene::L061B",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 13,
+      "size": 1,
+      "start": 45545,
+      "end_exclusive": 45546
+    },
+    {
+      "name": "_clear_bottom::L0B3B",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 14,
+      "size": 1,
+      "start": 45546,
+      "end_exclusive": 45547
+    },
+    {
+      "name": "_pad_to::L0A7F",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 15,
+      "size": 1,
+      "start": 45547,
+      "end_exclusive": 45548
+    },
+    {
+      "name": "_load_scene::L10EE",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 16,
+      "size": 1,
+      "start": 45548,
+      "end_exclusive": 45549
+    },
+    {
+      "name": "_show_saves::L11EB",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 1964,
+      "size": 1,
+      "start": 6060,
+      "end_exclusive": 6061
+    },
+    {
+      "name": "_show_saves::L11EC",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 1965,
+      "size": 1,
+      "start": 6061,
+      "end_exclusive": 6062
+    },
+    {
+      "name": "_save_checksum::L0038",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 19,
+      "size": 1,
+      "start": 45551,
+      "end_exclusive": 45552
+    },
+    {
+      "name": "_pack_save::L0051",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 22,
+      "size": 1,
+      "start": 45554,
+      "end_exclusive": 45555
+    },
+    {
+      "name": "_migrate_saved_flags::L00A6",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 25,
+      "size": 1,
+      "start": 45557,
+      "end_exclusive": 45558
+    },
+    {
+      "name": "_save_game::L0121",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 32,
+      "size": 1,
+      "start": 45564,
+      "end_exclusive": 45565
+    },
+    {
+      "name": "_load_game::L013F",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 35,
+      "size": 1,
+      "start": 45567,
+      "end_exclusive": 45568
+    },
+    {
+      "name": "_music_load::L01E2",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 55,
+      "size": 1,
+      "start": 45587,
+      "end_exclusive": 45588
+    },
+    {
+      "name": "_music_switch::L022B",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 56,
+      "size": 1,
+      "start": 45588,
+      "end_exclusive": 45589
+    },
+    {
+      "name": "_cfmt::L02BF",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 934,
+      "size": 1,
+      "start": 4006,
+      "end_exclusive": 4007
+    },
+    {
+      "name": "_cfmt::L02C0",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 935,
+      "size": 1,
+      "start": 4007,
+      "end_exclusive": 4008
+    },
+    {
+      "name": "_cfmt::L02C1",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 936,
+      "size": 1,
+      "start": 4008,
+      "end_exclusive": 4009
+    },
+    {
+      "name": "_cfmt::L02C2",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 937,
+      "size": 1,
+      "start": 4009,
+      "end_exclusive": 4010
+    },
+    {
+      "name": "_cfmt::L02C3",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 938,
+      "size": 1,
+      "start": 4010,
+      "end_exclusive": 4011
+    },
+    {
+      "name": "_confirm_quit::L0361",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 61,
+      "size": 1,
+      "start": 45593,
+      "end_exclusive": 45594
+    },
+    {
+      "name": "_render_title_bar::L0391",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 2006,
+      "size": 1,
+      "start": 6102,
+      "end_exclusive": 6103
+    },
+    {
+      "name": "_choice_available::L03DB",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 64,
+      "size": 1,
+      "start": 45596,
+      "end_exclusive": 45597
+    },
+    {
+      "name": "_choice_available::L0403",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 65,
+      "size": 1,
+      "start": 45597,
+      "end_exclusive": 45598
+    },
+    {
+      "name": "_choice_available::L0404",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 66,
+      "size": 1,
+      "start": 45598,
+      "end_exclusive": 45599
+    },
+    {
+      "name": "_render_choices::L043A",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 67,
+      "size": 1,
+      "start": 45599,
+      "end_exclusive": 45600
+    },
+    {
+      "name": "_render_choices::L043B",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 68,
+      "size": 1,
+      "start": 45600,
+      "end_exclusive": 45601
+    },
+    {
+      "name": "_render_choices::L043D",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 69,
+      "size": 1,
+      "start": 45601,
+      "end_exclusive": 45602
+    },
+    {
+      "name": "_map_of_page::L0510",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 76,
+      "size": 1,
+      "start": 45608,
+      "end_exclusive": 45609
+    },
+    {
+      "name": "_map_seen::L052C",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 81,
+      "size": 1,
+      "start": 45613,
+      "end_exclusive": 45614
+    },
+    {
+      "name": "_map_voisin::L0558",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 88,
+      "size": 1,
+      "start": 45620,
+      "end_exclusive": 45621
+    },
+    {
+      "name": "_map_voisin::L0562",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 89,
+      "size": 1,
+      "start": 45621,
+      "end_exclusive": 45622
+    },
+    {
+      "name": "_map_voisin::L056C",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 90,
+      "size": 1,
+      "start": 45622,
+      "end_exclusive": 45623
+    },
+    {
+      "name": "_map_voisin::L056D",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 91,
+      "size": 1,
+      "start": 45623,
+      "end_exclusive": 45624
+    },
+    {
+      "name": "_wipe::L05A2",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 92,
+      "size": 1,
+      "start": 45624,
+      "end_exclusive": 45625
+    },
+    {
+      "name": "_map_trait::L05B3",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 93,
+      "size": 1,
+      "start": 45625,
+      "end_exclusive": 45626
+    },
+    {
+      "name": "_render_place::L05D2",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 96,
+      "size": 1,
+      "start": 45628,
+      "end_exclusive": 45629
+    },
+    {
+      "name": "_lose_items::L06D4",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 107,
+      "size": 1,
+      "start": 45639,
+      "end_exclusive": 45640
+    },
+    {
+      "name": "_classify_line::L0709",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 120,
+      "size": 1,
+      "start": 45652,
+      "end_exclusive": 45653
+    },
+    {
+      "name": "_classify_line::L070A",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 121,
+      "size": 1,
+      "start": 45653,
+      "end_exclusive": 45654
+    },
+    {
+      "name": "_classify_line::L070D",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 122,
+      "size": 1,
+      "start": 45654,
+      "end_exclusive": 45655
+    },
+    {
+      "name": "_classify_line::L0710",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 123,
+      "size": 1,
+      "start": 45655,
+      "end_exclusive": 45656
+    },
+    {
+      "name": "_classify_line::L0766",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 130,
+      "size": 1,
+      "start": 45662,
+      "end_exclusive": 45663
+    },
+    {
+      "name": "_parse_text_file::L09E8",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 161,
+      "size": 1,
+      "start": 45693,
+      "end_exclusive": 45694
+    },
+    {
+      "name": "_put_gauge::L0A8F",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 162,
+      "size": 1,
+      "start": 45694,
+      "end_exclusive": 45695
+    },
+    {
+      "name": "_put_gauge::L0A90",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 163,
+      "size": 1,
+      "start": 45695,
+      "end_exclusive": 45696
+    },
+    {
+      "name": "_put_fighter::L0ACA",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 164,
+      "size": 1,
+      "start": 45696,
+      "end_exclusive": 45697
+    },
+    {
+      "name": "_show_inventory::L0B68",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 2021,
+      "size": 1,
+      "start": 6117,
+      "end_exclusive": 6118
+    },
+    {
+      "name": "_show_inventory::L0B69",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 2022,
+      "size": 1,
+      "start": 6118,
+      "end_exclusive": 6119
+    },
+    {
+      "name": "_show_inventory::L0B6A",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 2023,
+      "size": 1,
+      "start": 6119,
+      "end_exclusive": 6120
+    },
+    {
+      "name": "_show_inventory::L0B6B",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 2024,
+      "size": 1,
+      "start": 6120,
+      "end_exclusive": 6121
+    },
+    {
+      "name": "_show_inventory::L0B6C",
+      "module": "scoswamp.o",
+      "segment": "LOWBSS",
+      "offset": 2025,
+      "size": 1,
+      "start": 6121,
+      "end_exclusive": 6122
+    },
+    {
+      "name": "_show_map::L0C29",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 175,
+      "size": 1,
+      "start": 45707,
+      "end_exclusive": 45708
+    },
+    {
+      "name": "_show_map::L0C2A",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 176,
+      "size": 1,
+      "start": 45708,
+      "end_exclusive": 45709
+    },
+    {
+      "name": "_show_map::L0C2B",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 177,
+      "size": 1,
+      "start": 45709,
+      "end_exclusive": 45710
+    },
+    {
+      "name": "_show_map::L0C2C",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 178,
+      "size": 1,
+      "start": 45710,
+      "end_exclusive": 45711
+    },
+    {
+      "name": "_show_map::L0C2D",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 179,
+      "size": 1,
+      "start": 45711,
+      "end_exclusive": 45712
+    },
+    {
+      "name": "_show_map::L0C2E",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 180,
+      "size": 1,
+      "start": 45712,
+      "end_exclusive": 45713
+    },
+    {
+      "name": "_show_map::L0C2F",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 181,
+      "size": 1,
+      "start": 45713,
+      "end_exclusive": 45714
+    },
+    {
+      "name": "_show_map::L0C30",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 182,
+      "size": 1,
+      "start": 45714,
+      "end_exclusive": 45715
+    },
+    {
+      "name": "_show_map::L0C31",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 183,
+      "size": 1,
+      "start": 45715,
+      "end_exclusive": 45716
+    },
+    {
+      "name": "_show_map::L0C32",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 184,
+      "size": 1,
+      "start": 45716,
+      "end_exclusive": 45717
+    },
+    {
+      "name": "_show_map::L0C33",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 185,
+      "size": 1,
+      "start": 45717,
+      "end_exclusive": 45718
+    },
+    {
+      "name": "_run_luck_test::L0DA3",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 186,
+      "size": 1,
+      "start": 45718,
+      "end_exclusive": 45719
+    },
+    {
+      "name": "_run_luck_test::L0DA4",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 187,
+      "size": 1,
+      "start": 45719,
+      "end_exclusive": 45720
+    },
+    {
+      "name": "_run_dice_roll::L0DDF",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 188,
+      "size": 1,
+      "start": 45720,
+      "end_exclusive": 45721
+    },
+    {
+      "name": "_run_dice_roll::L0DE2",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 189,
+      "size": 1,
+      "start": 45721,
+      "end_exclusive": 45722
+    },
+    {
+      "name": "_run_stat_test::L0E19",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 190,
+      "size": 1,
+      "start": 45722,
+      "end_exclusive": 45723
+    },
+    {
+      "name": "_run_stat_test::L0E1A",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 191,
+      "size": 1,
+      "start": 45723,
+      "end_exclusive": 45724
+    },
+    {
+      "name": "_choose_stones::L0E47",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 953,
+      "size": 1,
+      "start": 4025,
+      "end_exclusive": 4026
+    },
+    {
+      "name": "_choose_stones::L0E48",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 954,
+      "size": 1,
+      "start": 4026,
+      "end_exclusive": 4027
+    },
+    {
+      "name": "_choose_stones::L0E49",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 955,
+      "size": 1,
+      "start": 4027,
+      "end_exclusive": 4028
+    },
+    {
+      "name": "_choose_stones::L0E5B",
+      "module": "scoswamp.o",
+      "segment": "MAPBSS",
+      "offset": 958,
+      "size": 1,
+      "start": 4030,
+      "end_exclusive": 4031
+    },
+    {
+      "name": "_run_combat::L0EAA",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 192,
+      "size": 1,
+      "start": 45724,
+      "end_exclusive": 45725
+    },
+    {
+      "name": "_run_combat::L0EAC",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 193,
+      "size": 1,
+      "start": 45725,
+      "end_exclusive": 45726
+    },
+    {
+      "name": "_run_combat::L0EAD",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 194,
+      "size": 1,
+      "start": 45726,
+      "end_exclusive": 45727
+    },
+    {
+      "name": "_run_combat::L0EAE",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 195,
+      "size": 1,
+      "start": 45727,
+      "end_exclusive": 45728
+    },
+    {
+      "name": "_run_combat::L0EB0",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 196,
+      "size": 1,
+      "start": 45728,
+      "end_exclusive": 45729
+    },
+    {
+      "name": "_run_combat::L0EB2",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 197,
+      "size": 1,
+      "start": 45729,
+      "end_exclusive": 45730
+    },
+    {
+      "name": "_run_combat::L0EB3",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 198,
+      "size": 1,
+      "start": 45730,
+      "end_exclusive": 45731
+    },
+    {
+      "name": "_run_combat::L0EB5",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 199,
+      "size": 1,
+      "start": 45731,
+      "end_exclusive": 45732
+    },
+    {
+      "name": "_run_combat::L0EB7",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 200,
+      "size": 1,
+      "start": 45732,
+      "end_exclusive": 45733
+    },
+    {
+      "name": "_run_combat::L0EB9",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 208,
+      "size": 1,
+      "start": 45740,
+      "end_exclusive": 45741
+    },
+    {
+      "name": "_show_help::L1034",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 211,
+      "size": 1,
+      "start": 45743,
+      "end_exclusive": 45744
+    },
+    {
+      "name": "_show_help::L1036",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 212,
+      "size": 1,
+      "start": 45744,
+      "end_exclusive": 45745
+    },
+    {
+      "name": "_game_over::L1077",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 213,
+      "size": 1,
+      "start": 45745,
+      "end_exclusive": 45746
+    },
+    {
+      "name": "_select_language::L11CE",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 216,
+      "size": 1,
+      "start": 45748,
+      "end_exclusive": 45749
+    },
+    {
+      "name": "_handle_user_input::L124E",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 217,
+      "size": 1,
+      "start": 45749,
+      "end_exclusive": 45750
+    },
+    {
+      "name": "_main::L12CA",
+      "module": "scoswamp.o",
+      "segment": "BSS",
+      "offset": 220,
+      "size": 1,
+      "start": 45752,
+      "end_exclusive": 45753
+    },
+    {
+      "name": "_put_scene::L0002",
+      "module": "paths.o",
+      "segment": "BSS",
+      "offset": 0,
+      "size": 1,
+      "start": 45755,
+      "end_exclusive": 45756
+    },
+    {
+      "name": "_put_scene::L0004",
+      "module": "paths.o",
+      "segment": "BSS",
+      "offset": 1,
+      "size": 1,
+      "start": 45756,
+      "end_exclusive": 45757
+    },
+    {
+      "name": "_character_amulet_count::L01A8",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 6,
+      "size": 1,
+      "start": 45763,
+      "end_exclusive": 45764
+    },
+    {
+      "name": "_character_amulet_count::L01AA",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 7,
+      "size": 1,
+      "start": 45764,
+      "end_exclusive": 45765
+    },
+    {
+      "name": "_character_trade_amulets::L01B6",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 8,
+      "size": 1,
+      "start": 45765,
+      "end_exclusive": 45766
+    },
+    {
+      "name": "_luck_test::L0204",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 17,
+      "size": 1,
+      "start": 45774,
+      "end_exclusive": 45775
+    },
+    {
+      "name": "_combat_round::L0221",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 20,
+      "size": 1,
+      "start": 45777,
+      "end_exclusive": 45778
+    },
+    {
+      "name": "_combat_round::L0223",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 21,
+      "size": 1,
+      "start": 45778,
+      "end_exclusive": 45779
+    },
+    {
+      "name": "_combat_round::L0225",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 22,
+      "size": 1,
+      "start": 45779,
+      "end_exclusive": 45780
+    },
+    {
+      "name": "_combat_round::L0227",
+      "module": "rules.o",
+      "segment": "BSS",
+      "offset": 23,
+      "size": 1,
+      "start": 45780,
+      "end_exclusive": 45781
+    },
+    {
+      "name": "_dice_seed_from_keypress::L001C",
+      "module": "dice.o",
+      "segment": "BSS",
+      "offset": 2,
+      "size": 1,
+      "start": 45816,
+      "end_exclusive": 45817
+    },
+    {
+      "name": "_messages_load::L004C",
+      "module": "messages.o",
+      "segment": "BSS",
+      "offset": 12,
+      "size": 1,
+      "start": 45829,
+      "end_exclusive": 45830
+    },
+    {
+      "name": "rep_byte",
+      "module": "hgr_loader.o",
+      "segment": "BSS",
+      "offset": 2,
+      "size": 1,
+      "start": 45832,
+      "end_exclusive": 45833
+    },
+    {
+      "name": "saved_80store",
+      "module": "hgr_loader.o",
+      "segment": "BSS",
+      "offset": 3,
+      "size": 1,
+      "start": 45833,
+      "end_exclusive": 45834
+    },
+    {
+      "name": "saved_page2",
+      "module": "hgr_loader.o",
+      "segment": "BSS",
+      "offset": 4,
+      "size": 1,
+      "start": 45834,
+      "end_exclusive": 45835
+    },
+    {
+      "name": "plane",
+      "module": "hgr_loader.o",
+      "segment": "BSS",
+      "offset": 9,
+      "size": 1,
+      "start": 45839,
+      "end_exclusive": 45840
+    },
+    {
+      "name": "period",
+      "module": "sfx.o",
+      "segment": "BSS",
+      "offset": 0,
+      "size": 1,
+      "start": 45840,
+      "end_exclusive": 45841
+    },
+    {
+      "name": "count",
+      "module": "sfx.o",
+      "segment": "BSS",
+      "offset": 1,
+      "size": 1,
+      "start": 45841,
+      "end_exclusive": 45842
+    },
+    {
+      "name": "count",
+      "module": "sfx.o",
+      "segment": "BSS",
+      "offset": 2,
+      "size": 1,
+      "start": 45842,
+      "end_exclusive": 45843
+    },
+    {
+      "name": "mb_slot",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 256,
+      "size": 1,
+      "start": 46099,
+      "end_exclusive": 46100
+    },
+    {
+      "name": "playing",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 257,
+      "size": 1,
+      "start": 46100,
+      "end_exclusive": 46101
+    },
+    {
+      "name": "paused",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 258,
+      "size": 1,
+      "start": 46101,
+      "end_exclusive": 46102
+    },
+    {
+      "name": "half",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 259,
+      "size": 1,
+      "start": 46102,
+      "end_exclusive": 46103
+    },
+    {
+      "name": "delay",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 260,
+      "size": 1,
+      "start": 46103,
+      "end_exclusive": 46104
+    },
+    {
+      "name": "cur_lo",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 261,
+      "size": 1,
+      "start": 46104,
+      "end_exclusive": 46105
+    },
+    {
+      "name": "cur_hi",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 262,
+      "size": 1,
+      "start": 46105,
+      "end_exclusive": 46106
+    },
+    {
+      "name": "atten",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 275,
+      "size": 1,
+      "start": 46118,
+      "end_exclusive": 46119
+    },
+    {
+      "name": "fade",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 276,
+      "size": 1,
+      "start": 46119,
+      "end_exclusive": 46120
+    },
+    {
+      "name": "fstep",
+      "module": "music.o",
+      "segment": "BSS",
+      "offset": 277,
+      "size": 1,
+      "start": 46120,
+      "end_exclusive": 46121
+    }
+  ],
+  "c_direct_call_cycles": [],
+  "exported_symbols": {
+    "COUT": 16436,
+    "HOME": 16446,
+    "RDKEY": 16466,
+    "VTABZ": 16517,
+    "__BSS_LOAD__": 45532,
+    "__BSS_RUN__": 45532,
+    "__BSS_SIZE__": 606,
+    "__CALLIRQ__": 1,
+    "__CONSTRUCTOR_COUNT__": 7,
+    "__CONSTRUCTOR_TABLE__": 45768,
+    "__DESTRUCTOR_COUNT__": 3,
+    "__DESTRUCTOR_TABLE__": 45211,
+    "__EXEHDR__": 0,
+    "__FILETYPE__": 6,
+    "__HIMEM__": 48896,
+    "__INTERRUPTOR_COUNT__": 1,
+    "__INTERRUPTOR_TABLE__": 45217,
+    "__LCADDR__": 54272,
+    "__LCSIZE__": 3072,
+    "__LC_FILEOFFS__": 0,
+    "__LC_LAST__": 57344,
+    "__LC_SIZE__": 3072,
+    "__LC_START__": 54272,
+    "__LOWBSS_LOAD__": 4096,
+    "__LOWBSS_RUN__": 4096,
+    "__LOWBSS_SIZE__": 4063,
+    "__LOWRAM_FILEOFFS__": 0,
+    "__LOWRAM_LAST__": 8159,
+    "__LOWRAM_SIZE__": 4096,
+    "__LOWRAM_START__": 4096,
+    "__MAIN_FILEOFFS__": 0,
+    "__MAIN_LAST__": 48854,
+    "__MAIN_SIZE__": 32512,
+    "__MAIN_START__": 16384,
+    "__MAPBSS_LOAD__": 3072,
+    "__MAPBSS_RUN__": 3072,
+    "__MAPBSS_SIZE__": 1012,
+    "__MAPRAM_FILEOFFS__": 0,
+    "__MAPRAM_LAST__": 4084,
+    "__MAPRAM_SIZE__": 1024,
+    "__MAPRAM_START__": 3072,
+    "__ONCE_LOAD__": 45532,
+    "__ONCE_RUN__": 45532,
+    "__ONCE_SIZE__": 250,
+    "__STACKSIZE__": 384,
+    "__STARTUP__": 1,
+    "__ZP_FILEOFFS__": 0,
+    "__ZP_LAST__": 154,
+    "__ZP_SIZE__": 26,
+    "__ZP_START__": 128,
+    "__argc": 45348,
+    "__argv": 45350,
+    "__auxtype": 45431,
+    "__bzero": 41730,
+    "__ctype": 45022,
+    "__ctypeidx": 45033,
+    "__cwd": 45438,
+    "__cwd_buf_size": 65,
+    "__datetime": 45434,
+    "__directerrno": 39269,
+    "__dos_type": 45392,
+    "__errno": 46133,
+    "__fdesc": 39278,
+    "__filetab": 45288,
+    "__filetype": 45430,
+    "__fopen": 39307,
+    "__mappederrno": 39430,
+    "__oserror": 46132,
+    "__osmaperrno": 42259,
+    "__seterrno": 39445,
+    "__syschdir": 42927,
+    "_abs": 41975,
+    "_amulet_from_name": 56893,
+    "_amulet_name": 56810,
+    "_app": 4096,
+    "_atoi": 39584,
+    "_atol": 39584,
+    "_build_paths": 33223,
+    "_bzero": 41730,
+    "_cclear": 39784,
+    "_cclearxy": 39779,
+    "_cgetc": 39789,
+    "_character_adjust_cha": 34031,
+    "_character_adjust_end": 33990,
+    "_character_adjust_gold": 34072,
+    "_character_adjust_hab": 33955,
+    "_character_amulet_count": 33647,
+    "_character_give_amulet": 57208,
+    "_character_give_object": 56986,
+    "_character_give_stone": 35923,
+    "_character_has_amulet": 57274,
+    "_character_has_object": 57131,
+    "_character_has_stone": 36055,
+    "_character_is_dead": 34254,
+    "_character_roll": 33758,
+    "_character_shift0": 34142,
+    "_character_take_object": 57057,
+    "_character_trade_amulets": 33700,
+    "_chdir": 39834,
+    "_chline": 39845,
+    "_chlinexy": 39840,
+    "_clearerr": 40627,
+    "_close": 39865,
+    "_clrscr": 16446,
+    "_combat_apply": 34731,
+    "_combat_flee": 34988,
+    "_combat_round": 34493,
+    "_cputc": 39919,
+    "_cputcxy": 39914,
+    "_cputs": 40015,
+    "_cputsxy": 40005,
+    "_dice_seed": 36779,
+    "_dice_seed_from_keypress": 36882,
+    "_exit": 16396,
+    "_fclose": 40150,
+    "_feof": 40639,
+    "_ferror": 40651,
+    "_fflush": 42508,
+    "_fgetc": 40184,
+    "_fgets": 40316,
+    "_file_buffer": 4334,
+    "_fileno": 40663,
+    "_fopen": 40684,
+    "_fread": 40708,
+    "_get_current_mode": 33391,
+    "_gotox": 40933,
+    "_gotoxy": 40922,
+    "_handle_user_input": 32343,
+    "_hgr_rle_load": 37750,
+    "_kbhit": 41127,
+    "_load_scene": 16663,
+    "_luck_test": 34274,
+    "_main": 32883,
+    "_memcmp": 41536,
+    "_memcpy": 41590,
+    "_memmove": 41650,
+    "_memset": 41738,
+    "_messages_load": 37030,
+    "_monster_enter": 35274,
+    "_monster_init": 34349,
+    "_monster_is_beaten": 34457,
+    "_monster_memory_export": 35875,
+    "_monster_memory_import": 35898,
+    "_monster_memory_reset": 35093,
+    "_monster_recover": 35105,
+    "_monster_remember": 35508,
+    "_monster_seal": 34431,
+    "_msg": 37496,
+    "_music_buf": 45843,
+    "_music_continue": 38664,
+    "_music_detect": 38374,
+    "_music_fade_in": 38729,
+    "_music_fade_out": 38715,
+    "_music_fading": 38745,
+    "_music_pause": 38617,
+    "_music_play": 38423,
+    "_music_resume": 38653,
+    "_music_select": 38557,
+    "_music_set_loop": 39196,
+    "_music_stop": 38521,
+    "_music_store": 39161,
+    "_object_from_name": 56725,
+    "_object_name": 56642,
+    "_open": 41993,
+    "_put_scene": 33046,
+    "_read": 42396,
+    "_revers": 42512,
+    "_roll_2d6": 36867,
+    "_roll_d6": 36852,
+    "_scene_mark_visited": 35760,
+    "_scene_memory_export": 35827,
+    "_scene_memory_import": 35850,
+    "_scene_memory_reset": 35643,
+    "_scene_visited": 35693,
+    "_sfx_beat": 37997,
+    "_sfx_death": 38103,
+    "_sfx_dodge": 38056,
+    "_sfx_fall": 38077,
+    "_sfx_hit": 38019,
+    "_sfx_hurt": 38035,
+    "_stderr": 45316,
+    "_stdin": 45312,
+    "_stdout": 45314,
+    "_stone_from_name": 33529,
+    "_stone_kind": 33397,
+    "_stone_name": 33446,
+    "_stone_usable": 36118,
+    "_stone_use": 36177,
+    "_strchr": 42713,
+    "_strcmp": 42750,
+    "_strlen": 42783,
+    "_strncpy": 42805,
+    "_switch_to_hgr": 33336,
+    "_switch_to_mixed": 33348,
+    "_switch_to_text": 33370,
+    "_videomode": 16476,
+    "_wherex": 43074,
+    "_write": 43079,
+    "addeq0sp": 39478,
+    "addeqysp": 39480,
+    "addysp": 39496,
+    "addysp1": 39495,
+    "aslax1": 39524,
+    "aslax2": 39532,
+    "aslax3": 39543,
+    "aslax4": 39557,
+    "aslaxy": 42599,
+    "asrax1": 39574,
+    "aux_mirror_end": 39161,
+    "aux_read_cur": 39143,
+    "axlong": 39729,
+    "axulong": 39735,
+    "bnega": 39746,
+    "bnegax": 39742,
+    "booleq": 41498,
+    "boolge": 41515,
+    "boolgt": 41513,
+    "boolle": 41505,
+    "boollt": 41507,
+    "boolne": 41492,
+    "booluge": 41531,
+    "boolugt": 41529,
+    "boolule": 41521,
+    "boolult": 41523,
+    "callirq": 45318,
+    "callirq_y": 45320,
+    "callmain": 39756,
+    "callmli": 45226,
+    "chlinedirect": 39847,
+    "closeallfiles": 42228,
+    "closedirect": 42218,
+    "complax": 39893,
+    "condes": 45352,
+    "cputdirect": 39929,
+    "ctypemask": 40058,
+    "ctypemaskdirect": 40062,
+    "cursor": 46129,
+    "cwd_init": 41068,
+    "decax1": 40088,
+    "decaxy": 40095,
+    "decsp1": 40104,
+    "decsp4": 40113,
+    "done": 45389,
+    "doneirq": 41112,
+    "donelib": 39902,
+    "enter": 40126,
+    "fdtab": 45393,
+    "freebuffer": 42210,
+    "getfd": 40486,
+    "gotoxy": 40919,
+    "incax2": 40982,
+    "incax3": 40989,
+    "incax4": 40999,
+    "incax5": 40994,
+    "incaxy": 41001,
+    "incsp1": 41010,
+    "incsp2": 41024,
+    "incsp3": 41038,
+    "incsp4": 41043,
+    "incsp5": 41048,
+    "incsp6": 41053,
+    "incsp7": 41058,
+    "incsp8": 41063,
+    "initconio": 45565,
+    "initcwd": 41068,
+    "initdostype": 45678,
+    "initiobuf": 45532,
+    "initirq": 45698,
+    "initlib": 45553,
+    "initprompt": 45763,
+    "iobuf_alloc": 39215,
+    "iobuf_free": 39256,
+    "irq_done": 41112,
+    "irq_init": 45698,
+    "ldaidx": 41264,
+    "ldax0sp": 41289,
+    "ldaxi": 41276,
+    "ldaxidx": 41278,
+    "ldaxysp": 41291,
+    "leaa0sp": 41298,
+    "leaaxsp": 41300,
+    "leave": 41323,
+    "leave0": 41312,
+    "leave00": 41310,
+    "leavey": 41320,
+    "leavey0": 41318,
+    "leavey00": 41316,
+    "memcpy_getparams": 41631,
+    "memcpy_upwards": 41593,
+    "mliparam": 45262,
+    "mul8x16": 41894,
+    "mul8x16a": 41904,
+    "mulax10": 41950,
+    "music_done": 38521,
+    "music_irq": 38839,
+    "negax": 41979,
+    "negeax": 41432,
+    "newline": 39948,
+    "popa": 42281,
+    "popax": 41017,
+    "popname": 40611,
+    "popptr1": 42291,
+    "ptr1": 136,
+    "ptr2": 138,
+    "ptr3": 140,
+    "ptr4": 142,
+    "push0": 42327,
+    "push0ax": 41465,
+    "pusha": 42309,
+    "pusha0": 42329,
+    "pusha0sp": 42305,
+    "pushax": 42331,
+    "pushaysp": 42307,
+    "pusheax": 41469,
+    "pushl0": 41462,
+    "pushname": 40508,
+    "pushptr1idx": 42359,
+    "pushw": 42353,
+    "pushw0sp": 42368,
+    "pushwidx": 42355,
+    "pushwysp": 42370,
+    "putchar": 39963,
+    "putchardirect": 39979,
+    "raisefilelevel": 45754,
+    "regbank": 148,
+    "regsave": 132,
+    "regswap2": 42486,
+    "return": 40051,
+    "return0": 42508,
+    "rwcommon": 42544,
+    "rwepilog": 42579,
+    "rwprolog": 42531,
+    "shlax1": 39524,
+    "shlax2": 39532,
+    "shlax3": 39543,
+    "shlax4": 39557,
+    "shlaxy": 42599,
+    "shrax3": 42640,
+    "sp": 128,
+    "sreg": 130,
+    "staspidx": 42654,
+    "stax0sp": 42676,
+    "staxspidx": 42687,
+    "staxysp": 42678,
+    "subeq0sp": 42893,
+    "subeqysp": 42895,
+    "subysp": 42914,
+    "tmp1": 144,
+    "tmp2": 145,
+    "tmp3": 146,
+    "tmp4": 147,
+    "tosadd0ax": 41136,
+    "tosadda0": 39454,
+    "tosaddax": 39456,
+    "tosaddeax": 41142,
+    "tosand0ax": 41172,
+    "tosanda0": 39509,
+    "tosandax": 39511,
+    "tosandeax": 41176,
+    "tosaslax": 42592,
+    "toseq00": 40140,
+    "toseqa0": 40142,
+    "toseqax": 40144,
+    "toseqeax": 41337,
+    "tosicmp": 40938,
+    "tosicmp0": 40936,
+    "toslcmp": 41205,
+    "tosmul0ax": 41343,
+    "tosmula0": 41892,
+    "tosmulax": 41823,
+    "tosmuleax": 41347,
+    "tosora0": 42242,
+    "tosorax": 42244,
+    "tosshlax": 42592,
+    "tossuba0": 42873,
+    "tossubax": 42875,
+    "tosudiva0": 42958,
+    "tosudivax": 42960,
+    "tosuge00": 43037,
+    "tosugea0": 43039,
+    "tosugeax": 43041,
+    "tosule00": 43047,
+    "tosulea0": 43049,
+    "tosuleax": 43051,
+    "tosumoda0": 43057,
+    "tosumodax": 43059,
+    "tosumul0ax": 41343,
+    "tosumula0": 41892,
+    "tosumulax": 41823,
+    "tosumuleax": 41347,
+    "udiv16": 42975,
+    "zerobss": 43185
+  }
+}

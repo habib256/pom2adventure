@@ -5,5 +5,5 @@ T 323 Return to the Orcs
    If you've already killed them, go to 309. Otherwise, you'll have to fight
 them with the STAMINA total they had when you left them.
 
-MU ORQUES.MB
+MU ORCS.MB
 C 281 Fight the Orcs

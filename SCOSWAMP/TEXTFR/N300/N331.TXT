@@ -1,8 +1,9 @@
 T 331 Le nid de l'Aigle
+AC
 
    Vous etes de retour dans la clairiere ou le grand Aigle a etabli son nid.
 Vous ne voyez rien d'autre que le vieil arbre et le nid lui-meme.
 
-MU AIGLE.MB
-C 202 Si vous avez combattu l'Aigle
-C 112 Sinon
+MU EAGLE.MB
+CV 392 202 Si vous avez combattu l'Aigle
+CX 392 112 Sinon

@@ -1,0 +1,21 @@
+T 032 Jaunes et Ripleigh
+
+   Vous secouez le sac. Le bruit des croquettes traverse l'univers connu. Le
+chat roux arrive au trot, digne, comme s'il vous avait convoque.
+
+   Une main sort de l'ombre et l'attrape. Une femme en debardeur, cheveux
+courts, un appareil a l'epaule. Elle a l'air de n'avoir pas dormi depuis un
+mois et de gerer parfaitement la situation.
+
+   -- Jaunes. Ne refais jamais ca. Ripleigh, second du Nostalgo.
+
+   Elle vous montre l'appareil, un rectangle qui bipe.
+
+   -- Le tracker compte ce qui bouge. Un bip lent et parfaitement regulier,
+c'est une machine : une machine ne respire pas. Tout le reste respire. Et ce
+qui respire ici deteste la lumiere blanche. C'est pour ca que ca vit dans les
+cales, et pas dans les couloirs.
+
+G .RIPL
+C 033 Suivre Ripleigh jusqu'aux sas
+C 003 Rentrer au Cabriolet pendant qu'elle parle

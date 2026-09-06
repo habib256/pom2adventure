@@ -6,5 +6,5 @@ multitude of scavenger insects, resembling crabs, feast.
    The smell and sight repel you; you refuse to approach. You turn around and
 resume the eastward trail, with good strides.
 
-MU BETE.MB
+MU BEAST.MB
 C 279 Go eastward

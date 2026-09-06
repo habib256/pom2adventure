@@ -1,6 +1,6 @@
 # Clairière 18 — Le pique-nique suspect
 
-**`PIQUENIQUE.MB.BIN` — 1 865 octets, 41,2 s, boucle.**
+**`PICNIC.MB.BIN` — 1 865 octets, 41,2 s, boucle.**
 
 ## La clairière
 
@@ -9,7 +9,7 @@
 | `hub` | **179** |
 | Pages | 066 (le pique-nique), 192 (retour chez le Voleur), 179 (le carrefour) |
 | Case | (2,4) |
-| Zone de référence | `sud` (`MARAISUD.MB`) |
+| Zone de référence | `sud` (`SOUTHSWAMP.MB`) |
 | Sorties | N → 183 (falaise), S → 010, E → 118 (scorpions) |
 | Contenu | VOLEUR (10/9 en 267) ; **Cape Rouge** (`386 G CAPE`) |
 
@@ -100,6 +100,6 @@ tonique est le procédé de la zone `sud`.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/18-piquenique
 python3 piquenique.py
-python3 ../../../midi_to_mb.py piquenique.mid PIQUENIQUE.MB.BIN \
+python3 ../../../midi_to_mb.py piquenique.mid PICNIC.MB.BIN \
     --bpm 176 --max 2304 --wav PIQUENIQUE.wav
 ```

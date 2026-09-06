@@ -40,7 +40,7 @@ Ce que la revision ajoute :
 32 mesures a 4/4, 48,6 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8) - coda(4).
 
     python3 rondpoint.py && python3 ../../../midi_to_mb.py rondpoint.mid \\
-        RONDPOINT.MB.BIN --bpm 158 --max 2304 --wav RONDPOINT.wav
+        ROUNDABOUT.MB.BIN --bpm 158 --max 2304 --wav RONDPOINT.wav
 """
 import sys
 from pathlib import Path

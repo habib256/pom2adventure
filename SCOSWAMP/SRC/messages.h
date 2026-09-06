@@ -69,7 +69,7 @@ enum {
  * un catalogue qui en demandait 1100, dans un binaire ou il en
  * restait 215 de libres. La marge de 32 laisse la place a une
  * traduction un peu plus longue sans toucher au code. */
-#define MSG_BYTES 1631
+#define MSG_BYTES 1642
 
 /* Charge le catalogue de la langue voulue. Rend 0 si le fichier manque
  * ou ne contient pas MSG_COUNT lignes -- mieux vaut un ecran vide

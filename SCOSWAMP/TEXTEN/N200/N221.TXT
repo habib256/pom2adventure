@@ -1,8 +1,7 @@
 T 221 The Fight Against the Unicorn
 
    You draw your sword and prepare to receive the charge. You're lucky: the
-creature is already seriously wounded. You'll need to strike at least two
-Assaults to bring it down.
+creature is already seriously wounded.
 
    After these two Assaults, if you wish, you can flee to save your life. If
 the Unicorn succumbs to your blows, you can then collect what must be
@@ -12,7 +11,8 @@ will end here; your body will serve as fertilizer for Swamp plants.
    Grit your teeth, strike with precision: even wounded, the beast remains
 dangerous and every mistake can be fatal.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 11 4 UNICORN
+MF 2
 CF 348 Flee after striking at least two Assaults
 MV 277

@@ -1,0 +1,18 @@
+T 025 La chambre de meditation
+
+   La porte s'ouvre sur une sphere noire et vide. Au centre, un fauteuil.
+Dans le fauteuil, une silhouette immense : cape, casque de metal noir, un
+respirateur qui souffle comme un vieux radiateur. Keuh-hooo. Keuh-hooo.
+
+   -- Je vous attendais, dit le Seigneur Vapeur. Keuh-hooo. Douze abonnes,
+c'est douze de plus qu'on ne m'en accorde en general.
+
+   Il accepte le selfie. Il se leve, arrange sa cape, trouve son profil.
+
+   -- Une seule condition. Keuh-hooo. Pas. De. Flash. Je vis dans le noir
+depuis quarante ans. Le flash me rappelle des choses desagreables.
+
+   La piece est tres sombre. Votre anneau lumineux hesite.
+
+C 026 Couper le flash et cadrer a la lueur rouge du casque
+C 027 Mettre le flash : sans lui, on ne verra rien

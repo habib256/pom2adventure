@@ -1,0 +1,17 @@
+SERV Serviette de bain
+PILE Pile d'Holophone
+CROQ Croquettes pour chat
+UNIF Armure de trouffion
+EPIC Fiole d'Epice
+PASS Accreditation presse
+S1 Selfie : Seigneur Vapeur
+S2 Selfie : Monsieur Spork
+S3 Selfie : le Ver des Dunes
+S4 Selfie : Ouiti
+S5 Selfie : Barbastella
+S6 Selfie : la Bete du Cargo
+.CHAG
+.CAL
+.BIZZ
+.RIPL
+.MING

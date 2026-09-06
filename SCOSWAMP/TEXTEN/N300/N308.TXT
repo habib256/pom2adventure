@@ -7,6 +7,6 @@ Purple Jewel and you leave immediately without forgetting to record your new
 acquisition on your Adventure Sheet. The only path that allows leaving the
 clearing takes you back westward.
 
-MU BASSIN.MB
+MU POOL.MB
 G BJ
 C 330 Continue westward

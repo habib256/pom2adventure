@@ -1,8 +1,9 @@
 T 330 The Hollow Log
+AC
 
    You're in the clearing with the large hollow log. The path is quiet, but
 you know the log has sheltered more than gnawed bones.
 
-MU TRONC.MB
-C 129 If you saw a creature there during a previous visit
-C 268 Examine the clearing
+MU LOG.MB
+CV 055 129 If you saw a creature there during a previous visit
+CX 055 268 Examine the clearing

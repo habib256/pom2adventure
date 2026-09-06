@@ -32,7 +32,7 @@ Do mineur eolien, 138 a la noire — un geant ne court pas, mais quatre noires a
 Forme intro(4) - A(8) - B(6) - A'(6).
 
     python3 geant.py && python3 ../../../midi_to_mb.py geant.mid \\
-        GEANT.MB.BIN --bpm 138 --max 2304 --wav GEANT.wav
+        GIANT.MB.BIN --bpm 138 --max 2304 --wav GEANT.wav
 """
 import sys
 from pathlib import Path

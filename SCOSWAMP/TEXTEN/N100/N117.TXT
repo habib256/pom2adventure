@@ -13,5 +13,5 @@ care."
    He takes back his Amulet and leaves. Gradually, you regain your strength
 and resume the journey westward.
 
-MU JARDINS.MB
+MU GARDENS.MB
 C 363 Go westward

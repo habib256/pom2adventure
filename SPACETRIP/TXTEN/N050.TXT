@@ -1,0 +1,17 @@
+T 050 Arrakoss, under two suns
+
+   The Convertible lands in a fan of sand. You fold the roof back -- that is
+the whole point of the model -- and a lungful of air at sixty degrees slaps
+you like a hot towel.
+
+   Two suns. Two shadows. No clouds. Sand to the horizon, and the horizon is
+made of sand as well.
+
+   A caped shape peels away from a rock and walks over without hurrying. An
+old nomad, eyes blue right through, a tortoise sort of smile.
+
+   "You," he says. "You want to cross. Everybody wants to cross."
+
+C 057 Hear the old nomad out
+C 051 Set straight off across the sea of sand
+C 003 Close the roof and leave

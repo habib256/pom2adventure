@@ -1,6 +1,6 @@
 # Clairière 20 — Trois chemins herbeux
 
-**`HERBEUX.MB.BIN` — 1 493 octets, 35,5 s, boucle.**
+**`GRASSLAND.MB.BIN` — 1 493 octets, 35,5 s, boucle.**
 
 ## La clairière
 
@@ -9,7 +9,7 @@
 | `hub` | **047** |
 | Pages | 047 |
 | Case | (4,4) |
-| Zone de référence | `sud` (`MARAISUD.MB`) |
+| Zone de référence | `sud` (`SOUTHSWAMP.MB`) |
 | Sorties | S → 290 (orques), E → 031 (bassin de cristal), O → 118 (scorpions) |
 | Contenu | rien — mais six pages y mènent (`CARTOGRAPHIE.md` § 2.3) |
 
@@ -34,7 +34,7 @@ est étroit et bordé d'arbres serrés. »
 | Notes | 326 de hauteur + **48 coups de batterie**, **0 abandonnée** |
 
 **Ce qu'elle garde de la zone `sud` :** le **bourdon de tonique immobile** sur
-le **même ré** que `MARAISUD.MB`, et la même marche modale. C'est la plus proche
+le **même ré** que `SOUTHSWAMP.MB`, et la même marche modale. C'est la plus proche
 de la zone des douze — voulu : c'est la clairière la plus neutre du jeu.
 
 **Ce qui lui appartient :** le mode dorien, si naturel au lieu de si bémol, et
@@ -69,7 +69,7 @@ chaque sentier a désormais sa propre basse **et** sa propre batterie :
   début.
 
 Le tempo passe de 145 à **150**, celui de la zone : la clairière la plus neutre
-du jeu sonne maintenant exactement au pas de `MARAISUD.MB`.
+du jeu sonne maintenant exactement au pas de `SOUTHSWAMP.MB`.
 
 ## La batterie
 
@@ -102,6 +102,6 @@ zone `sud`.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/20-herbeux
 python3 herbeux.py
-python3 ../../../midi_to_mb.py herbeux.mid HERBEUX.MB.BIN \
+python3 ../../../midi_to_mb.py herbeux.mid GRASSLAND.MB.BIN \
     --bpm 150 --max 2304 --wav HERBEUX.wav
 ```

@@ -15,7 +15,7 @@ une odeur repugnante en rampant lentement vers vous.
 
    Qu'allez-vous faire ?
 
-MU VASE.MB
+MU MUD.MB
 C 085 Vous enfuir
 C 257 Essayer de sauter par-dessus
 C 171 L'attaquer avec votre epee

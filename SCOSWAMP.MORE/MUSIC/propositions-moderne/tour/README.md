@@ -1,6 +1,6 @@
 # Zone `tour` — la tour de Stratagus
 
-**`TOUR.MB.BIN` — 1 045 octets, 46,4 s, boucle.** Tampon de zone (2 304 o), 1 259 octets de marge — la pièce la plus légère du dossier.
+**`TOWER.MB.BIN` — 1 045 octets, 46,4 s, boucle.** Tampon de zone (2 304 o), 1 259 octets de marge — la pièce la plus légère du dossier.
 
 ## Ce que la zone couvre
 
@@ -13,7 +13,7 @@ Aucune clairière : quatorze pages hors carte, plus la victoire amère.
 
 Les pages **124**, **222**, **225**, **402** portent aussi une ligne de combat,
 et **297**, **372**, **375**, **401** sont aussi des pages de mort : la
-surcouche `MU +COMBAT.MB` ou `MU +MORT.MB` remplace le thème pour une page sans
+surcouche `MU +BATTLE.MB` ou `MU +DEATH.MB` remplace le thème pour une page sans
 effacer la mémoire de la zone, qui revient à la page suivante.
 
 ## La pièce
@@ -58,6 +58,6 @@ Mesuré par `../verifier.py` — c'est l'attribution réelle de
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/tour
 python3 tour.py
-python3 ../../midi_to_mb.py tour.mid TOUR.MB.BIN \
+python3 ../../midi_to_mb.py tour.mid TOWER.MB.BIN \
     --bpm 125 --max 2304 --wav TOUR.wav
 ```

@@ -7,4 +7,5 @@ vaincre Stratagus et vous lui lancez donc votre Pierre Magique.
 effets du sortilege. Une sensation glacee vous envahit aussitot : vous avez
 peur, terriblement peur, et vous perdez un point d'HABILETE.
 
+E HABILETE -1
 C 124 Combattre

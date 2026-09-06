@@ -1,0 +1,16 @@
+T 077 La voisine de loge
+
+   Elle ne vous regarde pas. Elle regarde la tenture. Combinaison de vinyle,
+bottes blanches, ceinture a grosses boucles, un calme de statue.
+
+   "Barbastella", dit-elle. "Je pars ce soir. Ce palais n'a qu'une sortie que
+les gardes ne surveillent pas, et je ne peux pas y aller seule : il faut
+quelqu'un pour tenir la trappe. Vous savez ou elle est ?"
+
+   Elle tourne enfin la tete vers vous.
+
+   "Dites-le moi. Si vous vous trompez, je pars sans vous."
+
+C 078 La tenture pourpre du trone, et son conduit a ordures
+C 076 Le grand portail par ou entrent les fauves
+C 076 Le balcon de l'Empereur, en escaladant les colonnes

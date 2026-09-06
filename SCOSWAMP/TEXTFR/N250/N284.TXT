@@ -14,7 +14,7 @@ situation presente.
    Stratagus, impressionne par votre force et la promptitude de vos reflexes,
 cesse de rire et observe attentivement le combat.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 6 STATUE DE GOBELIN
 CF 315 Prendre la Fuite
 MV 156

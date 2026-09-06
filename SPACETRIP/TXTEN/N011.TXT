@@ -1,14 +1,21 @@
-Binary Sun Dunes, Khepra IX
-----------------------------
+T 011 The three glasses
 
-Two suns cast twin shadows across high dunes.
-The sand sings when the wind is right.
-Heat lines dance over the ridges.
-A caravan rests near a shade sail.
+   The four-armed barman sets three glasses in front of you. The first
+smokes. The second freezes and cracks. The third sings, all on its own,
+one held note, slightly sad.
 
-Climb a safe dune and catch both suns in frame.
-Drink water often.
+   "I do not serve strangers," he says. "But I serve people who listen.
+The smoking one is for whoever already has fire. The freezing one is for
+whoever is already cold. The singing one is for whoever talks all day long
+with nobody answering. Take yours. Take wrong, and I do not step in."
 
-C 008 Return to the city of Aeolis
-C 010 Return to the mirror sea
-C 012 Step on the Dyson petal edge
+   At the back a Klinger belches a small blue flame. Beside you the
+Martian tourists shiver inside their heated suits, saying "Ack ack" in a
+voice that is chattering its teeth.
+
+   You have been talking to a telephone for six years.
+
+C 016 Take the glass that smokes
+C 016 Take the glass that freezes
+C 017 Take the glass that sings
+C 010 Back away and touch nothing

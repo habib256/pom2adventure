@@ -1,7 +1,8 @@
 T 342 Retour au Geant
+AC
 
    Vous reconnaissez la clairiere ou vous avez rencontre l'enorme Geant.
 
-MU GEANT.MB
-C 197 Si vous l'avez tue
-C 300 Sinon
+MU GIANT.MB
+CV 366 197 Si vous l'avez tue
+CX 366 300 Sinon

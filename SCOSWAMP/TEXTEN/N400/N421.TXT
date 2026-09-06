@@ -1,0 +1,8 @@
+T 421 The Path over the Quicksand
+
+   Your Growth Stone makes the plants grow. Their roots and stems spread
+across the Quicksand, forming a firm path. You cross safely. This path will
+remain usable whenever you return.
+
+MU QUICKSAND.MB
+C 270 Choose a path to leave

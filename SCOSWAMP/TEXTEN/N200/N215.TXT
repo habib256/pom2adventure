@@ -6,6 +6,7 @@ cleanly cuts the first's throat mid-leap.
    The second circles around you, seeking the attack angle. You must hold firm
 and fight to the end.
 
-MU +COMBAT.MB
+MM 1
+MU +BATTLE.MB
 M 7 6 WOLF
 MV 247

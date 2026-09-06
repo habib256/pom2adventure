@@ -1,6 +1,6 @@
 # Zone `nord` — la forêt profonde, au-delà de la rivière
 
-**Fichier proposé : `MARAISNO.MB` (`MARAISNO.MB.BIN`, 1 058 octets, 58,4 s de boucle)**
+**Fichier proposé : `NORTHSWAMP.MB` (`NORTHSWAMP.MB.BIN`, 1 058 octets, 58,4 s de boucle)**
 
 C'est la moitié nord de la carte (`y = 0…2`), là où *« le sol devient plus sec et
 la végétation des marais cède place à une forêt profonde »*
@@ -68,7 +68,7 @@ vive et la boucle tombe à 58 s.
 ```sh
 python3 SCOSWAMP.MORE/MUSIC/midi_to_mb.py \
     SCOSWAMP.MORE/MUSIC/propositions/nord/27-tmeiskin.mid \
-    SCOSWAMP.MORE/MUSIC/propositions/nord/MARAISNO.MB.BIN \
+    SCOSWAMP.MORE/MUSIC/propositions/nord/NORTHSWAMP.MB.BIN \
     --bpm 200 --vol 13,9,11 \
     --wav SCOSWAMP.MORE/MUSIC/propositions/nord/MARAISNO.wav
 ```

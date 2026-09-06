@@ -10,7 +10,7 @@ before the trees regain strength.
    North offers a path that rises toward drier lands. South leads back to the
 deep river. West presents a narrow passage, perhaps less dangerous.
 
-MU ARBRESEPEES.MB
+MU SWORDTREES.MB
 G GR
 C 320 Take the path that climbs to the north
 C 090 Join the deep river to the south

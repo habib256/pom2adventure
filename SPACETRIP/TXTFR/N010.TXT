@@ -1,15 +1,22 @@
-Mer Miroir d'Epsilon
----------------------
+T 010 La Cantina de Moche-Isley
 
-L'ocean ici est plat comme du verre.
-Les etoiles se refletent si bien qu'on se croirait en vol spatial.
-Des iles basses portent du sable noir et des tours pales.
-Les vagues bougent en respirations longues et lentes.
+   La porte souffle un air tiede qui sent le carburant, le poil mouille et
+le regret. Il fait sombre exactement comme il faut pour qu'aucune camera
+n'y arrive.
 
-Une jetee offre un selfie parfait qui montre deux cieux.
-Marchez doucement pour garder la surface lisse.
+   Un orchestre a trois cuivres joue le seul morceau qu'il connaisse. Au
+bar, un barman a quatre bras aligne des verres. A une table basse, un
+contrebandier en gilet compte des billets en face d'un copilote poilu qui
+grogne. Au fond, deux Klingues au front plisse cherchent une raison. Sous
+la verriere VIP, douze cameramen entourent un menton chrome.
 
-C 007 Retour aux canyons de cristal
-C 011 Traverser les dunes aux soleils binaires
-C 013 Approcher la porte de Kalyx
+   Trois touristes martiens photographient le distributeur de serviettes.
 
+   L'anneau lumineux de l'Holophone s'allume. Toute la salle se retourne.
+Toute la salle vous en veut.
+
+C 011 Aller au bar
+C 012 La table du contrebandier
+C 013 La verriere VIP
+C 014 Le fond de la salle
+C 003 Retour au Cabriolet

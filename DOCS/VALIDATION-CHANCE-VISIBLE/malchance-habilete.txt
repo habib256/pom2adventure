@@ -1,0 +1,24 @@
+ Saut dans l'obscurite                            HAB 11/12  END 24/24  CHA 0/0 
+   Tentez votre CHANCE. Test: lancez 2 des (2d6). Si total <= CHANCE, vous      
+atteignez la clairiere sans dommage. Sinon, vous tombez et vous vous blessez    
+au bras; perdez 1 point d'HABILETE, puis atteignez quand meme la clairiere.     
+                                                                                
+   Appliquez l'effet immediat avant de poursuivre. Ou allez-vous ensuite?       
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+ Feu follet   sorties                            I:SAC M:CARTE H:AIDE Q:QUITTER 
+Vous jetez les deux des : 4, contre une CHANCE de 0.                            
+Malchanceux !                                                                   
+                                                                                
+[ESPACE] continuer                                                              

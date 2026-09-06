@@ -1,0 +1,13 @@
+T 079 Barbastella est deja partie
+
+   Le conduit a ordures est toujours la, derriere la tenture pourpre, et il
+sent toujours aussi mauvais. Barbastella, elle, n'y est plus.
+
+   Un garde a casque a ailerons y a colle une pancarte que vous ne savez pas
+lire, mais dont le dessin represente clairement quelqu'un qui tombe.
+
+   Vous avez deja son portrait. Elle a deja votre numero. C'est comme ca que
+finissent les meilleures collaborations.
+
+C 074 Remonter voir ce qui se passe dans l'arene
+C 003 Regagner le Cabriolet par les hangars

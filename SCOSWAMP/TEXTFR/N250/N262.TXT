@@ -7,5 +7,5 @@ que lui dessiner une carte pour l'aider a traverser le Marais. Le ton est
 neutre, la verite partielle - assez pour obtenir une reponse sans conflit.
 Selon votre parcours precedent, deux directions s'offrent a vous.
 
-C 166 Je suis deja parvenu jusqu'a Courbensaule
-C 115 Je ne suis pas encore parvenu a Courbensaule
+CV 280 166 Je suis deja parvenu jusqu'a Courbensaule
+CX 280 115 Je ne suis pas encore parvenu a Courbensaule

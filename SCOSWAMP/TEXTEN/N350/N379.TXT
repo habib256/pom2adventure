@@ -10,7 +10,7 @@ end.
    When you arrive near him, he makes a hand gesture to cast a spell on you
 and you lose 3 SKILL points.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 10 GARDEN MASTER
 CF 363 Flee
 E HABILETE -3

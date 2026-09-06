@@ -1,6 +1,6 @@
 # Clairière 5 — Feu follet à l'orée (`hub` 218, case 1,1)
 
-**`FEUFOLLET.MB.BIN` — 2 083 octets, 40,5 s, boucle.**
+**`WILLOWISP.MB.BIN` — 2 083 octets, 40,5 s, boucle.**
 
 ## Les pages
 
@@ -84,6 +84,6 @@ taper du pied dessus. C'est le sujet.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/05-feufollet
 python3 feufollet.py
-python3 ../../../midi_to_mb.py feufollet.mid FEUFOLLET.MB.BIN \
+python3 ../../../midi_to_mb.py feufollet.mid WILLOWISP.MB.BIN \
     --bpm 154 --max 2304 --wav FEUFOLLET.wav
 ```

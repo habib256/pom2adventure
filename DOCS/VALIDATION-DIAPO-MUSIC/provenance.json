@@ -1,0 +1,26 @@
+{
+  "dist/SCOSWAMP.HDV": {
+    "bytes": 6876672,
+    "sha256": "8785fda7dbee0948e3c9da9274baee1b669a59d71473d1e04144554566cec1db"
+  },
+  "SCOSWAMP/TOOLS/DIAPO.SYSTEM.SYS": {
+    "bytes": 4473,
+    "sha256": "2d98144113074710ad344e7e1879107cece2fe580cbe1c5e2b99e62165d847f1"
+  },
+  "SCOSWAMP/TOOLS/DIAPO.CODE.BIN": {
+    "bytes": 13410,
+    "sha256": "198e6337d449956251c57869c4a02004e3218ed5e4c3fa8be357fbd86cfe9ced"
+  },
+  "SCOSWAMP/TOOLS/DIAPO.DATA.BIN": {
+    "bytes": 2216,
+    "sha256": "59c985bfa21ed55fc0246713de84b4016d6190dda882702caa6d2a2c68ae9ee7"
+  },
+  "SCOSWAMP/TOOLS/DIAPO.IMAGES.BIN": {
+    "bytes": 65232,
+    "sha256": "22afdf630474174aa2660c9596f3863f6573c6633a0390dfd567d18e5026f450"
+  },
+  "/tmp/diapo-before-fast.hdv": {
+    "bytes": 6807552,
+    "sha256": "d09552849e518f26376221a5c428817d97fbdf27a1068885c7547d67eb5d2aef"
+  }
+}

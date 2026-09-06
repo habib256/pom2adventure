@@ -7,6 +7,6 @@ detacher le gros Bijou Violet et vous repartez aussitot sans oublier
 d'inscrire votre nouvelle acquisition sur votre Feuille d'Aventure. Le seul
 chemin qui permet de quitter la clairiere vous ramene vers l'ouest.
 
-MU BASSIN.MB
+MU POOL.MB
 G BJ
 C 330 Continuer vers l'ouest

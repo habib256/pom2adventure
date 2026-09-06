@@ -1,10 +1,9 @@
 T 289 Le Cheval Volant de Tancrede
 
-   Les Gardes Forestiers vous ont dit que "le Cheval Volant de Tancrede" etait
-la moins chere des trois auberges et c'est donc la que vous avez decide de
-passer la nuit. Le prix de la chambre est tres raisonnable en effet puisqu'on
-ne vous demande qu'une demi-Piece d'Or. Vous montez vous coucher et vous
-tombez endormi des que vous avez pose la tete sur l'oreiller.
+   Les Gardes Forestiers vous ont indique le "Cheval Volant de Tancrede". Vous
+decidez d'y passer la nuit. Vous payez 1 Piece d'Or pour la chambre, puis
+montez vous coucher. Vous tombez endormi des que vous avez pose la tete sur
+l'oreiller.
 
    Au milieu de la nuit, cependant, une sensation de brulure a votre doigt
 vous reveille brusquement. L'Anneau de Cuivre est en train de vous avertir
@@ -18,6 +17,7 @@ la nuit a pris deux objets dans votre sac, les Pierres placees au-dessus ayant
 disparu les premieres. L'Anneau de Cuivre est reste a votre doigt. Vous
 quittez a present l'auberge pour reprendre votre chemin. Tentez votre Chance.
 
+E OR -1
 PD
 E ENDURANCE +2
 CL 150 343

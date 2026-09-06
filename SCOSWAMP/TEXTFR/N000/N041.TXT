@@ -12,5 +12,5 @@ situation devient plus dangereuse.
 
    Que faites-vous?
 
-MU SABLES.MB
+MU QUICKSAND.MB
 CL 270 087 -2 0

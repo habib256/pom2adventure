@@ -1,6 +1,6 @@
 # Zone `combat` — surcouche, 32 pages
 
-**`COMBAT.MB.BIN` — 1 228 octets, 24,3 s, boucle.**
+**`BATTLE.MB.BIN` — 1 228 octets, 24,3 s, boucle.**
 
 Surcouche : le flux doit tenir dans le **tampon de surcouche de 1 280 octets**, la moitié de celui des thèmes de zone. Il reste 52 octets.
 
@@ -59,6 +59,6 @@ Mesuré par `../verifier.py` — c'est l'attribution réelle de
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/combat
 python3 combat.py
-python3 ../../midi_to_mb.py combat.mid COMBAT.MB.BIN \
+python3 ../../midi_to_mb.py combat.mid BATTLE.MB.BIN \
     --bpm 200 --max 1280 --wav COMBAT.wav
 ```

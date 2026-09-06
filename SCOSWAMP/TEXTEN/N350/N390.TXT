@@ -5,7 +5,7 @@ unsafe.
 
    In which direction do you wish to go?
 
-MU TRONC.MB
+MU LOG.MB
 C 144 North
 C 209 East
 C 195 West

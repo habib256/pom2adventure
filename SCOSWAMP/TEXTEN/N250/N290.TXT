@@ -8,6 +8,6 @@ distance before you lies another clearing.
 then see three SWAMP ORCS with skin eaten by scabies. They have bows in hand,
 and the two creatures who haven't yet fired shoot their arrows at you.
 
-MU ORQUES.MB
+MU ORCS.MB
 CI AI 083 If you possess the Gold Magnet
 CN AI 151 Otherwise

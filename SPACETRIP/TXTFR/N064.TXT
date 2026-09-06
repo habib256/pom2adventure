@@ -1,0 +1,16 @@
+T 064 Un, quatre, neuf
+
+   "Sur une lune tres loin d'ici", dit la voix douce, "on a trouve une dalle
+noire. Elle est parfaite. Ses trois cotes sont dans le rapport un, quatre,
+neuf. Exactement. Personne n'a jamais su pourquoi."
+
+   "Moi, je sais pourquoi. Et si vous le savez aussi, alors nous avons
+quelque chose en commun, et j'ouvrirai cette porte."
+
+   L'oeil rouge se penche d'un cheveu.
+
+   "Un, quatre, neuf. Quel est le nombre suivant ?"
+
+C 069 Repondre : douze
+C 065 Repondre : seize
+C 069 Repondre : vingt-cinq

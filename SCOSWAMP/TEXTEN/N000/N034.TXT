@@ -8,7 +8,7 @@ panicking the beast; variable effect depending on target.
 
    Warning: using it consumes the chosen Stone; check your inventory.
 
-C 237 USE WITHERING
-C 291 USE FIRE
-C 356 USE TERROR
+CU FLETRISSURE 237 USE WITHERING
+CU FEU 291 USE FIRE
+CU TERREUR 356 USE TERROR
 C 209 Use nothing and change approach

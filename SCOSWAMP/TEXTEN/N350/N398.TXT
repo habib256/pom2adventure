@@ -15,7 +15,7 @@ you to go your way.
 
    What will you do?
 
-MU MAITRELOUPS.MB
+MU WOLFMASTER.MB
 C 314 Obey and leave
 C 191 Resort to magic
 C 120 Attack him

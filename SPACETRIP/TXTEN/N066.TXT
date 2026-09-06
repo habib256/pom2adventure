@@ -1,0 +1,17 @@
+T 066 The storeroom, and what stirs under it
+
+   Crates, air filters, a bin of old cable. And, under a silver tarpaulin, a
+small thing that breathes.
+
+   It puts its head out. A metre tall, grey, round-bellied, with enormous sad
+eyes. It raises one very long finger whose tip lights up like a night lamp,
+and points it at the ceiling.
+
+   "Home," it says.
+
+   Then it points at the ring light of your Holophone, then at its own
+finger, and repeats the gesture. It wants to phone. It is short of power.
+
+GU PILE 068 Slot the Holophone battery into its contraption
+CN PILE 067 Spread your empty hands: you have no battery
+C 062 Step back out into the white corridor

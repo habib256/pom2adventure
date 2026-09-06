@@ -37,7 +37,7 @@ Fa mineur phrygien, 144 a la noire, 26 mesures a 4/4, 43,3 s.
 Forme intro(4) - A(8) - B(8) - A'(6).
 
     python3 sables.py && python3 ../../../midi_to_mb.py sables.mid \\
-        SABLES.MB.BIN --bpm 144 --max 2304 --wav SABLES.wav
+        QUICKSAND.MB.BIN --bpm 144 --max 2304 --wav SABLES.wav
 """
 import sys
 from pathlib import Path

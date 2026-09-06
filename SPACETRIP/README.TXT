@@ -57,7 +57,9 @@ ENGINE (in RAM, ~13 KB):
   - spacetrip.c       Main source code
   - paths.c           Path management module
   - paths.h           Path API header
-  - Makefile          Build configuration
+  - page.h            Page format, bag and visited bitmap (no conio)
+  - build.sh          Build script
+  - test_parse.c      Host test bench for page.h (not on the volume)
 
 DATA (on disk, unlimited):
   - IMG/              HGR graphics (8 KB per scene)
@@ -69,7 +71,8 @@ Potential: 1000+ scenes limited only by disk space (32 MB max)
 
 Data Structure (Flat and Simple):
   /
-  ├── SPACETRIP.BIN       [Engine: 13 KB in RAM]
+  ├── SPACETRIP.BIN       [Engine: 14 KB in RAM]
+  ├── OBJFR / OBJEN       [Object catalog, one line per bit]
   ├── IMG/                [Graphics on disk]
   │   ├── N001.HGR        8 KB
   │   ├── N002.HGR        8 KB
@@ -154,33 +157,84 @@ Available for expansion: ~16 KB (for combat, inventory, saves, etc.)
 CONTENT FILE FORMATS (DATA)
 ===============================================================================
 
-TEXT FILES (.TXT removed, ProDOS style)
+PAGE FILES (.TXT removed, ProDOS style)
 ---------------------------------------
 Location: TXTFR/N<id> (French) or TXTEN/N<id> (English)
-Format: Plain text, 80 columns max per line
+Format: Pure ASCII, 78 columns max per line, no accents
 Naming: N001, N002, N003... (3 digits, no extension)
 
-Structure:
-  Line 1-N: Scene description (narrative text)
-  Blank lines: Spacing for readability
-  Choice lines: C <scene_id> <choice_title>
-  
-Example (TXTEN/N001):
-  ────────────────────────────────────────────────────────────
-  Home, Sweet home
-  ------------------
-  
-  Here you stand at the threshold of an extraordinary cosmic adventure!
-  Your brand new spaceship awaits on the launch pad.
-  
-  C 002 Heading to the planet of eternal forests
-  C 003 Racing towards the supermassive black hole
-  ────────────────────────────────────────────────────────────
+Since version 3.0 the page format is the one of SCOSWAMP (see
+SPACETRIP.MORE/BIBLE.md, section 7). The engine knows these eight directives
+and NOTHING else; every other line is narrative text.
 
-Choice Format: C <scene_id> <title>
-  - C = literal character flag
-  - scene_id = 3-digit number (001-999)
-  - title = short description (< 60 chars)
+  line                          meaning
+  ----------------------------  --------------------------------------------
+  T <id> <title>                the title, 40 chars max, ALWAYS the 1st line
+  V <id> [<id>...]              "if you have already been here, go to <id>";
+                                right after T, before anything else; the
+                                following ids are the other pages of the
+                                same place
+  G <TOKEN>                     grant the object or raise the flag
+  GX <TOKEN>                    remove it
+  C <id> <label>                a choice
+  CI <TOKEN> <id> <label>       shown, takeable only if you HAVE the token
+  CN <TOKEN> <id> <label>       takeable only if you do NOT have it
+  GU <TOKEN> <id> <label>       requires the token and CONSUMES it
+
+Layout rules:
+  - 5 choices max per page; label 72 chars max; two labels of 36 chars max
+    share one screen line;
+  - the narrative text -- blank lines included, the one under T excepted --
+    is 18 lines max: that is what fits between the title bar (row 0) and the
+    four choice rows at the bottom of an 80x24 screen;
+  - G/GX are ENTRY EFFECTS: they play once when the page opens, hence the V
+    line on pages that grant something;
+  - a page that grants a selfie or an object carries a V towards its
+    "already taken" variant, in the same tens block;
+  - every page has at least one choice;
+  - CI/CN come in pairs when a page tests an object: the player sees both
+    outcomes, only one is takeable. The other one is displayed with '-'
+    instead of its letter, and the key is refused;
+  - no blank line at the top of the text (the one under T is enough).
+
+Example (TXTEN/N020):
+  ------------------------------------------------------------------------
+  T 020 The hangar of the Gloom Star
+  
+     Two troupers are checking passes. They miss everything, but they are
+     thorough about it.
+  
+  CI UNIF 021 Walk through the checkpoint in armour
+  CN UNIF 022 Walk through the checkpoint bare-faced
+  C 003 Turn back to the cockpit
+  ------------------------------------------------------------------------
+
+Directives are UPPERCASE (a lowercase `g croq` is narrative text), but the
+TOKEN itself is matched without regard to case. An unknown token is ignored
+in silence: a corpus written by several hands must stay playable.
+
+OBJECT CATALOG (.TXT removed, ProDOS style)
+-------------------------------------------
+Location: OBJFR and OBJEN, at the ROOT of the volume
+Format: one line per bit, "TOKEN label"
+
+An object (a bath towel) and a fact ("Mopey has been consoled") are the same
+mechanism: a NAMED BIT, set by G, cleared by GX, tested by CI / CN / GU.
+THE ORDER IS THE CONTRACT: line N is bit N. The token is the same in both
+languages -- it is what the pages carry; only the bag label is translated.
+A token starting with a dot is a hidden flag: it counts for the choices but
+never shows up in the [I] screen.
+
+  ------------------------------------------------------------------------
+  SERV Bath towel
+  PILE Holophone battery
+  ...
+  .CHAG
+  ------------------------------------------------------------------------
+
+The file is read ONCE, right after the language screen, into a 512-byte
+buffer that is split in place. 32 tokens max: the bag is a single 32-bit
+word, which is what the 6502 handles in two bytes.
 
 HGR IMAGE FILES
 ---------------
@@ -208,13 +262,23 @@ Note: Text files have NO extension (ProDOS style)
 COMPILING THE ENGINE
 ===============================================================================
 
-USING MAKEFILE (RECOMMENDED)
+USING BUILD.SH (RECOMMENDED)
 -----------------------------
-make              # Compile engine if source changed
-make clean        # Remove compiled files
-make rebuild      # Clean + compile
-make info         # Show build configuration
-make structure    # Create IMG/, TXTFR/, TXTEN/ directories
+sh build.sh       # Run the host test bench, then compile SPACETRIP.BIN
+sh build.sh test  # Run the host test bench only
+
+TESTING THE PAGE FORMAT ON THE HOST
+------------------------------------
+page.h holds everything that is pure arithmetic -- the line parser, the bag,
+the visited bitmap, the takeable/not-takeable rule -- and touches neither
+conio nor the disk. The very same file therefore compiles under cc65 for the
+Apple II and under cc on the development machine, where test_parse.c
+exercises it in one second:
+
+cc -Wall -Wextra -o /tmp/test_parse test_parse.c && /tmp/test_parse
+
+Checking the V line inside an emulator would mean replaying a whole game and
+would still cover a single path. test_parse.c is not shipped on the volume.
 
 MANUAL COMPILATION
 ------------------
@@ -227,7 +291,7 @@ Key flags:
   -Wl -S,0x4000        Start at $4000 (reserves $2000-$3FFF for HGR)
   -Wl -D,__EXEHDR__=0  Raw binary (no AppleSingle header)
 
-Result: SPACETRIP.BIN (~13 KB, starts at $4000)
+Result: SPACETRIP.BIN (~14 KB, starts at $4000)
 
 WHY START AT $4000?
 -------------------
@@ -275,8 +339,11 @@ Language Selection:
   [E] - English
 
 In-Game:
-  [SPACE] - Toggle text/graphics mode
-  [A-Z]   - Select choice (A=first, B=second, etc.)
+  [A-E]   - Select choice (A=first, B=second, etc.). A choice shown with
+            '-' instead of a letter is not takeable: you are missing (or
+            carrying) the object it tests.
+  [I]     - Your channel: the selfies and the gear you carry
+  [SPACE] - Toggle text/graphics mode (a page without image stays in text)
   [Q]     - Quit to ProDOS
 
 ===============================================================================
@@ -418,9 +485,24 @@ Check:
 CHOICES NOT DISPLAYING
 -----------------------
 Check:
-  - Choice lines start with "C " (C + space)
-  - Format: C <scene_id> <title>
+  - Choice lines start with "C ", "CI ", "CN " or "GU " (uppercase)
+  - A digit follows "C " immediately: "C 003 ...", never "C  ..."
+  - Format: C <scene_id> <title>, and the title is not empty
   - Lines under 80 characters
+  - For CI / CN / GU: the token exists in OBJFR / OBJEN. An unknown token
+    makes the whole choice disappear.
+
+A CHOICE SHOWS '-' INSTEAD OF ITS LETTER
+-----------------------------------------
+That is not a bug: the choice is displayed but not takeable. CI needs the
+token, CN needs its absence, GU needs the token and consumes it. Open [I] to
+see what you carry.
+
+THE PAGE JUMPS SOMEWHERE ELSE ON ITS OWN
+-----------------------------------------
+Its V line fired: you (or another page of the same place) have been here
+before. Check the ids listed on the V line -- they are the other pages of
+the same place, and any one of them being visited triggers the detour.
 
 CORRUPTED GRAPHICS
 -------------------
@@ -448,7 +530,7 @@ REQUIREMENTS
 
 ENGINE SIZE
 -----------
-- Binary: ~13 KB
+- Binary: ~14 KB
 - Memory footprint: $4000-$9FFF (~22 KB with scene loaded)
 - Free RAM: ~16 KB (for future RPG features)
 
@@ -504,6 +586,27 @@ See IMPROVEMENTS.TXT for planned RPG features.
 ===============================================================================
 VERSION HISTORY
 ===============================================================================
+
+Version 3.0 (2026) - "FORMAT DE PAGE SCOSWAMP"
+  - The page format of SCOSWAMP (BIBLE.md section 7): T, V, G, GX, C, CI,
+    CN, GU. The old "first line is the title" convention is gone; every page
+    now opens with a T line.
+  - Title bar: the page title in inverse video on row 0, with the key
+    reminder flush right. Text on rows 1..18, choices anchored to the bottom
+    rows 20..23, two short choices per line.
+  - Bag and flags: one named bit per line of the OBJFR / OBJEN catalog, read
+    once from the root of the volume. G grants, GX removes, CI requires,
+    CN forbids, GU requires and consumes. A choice that cannot be taken is
+    still displayed, with '-' instead of its letter.
+  - [I] opens "@COSMOSELFIE", the list of selfies and gear carried; tokens
+    starting with a dot are hidden flags and never show there.
+  - V line: a 1000-bit visited bitmap (125 bytes). If the current page, the
+    target, or any of the listed pages has been seen, the page is replaced
+    by <id> without displaying anything and without replaying its G lines.
+  - page.h: the format, the bag and the bitmap, with no call to conio, so
+    that test_parse.c can exercise them on the host machine.
+  - No sscanf anywhere: take_uint / take_word by hand. The first call into
+    the scanf family pulls kilobytes of format parser into the binary.
 
 Version 2.2 (2024) - "DATA-DRIVEN ARCHITECTURE"
   - MAJOR DOCUMENTATION UPDATE: Emphasizes data-driven philosophy

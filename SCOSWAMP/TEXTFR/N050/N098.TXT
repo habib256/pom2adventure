@@ -14,4 +14,4 @@ araignee des champs.
 
    Votre aventure est terminee.
 
-MU +MORT.MB
+MU +DEATH.MB

@@ -1,0 +1,18 @@
+{
+  "sha256": "cf12413164b38d4ab256cac6d546327c0eabf713e7b2d32e18b6005386df7de9",
+  "before": {
+    "bassin_observe": {
+      "passed": 0,
+      "failed": 1
+    }
+  },
+  "after": {
+    "bassin_observe": 11,
+    "musique_transitions": 4,
+    "auberges_solvabilite": 24,
+    "contrats_soins_or": 17
+  },
+  "failed_final": 0,
+  "emulator": "POM2 headless with Mockingboard",
+  "attribution": "adaptation data; original book not compared"
+}

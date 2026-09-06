@@ -1,6 +1,6 @@
 # Zone `victoire` — les deux fins heureuses, et les sept sorties vivantes
 
-**Fichier proposé : `VICTOIRE.MB` (`VICTOIRE.MB.BIN`, 315 octets, 39,2 s — *sans boucle*)**
+**Fichier proposé : `VICTORY.MB` (`VICTORY.MB.BIN`, 315 octets, 39,2 s — *sans boucle*)**
 
 ## Ce que la zone couvre
 
@@ -15,7 +15,7 @@ Le jeu n'a **pas de page finale unique** : il a une fin par employeur
 
 Les **sept fins vivantes non victorieuses** — 049 (vente de l'Anneau), 052
 (échec à la baie), 100, 141 (le repos du guerrier), 298 et 327 et 349 (les
-fuites de la tour) — ne prennent **pas** `VICTOIRE.MB`. Elles gardent la musique
+fuites de la tour) — ne prennent **pas** `VICTORY.MB`. Elles gardent la musique
 de leur zone, ou passent en silence par `MU -`. Une fanfare sur une fuite serait
 un contresens ; c'est le genre de détail que le validateur doit surveiller.
 
@@ -51,7 +51,7 @@ le moins souvent.
 
 ## Elle ne doit PAS boucler
 
-Comme `MORT.MB` : bit 0 des drapeaux à zéro dans l'en-tête MB1, et le lecteur
+Comme `DEATH.MB` : bit 0 des drapeaux à zéro dans l'en-tête MB1, et le lecteur
 s'arrête tout seul (`music.s`, branche `@stop` de la poignée `@end`). Voir
 `propositions/mort/README.md`.
 
@@ -60,7 +60,7 @@ s'arrête tout seul (`music.s`, branche `@stop` de la poignée `@end`). Voir
 ```sh
 python3 SCOSWAMP.MORE/MUSIC/midi_to_mb.py \
     SCOSWAMP.MORE/MUSIC/propositions/victoire/Old100.mid \
-    SCOSWAMP.MORE/MUSIC/propositions/victoire/VICTOIRE.MB.BIN \
+    SCOSWAMP.MORE/MUSIC/propositions/victoire/VICTORY.MB.BIN \
     --bpm 150 --vol 13,9,11 \
     --wav SCOSWAMP.MORE/MUSIC/propositions/victoire/VICTOIRE.wav
 ```

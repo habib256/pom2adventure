@@ -1,0 +1,17 @@
+T 078 L'evasion par le conduit
+V 079
+
+   "Enfin quelqu'un qui regarde", dit Barbastella.
+
+   On attend le gong. La cour applaudit un numero de filets. Vous soulevez la
+tenture pourpre, elle ouvre la trappe d'un coup de botte blanche, et le
+conduit a ordures descend vers les hangars en pente douce et grasse.
+
+   A mi-chemin, dans le noir, elle allume une torche, vous attrape par le col
+et met sa joue contre la votre : "Maintenant. On est bien eclaires."
+
+   L'Holophone crache un cliche parfait : deux visages, une torche, un tunnel
+de dechets imperiaux. Le plus beau de la galaxie.
+
+G S5
+C 003 Sortir par les hangars et retrouver le Cabriolet

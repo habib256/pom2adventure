@@ -9,6 +9,6 @@ de petits gemissements plaintifs.
 sortilege se dissipera bientot, et la Bete redeviendra alors aussi redoutable
 qu'avant.
 
-MU BETE.MB
+MU BEAST.MB
 C 176 La poursuivre et la combattre
 C 279 Faire demi-tour et quitter la clairiere

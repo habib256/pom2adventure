@@ -38,6 +38,13 @@
 > Backlog : [`TODO.md`](TODO.md). Ce qui n'est pas suivi par git et pourquoi :
 > [`.gitignore`](.gitignore).
 
+**Solutions SCOSWAMP (révélations)** : [les trois parcours gagnants](DOCS/PARCOURS-GAGNANTS.md),
+avec les pierres nécessaires, les embranchements, les variantes de fin et
+le niveau de validation dans POM2.
+
+**Code et mémoire SCOSWAMP** : [audit précis du binaire et optimisations](DOCS/AUDIT-MEMOIRE-SCOSWAMP.md),
+avec inventaire par fonction, allocations et expériences de compilation reproductibles.
+
 ---
 
 # Apple II - Moteurs de Jeu Pilotés par Données

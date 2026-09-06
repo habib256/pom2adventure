@@ -1,6 +1,6 @@
 # Clairière 6 — Le croisement (`hub` 121, case 2,1)
 
-**`CROISEMENT.MB.BIN` — 2 177 octets, 44,8 s, boucle.**
+**`CROSSROADS.MB.BIN` — 2 177 octets, 44,8 s, boucle.**
 
 ## Les pages
 
@@ -90,6 +90,6 @@ l'ostinato change, c'est la clairière qui tourne, pas la stéréo.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/06-croisement
 python3 croisement.py
-python3 ../../../midi_to_mb.py croisement.mid CROISEMENT.MB.BIN \
+python3 ../../../midi_to_mb.py croisement.mid CROSSROADS.MB.BIN \
     --bpm 150 --max 2304 --wav CROISEMENT.wav
 ```

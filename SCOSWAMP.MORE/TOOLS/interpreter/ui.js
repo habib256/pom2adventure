@@ -1,29 +1,41 @@
-/* ui.js -- l'ecran 80 colonnes, les images, et le banc d'essai autour.
+/* ui.js -- l'ecran de la machine a gauche, l'atelier a droite.
  *
- * La moitie gauche reproduit la mise en page de la machine : barre de titre
- * en video inverse, 18 lignes de recit, la ligne de lieu, et les 4 lignes que
- * le mode mixte laisse voir sous l'illustration. Les memes bornes que
- * scoswamp.c, parce qu'un texte qui deborde ICI debordera LA-BAS -- c'est la
- * premiere chose qu'un atelier doit montrer.
+ * La colonne de gauche N'EST PAS une mise en page web qui ressemble a
+ * l'Apple II : c'est une grille de 80 x 24 cellules, chacune avec son
+ * attribut de video inverse, peinte par les memes primitives que
+ * scoswamp.c -- render_title_bar(), render_place(), render_choices(),
+ * show_fighters(), put_gauge(), put_key(), put_roll(). Les barres, les
+ * jauges et les touches sont donc les memes, au caractere et a la colonne
+ * pres, y compris la ou le C s'arrete a la colonne 79 pour ne pas faire
+ * defiler l'ecran.
  *
- * La moitie droite est ce que la machine ne peut pas montrer : le master
- * avant conversion, le flux DHGR decode a cote pour comparaison, la Feuille
- * d'Aventure, le journal des directives de la page et sa source.
+ * Les ecrans modaux -- le sac, la carte, l'aide, la Feuille, les
+ * sauvegardes, le choix des Pierres -- sont eux aussi peints dans cette
+ * grille, comme sur la machine, et non en fenetres flottantes.
+ *
+ * La colonne de droite est ce que la machine ne peut pas montrer : le master
+ * avant conversion, le flux DHGR decode a cote, le journal des directives de
+ * la page et sa source.
  */
 
 import * as D from './data.js';
 import * as R from './rules.js';
-import { matchDirective } from './scene.js';
+import { matchDirective, choiceAvailable } from './scene.js';
 import { decodeToImageData, decodeRawHgr, paletteUsage } from './dhgr.js';
+import { Ecran } from './ecran.js';
 
-const COLS = 80;
-const pad = (s, n) => (s + ' '.repeat(n)).slice(0, n);
+/* La mise en page de la machine, en dur sur les 24 lignes -- les memes
+ * constantes que scoswamp.c. */
+const BODY_ROW0 = 1, PLACE_ROW = 19, CHOICE_ROW0 = 20, CHOICE_ROWN = 23;
+const CHOICE_COL2 = 40, CHOICE_WIDTH = 39;
+const BORD = 79;   /* pad_to(79) : la derniere cellule ne s'ecrit jamais */
 
 export class UI {
   constructor(root, proj) {
     this.proj = proj;
     this.root = root;
     this.el = {};
+    this.ecran = new Ecran(proj.moteur.colonnes || 80, proj.moteur.lignes || 24);
     this.resolveKey = null;
     this.variante = proj.images[0].id;
     this.onglet = 'journal';
@@ -46,8 +58,8 @@ export class UI {
     r(k);
   }
 
-  /* Le banc d'essai reprend la main : '\0' est la touche qui ne fait rien,
-   * et que chaque boucle du moteur sait reconnaitre pour abandonner. */
+  /* Le banc d'essai reprend la main : '\0' est la touche qui ne fait rien, et
+   * que chaque boucle du moteur sait reconnaitre pour abandonner. */
   resume() { this.press('\x00'); }
 
   onKeyDown(e) {
@@ -67,21 +79,21 @@ export class UI {
   build() {
     this.root.innerHTML = `
       <header class="barre">
-        <strong>${this.proj.titre}</strong>
+        <a href="?mode=images&jeu=${this.proj.id.toLowerCase()}">Atelier images ↗</a>
+        <strong>${echap(this.proj.titre)}</strong>
         <span class="sep"></span>
         <label>Langue <select id="langue"></select></label>
-        <label>Page <input id="goto" type="number" min="0" max="${this.proj.moteur.pageMax}" step="1" size="4"></label>
+        <label>Page <input id="goto" type="number" min="0" max="${this.proj.moteur.pageMax}" step="1"></label>
         <button id="allerA">Aller a</button>
-        <label>Graine <input id="graine" type="number" value="1" size="6"></label>
+        <label>Graine <input id="graine" type="number" value="1"></label>
         <button id="semer">Semer</button>
         <span class="sep"></span>
+        <span id="source" class="etat"></span>
         <span id="etat" class="etat"></span>
       </header>
       <main>
         <section class="gauche">
           <div id="ecran" class="ecran"></div>
-          <div id="zoneBasse" class="zoneBasse"></div>
-          <div id="touches" class="touches"></div>
         </section>
         <section class="droite">
           <div class="cartouche">
@@ -106,15 +118,13 @@ export class UI {
             <div id="panneau" class="panneau"></div>
           </div>
         </section>
-      </main>
-      <div id="modale" class="modale" hidden></div>`;
+      </main>`;
 
     const $ = (id) => this.root.querySelector('#' + id);
     this.el = {
-      ecran: $('ecran'), zoneBasse: $('zoneBasse'), touches: $('touches'),
-      toile: $('toile'), photo: $('photo'), imageVide: $('imageVide'),
+      ecran: $('ecran'), toile: $('toile'), photo: $('photo'), imageVide: $('imageVide'),
       imageEtat: $('imageEtat'), variante: $('variante'), feuille: $('feuille'),
-      panneau: $('panneau'), modale: $('modale'), etat: $('etat'),
+      panneau: $('panneau'), etat: $('etat'), source: $('source'),
       goto: $('goto'), graine: $('graine'), langue: $('langue'),
     };
 
@@ -143,147 +153,395 @@ export class UI {
       this.majEtat('graine posee');
     };
     this.root.querySelectorAll('[data-onglet]').forEach((b) => {
-      b.onclick = () => { this.onglet = b.dataset.onglet; this.render(); };
+      b.onclick = () => { this.onglet = b.dataset.onglet; this.renderPanneau(); };
     });
+    /* Toute cellule qui porte une touche est cliquable : les lettres des
+     * choix, les touches de l'invite, les emplacements de sauvegarde. */
+    this.el.ecran.onclick = (e) => {
+      const z = e.target.closest('[data-clic]');
+      if (z) this.press(z.dataset.clic);
+    };
   }
 
   majEtat(t) { this.el.etat.textContent = t; }
 
-  /* ── L'ecran de la machine ──────────────────────────────────────────── */
-
-  /* Barre de titre : le titre de la page a gauche, le rappel des touches
-   * derriere, la Feuille d'Aventure calee a droite -- render_title_bar(). */
-  barreTitre() {
+  /* D'ou viennent les octets de cette page-la. Sur le volume, on dit aussi si
+   * le depot a bouge depuis l'empaquetage : une page editee mais non
+   * empaquetee n'est pas celle que la machine lira. */
+  renderSource() {
+    const s = D.etatSource();
     const app = this.app;
-    let l = ' '.repeat(COLS).split('');
-    const mets = (i, s) => { for (let k = 0; k < s.length && i + k < COLS; k++) l[i + k] = s[k]; };
-    if (app.title) {
-      const t = app.title.slice(0, 40);
-      mets(1, t);
-      if (app.heroReady) mets(t.length + 3, app.lang === 'FR' ? 'I:SAC M:CARTE H:AIDE' : 'I:BAG M:MAP   H:HELP');
+    if (s.type !== 'volume') {
+      this.el.source.textContent = 'arborescence du depot';
+      this.el.source.className = 'etat';
+      return;
     }
-    if (app.heroReady) {
-      const h = app.hero;
-      const f = app.lang === 'FR'
-        ? `HAB ${h.hab}/${h.hab0}  END ${h.end}/${h.end0}  CHA ${h.cha}/${h.cha0}`
-        : `SKL ${h.hab}/${h.hab0}  STA ${h.end}/${h.end0}  LCK ${h.cha}/${h.cha0}`;
-      mets(COLS - 1 - f.length, f);
-    } else {
-      const hint = app.msg('M_TOUCHES');
-      mets(COLS - 1 - hint.length, hint);
-    }
-    return l.join('');
+    const accord = { identique: 'volume = depot',
+                     different: 'le depot a change depuis l\'empaquetage',
+                     absent: 'page absente du volume' }[app.pageVolume] || '';
+    this.el.source.textContent = `volume ${s.nom} (${s.fichiers} fichiers)`
+      + (accord ? ` -- ${accord}` : '')
+      + (s.horsVolume.length ? ` -- ${s.horsVolume.length} hors volume` : '');
+    this.el.source.className = 'etat' + (app.pageVolume === 'different' ? ' alerte' : '');
+    this.el.source.title = s.horsVolume.length
+      ? 'lus dans l\'arborescence :\n' + s.horsVolume.join('\n') : '';
   }
 
-  /* La ligne de lieu -- render_place(). Quand la page n'est d'aucun lieu, la
-   * clairiere collante s'affiche entre parentheses : c'est un souvenir, pas
-   * une position. */
-  barreLieu() {
-    const app = this.app;
-    if (!app.carte || app.mapHere < 0) return null;
-    const bloc = app.carte.langue[app.lang] || app.carte.langue.FR;
-    const nom = bloc.noms[app.mapHere];
-    if (D.clairiereDePage(app.carte, app.currentScene) !== app.mapHere) return ` (${nom})`;
-    const dirs = bloc.chaines[D.MS.DIRS] || 'NSEO';
-    const m = app.carte.clr[app.mapHere].out;
-    let s = ` ${nom}   ${bloc.chaines[D.MS.LIEU]} `;
-    for (let d = 0; d < 4; d++) if (m & (1 << d)) s += dirs[d] + ' ';
-    if (R.sceneVisited(app.mem, app.currentScene) && this.clairiereVue(app.mapHere)) s += `  ${bloc.chaines[D.MS.DEJA]}`;
-    return s;
-  }
-
-  clairiereVue(i) {
-    const app = this.app;
-    return app.carte.pages.some((p) => p.clr === i && R.sceneVisited(app.mem, p.page));
-  }
+  /* ── L'ecran ────────────────────────────────────────────────────────── */
 
   render() {
     const app = this.app;
     if (!app) return;
-    const m = this.proj.moteur;
-    const lignes = [];
-    lignes.push({ t: this.barreTitre(), inv: true });
-    for (let i = 0; i < m.lignesTexte; i++) lignes.push({ t: app.body[i] || '' });
-    const lieu = this.barreLieu();
-    lignes.push(lieu === null ? { t: '' } : { t: pad(lieu, COLS - 1), inv: true });
-
-    this.el.ecran.innerHTML = lignes
-      .map((l) => `<div class="ligne${l.inv ? ' inv' : ''}">${esc(pad(l.t, COLS))}</div>`)
-      .join('');
-
-    this.renderZoneBasse();
+    this.el.langue.value = app.lang;
+    const e = this.ecran;
+    e.effacer();
+    if (app.modal) this.dessineModale(e);
+    else this.dessinePage(e);
+    this.el.ecran.innerHTML = e.html();
+    this.renderSource();
     this.renderFeuille();
     this.renderPanneau();
-    this.renderModale();
     this.showImage();
     this.el.goto.value = app.currentScene;
   }
 
-  /* Les 4 lignes du bas : le combat, un message du moteur, ou les choix. */
-  renderZoneBasse() {
+  /* render_title_bar : le titre a gauche, le rappel des touches derriere, la
+   * Feuille d'Aventure calee a droite, le tout en video inverse sur les 80
+   * colonnes. */
+  barreTitre(e) {
     const app = this.app;
-    const z = this.el.zoneBasse;
-    z.innerHTML = '';
-    const touches = [];
-
-    if (app.combat) {
-      const c = app.combat, f = c.foe;
-      z.append(el('div', 'ligne combat', [
-        el('span', 'moi', [txt(`${app.msg('M_VOUS')}  END ${app.hero.end}/${app.hero.end0} `), jauge(app.hero.end, app.hero.end0)]),
-        el('span', 'lui', [txt(`${f.name}  HAB ${f.hab}  END ${f.end}/${f.end0} `), jauge(f.end, f.end0)]),
-      ]));
-      for (const l of c.lignes || []) z.append(el('div', 'ligne', [txt(l)]));
-      if (c.verdict) z.append(el('div', 'ligne verdict', [txt(c.verdict)]));
-      if (c.premier) touches.push(['ESPACE', app.msg('M_K_ENGAGER'), ' '], ['I', app.msg('M_K_SAC'), 'I']);
-      else touches.push(['ESPACE', c.pending ? app.msg(c.hits ? 'M_K_FRAPPER' : 'M_K_ENCAISSER') : app.msg('M_K_SUIVANT'), ' ']);
-      if (c.fuite) touches.push(['F', app.msg('M_K_FUIR'), 'F']);
-      if (c.enjeu) touches.push(['C', app.msg('M_K_ENJEU', c.enjeu.cha, c.enjeu.bon, c.enjeu.mauvais), 'C']);
-    } else if (app.bottom.some((l) => l)) {
-      for (const l of app.bottom) z.append(el('div', 'ligne', [txt(l)]));
-      touches.push(['ESPACE', app.hint || app.msg('M_K_CONTINUER'), ' ']);
-    } else {
-      /* Les choix, avec la regle de pairage de render_choices : deux par
-       * ligne quand les deux tiennent dans une demi-largeur. */
-      const cs = app.choices;
-      const tient = (i) => i + 1 < cs.length && cs[i].title.length <= 36 && cs[i + 1].title.length <= 36;
-      for (let i = 0; i < cs.length;) {
-        const ligne = el('div', 'ligne choix', []);
-        ligne.append(this.boutonChoix(i));
-        if (tient(i)) { ligne.append(this.boutonChoix(i + 1)); i += 2; } else i += 1;
-        z.append(ligne);
+    e.padTo(0, 0, e.cols, { inv: true });
+    if (app.title) {
+      const t = app.title.slice(0, 40);
+      e.put(1, 0, t, { inv: true });
+      if (app.heroReady) {
+        e.put(t.length + 3, 0,
+          app.lang === 'FR' ? 'I:SAC M:CARTE H:AIDE' : 'I:BAG M:MAP   H:HELP', { inv: true });
       }
-      if (!cs.length && app.hint) z.append(el('div', 'ligne', [txt(app.hint)]));
-      if (app.heroReady) touches.push(['I', app.msg('M_K_SAC'), 'I'], ['M', 'carte', 'M'], ['H', 'aide', 'H'],
-                                      ['S', 'sauver', 'S'], ['L', 'charger', 'L']);
-      if (!cs.length) touches.push(['R', 'recommencer', 'R']);
     }
-
-    this.el.touches.innerHTML = '';
-    for (const [k, label, key] of touches) {
-      const b = el('button', 'touche', [el('kbd', '', [txt(k)]), txt(' ' + label)]);
-      b.onclick = () => this.press(key);
-      this.el.touches.append(b);
-    }
+    const h = app.hero;
+    const droite = app.heroReady
+      ? (app.lang === 'FR'
+          ? `HAB ${h.hab}/${h.hab0}  END ${h.end}/${h.end0}  CHA ${h.cha}/${h.cha0}`
+          : `SKL ${h.hab}/${h.hab0}  STA ${h.end}/${h.end0}  LCK ${h.cha}/${h.cha0}`)
+      : app.msg('M_TOUCHES');
+    e.put(BORD - droite.length, 0, droite, { inv: true });
   }
 
-  boutonChoix(i) {
-    const app = this.app, c = app.choices[i];
-    const libre = choixDispo(app, c);
-    const b = el('button', 'choixBouton' + (libre ? '' : ' bloque'), [
-      el('span', 'tag', [txt((libre ? String.fromCharCode(65 + i) : '-') + ')')]),
-      txt(' ' + c.title),
-      el('span', 'cible', [txt(String(c.scene).padStart(3, '0'))]),
-    ]);
-    b.onclick = () => this.press(String.fromCharCode(65 + i));
-    b.title = detailChoix(app, c);
-    return b;
+  /* render_place : ou l'on est et par ou l'on peut partir, en video inverse
+   * juste au-dessus des quatre lignes du mode mixte. Quand la page n'est
+   * d'aucun lieu, la clairiere collante s'affiche entre parentheses : c'est
+   * un souvenir, pas une position. */
+  barreLieu(e) {
+    const app = this.app;
+    if (!app.carte || app.mapHere < 0) return;
+    const bloc = app.carte.langue[app.lang] || app.carte.langue.FR;
+    const nom = bloc.noms[app.mapHere];
+    let x = e.put(0, PLACE_ROW, ' ', { inv: true });
+    if (D.clairiereDePage(app.carte, app.currentScene) !== app.mapHere) {
+      x = e.put(x, PLACE_ROW, `(${nom})`, { inv: true });
+    } else {
+      const dirs = bloc.chaines[D.MS.DIRS] || 'NSEO';
+      const m = app.carte.clr[app.mapHere].out;
+      x = e.put(x, PLACE_ROW, `${nom}   ${bloc.chaines[D.MS.LIEU]} `, { inv: true });
+      for (let d = 0; d < 4; d++) if (m & (1 << d)) x = e.put(x, PLACE_ROW, dirs[d] + ' ', { inv: true });
+      if (app.lieuDejaVu) x = e.put(x, PLACE_ROW, `  ${bloc.chaines[D.MS.DEJA]}`, { inv: true });
+    }
+    e.padTo(x, PLACE_ROW, BORD, { inv: true });
+  }
+
+  dessinePage(e) {
+    const app = this.app;
+    this.barreTitre(e);
+    for (let i = 0; i < app.body.length; i++) e.put(0, BODY_ROW0 + i, app.body[i]);
+    this.barreLieu(e);
+    if (app.combat) this.dessineCombat(e);
+    else if (app.bottom.some((l) => l)) this.dessineMessages(e);
+    else this.dessineChoix(e);
+  }
+
+  /* Les quatre lignes du bas quand le moteur parle : un de, un jet de
+   * Chance, un refus. print_at() ecrit le texte puis comble jusqu'au bord. */
+  dessineMessages(e) {
+    const app = this.app;
+    for (let i = 0; i < 4; i++) {
+      const t = app.bottom[i] || '';
+      if (i === 3) break;
+      e.padTo(e.put(0, CHOICE_ROW0 + i, t), CHOICE_ROW0 + i, BORD);
+    }
+    e.put(0, CHOICE_ROWN, app.hint || app.msg('M_ESPACE_CONTINUER'), { clic: ' ' });
+  }
+
+  /* render_choices : deux choix par ligne quand les deux tiennent dans une
+   * demi-largeur, sinon un seul sur toute la ligne -- c'est ce qui fait
+   * entrer cinq choix dans quatre lignes. Ils se calent en BAS, le vide
+   * reste au-dessus, contre le texte. Un choix qui exige une Pierre absente
+   * du sac se voit mais ne porte pas de lettre. */
+  dessineChoix(e) {
+    const app = this.app;
+    const cs = app.choices;
+    const paire = (i) => i + 1 < cs.length
+      && cs[i].title.length <= CHOICE_WIDTH - 3
+      && cs[i + 1].title.length <= CHOICE_WIDTH - 3;
+
+    let lignes = 0;
+    for (let i = 0; i < cs.length; i += paire(i) ? 2 : 1) lignes++;
+    if (lignes > CHOICE_ROWN - CHOICE_ROW0 + 1) lignes = CHOICE_ROWN - CHOICE_ROW0 + 1;
+    let row = CHOICE_ROWN + 1 - lignes;
+
+    let i = 0;
+    while (i < cs.length && row <= CHOICE_ROWN) {
+      if (paire(i)) {
+        this.unChoix(e, 0, row, i);
+        this.unChoix(e, CHOICE_COL2, row, i + 1);
+        i += 2;
+      } else {
+        this.unChoix(e, 0, row, i, 75);
+        i += 1;
+      }
+      row++;
+    }
+    if (!cs.length && app.hint) e.put(0, CHOICE_ROWN, app.hint, { clic: 'R' });
+  }
+
+  unChoix(e, x, row, i, large) {
+    const c = this.app.choices[i];
+    const libre = choiceAvailable(this.app, c);
+    const lettre = libre ? String.fromCharCode(65 + i) : '-';
+    const clic = libre ? String.fromCharCode(65 + i) : null;
+    x = e.put(x, row, `${lettre}) `, { clic });
+    e.put(x, row, large ? c.title.slice(0, large) : c.title, { clic });
+  }
+
+  /* show_fighters + put_roll + put_verdict + l'invite : les quatre lignes du
+   * bas pendant un combat, aux memes colonnes que sur la machine. */
+  dessineCombat(e) {
+    const app = this.app, c = app.combat, f = c.foe;
+    const fr = app.lang === 'FR';
+    if (f) {
+      /* "VOUS" tient en quatre lettres, l'adversaire pas : la colonne de
+       * droite commence a 33 plutot qu'a la moitie de l'ecran. */
+      let x = e.combattant(0, CHOICE_ROW0, app.msg('M_VOUS'), 12,
+                           app.hero.hab, app.hero.end, app.hero.end0, fr ? 'HAB' : 'SKL');
+      x = e.padTo(x, CHOICE_ROW0, 33);
+      x = e.combattant(x, CHOICE_ROW0, f.name, c.rang ? 16 : 19,
+                       f.hab, f.end, f.end0, fr ? 'HAB' : 'SKL');
+      if (c.rang) x = e.put(x, CHOICE_ROW0, ` ${c.rang}`);
+      e.padTo(x, CHOICE_ROW0, BORD);
+    }
+    if (c.message) e.padTo(e.put(0, CHOICE_ROW0, c.message), CHOICE_ROW0, BORD);
+    if (c.jet) {
+      const r = c.jet;
+      e.put(0, CHOICE_ROW0 + 1, app.msg('M_ASSAUT_N', c.assaut));
+      e.put(11, CHOICE_ROW0 + 1,
+        `${app.msg('M_JET_VOUS')} ${r.heroD1} + ${r.heroD2} + ${r.heroForce - r.heroD1 - r.heroD2} = ${r.heroForce}`);
+      e.put(11, CHOICE_ROW0 + 2,
+        `${app.msg('M_JET_LUI')} ${r.monsterD1} + ${r.monsterD2} + ${r.monsterForce - r.monsterD1 - r.monsterD2} = ${r.monsterForce}`);
+    }
+    /* Le verdict s'ecrit A COTE du jet de la creature, pas par-dessus : les
+     * deux lignes de des restent lisibles pendant que le coup porte. */
+    if (c.verdict) e.padTo(e.put(40, CHOICE_ROW0 + 2, c.verdict), CHOICE_ROW0 + 2, BORD);
+
+    let x = 0;
+    const espace = fr ? 'ESPACE' : 'SPACE';
+    if (c.fuiteEnCours) {
+      x = e.touche(x, CHOICE_ROWN, espace, app.msg('M_K_ENCAISSER'), ' ');
+      x = e.touche(x, CHOICE_ROWN, 'C', app.msg('M_K_CHANCE'), 'C');
+    } else {
+      x = e.touche(x, CHOICE_ROWN, espace,
+        app.msg(c.premier ? 'M_K_ENGAGER'
+          : (!c.pending ? 'M_K_SUIVANT' : (c.hits ? 'M_K_FRAPPER' : 'M_K_ENCAISSER'))), ' ');
+      if (c.premier) x = e.touche(x, CHOICE_ROWN, 'I', app.msg('M_K_SAC'), 'I');
+      if (c.fuite) x = e.touche(x, CHOICE_ROWN, 'F', app.msg('M_K_FUIR'), 'F');
+      /* L'enjeu, et pas seulement la touche : le joueur pariait a l'aveugle
+       * un point de CHANCE contre une blessure dont il ignorait les issues. */
+      if (c.enjeu) {
+        x = e.tag(x, CHOICE_ROWN, 'C', 'C');
+        x = e.put(x, CHOICE_ROWN, app.msg('M_K_ENJEU', c.enjeu.cha, c.enjeu.bon, c.enjeu.mauvais), { clic: 'C' });
+      }
+    }
+    e.padTo(x, CHOICE_ROWN, BORD);
+  }
+
+  /* ── Les ecrans modaux, peints dans la meme grille ───────────────────── */
+
+  dessineModale(e) {
+    const app = this.app, m = app.modal;
+    const f = {
+      sac: () => this.ecranSac(e, m),
+      pierres: () => this.ecranPierres(e, m),
+      carte: () => this.ecranCarte(e),
+      aide: () => this.ecranAide(e),
+      feuille: () => this.ecranFeuille(e),
+      mort: () => this.ecranMort(e),
+      sauvegardes: () => this.ecranSauvegardes(e, m),
+    }[m.type];
+    if (f) f();
+  }
+
+  /* show_inventory : les Pierres a gauche, les objets et les amulettes a
+   * partir de la colonne 40, l'invite ligne 22. */
+  ecranSac(e, m) {
+    const app = this.app;
+    this.barreTitre(e);
+    e.put(0, 2, app.msg('M_SAC_A_DOS', app.hero.gold));
+    m.shown.forEach((s, i) => {
+      const lettre = String.fromCharCode(65 + i);
+      const n = String(app.hero.stones[s]).padStart(2);
+      const nom = R.stoneName(s, app.english).padEnd(12);
+      const interdit = R.stoneUsable(s, m.inCombat) ? '' : app.msg('M_INTERDITE_EN_PLEIN');
+      e.put(0, 4 + i, `${lettre}) ${n}  ${nom}  ${'NBM'['NBM'.indexOf(R.stoneKind(s))]}${interdit}`,
+            { clic: lettre });
+    });
+    let row = 4;
+    for (let i = 0; i < R.cat.hidden0; i++)
+      if (R.hasObject(app.hero, i)) e.put(40, row++, `- ${R.objectName(i)}`);
+    for (let i = 0; i < R.AMULET_COUNT(); i++)
+      if (R.hasAmulet(app.hero, i)) e.put(40, row++, `- ${R.amuletName(i, app.english)}`);
+    if (!m.shown.length) e.put(0, 4, app.msg('M_AUCUNE_PIERRE_MAGIQUE'));
+    e.put(0, 22, m.note || app.msg('M_UNE_PIERRE_SE'));
+    if (m.note) e.put(0, 23, app.msg('M_ESPACE_CONTINUER'), { clic: ' ' });
+    else e.put(0, 23, 'ESC / I', { inv: true, clic: 'I' });
+  }
+
+  /* choose_stones : la liste ne bouge pas d'un choix a l'autre, seul le
+   * compteur change -- tout repeindre a chaque prise faisait clignoter
+   * l'ecran neuf fois de suite pour six Pierres. */
+  ecranPierres(e, m) {
+    const app = this.app;
+    this.barreTitre(e);
+    m.allowed.forEach((s, i) => {
+      const lettre = String.fromCharCode(65 + i);
+      e.put(0, 4 + i, `${lettre}) ${R.stoneName(s, app.english).padEnd(12)} ${R.stoneKind(s)}`,
+            { clic: lettre });
+    });
+    e.put(0, CHOICE_ROW0, app.msg('M_CHOISISSEZ_PIERRES', m.reste));
+    e.put(0, CHOICE_ROW0 + 1, app.msg('M_PRENDRE_UNE_PIERRE'));
+  }
+
+  ecranAide(e) {
+    const app = this.app;
+    this.barreTitre(e);
+    (app.aide || '').split(/\r?\n/).forEach((l, i) => { if (i < CHOICE_ROW0 - 2) e.put(0, 2 + i, l); });
+    e.put(0, CHOICE_ROWN, app.msg('M_ESPACE_CONTINUER'), { clic: ' ' });
+  }
+
+  ecranFeuille(e) {
+    const app = this.app, c = app.hero;
+    this.barreTitre(e);
+    e.put(0, 3, app.msg('M_FEUILLE_D_AVENTURE'));
+    e.put(0, 5, app.msg('M_HABILETE_DE', c.hab));
+    e.put(0, 6, app.msg('M_ENDURANCE_DES', c.end));
+    e.put(0, 7, app.msg('M_CHANCE_DE', c.cha));
+    e.put(0, 9, app.msg('M_UNE_EPEE_UNE', c.gold));
+    e.put(0, 10, app.msg('M_AUCUN_DE_CES'));
+    e.put(0, 13, app.msg('M_ESPACE_ENTRER_DANS'), { clic: ' ' });
+  }
+
+  ecranMort(e) {
+    const app = this.app;
+    e.put(0, 6, app.msg('M_VOTRE_ENDURANCE_EST'));
+    e.put(0, 8, app.msg('M_MORT_RECOMMENCER'), { clic: 'R' });
+  }
+
+  ecranSauvegardes(e, m) {
+    const app = this.app;
+    this.barreTitre(e);
+    e.put(0, 2, app.msg(m.saving ? 'M_SAUVEGARDES' : 'M_CHARGEMENTS'));
+    m.slots.forEach((s, i) => {
+      e.put(2, 4 + i, `${i}) ${s ? `${s.date} -- p.${String(s.scene).padStart(3, '0')} ${s.titre}` : app.msg('M_VIDE')}`,
+            { clic: String(i) });
+    });
+    e.put(0, CHOICE_ROWN, app.msg('M_ESPACE_CONTINUER'), { clic: '\x1b' });
+  }
+
+  /* show_map : la grille 6 x 9, les sentiers d'abord, les cases par-dessus,
+   * et rien qui n'ait ete vu. Un sentier n'est dessine que depuis une
+   * clairiere VUE, et il finit par '?' quand l'autre bout est inconnu --
+   * c'est le « rayon termine par ? » du plan-modele du livre. */
+  ecranCarte(e) {
+    const app = this.app, carte = app.carte;
+    const bloc = carte.langue[app.lang] || carte.langue.FR;
+    const COL = [2, 8, 14, 20, 26, 32], ROW = [2, 4, 6, 8, 10, 12, 14, 16, 18];
+    const DC = [0, 0, 1, -1], DR = [-1, 1, 0, 0], SC = [1, 1, 4, -1];
+    const vu = carte.clr.map((_, i) => this.clairiereVue(i));
+    const nVus = vu.filter(Boolean).length;
+
+    let x = e.put(0, 0, ' ', { inv: true });
+    x = e.put(x, 0, `${bloc.chaines[D.MS.TITRE]} -- ${nVus} ${bloc.chaines[D.MS.SUR35]}`, { inv: true });
+    e.padTo(x, 0, BORD, { inv: true });
+    e.put(BORD, 0, ' ', { inv: true });
+
+    for (let i = 0; i < 6; i++) e.put(COL[i] + 1, 1, String(i));
+    for (let i = 0; i < 9; i++) e.put(0, ROW[i], String(i));
+
+    carte.clr.forEach((cl, i) => {
+      if (!vu[i]) return;
+      const r = ROW[cl.y], c = COL[cl.x];
+      if (cl.out & 0x10) e.put(c + 1, r + 1, 'v');
+      for (let d = 0; d < 4; d++) {
+        if (!(cl.out & (1 << d))) continue;
+        const j = D.voisin(carte, i, d);
+        if (j < 0) continue;
+        let n = 2;
+        if (vu[j]) n = d < 2 ? Math.abs(ROW[carte.clr[j].y] - r) - 1
+                             : Math.abs(COL[carte.clr[j].x] - c) - 4;
+        let cc = c + SC[d], rr = r + DR[d];
+        const glyphe = DC[d] ? '-' : '|';
+        for (let k = n; k > 0; k--) {
+          e.put(cc, rr, k > 1 || vu[j] ? glyphe : '?');
+          cc += DC[d]; rr += DR[d];
+        }
+      }
+    });
+    /* Le livre veut le NUMERO DE LA CLAIRIERE sur chaque cercle ; quatre
+     * lieux n'en ont pas dans la prose, ils portent un point d'interrogation.
+     * Celle ou l'on se tient passe en video inverse. */
+    carte.clr.forEach((cl, i) => {
+      if (!vu[i]) return;
+      const ici = i === app.mapHere;
+      const t = (ici ? '<' : '(') + (cl.num ? String(cl.num).padStart(2) : ' ?') + (ici ? '>' : ')');
+      e.put(COL[cl.x], ROW[cl.y], t, { inv: ici });
+    });
+
+    const dirs = bloc.chaines[D.MS.DIRS] || 'NSEO';
+    let row = 2;
+    if (app.mapHere >= 0) {
+      const cl = carte.clr[app.mapHere];
+      e.put(38, row++, (cl.num ? `N ${cl.num}  ` : '') + bloc.noms[app.mapHere]);
+      e.put(38, row++, bloc.chaines[D.MS.SORTIES]);
+      for (let d = 0; d < 4; d++) {
+        if (!(cl.out & (1 << d))) continue;
+        const j = D.voisin(carte, app.mapHere, d);
+        const connu = j >= 0 && vu[j];
+        e.put(38, row++, `  ${dirs[d]}  ${(connu ? bloc.noms[j] : '?').padEnd(12)}  ${bloc.chaines[connu ? D.MS.VUE : D.MS.INCONNUE]}`);
+      }
+      if (cl.out & 0x10) e.put(38, row++, `  v  ${''.padEnd(12)}  ${bloc.chaines[D.MS.HORS]}`);
+    }
+    e.put(38, 11, bloc.chaines[D.MS.LEGENDE]);
+    for (let i = 0; i < 5; i++) e.put(40, 12 + i, bloc.chaines[D.MS.LEG1 + i]);
+    e.put(38, 18, `${nVus} ${bloc.chaines[D.MS.SUR35]}`);
+    e.put(0, CHOICE_ROWN, bloc.chaines[D.MS.TOUCHES], { clic: 'M' });
+  }
+
+  /* Le brouillard de guerre, deduit du seul bitmap des pages visitees : une
+   * clairiere est vue des qu'UNE de ses pages l'est. */
+  clairiereVue(i) {
+    const app = this.app;
+    return app.carte.pages.some((p) => p.clr === i && R.sceneVisited(app.mem, p.page));
   }
 
   /* ── Les panneaux de droite ─────────────────────────────────────────── */
 
   renderFeuille() {
     const app = this.app;
-    if (!app.heroReady) { this.el.feuille.innerHTML = '<div class="titre">Feuille d\'Aventure</div><div class="vide">les des ne sont pas encore jetes</div>'; return; }
+    /* Un jeu sans Feuille d'Aventure (SPACETRIP) n'a rien a montrer ici : le
+     * cartouche disparait au lieu d'annoncer des des qui ne tomberont jamais. */
+    if (this.proj.moteur.feuille === false) { this.el.feuille.hidden = true; return; }
+    if (!app.heroReady) {
+      this.el.feuille.innerHTML = '<div class="titre">Feuille d\'Aventure</div><div class="vide">les des ne sont pas encore jetes</div>';
+      return;
+    }
     const h = app.hero;
     const l = (nom, v, v0) => `<div class="carac"><span>${nom}</span><b>${v}</b><i>/${v0}</i><span class="barre2"><span style="width:${v0 ? (100 * v) / v0 : 0}%"></span></span></div>`;
     this.el.feuille.innerHTML = `<div class="titre">Feuille d'Aventure</div>
@@ -298,18 +556,18 @@ export class UI {
 
     if (this.onglet === 'journal') {
       p.innerHTML = app.trace.length
-        ? app.trace.map((t) => `<div class="trace"><code>${esc(t.jeton)}</code><span class="ligne2">${esc(t.ligne)}</span><em>${esc(t.note || '')}</em></div>`).join('')
+        ? app.trace.map((t) => `<div class="trace"><code>${echap(t.jeton)}</code><span class="ligne2">${echap(t.ligne)}</span><em>${echap(t.note || '')}</em></div>`).join('')
         : '<div class="vide">aucune directive sur cette page</div>';
     } else if (this.onglet === 'source') {
       p.innerHTML = `<pre class="source">${(app.source || '').split('\n').map((l) => {
         const d = matchDirective(this.proj, l);
-        return d ? `<span class="dir" title="${esc(d.aide || '')}">${esc(l)}</span>` : esc(l);
+        return d ? `<span class="dir" title="${echap(d.aide || '')}">${echap(l)}</span>` : echap(l);
       }).join('\n')}</pre>`;
     } else if (this.onglet === 'sac') {
       p.innerHTML = this.htmlSac();
     } else {
       p.innerHTML = `<table class="dirs"><tr><th>jeton<th>3e<th>entree<th>role</tr>${
-        this.proj.directives.map((d) => `<tr><td><code>${d.jeton}</code><td>${d.troisieme === ' ' ? '␣' : d.troisieme}<td>${d.effetEntree ? 'oui' : ''}<td>${esc(d.aide || '')}</tr>`).join('')}</table>`;
+        this.proj.directives.map((d) => `<tr><td><code>${d.jeton}</code><td>${d.troisieme === ' ' ? '␣' : d.troisieme}<td>${d.effetEntree ? 'oui' : ''}<td>${echap(d.aide || '')}</tr>`).join('')}</table>`;
     }
   }
 
@@ -318,116 +576,14 @@ export class UI {
     if (!app.heroReady) return '<div class="vide">pas de heros</div>';
     const h = app.hero;
     const pierres = h.stones.map((n, s) => (n ? `<li>${n} &times; ${R.stoneName(s, app.english)} <em>${R.stoneKind(s)}</em></li>` : '')).join('');
-    const objets = R.cat.objets.map((o, i) => (i < R.cat.hidden0 && R.hasObject(h, i) ? `<li>${esc(o.libelle)}</li>` : '')).join('');
-    const drapeaux = R.cat.objets.map((o, i) => (i >= R.cat.hidden0 && R.hasObject(h, i) ? `<li><code>${esc(o.cle)}</code></li>` : '')).join('');
-    const amulettes = this.proj.amulettes.map((a, i) => (R.hasAmulet(h, i) ? `<li>${esc(app.english ? a.en : a.fr)}</li>` : '')).join('');
+    const objets = R.cat.objets.map((o, i) => (i < R.cat.hidden0 && R.hasObject(h, i) ? `<li>${echap(o.libelle)}</li>` : '')).join('');
+    const drapeaux = R.cat.objets.map((o, i) => (i >= R.cat.hidden0 && R.hasObject(h, i) ? `<li><code>${echap(o.cle)}</code></li>` : '')).join('');
+    const amulettes = this.proj.amulettes.map((a, i) => (R.hasAmulet(h, i) ? `<li>${echap(app.english ? a.en : a.fr)}</li>` : '')).join('');
     return `<div class="colonnes">
       <div><h4>Pierres</h4><ul>${pierres || '<li class="vide">aucune</li>'}</ul></div>
       <div><h4>Objets</h4><ul>${objets || '<li class="vide">aucun</li>'}</ul>
            <h4>Amulettes</h4><ul>${amulettes || '<li class="vide">aucune</li>'}</ul>
            <h4>Drapeaux</h4><ul>${drapeaux || '<li class="vide">aucun</li>'}</ul></div></div>`;
-  }
-
-  /* ── Les ecrans modaux ──────────────────────────────────────────────── */
-
-  renderModale() {
-    const app = this.app, m = app.modal, d = this.el.modale;
-    if (!m) { d.hidden = true; d.innerHTML = ''; return; }
-    d.hidden = false;
-    let h = '';
-    if (m.type === 'pierres') {
-      h = `<h3>${app.msg('M_CHOISISSEZ_PIERRES', m.reste)}</h3><ul class="liste">` +
-        m.allowed.map((s, i) => `<li data-k="${String.fromCharCode(65 + i)}"><kbd>${String.fromCharCode(65 + i)}</kbd> ${R.stoneName(s, app.english)} <em>${R.stoneKind(s)}</em></li>`).join('') + '</ul>';
-    } else if (m.type === 'sac') {
-      h = `<h3>${app.msg('M_SAC_A_DOS', app.hero.gold)}</h3><ul class="liste">` +
-        m.shown.map((s, i) => `<li data-k="${String.fromCharCode(65 + i)}"><kbd>${String.fromCharCode(65 + i)}</kbd> ${app.hero.stones[s]} &times; ${R.stoneName(s, app.english)}` +
-          `${R.stoneUsable(s, m.inCombat) ? '' : ' <em>' + app.msg('M_INTERDITE_EN_PLEIN') + '</em>'}</li>`).join('') +
-        '</ul>' + this.htmlSac() + `<p class="note">${esc(m.note || app.msg('M_UNE_PIERRE_SE'))}</p>`;
-    } else if (m.type === 'carte') {
-      h = `<pre class="carte">${esc(this.dessinCarte())}</pre>`;
-    } else if (m.type === 'aide') {
-      h = `<pre>${esc(app.aide || '')}</pre>`;
-    } else if (m.type === 'feuille') {
-      const c = app.hero;
-      h = `<h3>${app.msg('M_FEUILLE_D_AVENTURE')}</h3><pre>${esc([
-        app.msg('M_HABILETE_DE', c.hab), app.msg('M_ENDURANCE_DES', c.end),
-        app.msg('M_CHANCE_DE', c.cha), '', app.msg('M_UNE_EPEE_UNE', c.gold),
-        app.msg('M_AUCUN_DE_CES'),
-      ].join('\n'))}</pre><p class="note">${esc(app.msg('M_ESPACE_ENTRER_DANS'))}</p>`;
-    } else if (m.type === 'mort') {
-      h = `<h3>${esc(app.msg('M_VOTRE_ENDURANCE_EST'))}</h3><p class="note">${esc(app.msg('M_MORT_RECOMMENCER'))}</p>`;
-    } else if (m.type === 'sauvegardes') {
-      h = `<h3>${app.msg(m.saving ? 'M_SAUVEGARDES' : 'M_CHARGEMENTS')}</h3><ul class="liste">` +
-        m.slots.map((s, i) => `<li data-k="${i}"><kbd>${i}</kbd> ${s ? esc(`${s.date} -- p.${s.scene} ${s.titre}`) : app.msg('M_VIDE')}</li>`).join('') + '</ul>';
-    }
-    d.innerHTML = `<div class="boite">${h}</div>`;
-    d.querySelectorAll('[data-k]').forEach((li) => { li.onclick = () => this.press(String(li.dataset.k)); });
-  }
-
-  /* La carte, dessinee comme show_map() la dessine : une grille 6 x 9, les
-   * sentiers d'abord, les cases par-dessus, et rien qui n'ait ete vu. */
-  dessinCarte() {
-    const app = this.app, carte = app.carte;
-    const bloc = carte.langue[app.lang] || carte.langue.FR;
-    const COL = [2, 8, 14, 20, 26, 32], ROW = [2, 4, 6, 8, 10, 12, 14, 16, 18];
-    const DC = [0, 0, 1, -1], DR = [-1, 1, 0, 0], SC = [1, 1, 4, -1];
-    const g = Array.from({ length: 20 }, () => new Array(COLS).fill(' '));
-    const put = (c, r, s) => { for (let i = 0; i < s.length; i++) if (c + i < COLS && r >= 0 && r < 20) g[r][c + i] = s[i]; };
-    const vu = carte.clr.map((_, i) => this.clairiereVue(i));
-    const nVus = vu.filter(Boolean).length;
-
-    put(1, 0, `${bloc.chaines[D.MS.TITRE]} -- ${nVus} ${bloc.chaines[D.MS.SUR35]}`);
-    for (let i = 0; i < 6; i++) put(COL[i] + 1, 1, String(i));
-    for (let i = 0; i < 9; i++) put(0, ROW[i], String(i));
-
-    /* Un sentier n'est dessine que depuis une clairiere VUE, et il finit par
-     * '?' quand l'autre bout est inconnu -- « un rayon termine par ? ». */
-    carte.clr.forEach((cl, i) => {
-      if (!vu[i]) return;
-      const r = ROW[cl.y], c = COL[cl.x];
-      if (cl.out & 0x10) put(c + 1, r + 1, 'v');
-      for (let d = 0; d < 4; d++) {
-        if (!(cl.out & (1 << d))) continue;
-        const j = D.voisin(carte, i, d);
-        if (j < 0) continue;
-        let n = 2;
-        if (vu[j]) {
-          n = d < 2 ? Math.abs(ROW[carte.clr[j].y] - r) - 1 : Math.abs(COL[carte.clr[j].x] - c) - 4;
-        }
-        let cc = c + SC[d], rr = r + DR[d];
-        const glyphe = DC[d] ? '-' : '|';
-        for (let k = n; k > 0; k--) {
-          put(cc, rr, k > 1 || vu[j] ? glyphe : '?');
-          cc += DC[d]; rr += DR[d];
-        }
-      }
-    });
-    carte.clr.forEach((cl, i) => {
-      if (!vu[i]) return;
-      const ici = i === app.mapHere;
-      put(COL[cl.x], ROW[cl.y], (ici ? '<' : '(') + (cl.num ? String(cl.num).padStart(2) : ' ?') + (ici ? '>' : ')'));
-    });
-
-    /* Le panneau de droite : ou l'on est, et ce qui en part. */
-    const dirs = bloc.chaines[D.MS.DIRS] || 'NSEO';
-    let r = 2;
-    if (app.mapHere >= 0) {
-      const cl = carte.clr[app.mapHere];
-      put(38, r++, (cl.num ? `N ${cl.num}  ` : '') + bloc.noms[app.mapHere]);
-      put(38, r++, bloc.chaines[D.MS.SORTIES]);
-      for (let d = 0; d < 4; d++) {
-        if (!(cl.out & (1 << d))) continue;
-        const j = D.voisin(carte, app.mapHere, d);
-        const connu = j >= 0 && vu[j];
-        put(38, r++, `  ${dirs[d]}  ${pad(connu ? bloc.noms[j] : '?', 12)}  ${bloc.chaines[connu ? D.MS.VUE : D.MS.INCONNUE]}`);
-      }
-      if (cl.out & 0x10) put(38, r++, `  v  ${pad('', 12)}  ${bloc.chaines[D.MS.HORS]}`);
-    }
-    put(38, 11, bloc.chaines[D.MS.LEGENDE]);
-    for (let i = 0; i < 5; i++) put(40, 12 + i, bloc.chaines[D.MS.LEG1 + i]);
-    put(38, 18, `${nVus} ${bloc.chaines[D.MS.SUR35]}`);
-    put(0, 19, bloc.chaines[D.MS.TOUCHES]);
-    return g.map((l) => l.join('').replace(/\s+$/, '')).join('\n');
   }
 
   /* ── L'image ────────────────────────────────────────────────────────── */
@@ -436,14 +592,21 @@ export class UI {
     const app = this.app;
     const cles = [app.imageKey, app.imageAlt].filter(Boolean);
     const v = this.proj.images.find((x) => x.id === this.variante) || this.proj.images[0];
-    this.el.photo.hidden = true; this.el.toile.hidden = true;
-    if (!cles.length) { this.el.imageVide.textContent = 'cette page n\'a pas d\'illustration'; this.el.imageEtat.textContent = ''; return; }
-
+    /* render() repasse ici a chaque frappe : sans ce garde, chaque touche
+     * relisait le flux du disque et redecodait 16 Ko pour rien. */
+    const signature = v.id + '/' + cles.join(',');
+    if (signature === this.imageMontree) return;
+    this.imageMontree = signature;
+    this.el.photo.hidden = true;
+    this.el.toile.hidden = true;
+    if (!cles.length) {
+      this.el.imageVide.textContent = "cette page n'a pas d'illustration";
+      this.el.imageEtat.textContent = '';
+      return;
+    }
     for (const cle of cles) {
       const id = parseInt(cle.slice(1), 10);
-      const chemin = D.fill(this.proj, v.chemin, { img: cle, id });
-      const ok = await this.peindre(v, chemin, cle);
-      if (ok) return;
+      if (await this.peindre(v, D.fill(this.proj, v.chemin, { img: cle, id }), cle)) return;
     }
     this.el.imageVide.textContent = `${v.nom} : ${cles.join(' / ')} absent`;
     this.el.imageEtat.textContent = 'manquant';
@@ -464,10 +627,9 @@ export class UI {
       return true;
     }
     let bytes;
-    try { bytes = await D.getBytes(chemin); } catch { return false; }
+    try { bytes = await D.getBytes(chemin, { volume: !v.horsVolume }); } catch { return false; }
     const ctx = this.el.toile.getContext('2d');
-    const img = v.type === 'hgr-brut' ? decodeRawHgr(bytes, ctx)
-                                      : decodeToImageData(bytes, v.palette, ctx);
+    const img = v.type === 'hgr-brut' ? decodeRawHgr(bytes, ctx) : decodeToImageData(bytes, v.palette, ctx);
     if (!img) { this.el.imageEtat.textContent = `${cle} : flux illisible`; return false; }
     ctx.putImageData(img, 0, 0);
     this.el.toile.hidden = false;
@@ -479,34 +641,6 @@ export class UI {
   }
 }
 
-/* ── Petits outils ──────────────────────────────────────────────────── */
-
-function esc(s) {
+function echap(s) {
   return String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-}
-function el(tag, cls, kids) {
-  const e = document.createElement(tag);
-  if (cls) e.className = cls;
-  (kids || []).forEach((k) => e.append(k));
-  return e;
-}
-function txt(s) { return document.createTextNode(String(s ?? '')); }
-function jauge(v, v0) {
-  const n = v0 ? Math.round((10 * v) / v0) : 0;
-  return txt('[' + '#'.repeat(n) + '.'.repeat(Math.max(0, 10 - n)) + ']');
-}
-
-/* Le meme test que choice_available, importe indirectement pour eviter une
- * dependance croisee entre l'ecran et l'analyseur. */
-import { choiceAvailable as choixDispo } from './scene.js';
-
-/* Ce que l'infobulle d'un choix dit : pourquoi il est ouvert ou ferme. */
-function detailChoix(app, c) {
-  const bouts = [`-> page ${c.scene}`];
-  if (c.require < R.STONE_COUNT()) bouts.push(`exige une Pierre de ${R.stoneName(c.require, app.english)}`);
-  if (c.grant < R.STONE_COUNT()) bouts.push(`remet une Pierre de ${R.stoneName(c.grant, app.english)}`);
-  if (c.object < R.OBJ_COUNT()) bouts.push(`${c.objMode === 2 ? 'sans' : 'avec'} ${R.cat.objets[c.object].cle}${c.objMode === 3 ? ' (consomme)' : ''}`);
-  else if (c.object & 0x80) bouts.push(`${c.objMode === 2 ? 'sans' : 'avec'} amulette ${app.proj.amulettes[c.object & 0x7f].cle}`);
-  else if (c.object === 0x7f) bouts.push(`${c.objMode >> 4} a ${c.objMode & 15} amulettes`);
-  return bouts.join(' | ');
 }

@@ -9,6 +9,6 @@ remarquez alors des traces de dents humaines sur l'un des bords du chapeau. Le
 champignon degage une odeur agreable et vous pouvez en manger un morceau si
 vous le desirez.
 
-MU GRENOUILLES.MB
+MU FROGS.MB
 C 178 Manger un morceau
 C 352 Repartir vers le nord

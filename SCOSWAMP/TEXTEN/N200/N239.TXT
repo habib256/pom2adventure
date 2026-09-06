@@ -3,5 +3,5 @@ T 239 Wolf Master's House
    You're in front of the Wolf Master's house: the door is double-locked and
 no sign of life appears around. Not wishing to wait, you leave on the path.
 
-MU MAITRELOUPS.MB
+MU WOLFMASTER.MB
 C 314 Leave and resume the trail

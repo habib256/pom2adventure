@@ -16,7 +16,7 @@ vous ordonnant de passer votre chemin.
 
    Qu'allez-vous faire ?
 
-MU MAITRELOUPS.MB
+MU WOLFMASTER.MB
 C 314 Obeir et vous en aller
 C 191 Recourir a la magie
 C 120 L'attaquer

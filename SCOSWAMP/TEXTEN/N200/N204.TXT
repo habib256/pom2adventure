@@ -11,7 +11,7 @@ your hands trembling. You lose 1 SKILL point.
 
    What do you do?
 
-MU ANGOISSE.MB
+MU DREAD.MB
 E HABILETE -1
 C 269 Flee straight ahead
 C 032 Slash them with sword blows

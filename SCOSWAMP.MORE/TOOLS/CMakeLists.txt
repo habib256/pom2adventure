@@ -25,7 +25,8 @@ target_include_directories(scoswamp_dhgr PRIVATE
     "${POM2_SRC}"
     "${POM2_SRC}/hgrpaint"
 )
-target_compile_options(scoswamp_dhgr PRIVATE -Wall -Wextra -Wpedantic)
+target_compile_options(scoswamp_dhgr PRIVATE -Wall -Wextra -Wpedantic
+    $<$<NOT:$<CONFIG:Debug>>:-O2>)
 target_include_directories(scoswamp_hgr PRIVATE
     "${POM2_SRC}"
     "${POM2_SRC}/hgrpaint"

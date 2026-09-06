@@ -12,6 +12,6 @@ etes-vous et que voulez-vous a la Maitresse des Oiseaux ?" demande-t-il.
 
    Qu'allez-vous faire ?
 
-MU OISEAUX.MB
+MU BIRDS.MB
 C 071 Attaquer le Perroquet
 C 131 Demander a rencontrer sa Maitresse

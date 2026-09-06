@@ -10,7 +10,7 @@ can sit down.
 
    You must give him a Magic Stone, a jewel or any other object.
 
-   If you only possess the Copper Ring:
+   If you have nothing to hand over except, perhaps, your Copper Ring:
 
-C 180 Give him the Copper Ring
-C 407 If you give him another object of your choice
+CB 0 180 Admit you cannot pay
+CB 1 407 Hand over a possession from your bag

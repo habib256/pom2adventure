@@ -1,0 +1,18 @@
+T 072 A present for the Emperor
+
+   You set the vial of amber spice on the cushion a servant slips under your
+hands. Mingus lifts it against the light, turns it, breathes in a trace of
+it and closes his eyes.
+
+   "Spice. Real Spice." He snaps his fingers. "This stranger is my guest!
+Box of honour! Cushions! Small fruit!"
+
+   Twelve courtiers applaud with exactly the same smile. You film the throne,
+the beard, the fan collar. Three followers come back.
+
+   "We are going to watch some fighting," the Emperor adds. "I adore
+fighting."
+
+G .MING
+C 074 Settle into the box of honour
+C 003 Decline politely and go back to the Convertible

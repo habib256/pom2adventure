@@ -1,6 +1,6 @@
 # Clairière 12 — Sables mouvants (`hub` 270, case 4,2)
 
-**`SABLES.MB.BIN` — 1 920 octets, 43,3 s, boucle.**
+**`QUICKSAND.MB.BIN` — 1 920 octets, 43,3 s, boucle.**
 
 ## Les pages
 
@@ -88,6 +88,6 @@ sable, qui recommence en haut chaque fois qu'il est arrivé en bas.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/12-sables
 python3 sables.py
-python3 ../../../midi_to_mb.py sables.mid SABLES.MB.BIN \
+python3 ../../../midi_to_mb.py sables.mid QUICKSAND.MB.BIN \
     --bpm 144 --max 2304 --wav SABLES.wav
 ```

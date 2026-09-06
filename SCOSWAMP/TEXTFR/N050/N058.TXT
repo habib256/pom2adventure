@@ -12,7 +12,7 @@ personne. Malgre tout, vous continuez.
 l'ouest, un chemin sombre. A l'est, un passage bordant les hautes herbes. Au
 sud, la voie du retour. Votre destin est entre vos mains.
 
-MU RONDPOINT.MB
+MU ROUNDABOUT.MB
 CE ENDURANCE 0 -1
 C 398 Prendre le sentier qui part vers l'ouest
 C 105 Suivre le chemin herbeux vers l'est

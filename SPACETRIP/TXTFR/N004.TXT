@@ -1,15 +1,18 @@
-Promenade sur la Comete
-------------------------
+T 004 Le secteur interieur
 
-Vous arrivez sur une petite comete pres de son perihelie.
-Des jets de gaz rugissent depuis les fissures dans la glace.
-Une passerelle securisee suit la crete au-dessus d'une queue brillante.
-La lumiere est crue et les ombres sont tranchantes.
+   Le secteur interieur : des routes commerciales, des stations qui
+sentent le graillon, et assez de temoins pour qu'une betise devienne
+virale avant d'etre finie.
 
-C'est l'endroit parfait pour un selfie audacieux avec la queue derriere vous.
-Gardez vos bottes verrouillees au pont pendant les explosions de gaz.
+   Quatre balises repondent a votre appel. La Cantina de Moche-Isley, qui
+sert un alcool que la loi appelle carburant. L'Etoile du Malheur, une lune
+artificielle qui n'est pas une lune. Le cargo Nostalgo, silencieux depuis
+onze mois. Et la Decharge Orbitale, ou l'univers jette ce qu'il regrette.
 
-C 001 Retourner a la base
-C 005 Flotter parmi les montagnes de Myria
-C 009 Surfer vers la Station Tethys
+   Le Cabriolet attend un cap.
 
+C 010 La Cantina de Moche-Isley
+C 020 L'Etoile du Malheur
+C 030 Le cargo Nostalgo
+C 080 La Decharge Orbitale
+C 003 Rester au cockpit

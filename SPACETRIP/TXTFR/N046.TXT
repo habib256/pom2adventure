@@ -1,0 +1,13 @@
+T 046 La passerelle, deuxieme visite
+
+   L'officier aux oreilles pointues leve les yeux de sa console, vous
+identifie en un quart de seconde et hoche la tete d'un demi-centimetre.
+
+   "Vous possedez deja une image de moi. En posseder deux n'augmenterait pas
+le nombre de vos abonnes de facon mesurable."
+
+   Au fond, le capitaine repete une replique en trois morceaux devant un
+miroir. Personne ne le regarde. Il continue quand meme.
+
+C 047 Faire un detour par le telepositeur
+C 003 Vous faire teleporter jusqu'au Cabriolet

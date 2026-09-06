@@ -28,11 +28,9 @@ extern char _LOWBSS_SIZE__[];
 /* Adresse de la page HGR 1 */
 #define HGR_PAGE1 ((unsigned char*)0x2000)
 #define HGR_SIZE  16384
-/* Le corpus ne depasse jamais 5 choix sur une page, et la ligne MV en retire
- * un a trente pages de plus : le sixieme emplacement etait une marge qu'on ne
- * pouvait plus se payer. Chaque emplacement coute 77 octets -- deux vides,
- * c'est un ecran de texte gaspille. reflow_txt.py refuse une page qui en
- * aurait plus, et c'est lui qui garde l'invariant. */
+/* Le corpus ne depasse jamais 5 choix sur une page. Choice occupe 8 octets :
+ * les titres pointent dans file_buffer et ne sont pas recopies par choix.
+ * reflow_txt.py tient la limite de cinq choix. */
 #define MAX_CHOICES 5
 /* Pas FILENAME_MAX : build_paths n'ecrit jamais que "N999.RLE" (9 octets) et
  * "N999" (5). Deux champs de 64 octets pour ca, c'etaient 96 octets de BSS
@@ -123,13 +121,14 @@ typedef struct {
     char      choose_cats[3];/* categories permises : N, B, M */
     int       luck_ok;       /* scene si Chanceux, -1 si la page ne teste rien */
     int       luck_ko;       /* scene si Malchanceux */
-    int       luck_dok;      /* ENDURANCE gagnee ou perdue sur la branche Chanceux */
+    int       luck_dok;      /* effet Chanceux : END pour CL, dice_carac pour CE */
     int       luck_dko;
     /* Ligne MV : ou aller quand le dernier adversaire de la file est tombe,
      * -1 si la page rend la main aux choix comme avant. */
     int       win_scene;
     /* Ligne ED : le jet de des visible. `dice_n` porte le SIGNE (gain ou
-     * perte) et le NOMBRE de des dans sa valeur absolue ; 0 = pas de jet. */
+     * perte) et le NOMBRE de des dans sa valeur absolue ; 0 = pas de jet.
+     * La valeur interne 3 reserve CE ; ED positif est borne a deux des. */
     signed char   dice_n;
     unsigned char dice_carac;  /* 0 END, 1 HAB, 2 CHA, 3 OR */
     /* Ligne CS : 2d6 contre une caracteristique NOMMEE, sans depenser de
@@ -157,8 +156,8 @@ typedef struct {
 #pragma bss-name (push, "LOWBSS")
 AppState app;
 #pragma bss-name (pop)
-/* La page la plus longue du corpus fait 1264 octets (TEXTFR/N350/N361.TXT
- * avec sa ligne MU, 2026-09-03). fread en lit SIZE-1 et reserve le dernier
+/* La page la plus longue du corpus fait 1270 octets (TEXTFR/N350/N361.TXT
+ * avec sa ligne MU, mesure du 2026-09-06). fread en lit SIZE-1 et reserve le dernier
  * octet au '\0'. reflow_txt.py tient exactement la meme limite. */
 #define FILE_BUFFER_SIZE 1280
 /* En LOWBSS ($1000-$1FFF, voir scoswamp.cfg) : la RAM basse entre le tampon
@@ -167,19 +166,21 @@ AppState app;
 char file_buffer[FILE_BUFFER_SIZE];
 #pragma bss-name (pop)
 
-/* Sauvegarde binaire SCS2 : format explicite, independant du remplissage des
- * structures C. Dix emplacements numerotes de 0 a 9 sur le disque. */
+/* Sauvegarde binaire SCS5, avec lecture des anciens fichiers SCS4.
+ * Dix emplacements numerotes de 0 a 9 sur le disque. */
 #define SAVE_HEADER 8
 /* Le titre de la page ou la partie s'est arretee, tel que la ligne T le
  * donne, sur 32 octets termines par zero : la page des sauvegardes l'affiche
  * pour que le joueur se situe dans le Marais avant de reprendre. */
 #define SAVE_TITLE  32
-/* Le dernier octet est la clairiere collante du menu MAP. Sans lui, une
+/* SCS4 a ajoute la clairiere collante du menu MAP. Sans elle, une
  * partie reprise au milieu d'un combat -- une page qui n'est d'aucun lieu --
  * rouvrait la carte sans savoir ou l'on se tient. C'est ce qui fait passer le
  * format de SCS3 a SCS4 : les anciennes sauvegardes sont refusees par la
  * signature, pas lues de travers. */
-#define SAVE_SIZE (SAVE_HEADER + SAVE_TITLE + sizeof(Character) + SCENE_MEMORY_SIZE + MONSTER_MEMORY_SIZE + 1)
+/* SCS5 ajoute last_loss apres la clairiere : DV doit retrouver les blessures
+ * du combat, meme si une autre partie a ete jouee entre-temps. */
+#define SAVE_SIZE (SAVE_HEADER + SAVE_TITLE + sizeof(Character) + SCENE_MEMORY_SIZE + MONSTER_MEMORY_SIZE + 2)
 #define save_data ((unsigned char*)file_buffer)
 static unsigned char restoring;
 /* La clairiere ou l'on se tient, MAP_NONE si aucune n'est connue. Declaree
@@ -225,8 +226,8 @@ static unsigned char save_checksum(void)
 }
 #pragma code-name (pop)
 
-/* pack_save repasse en CODE : avec le titre, la Language Card debordait
- * d'un octet, et la fenetre principale a 7 Ko de marge. */
+/* pack_save reste en CODE : la Language Card ne peut pas accueillir
+ * cette fonction. Les marges courantes sont mesurees dans build.map. */
 #pragma code-name (push, "CODE")
 static void pack_save(void)
 {
@@ -238,28 +239,50 @@ static void pack_save(void)
     if (n) memmove(p, scene_title, n);
     memset(p + n, 0, SAVE_TITLE - n);
     p += SAVE_TITLE;
-    memcpy(save_data, "SCS4", 4);
+    memcpy(save_data, "SCS5", 4);
     save_u16(save_data + 5, (unsigned int)app.current_scene);
     save_data[7] = app.language[0];
     memcpy(p,&app.hero,sizeof app.hero); p+=sizeof app.hero;
     scene_memory_export(p); p += SCENE_MEMORY_SIZE;
     monster_memory_export(p); p += MONSTER_MEMORY_SIZE;
-    *p = map_here;
+    *p++ = map_here;
+    *p = app.last_loss;
     save_data[4]=save_checksum();
 }
 
 #pragma code-name (pop)
+/* Les migrations du jeu sont compilees hors machine depuis RULES.json.
+ * Chaque ligne teste un groupe de drapeaux absent, puis une visite ; poser
+ * un drapeau du groupe empeche les branches suivantes de l'ecraser. */
+#include "game_rules.h"
+#pragma code-name (push, "CODE")
+#pragma rodata-name (push, "RODATA")
+static void migrate_saved_flags(void)
+{
+    static const unsigned int rows[][3] = GAME_SAVE_MIGRATIONS;
+    const unsigned int* p = rows[0];
+    unsigned char i;
+    for (i = 0; i < GAME_SAVE_MIGRATION_COUNT; ++i, p += 3) {
+        if (!(app.hero.objects & p[0]) && scene_visited(p[1]))
+            app.hero.objects |= p[2];
+    }
+}
+#pragma rodata-name (pop)
+#pragma code-name (pop)
 static unsigned char unpack_save(void)
 {
     const unsigned char* p; int scene;
-    if (memcmp(save_data,"SCS4",4)!=0 || save_data[4]!=save_checksum()) return 0;
+    /* load_game a deja valide la version et sa longueur exacte. */
+    if (memcmp(save_data,"SCS",3)!=0 || save_data[4]!=save_checksum()) return 0;
     p=save_data+5; scene=(int)load_u16(p); p+=2;
     app.language[0]=*p++; app.language[1]=(app.language[0]=='F')?'R':'N'; app.language[2]='\0';
     p += SAVE_TITLE;
     memcpy(&app.hero,p,sizeof app.hero); p+=sizeof app.hero;
     scene_memory_import(p); p+=SCENE_MEMORY_SIZE;
     monster_memory_import(p); p+=MONSTER_MEMORY_SIZE;
-    map_here=*p;
+    migrate_saved_flags();
+    map_here=*p++;
+    app.last_loss=*p;
     app.hero_ready=1;
     restoring=1;
     app.pending_scene=scene;
@@ -272,7 +295,7 @@ static unsigned char unpack_save(void)
  * Language Card et peut remplacer le code LC pendant un open/read/write. */
 static unsigned char enter_save(unsigned char slot)
 {
-    memcpy(app.imgPath,"PARTIE0",8); app.imgPath[6]=(char)('0'+slot);
+    memcpy(app.imgPath,"SAVE0",6); app.imgPath[4]=(char)('0'+slot);
     return chdir("/SCOSWAMP")==0 && chdir("SAVE")==0;
 }
 
@@ -287,16 +310,25 @@ static unsigned char save_game(unsigned char slot)
 static unsigned char load_game(unsigned char slot)
 {
     FILE* f; unsigned char ok;
+    size_t n;
     if(!enter_save(slot)) return 0;
     f=fopen(app.imgPath,"r"); if(!f) return 0;
-    /* Une troncature est refusee ici ; toute alteration des octets lus est
-     * ensuite detectee par la signature et le checksum de unpack_save. */
-    ok=(fread(save_data,1,SAVE_SIZE,f)==SAVE_SIZE); fclose(f);
-    return ok && unpack_save();
+    /* Refuser longueurs et en-tetes invalides avant toute mutation du heros.
+     * Le checksum XOR detecte certaines alterations, pas toutes. */
+    /* SCS4 reste lisible : il n'avait pas last_loss. Le zero ajoute ne change
+     * pas son checksum XOR et evite d'heriter des blessures d'une autre partie. */
+    save_data[SAVE_SIZE - 1] = 0;
+    n=fread(save_data,1,SAVE_SIZE,f);
+    ok=(fgetc(f)==EOF && !ferror(f));
+    fclose(f);
+    if (!ok || (save_data[7]!='F' && save_data[7]!='E') ||
+        load_u16(save_data+5) >= SCENE_MEMORY_SIZE*8u) return 0;
+    ok=(unsigned char)(save_data[3]-'4');
+    return ok <= 1 && n == SAVE_SIZE-1+ok && unpack_save();
 }
 
 /* Le titre range dans un emplacement, ou une chaine vide si l'emplacement
- * est vierge (les PARTIEn du disque font deux octets) ou d'un autre format.
+ * est vierge (les SAVEn du disque font deux octets) ou d'un autre format.
  * Ne lit que l'en-tete : dix emplacements a lister, pas dix parties. */
 #pragma bss-name (push, "MAPBSS")
 static void slot_title(unsigned char slot, char* out)
@@ -306,7 +338,8 @@ static void slot_title(unsigned char slot, char* out)
     out[0] = '\0';
     if (!enter_save(slot)) return;
     f = fopen(app.imgPath, "r"); if (!f) return;
-    if (fread(hdr, 1, sizeof hdr, f) == sizeof hdr && memcmp(hdr, "SCS4", 4) == 0) {
+    if (fread(hdr, 1, sizeof hdr, f) == sizeof hdr &&
+        memcmp(hdr, "SCS", 3) == 0 && (hdr[3] == '4' || hdr[3] == '5')) {
         memcpy(out, hdr + SAVE_HEADER, SAVE_TITLE);
         out[SAVE_TITLE - 1] = '\0';
     }
@@ -348,14 +381,14 @@ static unsigned char music_slot;
 
 /* Ce qui joue, et le theme de la zone courante : deux noms de MUSIC/.
  * music_cur vide = silence. Ils different quand une surcouche joue.
- * cur_half est la moitie qui joue, zone_half celle qui tient la zone, et
- * zone_ok dit si ce tampon tient encore la zone (une seconde surcouche
- * d'affilee l'ecrase : il faudra la relire). */
+ * cur_half est la moitie qui joue. music_here suit la derniere clairiere
+ * mise en musique, independamment de map_here que les sauvegardes restaurent. */
 #pragma bss-name (push, "LOWBSS")
 static char music_cur[16];
 static char music_zone[16];
 #pragma bss-name (pop)
-static unsigned char cur_half, zone_half, zone_ok;
+static unsigned char cur_half;
+static unsigned char music_here = MAP_NONE;
 
 /* Lit MUSIC/<name> dans la moitie `half`. Rend 1 si c'est bien un flux MB1
  * qui y tient en entier -- la moitie 1 ne fait que 1 280 octets, et un flux
@@ -364,16 +397,23 @@ static unsigned char cur_half, zone_half, zone_ok;
 static unsigned char music_load(const char* name, unsigned char half)
 {
     FILE* f;
-    size_t n, cap = half ? MUSIC_OVER : MUSIC_ZONE;
-    unsigned char* dst = music_buf + (half ? MUSIC_ZONE : 0);
-    unsigned char more;
+    size_t n, total = 0, cap = half ? MUSIC_OVER : MUSIC_ZONE;
+    unsigned int offset = half ? MUSIC_ZONE : 0;
+    unsigned char valid = 1;
     if (!music_slot) return 0;
     if (chdir("/SCOSWAMP") != 0 || chdir("MUSIC") != 0) return 0;
     f = fopen(name, "rb"); if (!f) return 0;
-    n = fread(dst, 1, cap, f);
-    more = (n == cap && fgetc(f) != EOF);
+    do {
+        n = fread(music_buf, 1, MUSIC_STAGE, f);
+        if (total == 0 && (n <= 8 || memcmp(music_buf, "MB1", 3))) valid = 0;
+        if (total + n > cap) { valid = 0; break; }
+        if (n) music_store(offset + total, n);
+        total += n;
+    } while (n == MUSIC_STAGE);
+    if (ferror(f)) valid = 0;
     fclose(f);
-    return n > 8 && !more && memcmp(dst, "MB1", 3) == 0;
+    return valid;
+
 }
 
 /* Charge <name> dans la moitie qui ne joue pas -- l'autre continue pendant
@@ -399,26 +439,21 @@ static void music_switch(const char* name, unsigned char over)
         h = 0;
         if (!music_load(name, 0)) return;
     }
-    if (over && h == zone_half) zone_ok = 0;   /* la zone vient d'etre ecrasee */
     music_settle();
     music_pause();              /* tick arrete : l'echange de curseurs est sur */
     /* Le pilote lit ce drapeau à END. Les thèmes et scènes restent à passage
      * unique ; seule la surcouche de combat, appelée avec over=1, boucle. */
-    music_buf[(h ? MUSIC_ZONE : 0) + 5] = over;
     music_select(h);
+    music_set_loop(over);
     music_play();               /* et la nouvelle monte en fondu */
     cur_half = h;
-    if (!over) { zone_half = h; zone_ok = 1; }
     memcpy(music_cur, name, sizeof music_cur);
 }
 
-/* La cascade de la ligne MU, une fois le texte de la page lu :
- *   "-"      silence, et plus de zone ;
- *   rien     la musique continue -- ou, si une surcouche jouait, la zone
- *            reprend la ou elle en etait, sans lecture ;
- *   meme nom rien a faire, ni lecture ni redemarrage ;
- *   nouveau  lecture dans l'autre demi-tampon pendant que l'ancien joue,
- *            puis bascule ; un theme (sans +) devient la zone. */
+/* load_scene decide si le lieu musical change. Ici, l'ancien theme s'efface
+ * puis celui de MU commence depuis le debut ; MU absent ou "-" fait silence.
+ * La position musicale ne se restaure pas depuis la sauvegarde : elle doit
+ * encore designer ce qui jouait avant le chargement pour detecter le saut. */
 static void music_for_clearing(void)
 {
     const char* n = app.music_name;
@@ -426,7 +461,7 @@ static void music_for_clearing(void)
     music_settle();
     music_stop();
     music_cur[0] = music_zone[0] = '\0';
-    zone_ok = 0;
+    music_here = map_here;
     if (n[0] == '\0' || n[0] == '-') return;
     /* Forcer la grande moitié : même deux clairières portant le même nom
      * doivent chacune jouer le morceau une fois depuis son début. */
@@ -436,7 +471,7 @@ static void music_for_clearing(void)
 }
 
 /* Fonction pour charger une image DHGR */
-/* Charge IMG/<bucket>/<prefixe><id>.RLE dans les deux banques DHGR page 1.
+/* Charge DHGR/<bucket>/<prefixe><id>.RLE dans les deux banques DHGR page 1.
  *
  *   'N' : l'illustration de la clairiere ;
  *   'B' : l'image de bataille, les deux adversaires face a face. Elle est
@@ -451,7 +486,7 @@ static unsigned char load_hgr_image_as(int scene_id, char prefix) {
     }
     app.imgPath[0] = prefix;
 
-    if (!enter_asset_dir("IMG", scene_id)) {
+    if (!enter_asset_dir("DHGR", scene_id)) {
         return 0;
     }
     return hgr_rle_load(app.imgPath);
@@ -460,6 +495,8 @@ static unsigned char load_hgr_image_as(int scene_id, char prefix) {
 /* La page dont l'image de bataille est actuellement en HGR page 1, ou 0 quand
  * on n'en a pas encore charge pour cette scene. */
 static int foe_shown;
+static unsigned char magic_forbidden; /* MM 1 : aucune Pierre pendant ce combat */
+static unsigned char flee_after; /* MF : assauts encore a resoudre avant la fuite */
 
 /* L'illustration de l'adversaire EN COURS. Le disque range une image de
  * bataille par page (B<page>.RLE), mais une page peut aligner trois creatures
@@ -662,10 +699,14 @@ static void render_title_bar(void)
 /* Un choix qui exige une Pierre absente du sac ne porte pas de lettre : on
  * le voit -- le livre l'ecrit, et savoir ce qu'une Pierre aurait permis fait
  * partie de la lecture -- mais on ne peut pas le prendre. */
+/* The same goods can satisfy CB and be removed by PO/PD. */
+#define STEALABLE ((unsigned int)((1u << OBJ_HIDDEN0) - 2u))
+
 static unsigned char choice_available(unsigned char i)
 {
     Choice* c = &app.choices[i];
     unsigned char has;
+    if (c->require == 255) return 0; /* condition de visite non satisfaite */
     if (c->require < STONE_COUNT && !character_has_stone(&app.hero, (Stone)c->require)) return 0;
     if (c->object < OBJ_COUNT) {
         has = (unsigned char)character_has_object(&app.hero, (Object)c->object);
@@ -675,8 +716,21 @@ static unsigned char choice_available(unsigned char i)
         has = (unsigned char)character_has_amulet(&app.hero, (Amulet)(c->object & 0x7f));
         return c->obj_mode == 2 ? !has : has;
     }
-    if (c->object == 0x7f) {
-        unsigned char n=character_amulet_count(&app.hero);
+    if (c->object == 0x7d) return app.hero.gold >= c->obj_mode;
+    if (c->object == 0x7f || c->object == 0x7e || c->object == 0x7c) {
+        unsigned char n, s;
+        if (c->object == 0x7f) n = character_amulet_count(&app.hero);
+        else {
+            n = 0;
+            for (s = 0; s < STONE_COUNT; ++s) {
+                if (app.hero.stones[s] >= 15 - n) { n = 15; break; }
+                n += app.hero.stones[s];
+            }
+        }
+        if (c->object == 0x7c) {
+            if ((app.hero.objects & STEALABLE) || app.hero.amulets) n = 1;
+            return !!n == c->obj_mode;
+        }
         return n >= (c->obj_mode >> 4) && n <= (c->obj_mode & 15);
     }
     return 1;
@@ -748,7 +802,7 @@ static void render_choices(void)
  * octets du bitmap `visited`, deja sauvegardes, disent tout.
  */
 #define MAP_CLR    35                        /* clairieres canoniques */
-#define MAP_PAGES  115                       /* pages rattachees a un lieu */
+#define MAP_PAGES  116                       /* pages rattachees a un lieu */
 #define MAP_NAMEW  13                        /* 12 caracteres + le zero */
 #define MAP_HEAD   20                        /* taille de l'en-tete */
 #define MAP_POOL   (MAP_HEAD + 3 * MAP_CLR)  /* 125 : debut du bloc de langue */
@@ -803,7 +857,7 @@ static const unsigned char kMapRow[9] = { 2, 4, 6, 8, 10, 12, 14, 16, 18 };
  * haut-gauche de la case. Le pas vertical sert aussi d'ecart vertical. */
 static const signed char kMapDC[4] = { 0, 0,  1, -1 };
 static const signed char kMapD[4]  = { -1, 1, 0,  0 };
-static const signed char kMapSC[4] = { 1, 1,  4, -1 };
+static const signed char kMapSC[4] = { 1, 1,  3, -1 };
 
 /* Ces quatre-la ne touchent jamais au disque : elles peuvent vivre en
  * $D400, dans la banque deux de la Language Card, avec le reste du code
@@ -996,6 +1050,8 @@ static void render_scene(void)
 {
     unsigned char i, row;
 
+    /* conio needs 80STORE for both text banks, even behind full DHGR. */
+    *(volatile unsigned char*)0xC001 = 0;
     wipe();
     render_title_bar();
     row = BODY_ROW0;
@@ -1004,6 +1060,7 @@ static void render_scene(void)
     }
     render_place();
     render_choices();
+    if (app.video_mode == 1) *(volatile unsigned char*)0xC000 = 0;
 }
 
 /* ── Lecture d'une page de scene ──────────────────────────────────────── */
@@ -1124,7 +1181,7 @@ static void lose_items(unsigned char n)
          * se calcule -- bits 1 a OBJ_HIDDEN0-1 -- pour qu'un objet ajoute a
          * l'enum devienne volable sans qu'on ait a y repenser ; c'est une
          * constante, le compilateur la plie. */
-#define STEALABLE ((unsigned int)((1u << OBJ_HIDDEN0) - 2u))
+
         bits = app.hero.objects & STEALABLE;
         if (bits) {
             bits &= bits - 1;
@@ -1139,7 +1196,7 @@ static void lose_items(unsigned char n)
     }
 }
 
-/* Les 31 directives, dans l'ordre qui FAIT FOI : les prefixes de deux lettres
+/* Les directives, dans l'ordre qui FAIT FOI : les prefixes de deux lettres
  * passent devant la lettre seule, sinon `M ` avalerait `MV` et `E ` avalerait
  * `ED`. Quatre octets par ligne : les deux lettres, le troisieme caractere
  * exige (' ' un espace, '.' la fin de ligne, '*' n'importe lequel), puis '1'
@@ -1151,24 +1208,22 @@ static void lose_items(unsigned char n)
  * regles n'ont pas bouge d'un iota : c'est la meme liste, dans le meme ordre,
  * lue par une boucle au lieu d'etre depliee en code. */
 static const char kOps[] =
-    "GX 1GA 1G *1CI 0CN 0CA 0GU 0PD.1PO.1PX.1TR.1"
-    "MD 0MS 0MI 0MU 0MV 0MB 0M *0E0 1CE 1ED 1E *1"
-    "PC 1P *1CL 0CU 0CP 0V *1CS 0DV 0CF 0T *0C *0";
+    "AC.0GX 1GA 1G *1CI 0CN 0CG 0CB 0CT 0CA 0CV 0CX 0GU 0PD.1PO.1PS.1PX.1TR.1"
+    "MM 0MF 0MR 1MD 0MS 0MI 0MU 0MV 0MB 0M *0E0 1CE 1ED 1EH.1E *1"
+    "PC 1P *1CL 0CU 0CP 0VR 1V *1CS 0DV 0CF 0T *0C *0";
 
-enum { D_GX, D_GA, D_G, D_CI, D_CN, D_CA, D_GU, D_PD, D_PO, D_PX, D_TR,
-       D_MD, D_MS, D_MI, D_MU, D_MV, D_MB, D_M, D_E0, D_CE, D_ED, D_E,
-       D_PC, D_P, D_CL, D_CU, D_CP, D_V, D_CS, D_DV, D_CF, D_T, D_C,
+enum { D_AC, D_GX, D_GA, D_G, D_CI, D_CN, D_CG, D_CB, D_CT, D_CA, D_CV, D_CX, D_GU, D_PD, D_PO, D_PS, D_PX, D_TR,
+       D_MM, D_MF, D_MR, D_MD, D_MS, D_MI, D_MU, D_MV, D_MB, D_M, D_E0, D_CE, D_ED, D_EH, D_E,
+       D_PC, D_P, D_CL, D_CU, D_CP, D_VR, D_V, D_CS, D_DV, D_CF, D_T, D_C,
        D_TEXTE };
 
-/* kOps doit porter exactement D_TEXTE entrees de quatre octets -- 132, plus le
- * zero final. Sinon la directive lue n'est pas celle qu'on croit et la page
- * joue autre chose en silence. cc65 refuse `sizeof` dans une taille de
- * tableau, donc pas d'assertion de compilation : c'est la boucle qui borne sur
- * D_TEXTE, et le compte est a verifier a l'oeil en ajoutant une directive. */
+/* audit_contracts.py verifie la correspondance de kOps avec cette enum et
+ * avec le descripteur JavaScript, y compris les effets d'entree. */
 
 /* Classe une ligne du fichier. Le format d'une page :
  *
  *   T  <id> <titre>             titre, en video inverse ligne 1
+ *   VR <cible> <page> ...        detour si une issue explicite a ete visitee
  *   V  <id> [<page> ...]        "si vous y etes deja venu, rendez-vous au
  *                               <id>" -- doit preceder tout le reste de la
  *                               page, qu'un detour annule. Les numeros qui
@@ -1180,6 +1235,8 @@ enum { D_GX, D_GA, D_G, D_CI, D_CN, D_CA, D_GU, D_PD, D_PO, D_PX, D_TR,
  *                               rejouait la premiere visite
  *   M  <hab> <end> <nom>        la creature de la clairiere (Batailles)
  *   MD <n>                      ses coups coutent n ENDURANCE (defaut 2)
+ *   MF <n>                     fuite permise apres n assauts resolus (defaut 0)
+ *   MR <gain> <maximum>        recupere la creature vivante memorisee du lieu
  *   MS <n>                      le combat cesse a n ENDURANCE (defaut 0)
  *   MB <ok> <ko>                duel au premier sang : la premiere blessure
  *                               arrete le combat, <ok> si vous touchez,
@@ -1263,12 +1320,14 @@ static void classify_line(char* l)
     unsigned char c1 = (unsigned char)l[1];
     unsigned char c2 = (unsigned char)l[2];
 
-    if (app.revisit >= 0) return;   /* la page est court-circuitee (ligne V) */
-
     k = kOps;
     for (op = 0; op < D_TEXTE; ++op, k += 4)
         if (k[0] == (char)c0 && k[1] == (char)c1 &&
             (k[2] == '*' || (k[2] == '.' ? c2 == '\0' : c2 == ' '))) break;
+
+    /* V saute le recit et ses effets, mais conserve le theme du lieu :
+     * certaines pages courtes n'ont aucune ligne MU. */
+    if (app.revisit >= 0 && op != D_MU) return;
 
     /* L'instantane contient deja les effets d'entree de la scene reprise. */
     if (op < D_TEXTE && restoring && k[3] == '1') return;
@@ -1285,11 +1344,16 @@ static void classify_line(char* l)
         break;
 
     case D_G: {
-        Amulet am;
+        unsigned char am; /* object/amulet indices and sentinels fit in a byte */
         take_word(l + 2, &word);
         am = amulet_from_name(word);
         if (am != AMULET_COUNT) character_give_amulet(&app.hero, am);
-        else character_give_object(&app.hero, object_from_name(word));
+        else {
+            am = object_from_name(word);
+            /* G replaces the weapon; its following E BONUS defines this blade. */
+            if (am == OBJ_EPEMAGIQUE) app.hero.weapon_bonus = 0;
+            character_give_object(&app.hero, am);
+        }
         break;
     }
 
@@ -1306,10 +1370,17 @@ static void classify_line(char* l)
         break;
     }
 
+    case D_CB:
+    case D_CG:
+        t = take_uint(l + 3, &b); t = take_uint(t, &a);
+        push_object_choice((int)a, (Object)(op == D_CB ? 0x7c : 0x7d), (unsigned char)b, t);
+        break;
+
+    case D_CT:
     case D_CA: {
         unsigned int lo, hi;
         t = take_uint(l + 3, &lo); t = take_uint(t, &hi); t = take_uint(t, &a);
-        push_object_choice((int)a, (Object)0x7f,
+        push_object_choice((int)a, (Object)(op == D_CT ? 0x7e : 0x7f),
                            (unsigned char)((lo << 4) | hi), t);
         break;
     }
@@ -1322,29 +1393,87 @@ static void classify_line(char* l)
         break;
     }
 
+    /* CV <page deja visitee> <destination> <titre>. Le bitmap sauvegarde
+     * fait foi, y compris pour les anciennes parties : aucun second drapeau
+     * de quete a maintenir. L'historique reste fixe pendant cette page. */
+    case D_AC:
+        app.revisit = -2; /* automatic history choices on this page */
+        break;
+
+    case D_CV:
+    case D_CX:
+        /* Une liste est une conjonction ; ! exige une page non visitee.
+         * CX inverse le resultat complet. Le choix reste du meme format. */
+        t = l + 3;
+        b = 1;
+        for (;;) {
+            c0 = (*t == '!');
+            if (c0) ++t;
+            t = take_uint(t, &a);
+            if (!!scene_visited(a) == c0) b = 0;
+            if (*t != ',') break;
+            ++t;
+        }
+        c0 = (b == (op == D_CV));
+        t = take_uint(t, &b);
+        if (app.revisit == -2 && c0) {
+            app.revisit = (int)b;
+            break;
+        }
+        push_choice((int)b, STONE_COUNT, c0 ? STONE_COUNT : 255, t);
+        break;
+
     case D_PD:
     case D_PO:
         lose_items((unsigned char)(op == D_PD ? 2 : 1));
         break;
 
     case D_PX:
-        memset(app.hero.stones, 0, sizeof app.hero - 9);
+        /* Perdre son sac ne fait pas oublier sa mission ou ses decouvertes. */
+        app.hero.objects &= ~((1u << OBJ_HIDDEN0) - 1u);
+        app.hero.amulets = 0;
+        /* puis les Pierres, comme PS */
+
+    case D_PS: /* remettre toutes les Pierres, en conservant les objets */
+        memset(app.hero.stones, 0, sizeof app.hero.stones);
         break;
 
     case D_TR: {
-        unsigned int bits = app.hero.objects & 0x018Cu;
+        unsigned int bits = app.hero.objects & GAME_TRADE_OBJECT_MASK;
         a = 0;
-        while (bits && a < 3) { bits &= bits - 1; ++a; }
-        app.hero.objects = (app.hero.objects & ~0x018Cu) | bits;
-        while (app.hero.amulets && a < 3) {
+        while (bits && a < GAME_TRADE_LIMIT) { bits &= bits - 1; ++a; }
+        app.hero.objects = (app.hero.objects & ~GAME_TRADE_OBJECT_MASK) | bits;
+#if GAME_TRADE_AMULETS
+        while (app.hero.amulets && a < GAME_TRADE_LIMIT) {
             app.hero.amulets &= (unsigned char)(app.hero.amulets - 1); ++a;
         }
+#endif
         app.choose_n = (unsigned char)a;
-        app.choose_cats[0] = 'N'; app.choose_cats[1] = '\0';
+        app.choose_cats[0] = GAME_TRADE_CATEGORY_0;
+        app.choose_cats[1] = GAME_TRADE_CATEGORY_1;
+#if GAME_TRADE_CATEGORY_1
+        app.choose_cats[2] = '\0';
+#endif
         break;
     }
 
     /* MD, MS et MI qualifient le dernier adversaire declare. */
+    case D_MM:
+        take_uint(l + 3, &a);
+        magic_forbidden = (a != 0);
+        break;
+
+    case D_MF:
+        take_uint(l + 3, &a);
+        flee_after = (unsigned char)a;
+        break;
+
+    case D_MR:
+        t = take_uint(l + 3, &a);
+        take_uint(t, &b);
+        monster_recover(monster_zone_key(), (unsigned char)a, (unsigned char)b);
+        break;
+
     case D_MD:
         if (app.foe_count) {
             take_uint(l + 3, &a);
@@ -1421,14 +1550,13 @@ static void classify_line(char* l)
      * effet, et la page continue de se lire. Le livre le fait souvent --
      * "si vous etes Malchanceux, vous tombez et perdez 2 points
      * d'ENDURANCE, mais vous parvenez tout de meme a grimper". */
-    case D_CE: {
-        int dok, dko;
+    case D_CE:
         t = take_word(l + 3, &word);
-        t = take_int(t, &dok);
-        take_int(t, &dko);
-        carac_apply(carac_of(word), luck_test(&app.hero) ? dok : dko);
+        app.dice_carac = carac_of(word);
+        t = take_int(t, &app.luck_dok);
+        take_int(t, &app.luck_dko);
+        app.dice_n = 3; /* deferred Luck effect, sharing the visible dice path */
         break;
-    }
 
     case D_ED:
         t = take_word(l + 3, &word);
@@ -1439,6 +1567,7 @@ static void classify_line(char* l)
          * tient la regle "deux des au plus", et il la tient quoi qu'ecrive la
          * page. */
         if (app.dice_carac < 4) app.dice_n = (signed char)atoi(t);
+        if (app.dice_n > 2) app.dice_n = 2; /* 3 is internal CE, never ED */
         break;
 
     case D_E:
@@ -1447,6 +1576,10 @@ static void classify_line(char* l)
          * `gold += delta` sur un champ non signe donnait 65535 Pieces d'Or au
          * heros sans le sou qui en depense une. */
         carac_apply(carac_of(word), atoi(t));
+        break;
+
+    case D_EH: /* Faiblesse : ENDURANCE restante divisee par deux, entier bas. */
+        app.hero.end >>= 1;
         break;
 
     case D_PC:
@@ -1513,14 +1646,21 @@ static void classify_line(char* l)
      * premiere visite -- creature ressuscitee, objets redonnes. D'ou la
      * liste : on teste la page courante, la cible, puis chaque page
      * citee, et le premier drapeau leve suffit. */
+    /* V adds current/target visits; VR tests only explicit outcome pages.
+     * Reading the list and applying the redirect is common to both. */
     case D_V:
-        t = take_uint(l + 2, &a);
-        b = (unsigned int)app.current_scene;
-        while (!scene_visited(b)) {
-            if (*t) { t = take_uint(t, &b); continue; }
-            if (b == a) return;   /* la cible a ete testee : la liste est finie */
-            b = a;                /* passer par la revisite compte aussi */
+    case D_VR:
+        t = l + 2;
+        if (op == D_VR) ++t;
+        t = take_uint(t, &a);
+        if (op == D_V && (scene_visited((unsigned int)app.current_scene) ||
+                         scene_visited(a))) goto revisit_found;
+        while (*t) {
+            t = take_uint(t, &b);
+            if (scene_visited(b)) goto revisit_found;
         }
+        return;
+revisit_found:
         app.revisit = (int)a;
         break;
 
@@ -1659,7 +1799,7 @@ static void display_scene_text(int scene_id) {
     parse_text_file(scene_id, 1);  /* Mode display */
 }
 
-/* Cycle des modes video : texte 80 col -> DHGR mixte -> DHGR plein -> texte.
+/* Cycle des modes video : texte 80 col -> DHGR plein -> DHGR mixte -> texte.
  *
  * Que des soft-switches. Le texte reste en $400-$7FF et l'image en
  * $2000-$3FFF pendant tout le cycle, donc aucune bascule ne relit le disque ni
@@ -1670,7 +1810,7 @@ static void cycle_video_mode(void) {
     if (!app.has_image) {
         return;  /* Pas d'image pour cette scene : le texte reste. */
     }
-    app.video_mode = app.video_mode == 0 ? 2 : (app.video_mode == 2 ? 1 : 0);
+    app.video_mode = app.video_mode == 2 ? 0 : app.video_mode + 1;
     set_video_mode(app.video_mode);
 }
 
@@ -1881,12 +2021,14 @@ static void wait_space_at(unsigned char row, const char* label)
  * et de CHANCE deviennent alors interdites (regle "Quand peut-on se servir des
  * Pierres de Magie ?"). */
 #pragma bss-name (push, "LOWBSS")
-static void show_inventory(unsigned char in_combat)
+/* Rend vrai si une Pierre a tue le heros. L'appelant quitte alors la scene
+ * ou le combat avant d'ouvrir l'ecran de mort, sans recursion de load_scene. */
+static unsigned char __fastcall__ show_inventory(unsigned char in_combat)
 {
     /* N)eutre, B)enefique, M)alefique : la categorie compte (un bon sorcier ne
      * donne pas de pierre malefique), mais elle tient en une lettre. */
     static const char kKind[3] = { 'N', 'B', 'M' };
-    Stone shown[STONE_COUNT];
+    unsigned char shown[STONE_COUNT]; /* indices 0..11, pas des enum 16 bits */
     unsigned char n, i, row, back;
     char key;
     Stone s;
@@ -1914,7 +2056,7 @@ static void show_inventory(unsigned char in_combat)
             if (app.hero.stones[s] == 0) continue;
             gotoxy(0, row++);
             cfmt("%c) %2u  %-12s  %c%s",
-                    'A' + n, app.hero.stones[s],
+                    'A' + n + (n >= 8), app.hero.stones[s],
                     stone_name(s, !is_fr()), kKind[stone_kind(s)],
                     stone_usable(s, in_combat)
                         ? "" : (msg(M_INTERDITE_EN_PLEIN)));
@@ -1941,7 +2083,9 @@ static void show_inventory(unsigned char in_combat)
             gotoxy(40, row++);
             cfmt("- %s", amulet_name((Amulet)i, !is_fr()));
         }
-        if (n == 0 && app.hero.objects == 0) {
+        /* Ce message concerne la colonne des Pierres, independamment des
+         * objets, amulettes et drapeaux caches de la colonne de droite. */
+        if (n == 0) {
             gotoxy(0, 4);
             cputs(msg(M_AUCUNE_PIERRE_MAGIQUE));
         }
@@ -1953,6 +2097,8 @@ static void show_inventory(unsigned char in_combat)
         /* Une lettre hors de A..Z passe en negatif, donc au-dela de n
          * une fois dans l'octet : un seul test suffit. */
         i = (unsigned char)((key >= 'a') ? (key - 'a') : (key - 'A'));
+        /* I ferme le sac ; les Pierres sautent donc cette lettre (H, J, K...). */
+        if (i > 8) --i;
         if (i >= n) continue;
 
         s = shown[i];
@@ -1960,7 +2106,7 @@ static void show_inventory(unsigned char in_combat)
         gotoxy(0, 22);
         switch (stone_use(&app.hero, s, in_combat)) {
         case STONE_USE_FORBIDDEN:
-            cputs(msg(M_LE_PREMIER_COUP));
+            cputs(msg(in_combat == 2 ? M_PIERRE_ABSENTE : M_LE_PREMIER_COUP));
             break;
         case STONE_USE_NONE:
             cputs(msg(M_PIERRE_ABSENTE));
@@ -1970,9 +2116,12 @@ static void show_inventory(unsigned char in_combat)
             break;
         }
         wait_key_at(23, msg_continue());
+        if (!app.hero.end) break;
     }
 
+    render_scene();
     set_video_mode(back);
+    return app.hero_ready && !app.hero.end;
 }
 #pragma bss-name (pop)
 
@@ -2005,18 +2154,9 @@ static void show_map(void)
     char key;
 
     back = app.video_mode;
-    /* L'image du donateur est deja disponible avant le choix : elle peut
-     * etre revelee en DHGR puis masquee sans quitter cet ecran. Le chargeur
-     * final de load_scene la revalidera ensuite pour le recit. */
     set_video_mode(0);
-    if (!app.has_image) {
-        /* Le fichier peut etre ancien pendant la regeneration des references,
-         * mais le choix doit tout de meme autoriser la bascule : le chargeur
-         * peint la page DHGR quand elle existe et le flux final sera garanti
-         * par le controleur d'assets. */
-        (void)load_hgr_image_as(app.current_scene, 'N');
-        app.has_image = 1;
-    }
+    /* La carte est uniquement en texte. Elle ne charge aucune illustration
+     * et ne doit pas annoncer has_image si le chargement de scene a echoue. */
     wipe();
     map_seen();
     vus = 0;
@@ -2034,7 +2174,7 @@ static void show_map(void)
     revers(0);
 
     /* Les sentiers d'abord, les cases par-dessus : un trait qui arrive sur
-     * une clairiere ne doit pas mordre sur son numero. Un sentier n'est
+     * une clairiere ne doit pas mordre sur ses parentheses. Un sentier n'est
      * dessine que depuis une clairiere VUE -- c'est la regle du livre, qui
      * fait noter « un rayon termine par ? » au bout d'un chemin repere mais
      * pas encore emprunte. */
@@ -2058,7 +2198,7 @@ static void show_map(void)
                 if (d < 2) { b = kMapRow[map_cell(j) >> 3];
                              n = (unsigned char)((b > r ? b - r : r - b) - 1); }
                 else       { b = kMapCol[map_cell(j) & 7];
-                             n = (unsigned char)((b > c ? b - c : c - b) - 4); }
+                             n = (unsigned char)((b > c ? b - c : c - b) - 3); }
             }
             map_trait((unsigned char)(c + kMapSC[d]), (unsigned char)(r + kMapD[d]),
                       kMapDC[d], kMapD[d], n, map_vu[j]);
@@ -2074,7 +2214,7 @@ static void show_map(void)
         j = (i == map_here);
         gotoxy(kMapCol[rec[0] & 7], kMapRow[rec[0] >> 3]);
         if (j) revers(1);
-        cputc('*');
+        cputs("(*)");
         if (j) revers(0);
     }
 
@@ -2108,10 +2248,9 @@ static void show_map(void)
         key = cgetc();
         if (key == 27 || key == 'M' || key == 'm') break;
     }
-    /* On rend l'ecran blanc a celui qui repeindra : la carte occupe 80
-     * colonnes sur 24 lignes, et le clrscr() de render_scene laisserait ses
-     * queues derriere le texte de la page (voir wipe). */
-    wipe();
+    /* Restore the narrative while text writes still address both banks.
+     * Combat redraws only its HUD, so returning a blank body loses the scene. */
+    render_scene();
     set_video_mode(back);
 }
 
@@ -2143,6 +2282,13 @@ static unsigned char open_map(void)
  * ne laisse pas le choix : il ORDONNE le jet et annonce les deux issues. Le
  * moteur le joue donc lui-meme, une fois la page lue. Rend la scene ou aller. */
 #pragma code-name (push, "LC")
+static void wait_test_key(void)
+{
+    row_blank(CHOICE_ROW0 + 1);
+    row_blank(CHOICE_ROW0 + 2);
+    cgetc();
+}
+
 static int run_luck_test(void)
 {
     unsigned char roll;
@@ -2151,7 +2297,7 @@ static int run_luck_test(void)
     gotoxy(0, CHOICE_ROW0);
     cfmt(msg(M_TENTEZ_VOTRE_CHANCE), app.hero.cha);
     pad_to(79);
-    cgetc();
+    wait_test_key();
 
     /* Le jet est releve avant d'etre applique, pour pouvoir le montrer : la
      * regle veut qu'un point de CHANCE parte a chaque tentative, gagnee ou
@@ -2165,7 +2311,8 @@ static int run_luck_test(void)
     if (app.hero.cha > 0) app.hero.cha--;
 
     print_at(CHOICE_ROW0 + 1, lucky ? msg(M_CHANCEUX) : msg(M_MALCHANCEUX));
-    character_adjust_end(&app.hero, lucky ? app.luck_dok : app.luck_dko);
+    carac_apply(app.dice_n == 3 ? app.dice_carac : 0,
+                lucky ? app.luck_dok : app.luck_dko);
     render_title_bar();
     wait_key_at(CHOICE_ROWN, msg_continue());
     return lucky ? app.luck_ok : app.luck_ko;
@@ -2181,17 +2328,19 @@ static int run_luck_test(void)
  * page est encore a l'ecran au-dessus, elle dit deja ce que le de coute et
  * sur quoi ; la Feuille d'Aventure de la ligne 1 dit ce qu'il a coute. */
 #pragma code-name (push, "LC")
+static void prompt_dice(void)
+{
+    print_at(CHOICE_ROW0, msg(M_LANCEZ_LES_DES));
+    wait_test_key();
+}
+
 static void run_dice_roll(void)
 {
     signed char   n = app.dice_n;
     unsigned char roll;
 
-    print_at(CHOICE_ROW0, msg(M_LANCEZ_LES_DES));
-    /* Les choix de la page sont peints en dessous : les effacer, sinon on
-     * lirait "lancer les des" au-dessus de lettres qu'on ne peut pas taper. */
-    row_blank(CHOICE_ROW0 + 1);
-    row_blank(CHOICE_ROW0 + 2);
-    cgetc();
+    if (n == 3) { run_luck_test(); return; }
+    prompt_dice();
 
     /* Un de, deux au plus : le livre n'en jette jamais davantage sur ces
      * pages, et un compteur en bonne et due forme demandait une valeur
@@ -2226,10 +2375,7 @@ static int run_stat_test(void)
 {
     unsigned char roll, against;
 
-    print_at(CHOICE_ROW0, msg(M_LANCEZ_LES_DES));
-    row_blank(CHOICE_ROW0 + 1);
-    row_blank(CHOICE_ROW0 + 2);
-    cgetc();
+    prompt_dice();
 
     roll = roll_2d6();
     against = carac_value(app.cs_carac);
@@ -2250,7 +2396,7 @@ static int run_stat_test(void)
 static void choose_stones(void)
 {
     static const char kKindLetter[3] = { 'N', 'B', 'M' };
-    Stone allowed[STONE_COUNT];
+    unsigned char allowed[STONE_COUNT]; /* indices 0..11 */
     unsigned char count, i;
     char key;
     Stone s;
@@ -2307,9 +2453,11 @@ static unsigned char run_combat(void)
      * Malchanceux. Calcules au moment ou la blessure s'affiche et gardes
      * jusqu'a l'invite, qui les montre au joueur avant qu'il ne parie. */
     unsigned char wgood = 0, wbad = 0;
-    unsigned char end_in = app.hero.end;   /* pour last_loss (lignes DV) */
+    unsigned char end_in;   /* ENDURANCE avant le coup, pour last_loss (DV) */
     Round r;
     char key;
+
+    app.last_loss = 0;
 
     /* La page reste en texte jusqu'au premier "engager" : le joueur lit ce
      * qui l'attend, le bandeau des combattants occupant les 4 lignes du bas.
@@ -2321,6 +2469,8 @@ static unsigned char run_combat(void)
     for (;;) {
         /* Chaque ligne est reecrite en un passage, aucune n'est effacee
          * d'abord : c'est ce qui faisait clignoter le bandeau a chaque coup. */
+        /* conio ecrit les deux banques texte via 80STORE, meme en DHGR plein. */
+        *(volatile unsigned char*)0xC001 = 0;
         render_title_bar();
         show_fighters();
         if (assaut == 0) {
@@ -2328,8 +2478,27 @@ static unsigned char run_combat(void)
             row_blank(CHOICE_ROW0 + 2);
         }
 
+        /* Repeindre depuis le jet conserve : ouvrir le sac ne relance pas
+         * les des et ne consomme pas la blessure encore en attente. */
+        else {
+            gotoxy(0, CHOICE_ROW0 + 1);
+            cfmt(msg(M_ASSAUT_N), assaut);
+            put_roll(CHOICE_ROW0 + 1, msg(M_JET_VOUS),
+                     r.hero_d1, r.hero_d2, r.hero_force);
+            put_roll(CHOICE_ROW0 + 2, msg(M_JET_LUI),
+                     r.monster_d1, r.monster_d2, r.monster_force);
+            if (r.outcome == ROUND_DODGE) put_verdict(msg(M_VOUS_AVEZ_CHACUN));
+            else {
+                /* Le verdict reste a cote du jet de la creature. */
+                gotoxy(40, CHOICE_ROW0 + 2);
+                cputs(hits ? msg(M_VOUS_L_AVEZ) : msg(M_ELLE_VOUS_A));
+                cfmt(msg(M_DEGATS), hurt);
+                pad_to(79);
+            }
+        }
+
         /* L'invite : une touche par assaut. Avant le premier coup, les Pierres
-         * de caracteristique sont encore permises, donc le sac reste ouvrable ;
+         * de caracteristique sont encore permises dans le sac ;
          * ensuite la meme frappe encaisse la blessure annoncee et enchaine sur
          * l'assaut suivant. Seule la Chance demande une frappe de plus, et
          * c'est voulu : le livre la fait choisir APRES avoir vu qui a touche. */
@@ -2339,7 +2508,7 @@ static unsigned char run_combat(void)
                     : (!pending ? M_K_SUIVANT
                        : (hits ? M_K_FRAPPER : M_K_ENCAISSER))));
         if (assaut == 0) put_key("I", msg(M_K_SAC));
-        if (app.flee_target >= 0) put_key("F", msg(M_K_FUIR));
+        if (app.flee_target >= 0 && !flee_after) put_key("F", msg(M_K_FUIR));
         /* L'enjeu, et pas seulement la touche. "Tentez votre Chance" ne dit
          * pas ce qu'on parie ; le joueur pariait a l'aveugle un point de
          * CHANCE contre une blessure dont il ignorait les deux issues. Le
@@ -2360,12 +2529,18 @@ static unsigned char run_combat(void)
         }
         pad_to(79);
 
+        /* Rendre le mode DHGR plein apres les ecritures texte. */
+        if (app.video_mode == 1) *(volatile unsigned char*)0xC000 = 0;
         key = cgetc();
+        *(volatile unsigned char*)0xC001 = 0;
         /* ESC fait tourner les modes video sans quitter le combat : le mode
          * mixte met l'illustration de la creature au-dessus des 4 lignes ou
          * s'echangent les assauts. */
         if (key == 27) { cycle_video_mode(); continue; }
-        if ((key == 'I' || key == 'i') && assaut == 0) { show_inventory(0); continue; }
+        if (key == 'I' || key == 'i') {
+            if (show_inventory(magic_forbidden ? 2 : (assaut != 0))) return 0;
+            continue;
+        }
         /* La carte en plein combat : c'est le moment ou l'on decide de fuir,
          * et savoir vers quoi. Le tour de boucle qui suit repeint la barre,
          * le bandeau et l'invite, comme apres le sac a dos. */
@@ -2375,7 +2550,7 @@ static unsigned char run_combat(void)
             row_blank(CHOICE_ROW0 + 2);
             continue;
         }
-        if ((key == 'F' || key == 'f') && app.flee_target >= 0) {
+        if ((key == 'F' || key == 'f') && app.flee_target >= 0 && !flee_after) {
             gotoxy(0, CHOICE_ROW0);
             cputs(msg(M_VOUS_FUYEZ_ELLE));
             pad_to(79);
@@ -2394,7 +2569,7 @@ static unsigned char run_combat(void)
             wait_space_at(CHOICE_ROWN, msg(M_K_CONTINUER));
             set_video_mode(0);
             music_stop();
-            return character_is_dead(&app.hero) ? 0 : 2;
+            return !app.hero.end ? 0 : 2;
         }
         /* Le `cha` est le meme que celui qui decide d'afficher l'enjeu : une
          * touche qu'on n'a pas proposee ne doit pas repondre. */
@@ -2403,7 +2578,7 @@ static unsigned char run_combat(void)
         if (assaut == 0) {
             /* La musique d'action commence avec le premier assaut, pas pendant
              * la lecture de la page ni l'ouverture éventuelle du sac. */
-            music_switch("COMBAT.MB", 1);
+            music_switch("BATTLE.MB", 1);
             if (app.has_image) set_video_mode(2);   /* on engage : l'image */
         }
 
@@ -2411,7 +2586,12 @@ static unsigned char run_combat(void)
          * tenir un assaut en une seule frappe. */
         if (pending) {
             pending = 0;
+            if (flee_after) --flee_after;
+            end_in = app.hero.end;
             lucky = combat_apply(&app.hero, &app.foes[app.foe_cur], &r, use_luck);
+            /* Compter les blessures elles-memes : un soin dans le sac avant
+             * l'assaut (ou entre deux adversaires) ne doit pas les effacer. */
+            if (end_in > app.hero.end) app.last_loss += end_in - app.hero.end;
             render_title_bar();
             /* La jauge ne bouge qu'ICI, une fois la blessure portee et la
              * Chance tentee : elle est le constat du coup, pas son annonce.
@@ -2439,15 +2619,11 @@ static unsigned char run_combat(void)
                                            ? app.foe_cur : app.foe_count - 1]);
                 wait_space_at(CHOICE_ROWN, msg(M_K_CONTINUER));
                 if (app.foe_cur >= app.foe_count) {
-                    /* "Evaluez vos blessures" : la page d'apres peut brancher
-                     * sur ce que le combat a coute (lignes DV). */
-                    app.last_loss = (end_in > app.hero.end)
-                                  ? (unsigned char)(end_in - app.hero.end) : 0;
                     set_video_mode(0);
                     music_stop();
                     return 1;
                 }
-                assaut = 0;      /* le sac redevient ouvrable avant l'assaut */
+                assaut = 0;      /* les pierres de caracteristique redeviennent permises */
                 /* Le suivant amene son portrait -- sans quoi les deux Loups du
                  * 120 se battaient sous l'image du Maitre des Loups, du
                  * premier assaut au dernier. Seulement s'il CHANGE : une file
@@ -2456,7 +2632,7 @@ static unsigned char run_combat(void)
                 load_foe_image();
                 continue;
             }
-            if (character_is_dead(&app.hero)) {
+            if (!app.hero.end) {
                 sfx_death();
                 /* L'ecran de mort n'arrive pas sur le coup : la jauge vide
                  * reste une seconde de plus sous les yeux. */
@@ -2486,23 +2662,16 @@ static unsigned char run_combat(void)
         assaut++;
         combat_round(&app.hero, &app.foes[app.foe_cur], &r);
         hits = (r.outcome == ROUND_HERO_HITS);
-        gotoxy(0, CHOICE_ROW0 + 1);
-        cfmt(msg(M_ASSAUT_N), assaut);
-        put_roll(CHOICE_ROW0 + 1, msg(M_JET_VOUS),
-                 r.hero_d1, r.hero_d2, r.hero_force);
-        put_roll(CHOICE_ROW0 + 2, msg(M_JET_LUI),
-                 r.monster_d1, r.monster_d2, r.monster_force);
 
-        /* Le temps de lire les deux jets avant que le coup ne porte. Sans ce
-         * battement, des et blessure apparaissent du meme coup de touche : il
-         * n'y a plus d'assaut, seulement un resultat. */
+        /* Separateur sonore entre les assauts ; les jets et le verdict
+         * seront peints ensemble au retour en tete de boucle. */
         sfx_beat();
 
         /* Le bruitage suit QUI a touche : lame seche contre coup sourd. Il
          * part avant le texte, pour tomber en meme temps que l'annonce. */
         if (r.outcome == ROUND_DODGE) {
+            if (flee_after) --flee_after;
             sfx_dodge();
-            put_verdict(msg(M_VOUS_AVEZ_CHACUN));
             continue;   /* personne n'est blesse : rien a encaisser */
         }
         if (hits) sfx_hit(); else sfx_hurt();
@@ -2521,20 +2690,13 @@ static unsigned char run_combat(void)
             wgood = (unsigned char)(hurt - 1);
             wbad  = (unsigned char)(hurt + 1);
         }
-        /* Colonne 40 : le verdict s'ecrit A COTE du jet de la creature, pas
-         * par-dessus. Les deux lignes de des restent lisibles pendant que le
-         * coup porte. */
-        gotoxy(40, CHOICE_ROW0 + 2);
-        cputs(hits ? msg(M_VOUS_L_AVEZ) : msg(M_ELLE_VOUS_A));
-        cfmt(msg(M_DEGATS), hurt);
-        pad_to(79);
         pending = 1;
     }
 }
 
 /* ── L'aide ──────────────────────────────────────────────────────────────
  *
- * Le texte vit sur le disque, dans /SCOSWAMP/HELPFR et /SCOSWAMP/HELPEN, pas
+ * Le texte vit sur le disque, dans /SCOSWAMP/TEXTFR/HELPFR et /SCOSWAMP/TEXTEN/HELPEN, pas
  * dans le binaire : c'est du contenu, il se traduit et se corrige sans
  * recompiler -- et il tenait mal dans les 22 Ko de la fenetre programme.
  */
@@ -2643,9 +2805,9 @@ static void die_and_restart(void)
 {
     /* L'ecran de mort n'est pas une page : sa marche funebre se pose ici, en
      * surcouche, et ne boucle pas. */
-    if (strcmp(music_cur, "MORT.MB") != 0) {
-        music_stop();              /* coupe notamment la boucle COMBAT.MB */
-        music_switch("MORT.MB", 0);
+    if (strcmp(music_cur, "DEATH.MB") != 0) {
+        music_stop();              /* coupe notamment la boucle BATTLE.MB */
+        music_switch("DEATH.MB", 0);
     }
     if (game_over()) return;
     monster_memory_reset();
@@ -2658,7 +2820,6 @@ static void die_and_restart(void)
 /* Charger une nouvelle scene - version optimisée */
 void load_scene(int scene_id) {
     unsigned char issue;
-    unsigned char old_clearing = map_here;
 
     app.current_scene = scene_id;
     /* La clairiere courante suit la page quand la page en designe une, et
@@ -2672,6 +2833,8 @@ void load_scene(int scene_id) {
     app.foe_count = 0;
     app.foe_cur = 0;
     app.flee_target = -1;
+    flee_after = 0;
+    magic_forbidden = 0;
     app.revisit = -1;
     app.choose_n = 0;
     app.luck_ok = -1;
@@ -2703,8 +2866,12 @@ void load_scene(int scene_id) {
      * les jets et les Pierres, qui attendent une touche. La lecture du texte
      * s'est faite musique ouverte -- ProDOS masque les IRQ ~45 ms, une note
      * tenue, moins genante qu'un silence deliberer. */
-    if (app.revisit < 0 && map_ready &&
-        ((issue != MAP_NONE && issue != old_clearing) ||
+    if (app.music_over) {
+        /* Un combat lance sa surcouche au premier assaut. Les autres
+         * surcouches jouent a l'entree, sans remplacer le theme conserve. */
+        if (!app.foe_count) music_switch(app.music_name, 0);
+    } else if (map_ready &&
+        ((issue != MAP_NONE && issue != music_here) ||
          (issue == MAP_NONE && app.music_name[0] != '\0' &&
           /* Bourbenville est une seule zone, meme si ses rues, maisons et
            * dialogues sont plusieurs pages hors de la carte du Marais. Tant
@@ -2809,6 +2976,7 @@ void load_scene(int scene_id) {
      * sans issue. 3 = "gagne avant d'arriver" ; run_combat ne rend que 0
      * (mort), 1 (victoire) ou 2 (fuite). */
     issue = (app.foe_cur < app.foe_count) ? run_combat() : 3;
+    if (issue != 3) app.hero.objects &= ~(1u << OBJ_POTION_NAINE);
 
     if (issue == 0) {
         die_and_restart();
@@ -2908,7 +3076,13 @@ static unsigned char show_saves(unsigned char saving)
             wait_key_at(CHOICE_ROWN, msg_continue());
             return 0;
         }
-        if (load_game(slot)) return 1;
+        if (load_game(slot)) {
+            /* La sauvegarde restaure aussi la langue : les deux catalogues
+             * residents doivent suivre avant de repeindre la page. */
+            messages_load(!is_fr());
+            map_load();
+            return 1;
+        }
         print_at(CHOICE_ROW0, msg(M_CHARGE_ERREUR));
         wait_key_at(CHOICE_ROWN, msg_continue());
     }
@@ -2925,8 +3099,7 @@ void handle_user_input(char key) {
         
     } else if (key == 'I' || key == 'i') {
         /* Hors combat, toutes les Pierres sont utilisables. */
-        show_inventory(0);
-        render_scene();
+        if (show_inventory(0)) { die_and_restart(); return; }
 
     } else if (key == 'H' || key == 'h') {
         show_help();
@@ -2956,10 +3129,9 @@ void handle_user_input(char key) {
          * code deviendrait fragile au premier elargissement. */
         if (map_ready) {
             open_map();
-            /* La carte peut avoir ete ouverte depuis une page dont le texte
-             * est en banque de travail. Relire le fichier garantit que les
-             * pointeurs de lignes et les choix sont reappliques au retour. */
-            display_scene_text(app.current_scene);
+            /* La carte ne touche pas file_buffer : les pointeurs de texte
+             * et les choix sont encore valides. Relire la page rejouerait
+             * ses effets d'entree et son detour V, et forcerait le texte. */
             render_scene();
         }
 
@@ -2980,7 +3152,12 @@ void handle_user_input(char key) {
                 return;
             }
             /* La Pierre exigee se desintegre en servant. */
-            if (c->require < STONE_COUNT) stone_use(&app.hero, (Stone)c->require, 0);
+            if (c->require < STONE_COUNT) {
+                /* Le contrecoup de Malediction est le jet ED de la page cible.
+                 * stone_use le ferait payer une premiere fois en silence. */
+                if (c->require == STONE_MALEDICTION) --app.hero.stones[c->require];
+                else stone_use(&app.hero, (Stone)c->require, 0);
+            }
             /* Une Pierre offerte par le choix change de main avant le saut. */
             if (c->grant < STONE_COUNT) character_give_stone(&app.hero, (Stone)c->grant, 1);
             if (c->obj_mode == 3) character_take_object(&app.hero, (Object)c->object);
@@ -3000,16 +3177,8 @@ void main(void) {
      * avant tout, avec les bornes que le lieur exporte (scoswamp.cfg). */
     memset(_LOWBSS_RUN__, 0, (size_t)_LOWBSS_SIZE__);
 
-    /* Initialiser l'état de l'application */
-    app.current_scene = 0;
-    app.video_mode = 0;  /* Démarrer en mode texte 80 colonnes */
-    app.num_choices = 0;
-    app.has_image = 0;
-    app.foe_count = 0;
-    app.foe_cur = 0;
-    app.hero_ready = 0;
-    app.flee_target = -1;
-    app.revisit = -1;
+    /* app vient d'etre mise a zero avec LOWBSS. load_scene initialise les
+     * champs de scene ; seule la sentinelle de la boucle est necessaire ici. */
     app.pending_scene = -1;
     monster_memory_reset();
     scene_memory_reset();

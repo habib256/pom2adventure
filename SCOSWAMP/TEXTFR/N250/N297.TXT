@@ -11,4 +11,4 @@ hurler, le tapis volant s'eleve de plus en plus haut, et, bientot, le sorcier
 vous lache. Vous tombez, vous tombez... et tout devient noir... Votre aventure
 est terminee.
 
-MU +MORT.MB
+MU +DEATH.MB

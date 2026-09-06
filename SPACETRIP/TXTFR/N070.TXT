@@ -1,0 +1,19 @@
+T 070 La cour de l'Empereur Mingus
+
+   Mangeaux est une planete de marbre rouge, de gongs et de courants d'air.
+Deux gardes en casque a ailerons vous poussent devant un trone haut de six
+metres.
+
+   L'Empereur Mingus vous toise par-dessus un col en eventail qui monte plus
+haut que sa tete. Barbiche pointue, sourire mince, ongles laques.
+
+   "On ne se presente pas devant moi sans un present", dit-il. "C'est ecrit
+partout. Enfin : ce serait ecrit partout si j'avais des murs."
+
+   Derriere le trone, une tenture pourpre bat toute seule. Qui dit courant
+d'air dit conduit, et ce conduit-la descend vers les hangars.
+
+CI .MING 071 Saluer l'Empereur, qui vous connait deja
+GU EPIC 072 Presenter la fiole d'Epice a deux mains
+CN EPIC 073 Vous incliner tres bas, les mains vides
+C 003 Reculer vers le Cabriolet

@@ -12,6 +12,6 @@ accueille par votre nom.
 
    "Quel sorcier servez-vous ?" demande-t-elle.
 
-C 023 Pompatarte
-C 164 Gayolard
-C 288 Stratagus
+CI .P 023 Pompatarte
+CI .G 164 Gayolard
+CI .S 288 Stratagus

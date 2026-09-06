@@ -8,6 +8,6 @@ faut payer le prix.
    Impossible de fuir: il vous rattraperait. Il n'a pas d'arme, seulement ses
 poings monstrueux: une chance subsiste de le vaincre.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 12 16 DEMON
 MV 174

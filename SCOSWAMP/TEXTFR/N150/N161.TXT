@@ -5,7 +5,7 @@ trois directions possibles s'ouvrent sous les arbres.
 
    Choisissez vite, le vent tourne et charrie des odeurs de marais.
 
-MU GEANT.MB
+MU GIANT.MB
 C 092 Aller vers le nord
 C 041 Aller vers le sud
 C 121 Prendre la route de l'ouest

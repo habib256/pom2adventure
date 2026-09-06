@@ -4,6 +4,6 @@ T 267 Thief's Attack
 dagger, but he's a cunning opponent. It's impossible for you to flee; combat
 is inevitable. If you manage to kill him, continue the adventure.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 10 9 THIEF
 MV 386

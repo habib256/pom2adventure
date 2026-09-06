@@ -1,0 +1,10 @@
+{
+  "scenario": "demarrage",
+  "assertions": 18,
+  "failures": [],
+  "seconds": 3.534259080886841,
+  "maxima": {
+    "hardware": 58,
+    "c_call": 82
+  }
+}

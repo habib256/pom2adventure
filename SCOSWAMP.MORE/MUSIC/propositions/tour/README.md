@@ -1,6 +1,6 @@
 # Zone `tour` — la tour de Stratagus
 
-**Fichier proposé : `TOUR.MB` (`TOUR.MB.BIN`, 548 octets, 58,4 s de boucle)**
+**Fichier proposé : `TOWER.MB` (`TOWER.MB.BIN`, 548 octets, 58,4 s de boucle)**
 
 ## Ce que la zone couvre
 
@@ -25,7 +25,7 @@ plus grande composante fortement connexe du graphe, 14 pages**
 Les pages de combat (124, 222, 225, 402) passent en zone `combat` le temps du
 duel, puis reviennent ici ; les quatre morts passent en zone `mort`.
 
-**La page 358 reste sur `TOUR.MB` et non sur `VICTOIRE.MB`** : *« votre peu
+**La page 358 reste sur `TOWER.MB` et non sur `VICTORY.MB`** : *« votre peu
 reluisante mission »* (`TEXTFR/N350/N358.TXT:12`). Cette victoire-là ne mérite
 pas d'hymne, et c'est la musique qui doit le dire.
 
@@ -66,7 +66,7 @@ passage dans la tour sans se répéter.
 ```sh
 python3 SCOSWAMP.MORE/MUSIC/midi_to_mb.py \
     SCOSWAMP.MORE/MUSIC/propositions/tour/milan-pavan2.mid \
-    SCOSWAMP.MORE/MUSIC/propositions/tour/TOUR.MB.BIN \
+    SCOSWAMP.MORE/MUSIC/propositions/tour/TOWER.MB.BIN \
     --bpm 150 --vol 13,9,11 \
     --wav SCOSWAMP.MORE/MUSIC/propositions/tour/TOUR.wav
 ```

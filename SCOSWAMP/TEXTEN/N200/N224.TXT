@@ -4,7 +4,7 @@ T 224 Terror and Wolves
 dwelling; however the two Wolves attack you. They throw themselves at you in
 turn: you must fight them one after the other.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 5 First WOLF
 M 6 6 Second WOLF
 CF 314 Flee if you're getting the worse of it

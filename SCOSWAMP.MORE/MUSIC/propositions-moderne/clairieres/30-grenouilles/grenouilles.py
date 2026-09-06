@@ -35,7 +35,7 @@ Ce que la revision ajoute :
 28 mesures a 4/4, 38,2 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8).
 
     python3 grenouilles.py && python3 ../../../midi_to_mb.py grenouilles.mid \\
-        GRENOUILLES.MB.BIN --bpm 176 --max 2304 --wav GRENOUILLES.wav
+        FROGS.MB.BIN --bpm 176 --max 2304 --wav GRENOUILLES.wav
 """
 import sys
 from pathlib import Path

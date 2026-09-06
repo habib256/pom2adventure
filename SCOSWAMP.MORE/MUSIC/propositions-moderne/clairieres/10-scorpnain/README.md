@@ -1,6 +1,6 @@
 # Clairière 10 — Scorpion et nain (`hub` 088, case 2,2)
 
-**`SCORPNAIN.MB.BIN` — 2 076 octets, 36,5 s, boucle.**
+**`DWARFSCORP.MB.BIN` — 2 076 octets, 36,5 s, boucle.**
 
 ## Les pages
 
@@ -86,6 +86,6 @@ secondes, puis plus rien pendant huit mesures.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/10-scorpnain
 python3 scorpnain.py
-python3 ../../../midi_to_mb.py scorpnain.mid SCORPNAIN.MB.BIN \
+python3 ../../../midi_to_mb.py scorpnain.mid DWARFSCORP.MB.BIN \
     --bpm 184 --max 2304 --wav SCORPNAIN.wav
 ```

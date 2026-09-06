@@ -1,7 +1,8 @@
 T 342 Return to the Giant
+AC
 
    You recognize the clearing where you encountered the enormous Giant.
 
-MU GEANT.MB
-C 197 If you killed him
-C 300 Otherwise
+MU GIANT.MB
+CV 366 197 If you killed him
+CX 366 300 Otherwise

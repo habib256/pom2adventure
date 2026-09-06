@@ -10,7 +10,7 @@ vous puissiez vous asseoir.
 
    Vous devez lui donner une Pierre de Magie, un bijou ou tout autre objet.
 
-   Si vous ne possedez que l'Anneau de Cuivre :
+   Si vous ne possedez aucun bien a remettre, hormis peut-etre votre Anneau :
 
-C 180 Lui donner l'Anneau de Cuivre
-C 407 Si vous lui donnez un autre objet de votre choix
+CB 0 180 Avouer que vous ne pouvez pas payer
+CB 1 407 Lui remettre un bien de votre sac

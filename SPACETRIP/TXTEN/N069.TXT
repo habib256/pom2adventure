@@ -1,0 +1,12 @@
+T 069 I am sorry
+
+   "No," says the soft voice, without a trace of reproach. "I am sorry. I am
+truly very sorry. You did not find it, and I cannot open that door."
+
+   The red eye saddens by a semitone. The corridor tilts two degrees. A
+service hatch opens under your boots with exquisite delicacy.
+
+   "I wish you an excellent day," CAL adds while you drop towards the
+evacuation lock. It is said so kindly that you thank him on the way down.
+
+C 007 Let the autopilot scoop you up

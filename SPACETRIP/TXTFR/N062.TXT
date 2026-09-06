@@ -1,0 +1,16 @@
+T 062 La porte, et l'oeil rouge
+
+   Le couloir se termine sur une porte blanche sans poignee. Au-dessus,
+l'oeil rouge s'allume doucement, comme s'il se reveillait par politesse.
+
+   "Bonjour", dit une voix tres douce et tres lente, la voix d'un ami qui va
+vous annoncer une mauvaise nouvelle. "Je suis desole. Je ne peux pas ouvrir
+cette porte."
+
+   Un temps.
+
+   "Cela dit, je m'ennuie beaucoup. Je pourrais vous poser une question."
+
+CI .CAL 066 Franchir la porte, restee ouverte
+CN .CAL 064 Accepter la question de l'ordinateur
+C 003 Ressortir par le sas

@@ -1,0 +1,13 @@
+T 086 Trolley reprend tout
+
+   Trolley regarde vos bacs. Trolley regarde ses jumelles. Trolley regarde
+les bacs encore une fois, au cas ou l'univers se serait corrige tout seul.
+
+   Il vide tout par terre avec la douceur d'un bibliothecaire qui remet un
+livre au bon rayon, et il recommence. Il ne vous en veut pas. Il ne sait
+pas en vouloir. C'est presque pire.
+
+   Il tape a nouveau sur les trois bacs et attend. Il attendra toujours.
+
+C 082 Retrier
+C 081 Laisser tomber

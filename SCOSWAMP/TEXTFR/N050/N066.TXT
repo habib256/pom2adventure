@@ -15,7 +15,7 @@ s'agit d'un VOLEUR.
 
    Que faites-vous ?
 
-MU PIQUENIQUE.MB
+MU PICNIC.MB
 C 267 Attaquer le voleur sur-le-champ
 C 017 Ne pas lui preter attention et continuer
 C 147 Accepter son invitation et vous asseoir a cote de lui

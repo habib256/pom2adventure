@@ -7,5 +7,6 @@ immediately spring up and brandish their swords.
 fury. You take advantage of the confusion to retrace your steps and regain the
 trail by which you arrived, heading east.
 
-MU BETE.MB
+MU BEAST.MB
+GX GR
 C 279 Retrace your steps eastward

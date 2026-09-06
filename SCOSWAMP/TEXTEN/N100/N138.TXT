@@ -5,6 +5,6 @@ crosses it from east to west.
 
    A bridge spans it, apparently deserted.
 
-MU PONT.MB
+MU BRIDGE.MB
 C 101 Cross the bridge
 C 045 Go around the river

@@ -3,6 +3,6 @@ T 279 The Sword Trees
    To your great dismay, the terrible Sword Trees' branches have already
 regrown,
 
-MU ARBRESEPEES.MB
+MU SWORDTREES.MB
 C 028 Fight them with your sword
 C 203 Resort to magic

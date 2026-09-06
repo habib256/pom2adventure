@@ -7,5 +7,6 @@ T 285 Sortilege de Faiblesse
 Vous perdez la moitie de vos points d'ENDURANCE, et il vous faut a present
 combattre ou mourir.
 
+EH
 C 124 Attaquer le Sorcier avec votre epee
 C 256 L'affronter en ayant recours a la magie

@@ -1,0 +1,11 @@
+{
+  "scenario": "jardins_contrats",
+  "assertions": 23,
+  "failures": 0,
+  "exit_code": 0,
+  "seconds": 18.9,
+  "command": "python3 -u SCOSWAMP.MORE/TOOLS/playtest.py --port 6526 --only jardins_contrats",
+  "hdv_sha256": "8785fda7dbee0948e3c9da9274baee1b669a59d71473d1e04144554566cec1db",
+  "scope": "Injected scene fixtures: rewards 283/396, Friendship 152->117, truth 292, Withering 152->264->379, loot 251; save/load invariance. Not a natural complete route or a completed combat.",
+  "javascript": "node tools/test_gardens_contracts.mjs: FR/EN x entry/restore x 7 pages, passed"
+}

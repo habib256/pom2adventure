@@ -1,16 +1,21 @@
-Base de Lancement Spatiale
---------------------------
+T 001 SPACE TRIP -- Partie 1
 
-Vous voici au seuil d'une aventure cosmique extraordinaire !
-Votre vaisseau spatial flambant neuf attend sur le pas de tir.
-Les moteurs ioniques ronronnent doucement, prets a vous propulser
-vers les confins de l'univers connu... et au-dela !
+   Douze abonnes. Votre mere, un bot publicitaire, et dix ames que la
+solitude a rendues indulgentes. Voila @CosmoSelfie, votre chaine, la plus
+petite lueur de la galaxie.
 
-Cette expedition sera l'occasion revee de collectionner des selfies
-spectaculaires aux quatre coins de la galaxie. Vos amis sur l'Instagram
-intergalactique en seront verts de jalousie (ou bleus, selon leur planete
-d'origine). Alors, cap sur quelle destination ?
+   Ce matin, l'Holophone a sonne : le Grand Defi Selfie Galactique est
+lance. Le premier createur qui rapporte un selfie avec CINQ legendes de
+l'univers decroche un million d'abonnes et le contrat du mysterieux
+Sponsor Vortex.
 
-C 002 Direction la planete des forets eternelles
-C 003 Foncer vers le trou noir supermassif
-C 004 Explorer la comete au perihelie
+   Dehors, sur le pont d'envol, le Cabriolet vous attend : une fusee
+chromee a ailerons, dont le toit s'ouvre. Dans le vide. C'est idiot. C'est
+votre vaisseau.
+
+   Trois quais plus loin, Bizz Annee-Lumiere salue ses quarante millions
+d'abonnes. Il ne vous a pas vu. Personne ne vous a jamais vu.
+
+   Ca commence maintenant.
+
+C 002 Monter a bord du Cabriolet

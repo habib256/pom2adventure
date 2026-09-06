@@ -23,22 +23,22 @@ objet à écouter pour juger ; il n'est pas suivi par git.
 
 | # | `hub` | Clairière | Zone | Fichier disque | Pièce | Mode | bpm | Durée | Octets |
 | ---: | ---: | --- | --- | --- | --- | --- | ---: | ---: | ---: |
-| 1 | 078 | Route de Courbensaule | `village` | `COURBENS.MB` | **La Route des Trois Auberges** | ré mixolydien | **176** | 38,2 s | **2 276** |
-| 2 | 234 | Le Patrouilleur vert | `nord` | `PATROUIL.MB` | **La Question du Patrouilleur** | la éolien | 162 | 41,5 s | 2 185 |
-| 3 | 084 | Le Maître des Jardins | `nord` | `JARDINS.MB` | **L'Amulette de Fleur** | ré dorien | 144 | 43,3 s | 2 042 |
-| 4 | 232 | Les deux loups | `nord` | `LOUPS.MB` | **Deux Paires d'Yeux** | si éolien | 172 | 38,4 s | **2 253** |
-| 5 | 218 | Feu follet à l'orée | `nord` | `FEUFOLLET.MB` | **La Lumière qui Recule** | sol éolien | 154 | 40,5 s | 2 083 |
-| 6 | 121 | Le croisement | `nord` | `CROISEMENT.MB` | **Quatre Chemins** | mi éolien | 150 | 44,8 s | 2 177 |
-| 7 | 161 | Le Géant | `nord` | `GEANT.MB` | **Il Est Interdit de Passer** | do éolien | **138** | 41,7 s | **1 624** |
+| 1 | 078 | Route de Courbensaule | `village` | `BENTBEAKS.MB` | **La Route des Trois Auberges** | ré mixolydien | **176** | 38,2 s | **2 276** |
+| 2 | 234 | Le Patrouilleur vert | `nord` | `PATROLLER.MB` | **La Question du Patrouilleur** | la éolien | 162 | 41,5 s | 2 185 |
+| 3 | 084 | Le Maître des Jardins | `nord` | `GARDENS.MB` | **L'Amulette de Fleur** | ré dorien | 144 | 43,3 s | 2 042 |
+| 4 | 232 | Les deux loups | `nord` | `WOLVES.MB` | **Deux Paires d'Yeux** | si éolien | 172 | 38,4 s | **2 253** |
+| 5 | 218 | Feu follet à l'orée | `nord` | `WILLOWISP.MB` | **La Lumière qui Recule** | sol éolien | 154 | 40,5 s | 2 083 |
+| 6 | 121 | Le croisement | `nord` | `CROSSROADS.MB` | **Quatre Chemins** | mi éolien | 150 | 44,8 s | 2 177 |
+| 7 | 161 | Le Géant | `nord` | `GIANT.MB` | **Il Est Interdit de Passer** | do éolien | **138** | 41,7 s | **1 624** |
 | 8 | 019 | Clairière aux brigands | `nord` | `BRIGANDS.MB` | **Cinq Voix derrière l'Arbre** | ré éolien → **majeur** | **180** | **37,3 s** | **2 258** |
-| 9 | 153 | Le bassin de Vase | `danger` | `VASE.MB` | **Ce qui Sort du Bassin** | ré phrygien | 138 | **45,2 s** | 1 594 |
-| 10 | 088 | Scorpion et nain | `danger` | `SCORPNAIN.MB` | **Les Pinces et l'Os** | la phrygien | **184** | **36,5 s** | 2 076 |
-| 11 | 202 | Le nid de l'Aigle | `nord` | `AIGLE.MB` | **Le Grand Nid** | fa♯ éolien | 156 | 43,1 s | 1 682 |
-| 12 | 270 | Sables mouvants | `danger` | `SABLES.MB` | **Le Sol qui Cède** | fa phrygien | 144 | 43,3 s | 1 920 |
+| 9 | 153 | Le bassin de Vase | `danger` | `MUD.MB` | **Ce qui Sort du Bassin** | ré phrygien | 138 | **45,2 s** | 1 594 |
+| 10 | 088 | Scorpion et nain | `danger` | `DWARFSCORP.MB` | **Les Pinces et l'Os** | la phrygien | **184** | **36,5 s** | 2 076 |
+| 11 | 202 | Le nid de l'Aigle | `nord` | `EAGLE.MB` | **Le Grand Nid** | fa♯ éolien | 156 | 43,1 s | 1 682 |
+| 12 | 270 | Sables mouvants | `danger` | `QUICKSAND.MB` | **Le Sol qui Cède** | fa phrygien | 144 | 43,3 s | 1 920 |
 
 **Total : 24 170 octets** sur le volume, pour douze fichiers — **4 824 notes de
 hauteur et 985 coups de batterie**. Ce qui coûte n'est pas le nombre de pièces
-mais la plus grosse : **`COURBENS.MB`, 2 276 octets**, à **28 octets** de la
+mais la plus grosse : **`BENTBEAKS.MB`, 2 276 octets**, à **28 octets** de la
 limite du tampon de zone (2 304).
 
 ⚠ Trois pièces sont serrées et doivent être **reconverties avant d'être crues**
@@ -137,18 +137,18 @@ Depuis `SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres` :
 
 ```sh
 M=../../../midi_to_mb.py
-(cd 01-courbens   && python3 courbens.py   && python3 $M courbens.mid   COURBENS.MB.BIN   --bpm 176 --max 2304 --wav COURBENS.wav)
-(cd 02-patrouil   && python3 patrouil.py   && python3 $M patrouil.mid   PATROUIL.MB.BIN   --bpm 162 --max 2304 --wav PATROUIL.wav)
-(cd 03-jardins    && python3 jardins.py    && python3 $M jardins.mid    JARDINS.MB.BIN    --bpm 144 --max 2304 --wav JARDINS.wav)
-(cd 04-loups      && python3 loups.py      && python3 $M loups.mid      LOUPS.MB.BIN      --bpm 172 --max 2304 --wav LOUPS.wav)
-(cd 05-feufollet  && python3 feufollet.py  && python3 $M feufollet.mid  FEUFOLLET.MB.BIN  --bpm 154 --max 2304 --wav FEUFOLLET.wav)
-(cd 06-croisement && python3 croisement.py && python3 $M croisement.mid CROISEMENT.MB.BIN --bpm 150 --max 2304 --wav CROISEMENT.wav)
-(cd 07-geant      && python3 geant.py      && python3 $M geant.mid      GEANT.MB.BIN      --bpm 138 --max 2304 --wav GEANT.wav)
+(cd 01-courbens   && python3 courbens.py   && python3 $M courbens.mid   BENTBEAKS.MB.BIN   --bpm 176 --max 2304 --wav COURBENS.wav)
+(cd 02-patrouil   && python3 patrouil.py   && python3 $M patrouil.mid   PATROLLER.MB.BIN   --bpm 162 --max 2304 --wav PATROUIL.wav)
+(cd 03-jardins    && python3 jardins.py    && python3 $M jardins.mid    GARDENS.MB.BIN    --bpm 144 --max 2304 --wav JARDINS.wav)
+(cd 04-loups      && python3 loups.py      && python3 $M loups.mid      WOLVES.MB.BIN      --bpm 172 --max 2304 --wav LOUPS.wav)
+(cd 05-feufollet  && python3 feufollet.py  && python3 $M feufollet.mid  WILLOWISP.MB.BIN  --bpm 154 --max 2304 --wav FEUFOLLET.wav)
+(cd 06-croisement && python3 croisement.py && python3 $M croisement.mid CROSSROADS.MB.BIN --bpm 150 --max 2304 --wav CROISEMENT.wav)
+(cd 07-geant      && python3 geant.py      && python3 $M geant.mid      GIANT.MB.BIN      --bpm 138 --max 2304 --wav GEANT.wav)
 (cd 08-brigands   && python3 brigands.py   && python3 $M brigands.mid   BRIGANDS.MB.BIN   --bpm 180 --max 2304 --wav BRIGANDS.wav)
-(cd 09-vase       && python3 vase.py       && python3 $M vase.mid       VASE.MB.BIN       --bpm 138 --max 2304 --wav VASE.wav)
-(cd 10-scorpnain  && python3 scorpnain.py  && python3 $M scorpnain.mid  SCORPNAIN.MB.BIN  --bpm 184 --max 2304 --wav SCORPNAIN.wav)
-(cd 11-aigle      && python3 aigle.py      && python3 $M aigle.mid      AIGLE.MB.BIN      --bpm 156 --max 2304 --wav AIGLE.wav)
-(cd 12-sables     && python3 sables.py     && python3 $M sables.mid     SABLES.MB.BIN     --bpm 144 --max 2304 --wav SABLES.wav)
+(cd 09-vase       && python3 vase.py       && python3 $M vase.mid       MUD.MB.BIN       --bpm 138 --max 2304 --wav VASE.wav)
+(cd 10-scorpnain  && python3 scorpnain.py  && python3 $M scorpnain.mid  DWARFSCORP.MB.BIN  --bpm 184 --max 2304 --wav SCORPNAIN.wav)
+(cd 11-aigle      && python3 aigle.py      && python3 $M aigle.mid      EAGLE.MB.BIN      --bpm 156 --max 2304 --wav AIGLE.wav)
+(cd 12-sables     && python3 sables.py     && python3 $M sables.mid     QUICKSAND.MB.BIN     --bpm 144 --max 2304 --wav SABLES.wav)
 ```
 
 **Les tempos ont changé** : ce bloc n'est plus interchangeable avec l'ancien.
@@ -173,7 +173,7 @@ Les douze finissent par `OK`.
 
 Aucun texte, aucun code, aucun `Makefile` n'a été touché : ce dossier est un
 atelier. Adopter une de ces douze pièces demanderait, **pour chaque page de la
-clairière**, de remplacer sa ligne `MU MARAISNO.MB` / `MU DANGER.MB` /
+clairière**, de remplacer sa ligne `MU NORTHSWAMP.MB` / `MU DANGER.MB` /
 `MU VILLAGE.MB` par le fichier de la clairière, et de copier le `.MB.BIN` sur le
 volume. Les pages concernées sont listées en tête de chaque `README.md`.
 

@@ -8,5 +8,5 @@ leads you to the library where Pompatarte is seated, in robes.
 me a map to reach Courbensaule?" The question is direct; he awaits a precise
 answer.
 
-C 158 Yes, I went all the way to Courbensaule
-C 008 No, I did not find it
+CV 280 158 Yes, I went all the way to Courbensaule
+CX 280 008 No, I did not find it

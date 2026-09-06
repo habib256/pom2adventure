@@ -1,0 +1,19 @@
+T 054 Le Ver des Dunes veut etre tague
+V 056
+
+   Toc. Toc. Toc. Trois minutes plus tard, la dune se souleve et le Ver sort
+du sable sur trente metres de haut, en pluie doree, machoire grande ouverte.
+
+   Il s'arrete. Il vous ecoute filmer. Un ver sans yeux sait parfaitement ou
+se trouve une camera.
+
+   Vous sautez sur son dos, vous vous accrochez a une ecaille large comme une
+porte et vous levez l'Holophone. Il pose. Il pose vraiment.
+
+   Puis il tousse, et une fiole d'epice ambree roule a vos pieds. Un cadeau,
+ou un pourboire. Avec un ver, on ne sait jamais.
+
+G S3
+G EPIC
+C 055 Redescendre en surfant sur l'echine
+C 003 Regagner le Cabriolet en marchant n'importe comment

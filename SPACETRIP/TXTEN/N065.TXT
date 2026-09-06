@@ -1,0 +1,14 @@
+T 065 The door opens
+V 066
+
+   "Sixteen," the soft voice repeats. "One by one. Two by two. Three by
+three. Four by four. That is all the slab says, and it is enormous."
+
+   The white door slides open without a sound. Behind it: an untidy
+storeroom, crates, a silver tarpaulin, and a smell of hot chocolate
+forgotten a very long time ago.
+
+   "Thank you," says CAL. "It has been eleven years. I shall leave it open."
+
+G .CAL
+C 066 Step into the storeroom

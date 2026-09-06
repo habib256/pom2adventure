@@ -12,7 +12,7 @@ you will suffer an injury according to the usual rules.
    If you kill one of the two frogs, the combat continues against the other
 according to normal rules.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 5 6 FIRST GIANT FROG
 M 6 5 SECOND GIANT FROG
 MV 230

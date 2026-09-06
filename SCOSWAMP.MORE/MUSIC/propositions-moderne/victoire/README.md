@@ -1,6 +1,6 @@
 # Zone `victoire` — les deux fins gagnantes
 
-**`VICTOIRE.MB.BIN` — 1 265 octets, 25,9 s, `--no-loop`.**
+**`VICTORY.MB.BIN` — 1 265 octets, 25,9 s, `--no-loop`.**
 
 Surcouche : tampon de 1 280 octets, 15 de marge. Toute retouche doit être reconvertie avant d'être crue.
 
@@ -58,6 +58,6 @@ Mesuré par `../verifier.py` — c'est l'attribution réelle de
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/victoire
 python3 victoire.py
-python3 ../../midi_to_mb.py victoire.mid VICTOIRE.MB.BIN \
+python3 ../../midi_to_mb.py victoire.mid VICTORY.MB.BIN \
     --bpm 150 --no-loop --max 1280 --wav VICTOIRE.wav
 ```

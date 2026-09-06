@@ -1,6 +1,6 @@
 # Zone `courbensaule` — la ville du nord et son auberge
 
-**Fichier proposé : `COURBENS.MB` (`COURBENS.MB.BIN`, 553 octets, 35,8 s de boucle)**
+**Fichier proposé : `BENTBEAKS.MB` (`BENTBEAKS.MB.BIN`, 553 octets, 35,8 s de boucle)**
 
 ## Ce que la zone couvre
 
@@ -57,7 +57,7 @@ basse : c'est précisément ce que le format MB1 sait faire de mieux.
 ```sh
 python3 SCOSWAMP.MORE/MUSIC/midi_to_mb.py \
     SCOSWAMP.MORE/MUSIC/propositions/courbensaule/saltarello.mid \
-    SCOSWAMP.MORE/MUSIC/propositions/courbensaule/COURBENS.MB.BIN \
+    SCOSWAMP.MORE/MUSIC/propositions/courbensaule/BENTBEAKS.MB.BIN \
     --bpm 180 --vol 13,9,11 \
     --wav SCOSWAMP.MORE/MUSIC/propositions/courbensaule/COURBENS.wav
 ```

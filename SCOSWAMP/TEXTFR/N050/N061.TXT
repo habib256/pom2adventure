@@ -11,4 +11,4 @@ risquer la vie pour tenter de le tuer.
    Que faites-vous?
 
 C 229 Croire le Geant et partir en paix
-C 366 Continuer le combat pour tenter de tuer le Geant
+C 420 Continuer le combat pour tenter de tuer le Geant

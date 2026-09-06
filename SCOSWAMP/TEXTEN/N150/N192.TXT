@@ -3,6 +3,6 @@ T 192 Return to the Thief
    You recognize the clearing where you had encountered the Thief. Silence
 reigns there, heavy with recent memories.
 
-MU PIQUENIQUE.MB
+MU PICNIC.MB
 C 267 If he is still alive
 C 179 If he is dead and lying on the ground

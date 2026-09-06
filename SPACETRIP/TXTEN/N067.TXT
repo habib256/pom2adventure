@@ -1,0 +1,15 @@
+T 067 Weetee goes back to sleep
+
+   The small grey fellow looks at your pockets, then at your hands, then at
+your pockets once more. The finger fades out gently, like a bulb being
+unplugged.
+
+   He folds away his three hundred and ten wrinkles, curls up under the
+silver tarpaulin and begins to snore. It sounds like a well-mannered
+radiator.
+
+   You have nothing left to offer him today.
+
+C 066 Lift the tarpaulin one more time
+C 062 Step back out into the white corridor
+C 003 Head back to the Convertible

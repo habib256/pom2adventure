@@ -1,0 +1,17 @@
+T 023 Le compacteur a ordures
+
+   Vous atterrissez sur un matelas de choses molles dont vous preferez ne pas
+connaitre l'origine. Quelque part au-dessus, une porte se verrouille. Quelque
+chose de long et de tiede vous frole la cheville, puis renonce.
+
+   Un declic. Les deux murs se mettent en marche l'un vers l'autre, avec la
+patience tranquille d'une administration.
+
+   Trois trappes de maintenance, a hauteur d'epaule, numerotees UN, DEUX et
+TROIS. Vous avez le temps d'en ouvrir une seule.
+
+   Sur l'Holophone, le compteur de spectateurs grimpe. Ils adorent.
+
+C 024 Forcer la trappe UN
+C 025 Forcer la trappe DEUX
+C 024 Forcer la trappe TROIS

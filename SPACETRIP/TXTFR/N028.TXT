@@ -1,0 +1,16 @@
+T 028 Il vous reconnait et soupire
+
+   La porte s'ouvre sur la sphere noire. Le fauteuil pivote lentement, avec
+tout le poids du destin.
+
+   -- Encore vous. Keuh-hooo.
+
+   Le Seigneur Vapeur regarde votre Holophone, puis vous, puis le plafond.
+
+   -- Vous avez deja le cliche. Il est en ligne. Ma mere l'a vu. Le
+commandement l'a vu. On me demande si je vais bien. Keuh-hooo.
+
+   Il se rassoit. La cape retombe. Quelque part dans le casque, on entend
+tres distinctement le soupir d'un radiateur qui se vide.
+
+C 003 Le laisser mediter et regagner le Cabriolet

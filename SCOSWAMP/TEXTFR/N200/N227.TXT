@@ -8,7 +8,7 @@ mouches.
 
    Dans quelle direction souhaitez-vous aller ?
 
-MU ARENE.MB
+MU ARENA.MB
 C 066 Prendre le sentier qui monte vers le nord
 C 388 Emprunter le passage etroit vers l'est
 C 320 Prendre le chemin qui revient vers l'ouest

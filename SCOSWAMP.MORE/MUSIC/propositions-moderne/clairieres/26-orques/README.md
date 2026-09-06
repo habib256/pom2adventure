@@ -1,6 +1,6 @@
 # Clairière 26 — Orques des Marais (`hub` 309)
 
-**`ORQUES.MB.BIN` — 1 918 octets, 40,8 s, boucle, avec batterie.**
+**`ORCS.MB.BIN` — 1 918 octets, 40,8 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
@@ -73,6 +73,6 @@ stéréo 59/41.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/26-orques
 python3 orques.py
-python3 ../../../midi_to_mb.py orques.mid ORQUES.MB.BIN \
+python3 ../../../midi_to_mb.py orques.mid ORCS.MB.BIN \
     --bpm 166 --max 2304 --wav ORQUES.wav
 ```

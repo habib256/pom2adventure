@@ -30,7 +30,7 @@ pour que la boucle reparte a nu.
 32 mesures a 4/4, 43,6 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8) - coda(4).
 
     python3 pinces.py && python3 ../../../midi_to_mb.py pinces.mid \\
-        PINCES.MB.BIN --bpm 176 --max 2304 --wav PINCES.wav
+        PINCERS.MB.BIN --bpm 176 --max 2304 --wav PINCES.wav
 """
 import sys
 from pathlib import Path

@@ -1,0 +1,16 @@
+{
+  "hdv_sha256": "8365744045f2cf1a1c93ca07a9163407487e47110cb5700496c8af6acf5cedcf",
+  "checks": [
+    "PLEASE WAIT displayed by launcher before loading DIAPO",
+    "Bitsy Bye DIAPO/DIAPO.SYSTEM, English 80-column title, 453 images, Mockingboard slot 2",
+    "LEFT/RIGHT previous/next including first/last wrap",
+    "Mixed footer combat image title matches T of its Nxxx scene",
+    "Mockingboard IRQ advances the music stream during fullscreen display",
+    "SPACE full/mixed/full preserves all 16384 image bytes; M freezes slide timer; First English track selected and loaded in AUX",
+    "Three music columns, four arrow keys; moving cursor alters exactly two text cells, no full redraw",
+    "Three-column music selection; menu restores mixed; next image retains mixed",
+    "STOP selection; automatic advance remains fullscreen",
+    "Q quits from music menu to Bitsy Bye"
+  ],
+  "failures": []
+}

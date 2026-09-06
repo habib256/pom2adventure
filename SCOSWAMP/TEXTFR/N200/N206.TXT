@@ -15,5 +15,8 @@ vous un sorcier. Prenez six Pierres Magiques, mais pas de celles du Bien."
    Vous sentez que le Marais sera moins dangereux que cette tour lugubre.
 Votre mission commence : rapporter a Stratagus les Amulettes des Maitres.
 
+GX .G
+GX .P
+G .S
 PC 6 NM
 C 009 Quitter la tour et partir vers le Marais

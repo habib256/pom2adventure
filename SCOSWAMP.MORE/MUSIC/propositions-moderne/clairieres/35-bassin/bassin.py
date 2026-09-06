@@ -35,7 +35,7 @@ Ce que la revision ajoute :
 28 mesures a 4/4, 44,8 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8).
 
     python3 bassin.py && python3 ../../../midi_to_mb.py bassin.mid \\
-        BASSIN.MB.BIN --bpm 150 --max 2304 --wav BASSIN.wav
+        POOL.MB.BIN --bpm 150 --max 2304 --wav BASSIN.wav
 """
 import sys
 from pathlib import Path

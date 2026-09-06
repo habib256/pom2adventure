@@ -3,6 +3,6 @@ T 270 Two Paths
    Two paths allow you to leave the clearing: one goes toward the north, the
 other toward the west. Choose your direction carefully.
 
-MU SABLES.MB
+MU QUICKSAND.MB
 C 275 Take the path northward
 C 331 Take the path westward

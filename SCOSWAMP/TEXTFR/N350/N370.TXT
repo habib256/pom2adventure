@@ -5,6 +5,6 @@ de l'eau et vous pouvez le franchir sans encombre.
 
    Vous pouvez prendre la direction du nord ou celle du sud.
 
-MU PROFONDE.MB
+MU DEEPWATER.MB
 C 157 Aller au nord
 C 398 Aller au sud

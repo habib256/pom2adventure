@@ -5,7 +5,7 @@ a swamp smell. Three paths open before you; each leads to the unknown.
 
    Which direction will you choose?
 
-MU AIGLE.MB
+MU EAGLE.MB
 C 138 Take the southern trail
 C 041 Follow the eastern track
 C 014 Walk westward

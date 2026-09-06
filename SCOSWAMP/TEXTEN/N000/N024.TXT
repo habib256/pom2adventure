@@ -12,5 +12,7 @@ to take to find the clearing.
 
    What do you do?
 
-MU RONDPOINT.MB
-CL 273 297 0 -2
+MU WILLOWISP.MB
+CE ENDURANCE 0 -2
+C 336 Take the path south
+C 121 Take the path east

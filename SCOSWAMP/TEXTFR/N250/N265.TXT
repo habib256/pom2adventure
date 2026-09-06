@@ -5,5 +5,5 @@ mais l'endroit est desert maintenant; le silence pese. Les traces sur le sol
 montrent que la creature est partie. La route vous appelle, il est temps
 d'avancer.
 
-MU LICORNE.MB
+MU UNICORN.MB
 C 348 Poursuivre hors de la clairiere

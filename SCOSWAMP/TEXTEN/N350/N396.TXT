@@ -13,6 +13,6 @@ you must head west, then return east clockwise."
 which one). You now resume your journey. Only one path allows leaving the
 clearing so you take it, walking west.
 
-MU JARDINS.MB
+MU GARDENS.MB
 PC 1 B
 C 363 Continue west

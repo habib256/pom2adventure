@@ -2,7 +2,7 @@
 """« Trois Chemins Herbeux » — clairiere 20. Re dorien, 150.
 
 Variation dans la couleur `sud` : **bourdon de tonique immobile** sur le meme re
-que `MARAISUD.MB`, mais en dorien — le si naturel a la place du si bemol. C'est
+que `SOUTHSWAMP.MB`, mais en dorien — le si naturel a la place du si bemol. C'est
 la seule difference de mode, et elle suffit : la page 047 dit « rien
 d'interessant n'y apparait a premiere vue ; l'air est lourd et calme ». Une
 clairiere ou il n'arrive rien doit sonner comme la zone, en plus clair et en
@@ -50,7 +50,7 @@ cede la place — le bourdon de tonique est le procede de la zone.
 22 mesures a 4/4, 35,2 s.
 
     python3 herbeux.py && python3 ../../../midi_to_mb.py herbeux.mid \\
-        HERBEUX.MB.BIN --bpm 150 --max 2304 --wav HERBEUX.wav
+        GRASSLAND.MB.BIN --bpm 150 --max 2304 --wav HERBEUX.wav
 """
 import sys
 from pathlib import Path

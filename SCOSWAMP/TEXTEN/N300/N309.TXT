@@ -4,7 +4,7 @@ T 309 Three Paths
 
    In which direction do you wish to go?
 
-MU ORQUES.MB
+MU ORCS.MB
 C 047 North
 C 053 South
 C 388 West

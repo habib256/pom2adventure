@@ -1,0 +1,14 @@
+T 051 Three ways to walk
+
+   The sea of sand starts right there, warm and soft, and the first step
+sinks to the ankle. Three kilometres of dune lie between you and the black
+rock sticking up at the far end.
+
+   You hear nothing at all. That is exactly what is worrying: something
+underneath is listening.
+
+   You must pick a way of setting down your feet, and stick to it.
+
+C 052 The soldier's step: one, one, one, one, never varying
+C 052 Two quick steps, a pause, two quick steps, a pause
+C 053 One step, three steps, a halt, two steps, a slide, one step

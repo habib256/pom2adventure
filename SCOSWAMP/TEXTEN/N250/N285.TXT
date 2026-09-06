@@ -6,5 +6,6 @@ T 285 Weakness Spell
    He then makes a hand gesture and casts a Weakness spell on you. You lose
 half of your STAMINA points, and you must now fight or die.
 
+EH
 C 124 Attack the Sorcerer with your sword
 C 256 Face him by resorting to magic

@@ -10,8 +10,9 @@ The revelers thus make you lose 1 STAMINA point.
 
    What will you do now?
 
+E OR -1
 E ENDURANCE -1
 C 116 Bury your head under the pillow
 C 236 Go down brandishing your sword
-C 078 Go to the "Crooked Lance"
-C 289 Go to the "Tancrede's Flying Horse"
+CG 1 078 Go to the "Crooked Lance" (1 Gold Piece)
+CG 1 289 Go to the "Tancrede's Flying Horse" (1 Gold Piece)

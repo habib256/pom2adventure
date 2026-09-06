@@ -4,5 +4,5 @@ T 399 Magie contre les Orques
 
 CU TERREUR 346 Une Pierre de Terreur
 CU ILLUSION 169 d'Illusion
-C 188 Aucune de celles-ci
+C 309 Renoncer aux Pierres et prendre la fuite
 C 281 Combattre avec l'epee

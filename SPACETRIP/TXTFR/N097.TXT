@@ -1,0 +1,19 @@
+T 097 Il vous manque une legende
+
+   Le fil defile. Le Sponsor ne dit rien pendant tres longtemps. C'est pire
+que s'il riait.
+
+   -- Il en manque une, dit-il enfin. Le Grand Defi en reclame cinq. Vous en
+avez moins. Je pourrais fermer les yeux, mais un contrat est un contrat, et
+j'ai deja beaucoup de mal avec les regles.
+
+   -- Revenez quand le fil sera complet. Je serai la. Je suis toujours la :
+c'est meme mon principal defaut.
+
+   L'ecran s'eteint. Le cockpit sent le grille.
+
+CN S1 003 Il manque le casque noir qui souffle comme un radiateur
+CN S2 003 Il manque l'officier aux oreilles pointues
+CN S3 003 Il manque le ver long comme un train
+CN S4 003 Il manque le petit gris a l'index lumineux
+CN S5 003 Il manque l'aventuriere aux bottes blanches

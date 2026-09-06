@@ -1,6 +1,6 @@
 # Clairière 14 — Sommet de la falaise
 
-**`FALAISE.MB.BIN` — 1 447 octets, 40,3 s, boucle.**
+**`CLIFF.MB.BIN` — 1 447 octets, 40,3 s, boucle.**
 
 ## La clairière
 
@@ -9,7 +9,7 @@
 | `hub` | **183** |
 | Pages | 183 |
 | Case | (2,3) |
-| Zone de référence | `riviere` (`RIVIERE.MB`) |
+| Zone de référence | `riviere` (`RIVER.MB`) |
 | Sorties | S → 066, O → 295 ; **N et E = plonger = mort** (crocodile) |
 
 « Au lieu du morne feuillage, c'est le ciel qui s'ouvre. Vous atteignez le
@@ -100,6 +100,6 @@ répartissent trois et trois.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/14-falaise
 python3 falaise.py
-python3 ../../../midi_to_mb.py falaise.mid FALAISE.MB.BIN \
+python3 ../../../midi_to_mb.py falaise.mid CLIFF.MB.BIN \
     --bpm 144 --max 2304 --wav FALAISE.wav
 ```

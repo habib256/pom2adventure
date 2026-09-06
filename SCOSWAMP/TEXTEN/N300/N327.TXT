@@ -13,4 +13,4 @@ will earn you spending long years in the town's jails.
 
    END OF ADVENTURE.
 
-MU +MORT.MB
+MU +DEATH.MB

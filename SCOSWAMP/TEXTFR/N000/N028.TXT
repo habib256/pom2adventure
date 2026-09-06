@@ -11,6 +11,6 @@ attaque.
 vainquez, poursuivez la lecture au numero indique. Sinon, votre cadavre
 servira d'engrais pour le marais.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 12 ARBRES-EPEES
 MV 362

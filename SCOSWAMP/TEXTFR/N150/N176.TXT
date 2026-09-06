@@ -6,6 +6,6 @@ regard de fureur.
    Elle bondit avec une souplesse inattendue et vous comprenez qu'aucune fuite
 n'est possible. Le combat sera total, jusqu'a la mort.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 10 BETE IMMONDE
 MV 125

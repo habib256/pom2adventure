@@ -21,7 +21,7 @@ la chose qui vous a tue, citee une fois, sans commentaire.
 16 mesures a 4/4, 30,7 s. **Sans boucle** (`--no-loop`).
 
     python3 mort.py && python3 ../../midi_to_mb.py mort.mid \\
-        MORT.MB.BIN --bpm 125 --no-loop --max 1280 --wav MORT.wav
+        DEATH.MB.BIN --bpm 125 --no-loop --max 1280 --wav MORT.wav
 """
 import sys
 from pathlib import Path

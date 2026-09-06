@@ -11,6 +11,6 @@ collapses into the current, carrying its roots and branches.
    Before you, two distinct paths take shape: one climbs toward the north, the
 other runs toward the south. The choice is yours.
 
-MU PROFONDE.MB
+MU DEEPWATER.MB
 C 157 Take the path northward
 C 398 Take the path southward

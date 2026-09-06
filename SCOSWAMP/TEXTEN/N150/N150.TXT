@@ -15,6 +15,6 @@ choice (max. 3 stones). Cross out exchanged objects from your sheet and record
 your new stones. Then, you leave the shop and resume the journey south, toward
 the Scorpion Swamp.
 
-MU COURBENS.MB
+MU BENTBEAKS.MB
 C 408 Trade up to three items for neutral Stones
 C 343 Leave the shop and head back south

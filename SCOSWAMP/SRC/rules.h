@@ -52,15 +52,17 @@ typedef enum {
     OBJ_ANNEAU = 0, OBJ_CAPE, OBJ_CHAINE, OBJ_AIMANT,
     OBJ_FIOLE, OBJ_BAIE, OBJ_EPEMAGIQUE, OBJ_BIJOU, OBJ_CORNE, OBJ_PLUMES,
     OBJ_GRAINES,
-    OBJ_ANTHERIQUE,
+    OBJ_ANTHERIQUE, OBJ_MISSION_GAYOLARD, OBJ_MISSION_POMPATARTE,
+    OBJ_MISSION_STRATAGUS, OBJ_POTION_NAINE,
     OBJ_COUNT
 } Object;
 
 /* Les drapeaux caches se rangent APRES les objets, et OBJ_HIDDEN0 est le
  * premier d'entre eux : tout ce qui le precede a un nom et se montre dans le
- * sac, tout ce qui le suit est un fait narratif. Ajouter un objet = l'ecrire
- * juste avant OBJ_ANTHERIQUE, ici et dans build_objects.py, et le sac comme
- * le vol de PD/PO suivent d'eux-memes. */
+ * sac, tout ce qui le suit est un fait narratif. Les identifiants et bits
+ * sont declares dans SCOSWAMP/OBJECTS.json. Ces enums restent a extraire :
+ * toute modification des bits exige de les synchroniser et de prevoir la
+ * migration des sauvegardes ; inserer un objet decalerait les drapeaux. */
 #define OBJ_HIDDEN0 OBJ_ANTHERIQUE
 
 typedef enum {
@@ -237,6 +239,9 @@ int combat_flee(Character* c, const Monster* m, int use_luck);
 #define MONSTER_SLOTS 40
 
 void monster_memory_reset(void);
+/* Recupere uniquement la creature memorisee vivante de cette zone.
+ * Les deux bornes viennent des donnees; aucune resurrection ni nouvelle entree. */
+void monster_recover(unsigned int zone, unsigned char amount, unsigned char maximum);
 
 /* Reprend la file d'adversaires d'une clairiere la ou on l'avait laissee.
  *
@@ -291,7 +296,7 @@ int  character_has_stone(const Character* c, Stone s);
  * CHANCE a tout moment, sauf au cours d'un combat. Si vous souhaitez en faire
  * usage au debut de l'affrontement, rien ne s'y oppose, mais il vous est
  * interdit de vous en servir sitot que le premier coup a ete donne."
- * `in_combat` = un assaut a deja eu lieu. */
+ * `in_combat` : 0 avant assaut, 1 apres assaut, 2 toute magie interdite. */
 int      stone_usable(Stone s, int in_combat);
 StoneUse stone_use(Character* c, Stone s, int in_combat);
 

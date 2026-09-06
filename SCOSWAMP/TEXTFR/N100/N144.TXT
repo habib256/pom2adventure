@@ -1,5 +1,5 @@
 T 144 Tente aux araignees
-V 345 165 354
+VR 345 113 354
 
    Le sentier est envahi de toiles d'araignees qui pendent des branches. Un
 peu plus loin vous distinguez une clairiere constellee de toiles. Des milliers
@@ -14,7 +14,7 @@ votre doigt: signe malefique.
 
    Que voulez-vous faire?
 
-MU ARAIGNEES.MB
+MU SPIDERS.MB
 C 074 Recourir a la magie
 C 026 Attaquer sans attendre
 C 332 Parler a l'homme d'un ton aimable

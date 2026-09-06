@@ -1,0 +1,22 @@
+{
+  "assertions": 26,
+  "failures": [],
+  "exit_code": 0,
+  "headless": true,
+  "mockingboard_slot": 2,
+  "scenarios": {
+    "revisite": 7,
+    "musique_transitions": 4,
+    "araignee_retour": 15
+  },
+  "command": "python3 -u SCOSWAMP.MORE/TOOLS/playtest.py --only revisite --only araignee_retour --only musique_transitions --port 6526",
+  "binary_sha256": "730924b6ef9b64af21d4beac16fcc633aa2515a63d6b01387198689dc5982134",
+  "memory_delta": {
+    "CODE": -68,
+    "RODATA": 4,
+    "BSS": 0,
+    "net_load_bytes": -64,
+    "heap_before": 2067,
+    "heap_after": 2131
+  }
+}

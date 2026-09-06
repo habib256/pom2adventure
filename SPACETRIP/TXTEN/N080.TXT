@@ -1,0 +1,21 @@
+T 080 The Pixel Invaders
+V 081
+
+   The road to the Orbital Dump crosses a debris field where the Pixel
+Invaders live: small square green things that fly in tight ranks and have
+only ever learned one manoeuvre.
+
+   They drop one notch, slide all together towards one edge, and when the
+rank touches that edge they drop another notch and set off THE OTHER WAY.
+Always. Forever. They have no second idea.
+
+   Ahead of you the rank has just touched the LEFT edge of your
+windscreen. It drops a notch. It is about to set off again.
+
+   One second to pick your dodge. The Holophone is filming. Of course the
+Holophone is filming.
+
+C 081 Dive to the left
+C 088 Dive to the right
+C 088 Hold straight and open up
+C 003 Turn back

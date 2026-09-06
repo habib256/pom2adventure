@@ -9,6 +9,6 @@ realize this grass has something strange. It indeed grows so fast you can see
 it move. And while you observe it, pincers appear at its stems' ends, pincers
 trying to grab you. You're right in the middle of an expanse of PINCER GRASS!
 
-MU PINCES.MB
+MU PINCERS.MB
 C 134 Defend yourself with your sword
 C 167 Resort to magic

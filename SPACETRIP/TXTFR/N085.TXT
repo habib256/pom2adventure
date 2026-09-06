@@ -1,0 +1,19 @@
+T 085 Le cadeau de Trolley
+V 089
+
+   Trolley range chaque chose dans son bac. Il fait cela avec un soin qui
+n'a aucun sens ici et qui, pour cette raison exacte, en a beaucoup.
+
+   Puis il fouille dans son ventre, longtemps, avec le bruit d'un tiroir de
+cuisine, et sort une pile plate encore emballee. Il vous la tend a deux
+mains. Ses jumelles font un tour complet.
+
+   Vous reconnaissez le format : c'est une pile d'Holophone. Vous n'en
+aviez jamais vu une neuve.
+
+   Il bipe une derniere fois, puis retourne trier. Quelque part dans cette
+decharge il y a un pepin qui va pousser, et c'est deja plus que ce que
+fera la plupart des chaines de la galaxie.
+
+G PILE
+C 081 Repartir dans les ordures

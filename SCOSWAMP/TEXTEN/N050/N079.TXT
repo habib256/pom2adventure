@@ -6,6 +6,6 @@ the fight.
 
    The fight stops as soon as one of the two adversaries is wounded.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 10 BRIGAND CHIEF
 MB 360 128

@@ -1,0 +1,17 @@
+T 045 Illogical, but fascinating
+V 046
+
+   The right door opens onto the bridge: swivel chairs, a giant screen,
+lights blinking in an order nobody has ever bothered to explain.
+
+   "Your reasoning was correct," the officer says. You produce the
+Holophone. He studies its ring light the way one studies a rare insect.
+
+   "A portrait of oneself, taken by oneself, intended for people one has
+never met." The eyebrow rises. "Illogical. But fascinating."
+
+   He does not smile. He never smiles. The shot is perfect.
+
+G S2
+C 047 Stop by the transporter for your boot
+C 003 Have yourself beamed back to the Convertible

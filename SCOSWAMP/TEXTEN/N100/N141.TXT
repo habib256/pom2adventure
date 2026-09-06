@@ -11,4 +11,6 @@ perhaps you will return one day to explore the Swamp.
 
    END OF ADVENTURE.
 
+PS
+E ENDURANCE +255
 MU -

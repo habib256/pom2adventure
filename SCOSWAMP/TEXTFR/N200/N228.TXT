@@ -8,5 +8,6 @@ epees.
 furie. Vous profitez de la confusion pour rebrousser chemin et regagner le
 sentier par lequel vous etes arrive, en direction de l'est.
 
-MU BETE.MB
+MU BEAST.MB
+GX GR
 C 279 Rebrousser chemin vers l'est

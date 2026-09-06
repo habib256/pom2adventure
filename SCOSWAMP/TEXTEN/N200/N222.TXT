@@ -8,6 +8,6 @@ price.
    Impossible to flee: it would catch you. It has no weapon, only its
 monstrous fists: a chance remains to defeat it.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 12 16 DEMON
 MV 174

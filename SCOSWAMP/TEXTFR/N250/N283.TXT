@@ -8,6 +8,6 @@ alors une Pierre de Magie benefique : choisissez vous-meme laquelle.
    Un seul sentier permet de quitter cette clairiere, vous l'empruntez donc en
 retournant vers l'ouest.
 
-MU JARDINS.MB
+MU GARDENS.MB
 PC 1 B
 C 363 Continuer vers l'ouest

@@ -1,6 +1,6 @@
 # Clairière 32 — Clairière du Maître des Loups (`hub` 314)
 
-**`MAITRELOUPS.MB.BIN` — 2 182 octets, 45,9 s, boucle, avec batterie.**
+**`WOLFMASTER.MB.BIN` — 2 182 octets, 45,9 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
@@ -10,7 +10,7 @@
 | 239 | la maison fermée à double tour, aucun signe de vie |
 | 314 | deux directions, et un énorme escargot qui passe doucement devant vous |
 
-Zone de référence : **`sud`** (`MARAISUD.MB`, *Sentiers Verts*).
+Zone de référence : **`sud`** (`SOUTHSWAMP.MB`, *Sentiers Verts*).
 
 ## La pièce
 
@@ -75,6 +75,6 @@ stéréo 59/41.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/32-maitreloups
 python3 maitreloups.py
-python3 ../../../midi_to_mb.py maitreloups.mid MAITRELOUPS.MB.BIN \
+python3 ../../../midi_to_mb.py maitreloups.mid WOLFMASTER.MB.BIN \
     --bpm 150 --max 2304 --wav MAITRELOUPS.wav
 ```

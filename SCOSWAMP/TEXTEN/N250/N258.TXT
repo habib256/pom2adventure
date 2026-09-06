@@ -8,6 +8,6 @@ vibrates, energy rumbles around your hands. Each spell has a price.
 Doing nothing allows you to observe and keep the initiative, but you lose the
 advantage of being first to act. Weigh the power, cost and risk.
 
-C 198 Pronounce the Fear spell to break his will
-C 127 Attempt the Friendship spell to sow doubt and hesitation
+CU TERREUR 198 Pronounce the Fear spell to break his will
+CU AMITIE 127 Attempt the Friendship spell to sow doubt and hesitation
 C 212 Cast neither, wait and choose another spell

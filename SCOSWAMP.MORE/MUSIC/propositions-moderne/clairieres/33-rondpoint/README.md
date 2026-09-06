@@ -1,6 +1,6 @@
 # Clairière 33 — Le large rond-point, la clairière de départ (`hub` 058)
 
-**`RONDPOINT.MB.BIN` — 2 219 octets, 48,9 s, boucle, avec batterie.**
+**`ROUNDABOUT.MB.BIN` — 2 219 octets, 48,9 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
@@ -18,7 +18,7 @@ le reste de l'aventure part d'ici.
 La page 208 (retour vers le sud, sortie du Marais) porte la musique de
 `village`, pas celle-ci.
 
-Zone de référence : **`sud`** (`MARAISUD.MB`, *Sentiers Verts*).
+Zone de référence : **`sud`** (`SOUTHSWAMP.MB`, *Sentiers Verts*).
 
 ## La pièce
 
@@ -91,6 +91,6 @@ stéréo 60/40.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/33-rondpoint
 python3 rondpoint.py
-python3 ../../../midi_to_mb.py rondpoint.mid RONDPOINT.MB.BIN \
+python3 ../../../midi_to_mb.py rondpoint.mid ROUNDABOUT.MB.BIN \
     --bpm 158 --max 2304 --wav RONDPOINT.wav
 ```

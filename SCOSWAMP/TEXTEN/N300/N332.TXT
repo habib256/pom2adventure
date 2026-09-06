@@ -16,4 +16,4 @@ Spiders living in these places will doubtless judge your carcass ripe and will
 offer themselves at your expense a delectable meal. It's clear, of course,
 that your adventure is over.
 
-MU +MORT.MB
+MU +DEATH.MB

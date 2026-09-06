@@ -4,7 +4,7 @@ T 224 Terreur et Loups
 dans sa demeure; en revanche les deux Loups vous attaquent. Ils se jetent sur
 vous a tour de role: il faut les combattre l'un apres l'autre.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 5 Premier LOUP
 M 6 6 Deuxieme LOUP
 CF 314 Prendre la fuite si vous avez le dessous

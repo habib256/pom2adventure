@@ -6,6 +6,6 @@ curieux mais sans hostilite, attentifs au combat.
 
    Le combat s'arrete des qu'un des deux adversaires est blesse.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 10 CHEF DES BRIGANDS
 MB 360 128

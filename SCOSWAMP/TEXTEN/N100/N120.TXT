@@ -6,7 +6,7 @@ Master himself....
 
    If the fight turns bad, you can flee.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 5 FIRST WOLF
 MI 224
 M 6 6 SECOND WOLF

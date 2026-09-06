@@ -11,5 +11,5 @@ escape. If you are unlucky, the situation becomes more dangerous.
 
    What do you do?
 
-MU SABLES.MB
+MU QUICKSAND.MB
 CL 270 087 -2 0

@@ -6,5 +6,5 @@ threatening; you leave quickly, on your guard.
 
    What do you do?
 
-MU GRENOUILLES.MB
+MU FROGS.MB
 C 352 Resume the journey northward

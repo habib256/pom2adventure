@@ -1,6 +1,6 @@
 # Zone `accueil` — l'écran de titre
 
-**`ACCUEIL.MB.BIN` — 2 233 octets, 49,7 s, boucle.** Tampon de zone (2 304 o), 71 octets de marge.
+**`WELCOME.MB.BIN` — 2 233 octets, 49,7 s, boucle.** Tampon de zone (2 304 o), 71 octets de marge.
 
 ## Ce que la zone couvre
 
@@ -54,7 +54,7 @@ Mesuré par `../verifier.py` — c'est l'attribution réelle de
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/accueil
 python3 accueil.py
-python3 ../../midi_to_mb.py accueil.mid ACCUEIL.MB.BIN \
+python3 ../../midi_to_mb.py accueil.mid WELCOME.MB.BIN \
     --bpm 136 --max 2304 --wav ACCUEIL.wav
 python3 ../verifier.py accueil.mid --bpm 136
 ```

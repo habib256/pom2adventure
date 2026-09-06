@@ -1,0 +1,19 @@
+{
+  "scenario": "combat_sans_magie",
+  "pages": [
+    215,
+    355
+  ],
+  "assertions": 18,
+  "failures": [],
+  "process_exit_code": 0,
+  "headless": true,
+  "mockingboard_slot": 2,
+  "command": "python3 -u SCOSWAMP.MORE/TOOLS/playtest.py --only combat_sans_magie --port 6526",
+  "sha256": {
+    "dist/SCOSWAMP.HDV": "13b00eb4d7edb2c272e8084ee3bcf53410928f852cff1e5ead90251761b7d654",
+    "SCOSWAMP/SCOSWAMP.BIN": "7261fd99db845a8492fa7db29408b770d58a2479013aa6f345a73685a0b94eba",
+    "SCOSWAMP/TEXTFR/N200/N215.TXT": "bd2507c7e3674bfce4c086d8d22845431ee65d6acecc3dac83e3905f01f04810",
+    "SCOSWAMP/TEXTEN/N200/N215.TXT": "e3f2c8d98edb9e373cefdaeaef7289c9f946afd4adfc6fdd6c8cac8f863f756d"
+  }
+}

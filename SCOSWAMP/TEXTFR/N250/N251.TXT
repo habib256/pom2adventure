@@ -8,7 +8,7 @@ points de CHANCE.
 cou, puis reprenez le seul chemin qui permet de quitter la clairiere. Le
 sentier est oriente vers l'ouest et s'enfonce entre de vieux chenes tordus.
 
-MU JARDINS.MB
+MU GARDENS.MB
 G FLEUR
 E CHANCE -3
 C 363 Suivre le chemin vers l'ouest, portant l'Amulette

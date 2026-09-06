@@ -24,16 +24,16 @@ seul objet à écouter pour juger. Il n'est pas suivi par git
 
 | Zone | Fichier disque | Pièce | Mode | bpm | Durée | Octets | Tampon | Percussion |
 | --- | --- | --- | --- | ---: | ---: | ---: | :---: | --- |
-| `accueil` | `ACCUEIL.MB` | **L'Appel du Marais** | ré dorien | 136 | 49,7 s | 2 233 | zone | motif complet |
+| `accueil` | `WELCOME.MB` | **L'Appel du Marais** | ré dorien | 136 | 49,7 s | 2 233 | zone | motif complet |
 | `village` | `VILLAGE.MB` | **Les Feux de Bourbenville** | sol mixolydien | **166** | 40,8 s | 2 254 | zone | danse |
-| `nord` | `MARAISNO.MB` | **Le Bois des Guetteurs** | mi éolien | 150 | 45,1 s | 2 262 | zone | marche de guet |
-| `riviere` | `RIVIERE.MB` | **Le Pont sur la Croupie** | la dorien | 125 | 54,0 s | 1 964 | zone | **aucune** |
-| `sud` | `MARAISUD.MB` | **Sentiers Verts** | ré éolien | 150 | 45,1 s | 2 277 | zone | marche |
+| `nord` | `NORTHSWAMP.MB` | **Le Bois des Guetteurs** | mi éolien | 150 | 45,1 s | 2 262 | zone | marche de guet |
+| `riviere` | `RIVER.MB` | **Le Pont sur la Croupie** | la dorien | 125 | 54,0 s | 1 964 | zone | **aucune** |
+| `sud` | `SOUTHSWAMP.MB` | **Sentiers Verts** | ré éolien | 150 | 45,1 s | 2 277 | zone | marche |
 | `danger` | `DANGER.MB` | **Ce qui Attend Sous l'Eau** | do phrygien | 136 | 49,7 s | 1 951 | zone | **un cœur**, grosse caisse seule |
-| `tour` | `TOUR.MB` | **La Tour de Stratagus** | sol mineur harm. | 125 | 46,4 s | 1 045 | zone | un pas, toutes les 2 mesures |
-| `combat` | `COMBAT.MB` | **Le Fer et la Pince** | si éolien | **200** | 24,3 s | 1 228 | **surcouche** | c'est elle qui court |
-| `mort` | `MORT.MB` | **Le Marais Referme** | do éolien | 125 | 31,0 s | 673 | **surcouche** | **aucune** |
-| `victoire` | `VICTOIRE.MB` | **Par la Trouée de Ciel** | ré mixolydien | 150 | 25,9 s | 1 265 | **surcouche** | fanfare |
+| `tour` | `TOWER.MB` | **La Tour de Stratagus** | sol mineur harm. | 125 | 46,4 s | 1 045 | zone | un pas, toutes les 2 mesures |
+| `combat` | `BATTLE.MB` | **Le Fer et la Pince** | si éolien | **200** | 24,3 s | 1 228 | **surcouche** | c'est elle qui court |
+| `mort` | `DEATH.MB` | **Le Marais Referme** | do éolien | 125 | 31,0 s | 673 | **surcouche** | **aucune** |
+| `victoire` | `VICTORY.MB` | **Par la Trouée de Ciel** | ré mixolydien | 150 | 25,9 s | 1 265 | **surcouche** | fanfare |
 
 **Total sur le volume : 17 152 octets**, sur ~28 Mo libres — le nombre de pièces
 ne coûte rien.
@@ -44,8 +44,8 @@ exactement comme une note : les deux se comptent ensemble.
 
 | Tampon | Limite | Pièces | La plus grosse | Marge |
 | --- | ---: | --- | ---: | ---: |
-| **zone** | 2 304 o | `accueil`, `village`, `nord`, `riviere`, `sud`, `danger`, `tour` | `MARAISUD.MB`, 2 277 o | **27 o** |
-| **surcouche** | 1 280 o | `COMBAT`, `MORT`, `VICTOIRE` | `VICTOIRE.MB`, 1 265 o | **15 o** |
+| **zone** | 2 304 o | `accueil`, `village`, `nord`, `riviere`, `sud`, `danger`, `tour` | `SOUTHSWAMP.MB`, 2 277 o | **27 o** |
+| **surcouche** | 1 280 o | `COMBAT`, `MORT`, `VICTOIRE` | `VICTORY.MB`, 1 265 o | **15 o** |
 
 Les commandes des `README.md` passent `--max 2304` pour les thèmes de zone et
 `--max 1280` pour les trois surcouches : la conversion **échoue** au lieu de
@@ -71,40 +71,40 @@ signalée en gras : `courbensaule` est fondue dans `village` (voir § 4).
 | # | `hub` | Titre | (x,y) | Zone | Fichier |
 | ---: | ---: | --- | :---: | --- | --- |
 | 1 | 078 | Route de Courbensaule | (0,0) | **`village`** | `VILLAGE.MB` |
-| 2 | 234 | Le Patrouilleur vert | (2,0) | `nord` | `MARAISNO.MB` |
-| 3 | 084 | Le Maître des Jardins | (3,0) | `nord` | `MARAISNO.MB` |
-| 4 | 232 | Les deux loups | (4,0) | `nord` | `MARAISNO.MB` |
-| 5 | 218 | Feu follet à l'orée | (1,1) | `nord` | `MARAISNO.MB` |
-| 6 | 121 | Le croisement | (2,1) | `nord` | `MARAISNO.MB` |
-| 7 | 161 | Le Géant | (4,1) | `nord` | `MARAISNO.MB` |
-| 8 | 019 | Clairière aux brigands | (0,2) | `nord` | `MARAISNO.MB` |
+| 2 | 234 | Le Patrouilleur vert | (2,0) | `nord` | `NORTHSWAMP.MB` |
+| 3 | 084 | Le Maître des Jardins | (3,0) | `nord` | `NORTHSWAMP.MB` |
+| 4 | 232 | Les deux loups | (4,0) | `nord` | `NORTHSWAMP.MB` |
+| 5 | 218 | Feu follet à l'orée | (1,1) | `nord` | `NORTHSWAMP.MB` |
+| 6 | 121 | Le croisement | (2,1) | `nord` | `NORTHSWAMP.MB` |
+| 7 | 161 | Le Géant | (4,1) | `nord` | `NORTHSWAMP.MB` |
+| 8 | 019 | Clairière aux brigands | (0,2) | `nord` | `NORTHSWAMP.MB` |
 | 9 | 153 | Le bassin de Vase | (1,2) | `danger` | `DANGER.MB` |
 | 10 | 088 | Scorpion et nain | (2,2) | `danger` | `DANGER.MB` |
-| 11 | 202 | Le nid de l'Aigle | (3,2) | `nord` | `MARAISNO.MB` |
+| 11 | 202 | Le nid de l'Aigle | (3,2) | `nord` | `NORTHSWAMP.MB` |
 | 12 | 270 | Sables mouvants | (4,2) | `danger` | `DANGER.MB` |
-| 13 | 295 | La Rivière Croupie | (1,3) | `riviere` | `RIVIERE.MB` |
-| 14 | 183 | Sommet de la falaise | (2,3) | `riviere` | `RIVIERE.MB` |
-| 15 | 045 | **Le pont sur la rivière Croupie** | (3,3) | `riviere` | `RIVIERE.MB` |
-| 16 | 304 | Le Perroquet / Maîtresse des Oiseaux | (0,4) | `sud` | `MARAISUD.MB` |
-| 17 | 094 | La brume fétide | (1,4) | `sud` | `MARAISUD.MB` |
-| 18 | 179 | Le pique-nique suspect | (2,4) | `sud` | `MARAISUD.MB` |
+| 13 | 295 | La Rivière Croupie | (1,3) | `riviere` | `RIVER.MB` |
+| 14 | 183 | Sommet de la falaise | (2,3) | `riviere` | `RIVER.MB` |
+| 15 | 045 | **Le pont sur la rivière Croupie** | (3,3) | `riviere` | `RIVER.MB` |
+| 16 | 304 | Le Perroquet / Maîtresse des Oiseaux | (0,4) | `sud` | `SOUTHSWAMP.MB` |
+| 17 | 094 | La brume fétide | (1,4) | `sud` | `SOUTHSWAMP.MB` |
+| 18 | 179 | Le pique-nique suspect | (2,4) | `sud` | `SOUTHSWAMP.MB` |
 | 19 | 319 | La clairière des scorpions | (3,4) | `danger` | `DANGER.MB` |
-| 20 | 047 | Trois chemins herbeux | (4,4) | `sud` | `MARAISUD.MB` |
-| 21 | 031 | Bassin de cristal | (5,4) | `sud` | `MARAISUD.MB` |
+| 20 | 047 | Trois chemins herbeux | (4,4) | `sud` | `SOUTHSWAMP.MB` |
+| 21 | 031 | Bassin de cristal | (5,4) | `sud` | `SOUTHSWAMP.MB` |
 | 22 | 367 | Les Fleurs d'Angoisse | (0,5) | `danger` | `DANGER.MB` |
-| 23 | 348 | La Licorne | (1,5) | `sud` | `MARAISUD.MB` |
-| 24 | 227 | La clairière des combats | (2,5) | `sud` | `MARAISUD.MB` |
+| 23 | 348 | La Licorne | (1,5) | `sud` | `SOUTHSWAMP.MB` |
+| 24 | 227 | La clairière des combats | (2,5) | `sud` | `SOUTHSWAMP.MB` |
 | 25 | 187 | Herbe à Pinces | (3,5) | `danger` | `DANGER.MB` |
 | 26 | 309 | Orques des Marais | (4,5) | `danger` | `DANGER.MB` |
 | 27 | 125 | Cul-de-sac de la Bête | (0,6) | `danger` | `DANGER.MB` |
 | 28 | 022 | La clairière des Arbres-Épées | (1,6) | `danger` | `DANGER.MB` |
 | 29 | 165 | Tente aux araignées | (3,6) | `danger` | `DANGER.MB` |
-| 30 | 230 | Clairière des grenouilles | (4,6) | `sud` | `MARAISUD.MB` |
-| 31 | 044 | La rivière profonde | (1,7) | `riviere` | `RIVIERE.MB` |
-| 32 | 314 | Clairière du Maître des Loups | (1,8) | `sud` | `MARAISUD.MB` |
-| 33 | 058 | **Le large rond-point (départ)** | (2,8) | `sud` | `MARAISUD.MB` |
-| 34 | 390 | Pierres et tronc | (3,8) | `sud` | `MARAISUD.MB` |
-| 35 | 082 | Bête du bassin | (4,8) | `sud` | `MARAISUD.MB` |
+| 30 | 230 | Clairière des grenouilles | (4,6) | `sud` | `SOUTHSWAMP.MB` |
+| 31 | 044 | La rivière profonde | (1,7) | `riviere` | `RIVER.MB` |
+| 32 | 314 | Clairière du Maître des Loups | (1,8) | `sud` | `SOUTHSWAMP.MB` |
+| 33 | 058 | **Le large rond-point (départ)** | (2,8) | `sud` | `SOUTHSWAMP.MB` |
+| 34 | 390 | Pierres et tronc | (3,8) | `sud` | `SOUTHSWAMP.MB` |
+| 35 | 082 | Bête du bassin | (4,8) | `sud` | `SOUTHSWAMP.MB` |
 
 **Répartition : `sud` 12 · `danger` 10 · `nord` 8 · `riviere` 4 · `village` 1.**
 
@@ -245,7 +245,7 @@ le fondu se chargeant de la couture.
 | --- | --- | --- |
 | Sources | onze pièces XV<sup>e</sup>-XVIII<sup>e</sup>, Mutopia, domaine public | dix compositions originales, GPL v3 |
 | Voix | 3, mono en pratique | **6**, ou **5 + batterie**, stéréo écrite |
-| Taille max | 1 058 o (`MARAISNO.MB`) | 2 277 o (`MARAISUD.MB`) |
+| Taille max | 1 058 o (`NORTHSWAMP.MB`) | 2 277 o (`SOUTHSWAMP.MB`) |
 | Tampons | tout tient en 1 280 o | **zone 2 304 o**, surcouche 1 280 o |
 | Langage | contrepoint vocal, cadences fonctionnelles, sensible | modes (dorien, phrygien, mixolydien, éolien), bourdons, quintes à vide, ostinatos, **percussion** |
 | Forme | celle de l'œuvre d'origine | intro - A - B - A', un crochet énoncé deux fois, une surprise par pièce, écrite pour boucler sans couture |
@@ -276,8 +276,8 @@ Trois différences méritent une décision, pas un goût :
   style Renaissance assume celui du récit. Aucun des deux n'a tort.
 
 Les deux dossiers sont **interchangeables fichier par fichier** : les noms de
-disque (`MARAISNO.MB`, `DANGER.MB`, …) et la carte des zones sont les mêmes.
-On peut prendre `DANGER.MB` ici et `TOUR.MB` là.
+disque (`NORTHSWAMP.MB`, `DANGER.MB`, …) et la carte des zones sont les mêmes.
+On peut prendre `DANGER.MB` ici et `TOWER.MB` là.
 
 ---
 
@@ -286,16 +286,16 @@ On peut prendre `DANGER.MB` ici et `TOUR.MB` là.
 ```sh
 cd /Users/gistair/src/pom2adventure/SCOSWAMP.MORE/MUSIC/propositions-moderne
 M=../../midi_to_mb.py
-(cd accueil  && python3 accueil.py   && python3 $M accueil.mid   ACCUEIL.MB.BIN  --bpm 136 --max 2304 --wav ACCUEIL.wav)
+(cd accueil  && python3 accueil.py   && python3 $M accueil.mid   WELCOME.MB.BIN  --bpm 136 --max 2304 --wav ACCUEIL.wav)
 (cd village  && python3 village.py   && python3 $M village.mid   VILLAGE.MB.BIN  --bpm 166 --max 2304 --wav VILLAGE.wav)
-(cd nord     && python3 nord.py      && python3 $M nord.mid      MARAISNO.MB.BIN --bpm 150 --max 2304 --wav MARAISNO.wav)
-(cd riviere  && python3 riviere.py   && python3 $M riviere.mid   RIVIERE.MB.BIN  --bpm 125 --max 2304 --wav RIVIERE.wav)
-(cd sud      && python3 sud.py       && python3 $M sud.mid       MARAISUD.MB.BIN --bpm 150 --max 2304 --wav MARAISUD.wav)
+(cd nord     && python3 nord.py      && python3 $M nord.mid      NORTHSWAMP.MB.BIN --bpm 150 --max 2304 --wav MARAISNO.wav)
+(cd riviere  && python3 riviere.py   && python3 $M riviere.mid   RIVER.MB.BIN  --bpm 125 --max 2304 --wav RIVIERE.wav)
+(cd sud      && python3 sud.py       && python3 $M sud.mid       SOUTHSWAMP.MB.BIN --bpm 150 --max 2304 --wav MARAISUD.wav)
 (cd danger   && python3 danger.py    && python3 $M danger.mid    DANGER.MB.BIN   --bpm 136 --max 2304 --wav DANGER.wav)
-(cd tour     && python3 tour.py      && python3 $M tour.mid      TOUR.MB.BIN     --bpm 125 --max 2304 --wav TOUR.wav)
-(cd combat   && python3 combat.py    && python3 $M combat.mid    COMBAT.MB.BIN   --bpm 200 --max 1280 --wav COMBAT.wav)
-(cd mort     && python3 mort.py      && python3 $M mort.mid      MORT.MB.BIN     --bpm 125 --no-loop --max 1280 --wav MORT.wav)
-(cd victoire && python3 victoire.py  && python3 $M victoire.mid  VICTOIRE.MB.BIN --bpm 150 --no-loop --max 1280 --wav VICTOIRE.wav)
+(cd tour     && python3 tour.py      && python3 $M tour.mid      TOWER.MB.BIN     --bpm 125 --max 2304 --wav TOUR.wav)
+(cd combat   && python3 combat.py    && python3 $M combat.mid    BATTLE.MB.BIN   --bpm 200 --max 1280 --wav COMBAT.wav)
+(cd mort     && python3 mort.py      && python3 $M mort.mid      DEATH.MB.BIN     --bpm 125 --no-loop --max 1280 --wav MORT.wav)
+(cd victoire && python3 victoire.py  && python3 $M victoire.mid  VICTORY.MB.BIN --bpm 150 --no-loop --max 1280 --wav VICTOIRE.wav)
 ```
 
 Chaque ligne entre dans son sous-dossier, d'où le `../../midi_to_mb.py` : c'est

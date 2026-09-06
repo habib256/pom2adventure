@@ -11,7 +11,7 @@ as many STAMINA points as the number obtained.
 his SKILL total and his STAMINA total.
 
 ED ENDURANCE -1
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 8 WOLF MASTER
 CF 314 Flee if the fight turns against you
 MV 154

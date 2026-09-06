@@ -8,7 +8,7 @@ de paniquer la bete; effet variable selon la cible.
 
    Attention: l'emploi consume la Pierre choisie; verifiez votre inventaire.
 
-C 237 UTILISER FLETRISSURE
-C 291 UTILISER FEU
-C 356 UTILISER TERREUR
+CU FLETRISSURE 237 UTILISER FLETRISSURE
+CU FEU 291 UTILISER FEU
+CU TERREUR 356 UTILISER TERREUR
 C 209 Ne rien utiliser et changer d'approche

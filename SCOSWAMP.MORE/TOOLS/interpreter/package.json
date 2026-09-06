@@ -1,0 +1,6 @@
+{
+  "name": "scoswamp-interpreter",
+  "private": true,
+  "type": "module",
+  "description": "Le lecteur de donnees SCOSWAMP. `type: module` sert au banc node (verifier.js), qui monte EXACTEMENT les memes fichiers que le navigateur -- pas une copie."
+}

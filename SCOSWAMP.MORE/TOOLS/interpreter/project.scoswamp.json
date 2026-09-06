@@ -1,5 +1,6 @@
 {
   "id": "SCOSWAMP",
+  "rulesSource": "SCOSWAMP/JSON/RULES.json",
   "titre": "Le Marais aux Scorpions",
   "commentaire": [
     "Le DESCRIPTEUR du jeu : tout ce que le lecteur doit savoir pour lire les",
@@ -32,7 +33,18 @@
 
   "bucket": 50,
 
-  "titre": { "source": "directive-T" },
+  "volumeCommentaire": [
+    "Le volume ProDOS que la machine demarre. Le lecteur s'en sert par defaut :",
+    "il lit alors EXACTEMENT les octets de l'Apple II, avec les noms que",
+    "fopen() demande la-bas -- l'empaqueteur pose le contenu du dossier du jeu",
+    "a la racine du volume et retire l'extension, d'ou `racineVolume`.",
+    "L'arborescence reste disponible : c'est ce qu'on edite, et le lecteur dit",
+    "a chaque page si les deux concordent encore."
+  ],
+  "volume": "dist/SCOSWAMP.HDV",
+  "racineVolume": "SCOSWAMP/",
+
+  "titrePage": { "source": "directive-T" },
 
   "directivesCommentaire": [
     "La table des directives, dans l'ordre de kOps (SCOSWAMP/SRC/scoswamp.c) :",
@@ -46,17 +58,28 @@
     "emploie et comment ils s'ecrivent."
   ],
   "directives": [
+    { "jeton": "AC", "troisieme": ".", "effetEntree": false, "aide": "oriente automatiquement selon le premier CV/CX satisfait, sans question au joueur" },
     { "jeton": "GX",  "troisieme": " ",  "effetEntree": true,  "aide": "retire un objet ou un drapeau" },
     { "jeton": "GA",  "troisieme": " ",  "effetEntree": true,  "aide": "revend toutes les amulettes, <n> Pieces d'Or chacune" },
     { "jeton": "G",   "troisieme": "*",  "effetEntree": true,  "aide": "donne un objet, un drapeau ou une amulette" },
     { "jeton": "CI",  "troisieme": " ",  "effetEntree": false, "aide": "choix conditionne a la possession" },
     { "jeton": "CN",  "troisieme": " ",  "effetEntree": false, "aide": "choix conditionne a l'absence" },
+    { "jeton": "CX", "troisieme": " ", "effetEntree": false, "aide": "inverse des conditions de visite : CX p,!q destination titre" },
+    { "jeton": "CV",  "troisieme": " ",  "effetEntree": false, "aide": "conditions de visite ET : CV p,!q destination titre (! = non visitee)" },
+    { "jeton": "CG", "troisieme": " ", "effetEntree": false, "aide": "choix selon l’or disponible : CG minimum destination titre ; minimum entier 0..255, sans debit automatique" },
+    { "jeton": "CB", "troisieme": " ", "effetEntree": false, "aide": "CB 0|1 destination titre : absence/presence de biens prelevables par PO (Pierres, objets hors Anneau et drapeaux, amulettes)" },
+    { "jeton": "CT", "troisieme": " ", "effetEntree": false, "aide": "choix selon le total de pierres : CT min max destination titre ; bornes 0..15, 15 = quinze ou plus" },
     { "jeton": "CA",  "troisieme": " ",  "effetEntree": false, "aide": "choix conditionne au NOMBRE d'amulettes (<lo> <hi>)" },
     { "jeton": "GU",  "troisieme": " ",  "effetEntree": false, "aide": "choix qui exige et CONSOMME un objet" },
     { "jeton": "PD",  "troisieme": ".",  "effetEntree": true,  "aide": "on vous prend deux biens" },
     { "jeton": "PO",  "troisieme": ".",  "effetEntree": true,  "aide": "on vous prend un bien" },
+    { "jeton": "PS", "troisieme": ".", "effetEntree": true, "aide": "remet toutes les Pierres, conserve les objets" },
+    { "jeton": "EH", "troisieme": ".", "effetEntree": true, "aide": "ENDURANCE divisee par deux, entier inferieur" },
     { "jeton": "PX",  "troisieme": ".",  "effetEntree": true,  "aide": "on vous prend tout le sac" },
-    { "jeton": "TR",  "troisieme": ".",  "effetEntree": true,  "aide": "troque jusqu'a trois biens contre autant de Pierres neutres" },
+    { "jeton": "TR",  "troisieme": ".",  "effetEntree": true,  "aide": "troque les biens selon RULES.json / trade : objets, amulettes, limite et categories" },
+    { "jeton": "MM", "troisieme": " ", "effetEntree": false, "aide": "MM 1 : aucune Pierre pendant le combat ; MM 0 : regles normales (defaut)" },
+    { "jeton": "MF", "troisieme": " ", "effetEntree": false, "aide": "MF n : fuite permise apres n assauts resolus, defaut zero" },
+    { "jeton": "MR", "troisieme": " ", "effetEntree": true, "aide": "recupere la creature memorisee vivante du lieu : MR gain maximum" },
     { "jeton": "MD",  "troisieme": " ",  "effetEntree": false, "aide": "les coups du dernier adversaire coutent <n> ENDURANCE" },
     { "jeton": "MS",  "troisieme": " ",  "effetEntree": false, "aide": "le combat cesse a <n> ENDURANCE" },
     { "jeton": "MI",  "troisieme": " ",  "effetEntree": false, "aide": "l'image de bataille du dernier adversaire vient de la page <p>" },
@@ -73,6 +96,7 @@
     { "jeton": "CL",  "troisieme": " ",  "effetEntree": false, "aide": "Tentez votre Chance : <ok> <ko> [<dok> <dko>]" },
     { "jeton": "CU",  "troisieme": " ",  "effetEntree": false, "aide": "choix qui EXIGE et consomme une Pierre" },
     { "jeton": "CP",  "troisieme": " ",  "effetEntree": false, "aide": "choix qui REMET une Pierre" },
+    { "jeton": "VR", "troisieme": " ", "effetEntree": true, "aide": "VR cible preuves... : detour si au moins une page preuve a ete visitee ; aucun test implicite" },
     { "jeton": "V",   "troisieme": "*",  "effetEntree": true,  "aide": "deja venu : detour vers <id>, les autres pages du lieu suivent" },
     { "jeton": "CS",  "troisieme": " ",  "effetEntree": false, "aide": "jet de 2 des contre <carac> : <ok> <ko>" },
     { "jeton": "DV",  "troisieme": " ",  "effetEntree": false, "aide": "en cascade : perte du dernier combat <= <max> -> <id>" },
@@ -84,10 +108,10 @@
   "assets": {
     "texte":        "SCOSWAMP/TEXT{LANG}/{BUCKET}/{PAGE}.TXT",
     "titre":        "SCOSWAMP/TITLE.TXT",
-    "aide":         "SCOSWAMP/HELP{LANG}.TXT",
-    "messages":     "SCOSWAMP/MSG{LANG}.TXT",
+    "aide":         "SCOSWAMP/TEXT{LANG}/HELP{LANG}.TXT",
+    "messages":     "SCOSWAMP/TEXT{LANG}/MSG{LANG}.TXT",
     "messagesEnum": "SCOSWAMP/SRC/messages.h",
-    "objets":       "SCOSWAMP/OBJ{LANG}.TXT",
+    "objets":       "SCOSWAMP/TEXT{LANG}/OBJ{LANG}.TXT",
     "carte":        "SCOSWAMP/MAP.BIN"
   },
 
@@ -97,13 +121,14 @@
       "nom": "Master (avant DHGR)",
       "type": "png",
       "chemin": "SCOSWAMP.MORE/GENERATED/{IMG}.png",
-      "note": "L'illustration d'origine, pleine resolution : ce que la conversion prend en entree."
+      "horsVolume": true,
+      "note": "L'illustration d'origine, pleine resolution : ce que la conversion prend en entree. Elle n'a rien a faire sur le volume -- c'est l'entree de la conversion, pas sa sortie."
     },
     {
       "id": "dhgr-chatmauve",
       "nom": "DHGR decode (Chat Mauve)",
       "type": "dhgr",
-      "chemin": "SCOSWAMP/IMG/{BUCKET}/{IMG}.RLE.BIN",
+      "chemin": "SCOSWAMP/DHGR/{BUCKET}/{IMG}.RLE.BIN",
       "palette": "chatmauve",
       "note": "Le flux RLE du volume, decode ici meme : exactement ce que la machine affiche."
     },
@@ -111,20 +136,22 @@
       "id": "dhgr-composite",
       "nom": "DHGR decode (composite)",
       "type": "dhgr",
-      "chemin": "SCOSWAMP/IMG/{BUCKET}/{IMG}.RLE.BIN",
+      "chemin": "SCOSWAMP/DHGR/{BUCKET}/{IMG}.RLE.BIN",
       "palette": "composite"
     },
     {
       "id": "preview-chatmauve",
       "nom": "Apercu PNG Chat Mauve",
       "type": "png",
-      "chemin": "SCOSWAMP.MORE/CHATMAUVE-PREVIEW/{IMG}.png"
+      "chemin": "SCOSWAMP.MORE/CHATMAUVE-PREVIEW/{IMG}.png",
+      "horsVolume": true
     },
     {
       "id": "preview-composite",
       "nom": "Apercu PNG composite",
       "type": "png",
-      "chemin": "SCOSWAMP.MORE/HGR-PREVIEW/{IMG}.png"
+      "chemin": "SCOSWAMP.MORE/HGR-PREVIEW/{IMG}.png",
+      "horsVolume": true
     }
   ],
 

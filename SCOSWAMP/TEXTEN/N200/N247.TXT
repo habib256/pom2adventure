@@ -6,7 +6,7 @@ juicy.
 
    What do you do?
 
-MU LOUPS.MB
+MU WOLVES.MB
 G .T
 C 020 Eat the berry on the spot
 C 232 Pick it and store it carefully

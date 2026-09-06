@@ -87,9 +87,14 @@ def battle_rows(root, characters):
         if not names and not text.startswith("T ") or scene_id in seen:
             pass
         # une page deja convertie porte une ligne "M <hab> <end> <nom>"
+        assigned = []
         for line in text.splitlines():
             if line.startswith("M ") and len(line.split()) >= 4:
-                names.append(line.split(None, 3)[3].strip())
+                assigned.append([line.split(None, 3)[3].strip(), scene_id])
+            elif line.startswith("MI ") and assigned:
+                assigned[-1][1] = int(line.split()[1])
+        if assigned:
+            names = [name for name, image in assigned if image == scene_id]
         if not names or scene_id in seen:
             continue
         seen.add(scene_id)
@@ -101,10 +106,13 @@ def battle_rows(root, characters):
             "adversaries": names,
             "text_path": str(path.relative_to(root)),
             "source_png": str((more / "GENERATED" / f"B{sid}.png").relative_to(root)),
-            "hgr_rle": str((game / "IMG" / bucket / f"B{sid}.RLE.BIN").relative_to(root)),
+            "hgr_rle": str((game / "DHGR" / bucket / f"B{sid}.RLE.BIN").relative_to(root)),
             "preview_png": str((more / "HGR-PREVIEW" / f"B{sid}.png").relative_to(root)),
             "prompt": (BATTLE_STYLE + "Adversary: " + ", ".join(names)
                        + "\n\n" + text.strip()
+                       + "\n\nIMAGE ASSIGNMENT: depict ONLY " + ", ".join(names)
+                       + ". Other monsters assigned an MI image in the source text "
+                         "are illustrated separately and MUST NOT appear in this image."
                        + character_block(text + " " + " ".join(names), characters)),
             "refs": battle_refs(text + " " + " ".join(names), characters, root),
             "bible": bible_hash(text + " " + " ".join(names), characters),
@@ -353,7 +361,7 @@ def scene_rows(root, characters, all_pages):
         sid = f"{scene_id:03d}"
         bucket = f"N{(scene_id // 50) * 50:03d}"
         text_path = game / "TEXTFR" / bucket / f"N{sid}.TXT"
-        rle_path = game / "IMG" / bucket / f"N{sid}.RLE.BIN"
+        rle_path = game / "DHGR" / bucket / f"N{sid}.RLE.BIN"
         # --all les demande toutes : c'est ce qu'il faut apres une modification
         # des bibles, sans quoi les anciennes images gardent leur ancienne
         # interpretation.

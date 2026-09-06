@@ -35,7 +35,7 @@ la grosse caisse sur le premier, et trois coups nus dans la mesure amputee.
 mesure courte(1) - A'(7).
 
     python3 arbresepees.py && python3 ../../../midi_to_mb.py arbresepees.mid \\
-        ARBRESEPEES.MB.BIN --bpm 166 --max 2304 --wav ARBRESEPEES.wav
+        SWORDTREES.MB.BIN --bpm 166 --max 2304 --wav ARBRESEPEES.wav
 """
 import sys
 from pathlib import Path

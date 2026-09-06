@@ -13,6 +13,6 @@ les flammes se propagent derriere vous. L'incendie aura tot fait de bruler les
 araignees, mais il faut vous depecher si vous ne voulez pas etre carbonise a
 votre tour !
 
-MU ARAIGNEES.MB
+MU SPIDERS.MB
 G ARAIGNEE
 C 165 Partir immediatement

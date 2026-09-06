@@ -5,5 +5,5 @@ T 324 After the Combat
    What will you do?
 
 C 088 Leave the clearing immediately
-C 383 Cast a Blessing spell on the Dwarf
+CU BENEDICTION 383 Cast a Blessing spell on the Dwarf
 C 042 Search the Dwarf's corpse

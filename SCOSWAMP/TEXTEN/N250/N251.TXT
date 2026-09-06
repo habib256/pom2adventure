@@ -7,7 +7,7 @@ to anyone, and you begin to regret your act. You lose 3 LUCK points.
 only path that allows leaving the clearing. The trail is oriented toward the
 west and plunges between old twisted oaks.
 
-MU JARDINS.MB
+MU GARDENS.MB
 G FLEUR
 E CHANCE -3
 C 363 Follow the path westward, wearing the Amulet

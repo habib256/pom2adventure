@@ -1,15 +1,19 @@
-Sylvaria Prime
----------------
+T 002 The cockpit of the Convertible
+V 003
 
-Welcome to Sylvaria Prime, the legendary planet of eternal forests!
-Immense multicolored trees rise as far as the eye can see, their
-crystalline leaves tinkling melodiously in the fragrant breeze.
-Bioluminescent creatures flutter between the gigantic branches.
+   The roof shuts with the clack of a biscuit tin. The star chart lights
+up and paints your face violet. Two sectors are blinking: the inner one,
+warm and crowded, and the outer one, where the charts say only HERE,
+PROBABLY.
 
-The perfect spot for a memorable selfie! The light filtered through
-the canopy creates a magical atmosphere. Perfect for your Instagram feed.
-But be careful not to get lost in this plant labyrinth...
+   You clip the Holophone onto its arm. The ring light comes on. You are
+live. You were already live, in fact, and have been for twenty minutes:
+your twelve followers watched you lose a fight with a seat belt.
 
-C 001 Return home
-C 005 Drift to the floating mountains of Myria
-C 007 Descend into the crystal canyons
+   A message arrives. Bizz Lightspan, in close-up, a selfie behind him: a
+black helmet breathing like a radiator. "ONE down, everybody! Four to go!"
+Forty million hearts scroll past.
+
+   You have a Convertible, a telephone and nerve. That is a start.
+
+C 003 Take the controls

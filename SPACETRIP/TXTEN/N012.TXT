@@ -1,14 +1,19 @@
-Crystal Canyons of Virelia
----------------------------
+T 012 Hans Lonely and Chewpaca
 
-Tall crystal walls rise like organ pipes.
-Wind makes them sing with pure tones.
-Shards glitter on the canyon floor.
-The air is cool and very clear.
+   The smuggler in the waistcoat does not look up from his banknotes. "If
+it is an autograph, that is fifty. If it is a passage, that is two
+thousand and I do not ask what is in the crate."
 
-Stand near a safe wall and frame the songs in the back.
-Do not touch loose shards with bare hands.
+   Beside him the hairy copilot occupies two chairs and part of a third.
+He growls a sentence of three syllables. Hans Lonely translates without
+turning round: "He says hello." The copilot growls fourteen more
+syllables. "He says hello."
 
-C 002 Return to Sylvaria Prime forests
-C 008 Visit the wind city of Aeolis
-C 010 Sail the mirror
+   Chewpaca is holding his left paw tight against his chest, very quietly,
+the way you hold a thing that hurts when nobody is watching.
+
+   Under the table sits a sack of cat kibble, enormous, absurd.
+
+C 018 Buy the sack of kibble
+C 015 Ask to see the paw
+C 010 Back into the room

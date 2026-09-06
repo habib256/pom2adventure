@@ -3,6 +3,6 @@ T 234 Two Paths
    The path widens and opens onto a new clearing. Two trails allow you to
 exit: one leads eastward, the other opens toward the south. Choose your road.
 
-MU PATROUIL.MB
+MU PATROLLER.MB
 C 305 Go east
 C 121 Take the southern direction

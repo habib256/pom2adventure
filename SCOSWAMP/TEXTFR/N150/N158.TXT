@@ -13,4 +13,4 @@ le voudrez. Et la moitie des economies d'une annee sera a vous, comme promis."
    Vous le remerciez, satisfait: Pompatarte est un homme de parole. Votre
 mission a reussi et votre aventure s'acheve ici.
 
-MU +VICTOIRE.MB
+MU +VICTORY.MB

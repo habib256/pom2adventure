@@ -33,7 +33,7 @@ Ce qui a change a la revision :
 28 mesures a 4/4, 44,8 s. Forme intro(4) - nord(6) - sud(6) - est(6) - ouest(6).
 
     python3 croisement.py && python3 ../../../midi_to_mb.py croisement.mid \\
-        CROISEMENT.MB.BIN --bpm 150 --max 2304 --wav CROISEMENT.wav
+        CROSSROADS.MB.BIN --bpm 150 --max 2304 --wav CROISEMENT.wav
 """
 import sys
 from pathlib import Path

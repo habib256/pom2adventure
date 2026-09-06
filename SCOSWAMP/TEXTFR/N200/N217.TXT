@@ -4,5 +4,5 @@ T 217 Retour force
 reprenez la direction du sud. Bientot, l'air se charge d'un parfum inquietant:
 la clairiere des Fleurs d'Angoisse approche.
 
-MU OISEAUX.MB
+MU BIRDS.MB
 C 250 Reprendre la direction du sud vers les Fleurs d'Angoisse

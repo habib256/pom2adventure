@@ -10,7 +10,7 @@ bientot, vous entendez un battement d'ailes derriere vous et vous apercevez un
 AIGLE enorme qui vole au-dessus de la clairiere en vous observant
 attentivement. Avez-vous :
 
-MU AIGLE.MB
+MU EAGLE.MB
 CI PL 392 Des Plumes de Perroquet
 CI FAUX 025 Une Amulette d'Argent en forme d'oiseau
 C 233 Ni les unes ni l'autre

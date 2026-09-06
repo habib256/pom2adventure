@@ -1,8 +1,7 @@
 T 221 Le combat contre la Licorne
 
    Vous tirez votre epee et vous vous preparez a recevoir la charge. Vous avez
-de la chance: la creature est deja gravement blessee. Il vous faudra lui
-porter au moins deux Assauts pour l'abattre.
+de la chance : la creature est deja gravement blessee.
 
    Apres ces deux Assauts, si vous le desirez, vous pourrez prendre la fuite
 afin de sauver votre vie. Si la Licorne succombe sous vos coups, vous pourrez
@@ -13,7 +12,8 @@ plantes du Marais.
    Serrez les dents, frappez avec precision: meme blesse, la bete reste
 dangereuse et chaque erreur peut vous etre fatale.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 11 4 LICORNE
+MF 2
 CF 348 Prendre la fuite apres avoir porte au moins deux Assauts
 MV 277

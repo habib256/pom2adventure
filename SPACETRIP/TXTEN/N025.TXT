@@ -1,0 +1,18 @@
+T 025 The Meditation Chamber
+
+   The door opens onto a black empty sphere. At its centre, a chair. In the
+chair, an enormous silhouette: cape, black metal helmet, a respirator wheezing
+like an old radiator. Kuh-hooo. Kuh-hooo.
+
+   -- I have been expecting you, says Lord Vapour. Kuh-hooo. Twelve followers
+is twelve more than anyone gives me credit for.
+
+   He agrees to the selfie. He stands, arranges the cape, finds his angle.
+
+   -- One condition. Kuh-hooo. No. Flash. I have lived in the dark for forty
+years. Flash reminds me of unpleasant things.
+
+   The room is very dark. Your ring light hesitates.
+
+C 026 Kill the flash and shoot by the helmet's red glow
+C 027 Use the flash: without it nobody will see a thing

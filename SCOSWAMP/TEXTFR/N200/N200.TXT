@@ -6,7 +6,7 @@ pret au combat. L'ours est massif, ses griffes laceraient une armure fragile.
 
    Si vous sentez que vous avez le dessous, prenez la Fuite.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 8 OURS
 CF 390 Prendre la fuite
 MV 069

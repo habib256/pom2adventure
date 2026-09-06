@@ -1,6 +1,6 @@
 # Zone `sud` — les douze clairières au sud de la rivière
 
-**`MARAISUD.MB.BIN` — 2 277 octets, 45,1 s, boucle.** Tampon de zone (2 304 o), 27 octets de marge.
+**`SOUTHSWAMP.MB.BIN` — 2 277 octets, 45,1 s, boucle.** Tampon de zone (2 304 o), 27 octets de marge.
 
 ## Ce que la zone couvre
 
@@ -66,6 +66,6 @@ Mesuré par `../verifier.py` — c'est l'attribution réelle de
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/sud
 python3 sud.py
-python3 ../../midi_to_mb.py sud.mid MARAISUD.MB.BIN \
+python3 ../../midi_to_mb.py sud.mid SOUTHSWAMP.MB.BIN \
     --bpm 150 --max 2304 --wav MARAISUD.wav
 ```

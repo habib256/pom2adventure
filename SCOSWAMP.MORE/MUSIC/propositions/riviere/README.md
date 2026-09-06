@@ -1,6 +1,6 @@
 # Zone `riviere` — la rivière Croupie, la falaise et le pont
 
-**Fichier proposé : `RIVIERE.MB` (`RIVIERE.MB.BIN`, 719 octets, 37,8 s de boucle)**
+**Fichier proposé : `RIVER.MB` (`RIVER.MB.BIN`, 719 octets, 37,8 s de boucle)**
 
 La ligne `y = 3` de la grille coupe la carte en deux, et le pont en est l'unique
 passage (`carte.json:784`, `CARTOGRAPHIE.md:377-379`). C'est la zone la plus
@@ -60,7 +60,7 @@ trois pages du pont.
 ```sh
 python3 SCOSWAMP.MORE/MUSIC/midi_to_mb.py \
     SCOSWAMP.MORE/MUSIC/propositions/riviere/SilverSwan.mid \
-    SCOSWAMP.MORE/MUSIC/propositions/riviere/RIVIERE.MB.BIN \
+    SCOSWAMP.MORE/MUSIC/propositions/riviere/RIVER.MB.BIN \
     --bpm 136 --vol 13,9,11 \
     --wav SCOSWAMP.MORE/MUSIC/propositions/riviere/RIVIERE.wav
 ```

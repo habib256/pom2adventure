@@ -1,0 +1,10 @@
+{
+  "route": "pompatarte",
+  "attempt": 1,
+  "disk_sha256": "bf605323b5f4e90fd6d92a6e775705cf9eeb559827bb9944ffdada61baf9a2b8",
+  "started": "2026-09-06T14:22:38+0400",
+  "events": [],
+  "status": "error",
+  "error": "RuntimeError('POM2 ne repond pas sur le port 6523')",
+  "seconds": 30.0
+}

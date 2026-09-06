@@ -8,6 +8,6 @@ on which he was sitting.
 traces of human teeth on one of the cap's edges. The mushroom gives off a
 pleasant smell and you can eat a piece if you wish.
 
-MU GRENOUILLES.MB
+MU FROGS.MB
 C 178 Eat a piece
 C 352 Leave northward

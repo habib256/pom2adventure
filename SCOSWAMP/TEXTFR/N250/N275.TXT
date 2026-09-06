@@ -16,7 +16,7 @@ n'en est pas moins dangereux pour autant.
 
    Qu'allez-vous faire ?
 
-MU GEANT.MB
+MU GIANT.MB
 C 012 L'attaquer
 C 229 Essayer de le calmer
 C 145 Recourir a la magie

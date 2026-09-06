@@ -1,0 +1,17 @@
+T 072 Un present pour l'Empereur
+
+   Vous posez la fiole d'epice ambree sur le coussin qu'un serviteur glisse
+sous vos mains. Mingus la souleve a contre-jour, la fait tourner, en respire
+une trace et ferme les yeux.
+
+   "De l'Epice. De la vraie." Il claque des doigts. "Cet etranger est mon
+invite ! Loge d'honneur ! Coussins ! Petits fruits !"
+
+   Douze courtisans applaudissent avec exactement le meme sourire. Vous
+filmez le trone, la barbiche, le col en eventail. Trois abonnes reviennent.
+
+   "Nous allons voir des combats", ajoute l'Empereur. "J'adore les combats."
+
+G .MING
+C 074 Vous installer dans la loge d'honneur
+C 003 Decliner poliment et regagner le Cabriolet

@@ -4,6 +4,6 @@ T 234 Deux sentiers
 permettent d'en sortir: l'un mene vers l'est, l'autre s'ouvre en direction du
 sud. Choisissez votre route.
 
-MU PATROUIL.MB
+MU PATROLLER.MB
 C 305 Aller vers l'est
 C 121 Prendre la direction du sud

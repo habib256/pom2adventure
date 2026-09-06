@@ -16,5 +16,5 @@ Duncan Smith (1984), French edition by Gallimard (1985).
    Commands:
  [A-E] - Choose   [L] - Load a game   [H] - Help   [Q] - Quit
 
-MU ACCUEIL.MB
+MU WELCOME.MB
 C 419 Create my character

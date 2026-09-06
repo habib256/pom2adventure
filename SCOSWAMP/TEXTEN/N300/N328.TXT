@@ -12,6 +12,6 @@ you, I'd be happy to do so."
 
    Which sorcerer have you decided to serve?
 
-C 244 Gayolard
-C 317 Stratagus
-C 103 Pompatarte
+CI .G 244 Gayolard
+CI .S 317 Stratagus
+CI .P 103 Pompatarte

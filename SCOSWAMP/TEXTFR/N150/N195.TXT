@@ -19,6 +19,6 @@ pieges.
 serrez votre epee, pret a choisir la voie qui vous permettra de quitter cette
 clairiere sans y laisser vos forces. Le danger est tangible.
 
-MU RONDPOINT.MB
+MU ROUNDABOUT.MB
 C 058 Traverser prudemment la clairiere vers un autre sentier
 C 091 Tenter de franchir d'un bond la zone marecageuse

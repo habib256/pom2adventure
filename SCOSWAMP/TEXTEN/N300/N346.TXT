@@ -5,4 +5,9 @@ T 346 Terror Stone on the Orcs
    One of them starts screaming, drops his weapons and flees into the marshes.
 But the other two advance toward you and you'll have to fight them.
 
-C 281 Fight the two Orcs
+MU +BATTLE.MB
+M 6 7 FIRST ORC
+MI 281
+M 7 7 SECOND ORC
+MI 281
+MV 135

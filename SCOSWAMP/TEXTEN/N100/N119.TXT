@@ -6,8 +6,8 @@ need to act quickly.
 
    Which Stone will you try to neutralize it?
 
-CU AMITIE 039 Use a Friendship Stone
+CU TERREUR 293 Use a Terror Stone
 CU BENEDICTION 381 Use a Blessing Stone
 CU FEU 337 Use a Fire Stone
-CU TERREUR 293 Use a Terror Stone
+CU AMITIE 039 Use a Friendship Stone
 C 320 Don't use these Stones and make another choice

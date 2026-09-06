@@ -36,7 +36,7 @@ export class Engine {
       /* La page en cours, remise a plat par loadScene. */
       title: null, body: [], choices: [], trace: [],
       foes: [], foeImg: [], foeCur: 0, lastLoss: 0, dvDone: false,
-      revisit: -1, fleeTarget: -1, winScene: -1,
+      revisit: -1, fleeTarget: -1, fleeAfter: 0, magicForbidden: false, winScene: -1,
       luckOk: -1, luckKo: -1, luckDok: 0, luckDko: 0,
       csCarac: 0, csOk: -1, csKo: -1,
       mbOk: -1, mbKo: -1,
@@ -46,18 +46,26 @@ export class Engine {
       /* Ce que l'ecran montre : les 4 lignes du bas, l'invite, la modale. */
       bottom: ['', '', '', ''], hint: '', modal: null, combat: null,
       imageKey: null, imageAlt: null,
-      mapHere: -1, carte: null,
+      mapHere: -1, carte: null, lieuDejaVu: false, pageVolume: null,
       msg: (n, ...a) => n,
     };
   }
 
   /* ── Demarrage ──────────────────────────────────────────────────────── */
 
-  async setLangue(lang) {
+  async prepareLangue(lang) {
+    const [cat, carte, aide] = await Promise.all([
+      D.loadCatalogs(this.proj, lang),
+      D.loadMap(this.proj),
+      D.loadTexteEcran(this.proj, lang, 'aide'),
+    ]);
+    return {lang, cat, carte, aide};
+  }
+
+  applyLangue({lang, cat, carte, aide}) {
     const app = this.app;
     app.lang = lang;
     app.english = lang !== 'FR';
-    const cat = await D.loadCatalogs(this.proj, lang);
     R.setCatalogs({
       objets: cat.objets,
       pierres: this.proj.pierres,
@@ -65,8 +73,12 @@ export class Engine {
     });
     app.msg = cat.msg;
     app.messages = cat.messages;
-    app.carte = await D.loadMap(this.proj);
-    app.aide = await D.loadTexteEcran(this.proj, lang, 'aide');
+    app.carte = carte;
+    app.aide = aide;
+  }
+
+  async setLangue(lang) {
+    this.applyLangue(await this.prepareLangue(lang));
   }
 
   async run() {
@@ -82,7 +94,7 @@ export class Engine {
       }
       /* Une page restee sans aucun choix est une fin -- mort par la prose,
        * victoire, ou combat gagne sans suite : on offre de recommencer. */
-      if (!app.choices.length) app.hint = app.msg('M_MORT_RECOMMENCER');
+      app.hint = app.choices.length ? '' : app.msg('M_MORT_RECOMMENCER');
       this.ui.render();
       await this.handleKey(await this.ui.key());
     }
@@ -99,19 +111,24 @@ export class Engine {
     }
     app.title = null; app.body = []; app.choices = []; app.trace = [];
     app.foes = []; app.foeImg = []; app.foeCur = 0; app.dvDone = false;
-    app.revisit = -1; app.fleeTarget = -1; app.winScene = -1;
+    app.revisit = -1; app.fleeTarget = -1; app.fleeAfter = 0; app.magicForbidden = false; app.winScene = -1;
     app.luckOk = -1; app.luckKo = -1; app.luckDok = 0; app.luckDko = 0;
     app.csOk = -1; app.csKo = -1; app.mbOk = -1; app.mbKo = -1;
     app.diceN = 0; app.diceCarac = 0;
     app.chooseN = 0; app.chooseCats = '';
     app.musicName = ''; app.musicOver = false;
     app.bottom = ['', '', '', '']; app.hint = ''; app.combat = null;
-    app.imageKey = null; app.imageAlt = null;
+    app.imageKey = null; app.imageAlt = null; app.source = '';
     /* lastLoss ne se remet PAS a zero : c'est la page SUIVANT le combat qui
      * la lit (lignes DV). */
 
     let texte;
-    try { texte = await D.getText(D.pagePath(this.proj, app.lang, id)); }
+    const chemin = D.pagePath(this.proj, app.lang, id);
+    /* Quand on lit le volume, on dit si le depot a bouge depuis l'empaquetage :
+     * c'est la question de l'auteur qui vient d'editer une page -- est-ce que
+     * la machine la verra ? */
+    D.comparerAuDepot(chemin).then((v) => { app.pageVolume = v; this.ui.render(); });
+    try { texte = await D.getText(chemin); }
     catch (e) {
       app.body = [`*** Page ${id} introuvable : ${e.message}`];
       this.ui.render();
@@ -119,6 +136,7 @@ export class Engine {
     }
     /* C'est la LECTURE du fichier qui applique les lignes E, P, G et V :
      * elles jouent une fois par visite, dans l'ordre du fichier. */
+    app.source = texte;      /* l'onglet Source montre la page telle qu'elle est */
     parseScene(app, texte);
 
     if (app.heroReady && R.isDead(app.hero)) { await this.dieAndRestart(); return; }
@@ -126,6 +144,12 @@ export class Engine {
     /* Deja venu : la page longue cede la place a sa version courte, sans rien
      * afficher entre les deux. Le passage n'est PAS marque. */
     if (app.revisit >= 0) { app.pending = app.revisit; return; }
+    /* « deja visitee » se decide AVANT de marquer la page : sur la machine,
+     * render_place() peint la ligne de lieu pendant la lecture du fichier,
+     * donc avant scene_mark_visited(). Marquer d'abord aurait affiche le
+     * mot des la premiere arrivee, sur toutes les pages. */
+    app.lieuDejaVu = !!(app.carte && app.mapHere >= 0 &&
+      app.carte.pages.some((p) => p.clr === app.mapHere && R.sceneVisited(app.mem, p.page)));
     R.sceneMarkVisited(app.mem, id);
 
     app.imageKey = 'N' + D.pad3(id);
@@ -151,10 +175,11 @@ export class Engine {
     if (!app.foes.length) { this.ui.render(); return; }
 
     const issue = app.foeCur < app.foes.length ? await this.runCombat() : ISSUE.DEJA_GAGNE;
+    if (issue !== ISSUE.DEJA_GAGNE) R.takeObject(app.hero, R.objectFromName('.D'));
     if (issue === ISSUE.MORT) await this.dieAndRestart();
     else if (issue === ISSUE.FUITE) app.pending = app.fleeTarget;
     else if (app.winScene >= 0) app.pending = app.winScene;
-    else { app.combat = null; app.bottom = ['', '', '', '']; this.ui.render(); }
+    else { app.bottom = ['', '', '', '']; this.ui.render(); }
   }
 
   /* La memoire d'une rencontre appartient a la CLAIRIERE, pas au paragraphe :
@@ -162,7 +187,7 @@ export class Engine {
    * Les clairieres commencent a 1 -- 0 marque un emplacement libre. */
   zoneKey() {
     const app = this.app;
-    return app.mapHere >= 0 ? app.mapHere + 1 : 0x100 + app.currentScene;
+    return R.monsterZoneKey(app);
   }
 
   /* Le disque range une image de bataille par page (B<page>), mais une file
@@ -190,6 +215,7 @@ export class Engine {
    * d'une perte seche. */
   async runDiceRoll() {
     const app = this.app;
+    if (app.diceN === 3) { await this.runLuckTest(); return; }
     app.bottom = [app.msg('M_LANCEZ_LES_DES'), '', '', ''];
     await this.pause();
     let roll = R.rollD6();
@@ -212,7 +238,7 @@ export class Engine {
     app.bottom = [app.msg('M_JET_DE_CHANCE', roll, app.hero.cha), '', '', ''];
     if (app.hero.cha > 0) app.hero.cha--;
     app.bottom[1] = app.msg(lucky ? 'M_CHANCEUX' : 'M_MALCHANCEUX');
-    R.adjustEnd(app.hero, lucky ? app.luckDok : app.luckDko);
+    caracApply(app.hero, app.diceN === 3 ? app.diceCarac : 0, lucky ? app.luckDok : app.luckDko);
     await this.pause();
     return lucky ? app.luckOk : app.luckKo;
   }
@@ -259,23 +285,37 @@ export class Engine {
    * touche par assaut, la blessure annoncee puis encaissee, et la Chance
    * choisie APRES avoir vu qui a touche -- c'est l'ordre du livre. */
   async runCombat() {
+    /* Le bandeau de combat s'efface a la sortie, quelle qu'elle soit : la
+     * mort, la fuite et la victoire rendent la main a un autre ecran, et un
+     * bandeau qui survit a son combat ferait croire qu'il dure encore. */
+    try { return await this.combatBoucle(); }
+    finally { this.app.combat = null; }
+  }
+
+  async combatBoucle() {
     const app = this.app;
+    let remaining = app.fleeAfter;
     let assaut = 0, pending = false, hits = false, r = null;
     let wgood = 0, wbad = 0;
-    const endIn = app.hero.end;
+    app.lastLoss = 0;
 
     const foe = () => app.foes[app.foeCur];
-    app.combat = { assaut: 0, lignes: [], verdict: '' };
+    /* Ce que l'ecran doit peindre d'un combat, en clair : le bandeau des deux
+     * combattants, le jet du dernier assaut, le verdict, l'enjeu de la
+     * Chance. C'est l'ecran qui les met en page -- aux colonnes exactes de
+     * show_fighters() et de put_roll(). */
+    app.combat = { assaut: 0, jet: null, verdict: '', message: '' };
 
     for (;;) {
       const c = app.combat;
       c.assaut = assaut;
       c.foe = foe();
+      c.rang = app.foes.length > 1 ? `${app.foeCur + 1}/${app.foes.length}` : '';
       c.pending = pending;
       c.hits = hits;
       c.enjeu = pending && app.hero.cha ? { cha: app.hero.cha, bon: wgood, mauvais: wbad } : null;
       c.premier = assaut === 0;
-      c.fuite = app.fleeTarget >= 0;
+      c.fuite = app.fleeTarget >= 0 && remaining === 0;
       this.ui.render();
 
       const key = await this.ui.key();
@@ -283,10 +323,14 @@ export class Engine {
        * sort sans appliquer quoi que ce soit, la page demandee est deja en
        * attente. */
       if (key === '\x00') { app.combat = null; return ISSUE.DEJA_GAGNE; }
-      if (key === 'I' && assaut === 0) { await this.showInventory(false); continue; }
+      if (key === 'I') {
+        if (await this.showInventory(app.magicForbidden ? 2 : assaut !== 0)) return ISSUE.MORT;
+        continue;
+      }
       if (key === 'M') { await this.openMap(); continue; }
-      if (key === 'F' && app.fleeTarget >= 0) {
-        c.lignes = [app.msg('M_VOUS_FUYEZ_ELLE')];
+      if (key === 'F' && c.fuite) {
+        c.message = app.msg('M_VOUS_FUYEZ_ELLE');
+        c.jet = null;
         c.enjeu = { cha: app.hero.cha, bon: foe().damage - 1, mauvais: foe().damage + 1 };
         c.fuiteEnCours = true;
         this.ui.render();
@@ -307,7 +351,10 @@ export class Engine {
        * tenir un assaut en une seule frappe. */
       if (pending) {
         pending = false;
+        if (remaining) remaining--;
+        const endIn = app.hero.end;
         const lucky = R.combatApply(app.hero, foe(), r, useLuck);
+        app.lastLoss += Math.max(0, endIn - app.hero.end);
         if (useLuck) {
           c.verdict = app.msg(lucky ? 'M_CHANCEUX' : 'M_MALCHANCEUX');
           c.pending = false;
@@ -323,10 +370,9 @@ export class Engine {
           if (app.foeCur >= app.foes.length) {
             /* "Evaluez vos blessures" : la page d'apres peut brancher sur ce
              * que le combat a coute (lignes DV). */
-            app.lastLoss = Math.max(0, endIn - app.hero.end);
             return ISSUE.VICTOIRE;
           }
-          assaut = 0;              /* le sac redevient ouvrable */
+          assaut = 0;              /* les pierres de caracteristique redeviennent permises */
           c.verdict = '';
           this.setFoeImage();
           continue;
@@ -349,12 +395,9 @@ export class Engine {
       r = R.combatRound(app.hero, foe());
       hits = r.outcome === R.ROUND_HERO_HITS;
       c.assaut = assaut;
-      c.lignes = [
-        app.msg('M_ASSAUT_N', assaut),
-        `${app.msg('M_JET_VOUS')} ${r.heroD1} + ${r.heroD2} + ${r.heroForce - r.heroD1 - r.heroD2} = ${r.heroForce}`,
-        `${app.msg('M_JET_LUI')} ${r.monsterD1} + ${r.monsterD2} + ${foe().hab} = ${r.monsterForce}`,
-      ];
-      if (r.outcome === R.ROUND_DODGE) { c.verdict = app.msg('M_VOUS_AVEZ_CHACUN'); continue; }
+      c.jet = r;
+      c.message = '';
+      if (r.outcome === R.ROUND_DODGE) { if (remaining) remaining--; c.verdict = app.msg('M_VOUS_AVEZ_CHACUN'); continue; }
       /* "chaque blessure coute 2 points d'ENDURANCE" -- sauf aux creatures
        * dont la page dit autrement (ligne MD). On annonce la perte seche ; la
        * Chance peut encore la changer, et la jauge dira le vrai. */
@@ -370,7 +413,8 @@ export class Engine {
 
   async showInventory(inCombat) {
     const app = this.app;
-    for (;;) {
+    try {
+    while (!app.heroReady || !R.isDead(app.hero)) {
       const shown = [];
       app.hero.stones.forEach((n, s) => { if (n) shown.push(s); });
       app.modal = { type: 'sac', shown, inCombat, note: '' };
@@ -381,13 +425,14 @@ export class Engine {
       if (i < 0 || i >= shown.length) continue;
       const s = shown[i];
       const issue = R.stoneUse(app.hero, s, inCombat);
-      app.modal.note = issue === R.STONE_USE_FORBIDDEN ? app.msg('M_LE_PREMIER_COUP')
+      app.modal.note = issue === R.STONE_USE_FORBIDDEN ? app.msg(inCombat === 2 ? 'M_PIERRE_ABSENTE' : 'M_LE_PREMIER_COUP')
                      : issue === R.STONE_USE_NONE ? app.msg('M_PIERRE_ABSENTE')
                      : app.msg('M_LA_PIERRE_DE', R.stoneName(s, app.english));
       this.ui.render();
       await this.ui.key();
     }
-    app.modal = null;
+    return app.heroReady && R.isDead(app.hero);
+    } finally { app.modal = null; }
   }
 
   /* [M] hors de l'Anneau de Cuivre : refus, avec la phrase du livre. « les
@@ -465,15 +510,49 @@ export class Engine {
     }));
   }
 
-  loadGame(i) {
-    const raw = localStorage.getItem(this.slotKey(i));
-    if (!raw) return false;
-    const s = JSON.parse(raw);
+  readSave(i) {
+    try {
+      const s = JSON.parse(localStorage.getItem(this.slotKey(i)));
+      const integer = (v, min = 0, max = Number.MAX_SAFE_INTEGER) =>
+        Number.isSafeInteger(v) && v >= min && v <= max;
+      const bytes = (v, n) => Array.isArray(v) && v.length === n &&
+        v.every(x => integer(x, 0, 255));
+      if (!s || !integer(s.scene, 0, this.proj.moteur.pageMax) ||
+          !['FR', 'EN'].includes(s.lang) || typeof s.heroReady !== 'boolean' ||
+          !s.hero || !bytes(s.hero.stones, this.app.hero.stones.length) ||
+          !bytes(s.visited, this.app.mem.visited.length) ||
+          !Array.isArray(s.seen) || s.seen.length !== R.MONSTER_SLOTS ||
+          !s.seen.every(m => m && integer(m.scene, 0, 65535) &&
+            integer(m.index, 0, 255) && integer(m.end, 0, 255)) ||
+          !integer(s.mapHere, -1, 254) || !integer(s.dice, 0, 0xffffffff) ||
+          (s.lastLoss !== undefined && !integer(s.lastLoss, 0, 255))) return null;
+      for (const k of ['hab', 'hab0', 'end', 'end0', 'cha', 'cha0', 'gold']) {
+        if (!integer(s.hero[k])) return null;
+      }
+      if (!integer(s.hero.weaponBonus, -128, 127) ||
+          !integer(s.hero.objects, -0x80000000, 0xffffffff) ||
+          !integer(s.hero.amulets, -0x80000000, 0xffffffff)) return null;
+      return s;
+    } catch { return null; }
+  }
+
+  async loadGame(i) {
+    const s = this.readSave(i);
+    if (!s) return false;
+    // Prepare migrations on the detached snapshot: a bad rule must not
+    // leave the active hero and memories partially replaced.
+    const mem = {visited: Uint8Array.from(s.visited), seen: s.seen};
+    let language;
+    try {
+      R.migrateSavedFlags(s.hero, mem, this.proj.rules);
+      language = await this.prepareLangue(s.lang);
+    }
+    catch { return false; }
     const app = this.app;
+    this.applyLangue(language);
     app.hero = s.hero;
     app.heroReady = s.heroReady;
-    app.mem.visited = Uint8Array.from(s.visited);
-    app.mem.seen = s.seen;
+    app.mem = mem;
     app.mapHere = s.mapHere;
     app.lastLoss = s.lastLoss || 0;
     R.diceStateSet(s.dice);
@@ -487,8 +566,7 @@ export class Engine {
     for (;;) {
       const slots = [];
       for (let i = 0; i < 10; i++) {
-        const raw = localStorage.getItem(this.slotKey(i));
-        slots.push(raw ? JSON.parse(raw) : null);
+        slots.push(this.readSave(i));
       }
       app.modal = { type: 'sauvegardes', saving, slots };
       this.ui.render();
@@ -497,7 +575,7 @@ export class Engine {
       const i = key.charCodeAt(0) - 48;
       if (i < 0 || i > 9) continue;
       if (saving) { this.saveGame(i); app.modal = null; return false; }
-      if (this.loadGame(i)) { app.modal = null; return true; }
+      if (await this.loadGame(i)) { app.modal = null; return true; }
     }
   }
 
@@ -505,7 +583,10 @@ export class Engine {
 
   async handleKey(key) {
     const app = this.app;
-    if (key === 'I') { await this.showInventory(false); return; }
+    if (key === 'I') {
+      if (await this.showInventory(false)) await this.dieAndRestart();
+      return;
+    }
     if (key === 'H') { await this.showHelp(); return; }
     if (key === 'M') { await this.openMap(); return; }
     if (key === 'S' || key === 'L') { await this.showSaves(key === 'S'); return; }
@@ -538,7 +619,9 @@ export class Engine {
     /* Le premier choix de l'introduction lance la creation : le joueur
      * comprend d'abord qui il va incarner, puis les des produisent sa
      * Feuille d'Aventure avant l'entree au Marais. */
-    if (!app.heroReady) await this.rollCharacter();
+    /* Un jeu sans Feuille d'Aventure -- SPACETRIP n'en a pas -- ne jette
+     * aucun de : le descripteur le dit, le moteur n'a pas a le deviner. */
+    if (!app.heroReady && this.proj.moteur.feuille !== false) await this.rollCharacter();
     app.pending = c.scene;
   }
 

@@ -1,15 +1,18 @@
-Station de Surf d'Anneaux, Tethys
------------------------------------
+T 009 La chaine de Bizz Annee-Lumiere
 
-Un petit avant-poste orbite a l'interieur d'une bande d'anneau brillante.
-Des blocs de glace derivent comme des vaisseaux silencieux.
-Des guides dirigent des luges le long de chemins stables dans l'anneau.
-Tout scintille dans la lumiere solaire brute.
+   Quarante millions d'abonnes. Un menton de plastique moule. Un sourire
+qui fait un petit bruit de chrome quand il s'ouvre.
 
-Posez a cote d'une luge avec le plan de l'anneau derriere vous.
-Attention a la derive douce mais constante des debris.
+   Sur l'ecran, Bizz court au ralenti devant une explosion. Douze
+cameramen courent a cote de lui, dans le meme ralenti, ce qui demande une
+discipline enorme et un salaire modeste.
 
-C 004 Retour a la comete
-C 010 Naviguer sur la mer miroir d'Epsilon
-C 012 Atteindre le petale Dyson
+   "Salut a tous, ici Bizz ! Aujourd'hui, le Defi ! Aucun amateur ne peut
+gagner ce truc. Aucun. Zero. Impossible." Il fait un clin d'oeil. Le clin
+d'oeil est sponsorise.
 
+   Vos douze abonnes, eux, ont commente. L'un d'eux est votre mere. Elle a
+ecrit : "Couvre-toi." L'autre est un bot. Il a ecrit la meme chose.
+
+C 006 Fermer et revenir a votre chaine
+C 003 Retour au cockpit

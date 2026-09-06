@@ -11,7 +11,7 @@ s'offrent a vous.
 
    Que voulez-vous faire?
 
-MU FALAISE.MB
+MU CLIFF.MB
 C 066 Entrer dans le Marais vers le sud
 C 295 Longer la riviere vers l'ouest
 C 030 Plonger et nager vers le nord

@@ -33,7 +33,7 @@ Fa diese mineur eolien, 156 a la noire, 28 mesures a 4/4, 43,1 s.
 Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 aigle.py && python3 ../../../midi_to_mb.py aigle.mid \\
-        AIGLE.MB.BIN --bpm 156 --max 2304 --wav AIGLE.wav
+        EAGLE.MB.BIN --bpm 156 --max 2304 --wav AIGLE.wav
 """
 import sys
 from pathlib import Path

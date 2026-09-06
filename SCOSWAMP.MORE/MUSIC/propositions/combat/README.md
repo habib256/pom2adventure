@@ -1,6 +1,6 @@
 # Zone `combat` — les 32 pages de bataille
 
-**Fichier proposé : `COMBAT.MB` (`COMBAT.MB.BIN`, 644 octets, 32,8 s de boucle)**
+**Fichier proposé : `BATTLE.MB` (`BATTLE.MB.BIN`, 644 octets, 32,8 s de boucle)**
 
 ## Ce que la zone couvre
 
@@ -86,7 +86,7 @@ chaque `_sfx_*` d'un `php / sei … plp` (8 octets, politique 1 de § 3.4).
 ```sh
 python3 SCOSWAMP.MORE/MUSIC/midi_to_mb.py \
     SCOSWAMP.MORE/MUSIC/propositions/combat/bourree.mid \
-    SCOSWAMP.MORE/MUSIC/propositions/combat/COMBAT.MB.BIN \
+    SCOSWAMP.MORE/MUSIC/propositions/combat/BATTLE.MB.BIN \
     --bpm 180 --vol 13,9,11 \
     --wav SCOSWAMP.MORE/MUSIC/propositions/combat/COMBAT.wav
 ```

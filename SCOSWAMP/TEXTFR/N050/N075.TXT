@@ -7,4 +7,7 @@ atteints.
    Vous allez a present devoir les combattre, mais leur total d'ENDURANCE est
 reduit de 2 points avant le debut du combat.
 
-C 028 Affronter les Arbres-Epees
+MU +BATTLE.MB
+M 9 10 ARBRES-EPEES
+MI 028
+MV 362

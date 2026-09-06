@@ -6,7 +6,7 @@ presque sans intelligence mais d'une force terrible.
    Vous pouvez choisir de fuir a tout moment, mais il vous faudra rebrousser
 chemin.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 5 17 VASE
 CF 153 Prendre la fuite
 MV 038

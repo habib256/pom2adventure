@@ -1,0 +1,71 @@
+{
+  "source_sha256": "af2607afcdf4b8f26062eb598e0187b8c9078e3191cda5cdf9f631e9a493926c",
+  "variants": {
+    "baseline_u8": {
+      "CODE": 16519,
+      "RODATA": 822,
+      "BSS": 223,
+      "DATA": 2,
+      "ZEROPAGE": 0,
+      "NULL": 0,
+      "LC": 2238,
+      "LOWBSS": 2028,
+      "MAPBSS": 959
+    },
+    "stone_arrays_enum16": {
+      "CODE": 16543,
+      "RODATA": 822,
+      "BSS": 223,
+      "DATA": 2,
+      "ZEROPAGE": 0,
+      "NULL": 0,
+      "LC": 2262,
+      "LOWBSS": 2040,
+      "MAPBSS": 971
+    },
+    "codesize120": {
+      "CODE": 16519,
+      "RODATA": 822,
+      "BSS": 223,
+      "DATA": 2,
+      "ZEROPAGE": 0,
+      "NULL": 0,
+      "LC": 2238,
+      "LOWBSS": 2028,
+      "MAPBSS": 959
+    },
+    "codesize150": {
+      "CODE": 16525,
+      "RODATA": 822,
+      "BSS": 223,
+      "DATA": 2,
+      "ZEROPAGE": 0,
+      "NULL": 0,
+      "LC": 2238,
+      "LOWBSS": 2028,
+      "MAPBSS": 959
+    },
+    "codesize200": {
+      "CODE": 17539,
+      "RODATA": 822,
+      "BSS": 223,
+      "DATA": 2,
+      "ZEROPAGE": 0,
+      "NULL": 0,
+      "LC": 2296,
+      "LOWBSS": 2028,
+      "MAPBSS": 959
+    },
+    "no_static_locals": {
+      "CODE": 16581,
+      "RODATA": 822,
+      "BSS": 12,
+      "DATA": 2,
+      "ZEROPAGE": 0,
+      "NULL": 0,
+      "LC": 2229,
+      "LOWBSS": 1932,
+      "MAPBSS": 884
+    }
+  }
+}

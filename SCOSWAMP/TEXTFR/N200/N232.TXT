@@ -6,7 +6,7 @@ reprenez le chemin du sud.
 
    Que faites-vous?
 
-MU LOUPS.MB
+MU WOLVES.MB
 G BA
-C 389 Je sers Gayolard
-C 342 Quitter la clairiere et reprendre le sud
+CI .G 389 Je sers Gayolard
+CN .G 342 Quitter la clairiere et reprendre le sud

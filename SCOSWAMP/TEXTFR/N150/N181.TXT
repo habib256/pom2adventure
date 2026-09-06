@@ -7,4 +7,5 @@ luisent d'une rage tenace : il se souvient de vous.
    S'il avait ete blesse auparavant, il a regagne 1 point d'ENDURANCE. Sinon,
 il combat avec toute sa vigueur.
 
+MR 1 8
 C 200 Affronter l'Ours

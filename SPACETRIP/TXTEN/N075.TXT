@@ -1,0 +1,16 @@
+T 075 Forty million witnesses
+V 077
+
+   You push the ring light to maximum and aim it at the chrome helmet. The
+beam bounces, comes back, and catches Bizz Lightspan square in the eyes.
+
+   He steps back, finds nothing there, and goes down into the arena by the
+shortest route, making a noise very high-pitched for a space ranger.
+
+   The three-horned beast sniffs him, decides he is plastic and wanders off.
+That is worse than anything. Forty million people saw it.
+
+   His twelve camera operators keep filming. They are paid to film.
+
+G .BIZZ
+C 077 Sit back down quietly beside your neighbour

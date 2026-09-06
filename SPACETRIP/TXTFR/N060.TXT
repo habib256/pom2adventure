@@ -1,0 +1,18 @@
+T 060 Station CAL 9000
+
+   Le sas se referme derriere vous sur un couloir blanc et courbe, propre a
+faire peur. Tout au fond, un oeil rouge encastre dans un panneau vous regarde
+sans cligner.
+
+   Beaucoup plus pres, un grand robot est assis en travers du passage, la
+tete dans les mains. Il occupe tout le couloir.
+
+   "Ne vous derangez pas pour moi", dit-il d'une voix de fin du monde. "J'ai
+un cerveau grand comme une planete et on me demande de tenir une porte. Vous
+voulez que je vous raconte ? Ca prend trois heures. Personne n'a jamais tenu
+jusqu'au bout."
+
+CI .CHAG 062 Enjamber Chagrin, qui soupire pour la forme
+GU SERV 061 Lui tendre la serviette de bain
+CN .CHAG 063 Le laisser raconter sa vie depuis le debut
+C 003 Ressortir par le sas

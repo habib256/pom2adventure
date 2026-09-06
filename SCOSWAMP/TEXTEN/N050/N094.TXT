@@ -6,7 +6,7 @@ air and you hold your breath.
    But soon, you are forced to breathe again and the polluted atmosphere costs
 you 2 STAMINA points.
 
-MU BRUME.MB
+MU MIST.MB
 E ENDURANCE -2
 C 295 Go north
 C 320 Go south

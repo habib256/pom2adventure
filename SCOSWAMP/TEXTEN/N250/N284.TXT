@@ -12,7 +12,7 @@ improvised club that will be much more effective in the present situation.
    Stratagus, impressed by your strength and the promptness of your reflexes,
 stops laughing and carefully observes the combat.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 6 GOBLIN STATUE
 CF 315 Flee
 MV 156

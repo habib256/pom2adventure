@@ -16,6 +16,6 @@ Benefique (choisissez laquelle). Vous reprenez a present votre route. Un seul
 chemin permet de quitter la clairiere : vous l'empruntez donc, en marchant
 vers l'ouest.
 
-MU JARDINS.MB
+MU GARDENS.MB
 PC 1 B
 C 363 Continuer vers l'ouest

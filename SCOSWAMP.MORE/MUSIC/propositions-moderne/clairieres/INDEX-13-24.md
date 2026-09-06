@@ -21,25 +21,25 @@ clairière sont inchangés : ce sont des acquis.
 
 | # | `hub` | Clairière | Dossier | Fichier | Pièce | Mode | bpm | Durée | Octets | Coups |
 | ---: | ---: | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| 13 | 295 | La Rivière Croupie | `13-croupie` | `CROUPIE.MB.BIN` | **La Berge aux Crocodiles** | sol dorien | 132 | 43,9 s | 1 595 | 45 |
-| 14 | 183 | Sommet de la falaise | `14-falaise` | `FALAISE.MB.BIN` | **Le Ciel s'Ouvre** | si dorien | **144** | 40,3 s | 1 447 | **—** |
-| 15 | 045 | Le pont sur la Croupie | `15-pont` | `PONT.MB.BIN` | **Le Seul Passage** | si♭ dorien | **154** | 40,8 s | 1 946 | 85 |
-| 16 | 304 | Le Perroquet / la Maîtresse des Oiseaux | `16-oiseaux` | `OISEAUX.MB.BIN` | **La Maîtresse des Oiseaux** | mi dorien | 168 | 40,3 s | 2 002 | 73 |
-| 17 | 094 | La brume fétide | `17-brume` | `BRUME.MB.BIN` | **La Brume Fétide** | do éolien | 128 | 41,5 s | 1 399 | 36 |
-| 18 | 179 | Le pique-nique suspect | `18-piquenique` | `PIQUENIQUE.MB.BIN` | **Le Repas du Voleur** | fa dorien | 176 | 41,2 s | 1 865 | **120** |
+| 13 | 295 | La Rivière Croupie | `13-croupie` | `STAGNANT.MB.BIN` | **La Berge aux Crocodiles** | sol dorien | 132 | 43,9 s | 1 595 | 45 |
+| 14 | 183 | Sommet de la falaise | `14-falaise` | `CLIFF.MB.BIN` | **Le Ciel s'Ouvre** | si dorien | **144** | 40,3 s | 1 447 | **—** |
+| 15 | 045 | Le pont sur la Croupie | `15-pont` | `BRIDGE.MB.BIN` | **Le Seul Passage** | si♭ dorien | **154** | 40,8 s | 1 946 | 85 |
+| 16 | 304 | Le Perroquet / la Maîtresse des Oiseaux | `16-oiseaux` | `BIRDS.MB.BIN` | **La Maîtresse des Oiseaux** | mi dorien | 168 | 40,3 s | 2 002 | 73 |
+| 17 | 094 | La brume fétide | `17-brume` | `MIST.MB.BIN` | **La Brume Fétide** | do éolien | 128 | 41,5 s | 1 399 | 36 |
+| 18 | 179 | Le pique-nique suspect | `18-piquenique` | `PICNIC.MB.BIN` | **Le Repas du Voleur** | fa dorien | 176 | 41,2 s | 1 865 | **120** |
 | 19 | 319 | La clairière des scorpions | `19-scorpions` | `SCORPIONS.MB.BIN` | **La Nuée** | ré phrygien | **184** | 31,6 s | 2 018 | 108 |
-| 20 | 047 | Trois chemins herbeux | `20-herbeux` | `HERBEUX.MB.BIN` | **Trois Chemins Herbeux** | ré dorien | **150** | 35,5 s | 1 493 | 48 |
-| 21 | 031 | Bassin de cristal | `21-cristal` | `CRISTAL.MB.BIN` | **Le Bassin de Cristal** | do dorien | **156** | 40,3 s | 2 056 | 65 |
-| 22 | 367 | Les Fleurs d'Angoisse | `22-angoisse` | `ANGOISSE.MB.BIN` | **Les Fleurs d'Angoisse** | mi phrygien | **148** | 39,2 s | 1 773 | 75 |
-| 23 | 348 | La Licorne | `23-licorne` | `LICORNE.MB.BIN` | **La Licorne Blessée** | fa éolien | **142** | 40,8 s | 1 601 | 51 |
-| 24 | 227 | La clairière des combats | `24-arene` | `ARENE.MB.BIN` | **Ce qui Reste du Combat** | mi éolien | **164** | 41,3 s | **2 128** | 99 |
+| 20 | 047 | Trois chemins herbeux | `20-herbeux` | `GRASSLAND.MB.BIN` | **Trois Chemins Herbeux** | ré dorien | **150** | 35,5 s | 1 493 | 48 |
+| 21 | 031 | Bassin de cristal | `21-cristal` | `CRYSTAL.MB.BIN` | **Le Bassin de Cristal** | do dorien | **156** | 40,3 s | 2 056 | 65 |
+| 22 | 367 | Les Fleurs d'Angoisse | `22-angoisse` | `DREAD.MB.BIN` | **Les Fleurs d'Angoisse** | mi phrygien | **148** | 39,2 s | 1 773 | 75 |
+| 23 | 348 | La Licorne | `23-licorne` | `UNICORN.MB.BIN` | **La Licorne Blessée** | fa éolien | **142** | 40,8 s | 1 601 | 51 |
+| 24 | 227 | La clairière des combats | `24-arene` | `ARENA.MB.BIN` | **Ce qui Reste du Combat** | mi éolien | **164** | 41,3 s | **2 128** | 99 |
 
 Les tempos en gras ont été **augmentés** ; aucun n'a été ralenti. Les douze
 durées sont entre **31,6 et 43,9 s**, dans la fenêtre de 30 à 50 s.
 
 **Total : 21 323 octets** sur le volume, dont **805 coups de batterie**
 (2 415 octets, soit 11 % du flux). Ce qui coûte, c'est la plus grosse :
-`ARENE.MB.BIN`, **2 128 octets**, soit **176 octets de marge** sur le tampon de
+`ARENA.MB.BIN`, **2 128 octets**, soit **176 octets de marge** sur le tampon de
 zone (2 304). Les onze autres ont entre 248 et 905 octets de marge. Aucune des
 douze n'abandonne une seule note à la réduction : la polyphonie maximale est de
 **5** exactement pour les onze pièces avec batterie, **6** pour `falaise`, et
@@ -120,18 +120,18 @@ temps sonnant — et de **50/50** sur `falaise`.
 ```sh
 cd /Users/gistair/src/pom2adventure/SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres
 M=../../../midi_to_mb.py
-(cd 13-croupie    && python3 croupie.py    && python3 $M croupie.mid    CROUPIE.MB.BIN    --bpm 132 --max 2304 --wav CROUPIE.wav)
-(cd 14-falaise    && python3 falaise.py    && python3 $M falaise.mid    FALAISE.MB.BIN    --bpm 144 --max 2304 --wav FALAISE.wav)
-(cd 15-pont       && python3 pont.py       && python3 $M pont.mid       PONT.MB.BIN       --bpm 154 --max 2304 --wav PONT.wav)
-(cd 16-oiseaux    && python3 oiseaux.py    && python3 $M oiseaux.mid    OISEAUX.MB.BIN    --bpm 168 --max 2304 --wav OISEAUX.wav)
-(cd 17-brume      && python3 brume.py      && python3 $M brume.mid      BRUME.MB.BIN      --bpm 128 --max 2304 --wav BRUME.wav)
-(cd 18-piquenique && python3 piquenique.py && python3 $M piquenique.mid PIQUENIQUE.MB.BIN --bpm 176 --max 2304 --wav PIQUENIQUE.wav)
+(cd 13-croupie    && python3 croupie.py    && python3 $M croupie.mid    STAGNANT.MB.BIN    --bpm 132 --max 2304 --wav CROUPIE.wav)
+(cd 14-falaise    && python3 falaise.py    && python3 $M falaise.mid    CLIFF.MB.BIN    --bpm 144 --max 2304 --wav FALAISE.wav)
+(cd 15-pont       && python3 pont.py       && python3 $M pont.mid       BRIDGE.MB.BIN       --bpm 154 --max 2304 --wav PONT.wav)
+(cd 16-oiseaux    && python3 oiseaux.py    && python3 $M oiseaux.mid    BIRDS.MB.BIN    --bpm 168 --max 2304 --wav OISEAUX.wav)
+(cd 17-brume      && python3 brume.py      && python3 $M brume.mid      MIST.MB.BIN      --bpm 128 --max 2304 --wav BRUME.wav)
+(cd 18-piquenique && python3 piquenique.py && python3 $M piquenique.mid PICNIC.MB.BIN --bpm 176 --max 2304 --wav PIQUENIQUE.wav)
 (cd 19-scorpions  && python3 scorpions.py  && python3 $M scorpions.mid  SCORPIONS.MB.BIN  --bpm 184 --max 2304 --wav SCORPIONS.wav)
-(cd 20-herbeux    && python3 herbeux.py    && python3 $M herbeux.mid    HERBEUX.MB.BIN    --bpm 150 --max 2304 --wav HERBEUX.wav)
-(cd 21-cristal    && python3 cristal.py    && python3 $M cristal.mid    CRISTAL.MB.BIN    --bpm 156 --max 2304 --wav CRISTAL.wav)
-(cd 22-angoisse   && python3 angoisse.py   && python3 $M angoisse.mid   ANGOISSE.MB.BIN   --bpm 148 --max 2304 --wav ANGOISSE.wav)
-(cd 23-licorne    && python3 licorne.py    && python3 $M licorne.mid    LICORNE.MB.BIN    --bpm 142 --max 2304 --wav LICORNE.wav)
-(cd 24-arene      && python3 arene.py      && python3 $M arene.mid      ARENE.MB.BIN      --bpm 164 --max 2304 --wav ARENE.wav)
+(cd 20-herbeux    && python3 herbeux.py    && python3 $M herbeux.mid    GRASSLAND.MB.BIN    --bpm 150 --max 2304 --wav HERBEUX.wav)
+(cd 21-cristal    && python3 cristal.py    && python3 $M cristal.mid    CRYSTAL.MB.BIN    --bpm 156 --max 2304 --wav CRISTAL.wav)
+(cd 22-angoisse   && python3 angoisse.py   && python3 $M angoisse.mid   DREAD.MB.BIN   --bpm 148 --max 2304 --wav ANGOISSE.wav)
+(cd 23-licorne    && python3 licorne.py    && python3 $M licorne.mid    UNICORN.MB.BIN    --bpm 142 --max 2304 --wav LICORNE.wav)
+(cd 24-arene      && python3 arene.py      && python3 $M arene.mid      ARENA.MB.BIN      --bpm 164 --max 2304 --wav ARENE.wav)
 ```
 
 Le bloc entier se recolle tel quel dans un shell. **Les bpm ont changé sur huit

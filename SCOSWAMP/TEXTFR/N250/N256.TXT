@@ -7,8 +7,8 @@ vos mains chauffent alors que l'essence du sort palpite au bout des doigts.
    Il est temps de choisir l'incantation qui decidera de l'issue du duel.
 Pesez la portee, le cout et le risque; chaque sort a ses consequences.
 
-C 274 Lancer la Malediction
-C 365 Prononcer la Terreur
-C 385 Enflammer - sort de Feu
-C 351 Creer une Illusion trompeuse
+CU MALEDICTION 274 Lancer la Malediction
+CU TERREUR 365 Prononcer la Terreur
+CU FEU 385 Enflammer - sort de Feu
+CU ILLUSION 351 Creer une Illusion trompeuse
 C 057 Ne lancer aucun sort - chercher une autre voie

@@ -38,7 +38,7 @@ Ce que la revision ajoute :
 28 mesures a 4/4, 49,4 s. Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 profonde.py && python3 ../../../midi_to_mb.py profonde.mid \\
-        PROFONDE.MB.BIN --bpm 136 --max 2304 --wav PROFONDE.wav
+        DEEPWATER.MB.BIN --bpm 136 --max 2304 --wav PROFONDE.wav
 """
 import sys
 from pathlib import Path

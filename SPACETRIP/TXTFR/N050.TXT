@@ -1,0 +1,17 @@
+T 050 Arrakoss, sous deux soleils
+
+   Le Cabriolet se pose dans une gerbe de sable. Vous ouvrez le toit -- c'est
+tout l'interet du modele -- et une bouffee d'air a soixante degres vous gifle
+comme une serviette chaude.
+
+   Deux soleils. Deux ombres. Zero nuage. Du sable jusqu'a l'horizon, et
+l'horizon aussi est en sable.
+
+   Une silhouette en cape se detache d'un rocher et vient vers vous sans se
+presser. Un vieux nomade, les yeux entierement bleus, un sourire de tortue.
+
+   "Toi", dit-il, "tu vas traverser. Tout le monde veut traverser."
+
+C 057 Ecouter le vieux nomade jusqu'au bout
+C 051 Vous lancer tout de suite sur la mer de sable
+C 003 Refermer le toit et repartir

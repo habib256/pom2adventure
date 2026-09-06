@@ -48,7 +48,7 @@ tenus qui a cede la place — le bourdon de tonique est le procede de la zone.
 chauffe - A'(12) la reprise empoisonnee.
 
     python3 piquenique.py && python3 ../../../midi_to_mb.py piquenique.mid \\
-        PIQUENIQUE.MB.BIN --bpm 176 --max 2304 --wav PIQUENIQUE.wav
+        PICNIC.MB.BIN --bpm 176 --max 2304 --wav PIQUENIQUE.wav
 """
 import sys
 from pathlib import Path

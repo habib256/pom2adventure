@@ -1,0 +1,17 @@
+T 017 The glass that sings
+
+   The glass sings one more note, then stops. The barman shrugs all four
+shoulders. "Drink. It is green, it is warm, it is legal here."
+
+   It is vile. You film your own face doing it: the finest shot of your
+career.
+
+   "You are looking for something," says the barman, polishing a glass
+that did not exist a moment ago. "So keep listening. The smuggler sells
+anything to anyone. And his copilot has been limping since this morning.
+He will not say so. Those two never say anything. Look at his paw."
+
+   He pours you a second glass. This one does not sing. It hisses.
+
+C 012 The smuggler's table
+C 010 Back into the room

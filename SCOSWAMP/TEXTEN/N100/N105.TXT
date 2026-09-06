@@ -7,7 +7,7 @@ and two paths appear a little further on.
 
    What do you want to do?
 
-MU TRONC.MB
+MU LOG.MB
 C 021 Sit on a stone to rest
 C 055 Inspect the hollow log
 C 390 Leave the clearing immediately

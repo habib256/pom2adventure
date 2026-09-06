@@ -1,0 +1,10 @@
+{
+  "route": "stratagus",
+  "attempt": 1,
+  "disk_sha256": "3ca0cc5052406059ac789028c284d543cfda22a152df42e668df9e710e64875e",
+  "started": "2026-09-06T10:57:23+0400",
+  "events": [],
+  "status": "error",
+  "error": "RuntimeError('POM2 ne repond pas sur le port 6523')",
+  "seconds": 30.0
+}

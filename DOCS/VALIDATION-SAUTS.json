@@ -1,0 +1,9 @@
+{
+  "disk": "dist/SCOSWAMP.HDV",
+  "sha256": "797beaf4ea6f854b0f1d34a0240e66aabbf70bcd0c8deb06990cc344c285b7d2",
+  "scenario": "sauts_contrats",
+  "passed": 53,
+  "failed": 0,
+  "emulator": "POM2 headless with Mockingboard",
+  "scope": "six CS outcomes, inventory returns, save/load, fatal entry effect"
+}

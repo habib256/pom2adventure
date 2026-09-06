@@ -10,6 +10,6 @@ effet si vite qu'on peut la voir bouger. Et tandis que vous l'observez, des
 pinces apparaissent aux extremites de ses tiges, des pinces qui essayent de
 vous saisir. Vous vous trouvez au plein milieu d'une etendue d'HERBE A PINCES!
 
-MU PINCES.MB
+MU PINCERS.MB
 C 134 Vous defendre avec votre epee
 C 167 Recourir a la magie

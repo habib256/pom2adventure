@@ -1,6 +1,6 @@
 # Clairière 23 — La Licorne
 
-**`LICORNE.MB.BIN` — 1 601 octets, 40,8 s, boucle.**
+**`UNICORN.MB.BIN` — 1 601 octets, 40,8 s, boucle.**
 
 ## La clairière
 
@@ -9,7 +9,7 @@
 | `hub` | **348** |
 | Pages | 320 (la Licorne), 265 (la clairière déserte), 348 (quatre chemins) |
 | Case | (1,5) |
-| Zone de référence | `sud` (`MARAISUD.MB`) |
+| Zone de référence | `sud` (`SOUTHSWAMP.MB`) |
 | Sorties | N → 094 (brume), S → 157, E → 010 (les combats), O → 204 (les Fleurs) |
 | Contenu | LICORNE blessée (11/4 en 221) ; **Corne de Licorne** (`277 G CO`) ; bénédiction (381) |
 
@@ -36,7 +36,7 @@ défi. »
 | Notes | 348 de hauteur + **51 coups de batterie**, **0 abandonnée** |
 
 **Ce qu'elle garde de la zone `sud` :** c'est la plus fidèle des sept pièces
-`sud` — elle reprend la **marche i-VI-III-VII** de `MARAISUD.MB` (Fm-D♭-A♭-E♭,
+`sud` — elle reprend la **marche i-VI-III-VII** de `SOUTHSWAMP.MB` (Fm-D♭-A♭-E♭,
 soit Dm-B♭-F-C transposé) sur un **bourdon de tonique** qui ne bouge pas.
 
 **Ce qui lui appartient :** la **noblesse**. La section A est en blanches, sans
@@ -108,6 +108,6 @@ tonique est le procédé de la zone `sud`.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/23-licorne
 python3 licorne.py
-python3 ../../../midi_to_mb.py licorne.mid LICORNE.MB.BIN \
+python3 ../../../midi_to_mb.py licorne.mid UNICORN.MB.BIN \
     --bpm 142 --max 2304 --wav LICORNE.wav
 ```

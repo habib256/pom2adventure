@@ -15,5 +15,8 @@ all used, you can only count on your sword and intelligence.
    You put the Stones in your purse and take leave. Your mission: find an
 Antherique berry and bring it back."
 
+GX .P
+GX .S
+G .G
 PC 6 NB
 C 009 Begin your adventure

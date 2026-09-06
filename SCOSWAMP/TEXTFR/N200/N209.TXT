@@ -10,7 +10,7 @@ de la bete.
 
    Que faites-vous?
 
-MU BASSIN.MB
+MU POOL.MB
 C 397 Prendre la fuite
 C 082 Attaquer avec votre epee
 C 034 Recourir a la magie

@@ -4,5 +4,5 @@ T 238 Garden Master's Clearing
 deserted. Calm reigns, nothing moves. You decide to leave by following the
 path westward.
 
-MU JARDINS.MB
+MU GARDENS.MB
 C 363 Resume the journey westward

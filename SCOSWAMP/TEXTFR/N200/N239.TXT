@@ -4,5 +4,5 @@ T 239 Maison du Maitre des Loups
 double tour et aucun signe de vie n'apparait alentour. Ne souhaitant pas
 attendre, vous repartez sur le chemin.
 
-MU MAITRELOUPS.MB
+MU WOLFMASTER.MB
 C 314 Repartir et reprendre le sentier

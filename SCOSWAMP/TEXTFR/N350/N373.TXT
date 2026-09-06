@@ -8,5 +8,5 @@ d'ENDURANCE de votre adversaire avant que le combat ne s'engage.
 vous devrez egalement le combattre, mais sans rien changer cette fois au total
 d'ENDURANCE dont il dispose.
 
-MU TOUR.MB
+MU TOWER.MB
 CL 402 225

@@ -30,6 +30,7 @@
 #   --himem <adr>   Plafond RAM. Défaut 0x9600 (BASIC.SYSTEM résident, ]BRUN).
 #                   Passer 0xBF00 pour un binaire qui sacrifie BASIC.SYSTEM et
 #                   quitte par l'appel MLI QUIT (voir DOCS/MEMOIRE.md).
+#   --min-free <n>  Marge principale minimale en octets (defaut 0).
 #
 # Code de sortie : 0 = tient en mémoire, 1 = déborde.
 #
@@ -46,11 +47,18 @@ MAP=""
 # l'alerte de debordement.
 HIMEM=""
 HIMEM_DEFAUT=0x9600
+MEMORY_MIN_FREE=0
 
 while [ $# -gt 0 ]; do
     case "$1" in
         --himem) HIMEM="$2"; shift 2 ;;
         --stack) STACKSIZE=$(($2)); shift 2 ;;
+        --min-free)
+            if [ $# -lt 2 ] || [[ ! "$2" =~ ^[0-9]+$ ]]; then
+                echo "--min-free attend un nombre entier positif ou nul" >&2
+                exit 2
+            fi
+            MEMORY_MIN_FREE=$((10#$2)); shift 2 ;;
         -*)      echo "Option inconnue : $1" >&2; exit 2 ;;
         *)       MAP="$1"; shift ;;
     esac
@@ -97,14 +105,18 @@ fi
 bss_start=$((16#$(echo "$bss_line" | awk '{print $2}')))
 bss_end=$((16#$(echo "$bss_line" | awk '{print $3}')))
 
-footprint=$((bss_end - LOAD_ADDR))
+# La colonne End de ld65 est INCLUSIVE. Le tas commence a Start + Size.
+bss_size=$((16#$(echo "$bss_line" | awk '{print $4}')))
+heap_start=$((bss_start + bss_size))
+
+footprint=$((heap_start - LOAD_ADDR))
 available=$((CEILING - LOAD_ADDR))
 
 printf 'Analyse mémoire : %s\n' "$MAP"
 printf '  Chargement    : $%04X\n' "$LOAD_ADDR"
 printf '  BSS           : $%04X - $%04X\n' "$bss_start" "$bss_end"
-printf '  Tas           : $%04X - $%04X  (%d o)\n' \
-       "$bss_end" "$CEILING" "$((CEILING - bss_end))"
+printf '  Tas           : [$%04X, $%04X[  (%d o)\n' \
+       "$heap_start" "$CEILING" "$((CEILING - heap_start))"
 printf '  Plafond       : $%04X  (__HIMEM__ $%04X moins %d o de pile C)\n' \
        "$CEILING" "$HIMEM_D" "$STACKSIZE"
 printf '  Empreinte     : %d o sur %d o disponibles\n' "$footprint" "$available"
@@ -118,7 +130,7 @@ if [ "$bss_start" -lt "$LOAD_ADDR" ]; then
            "$bss_start" "$LOAD_ADDR"
     printf 'Dans cc65 le tas suit la BSS (__heaporg = __BSS_RUN__ + __BSS_SIZE__).\n'
     printf 'Il démarrerait à $%04X et traverserait HGR page 1 ($%04X-$%04X)\n' \
-           "$bss_end" "$HGR1_START" "$HGR1_END"
+           "$heap_start" "$HGR1_START" "$HGR1_END"
     printf "puis le code lui-même. fopen() alloue 1 Ko par fichier ouvert :\n"
     printf "l'image affichée et le programme seraient écrasés.\n"
     printf 'Gagner de la place par ce biais ne fonctionne pas.\n'
@@ -137,9 +149,9 @@ if [ "$bss_start" -ge "$CEILING" ]; then
     exit 1
 fi
 
-if [ "$bss_end" -gt "$CEILING" ]; then
+if [ "$heap_start" -gt "$CEILING" ]; then
     printf '\n'
-    printf 'ERREUR : dépassement de %d octets.\n' "$((bss_end - CEILING))"
+    printf 'ERREUR : dépassement de %d octets.\n' "$((heap_start - CEILING))"
     printf 'Réduire le code/les données, ou passer en overlay\n'
     printf '(voir /usr/share/cc65/cfg/apple2enh-overlay.cfg).\n'
     exit 1
@@ -178,6 +190,12 @@ if [ -n "$mapbss_line" ]; then
     fi
 fi
 
+if [ "$((CEILING - heap_start))" -lt "$MEMORY_MIN_FREE" ]; then
+    printf 'ERREUR : marge de %d octets inferieure au budget minimal de %d octets.\n' \
+           "$((CEILING - heap_start))" "$MEMORY_MIN_FREE"
+    exit 1
+fi
 printf '\n'
-printf 'OK : tient en mémoire, marge de %d octets.\n' "$((CEILING - bss_end))"
+printf 'OK : tient en mémoire, marge de %d octets.\n' "$((CEILING - heap_start))"
+printf '  Budget minimal : %d octets.\n' "$MEMORY_MIN_FREE"
 exit 0

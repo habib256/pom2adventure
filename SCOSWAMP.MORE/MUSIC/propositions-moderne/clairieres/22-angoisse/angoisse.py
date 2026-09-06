@@ -46,7 +46,7 @@ cede la place — le bourdon de tonique fait le caractere de la piece.
 tremblement - A'(4).
 
     python3 angoisse.py && python3 ../../../midi_to_mb.py angoisse.mid \\
-        ANGOISSE.MB.BIN --bpm 148 --max 2304 --wav ANGOISSE.wav
+        DREAD.MB.BIN --bpm 148 --max 2304 --wav ANGOISSE.wav
 """
 import sys
 from pathlib import Path

@@ -1,0 +1,17 @@
+{
+  "disk": "dist/SCOSWAMP.HDV",
+  "sha256": "797beaf4ea6f854b0f1d34a0240e66aabbf70bcd0c8deb06990cc344c285b7d2",
+  "emulator": "POM2 headless, Mockingboard",
+  "scenarios": {
+    "chance_effet_visible": {
+      "passed": 111,
+      "failed": 0
+    },
+    "feufollet_parcours": {
+      "passed": 13,
+      "failed": 0
+    }
+  },
+  "scope": "controlled encounter states; not full game runs",
+  "memory_heap_bytes": 2065
+}

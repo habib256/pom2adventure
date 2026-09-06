@@ -1,0 +1,139 @@
+--- a/src/M6502.cpp
++++ b/src/M6502.cpp
+@@ -42,6 +42,16 @@
+ }
+ 
+ 
++// SCOSWAMP diagnostic only. Host-side observation; no guest writes.
++static bool scosArmed = false, scosCReady = false;
++static unsigned scosHardwareMin = 256, scosCallMin = 65536;
++static void scosHardware(unsigned sp, unsigned pc) {
++    if (scosArmed && sp < scosHardwareMin) {
++        scosHardwareMin = sp;
++        std::fprintf(stderr, "[SCOS_STACK] hardware used=%u sp=%02X pc=%04X\n", 255-sp, sp, pc);
++    }
++}
++
+ M6502::M6502()
+ {
+    memory = nullptr;
+@@ -94,9 +104,9 @@
+ void M6502::pushProgramCounter(void)
+ {
+     memory->memWrite((unsigned short)(stackPointer + 0x100), (unsigned char)(programCounter >> 8));
+-    stackPointer--;
++    stackPointer--; scosHardware(stackPointer, programCounter);
+    memory->memWrite((unsigned short)(stackPointer + 0x100), (unsigned char)programCounter);
+-   stackPointer--;
++   stackPointer--; scosHardware(stackPointer, programCounter);
+     cycles += 2;
+ }
+ 
+@@ -116,7 +126,7 @@
+ {
+     pushProgramCounter();
+     memory->memWrite((unsigned short)(0x100 + stackPointer), (unsigned char)((statusRegister & ~0x10) | 0x20));
+-    stackPointer--;
++    stackPointer--; scosHardware(stackPointer, programCounter);
+     statusRegister |= M6502::Status::I;
+     // 65C02 clears D on interrupt entry (MAME ow65c02.lst:259 brk_c_imp:
+     // `m_P = (m_P | F_I) & ~F_D;`). NMOS leaves D untouched.
+@@ -129,7 +139,7 @@
+ {
+     pushProgramCounter();
+     memory->memWrite((unsigned short)(0x100 + stackPointer), (unsigned char)((statusRegister & ~0x10) | 0x20));
+-    stackPointer--;
++    stackPointer--; scosHardware(stackPointer, programCounter);
+     statusRegister |= M6502::Status::I;
+     if (cpuMode == CpuMode::CMOS) statusRegister &= ~M6502::Status::D;
+     NMI = 0;
+@@ -806,7 +816,7 @@
+ void M6502::PHA(void)
+ {
+ memory->memWrite((uint16_t)(0x100 + stackPointer), accumulator);
+-    stackPointer--;
++    stackPointer--; scosHardware(stackPointer, programCounter);
+     cycles++;
+ }
+ 
+@@ -819,7 +829,7 @@
+     // cleared instead; see handleIRQ / handleNMI.
+     memory->memWrite((uint16_t)(0x100 + stackPointer),
+                      statusRegister | M6502::Status::B | 0x20);
+-    stackPointer--;
++    stackPointer--; scosHardware(stackPointer, programCounter);
+     cycles++;
+ }
+ 
+@@ -879,7 +889,7 @@
+     programCounter++;
+     pushProgramCounter();
+     memory->memWrite((uint16_t)(0x100 + stackPointer), statusRegister | M6502::Status::B | 0x20);
+-    stackPointer--;
++    stackPointer--; scosHardware(stackPointer, programCounter);
+     statusRegister |= M6502::Status::I;
+     if (cpuMode == CpuMode::CMOS) statusRegister &= ~M6502::Status::D;
+     programCounter = memReadAbsolute(0xFFFE);
+@@ -1085,14 +1095,14 @@
+ void M6502::PHX(void)
+ {
+     memory->memWrite(static_cast<uint16_t>(0x100 + stackPointer), xRegister);
+-    stackPointer--;
++    stackPointer--; scosHardware(stackPointer, programCounter);
+     cycles++;
+ }
+ 
+ void M6502::PHY(void)
+ {
+     memory->memWrite(static_cast<uint16_t>(0x100 + stackPointer), yRegister);
+-    stackPointer--;
++    stackPointer--; scosHardware(stackPointer, programCounter);
+     cycles++;
+ }
+ 
+@@ -1989,6 +1999,30 @@
+ 
+ void M6502::step(void)
+ {
++    if (programCounter == 0x4003 && !scosArmed) {
++        scosArmed = true; scosCReady = false; scosHardwareMin = 256; scosCallMin = 65536;
++        std::fprintf(stderr, "[SCOS_STACK] armed after startup TXS=4003\n");
++        scosHardware(stackPointer, programCounter);
++    }
++    if (programCounter == 0x400C && scosArmed) {
++        std::fprintf(stderr, "[SCOS_STACK] stopped at exit\n");
++        scosArmed = false;
++    }
++    if (scosArmed && programCounter == 0xB289 && !scosCReady) {
++        scosCReady = true;
++        std::fprintf(stderr, "[SCOS_CSP_READY] sp=%04X\n", memory->data()[0x80] | (memory->data()[0x81] << 8));
++    }
++    scosHardware(stackPointer, programCounter);
++    if (scosCReady && scosArmed && memory && programCounter >= 0x4000 && programCounter < 0xB348
++        && memory->data()[programCounter] == 0x20) {
++        const uint8_t* m = memory->data();
++        const unsigned csp = m[0x80] | (m[0x81] << 8);
++        if (csp >= 0x4000 && csp <= 0xBF00 && csp < scosCallMin) {
++            scosCallMin = csp;
++            std::fprintf(stderr, "[SCOS_STACK] c_call used=%u sp=%04X pc=%04X\n", 0xBF00-csp, csp, programCounter);
++        }
++    }
++
+     // CPU crash trap (POM2_TRACE_HANG=1): a deterministic "plantage" where the
+     // PC jumps into non-code (stack page or $C0xx I/O) — i.e. it executes RAM
+     // data / soft-switch bytes as opcodes — is the signature of a corrupted
+@@ -2106,7 +2140,14 @@
+         interruptCycles = cycles;
+     }
+ 
++    const unsigned scosPc = programCounter;
++    const unsigned scosBefore = memory ? (memory->data()[0x80] | (memory->data()[0x81] << 8)) : 0;
+     executeOpcode();
++    if (scosCReady && scosArmed && memory) {
++        const unsigned after = memory->data()[0x80] | (memory->data()[0x81] << 8);
++        if (after != scosBefore)
++            std::fprintf(stderr, "[SCOS_CSP] pc=%04X next=%04X before=%04X after=%04X\n", scosPc, programCounter, scosBefore, after);
++    }
+     cycles += interruptCycles;
+     if (memory != nullptr) {
+         memory->advanceCycles(cycles);

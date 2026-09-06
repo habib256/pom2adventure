@@ -5,5 +5,5 @@ as quickly as possible.
 
    The only path allowing you to leave brings you back west.
 
-MU BASSIN.MB
+MU POOL.MB
 C 330 Continue west

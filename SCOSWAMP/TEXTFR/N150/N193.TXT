@@ -11,4 +11,7 @@ une Potion de Guerison ! Vous videz les autres fioles et, contre toute
 attente, aucune n'est empoisonnee. Vos points d'HABILETE, d'ENDURANCE et de
 CHANCE reviennent a leur total initial.
 
+E HABILETE +255
+E ENDURANCE +255
+E CHANCE +255
 C 206 Poursuivre apres cette etrange entrevue

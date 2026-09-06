@@ -284,7 +284,7 @@ def build(carte):
         out += bytes([x | (y << 3), c["id"] or 0, masques[i]])
     for d, i in ecarts:
         out += bytes([d, i])
-    assert len(out) == 355, len(out)
+    assert len(out) == 20 + 3 * len(clrs) + 2 * len(pages), len(out)
     out += blocs[0] + blocs[1]
     return bytes(out), len(blocs[0]), len(blocs[1]), pages
 

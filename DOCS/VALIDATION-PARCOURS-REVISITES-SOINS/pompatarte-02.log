@@ -1,0 +1,6 @@
+[INFO] Audio: miniaudio ready: requested 44100 Hz, got 44100 Hz
+[INFO] ROM: Loaded /Users/gistair/src/pom2/roms/apple2e.rom at $C000 (IIe)
+[INFO] ROM: Loaded char ROM (4096 B, lowercase): /Users/gistair/src/pom2/roms/apple2e_char_us.rom
+[INFO] HDV: Loaded SCOSWAMP.hdv (13197 blocks)
+[INFO] Emul: Boot via slot 5 ROM ($C500)
+[INFO] AICtrl: listening on 127.0.0.1:6527 — POST/GET to drive the emulator from an AI agent

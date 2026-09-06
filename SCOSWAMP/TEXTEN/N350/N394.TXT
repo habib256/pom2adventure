@@ -6,6 +6,6 @@ well as the rest of the clearing.
    A big Lizard comes to drink the basin's water, then returns with a waddling
 gait. You see nothing else worth noting.
 
-MU CRISTAL.MB
+MU CRYSTAL.MB
 C 047 Leave the clearing
 C 077 Drink in turn

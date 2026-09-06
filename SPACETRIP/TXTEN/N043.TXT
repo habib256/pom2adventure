@@ -1,0 +1,15 @@
+T 043 Mr. Spork's riddle
+
+   Two identical androids guard two doors. The officer explains, hands
+behind his back: "One of them always tells the truth. The other always lies.
+Only one door leads to the bridge. You are allowed ONE question, put to ONE
+of them. Then you pick a door."
+
+   The two androids smile in exactly the same way. It is unpleasant.
+
+   "Take your time," the officer adds. "A reasonable amount of it."
+
+C 044 Ask: which door leads to the bridge?
+C 044 Ask: are you the one who lies?
+C 045 Ask what the OTHER would say, then take the opposite door
+C 044 Ask what the OTHER would say, then take the door he named

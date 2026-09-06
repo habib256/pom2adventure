@@ -1,0 +1,17 @@
+T 078 Escape down the chute
+V 079
+
+   "At last, somebody who looks," says Barbastella.
+
+   You wait for the gong. The court applauds an act involving nets. You lift
+the purple hanging, she kicks the hatch open with one white boot, and the
+rubbish chute runs down to the hangars, gentle and greasy.
+
+   Halfway, in the dark, she lights a torch, grabs you by the collar and puts
+her cheek against yours: "Now. The light is good."
+
+   The Holophone spits out a perfect frame: two faces, one torch, a tunnel
+of imperial refuse. The finest in the galaxy.
+
+G S5
+C 003 Come out through the hangars and find the Convertible

@@ -1,7 +1,8 @@
 T 343 Return to the Brigands
+AC
 
    You approach the place where you had encountered the Brigands.
 
 MU BRIGANDS.MB
-C 199 If you were friends
-C 301 If you fled, deceived or killed them
+CV 214 199 If you were friends
+CX 214 301 If you fled, deceived or killed them

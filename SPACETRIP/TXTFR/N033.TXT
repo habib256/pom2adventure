@@ -1,0 +1,21 @@
+T 033 Les trois sas
+
+   Le couloir s'acheve sur trois sas ronds. Ripleigh pose le tracker au sol,
+entre les trois portes, et recule d'un pas.
+
+   -- Derriere l'un des trois, la navette de secours. Derriere les autres, la
+cale. Choisissez, et ne vous trompez pas : j'ouvre une porte par soir.
+
+   BABORD : bip... bip... bip... bip... Lent. Toujours sur le temps.
+
+   TRIBORD : bip. bip. bip-bip-bip-bipbipbip. Ca accelere. Ca approche.
+
+   CENTRE : bip....... bip... bip......... bip. Lent, mais qui traine, qui
+repart, qui hesite. Comme quelque chose qui dort mal.
+
+   Le chat, dans les bras de Ripleigh, fixe le centre. Les chats ont
+toujours tort.
+
+C 035 Ouvrir le sas de babord
+C 034 Ouvrir le sas de tribord
+C 034 Ouvrir le sas du centre

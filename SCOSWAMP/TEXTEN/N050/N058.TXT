@@ -11,7 +11,7 @@ one. Despite everything, you continue.
 dark path. To the east, a passage bordering tall grass. To the south, the way
 back. Your fate is in your hands.
 
-MU RONDPOINT.MB
+MU ROUNDABOUT.MB
 CE ENDURANCE 0 -1
 C 398 Take the path heading west
 C 105 Follow the grassy path to the east

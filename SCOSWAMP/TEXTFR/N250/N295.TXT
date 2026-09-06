@@ -7,7 +7,7 @@ accueillantes.
 
    Qu'allez-vous faire ?
 
-MU CROUPIE.MB
+MU STAGNANT.MB
 CU GLACE 089 Lancer une Pierre Magique de Glace
 C 183 Marcher vers l'est, le long de la berge
 C 094 Aller plutot vers le sud

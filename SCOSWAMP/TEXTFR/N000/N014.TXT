@@ -11,6 +11,6 @@ semble peu probable que vos Pierres de Magie aient de l'effet ici.
 
    Que faites-vous?
 
-MU SCORPNAIN.MB
+MU DWARFSCORP.MB
 C 088 Quitter la clairiere pendant que le monstre se repait
 C 312 Attaquer le Scorpion pour le combattre

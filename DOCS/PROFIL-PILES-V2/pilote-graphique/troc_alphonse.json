@@ -1,0 +1,10 @@
+{
+  "scenario": "troc_alphonse",
+  "assertions": 20,
+  "failures": [],
+  "seconds": 20.64870309829712,
+  "maxima": {
+    "hardware": 57,
+    "c_call": 81
+  }
+}
