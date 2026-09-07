@@ -3022,8 +3022,10 @@ static void display_language_selection(void) {
 #undef line
 }
 
-/* [D] et [T] de l'ecran-titre : DIAPO ou TOTAL, les deux autres programmes
- * du volume. Leur lanceur SYS est lu en $2000, la ou ProDOS l'aurait mis, et
+/* [D] et [T] de l'ecran-titre : DIAPO ou A2 Retro Cmd, les deux autres
+ * programmes du volume. Le second n'est pas construit ici : c'est une copie
+ * de la Release d'un depot voisin, posee dans SCOSWAMP/A2RETRO/ par
+ * tools/update_a2retrocmd.py. Leur lanceur SYS est lu en $2000, la ou ProDOS l'aurait mis, et
  * l'on y saute : le jeu ne revient pas, le lanceur charge son programme en
  * $4000 par-dessus. Bien moins cher que exec() de cc65, et la page HGR est
  * libre a ce moment. La ROM est remise en lecture pour le demarrage cc65 du
@@ -3037,7 +3039,7 @@ static void launch(const char* path)
     fread(HGR_PAGE1, 1, 0x2000, f);
     fclose(f);
     music_stop();
-    __asm__("jsr donelib");     /* rend l'entree d'interruption ProDOS (voir chain.s de TOTAL) */
+    __asm__("jsr donelib");     /* rend l'entree d'interruption ProDOS */
     __asm__("bit $C082");
     ((void (*)(void))HGR_PAGE1)();
 }
@@ -3062,7 +3064,7 @@ static void select_language(void) {
         } else if (key == 'D' || key == 'd') {
             launch("DIAPO/DIAPO.SYSTEM");
         } else if (key == 'T' || key == 't') {
-            launch("TOTAL/TOTAL.SYSTEM");
+            launch("A2RETRO/A2RETRO.SYSTEM");
         }
     }
 }

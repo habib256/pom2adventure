@@ -19,14 +19,6 @@ class SplitLoadLayout(unittest.TestCase):
     def check(self):
         return check_layout(self.s, self.loader, self.length)
 
-    def staged(self, stage=0x1000):
-        """La disposition de TOTAL : du code LOWEXE au-dessus de l'image LC,
-        dans le meme prefixe mis en scene en $1000."""
-        self.s = dict(self.s, __MAIN_FILEOFFS__=stage, __LOWEXE_RUN__=0x1C00,
-                      __LOWEXE_SIZE__=0x400, __LOWBSS_RUN__=0x1058,
-                      __LOWBSS_SIZE__=0x950)
-        return check_layout(self.s, self.loader, self.length + stage - 0xC00, stage)
-
     def test_valid_and_padded_prefix(self):
         self.assertEqual(self.check(), [])
         self.s['__LC_LAST__'] -= 128
@@ -73,28 +65,6 @@ class SplitLoadLayout(unittest.TestCase):
     def test_bss_alone_may_not_reach_the_stack(self):
         self.s['__BSS_SIZE__'] = 0xC00                            # jusqu'en $BE49
         self.assertTrue(any('BSS' in e for e in self.check()))
-
-    def test_staged_prefix_carries_low_code(self):
-        self.assertEqual(self.staged(), [])
-        # le prefixe ne peut pas etre plus court que l'image LC
-        self.assertTrue(self.staged(0x800))
-
-    def test_low_code_must_sit_above_the_lc_image_and_below_the_prefix(self):
-        self.staged()
-        self.s['__LOWEXE_RUN__'] = 0x1800
-        self.assertIn('LOWEXE starts inside the LC staging area',
-                      check_layout(self.s, self.loader, self.length + 0x400, 0x1000))
-        self.s['__LOWEXE_RUN__'] = 0x1C00
-        self.s['__LOWEXE_SIZE__'] = 0x401
-        self.assertIn('LOWEXE runs past the staged prefix',
-                      check_layout(self.s, self.loader, self.length + 0x400, 0x1000))
-
-    def test_low_bss_may_not_climb_into_the_low_code(self):
-        self.staged()
-        self.s['__LOWBSS_SIZE__'] = 0xC00                         # jusqu'en $1C57
-        self.assertIn('low BSS runs into LOWEXE',
-                      check_layout(self.s, self.loader, self.length + 0x400, 0x1000))
-
 
 if __name__ == '__main__':
     unittest.main()

@@ -19,15 +19,6 @@
 #define CHUNK     1024
 #define LC_STAGE  0x1000
 #define LC_BYTES  0x0C00
-/* Ce qui est mis en scene en $1000 d'un seul coup. TOTAL y ajoute 1 Ko de
- * code en $1C00-$1FFF (segment LOWEXE de total.cfg), que crt0 n'emporte pas
- * avec l'image LC : la seule place qui restait. Le jeu n'a que l'image LC. */
-#ifdef TOTAL_LOADER
-#define STAGE_BYTES 0x1000
-#else
-#define STAGE_BYTES LC_BYTES
-#endif
-
 int main(void)
 {
     FILE* f;
@@ -39,56 +30,16 @@ int main(void)
 #ifdef DIAPO_LOADER
     cputs("PLEASE WAIT");
 #endif
-#ifdef TOTAL_LOADER
-    /* L'ecran d'attente d'Apple IIe Total Commander : le titre, la condition
-     * ProDOS, la date si une horloge est la (bit 0 de MACHID, $BF98 ; ProDOS
-     * tient alors $BF90-$BF93 a jour), puis le chargement. */
-    {
-        static const char* const months[] = { "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December" };
-        unsigned char machid = *(unsigned char*)0xBF98;
-        unsigned int date = *(unsigned int*)0xBF90;
-        unsigned char minute = *(unsigned char*)0xBF92, hour = *(unsigned char*)0xBF93;
-        unsigned char year = date >> 9, month = (date >> 5) & 15, day = date & 31;
-        gotoxy(26, 2);
-        revers(1);
-        cputs("  APPLE IIe TOTAL COMMANDER " TOTAL_VERSION "  ");
-        revers(0);
-        gotoxy(14, 4);
-        cputs("A two-panel file manager for the Apple IIe with 128 KB.");
-        gotoxy(14, 5);
-        cputs("It runs under ProDOS 8 only, launched from Bitsy Bye or at boot.");
-        gotoxy(14, 6);
-        cputs("Free software under the GNU GPL v3, by Arnaud VERHILLE.");
-        gotoxy(14, 8);
-        /* ProDOS : annee sur 7 bits (0-39 = 2000-2039), mois 1-12, jour 1-31,
-         * heure 0-23 -- deja en 24 heures. Une date hors bornes vaut absence. */
-        if ((machid & 1) && month >= 1 && month <= 12 && day >= 1 && day <= 31 && hour < 24 && minute < 60)
-            cprintf("%u %s %u, %02u:%02u", day, months[month - 1],
-                    year < 40 ? 2000 + year : 1900 + year, hour, minute);
-        else
-            cputs("No clock: new files will carry no date.");
-        gotoxy(14, 11);
-        cputs("PLEASE WAIT, loading TOTAL.CODE ...");
-    }
-#endif
 
-    /* Sur la disquette Apple IIe Total Commander (NO_CHDIR), le prefixe est deja
-     * la racine du volume amorce : pas de nom de volume a connaitre. */
-#ifdef NO_CHDIR
-    if ((f = fopen(GAME_FILE, "rb")) == NULL) {
-#else
     if (chdir("/SCOSWAMP") != 0 || (f = fopen(GAME_FILE, "rb")) == NULL) {
-#endif
         cprintf("%s introuvable (errno=%d).\r\n", GAME_FILE, errno);
         cprintf("Appuyez sur une touche...\r\n");
         cgetc();
         return 1;
     }
     /* The first 3 KiB are transient LC code, consumed by crt0 before
-     * main() initializes LOWBSS at the same address. TOTAL reads one more
-     * KiB in the same gulp: its LOWEXE code, which stays at $1C00. */
-    if (fread((void*)LC_STAGE, 1, STAGE_BYTES, f) != STAGE_BYTES) {
+     * main() initializes LOWBSS at the same address. */
+    if (fread((void*)LC_STAGE, 1, LC_BYTES, f) != LC_BYTES) {
         fclose(f);
         cputs("Image LC incomplete.\r\n");
         cgetc();

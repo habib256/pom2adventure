@@ -69,8 +69,8 @@ STACK   = 0x0180
 # Le deplacement musical AUX rend cette marge possible ; ne pas la consommer
 # silencieusement lors de l'ajout de regles partagees.
 # 2026-09-07 : 2048 -> 1792. Les touches [D] et [T] de l'ecran-titre, qui
-# lancent DIAPO et TOTAL (launch() dans scoswamp.c : lecture du SYS en $2000
-# et saut), coutent 165 octets ; la marge mesuree est de 1886. Bitsy Bye
+# lancent DIAPO et A2 Retro Cmd (launch() dans scoswamp.c : lecture du SYS en
+# $2000 et saut), coutent 165 octets ; la marge mesuree est de 1886. Bitsy Bye
 # n'honore pas le QUIT etendu avec chemin, qui aurait coute trois fois moins.
 MIN_FREE = 1792
 # -C scoswamp.cfg : apple2enh.cfg plus la zone LOWRAM ($1000-$1FFF) et son
@@ -414,10 +414,6 @@ ay_notes.inc: $(OUTDIR)/MUSIC/WELCOME.MB.BIN
 music.o: music.s ay_notes.inc
 	$(AS) -t $(TARGET) -o music.o music.s
 
-# Le meme lecteur pour TOTAL, page de transit en RAM basse (LOWBUF).
-music_total.o: music.s ay_notes.inc
-	$(AS) -t $(TARGET) -D LOWBUF -o music_total.o music.s
-
 sfx.o: sfx.s sfx.h
 	$(AS) -t $(TARGET) -o sfx.o sfx.s
 
@@ -501,78 +497,29 @@ $(OUTDIR)/DIAPO/DIAPO.CODE.BIN: diapo.c music.h music.o crt0.o hgr_loader.o memo
 	@mkdir -p $(OUTDIR)/DIAPO
 	$(CL) $(CFLAGS) -C scoswamp.cfg -Wl -D,__EXEHDR__=0 -Wl -D,__HIMEM__=$(HIMEM) -Wl -m,diapo.map -Wl -Ln,diapo.lbl -o $@ crt0.o diapo.c music.o hgr_loader.o memory_swap.o mli_safe.o $(IOBUF)
 
-# Le numero de version d'Apple IIe Total Commander : lanceur, ligne de statut,
-# aide (TOTAL/TOTAL.HELP.TXT le porte aussi, a la main) et doc.
-TOTAL_VERSION = 1.0
-# La pile C de TOTAL. Le jeu tourne depuis toujours avec 384 octets ; TOTAL
-# n'a pas plus profond (-Cl met les locales en statique, seuls les parametres
-# et les temporaires passent par la pile logicielle) et le banc a mesure le
-# creux maximal -- voir DOCS/TOTAL.md. Ce que la pile ne prend pas, la
-# fenetre principale le recoit : le plafond du code est __HIMEM__ - cette
-# valeur, et tools/check_lc_layout.py le verifie a chaque lien.
-TOTAL_STACK = 0x0100
-# TOTAL : le gestionnaire de fichiers a deux panneaux (total.c),
-# construit comme DIAPO -- meme lanceur, meme disposition LC/MAIN, meme
-# decodeur DHGR et memes bascules video. Il ne depend ni de la musique ni
-# des catalogues de DIAPO.
-.PHONY: total
-total: $(OUTDIR)/TOTAL/TOTAL.SYSTEM.SYS $(OUTDIR)/TOTAL/TOTAL.CODE.BIN $(OUTDIR)/TOTAL/FORMAT.SYS.SYS
-
-# FORMAT.SYS : le formateur, programme SYS a part entiere dans le dossier
-# TOTAL, ou Bitsy Bye le propose ; la touche F de TOTAL le lance aussi, et
-# il relance TOTAL en sortant. Il ne s'appelle pas .SYSTEM : ProDOS amorce
-# le premier fichier .SYSTEM du catalogue, et F passe avant S.
-# Disposition cc65 standard a $2000, HIMEM $6400 : l'image de piste
-# Hyper-FORMAT vit en $6500-$7FFF.
-$(OUTDIR)/TOTAL/FORMAT.SYS.SYS: format.c format_diskii.s format_mli.s chain.o format.cfg Makefile
-	$(CL) $(CFLAGS) -D 'TOTAL_VERSION="$(TOTAL_VERSION)"' -C format.cfg --start-addr 0x2000 -Wl -D,__EXEHDR__=0 -Wl -D,__HIMEM__=0x6400 -Wl -D,__FILETYPE__=0xFF -Wl -m,format.map -Wl -Ln,format.lbl -o $@ format.c format_diskii.s format_mli.s chain.o $(IOBUF)
-
-$(OUTDIR)/TOTAL/TOTAL.SYSTEM.SYS: loader.c Makefile
-	@mkdir -p $(OUTDIR)/TOTAL
-	$(CL) $(CFLAGS) -D TOTAL_LOADER -D 'TOTAL_VERSION="$(TOTAL_VERSION)"' -D 'GAME_FILE="TOTAL/TOTAL.CODE"' --start-addr 0x2000 -Wl -D,__EXEHDR__=0 -Wl -D,__HIMEM__=$(HIMEM) -Wl -D,__FILETYPE__=0xFF -o $@ loader.c $(IOBUF)
-
-total_mli.o: total_mli.s
-	$(AS) -t $(TARGET) -o $@ $<
-
-chain.o: chain.s
-	$(AS) -t $(TARGET) -o $@ $<
-
-$(OUTDIR)/TOTAL/TOTAL.CODE.BIN: total.c total_mli.o chain.o crt0.o memory_swap.o mli_safe.o music_total.o music.h total.cfg
-	@mkdir -p $(OUTDIR)/TOTAL
-	$(CL) $(CFLAGS) -D 'TOTAL_VERSION="$(TOTAL_VERSION)"' -C total.cfg -Wl -D,__EXEHDR__=0 -Wl -D,__HIMEM__=$(HIMEM) -Wl -D,__STACKSIZE__=$(TOTAL_STACK) -Wl -m,total.map -Wl -Ln,total.lbl -o $@ crt0.o total.c total_mli.o chain.o music_total.o memory_swap.o mli_safe.o $(IOBUF)
-	@python3 ../../tools/check_lc_layout.py --src . --lbl total.lbl --bin ../TOTAL/TOTAL.CODE.BIN --stage 0x1000
-
-# La disquette 5,25 pouces d'Apple IIe Total Commander : ProDOS 2.4.3, un
-# lanceur sans chdir (le prefixe est la racine du volume amorce), le meme
-# TOTAL.CODE que le volume du jeu, dans un dossier TOTAL comme sur celui-ci
-# (TOTAL.CFG y sera ecrit). Volume /APPLE.TOTAL, 280 blocs, en .po et .dsk.
-FLOPPY_PO  = ../../dist/APPLE.TOTAL.po
-FLOPPY_DSK = ../../dist/APPLE.TOTAL.dsk
-FSTAGE     = ../../dist/.floppy
-.PHONY: floppy
-floppy: $(FLOPPY_PO)
-$(FSTAGE)/TOTAL.SYSTEM.SYS: loader.c Makefile
-	@mkdir -p $(FSTAGE)
-	$(CL) $(CFLAGS) -D TOTAL_LOADER -D NO_CHDIR -D 'TOTAL_VERSION="$(TOTAL_VERSION)"' -D 'GAME_FILE="TOTAL/TOTAL.CODE"' --start-addr 0x2000 -Wl -D,__EXEHDR__=0 -Wl -D,__HIMEM__=$(HIMEM) -Wl -D,__FILETYPE__=0xFF -o $@ loader.c $(IOBUF)
-$(FLOPPY_PO): $(FSTAGE)/TOTAL.SYSTEM.SYS $(OUTDIR)/TOTAL/TOTAL.CODE.BIN $(OUTDIR)/TOTAL/TOTAL.HELP.TXT $(OUTDIR)/TOTAL/FORMAT.SYS.SYS $(OUTDIR)/PRODOS.SYS $(TOOLS)/floppy_readme.txt $(BOOTTMPL) $(TOOLS)/make_floppy.py | $(VOLBUILD)
-	@rm -rf $(FSTAGE)/vol && mkdir -p $(FSTAGE)/vol/TOTAL $(FSTAGE)/vol/TEST
-	cp $(OUTDIR)/PRODOS.SYS $(FSTAGE)/TOTAL.SYSTEM.SYS $(FSTAGE)/vol/
-	cp $(OUTDIR)/TOTAL/TOTAL.CODE.BIN $(OUTDIR)/TOTAL/TOTAL.HELP.TXT $(OUTDIR)/TOTAL/FORMAT.SYS.SYS $(FSTAGE)/vol/TOTAL/
-	# TEST : de quoi essayer le visionneur, le lecteur MB et l'editeur
-	cp ../../SPACETRIP/IMG/N001.HGR.BIN $(FSTAGE)/vol/TEST/HGR.RAW.BIN
-	$(TOOLS)/build/scoswamp_hgr encode ../../SPACETRIP/IMG/N001.HGR.BIN $(FSTAGE)/vol/TEST/HGR.RLE.BIN > /dev/null
-	cp $(OUTDIR)/DHGR/N000/N000.RLE.BIN $(FSTAGE)/vol/TEST/DHGR.RLE.BIN
-	cp $(OUTDIR)/MUSIC/WELCOME.MB.BIN $(FSTAGE)/vol/TEST/WELCOME.MB.BIN
-	cp $(TOOLS)/floppy_readme.txt $(FSTAGE)/vol/TEST/README.TXT
-	$(VOLBUILD) $(FSTAGE)/vol $(BOOTTMPL) $(FSTAGE)/volume.po APPLE.TOTAL
-	python3 $(TOOLS)/make_floppy.py $(FSTAGE)/volume.po $(FLOPPY_PO) $(FLOPPY_DSK)
-	@echo "==> Disquette : $(FLOPPY_PO) et $(FLOPPY_DSK)"
+# A2 Retro Cmd : le gestionnaire de fichiers a deux panneaux, autrefois
+# construit ici, vit desormais dans son propre depot avec ses sources, ses
+# bancs et son integration continue :
+#
+#     https://github.com/habib256/a2retrocmd
+#
+# Le jeu n'en est plus que l'hote. SCOSWAMP/A2RETRO/ contient une copie des
+# quatre fichiers publies, tiree de l'image de disquette d'une Release par
+# tools/update_a2retrocmd.py (qui ecrit aussi leur provenance a cote), et
+# `make hdv` la pose sur le disque comme le reste du volume. La touche [T]
+# de l'ecran-titre lance A2RETRO/A2RETRO.SYSTEM.
+#
+# Pour rafraichir la copie :
+#     python3 ../../tools/update_a2retrocmd.py            (derniere Release)
+#     python3 ../../tools/update_a2retrocmd.py --tag v1.1
+A2RETRO = $(OUTDIR)/A2RETRO/A2RETRO.SYSTEM.SYS $(OUTDIR)/A2RETRO/A2RETRO.CODE.BIN \
+          $(OUTDIR)/A2RETRO/A2RETRO.HELP.TXT $(OUTDIR)/A2RETRO/FORMAT.SYS.SYS
 
 hdv: $(HDV)
 
 $(HDV): $(OUTDIR)/$(PROGRAM) $(OUTDIR)/$(LAUNCHER) $(BOOTTMPL) $(MUSICS) \
         $(OUTDIR)/MAP.BIN $(OUTDIR)/DIAPO/DIAPO.SYSTEM.SYS $(OUTDIR)/DIAPO/DIAPO.CODE.BIN diapo-catalog \
-        $(OUTDIR)/TOTAL/TOTAL.SYSTEM.SYS $(OUTDIR)/TOTAL/TOTAL.CODE.BIN $(OUTDIR)/TOTAL/TOTAL.HELP.TXT $(OUTDIR)/TOTAL/FORMAT.SYS.SYS $(PAYLOAD) | $(VOLBUILD) check
+        $(A2RETRO) $(PAYLOAD) | $(VOLBUILD) check
 	@rm -rf $(STAGE) && mkdir -p $(STAGE) $(dir $(HDV))
 	@for f in $(OUTDIR)/*; do \
 		b=`basename "$$f"`; \
@@ -677,7 +624,7 @@ install: all
 	@echo "==> Binaire disponible dans $(OUTDIR)/$(PROGRAM)"
 
 # Déclaration des cibles "phony" (ne correspondent pas à des fichiers)
-.PHONY: all hdv map release check playtest clean distclean rebuild info install floppy
+.PHONY: all hdv map release check playtest clean distclean rebuild info install
 
 crt0.o: crt0.s
 	$(AS) -t $(TARGET) -o $@ $<

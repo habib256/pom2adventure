@@ -1,0 +1,13 @@
+A2 Retro Cmd, copie embarquee sur le disque du jeu.
+
+Source : https://github.com/habib256/a2retrocmd/releases/download/v1.0/A2RETROCMD.po
+Image  : sha256 8e179ea2d109b01e1254083a78b3274e9d8a39bf941029b8c7fcbe817d20522d
+
+Les sources, les bancs et la construction vivent dans
+https://github.com/habib256/a2retrocmd -- pas ici. Pour rafraichir
+cette copie : python3 tools/update_a2retrocmd.py
+
+A2RETRO.CODE.BIN        36040 octets  sha256:b8c99f1d40190efc...
+A2RETRO.HELP.TXT         1126 octets  sha256:08325b23638ac05a...
+A2RETRO.SYSTEM.SYS       5139 octets  sha256:5dc86a8045a79c28...
+FORMAT.SYS.SYS          11598 octets  sha256:6de3abd0051646a1...
