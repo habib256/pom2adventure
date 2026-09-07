@@ -3037,6 +3037,7 @@ static void launch(const char* path)
     fread(HGR_PAGE1, 1, 0x2000, f);
     fclose(f);
     music_stop();
+    __asm__("jsr donelib");     /* rend l'entree d'interruption ProDOS (voir chain.s de TOTAL) */
     __asm__("bit $C082");
     ((void (*)(void))HGR_PAGE1)();
 }

@@ -14,7 +14,7 @@ static void stop(int) { stopped = 1; }
 
 int main(int argc, char** argv) {
     try {
-        int port = 6503, speed = 200000;
+        int port = 6503, speed = 200000, bootSlot = 5;
         std::string disk, floppy;
         for (int i = 1; i < argc; ++i) {
             std::string a = argv[i];
@@ -22,8 +22,10 @@ int main(int argc, char** argv) {
                 if (std::string(argv[++i]) != "iie") return 2;
             } else if (a == "--speed" && i + 1 < argc) speed = std::stoi(argv[++i]);
             // --disk : une disquette 5,25 pouces dans un Disk II en slot 6,
-            // pour le banc du formateur d'Apple Total Commander.
+            // pour le banc du formateur d'Apple IIe Total Commander.
             else if (a == "--disk" && i + 1 < argc) floppy = argv[++i];
+            // --boot 6 : amorcer la disquette plutot que le disque dur.
+            else if (a == "--boot" && i + 1 < argc) bootSlot = std::stoi(argv[++i]);
             else if (a.rfind("--ai-control=", 0) == 0) port = std::stoi(a.substr(13));
             else if (!a.empty() && a[0] != '-' && disk.empty()) disk = a;
             else return 2;
@@ -56,7 +58,8 @@ int main(int argc, char** argv) {
             floppyCard = card.get();
             mem.slotBus().plug(6, std::move(card));
         }
-        if (!ctrl.bootFromSlot(5)) throw std::runtime_error("Cannot boot slot 5");
+        if (bootSlot == 6 && !floppyCard) return 2;
+        if (!ctrl.bootFromSlot(bootSlot)) throw std::runtime_error("Cannot boot slot " + std::to_string(bootSlot));
         ctrl.setCyclesPerFrame(speed);
         Apple2Display display;
         // Match the GUI host: 80-column text and DHGR need the AUX plane.
