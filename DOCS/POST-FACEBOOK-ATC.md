@@ -1,8 +1,8 @@
 # Post pour le groupe Facebook « Apple II Enthusiasts »
 
-**Apple Total Commander 1.0 – a two-panel file manager for the Apple IIe (ProDOS 8, free software)**
+**Apple IIe Total Commander 1.0 – a two-panel file manager for the Apple IIe (ProDOS 8, free software)**
 
-Hi everyone! I'd like to share a new utility for the Apple IIe: **Apple Total Commander**, a two-panel file manager for ProDOS 8 in the spirit of the good old Total Commander / Norton Commander, written in C and 6502 assembly with cc65.
+Hi everyone! I'd like to share a new utility for the Apple IIe: **Apple IIe Total Commander**, a two-panel file manager for ProDOS 8 in the spirit of the good old Total Commander / Norton Commander, written in C and 6502 assembly with cc65.
 
 What it does, from an 80-column screen with a 128 KB IIe:
 - two panels, TAB to switch, sort by name, size or type, tag several files with the space bar;
@@ -26,9 +26,9 @@ Enjoy, and tell me what you'd like to see next!
 
 Version française, si vous préférez la poster telle quelle :
 
-**Apple Total Commander 1.0 – un gestionnaire de fichiers à deux panneaux pour l'Apple IIe (ProDOS 8, logiciel libre)**
+**Apple IIe Total Commander 1.0 – un gestionnaire de fichiers à deux panneaux pour l'Apple IIe (ProDOS 8, logiciel libre)**
 
-Bonjour à tous ! Je vous présente **Apple Total Commander**, un gestionnaire de fichiers à deux panneaux pour ProDOS 8, dans l'esprit de Total Commander et de Norton Commander, écrit en C et en assembleur 6502 avec cc65, pour l'Apple IIe 128 Ko en 80 colonnes.
+Bonjour à tous ! Je vous présente **Apple IIe Total Commander**, un gestionnaire de fichiers à deux panneaux pour ProDOS 8, dans l'esprit de Total Commander et de Norton Commander, écrit en C et en assembleur 6502 avec cc65, pour l'Apple IIe 128 Ko en 80 colonnes.
 
 Au menu : deux panneaux, tri, marquage de plusieurs fichiers ; copie, déplacement, renommage, suppression, dossiers entiers, barre de progression et question Écraser / Passer / Tout / Aucun ; visionneuses texte et hexadécimale, petit éditeur de texte ; visionneur d'images HGR et DHGR, brutes ou compressées RLE, avec les flèches pour feuilleter un dossier ; lecteur Mockingboard ; verrou, type et auxtype, comparaison des deux panneaux ; et un formateur ProDOS (Disk II, SmartPort, /RAM) avec une confirmation très explicite : il nomme le lecteur et son volume, et il faut taper le mot ERASE.
 
