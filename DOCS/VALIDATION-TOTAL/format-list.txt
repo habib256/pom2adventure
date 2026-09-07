@@ -4,7 +4,7 @@
       Where             Type            Current volume     Size                 
    1  Slot 6, drive 2  Disk II 5.25"   (no ProDOS volume)   280 blocks          
    2  Slot 6, drive 1  Disk II 5.25"   (no ProDOS volume)   280 blocks          
-   3  Slot 5, drive 1  block device    /SCOSWAMP          14641 blocks  IN USE  
+   3  Slot 5, drive 1  block device    /SCOSWAMP          14643 blocks  IN USE  
    4  Slot 3, drive 2  /RAM disk       /RAM                 127 blocks          
                                                                                 
                                                                                 

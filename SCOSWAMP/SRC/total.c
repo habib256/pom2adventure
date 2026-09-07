@@ -42,8 +42,10 @@ extern unsigned char _filetype;
 extern unsigned int _auxtype;
 
 unsigned char __fastcall__ mli_gfi(void* params);   /* total_mli.s */
+unsigned char ram_format(void);
 extern unsigned int chain_addr;                    /* chain.s */
 void __fastcall__ chain_load(const char* path);
+void __fastcall__ chain_command(const char* name);
 unsigned char __fastcall__ mli_sfi(void* params);
 static unsigned char exists(const char* path);
 static void too_long(void);
@@ -870,6 +872,7 @@ enum { IMG_NONE, IMG_HGR, IMG_DHGR, IMG_HGRR, IMG_DHRR };
 static const char* const IMG_NAMES[] = { "not an image", "HGR raw", "DHGR raw", "HGR RLE", "DHGR RLE" };
 static const unsigned long IMG_BYTES[] = { 0, 8192, 16384, 8192, 16384 };
 static unsigned char img_kind;
+static const char* ram_note;
 
 #define HGR_MAIN ((unsigned char*)0x2000)
 
@@ -881,12 +884,22 @@ static void aux_writes(unsigned char on)
     else { *(unsigned char*)0xC054 = 0; *(unsigned char*)0xC000 = 0; }
 }
 
-/* HGR simple, page 1, sans le mode double : 80COL et DHIRES coupes. */
+/* HGR simple, page 1, sans le mode double : 80COL et DHIRES coupes.
+ * TXTCLR ($C050) en DERNIER : allumer le graphique avant d'avoir arme HIRES
+ * montre la page texte relue en basse resolution -- un damier de couleurs le
+ * temps de deux ecritures, juste assez pour une trame sur un moniteur lent. */
 static void show_hgr(void)
 {
     *(unsigned char*)0xC000 = 0; *(unsigned char*)0xC00C = 0; *(unsigned char*)0xC05F = 0;
-    *(unsigned char*)0xC050 = 0; *(unsigned char*)0xC057 = 0; *(unsigned char*)0xC054 = 0; *(unsigned char*)0xC052 = 0;
+    *(unsigned char*)0xC057 = 0; *(unsigned char*)0xC054 = 0; *(unsigned char*)0xC052 = 0;
+    *(unsigned char*)0xC050 = 0;
 }
+
+/* Le decodeur et le chargeur tiennent dans LOWEXE, le kilo-octet de RAM
+ * basse en $1C00-$1FFF que le lanceur met en scene avec l'image LC (voir
+ * total.cfg) : de la RAM ordinaire, au meme prix que $4000, et c'est ce qui
+ * a rendu a la fenetre principale de quoi refaire /RAM. */
+#pragma code-name (push, "LOWEXE")
 
 /* Un flux RLE v1 (HGRR ou DHRR) decompresse en $2000 : `bytes` octets, la
  * premiere moitie d'un DHRR vers AUX. Le fichier est ouvert sur l'en-tete.
@@ -943,12 +956,21 @@ static unsigned char decode_rle(FILE* f, unsigned long bytes)
     return dplane == dplanes;
 }
 
+#pragma code-name (pop)
+
 /* Identifie et charge l'image `full` en page 1. Rend le format, IMG_NONE
  * si le fichier n'en est pas une. */
 static unsigned char load_image(unsigned long size)
 {
-    FILE* f = fopen(full, "rb");
+    FILE* f;
     unsigned char kind = IMG_NONE, ok = 0;
+    /* Le firmware 80 colonnes laisse 80STORE arme et se sert de PAGE2 pour
+     * atteindre la banque auxiliaire. Avec HIRES encore actif (une image
+     * precedente), $2000-$3FFF suivrait ce routage et la lecture partirait
+     * en AUX : ecran fige sur l'ancienne image, ou moitie d'image. On part
+     * donc toujours d'un routage MAIN connu. */
+    aux_writes(0);
+    f = fopen(full, "rb");
     if (!f) return IMG_NONE;
     if (fread(copy_buf, 1, 8, f) == 8) {
         if (!memcmp(copy_buf, "DHRR\1\0\0\x40", 8)) kind = IMG_DHRR;
@@ -988,11 +1010,21 @@ static void view_image(void)
         if (!build_full(full, pan, &pan->e[index])) { too_long(); break; }
         strcpy(input, pan->e[index].name);
         total_view = 1;
+        /* RIEN ne doit ecrire dans $2000-$3FFF pendant que la page graphique
+         * est a l'antenne : on y voyait sinon l'image precedente se faire
+         * ronger par la table d'entrees, puis la nouvelle se peindre bande
+         * par bande (et, en DHGR, le plan AUX avant le plan MAIN). L'ecran
+         * revient donc au texte -- les panneaux, intacts en $400-$7FF -- le
+         * temps du decodage, et l'image ne s'allume qu'une fois complete. */
+        switch_to_text();
+        message(input);
         img_kind = load_image(pan->e[index].size);
         if (img_kind == IMG_NONE) break;
         if (img_kind == IMG_HGR || img_kind == IMG_HGRR) show_hgr(); else switch_to_hgr();
         key = cgetc();
         if (key != KEY_LEFT && key != KEY_RIGHT) break;
+        /* read_panel reecrit la table d'entrees, donc la page graphique. */
+        switch_to_text();
         read_panel(active);
         if (index >= pan->count) break;   /* le dossier a change sous nos pieds */
         next = index;
@@ -1004,16 +1036,30 @@ static void view_image(void)
     }
     switch_to_text();
     total_view = 0;
+    /* Le prix du DHGR : sa moitie auxiliaire ($2000-$3FFF en banque AUX) est
+     * de la memoire que le disque virtuel de ProDOS utilise -- 18 blocs,
+     * mesures au banc, et c'est justement la que commencent les donnees d'un
+     * fichier ecrit sur /RAM. Ils sont perdus, le volume est donc faux : la
+     * prochaine ecriture rendrait n'importe quoi. On le refait a neuf par son
+     * propre pilote, ce qui rend un volume vide et coherent, et on le dit.
+     * Une image HGR simple n'ecrit qu'en banque principale et ne declenche
+     * rien. */
+    ram_note = (img_kind == IMG_DHGR || img_kind == IMG_DHRR) && ram_format()
+             ? "  /RAM was rebuilt empty." : "";
     read_panel(0);
     read_panel(1);
     memcpy(panels[0].tags, picked, sizeof panels[0].tags);
     memcpy(panels[1].tags, picked + sizeof panels[0].tags, sizeof panels[1].tags);
+    /* Le panneau a pu retrecir pendant qu'on regardait : un dossier change
+     * sous nos pieds, ou /RAM refait a neuf sous celui qui s'y trouvait --
+     * read_panel le ramene alors a la liste des volumes. */
+    if (index >= pan->count) index = pan->count ? pan->count - 1 : 0;
     set_cursor(pan, index);
     draw_all();
     clear_row(22);
     gotoxy(0, 22);
     if (img_kind == IMG_NONE) cprintf("%s: not an image.", input);
-    else cprintf("%s: %s, %lu bytes on screen.", input, IMG_NAMES[img_kind], IMG_BYTES[img_kind]);
+    else cprintf("%s: %s, %lu bytes on screen.%s", input, IMG_NAMES[img_kind], IMG_BYTES[img_kind], ram_note);
 }
 
 /* ---------------------------------------------------------------------- */
@@ -1742,16 +1788,30 @@ static void launch_file(unsigned int addr)
 }
 
 /* X : un SYS est lu en $2000, la ou ProDOS l'aurait mis, un BIN a son
- * auxtype. */
+ * auxtype. Un BAS ne se lance pas seul : c'est BASIC.SYSTEM qu'on charge, le
+ * nom du programme depose en $2006 par chain_command -- il en fait la
+ * commande "-NOM" au demarrage, exactement comme Bitsy Bye. BASIC.SYSTEM est
+ * cherche a la racine du volume, sa place d'usage ; le prefixe part sur le
+ * dossier du programme, c'est de la que "-NOM" se resout. */
 static void run_selected(const struct Entry* e)
 {
     unsigned int addr = e->type == 0xFF ? 0x2000 : e->aux;
-    if (is_dir(e) || !panels[active].path[0]) { message("Select a SYS or BIN."); return; }
-    if (e->type != 0xFF && e->type != 0x06) { message("Only SYS and BIN run."); return; }
-    if (addr < 0x0800 || (unsigned long)addr + e->size > 0xBB00) { message("BIN must load in $0800-$BAFF."); return; }
-    if (!build_full(full, &panels[active], e)) { too_long(); return; }
+    unsigned char bas = e->type == 0xFC;
+    if (is_dir(e) || !panels[active].path[0]) { message("Select a program."); return; }
+    if (bas) {
+        /* BASIC.SYSTEM absent : launch_file dira "Run failed". */
+        strcpy(full, panels[active].path);
+        { char* s = strchr(full + 1, '/'); if (s) *s = 0; }   /* "/VOL/DIR" -> "/VOL" */
+        strcat(full, "/BASIC.SYSTEM");
+        addr = 0x2000;
+    } else {
+        if (e->type != 0xFF && e->type != 0x06) { message("SYS, BIN or BAS only."); return; }
+        if (addr < 0x0800 || (unsigned long)addr + e->size > 0xBB00) { message("BIN must load in $0800-$BAFF."); return; }
+        if (!build_full(full, &panels[active], e)) { too_long(); return; }
+    }
     sprintf(question, "Run %s? No return to TOTAL.", e->name);
     if (!confirm(question)) return;
+    if (bas) chain_command(e->name);
     chdir(panels[active].path);
     launch_file(addr);
 }
@@ -1780,7 +1840,7 @@ static void open_selected(void)
     if (looks_like_image(e)) view_image();
     else if (looks_like_music(e)) play_music(e);
     else if (e->type == 0x04) view_text(full);
-    else if (e->type == 0xFF) run_selected(e);
+    else if (e->type == 0xFF || e->type == 0xFC) run_selected(e);
     else view_hex(full, e->size);
 }
 
@@ -1935,8 +1995,13 @@ int main(void)
         switch (key) {
         case KEY_UP: move_cursor(-1); break;
         case KEY_DOWN: move_cursor(1); break;
-        case '<': case '-': move_cursor(-ROWS); break;
-        case '>': case '+': move_cursor(ROWS); break;
+        /* Les fleches horizontales font la page, pas l'ouverture : sur un
+         * dossier de cent fichiers, monter et descendre est ce qu'on fait
+         * le plus souvent, et le clavier de l'Apple IIe n'a pas de PgUp.
+         * RET ouvre, ESC remonte -- les deux seules autres facons de le
+         * faire restent inchangees. */
+        case '<': case '-': case KEY_LEFT: move_cursor(-ROWS); break;
+        case '>': case '+': case KEY_RIGHT: move_cursor(ROWS); break;
         case '[': set_cursor(pan, 0); show_active(); break;
         case ']': if (pan->count) set_cursor(pan, pan->count - 1); show_active(); break;
         case ' ': toggle_tag(); break;
@@ -1949,8 +2014,8 @@ int main(void)
             draw_status();
             draw_info();
             break;
-        case KEY_RETURN: case KEY_RIGHT: open_selected(); break;
-        case KEY_LEFT: case KEY_ESC:
+        case KEY_RETURN: open_selected(); break;
+        case KEY_ESC:
             if (pan->path[0]) { go_up(pan); show_active(); }
             break;
         case '/':

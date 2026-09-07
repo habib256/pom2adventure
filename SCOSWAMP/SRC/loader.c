@@ -19,6 +19,14 @@
 #define CHUNK     1024
 #define LC_STAGE  0x1000
 #define LC_BYTES  0x0C00
+/* Ce qui est mis en scene en $1000 d'un seul coup. TOTAL y ajoute 1 Ko de
+ * code en $1C00-$1FFF (segment LOWEXE de total.cfg), que crt0 n'emporte pas
+ * avec l'image LC : la seule place qui restait. Le jeu n'a que l'image LC. */
+#ifdef TOTAL_LOADER
+#define STAGE_BYTES 0x1000
+#else
+#define STAGE_BYTES LC_BYTES
+#endif
 
 int main(void)
 {
@@ -78,8 +86,9 @@ int main(void)
         return 1;
     }
     /* The first 3 KiB are transient LC code, consumed by crt0 before
-     * main() initializes LOWBSS at the same address. */
-    if (fread((void*)LC_STAGE, 1, LC_BYTES, f) != LC_BYTES) {
+     * main() initializes LOWBSS at the same address. TOTAL reads one more
+     * KiB in the same gulp: its LOWEXE code, which stays at $1C00. */
+    if (fread((void*)LC_STAGE, 1, STAGE_BYTES, f) != STAGE_BYTES) {
         fclose(f);
         cputs("Image LC incomplete.\r\n");
         cgetc();

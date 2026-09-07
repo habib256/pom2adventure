@@ -33,15 +33,15 @@ avec le chemin et la page à gauche.
 | Touche | Action |
 |---|---|
 | **Haut / Bas** | déplacer la sélection |
-| **< / >** (ou **- / +**) | page précédente / suivante (18 lignes) |
+| **Gauche / Droite** (ou **< / >**, **- / +**) | page précédente / suivante (18 lignes) : c'est le déplacement rapide dans un long dossier, le clavier de l'Apple IIe n'ayant pas de PgUp |
 | **[ / ]** | première / dernière entrée |
 | **TAB** | changer de panneau |
 | **=** | ouvrir le dossier du panneau actif dans l'autre panneau |
 | **Espace** | marquer ou démarquer le fichier sélectionné (étoile après le nom) et descendre |
 | **\*** | inverser les marques du panneau |
 | **'** puis une touche | sauter à l'entrée suivante dont le nom commence par cette lettre ou ce chiffre, comme dans Bitsy Bye |
-| **Entrée** ou **Droite** | ouvrir : un dossier s'ouvre ; une image s'affiche plein écran, en HGR ou en DHGR selon son contenu (une touche pour revenir, la ligne de message dit le format reconnu) ; un TXT se lit page par page ; un SYS se lance après confirmation ; tout autre fichier s'affiche en hexadécimal |
-| **Échap** ou **Gauche** | remonter au dossier parent, la sélection revient sur le dossier quitté ; depuis la racine d'un volume, la liste des volumes |
+| **Entrée** | ouvrir : un dossier s'ouvre ; une image s'affiche plein écran, en HGR ou en DHGR selon son contenu (une touche pour revenir, la ligne de message dit le format reconnu) ; un TXT se lit page par page ; un SYS ou un BAS se lance après confirmation ; tout autre fichier s'affiche en hexadécimal |
+| **Échap** | remonter au dossier parent, la sélection revient sur le dossier quitté ; depuis la racine d'un volume, la liste des volumes |
 | **/** | la liste des volumes en ligne |
 | **C** | copier les entrées marquées, sinon l'entrée sélectionnée, dans le dossier de l'autre panneau ; un dossier est copié entier, sous-dossiers compris, un sous-dossier déjà présent est complété ; même nom, même type et auxtype. Quand le fichier existe, TOTAL demande : **O** écraser, **S** passer, **A** tout écraser, **N** ne rien écraser. Une barre de progression montre le fichier en cours, son rang sur le total et les octets copiés ; le message final compte les fichiers copiés et passés |
 | **V** | déplacer : copie, puis suppression de l'original, dossiers compris |
@@ -55,7 +55,7 @@ avec le chemin et la page à gauche.
 | **?** | l'aide, un écran qui résume toutes les touches, sous le titre « Apple IIe Total Commander » |
 | **T** | lire le fichier sélectionné comme du texte |
 | **H** | afficher le fichier sélectionné en hexadécimal |
-| **X** | lancer le fichier sélectionné après confirmation ; TOTAL ne reprend pas la main. Un SYS est lu en `$2000`, un BIN à son auxtype, entre `$0800` et `$BAFF` (le talon garde son tampon ProDOS en `$BB00`) |
+| **X** | lancer le fichier sélectionné après confirmation ; TOTAL ne reprend pas la main. Un SYS est lu en `$2000`, un BIN à son auxtype, entre `$0800` et `$BAFF` (le talon garde son tampon ProDOS en `$BB00`). Un BAS (Applesoft) passe par `BASIC.SYSTEM`, voir ci-dessous |
 | **E** | éditer le fichier sélectionné comme du texte ; sur un dossier ou `..`, créer un fichier texte neuf dans le dossier courant |
 | **I** | afficher le fichier sélectionné comme une image, quel que soit son nom : HGR ou DHGR, brut ou compressé RLE |
 | **P** | mettre en pause ou reprendre la musique Mockingboard ; Entrée sur un fichier `.MB` la lance |
@@ -86,11 +86,63 @@ octets et leur rendu ASCII.
 
 Le décodeur RLE est écrit en C et sert aux deux flux ; une répétition qui
 chevauche la frontière des deux banques est coupée au passage de `$4000`.
+
+**Le chargement ne se voit jamais.** Écrire dans `$2000-$3FFF`, c'est écrire
+dans la page affichée : tant que le décodeur travaille, l'écran reste au
+texte — les panneaux, intacts en `$400-$7FF` — et l'image ne s'allume qu'une
+fois complète. Sans cela, feuilleter un dossier montrait l'image précédente
+se faire recouvrir par la table d'entrées relue, puis la nouvelle se peindre
+bande par bande, plan AUX avant plan MAIN. `load_image` remet aussi le
+routage mémoire sur la banque principale avant toute lecture : le firmware 80
+colonnes laisse `80STORE` armé, et avec `HIRES` encore actif d'une image
+précédente une page HGR brute serait partie en banque auxiliaire.
+
+**Une image DHGR détruit le contenu de `/RAM`, alors TOTAL le refait à
+neuf.** Le disque virtuel de ProDOS vit en RAM auxiliaire, et la moitié
+auxiliaire d'une page DHGR (`$2000-$3FFF` en banque AUX) lui appartient : 18
+blocs, mesurés au banc, et c'est justement là que commencent les données d'un
+fichier écrit sur `/RAM`. C'est la contrainte de la machine, pas un défaut de
+TOTAL — le double haute résolution et `/RAM` se partagent les mêmes octets —
+mais elle laissait un volume à moitié faux, dont la prochaine écriture rendait
+n'importe quoi.
+
+En quittant une image DHGR, TOTAL demande donc à `/RAM` de se reformater : il
+reconnaît son pilote à son adresse `$FF00` dans `DEVADR` (`$BF10`), comme le
+formateur, et lui envoie la commande FORMAT, carte langage commutée en banque
+1 comme ce pilote l'exige (`ram_format`, dans `total_mli.s` — une quarantaine
+d'instructions ; le pilote reconstruit lui-même le répertoire de volume, il
+n'y a aucune structure à écrire, et l'appel rend à TOTAL la banque 2 de la
+carte langage, pas la ROM). Le volume revient vide et cohérent, 119
+blocs libres sur 127, et la ligne de message le dit : `/RAM was rebuilt
+empty.` On perd ce qu'il contenait — c'était déjà perdu — mais plus rien
+n'est faux.
+
+Une image **HGR simple** n'écrit qu'en banque principale : elle ne touche pas
+à `/RAM` et ne déclenche rien. Le banc `ram_dhgr.py` vérifie les deux cas.
+Le jeu et DIAPO, qui affichent du DHGR en permanence, détruisent `/RAM` de la
+même façon et ne le refont pas : ils ne s'en servent pas.
 Dans un dossier, Gauche et Droite passent à l'image précédente ou suivante
 parmi les fichiers qui ressemblent à une image (type FOT, ou BIN de la
 taille d'une page, ou nom en `.RLE`). Un banc à part,
-`validate_images.py`, monte un volume avec les quatre formats et compare la
-page graphique octet à octet : 12 contrôles.
+`validate_images.py`, monte un volume avec les formats compressés et le DHGR
+brut, et compare la page graphique octet à octet : 10 contrôles.
+
+## Lancer un programme Applesoft
+
+Un fichier BAS ne se lance pas seul : c'est `BASIC.SYSTEM` qui l'exécute.
+**X** (ou **Entrée**) sur un BAS charge donc `BASIC.SYSTEM` depuis la racine
+du volume et lui passe le nom du programme dans le tampon que tous ses
+lanceurs utilisent — Bitsy Bye compris : les huit premiers octets d'un
+programme SYSTEM sont un saut puis un nom précédé de sa longueur, en `$2006`,
+et `BASIC.SYSTEM` en fait la commande `-NOM` à son démarrage. `chain_command`
+(chain.s) dépose ce nom dans le talon de la page `$0300`, qui l'écrit en
+`chain_addr+6` juste avant de sauter.
+
+Le préfixe ProDOS part sur le dossier du programme : `-NOM` s'y résout, un BAS
+rangé dans un sous-dossier se lance donc aussi. Sans `BASIC.SYSTEM` à la
+racine du volume, le lancement s'arrête sur `Run failed` et TOTAL garde la
+main. Comme pour un SYS, TOTAL ne reprend pas la main ensuite : on revient
+par Applesoft.
 
 ## Formater un disque
 
@@ -206,18 +258,45 @@ tourne à `$4000`. Les deux tables de 140 entrées occupent la page graphique
 MAIN `$2000-$3FFF`, libre tant qu'aucune image n'est affichée : une image
 la recouvre, et les deux panneaux sont relus au retour, marques conservées.
 La RAM basse `$1000-$1FFF` reçoit toute la BSS de `total.c` (panneaux,
-chemins, copie, débuts de page du texte), mise à zéro par `main`. La réserve
+chemins, copie, débuts de page du texte), mise à zéro par `main`, et depuis
+`total.cfg` la BSS principale de cc65 avec elle. Son dernier kilo-octet,
+`$1C00-$1FFF`, est **du code** : segment `LOWEXE`, le décodeur RLE et ce qui
+l'entoure. Le lanceur met en scène en `$1000` un préfixe de 4 Ko au lieu de 3
+(`STAGE_BYTES` dans `loader.c`) ; `crt0` n'en emporte que les trois premiers
+vers la carte langage, le quatrième reste sur place. Personne d'autre n'y
+touche : la zone `LOWRAM` est bornée à `$0C00` pour que le lieur refuse une
+BSS qui monterait jusque-là, et `check_lc_layout.py` le vérifie aussi. C'était
+la dernière réserve de place de la machine — la fenêtre principale bute sur la
+pile C, la carte langage est pleine. **`TOTAL.SYSTEM` et `TOTAL.CODE` vont
+désormais par paire** : un ancien lanceur ne lit que 3 Ko et laisserait le
+décodeur d'images absent. La réserve
 des parcours récursifs emprunte la table d'entrées du panneau inactif.
 Les visionneuses, les saisies et le fichier de préférences vivent dans la
 carte langage, `$D400-$DFFF` en banque 2 (une vingtaine d'octets libres : `check_lc_layout.py` veille), copiés par `crt0.s` comme pour le
-jeu ; avant de lancer un programme, TOTAL remet la ROM en lecture. La pile C
-fait 512 octets ; le lecteur Mockingboard (1,5 Ko) a pris presque tout le
-reste, il ne demeure qu'une vingtaine d'octets libres en RAM principale : chaque
-correction se paie par un message raccourci ou une fonction déplacée d'une banque
-à l'autre. Les programmes lancés par
+jeu ; avant de lancer un programme, TOTAL remet la ROM en lecture.
+
+**Le plafond de la fenêtre principale.** Ce qui survit à l'initialisation —
+CODE, RODATA, DATA, INIT — doit finir sous le plancher de la pile C,
+`__HIMEM__ - __STACKSIZE__` ; seul ONCE a le droit de le dépasser, il est mort
+avant `main`. ld65 ne le vérifie pas : la zone BSS se dimensionne par
+`__HIMEM__ - __STACKSIZE__ - __ONCE_RUN__` et, dès que cette différence passe
+en négatif, il la lit en entier non signé, ne signale rien et pose la BSS au
+milieu de la pile. Le lien réussit, le programme se corrompt à l'usage. Deux
+mesures ferment ce piège : TOTAL est lié par `total.cfg`, où la BSS descend en
+RAM basse (il ne lie ni `malloc` ni `free` — les tampons ProDOS viennent de
+`$0800` — donc aucun tas ne la suit, ce qui n'est pas vrai du jeu), et
+`check_lc_layout.py` contrôle le plancher à chaque lien. La pile C fait 256
+octets : le banc a mesuré son creux maximal à **94 octets** sous `$BF00`, la
+copie récursive d'un arbre comprise, `-Cl` mettant les locales en statique.
+Les 512 octets d'avant, plus les 88 de la BSS, sont rendus au code — de quoi
+loger le lanceur Applesoft, là où il ne restait qu'une vingtaine d'octets.
+Les programmes lancés par
 X et F le sont par un talon recopié en page `$0300` (`chain.s`), qui lit le
 fichier entier à son adresse et y saute : aucune limite de taille, et
-FORMAT.SYS revient à TOTAL par le même talon. TOTAL n'utilise plus ni
+FORMAT.SYS revient à TOTAL par le même talon ; `chain_command` y ajoute le nom
+que `BASIC.SYSTEM` attend en `$2006`, seize octets de plus dans le talon, et
+une assertion d'assemblage garde l'ensemble sous `$03D0`, où commencent les
+vecteurs. TOTAL n'utilise plus ni
 `opendir` ni `malloc` : les dossiers sont lus comme des fichiers, bloc par
 bloc, dans le tampon de copie, ce qui est aussi plus rapide. Pour loger
 l'éditeur et le visionneur, il a aussi rendu `hgr_loader.s` (le décodeur C
@@ -245,12 +324,17 @@ d'un arbre à deux niveaux, renommage, liste des volumes avec slot et espace
 libre, retour à Bitsy Bye, restauration des panneaux par `TOTAL.CFG`, puis
 lancement de `DIAPO.SYSTEM` depuis TOTAL : 50 contrôles. Le banc travaille sur
 une copie du disque ; `SCOSWAMP/DHGR` n'est jamais modifié. Trois autres
-bancs le complètent : `validate_images.py` (visionneur HGR/DHGR brut et RLE,
-comparaison octet à octet), `validate_format.py` (formatage d'une disquette
+bancs le complètent : `validate_images.py` (visionneur HGR RLE et DHGR brut et RLE,
+comparaison octet à octet ; le HGR brut, un simple `fread` de 8 Ko, n'en fait
+plus partie), `validate_format.py` (formatage d'une disquette
 vierge et du /RAM, image vérifiée à l'arrêt), `validate_floppy.py`
 (`dist/APPLE.TOTAL.dsk` amorcée seule avec `pom2_playtest --disk ... --boot 6` :
 racine, F puis ESC qui revient à TOTAL, aide, musique de TEST jouée une fois
-pendant l'image) ; et `explore.py`, la chasse aux bugs de la 1.0 sur un
+pendant l'image), `validate_basic.py` (un programme Applesoft rangé dans un
+sous-dossier, lancé par `BASIC.SYSTEM` et qui imprime), `ram_dhgr.py` (les
+blocs de `/RAM` détruits par une image DHGR, marque par marque, puis le volume
+refait à neuf, et une image HGR qui n'y touche pas) et `stack.py`
+(le creux maximal de la pile C) ; et `explore.py`, la chasse aux bugs de la 1.0 sur un
 volume artificiel : dossier de 150 fichiers lu par fenêtres puis copié vers un
 /RAM trop petit, dossier vide, fichiers de 0 octet, lignes de 200 caractères
 dans le visionneur et l'éditeur, chemin de 56 caractères, renommage vers un

@@ -504,6 +504,13 @@ $(OUTDIR)/DIAPO/DIAPO.CODE.BIN: diapo.c music.h music.o crt0.o hgr_loader.o memo
 # Le numero de version d'Apple IIe Total Commander : lanceur, ligne de statut,
 # aide (TOTAL/TOTAL.HELP.TXT le porte aussi, a la main) et doc.
 TOTAL_VERSION = 1.0
+# La pile C de TOTAL. Le jeu tourne depuis toujours avec 384 octets ; TOTAL
+# n'a pas plus profond (-Cl met les locales en statique, seuls les parametres
+# et les temporaires passent par la pile logicielle) et le banc a mesure le
+# creux maximal -- voir DOCS/TOTAL.md. Ce que la pile ne prend pas, la
+# fenetre principale le recoit : le plafond du code est __HIMEM__ - cette
+# valeur, et tools/check_lc_layout.py le verifie a chaque lien.
+TOTAL_STACK = 0x0100
 # TOTAL : le gestionnaire de fichiers a deux panneaux (total.c),
 # construit comme DIAPO -- meme lanceur, meme disposition LC/MAIN, meme
 # decodeur DHGR et memes bascules video. Il ne depend ni de la musique ni
@@ -530,10 +537,10 @@ total_mli.o: total_mli.s
 chain.o: chain.s
 	$(AS) -t $(TARGET) -o $@ $<
 
-$(OUTDIR)/TOTAL/TOTAL.CODE.BIN: total.c total_mli.o chain.o crt0.o memory_swap.o mli_safe.o music_total.o music.h scoswamp.cfg
+$(OUTDIR)/TOTAL/TOTAL.CODE.BIN: total.c total_mli.o chain.o crt0.o memory_swap.o mli_safe.o music_total.o music.h total.cfg
 	@mkdir -p $(OUTDIR)/TOTAL
-	$(CL) $(CFLAGS) -D 'TOTAL_VERSION="$(TOTAL_VERSION)"' -C scoswamp.cfg -Wl -D,__EXEHDR__=0 -Wl -D,__HIMEM__=$(HIMEM) -Wl -D,__STACKSIZE__=0x0200 -Wl -m,total.map -Wl -Ln,total.lbl -o $@ crt0.o total.c total_mli.o chain.o music_total.o memory_swap.o mli_safe.o $(IOBUF)
-	@python3 ../../tools/check_lc_layout.py --src . --lbl total.lbl --bin ../TOTAL/TOTAL.CODE.BIN
+	$(CL) $(CFLAGS) -D 'TOTAL_VERSION="$(TOTAL_VERSION)"' -C total.cfg -Wl -D,__EXEHDR__=0 -Wl -D,__HIMEM__=$(HIMEM) -Wl -D,__STACKSIZE__=$(TOTAL_STACK) -Wl -m,total.map -Wl -Ln,total.lbl -o $@ crt0.o total.c total_mli.o chain.o music_total.o memory_swap.o mli_safe.o $(IOBUF)
+	@python3 ../../tools/check_lc_layout.py --src . --lbl total.lbl --bin ../TOTAL/TOTAL.CODE.BIN --stage 0x1000
 
 # La disquette 5,25 pouces d'Apple IIe Total Commander : ProDOS 2.4.3, un
 # lanceur sans chdir (le prefixe est la racine du volume amorce), le meme
