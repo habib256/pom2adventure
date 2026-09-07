@@ -1,14 +1,17 @@
-Ring Surf Station, Tethys
---------------------------
+T 009 The channel of Bizz Lightspan
 
-A small outpost orbits inside a bright ring band.
-Ice blocks drift like silent ships.
-Guides steer sleds along stable paths in the ring.
-Everything sparkles in raw sunlight.
+   Forty million followers. A moulded plastic chin. A smile that makes a
+small chrome noise when it opens.
 
-Pose beside a sled with the ring plane behind you.
-Mind the gentle but steady drift of debris.
+   On screen, Bizz runs in slow motion away from an explosion. Twelve
+camera operators run beside him in the same slow motion, which takes
+enormous discipline and a modest salary.
 
-C 004 Return to the comet
-C 010 Sail the mirror sea of Epsilon
-C 012 Reach the Dyson petal
+   "Hey everyone, Bizz here! Today, the Challenge! No amateur can win this
+thing. None. Zero. Impossible." He winks. The wink is sponsored.
+
+   Your twelve followers have left comments. One of them is your mother.
+She wrote: "Wear a coat." The other is a bot. It wrote the same thing.
+
+C 006 Close it and open your channel
+C 003 Back to the cockpit

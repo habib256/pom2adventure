@@ -1,0 +1,17 @@
+{
+  "assertions": 81,
+  "failures": 0,
+  "exit_code": 0,
+  "scenarios": {
+    "revisite": 7,
+    "musique_transitions": 4,
+    "contrats_retours": 24,
+    "patrouilleur_historique": 16,
+    "aigle_butin_unique": 7,
+    "jardins_parcours": 23
+  },
+  "hdv_sha256": "3887000da89f9de507bcdb3dd0fbc8ab25e0751dd197fd085f11a3226890a7f2",
+  "native_heap_bytes": 2061,
+  "native_code_delta_bytes": 58,
+  "scope": "seven history routers; FR/EN JavaScript; native entry and old save restoration; unique nest loot and completed Gardens combat"
+}

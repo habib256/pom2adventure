@@ -1,0 +1,19 @@
+T 085 The present of Trolley
+V 089
+
+   Trolley files each thing in its bin. It does this with a care that
+makes no sense here and that, for that exact reason, makes a great deal.
+
+   Then it rummages in its own belly, at length, with the sound of a
+kitchen drawer, and brings out a flat battery still in its wrapper. It
+holds it out with both hands. Its binoculars turn a full circle.
+
+   You know the shape: it is a Holophone battery. You have never seen a
+new one.
+
+   It beeps once more and goes back to sorting. Somewhere in this dump
+there is a pip that will grow, which is already more than most channels in
+this galaxy will ever manage.
+
+G PILE
+C 081 Back into the rubbish

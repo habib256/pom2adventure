@@ -7,4 +7,5 @@ rage: it remembers you.
    If it had been wounded previously, it has regained 1 STAMINA point.
 Otherwise, it fights with all its vigor.
 
+MR 1 8
 C 200 Face the Bear

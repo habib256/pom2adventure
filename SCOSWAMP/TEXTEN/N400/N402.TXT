@@ -7,6 +7,6 @@ threatens you: "I am going to kill you!"
 
    The assault is inevitable; you must engage in combat without delay.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 8 STRATAGUS
 MV 140

@@ -19,18 +19,18 @@ réduction, le même tempo. C'est le seul objet à écouter pour juger.
 | --- | --- | --- | --- | ---: | ---: | ---: |
 | `accueil` *(déjà sur le disque)* | `COMEAGAIN.MB` | Come Again | J. Dowland, 1597 | 120 | — | 478 |
 | `village` | `VILLAGE.MB` | Il Est de Bonne Heure Né | Anonyme, c. 1470 | **150** | 48,0 s | 916 |
-| `courbensaule` | `COURBENS.MB` | Saltarello | V. Galilei, 1584 | **180** | 35,8 s | 553 |
-| `sud` | `MARAISUD.MB` | Pavane « Belle qui tiens ma vie » | T. Arbeau, 1588 | **125** | 31,5 s | 574 |
-| `nord` | `MARAISNO.MB` | Tmeiskin | J. Japart, av. 1507 | **200** | 58,4 s | 1 058 |
-| `riviere` | `RIVIERE.MB` | The Silver Swan | O. Gibbons, 1612 | **136** | 37,8 s | 719 |
+| `courbensaule` | `BENTBEAKS.MB` | Saltarello | V. Galilei, 1584 | **180** | 35,8 s | 553 |
+| `sud` | `SOUTHSWAMP.MB` | Pavane « Belle qui tiens ma vie » | T. Arbeau, 1588 | **125** | 31,5 s | 574 |
+| `nord` | `NORTHSWAMP.MB` | Tmeiskin | J. Japart, av. 1507 | **200** | 58,4 s | 1 058 |
+| `riviere` | `RIVER.MB` | The Silver Swan | O. Gibbons, 1612 | **136** | 37,8 s | 719 |
 | `danger` | `DANGER.MB` | Unquiet Thoughts | J. Dowland, 1597 | **140** | 55,6 s | 960 |
-| `tour` | `TOUR.MB` | Pavan 2 | L. Milán, XVI<sup>e</sup> s. | **150** | 58,4 s | 548 |
-| `combat` | `COMBAT.MB` | Bourrée en mi mineur BWV 996 | J. S. Bach, c. 1710 | **180** | 32,8 s | 644 |
-| `mort` | `MORT.MB` | Marche funèbre KV 453a | W. A. Mozart, 1784 | **120** | 32,3 s | 725 |
-| `victoire` | `VICTOIRE.MB` | Old 100th | L. Bourgeois, c. 1550 | **150** | 39,2 s | 315 |
+| `tour` | `TOWER.MB` | Pavan 2 | L. Milán, XVI<sup>e</sup> s. | **150** | 58,4 s | 548 |
+| `combat` | `BATTLE.MB` | Bourrée en mi mineur BWV 996 | J. S. Bach, c. 1710 | **180** | 32,8 s | 644 |
+| `mort` | `DEATH.MB` | Marche funèbre KV 453a | W. A. Mozart, 1784 | **120** | 32,3 s | 725 |
+| `victoire` | `VICTORY.MB` | Old 100th | L. Bourgeois, c. 1550 | **150** | 39,2 s | 315 |
 
 **Total sur le volume : 7 490 octets** (7 012 pour les dix nouvelles + 478 pour
-`COMEAGAIN.MB`), sur ~28 Mo libres. La plus grosse pièce, `MARAISNO.MB`
+`COMEAGAIN.MB`), sur ~28 Mo libres. La plus grosse pièce, `NORTHSWAMP.MB`
 (1 058 o), fixe le plancher du tampon : **1 280 octets** suffisent, contre 2 560
 déclarés aujourd'hui (`SCOSWAMP/SRC/music.h:11`).
 
@@ -123,7 +123,7 @@ exceptions ci-dessous sont les seules à porter une ligne `MU`.
 Une page peut apparaître deux fois (124 est une page de tour **et** de combat,
 297/372/375/401 sont des pages de tour **et** de mort) : c'est exactement ce que
 règle la notion de **surcouche** du § 4 de `DOCS/MUSIQUE-CLAIRIERES.md` —
-`MU +COMBAT.MB` remplace le thème pour une page, sans effacer la mémoire du
+`MU +BATTLE.MB` remplace le thème pour une page, sans effacer la mémoire du
 thème de zone, qui revient tout seul à la page suivante.
 
 ---
@@ -134,13 +134,13 @@ Le propriétaire visait 6 à 10 musiques. Trois fusions possibles, par ordre de
 coût artistique croissant :
 
 1. **`village` disparaît dans `courbensaule`** — les deux sont des villes ;
-   `COURBENS.MB` (saltarello) sert de thème urbain unique. **−916 octets.**
+   `BENTBEAKS.MB` (saltarello) sert de thème urbain unique. **−916 octets.**
 2. **`riviere` disparaît dans `sud`** — la rivière n'est que quatre clairières,
    dont trois d'une seule page. **−719 octets.** C'est la fusion la plus
    regrettable : le pont est le seuil du jeu.
 3. **`victoire` disparaît dans `village`** — la sortie du Marais et la victoire
    partagent la même respiration. **−315 octets.** La moins chère, et
-   `VICTOIRE.MB` ne pèse que 315 octets, donc le gain est nul : à ne pas faire.
+   `VICTORY.MB` ne pèse que 315 octets, donc le gain est nul : à ne pas faire.
 
 Recommandation : **garder les onze**. Le disque a 28 Mo libres, et le tampon ne
 dépend que de la *plus grosse* pièce, pas de leur nombre.
@@ -156,7 +156,7 @@ dépend que de la *plus grosse* pièce, pas de leur nombre.
 | What power art thou (*Cold Song*) | H. Purcell | id 2243 | Le chromatisme descendant serait parfait pour `danger` ; écartée parce que la basse solo se réduit mal à trois voix égales. Deuxième choix ferme. |
 | Es ist ein Ros' entsprungen | M. Praetorius, 1609 | id 1175 | Trop associée à Noël. |
 | Belle qui tiens ma vie *(alt.)* | — | — | Déjà retenue pour `sud`. |
-| `ACCUEIL.MB` | composition maison (`../accueil.py`) | — | 2 339 octets pour un thème d'accueil : elle coûte à elle seule deux fois le tampon proposé. À remplacer par `COMEAGAIN.MB`, déjà en place sur la page 000. |
+| `WELCOME.MB` | composition maison (`../accueil.py`) | — | 2 339 octets pour un thème d'accueil : elle coûte à elle seule deux fois le tampon proposé. À remplacer par `COMEAGAIN.MB`, déjà en place sur la page 000. |
 
 ---
 
@@ -169,15 +169,15 @@ Les URLs Mutopia sont dans chaque `README.md`. Pour tout reconvertir depuis les
 cd /Users/gistair/src/pom2adventure
 M=SCOSWAMP.MORE/MUSIC ; P=$M/propositions ; C="python3 $M/midi_to_mb.py"
 $C $P/village/bonne_heure.mid      $P/village/VILLAGE.MB.BIN       --bpm 150 --wav $P/village/VILLAGE.wav
-$C $P/courbensaule/saltarello.mid  $P/courbensaule/COURBENS.MB.BIN --bpm 180 --wav $P/courbensaule/COURBENS.wav
-$C $P/sud/belle.mid                $P/sud/MARAISUD.MB.BIN          --bpm 125 --wav $P/sud/MARAISUD.wav
-$C $P/nord/27-tmeiskin.mid         $P/nord/MARAISNO.MB.BIN         --bpm 200 --wav $P/nord/MARAISNO.wav
-$C $P/riviere/SilverSwan.mid       $P/riviere/RIVIERE.MB.BIN       --bpm 136 --wav $P/riviere/RIVIERE.wav
+$C $P/courbensaule/saltarello.mid  $P/courbensaule/BENTBEAKS.MB.BIN --bpm 180 --wav $P/courbensaule/COURBENS.wav
+$C $P/sud/belle.mid                $P/sud/SOUTHSWAMP.MB.BIN          --bpm 125 --wav $P/sud/MARAISUD.wav
+$C $P/nord/27-tmeiskin.mid         $P/nord/NORTHSWAMP.MB.BIN         --bpm 200 --wav $P/nord/MARAISNO.wav
+$C $P/riviere/SilverSwan.mid       $P/riviere/RIVER.MB.BIN       --bpm 136 --wav $P/riviere/RIVIERE.wav
 $C $P/danger/UnquietThoughts.mid   $P/danger/DANGER.MB.BIN         --bpm 140 --wav $P/danger/DANGER.wav
-$C $P/tour/milan-pavan2.mid        $P/tour/TOUR.MB.BIN             --bpm 150 --wav $P/tour/TOUR.wav
-$C $P/combat/bourree.mid           $P/combat/COMBAT.MB.BIN         --bpm 180 --wav $P/combat/COMBAT.wav
-$C $P/mort/k453a.mid               $P/mort/MORT.MB.BIN             --bpm 120 --wav $P/mort/MORT.wav
-$C $P/victoire/Old100.mid          $P/victoire/VICTOIRE.MB.BIN     --bpm 150 --wav $P/victoire/VICTOIRE.wav
+$C $P/tour/milan-pavan2.mid        $P/tour/TOWER.MB.BIN             --bpm 150 --wav $P/tour/TOUR.wav
+$C $P/combat/bourree.mid           $P/combat/BATTLE.MB.BIN         --bpm 180 --wav $P/combat/COMBAT.wav
+$C $P/mort/k453a.mid               $P/mort/DEATH.MB.BIN             --bpm 120 --wav $P/mort/MORT.wav
+$C $P/victoire/Old100.mid          $P/victoire/VICTORY.MB.BIN     --bpm 150 --wav $P/victoire/VICTOIRE.wav
 ```
 
 `--vol` reste au défaut `13,9,11` partout : mélodie en avant, voix médiane

@@ -7,7 +7,7 @@ repousse cependant sans cesse et finit par vous entourer.
 adversaire, implacable et infini. Le choc est brutal; gardez votre souffle et
 votre sang-froid.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 6 16 HERBE A PINCES
 CF 187 Prendre la fuite
 MV 081

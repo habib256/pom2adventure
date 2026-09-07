@@ -1,6 +1,6 @@
 # Clairière 16 — Le Perroquet et la Maîtresse des Oiseaux
 
-**`OISEAUX.MB.BIN` — 2 002 octets, 40,3 s, boucle.**
+**`BIRDS.MB.BIN` — 2 002 octets, 40,3 s, boucle.**
 
 ## La clairière
 
@@ -9,7 +9,7 @@
 | `hub` | **304** |
 | Pages | 304 (le Perroquet), 149 (la clairière aux oiseaux), 217 (retour forcé) |
 | Case | (0,4) |
-| Zone de référence | `sud` (`MARAISUD.MB`) |
+| Zone de référence | `sud` (`SOUTHSWAMP.MB`) |
 | Sorties | aucune orientée — cul-de-sac tropical, on ressort par 217 → 250 |
 
 « Le Marais change d'aspect. Il devient moins lugubre et ressemble de plus en
@@ -93,6 +93,6 @@ tonique est le procédé de la zone `sud`.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/16-oiseaux
 python3 oiseaux.py
-python3 ../../../midi_to_mb.py oiseaux.mid OISEAUX.MB.BIN \
+python3 ../../../midi_to_mb.py oiseaux.mid BIRDS.MB.BIN \
     --bpm 168 --max 2304 --wav OISEAUX.wav
 ```

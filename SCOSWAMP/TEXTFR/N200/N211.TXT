@@ -9,6 +9,6 @@ jusqu'a eteindre les flammes.
 mais sa fureur est terrible et il vous barre toute retraite. L'affrontement
 est inevitable.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 6 12 GEANT
 MV 366

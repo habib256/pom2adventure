@@ -13,7 +13,8 @@ need is to find an inn to spend a good night's sleep.
 
    Which will you choose?
 
-MU COURBENS.MB
-C 395 The Black Bear
-C 078 The Twisted Lance
-C 289 Tancred's Flying Horse
+MU BENTBEAKS.MB
+CG 1 395 The Black Bear (1 Gold Piece)
+CG 1 078 The Twisted Lance (1 Gold Piece)
+CG 1 289 Tancred's Flying Horse (1 Gold Piece)
+C 343 Leave without spending the night

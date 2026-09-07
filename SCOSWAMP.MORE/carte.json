@@ -1,793 +1,793 @@
 {
- "clairieres": [
-  {
-   "id": null,
-   "hub": 78,
-   "pages": [
-    280,
-    355,
-    78,
-    150,
-    408
-   ],
-   "titre": "Route de Courbensaule",
-   "x": 0,
-   "y": 0,
-   "sorties": {
-    "S": 343
-   },
-   "voisins": {
-    "S": 19
-   },
-   "contenu": "HORS MARAIS : ville, boutique d'Alphonse / La Lance Tordue"
+  "clairieres": [
+    {
+      "id": null,
+      "hub": 78,
+      "pages": [
+        280,
+        355,
+        78,
+        150,
+        408
+      ],
+      "titre": "Route de Courbensaule",
+      "x": 0,
+      "y": 0,
+      "sorties": {
+        "S": 343
+      },
+      "voisins": {
+        "S": 19
+      },
+      "contenu": "HORS MARAIS : ville, boutique d'Alphonse / La Lance Tordue"
+    },
+    {
+      "id": 19,
+      "hub": 234,
+      "pages": [
+        170,
+        363,
+        234
+      ],
+      "titre": "Le Patrouilleur vert",
+      "x": 2,
+      "y": 0,
+      "sorties": {
+        "S": 121,
+        "E": 305
+      },
+      "voisins": {
+        "S": 121,
+        "E": 84
+      },
+      "contenu": "PATROUILLEUR"
+    },
+    {
+      "id": 27,
+      "hub": 84,
+      "pages": [
+        305,
+        238,
+        84,
+        117,
+        251,
+        283,
+        396
+      ],
+      "titre": "Le Maitre des Jardins",
+      "x": 3,
+      "y": 0,
+      "sorties": {
+        "O": 363
+      },
+      "voisins": {
+        "O": 234
+      },
+      "contenu": "MAITRE DES JARDINS (Amulette de Fleur), buisson d'Antherique"
+    },
+    {
+      "id": 11,
+      "hub": 232,
+      "pages": [
+        92,
+        232,
+        247,
+        389
+      ],
+      "titre": "Les deux loups",
+      "x": 4,
+      "y": 0,
+      "sorties": {
+        "S": 342
+      },
+      "voisins": {
+        "S": 161
+      },
+      "contenu": "2 LOUPS GRIS ; buisson violet / Antherique"
+    },
+    {
+      "id": 15,
+      "hub": 218,
+      "pages": [
+        218,
+        249,
+        24
+      ],
+      "titre": "Feu follet a l'oree",
+      "x": 1,
+      "y": 1,
+      "sorties": {
+        "S": 336,
+        "E": 121,
+        "O": 72
+      },
+      "voisins": {
+        "S": 153,
+        "E": 121
+      },
+      "contenu": "FEU FOLLET (piege)"
+    },
+    {
+      "id": null,
+      "hub": 121,
+      "pages": [
+        121
+      ],
+      "titre": "Le croisement",
+      "x": 2,
+      "y": 1,
+      "sorties": {
+        "N": 170,
+        "S": 14,
+        "E": 275,
+        "O": 218
+      },
+      "voisins": {
+        "N": 234,
+        "S": 88,
+        "E": 161,
+        "O": 218
+      },
+      "contenu": "carrefour a quatre branches"
+    },
+    {
+      "id": 7,
+      "hub": 161,
+      "pages": [
+        275,
+        342,
+        161,
+        103,
+        244
+      ],
+      "titre": "Le Geant",
+      "x": 4,
+      "y": 1,
+      "sorties": {
+        "N": 92,
+        "S": 41,
+        "O": 121
+      },
+      "voisins": {
+        "N": 232,
+        "S": 270,
+        "O": 121
+      },
+      "contenu": "GEANT (massue)"
+    },
+    {
+      "id": 9,
+      "hub": 19,
+      "pages": [
+        65,
+        343,
+        19
+      ],
+      "titre": "Clairiere aux brigands",
+      "x": 0,
+      "y": 2,
+      "sorties": {
+        "N": 280,
+        "E": 137
+      },
+      "voisins": {
+        "N": 78,
+        "E": 153
+      },
+      "contenu": "5 BRIGANDS"
+    },
+    {
+      "id": 28,
+      "hub": 153,
+      "pages": [
+        336,
+        137,
+        153
+      ],
+      "titre": "Le bassin de Vase",
+      "x": 1,
+      "y": 2,
+      "sorties": {
+        "N": 218,
+        "O": 65
+      },
+      "voisins": {
+        "N": 218,
+        "O": 19
+      },
+      "contenu": "VASE visqueuse"
+    },
+    {
+      "id": 32,
+      "hub": 88,
+      "pages": [
+        14,
+        338,
+        88
+      ],
+      "titre": "Scorpion et nain",
+      "x": 2,
+      "y": 2,
+      "sorties": {
+        "N": 121,
+        "E": 331
+      },
+      "voisins": {
+        "N": 121,
+        "E": 202
+      },
+      "contenu": "SCORPION GEANT + NAIN mort (Fiole scellee)"
+    },
+    {
+      "id": 16,
+      "hub": 202,
+      "pages": [
+        350,
+        331,
+        25,
+        112,
+        202
+      ],
+      "titre": "Le nid de l'Aigle",
+      "x": 3,
+      "y": 2,
+      "sorties": {
+        "S": 138,
+        "E": 41,
+        "O": 14
+      },
+      "voisins": {
+        "S": 45,
+        "E": 270,
+        "O": 88
+      },
+      "contenu": "AIGLE GEANT, grand nid"
+    },
+    {
+      "id": 30,
+      "hub": 270,
+      "pages": [
+        41,
+        382,
+        270,
+        421
+      ],
+      "titre": "Sables mouvants",
+      "x": 4,
+      "y": 2,
+      "sorties": {
+        "N": 275,
+        "O": 331
+      },
+      "voisins": {
+        "N": 161,
+        "O": 202
+      },
+      "contenu": "SABLES MOUVANTS"
+    },
+    {
+      "id": 33,
+      "hub": 295,
+      "pages": [
+        295
+      ],
+      "titre": "La Riviere Croupie",
+      "x": 1,
+      "y": 3,
+      "sorties": {
+        "S": 94,
+        "E": 183
+      },
+      "voisins": {
+        "S": 94,
+        "E": 183
+      },
+      "contenu": "berge de la riviere Croupie"
+    },
+    {
+      "id": 20,
+      "hub": 183,
+      "pages": [
+        183
+      ],
+      "titre": "Sommet de la falaise",
+      "x": 2,
+      "y": 3,
+      "sorties": {
+        "N": 30,
+        "S": 66,
+        "E": 321,
+        "O": 295
+      },
+      "voisins": {
+        "N": null,
+        "S": 179,
+        "E": null,
+        "O": 295
+      },
+      "contenu": "lisiere du Marais / riviere"
+    },
+    {
+      "id": 35,
+      "hub": 45,
+      "pages": [
+        138,
+        45,
+        101
+      ],
+      "titre": "Le pont sur la riviere Croupie",
+      "x": 3,
+      "y": 3,
+      "sorties": {
+        "N": 331,
+        "S": 303
+      },
+      "voisins": {
+        "N": 202,
+        "S": 319
+      },
+      "contenu": "vieux pont"
+    },
+    {
+      "id": 14,
+      "hub": 304,
+      "pages": [
+        304,
+        149,
+        217
+      ],
+      "titre": "Le Perroquet / Maitresse des Oiseaux",
+      "x": 0,
+      "y": 4,
+      "sorties": {},
+      "voisins": {},
+      "contenu": "PERROQUET, MAITRESSE DES OISEAUX (Plumes)"
+    },
+    {
+      "id": null,
+      "hub": 94,
+      "pages": [
+        94
+      ],
+      "titre": "La brume fetide",
+      "x": 1,
+      "y": 4,
+      "sorties": {
+        "N": 295,
+        "S": 320
+      },
+      "voisins": {
+        "N": 295,
+        "S": 348
+      },
+      "contenu": "brume toxique (-2 ENDURANCE)"
+    },
+    {
+      "id": 9,
+      "hub": 179,
+      "pages": [
+        66,
+        192,
+        179
+      ],
+      "titre": "Le pique-nique suspect",
+      "x": 2,
+      "y": 4,
+      "sorties": {
+        "N": 183,
+        "S": 10,
+        "E": 118
+      },
+      "voisins": {
+        "N": 183,
+        "S": 227,
+        "E": 319
+      },
+      "contenu": "VOLEUR"
+    },
+    {
+      "id": 13,
+      "hub": 319,
+      "pages": [
+        118,
+        303,
+        319
+      ],
+      "titre": "La clairiere des scorpions",
+      "x": 3,
+      "y": 4,
+      "sorties": {
+        "N": 138,
+        "E": 47,
+        "O": 66
+      },
+      "voisins": {
+        "N": 45,
+        "E": 47,
+        "O": 179
+      },
+      "contenu": "nuee de SCORPIONS"
+    },
+    {
+      "id": 3,
+      "hub": 47,
+      "pages": [
+        47
+      ],
+      "titre": "Trois chemins herbeux",
+      "x": 4,
+      "y": 4,
+      "sorties": {
+        "S": 290,
+        "E": 31,
+        "O": 118
+      },
+      "voisins": {
+        "S": 309,
+        "E": 31,
+        "O": 319
+      },
+      "contenu": "rien"
+    },
+    {
+      "id": 21,
+      "hub": 31,
+      "pages": [
+        31,
+        77,
+        394
+      ],
+      "titre": "Bassin de cristal",
+      "x": 5,
+      "y": 4,
+      "sorties": {
+        "O": 47
+      },
+      "voisins": {
+        "O": 47
+      },
+      "contenu": "bassin bienfaisant (+ENDURANCE)"
+    },
+    {
+      "id": 23,
+      "hub": 367,
+      "pages": [
+        204,
+        250,
+        367
+      ],
+      "titre": "Les Fleurs d'Angoisse",
+      "x": 0,
+      "y": 5,
+      "sorties": {
+        "N": 304,
+        "E": 265
+      },
+      "voisins": {
+        "N": 304,
+        "E": 348
+      },
+      "contenu": "FLEURS D'ANGOISSE (-1 HABILETE)"
+    },
+    {
+      "id": 29,
+      "hub": 348,
+      "pages": [
+        320,
+        265,
+        348
+      ],
+      "titre": "La Licorne",
+      "x": 1,
+      "y": 5,
+      "sorties": {
+        "N": 94,
+        "S": 157,
+        "E": 10,
+        "O": 204
+      },
+      "voisins": {
+        "N": 94,
+        "S": 22,
+        "E": 227,
+        "O": 367
+      },
+      "contenu": "LICORNE (Corne de Licorne)"
+    },
+    {
+      "id": 5,
+      "hub": 227,
+      "pages": [
+        10,
+        142,
+        227
+      ],
+      "titre": "La clairiere des combats",
+      "x": 2,
+      "y": 5,
+      "sorties": {
+        "N": 66,
+        "E": 388,
+        "O": 320
+      },
+      "voisins": {
+        "N": 179,
+        "E": 187,
+        "O": 348
+      },
+      "contenu": "traces de bataille, butin, pendentif"
+    },
+    {
+      "id": 24,
+      "hub": 187,
+      "pages": [
+        388,
+        263,
+        33,
+        187
+      ],
+      "titre": "Herbe a Pinces",
+      "x": 3,
+      "y": 5,
+      "sorties": {
+        "S": 144,
+        "E": 290,
+        "O": 10
+      },
+      "voisins": {
+        "S": 165,
+        "E": 309,
+        "O": 227
+      },
+      "contenu": "HERBE A PINCES"
+    },
+    {
+      "id": 26,
+      "hub": 309,
+      "pages": [
+        290,
+        323,
+        352,
+        309
+      ],
+      "titre": "Orques des Marais",
+      "x": 4,
+      "y": 5,
+      "sorties": {
+        "N": 47,
+        "S": 53,
+        "O": 388
+      },
+      "voisins": {
+        "N": 47,
+        "S": 230,
+        "O": 187
+      },
+      "contenu": "3 ORQUES DES MARAIS"
+    },
+    {
+      "id": null,
+      "hub": 125,
+      "pages": [
+        11,
+        210,
+        299,
+        125,
+        228,
+        243
+      ],
+      "titre": "Cul-de-sac de la Bete",
+      "x": 0,
+      "y": 6,
+      "sorties": {
+        "E": 279
+      },
+      "voisins": {
+        "E": 22
+      },
+      "contenu": "BETE IMMONDE ; graines-armes"
+    },
+    {
+      "id": 18,
+      "hub": 22,
+      "pages": [
+        157,
+        279,
+        22
+      ],
+      "titre": "La clairiere des Arbres-Epees",
+      "x": 1,
+      "y": 6,
+      "sorties": {
+        "N": 320,
+        "S": 90,
+        "O": 11
+      },
+      "voisins": {
+        "N": 348,
+        "S": 44,
+        "O": 125
+      },
+      "contenu": "ARBRES-EPEES"
+    },
+    {
+      "id": 17,
+      "hub": 165,
+      "pages": [
+        144,
+        345,
+        354,
+        165
+      ],
+      "titre": "Tente aux araignees",
+      "x": 3,
+      "y": 6,
+      "sorties": {
+        "N": 388,
+        "S": 105
+      },
+      "voisins": {
+        "N": 187,
+        "S": 390
+      },
+      "contenu": "MAITRE DES ARAIGNEES (Amulette d'Argent)"
+    },
+    {
+      "id": 8,
+      "hub": 230,
+      "pages": [
+        53,
+        329,
+        230
+      ],
+      "titre": "Clairiere des grenouilles",
+      "x": 4,
+      "y": 6,
+      "sorties": {
+        "E": 352
+      },
+      "voisins": {
+        "E": 309
+      },
+      "contenu": "MAITRE DES GRENOUILLES, champignon"
+    },
+    {
+      "id": 34,
+      "hub": 44,
+      "pages": [
+        90,
+        44,
+        254,
+        370
+      ],
+      "titre": "La riviere profonde",
+      "x": 1,
+      "y": 7,
+      "sorties": {
+        "N": 157,
+        "S": 398
+      },
+      "voisins": {
+        "N": 22,
+        "S": 314
+      },
+      "contenu": "SANGSUES / pont d'arbre"
+    },
+    {
+      "id": 4,
+      "hub": 314,
+      "pages": [
+        398,
+        239,
+        314
+      ],
+      "titre": "Clairiere du Maitre des Loups",
+      "x": 1,
+      "y": 8,
+      "sorties": {
+        "N": 90,
+        "E": 195
+      },
+      "voisins": {
+        "N": 44,
+        "E": 58
+      },
+      "contenu": "MAITRE DES LOUPS (Amulette de Loup)"
+    },
+    {
+      "id": 1,
+      "hub": 58,
+      "pages": [
+        195,
+        58,
+        404,
+        405
+      ],
+      "titre": "Clairiere n 1 (rond-point)",
+      "x": 2,
+      "y": 8,
+      "sorties": {
+        "S": 208,
+        "E": 105,
+        "O": 398
+      },
+      "voisins": {
+        "S": null,
+        "E": 390,
+        "O": 314
+      },
+      "contenu": "carrefour, sol instable"
+    },
+    {
+      "id": 12,
+      "hub": 390,
+      "pages": [
+        105,
+        330,
+        390
+      ],
+      "titre": "Pierres et tronc",
+      "x": 3,
+      "y": 8,
+      "sorties": {
+        "N": 144,
+        "E": 209,
+        "O": 195
+      },
+      "voisins": {
+        "N": 165,
+        "E": 82,
+        "O": 58
+      },
+      "contenu": "tronc creux, pierres plates"
+    },
+    {
+      "id": 25,
+      "hub": 82,
+      "pages": [
+        209,
+        82,
+        308,
+        397
+      ],
+      "titre": "Bete du bassin",
+      "x": 4,
+      "y": 8,
+      "sorties": {
+        "O": 330
+      },
+      "voisins": {
+        "O": 390
+      },
+      "contenu": "BETE DU BASSIN, Bijou Violet"
+    }
+  ],
+  "depart": 195,
+  "depart_prologue": 9,
+  "sortie_sud": 208,
+  "sortie_nord": 280,
+  "grille": {
+    "largeur": 6,
+    "hauteur": 9
   },
-  {
-   "id": 19,
-   "hub": 234,
-   "pages": [
-    170,
-    363,
-    234
-   ],
-   "titre": "Le Patrouilleur vert",
-   "x": 2,
-   "y": 0,
-   "sorties": {
-    "S": 121,
-    "E": 305
-   },
-   "voisins": {
-    "S": 121,
-    "E": 84
-   },
-   "contenu": "PATROUILLEUR"
-  },
-  {
-   "id": 27,
-   "hub": 84,
-   "pages": [
-    305,
-    238,
-    84,
-    117,
-    251,
-    283,
-    396
-   ],
-   "titre": "Le Maitre des Jardins",
-   "x": 3,
-   "y": 0,
-   "sorties": {
-    "O": 363
-   },
-   "voisins": {
-    "O": 234
-   },
-   "contenu": "MAITRE DES JARDINS (Amulette de Fleur), buisson d'Antherique"
-  },
-  {
-   "id": 11,
-   "hub": 232,
-   "pages": [
-    92,
-    232,
-    247,
-    389
-   ],
-   "titre": "Les deux loups",
-   "x": 4,
-   "y": 0,
-   "sorties": {
-    "S": 342
-   },
-   "voisins": {
-    "S": 161
-   },
-   "contenu": "2 LOUPS GRIS ; buisson violet / Antherique"
-  },
-  {
-   "id": 15,
-   "hub": 218,
-   "pages": [
-    218,
-    249
-   ],
-   "titre": "Feu follet a l'oree",
-   "x": 1,
-   "y": 1,
-   "sorties": {
-    "S": 336,
-    "E": 121,
-    "O": 72
-   },
-   "voisins": {
-    "S": 153,
-    "E": 121,
-    "O": 58
-   },
-   "contenu": "FEU FOLLET (piege)"
-  },
-  {
-   "id": null,
-   "hub": 121,
-   "pages": [
-    121
-   ],
-   "titre": "Le croisement",
-   "x": 2,
-   "y": 1,
-   "sorties": {
-    "N": 170,
-    "S": 14,
-    "E": 275,
-    "O": 218
-   },
-   "voisins": {
-    "N": 234,
-    "S": 88,
-    "E": 161,
-    "O": 218
-   },
-   "contenu": "carrefour a quatre branches"
-  },
-  {
-   "id": 7,
-   "hub": 161,
-   "pages": [
-    275,
-    342,
-    161,
-    103,
-    244
-   ],
-   "titre": "Le Geant",
-   "x": 4,
-   "y": 1,
-   "sorties": {
-    "N": 92,
-    "S": 41,
-    "O": 121
-   },
-   "voisins": {
-    "N": 232,
-    "S": 270,
-    "O": 121
-   },
-   "contenu": "GEANT (massue)"
-  },
-  {
-   "id": 9,
-   "hub": 19,
-   "pages": [
-    65,
-    343,
-    19
-   ],
-   "titre": "Clairiere aux brigands",
-   "x": 0,
-   "y": 2,
-   "sorties": {
-    "N": 280,
-    "E": 137
-   },
-   "voisins": {
-    "N": 78,
-    "E": 153
-   },
-   "contenu": "5 BRIGANDS"
-  },
-  {
-   "id": 28,
-   "hub": 153,
-   "pages": [
-    336,
-    137,
-    153
-   ],
-   "titre": "Le bassin de Vase",
-   "x": 1,
-   "y": 2,
-   "sorties": {
-    "N": 218,
-    "O": 65
-   },
-   "voisins": {
-    "N": 218,
-    "O": 19
-   },
-   "contenu": "VASE visqueuse"
-  },
-  {
-   "id": 32,
-   "hub": 88,
-   "pages": [
-    14,
-    338,
-    88
-   ],
-   "titre": "Scorpion et nain",
-   "x": 2,
-   "y": 2,
-   "sorties": {
-    "N": 121,
-    "E": 331
-   },
-   "voisins": {
-    "N": 121,
-    "E": 202
-   },
-   "contenu": "SCORPION GEANT + NAIN mort (Fiole scellee)"
-  },
-  {
-   "id": 16,
-   "hub": 202,
-   "pages": [
-    350,
-    331,
-    25,
-    112,
-    202
-   ],
-   "titre": "Le nid de l'Aigle",
-   "x": 3,
-   "y": 2,
-   "sorties": {
-    "S": 138,
-    "E": 41,
-    "O": 14
-   },
-   "voisins": {
-    "S": 45,
-    "E": 270,
-    "O": 88
-   },
-   "contenu": "AIGLE GEANT, grand nid"
-  },
-  {
-   "id": 30,
-   "hub": 270,
-   "pages": [
-    41,
-    382,
-    270
-   ],
-   "titre": "Sables mouvants",
-   "x": 4,
-   "y": 2,
-   "sorties": {
-    "N": 275,
-    "O": 331
-   },
-   "voisins": {
-    "N": 161,
-    "O": 202
-   },
-   "contenu": "SABLES MOUVANTS"
-  },
-  {
-   "id": 33,
-   "hub": 295,
-   "pages": [
-    295
-   ],
-   "titre": "La Riviere Croupie",
-   "x": 1,
-   "y": 3,
-   "sorties": {
-    "S": 94,
-    "E": 183
-   },
-   "voisins": {
-    "S": 94,
-    "E": 183
-   },
-   "contenu": "berge de la riviere Croupie"
-  },
-  {
-   "id": 20,
-   "hub": 183,
-   "pages": [
-    183
-   ],
-   "titre": "Sommet de la falaise",
-   "x": 2,
-   "y": 3,
-   "sorties": {
-    "N": 30,
-    "S": 66,
-    "E": 321,
-    "O": 295
-   },
-   "voisins": {
-    "N": null,
-    "S": 179,
-    "E": null,
-    "O": 295
-   },
-   "contenu": "lisiere du Marais / riviere"
-  },
-  {
-   "id": 35,
-   "hub": 45,
-   "pages": [
-    138,
-    45,
-    101
-   ],
-   "titre": "Le pont sur la riviere Croupie",
-   "x": 3,
-   "y": 3,
-   "sorties": {
-    "N": 331,
-    "S": 303
-   },
-   "voisins": {
-    "N": 202,
-    "S": 319
-   },
-   "contenu": "vieux pont"
-  },
-  {
-   "id": 14,
-   "hub": 304,
-   "pages": [
-    304,
-    149,
-    217
-   ],
-   "titre": "Le Perroquet / Maitresse des Oiseaux",
-   "x": 0,
-   "y": 4,
-   "sorties": {},
-   "voisins": {},
-   "contenu": "PERROQUET, MAITRESSE DES OISEAUX (Plumes)"
-  },
-  {
-   "id": null,
-   "hub": 94,
-   "pages": [
-    94
-   ],
-   "titre": "La brume fetide",
-   "x": 1,
-   "y": 4,
-   "sorties": {
-    "N": 295,
-    "S": 320
-   },
-   "voisins": {
-    "N": 295,
-    "S": 348
-   },
-   "contenu": "brume toxique (-2 ENDURANCE)"
-  },
-  {
-   "id": 9,
-   "hub": 179,
-   "pages": [
-    66,
-    192,
-    179
-   ],
-   "titre": "Le pique-nique suspect",
-   "x": 2,
-   "y": 4,
-   "sorties": {
-    "N": 183,
-    "S": 10,
-    "E": 118
-   },
-   "voisins": {
-    "N": 183,
-    "S": 227,
-    "E": 319
-   },
-   "contenu": "VOLEUR"
-  },
-  {
-   "id": 13,
-   "hub": 319,
-   "pages": [
-    118,
-    303,
-    319
-   ],
-   "titre": "La clairiere des scorpions",
-   "x": 3,
-   "y": 4,
-   "sorties": {
-    "N": 138,
-    "E": 47,
-    "O": 66
-   },
-   "voisins": {
-    "N": 45,
-    "E": 47,
-    "O": 179
-   },
-   "contenu": "nuee de SCORPIONS"
-  },
-  {
-   "id": 3,
-   "hub": 47,
-   "pages": [
-    47
-   ],
-   "titre": "Trois chemins herbeux",
-   "x": 4,
-   "y": 4,
-   "sorties": {
-    "S": 290,
-    "E": 31,
-    "O": 118
-   },
-   "voisins": {
-    "S": 309,
-    "E": 31,
-    "O": 319
-   },
-   "contenu": "rien"
-  },
-  {
-   "id": 21,
-   "hub": 31,
-   "pages": [
-    31,
-    77,
-    394
-   ],
-   "titre": "Bassin de cristal",
-   "x": 5,
-   "y": 4,
-   "sorties": {
-    "O": 47
-   },
-   "voisins": {
-    "O": 47
-   },
-   "contenu": "bassin bienfaisant (+ENDURANCE)"
-  },
-  {
-   "id": 23,
-   "hub": 367,
-   "pages": [
-    204,
-    250,
-    367
-   ],
-   "titre": "Les Fleurs d'Angoisse",
-   "x": 0,
-   "y": 5,
-   "sorties": {
-    "N": 304,
-    "E": 265
-   },
-   "voisins": {
-    "N": 304,
-    "E": 348
-   },
-   "contenu": "FLEURS D'ANGOISSE (-1 HABILETE)"
-  },
-  {
-   "id": 29,
-   "hub": 348,
-   "pages": [
-    320,
-    265,
-    348
-   ],
-   "titre": "La Licorne",
-   "x": 1,
-   "y": 5,
-   "sorties": {
-    "N": 94,
-    "S": 157,
-    "E": 10,
-    "O": 204
-   },
-   "voisins": {
-    "N": 94,
-    "S": 22,
-    "E": 227,
-    "O": 367
-   },
-   "contenu": "LICORNE (Corne de Licorne)"
-  },
-  {
-   "id": 5,
-   "hub": 227,
-   "pages": [
-    10,
-    142,
-    227
-   ],
-   "titre": "La clairiere des combats",
-   "x": 2,
-   "y": 5,
-   "sorties": {
-    "N": 66,
-    "E": 388,
-    "O": 320
-   },
-   "voisins": {
-    "N": 179,
-    "E": 187,
-    "O": 348
-   },
-   "contenu": "traces de bataille, butin, pendentif"
-  },
-  {
-   "id": 24,
-   "hub": 187,
-   "pages": [
-    388,
-    263,
-    33,
-    187
-   ],
-   "titre": "Herbe a Pinces",
-   "x": 3,
-   "y": 5,
-   "sorties": {
-    "S": 144,
-    "E": 290,
-    "O": 10
-   },
-   "voisins": {
-    "S": 165,
-    "E": 309,
-    "O": 227
-   },
-   "contenu": "HERBE A PINCES"
-  },
-  {
-   "id": 26,
-   "hub": 309,
-   "pages": [
-    290,
-    323,
-    352,
-    309
-   ],
-   "titre": "Orques des Marais",
-   "x": 4,
-   "y": 5,
-   "sorties": {
-    "N": 47,
-    "S": 53,
-    "O": 388
-   },
-   "voisins": {
-    "N": 47,
-    "S": 230,
-    "O": 187
-   },
-   "contenu": "3 ORQUES DES MARAIS"
-  },
-  {
-   "id": null,
-   "hub": 125,
-   "pages": [
-    11,
-    210,
-    299,
-    125,
-    228,
-    243
-   ],
-   "titre": "Cul-de-sac de la Bete",
-   "x": 0,
-   "y": 6,
-   "sorties": {
-    "E": 279
-   },
-   "voisins": {
-    "E": 22
-   },
-   "contenu": "BETE IMMONDE ; graines-armes"
-  },
-  {
-   "id": 18,
-   "hub": 22,
-   "pages": [
-    157,
-    279,
-    22
-   ],
-   "titre": "La clairiere des Arbres-Epees",
-   "x": 1,
-   "y": 6,
-   "sorties": {
-    "N": 320,
-    "S": 90,
-    "O": 11
-   },
-   "voisins": {
-    "N": 348,
-    "S": 44,
-    "O": 125
-   },
-   "contenu": "ARBRES-EPEES"
-  },
-  {
-   "id": 17,
-   "hub": 165,
-   "pages": [
-    144,
-    345,
-    354,
-    165
-   ],
-   "titre": "Tente aux araignees",
-   "x": 3,
-   "y": 6,
-   "sorties": {
-    "N": 388,
-    "S": 105
-   },
-   "voisins": {
-    "N": 187,
-    "S": 390
-   },
-   "contenu": "MAITRE DES ARAIGNEES (Amulette d'Argent)"
-  },
-  {
-   "id": 8,
-   "hub": 230,
-   "pages": [
-    53,
-    329,
-    230
-   ],
-   "titre": "Clairiere des grenouilles",
-   "x": 4,
-   "y": 6,
-   "sorties": {
-    "E": 352
-   },
-   "voisins": {
-    "E": 309
-   },
-   "contenu": "MAITRE DES GRENOUILLES, champignon"
-  },
-  {
-   "id": 34,
-   "hub": 44,
-   "pages": [
-    90,
-    44,
-    254,
-    370
-   ],
-   "titre": "La riviere profonde",
-   "x": 1,
-   "y": 7,
-   "sorties": {
-    "N": 157,
-    "S": 398
-   },
-   "voisins": {
-    "N": 22,
-    "S": 314
-   },
-   "contenu": "SANGSUES / pont d'arbre"
-  },
-  {
-   "id": 4,
-   "hub": 314,
-   "pages": [
-    398,
-    239,
-    314
-   ],
-   "titre": "Clairiere du Maitre des Loups",
-   "x": 1,
-   "y": 8,
-   "sorties": {
-    "N": 90,
-    "E": 195
-   },
-   "voisins": {
-    "N": 44,
-    "E": 58
-   },
-   "contenu": "MAITRE DES LOUPS (Amulette de Loup)"
-  },
-  {
-   "id": 1,
-   "hub": 58,
-   "pages": [
-    195,
-    24,
-    58,
-    404,
-    405
-   ],
-   "titre": "Clairiere n 1 (rond-point)",
-   "x": 2,
-   "y": 8,
-   "sorties": {
-    "S": 208,
-    "E": 105,
-    "O": 398
-   },
-   "voisins": {
-    "S": null,
-    "E": 390,
-    "O": 314
-   },
-   "contenu": "carrefour, sol instable"
-  },
-  {
-   "id": 12,
-   "hub": 390,
-   "pages": [
-    105,
-    330,
-    390
-   ],
-   "titre": "Pierres et tronc",
-   "x": 3,
-   "y": 8,
-   "sorties": {
-    "N": 144,
-    "E": 209,
-    "O": 195
-   },
-   "voisins": {
-    "N": 165,
-    "E": 82,
-    "O": 58
-   },
-   "contenu": "tronc creux, pierres plates"
-  },
-  {
-   "id": 25,
-   "hub": 82,
-   "pages": [
-    209,
-    82,
-    308,
-    397
-   ],
-   "titre": "Bete du bassin",
-   "x": 4,
-   "y": 8,
-   "sorties": {
-    "O": 330
-   },
-   "voisins": {
-    "O": 390
-   },
-   "contenu": "BETE DU BASSIN, Bijou Violet"
-  }
- ],
- "depart": 195,
- "depart_prologue": 9,
- "sortie_sud": 208,
- "sortie_nord": 280,
- "grille": {
-  "largeur": 6,
-  "hauteur": 9
- },
- "notes": [
-  "La grille suit la convention ecran : x croit vers l'EST, y croit vers le SUD. Le nord est en haut.",
-  "35 clairieres canoniques, 68 sentiers orientes (34 paires N/S ou E/O reciproques), plus deux liens a sens unique.",
-  "Un hub = la page qui offre les directions. Une clairiere peut avoir plusieurs pages-hub equivalentes (variantes de recit) : elles sont listees dans `pages`.",
-  "`sorties` donne la PAGE cible du choix directionnel ; `voisins` donne le hub de la clairiere atteinte.",
-  "Depart : page 009 (lisiere sud) -> page 195 = Clairiere n 1, hub 58, case (2,8).",
-  "Sortie sud du Marais : page 208, depuis la Clairiere n 1 vers le sud. Sortie nord : page 280 (Route de Courbensaule), depuis la Clairiere n 9 (brigands) vers le nord.",
-  "La riviere Croupie court d'est en ouest sur la ligne y=3 ; le PONT (Clairiere n 35, page 138) est le SEUL passage entre la moitie nord (12 clairieres) et la moitie sud (23 clairieres).",
-  "Incoherence 1 : page 230 (sortie de la Clairiere n 8) annonce 'vers l'est' alors que la page 352 qui la suit dit 'en direction du nord'. Le nord a ete retenu ; le sentier 26<->8 est un axe N/S.",
-  "Incoherence 2 : la Clairiere n 15 (Feu follet, page 218) offre un choix 'ouest' qui, via les pages 72 et 24, depose le joueur dans la Clairiere n 1 a l'autre bout du Marais. Ce n'est pas un sentier : c'est le piege du Feu Follet, un lien a sens unique.",
-  "Incoherence 3 : la Clairiere n 14 (Perroquet / Maitresse des Oiseaux, page 304) est un cul-de-sac au nord de la Clairiere n 23 ; le retour (pages 217 puis 250) ne porte aucune direction, il est donc a sens unique dans le graphe des directions.",
-  "Incoherence 4 : le numero 9 est porte par DEUX clairieres distinctes, la Clairiere aux brigands (page 65, hub 19) et le pique-nique du Voleur (page 66, hub 179). Numerotation du livre non respectee par l'adaptation.",
-  "Incoherence 5 : deux cycles de sentiers ont une longueur IMPAIRE (121-E->7-S->30-O->16-O->32-N->121, et le grand cycle 5-24-26-3-13-9-5 par le sud). Sur une grille carree tout cycle est de longueur paire : trois sentiers ont donc du etre allonges a deux cases. Le livre l'autorise : « un sentier peut suivre un trace sinueux mais sa direction generale restera toujours la meme ».",
-  "Sentiers allonges (2 cases) : 9<->Courbensaule (N/S), croisement<->Clairiere n 7 (E/O), Clairiere n 17<->Clairiere n 12 (N/S).",
-  "Coquilles de numerotation reperees dans la prose : page 33 ecrit « Clairiere n 388 » (lire 24), page 42 « Clairiere n 042 » (lire 32), page 25 « Clairiere n 025 » (lire 16), page 388 « Clairiere n 0 24 » (lire 24).",
-  "Les numeros de clairiere du livre effectivement donnes en clair : 1, 3, 4, 5, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35 -- 30 valeurs pour 35 clairieres (4 restent anonymes, et le 9 est double).",
-  "Les numeros 2, 6, 10, 22, 31 et au-dela de 35 n'apparaissent nulle part : l'adaptation ne couvre pas tout le Marais du livre.",
-  "Arbitrages appliques : 363 -> clairiere 19, 394 -> 21, 330 -> 12 (CARTOGRAPHIE.md § 6).",
-  "Page 208 (sortie du Marais vers le village) retiree de la clairiere de depart : c'est la route, pas la clairiere ; sa musique est celle du village."
- ]
+  "notes": [
+    "La grille suit la convention ecran : x croit vers l'EST, y croit vers le SUD. Le nord est en haut.",
+    "35 clairieres canoniques, 68 sentiers orientes (34 paires N/S ou E/O reciproques), plus deux liens a sens unique.",
+    "Un hub = la page qui offre les directions. Une clairiere peut avoir plusieurs pages-hub equivalentes (variantes de recit) : elles sont listees dans `pages`.",
+    "`sorties` donne la PAGE cible du choix directionnel ; `voisins` donne le hub de la clairiere atteinte.",
+    "Depart : page 009 (lisiere sud) -> page 195 = Clairiere n 1, hub 58, case (2,8).",
+    "Sortie sud du Marais : page 208, depuis la Clairiere n 1 vers le sud. Sortie nord : page 280 (Route de Courbensaule), depuis la Clairiere n 9 (brigands) vers le nord.",
+    "La riviere Croupie court d'est en ouest sur la ligne y=3 ; le PONT (Clairiere n 35, page 138) est le SEUL passage entre la moitie nord (12 clairieres) et la moitie sud (23 clairieres).",
+    "Incoherence 1 : page 230 (sortie de la Clairiere n 8) annonce 'vers l'est' alors que la page 352 qui la suit dit 'en direction du nord'. Le nord a ete retenu ; le sentier 26<->8 est un axe N/S.",
+    "Incoherence 2 : la Clairiere n 15 (Feu follet, page 218) offre un choix 'ouest' qui, via les pages 72 et 24, depose le joueur dans la Clairiere n 1 a l'autre bout du Marais. Ce n'est pas un sentier : c'est le piege du Feu Follet, un lien a sens unique.",
+    "Incoherence 3 : la Clairiere n 14 (Perroquet / Maitresse des Oiseaux, page 304) est un cul-de-sac au nord de la Clairiere n 23 ; le retour (pages 217 puis 250) ne porte aucune direction, il est donc a sens unique dans le graphe des directions.",
+    "Incoherence 4 : le numero 9 est porte par DEUX clairieres distinctes, la Clairiere aux brigands (page 65, hub 19) et le pique-nique du Voleur (page 66, hub 179). Numerotation du livre non respectee par l'adaptation.",
+    "Incoherence 5 : deux cycles de sentiers ont une longueur IMPAIRE (121-E->7-S->30-O->16-O->32-N->121, et le grand cycle 5-24-26-3-13-9-5 par le sud). Sur une grille carree tout cycle est de longueur paire : trois sentiers ont donc du etre allonges a deux cases. Le livre l'autorise : « un sentier peut suivre un trace sinueux mais sa direction generale restera toujours la meme ».",
+    "Sentiers allonges (2 cases) : 9<->Courbensaule (N/S), croisement<->Clairiere n 7 (E/O), Clairiere n 17<->Clairiere n 12 (N/S).",
+    "Coquilles de numerotation reperees dans la prose : page 33 ecrit « Clairiere n 388 » (lire 24), page 42 « Clairiere n 042 » (lire 32), page 25 « Clairiere n 025 » (lire 16), page 388 « Clairiere n 0 24 » (lire 24).",
+    "Les numeros de clairiere du livre effectivement donnes en clair : 1, 3, 4, 5, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35 -- 30 valeurs pour 35 clairieres (4 restent anonymes, et le 9 est double).",
+    "Les numeros 2, 6, 10, 22, 31 et au-dela de 35 n'apparaissent nulle part : l'adaptation ne couvre pas tout le Marais du livre.",
+    "Arbitrages appliques : 363 -> clairiere 19, 394 -> 21, 330 -> 12 (CARTOGRAPHIE.md § 6).",
+    "Page 208 (sortie du Marais vers le village) retiree de la clairiere de depart : c'est la route, pas la clairiere ; sa musique est celle du village."
+  ]
 }

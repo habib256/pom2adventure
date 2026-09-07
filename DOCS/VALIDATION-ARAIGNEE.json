@@ -1,0 +1,20 @@
+{
+  "scenario": "araignee_malediction",
+  "assertions": 15,
+  "failures": [],
+  "process_exit_code": 0,
+  "command": "python3 -u SCOSWAMP.MORE/TOOLS/playtest.py --only araignee_malediction --port 6526",
+  "headless": true,
+  "mockingboard_slot": 2,
+  "current_artifact_sha256": {
+    "SCOSWAMP/SCOSWAMP.BIN": "7261fd99db845a8492fa7db29408b770d58a2479013aa6f345a73685a0b94eba",
+    "SCOSWAMP/TEXTFR/N050/N074.TXT": "2d36c622573622c1e4b360d2524d5bc3a52f33c07d429c0de1dd19c3059a247e",
+    "SCOSWAMP/TEXTFR/N250/N261.TXT": "a9bc1a6e385a373a06b648a69a6aa6fcafdcddd9ed081c146de405b73c772221",
+    "SCOSWAMP/TEXTFR/N350/N354.TXT": "0b80fe42c11aa6f4c3e72f157dfdb65df74a7067665cbdb2c62a1c8ec4207b3b",
+    "SCOSWAMP/TEXTEN/N050/N074.TXT": "ab1160d8b3fd6e5d85307e87786d5ea3c0d30fa198f8980f70b4219f45bbee6c",
+    "SCOSWAMP/TEXTEN/N250/N261.TXT": "499a165e4a7d230dec72d69582988d1a5e4708d98ddf9f9c78fe5e85eff6eb68",
+    "SCOSWAMP/TEXTEN/N350/N354.TXT": "54e956c3e0364cbb2f809ced7a2203ef1925505232a709c00a355fbef58ca821"
+  },
+  "initial_test_failure": "Test expected MORT; actual death screen says Votre ENDURANCE est tombee a zero. Assertion corrected, final rerun passed.",
+  "scope": "Prepared state at page 074, keyboard choices, save/load before curse and after victory, backpack, forbidden flee key, fatal curse before combat. No full natural route."
+}

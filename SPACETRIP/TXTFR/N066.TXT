@@ -1,0 +1,17 @@
+T 066 La reserve, et ce qui bouge dessous
+
+   Des caisses, des filtres a air, un bac de vieux cables. Et, sous une bache
+argentee, une petite chose qui respire.
+
+   Elle sort la tete. Un metre de haut, grise, le ventre rond, des yeux
+enormes et tristes. Elle leve un index tres long dont le bout s'allume comme
+une veilleuse, et le pointe vers le plafond.
+
+   "Maison", dit-elle.
+
+   Puis elle montre l'anneau lumineux de votre Holophone, puis son propre
+index, et refait le geste. Elle veut telephoner. Il lui manque du courant.
+
+GU PILE 068 Glisser la pile d'Holophone dans son bricolage
+CN PILE 067 Ecarter les mains : vous n'avez pas de pile
+C 062 Ressortir dans le couloir blanc

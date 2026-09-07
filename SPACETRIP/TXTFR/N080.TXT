@@ -1,0 +1,21 @@
+T 080 Les Envahisseurs Pixels
+V 081
+
+   La route de la Decharge Orbitale traverse un champ de debris ou vivent
+les Envahisseurs Pixels : de petites choses carrees et vertes, qui volent
+en rangs serres et n'ont jamais appris qu'une seule manoeuvre.
+
+   Ils descendent d'un cran, glissent tous ensemble vers un bord, et quand
+le rang touche ce bord, ils descendent encore d'un cran et repartent DANS
+L'AUTRE SENS. Toujours. Depuis toujours. Ils n'ont pas d'autre idee.
+
+   Devant vous, le rang vient de toucher le bord GAUCHE de la verriere. Il
+descend d'un cran. Il va repartir.
+
+   Une seconde pour choisir votre esquive. L'Holophone filme. Bien sur que
+l'Holophone filme.
+
+C 081 Piquer a gauche
+C 088 Piquer a droite
+C 088 Tenir droit et accelerer
+C 003 Faire demi-tour

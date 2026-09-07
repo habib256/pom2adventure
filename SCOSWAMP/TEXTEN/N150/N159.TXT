@@ -6,6 +6,6 @@ T 159 Return to the Master
 failure.
 
 MU VILLAGE.MB
-C 006 If you serve Gayolard
-C 226 If you are in Stratagus's service
-C 056 If you chose Pompatarte
+CI .G 006 If you serve Gayolard
+CI .S 226 If you are in Stratagus's service
+CI .P 056 If you chose Pompatarte

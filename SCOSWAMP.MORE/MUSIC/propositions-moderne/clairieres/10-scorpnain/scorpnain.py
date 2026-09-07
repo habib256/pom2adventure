@@ -30,7 +30,7 @@ La phrygien, 184 a la noire — le tempo le plus vif des douze, celui de la lutt
 28 mesures a 4/4, 36,5 s. Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 scorpnain.py && python3 ../../../midi_to_mb.py scorpnain.mid \\
-        SCORPNAIN.MB.BIN --bpm 184 --max 2304 --wav SCORPNAIN.wav
+        DWARFSCORP.MB.BIN --bpm 184 --max 2304 --wav SCORPNAIN.wav
 """
 import sys
 from pathlib import Path

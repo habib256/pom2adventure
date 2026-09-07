@@ -7,7 +7,7 @@ east plunges deeper into the Swamp.
    Which path do you choose? Weigh quickly: each direction will lead you to
 different trials and diverse encounters.
 
-MU PIQUENIQUE.MB
+MU PICNIC.MB
 C 183 Take the path descending northward
 C 010 Return to the clearing southward
 C 118 Take the path plunging eastward

@@ -1,12 +1,11 @@
 T 180 L'honneur du brigand
 
-   L'Anneau de Cuivre est votre seul bien precieux, mais votre parole vous
-oblige. Vous l'otez a regret et le tendez au Chef des Brigands. Il voit votre
-tristesse et fronce les sourcils.
+   Vous montrez votre sac vide au Chef des Brigands. Vous n'avez aucun bien
+que vous puissiez lui remettre. Si vous portez encore l'Anneau de Cuivre, vous
+le lui proposez a regret, mais il refuse de vous en priver.
 
-   "Gardez-le", dit-il d'une voix sincere. "Vous avez fait preuve d'honnetete
-et de courage. Je serais un vaurien si je prenais l'unique chose qu'il vous
-reste."
+   "Gardez ce qui vous reste", dit-il. "Vous avez fait preuve d'honnetete et
+de courage. Je vous dispense de payer."
 
    Il vous donne une tape amicale sur l'epaule, et vous sentez naitre un
 respect mutuel.

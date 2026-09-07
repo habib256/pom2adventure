@@ -175,6 +175,14 @@ static void test_assaut(void)
     c.weapon_bonus=1;
     dice_seed(77); combat_round(&c, &m, &r);
     CHECK(i == r.hero_force + 1, "epee prise +2 contre epee offerte +1");
+    c.objects |= (1u << OBJ_POTION_NAINE);
+    dice_seed(77); combat_round(&c, &m, &r);
+    CHECK(i == r.hero_force + 2, "potion naine : -1 cumule avec l'epee +1");
+    CHECK(c.hab == 10 && c.hab0 == 10, "le malus temporaire ne modifie pas le plafond");
+    c.hab = 0;
+    dice_seed(77); combat_round(&c, &m, &r);
+    CHECK(r.hero_force == r.hero_d1 + r.hero_d2 + c.weapon_bonus,
+          "la potion ne rend pas l'HABILETE negative");
 }
 
 static void test_blessures(void)
@@ -292,6 +300,14 @@ static void test_memoire_clairieres(void)
     monster_remember(200, 0, &m[0]);
     m[0].end = 12;
     CHECK(monster_enter(200, m, 1) == 1, "retour : le seuil est deja atteint");
+    monster_remember(200, 1, &m[0]); /* index avance par le moteur au seuil */
+    m[0].end = 12;
+    CHECK(monster_enter(200, m, 1) == 1, "un meme seuil ne rejoue pas le combat");
+    m[0].stop_at = 0; m[0].end = 12;
+    CHECK(monster_enter(200, m, 1) == 0 && m[0].end == 6,
+          "reprendre jusqu'a la mort conserve les six END restants");
+    m[0].end = 0; monster_remember(200, 1, &m[0]); m[0].end = 12;
+    CHECK(monster_enter(200, m, 1) == 1, "le dernier adversaire mort ne ressuscite pas");
 
     /* Une file : "vous devrez les combattre tous deux a tour de role"
      * (paragraphe 224, les deux LOUPS). Fuir devant le second puis revenir
@@ -875,6 +891,33 @@ static void test_carte(void)
     scene_memory_reset();
 }
 
+static void test_recuperation(void)
+{
+    Monster m;
+    unsigned char snapshot[MONSTER_SLOTS * 4];
+    monster_memory_reset(); monster_init(&m); m.end = 8;
+    monster_recover(34, 1, 8);
+    CHECK(monster_enter(34, &m, 1) == 0 && m.end == 8, "MR inconnu : aucune nouvelle rencontre");
+    m.end = 3; monster_remember(34, 0, &m);
+    monster_recover(34, 1, 8);
+    monster_enter(34, &m, 1);
+    CHECK(m.end == 4, "MR ours : trois plus un");
+    monster_memory_export(snapshot); monster_memory_reset(); monster_memory_import(snapshot);
+    m.end = 8; monster_enter(34, &m, 1);
+    CHECK(m.end == 4, "MR persiste dans le format de sauvegarde existant");
+    monster_recover(34, 255, 8); monster_enter(34, &m, 1);
+    CHECK(m.end == 8, "MR gain 255 sans debordement et plafond huit");
+    monster_recover(34, 1, 8); monster_enter(34, &m, 1);
+    CHECK(m.end == 8, "MR ne depasse pas le maximum");
+    m.end = 2; monster_remember(2, 0, &m);
+    monster_recover(2, 255, 10); monster_enter(2, &m, 1);
+    CHECK(m.end == 10, "MR Patrouilleur : recuperation complete");
+    monster_enter(34, &m, 1); CHECK(m.end == 8, "MR isole les clairieres");
+    m.end = 0; monster_remember(34, 1, &m);
+    monster_recover(34, 255, 8); m.end = 8;
+    CHECK(monster_enter(34, &m, 1) == 1, "MR ne ressuscite pas un mort");
+}
+
 int main(void)
 {
     test_dice();
@@ -886,6 +929,7 @@ int main(void)
     test_blessures();
     test_fuite();
     test_memoire_clairieres();
+    test_recuperation();
     test_file_120();
     test_clairieres_vues();
     test_perte_definitive();

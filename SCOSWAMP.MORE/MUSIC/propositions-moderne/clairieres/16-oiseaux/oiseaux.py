@@ -42,7 +42,7 @@ tonique est le procede de la zone.
 28 mesures a 4/4, 40,0 s. Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 oiseaux.py && python3 ../../../midi_to_mb.py oiseaux.mid \\
-        OISEAUX.MB.BIN --bpm 168 --max 2304 --wav OISEAUX.wav
+        BIRDS.MB.BIN --bpm 168 --max 2304 --wav OISEAUX.wav
 """
 import sys
 from pathlib import Path

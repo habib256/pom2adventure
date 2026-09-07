@@ -1,8 +1,8 @@
 #!/bin/sh
 # Convertit les PNG de SCOSWAMP.MORE/GENERATED en flux DHGR RLE pour le disque.
 #
-#   N<id>.png -> SCOSWAMP/IMG/N<bucket>/N<id>.RLE.BIN   l'illustration de la clairiere
-#   B<id>.png -> SCOSWAMP/IMG/N<bucket>/B<id>.RLE.BIN   l'illustration de bataille
+#   N<id>.png -> SCOSWAMP/DHGR/N<bucket>/N<id>.RLE.BIN   l'illustration de la clairiere
+#   B<id>.png -> SCOSWAMP/DHGR/N<bucket>/B<id>.RLE.BIN   l'illustration de bataille
 #
 # Le bucket est celui du moteur : (id / 50) * 50. Un PNG plus recent que son
 # RLE est reconverti, les autres sont laisses tranquilles -- la conversion des
@@ -27,7 +27,17 @@ for png in "$ROOT"/SCOSWAMP.MORE/GENERATED/[NB][0-9][0-9][0-9].png; do
     # 10#$id force la base 10 : sans lui "008" est lu comme de l'octal et
     # l'arithmetique du shell s'arrete sur "value too great for base".
     bucket=$(printf 'N%03d' $(( 10#$id / 50 * 50 )))
-    out="$ROOT/SCOSWAMP/IMG/$bucket/$name.RLE.BIN"
+    out="$ROOT/SCOSWAMP/DHGR/$bucket/$name.RLE.BIN"
+    recipe="$ROOT/SCOSWAMP.MORE/IMAGE-RECIPES/$name.json"
+    if [ -e "$recipe" ]; then
+        if [ ! -e "$out" ] || [ "$png" -nt "$out" ] || [ "$recipe" -nt "$out" ]; then
+            python3 "$ROOT/SCOSWAMP.MORE/TOOLS/interpreter/image_workshop.py" --replay SCOSWAMP "$name"
+            converted=$((converted + 1))
+        else
+            skipped=$((skipped + 1))
+        fi
+        continue
+    fi
     if [ -e "$out" ] && [ ! "$png" -nt "$out" ]; then
         skipped=$((skipped + 1))
         continue

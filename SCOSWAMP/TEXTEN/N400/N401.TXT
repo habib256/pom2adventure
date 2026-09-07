@@ -7,4 +7,4 @@ consciousness, you find yourself chained to a wall by heavy chains.
 warm, and at the sight of what he holds in his hands, you begin to tremble in
 all your limbs. Needless to say, your adventure is over.
 
-MU +MORT.MB
+MU +DEATH.MB

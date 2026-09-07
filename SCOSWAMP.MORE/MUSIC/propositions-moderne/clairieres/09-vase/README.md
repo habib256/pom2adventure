@@ -1,6 +1,6 @@
 # Clairière 9 — Le bassin de Vase (`hub` 153, case 1,2)
 
-**`VASE.MB.BIN` — 1 594 octets, 45,2 s, boucle.**
+**`MUD.MB.BIN` — 1 594 octets, 45,2 s, boucle.**
 
 ## Les pages
 
@@ -89,6 +89,6 @@ déplacement. Tout le morceau tient sur ce demi-ton, y compris le sol.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/09-vase
 python3 vase.py
-python3 ../../../midi_to_mb.py vase.mid VASE.MB.BIN \
+python3 ../../../midi_to_mb.py vase.mid MUD.MB.BIN \
     --bpm 138 --max 2304 --wav VASE.wav
 ```

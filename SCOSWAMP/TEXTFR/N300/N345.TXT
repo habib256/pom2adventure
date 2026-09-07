@@ -8,6 +8,6 @@ intense.
 la qu'un immense brasier qui vous interdit le passage. La fumee qui se degage
 de l'incendie vous etouffe a moitie et vous perdez 1 point d'ENDURANCE.
 
-MU ARAIGNEES.MB
+MU SPIDERS.MB
 E ENDURANCE -1
 C 165 Continuer

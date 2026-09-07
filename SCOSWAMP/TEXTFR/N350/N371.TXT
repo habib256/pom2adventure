@@ -17,5 +17,8 @@ pourrez compter que sur votre epee et votre intelligence.
    Vous rangez les Pierres dans votre bourse et prenez conge. Votre mission :
 trouver une baie d'Antherique et la rapporter."
 
+GX .P
+GX .S
+G .G
 PC 6 NB
 C 009 Commencer votre aventure

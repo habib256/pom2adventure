@@ -6,6 +6,6 @@ la moindre inquietude.
 
    Quel sorcier choisissez-vous de servir?
 
-C 212 Gayolard
-C 287 Stratagus
-C 376 Pompatarte
+CI .G 212 Gayolard
+CI .S 287 Stratagus
+CI .P 376 Pompatarte

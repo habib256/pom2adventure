@@ -1,11 +1,12 @@
 T 363 Retour au Patrouilleur
+AC
 
    Vous retournez dans la clairiere ou vous avez fait la rencontre du
 Patrouilleur.
 
    Que s'est-il passe avec lui ?
 
-MU PATROUIL.MB
-C 133 L'avez-vous quitte en bons termes
-C 234 L'avez-vous tue
-C 306 Avez-vous pris la Fuite au cours d'un combat
+MU PATROLLER.MB
+CV !378,!219 133 L'avez-vous quitte en bons termes
+CV 219 234 L'avez-vous tue
+CV 378,!219 306 Avez-vous pris la Fuite au cours d'un combat

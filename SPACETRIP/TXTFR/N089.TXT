@@ -1,0 +1,14 @@
+T 089 Le bac est vide
+
+   Vous revenez sur vos pas et il n'y a plus rien a prendre.
+
+   Le placard chauffant du module est ouvert et vide. L'armure blanche
+n'est plus qu'un tas de plaques que vous avez vous-meme empilees. Trolley
+a deja tout trie, deux fois, par acquit de conscience.
+
+   Il vous fait un signe des jumelles. Dans une decharge, on ne trouve
+jamais deux fois la meme chose : c'est la seule regle du lieu, et c'est
+aussi la definition d'une decharge.
+
+C 081 Retourner dans les ordures
+C 003 Retour au Cabriolet

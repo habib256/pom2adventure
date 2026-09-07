@@ -7,5 +7,5 @@ drawing him a map to help him cross the Swamp. The tone is neutral, the truth
 partial - enough to get an answer without conflict. According to your previous
 journey, two directions offer themselves to you.
 
-C 166 I've already reached Courbensaule
-C 115 I haven't yet reached Courbensaule
+CV 280 166 I've already reached Courbensaule
+CX 280 115 I haven't yet reached Courbensaule

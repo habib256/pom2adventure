@@ -22,7 +22,7 @@ tient la dominante desormais, et rien ne se resout tant que le combat dure.
 de surcouche de 1 280 octets.
 
     python3 combat.py && python3 ../../midi_to_mb.py combat.mid \\
-        COMBAT.MB.BIN --bpm 200 --max 1280 --wav COMBAT.wav
+        BATTLE.MB.BIN --bpm 200 --max 1280 --wav COMBAT.wav
 """
 import sys
 from pathlib import Path

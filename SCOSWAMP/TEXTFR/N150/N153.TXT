@@ -7,6 +7,6 @@ sentier.
    Deux directions s'offrent a vous: le nord ou l'ouest. Le sol y semble plus
 sec, mais le danger demeure.
 
-MU VASE.MB
+MU MUD.MB
 C 218 Aller vers le nord
 C 065 Prendre le chemin de l'ouest

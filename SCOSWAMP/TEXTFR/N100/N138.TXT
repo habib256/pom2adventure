@@ -5,6 +5,6 @@ Croupie la traverse d'est en ouest.
 
    Un pont l'enjambe, apparemment desert.
 
-MU PONT.MB
+MU BRIDGE.MB
 C 101 Franchir le pont
 C 045 Contourner la riviere

@@ -12,6 +12,6 @@ d'attirer l'attention d'ennemis caches.
 
    Que faites-vous ?
 
-MU ARENE.MB
+MU ARENA.MB
 C 059 Examiner la clairiere et chercher des indices
 C 227 Quitter la clairiere au plus vite et partir

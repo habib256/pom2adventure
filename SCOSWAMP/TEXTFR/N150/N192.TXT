@@ -3,6 +3,6 @@ T 192 Retour chez le Voleur
    Vous reconnaissez la clairiere ou vous aviez croise le Voleur. Le silence y
 regne, lourd de souvenirs recents.
 
-MU PIQUENIQUE.MB
+MU PICNIC.MB
 C 267 S'il est encore en vie
 C 179 S'il est mort et gisant sur le sol

@@ -1,0 +1,12 @@
+T 076 Barbastella soupire
+
+   "Non", dit-elle. "Il y a douze gardes la-bas, et deux betes, et un gong."
+
+   Elle remet une meche en place avec une patience terrifiante. Elle ne se
+moque meme pas de vous : c'est encore plus vexant.
+
+   "Reflechissez. Vous etes passe devant tout a l'heure. Vous l'avez meme
+regardee bouger. Un palais qui a un courant d'air a un trou quelque part."
+
+C 077 Rouvrir la bouche et proposer autre chose
+C 003 Renoncer et regagner le Cabriolet

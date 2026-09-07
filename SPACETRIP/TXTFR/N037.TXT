@@ -1,0 +1,19 @@
+T 037 Selfie avec la Bete du Cargo
+V 038
+
+   Vous poussez l'anneau lumineux au maximum. La coursive devient blanche.
+
+   La creature se fige, puis recule d'un pas, la tete detournee, une longue
+main a six doigts levee devant sa face -- exactement comme n'importe qui a
+la sortie d'une boite de nuit a sept heures du matin.
+
+   C'est votre seconde. Vous vous glissez sous son bras, vous cadrez, vous
+souriez. Elle, non. Elle n'a pas de quoi.
+
+   Le cliche est magnifique : la double machoire ouverte, la bave qui prend
+la lumiere, et vous, devant, avec la tete de quelqu'un qui va tres mal.
+
+   -- MAINTENANT ! hurle Ripleigh.
+
+G S6
+C 039 Plonger dans la navette

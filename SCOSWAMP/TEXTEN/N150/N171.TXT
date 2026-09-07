@@ -6,7 +6,7 @@ without intelligence but of terrible strength.
    You can choose to flee at any time, but you will have to retrace your
 steps.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 5 17 SLIME
 CF 153 Flee
 MV 038

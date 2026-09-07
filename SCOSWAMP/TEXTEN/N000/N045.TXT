@@ -6,6 +6,6 @@ conceal some trap. So you retrace your steps in the direction you came from.
    The route depends on your origin: return north if you came from the north,
 or south if you came from the south.
 
-MU PONT.MB
+MU BRIDGE.MB
 C 331 Return to the north
 C 303 Return to the south

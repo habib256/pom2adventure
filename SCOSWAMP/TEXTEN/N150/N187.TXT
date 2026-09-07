@@ -8,7 +8,7 @@ runs through dense, dark woods.
 
    Which direction do you choose?
 
-MU PINCES.MB
+MU PINCERS.MB
 C 144 Go south
 C 290 Take the eastern road along the river
 C 010 Head west through the woods

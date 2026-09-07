@@ -7,10 +7,10 @@ preparee pour des nains.
    Son effet sur vous est insolite : pendant une heure vous etes plus petit et
 plus trapu que d'habitude, et votre nez devient sensiblement plus gros.
 
-   Au bout d'une heure vous retrouverez votre apparence normale, mais vous
-devrez reduire de 1 point votre total d'HABILETE lors du prochain combat que
-vous aurez a livrer. Des la fin de ce combat, vos points d'HABILETE reviennent
-a leur niveau initial.
+   Au bout d'une heure vous retrouverez votre apparence normale. Lors du
+prochain combat, votre HABILETE comptera pour 1 point de moins dans vos
+Assauts. Cet effet temporaire cessera a la fin du combat.
 
+G .D
 GX FI
 C 088 Reprendre la route et poursuivre

@@ -42,7 +42,7 @@ tonique est le procede de la zone.
 A'(6) la brume se referme.
 
     python3 brume.py && python3 ../../../midi_to_mb.py brume.mid \\
-        BRUME.MB.BIN --bpm 128 --max 2304 --wav BRUME.wav
+        MIST.MB.BIN --bpm 128 --max 2304 --wav BRUME.wav
 """
 import sys
 from pathlib import Path

@@ -1,5 +1,6 @@
 T 031 Crystal Pool
-V 364 077 394
+VR 364 077 364
+VR 394 394
 
    You advance eastward and feel you've gone too far into the swamp.
 
@@ -10,7 +11,7 @@ connects you to the outside world.
 
    What do you do?
 
-MU CRISTAL.MB
+MU CRYSTAL.MB
 C 047 Leave the place by returning west
 C 394 Wait a few minutes to observe
 C 077 Drink the water from the pool

@@ -1,6 +1,6 @@
 # Clairière 28 — La clairière des Arbres-Épées (`hub` 022)
 
-**`ARBRESEPEES.MB.BIN` — 2 198 octets, 40,4 s, boucle, avec batterie.**
+**`SWORDTREES.MB.BIN` — 2 198 octets, 40,4 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
@@ -74,6 +74,6 @@ stéréo 60/40.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/28-arbresepees
 python3 arbresepees.py
-python3 ../../../midi_to_mb.py arbresepees.mid ARBRESEPEES.MB.BIN \
+python3 ../../../midi_to_mb.py arbresepees.mid SWORDTREES.MB.BIN \
     --bpm 166 --max 2304 --wav ARBRESEPEES.wav
 ```

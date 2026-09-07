@@ -1,0 +1,19 @@
+T 018 Un sac de croquettes
+V 019
+
+   "Ca ? Ca n'est pas a moi." Han Seul pousse le sac du pied. "C'est le
+copilote. Il en achete a chaque escale. Il ne veut pas dire pourquoi. Je
+ne pose plus la question depuis la fois ou il a repondu."
+
+   Chewpaca detourne la tete avec la dignite d'un etre qui garde un secret
+enorme et parfaitement ridicule.
+
+   "Vingt credits et il est a toi. Trente si tu ne me filmes pas."
+
+   Vous payez vingt. Vous filmez quand meme. Le sac pese le poids d'un
+enfant et sent la sardine cosmique. Vous n'avez aucune idee de ce que vous
+allez en faire.
+
+G CROQ
+C 012 Revenir a la table
+C 010 Retourner dans la salle

@@ -13,7 +13,7 @@ defi.
 
    Qu'allez-vous faire ?
 
-MU LICORNE.MB
+MU UNICORN.MB
 C 368 Vous enfuir
 C 221 La combattre
 C 119 Recourir a la magie

@@ -1,0 +1,18 @@
+T 074 La loge d'honneur, et le rival
+
+   La loge sent le fruit confit. En dessous, l'arene tourne : betes a cornes,
+filets, gongs, sable ratisse entre chaque numero.
+
+   Deux places plus loin, en pleine lumiere, Bizz Annee-Lumiere fait son
+direct. Menton carre, combinaison de plastique moule, douze cameramen en
+demi-cercle. Son casque est si chrome qu'il s'en sert de miroir pour
+verifier sa raie.
+
+   "Et voici, mes quarante millions d'amis, la planete Mangeaux !"
+
+   A votre droite, une voisine de loge en combinaison de vinyle et bottes
+blanches n'a pas quitte la tenture pourpre des yeux une seule seconde.
+
+C 075 Braquer l'anneau lumineux de l'Holophone sur son casque
+C 073 Sauter dans l'arene pour lui voler le cadre
+C 077 Laisser Bizz au direct et parler a votre voisine de loge

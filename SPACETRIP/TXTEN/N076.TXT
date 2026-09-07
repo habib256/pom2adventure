@@ -1,0 +1,13 @@
+T 076 Barbastella sighs
+
+   "No," she says. "There are twelve guards down there, and two beasts, and
+a gong."
+
+   She puts a stray lock back in place with terrifying patience. She is not
+even mocking you, which is somehow worse.
+
+   "Think. You walked past it earlier. You even watched it move. A palace
+with a draught has a hole in it somewhere."
+
+C 077 Open your mouth again and offer something else
+C 003 Give up and go back to the Convertible

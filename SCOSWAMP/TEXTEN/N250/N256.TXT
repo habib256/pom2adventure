@@ -7,8 +7,8 @@ essence pulses at fingertips.
    It's time to choose the incantation that will decide the duel's outcome.
 Weigh the power, cost and risk; each spell has its consequences.
 
-C 274 Cast the Curse
-C 365 Pronounce Terror
-C 385 Ignite - Fire spell
-C 351 Create a deceptive Illusion
+CU MALEDICTION 274 Cast the Curse
+CU TERREUR 365 Pronounce Terror
+CU FEU 385 Ignite - Fire spell
+CU ILLUSION 351 Create a deceptive Illusion
 C 057 Cast no spell - seek another way

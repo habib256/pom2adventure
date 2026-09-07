@@ -1,5 +1,6 @@
 T 092 The Two Wolves
-V 108 232 247 389
+VR 108 020 232 389 108
+VR 247 247
 
    The path northward gradually rises. The ground becomes drier and the swamp
 vegetation gives way to a deep forest.
@@ -9,6 +10,6 @@ vegetation gives way to a deep forest.
    You listen, but nothing abnormal disturbs the silence. Then, suddenly, two
 enormous wolves appear and stare at you in the shadow.
 
-MU LOUPS.MB
+MU WOLVES.MB
 CI LOUP 344 If you possess the Wolf-shaped Amulet
 CN LOUP 068 Otherwise

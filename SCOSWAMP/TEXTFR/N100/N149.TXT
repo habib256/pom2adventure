@@ -8,5 +8,5 @@ s'absenter.
 trouvez, ce sont des plumes eparses, jonchant le sol. Un silence leger flotte,
 comme si les branches retenaient leur souffle.
 
-MU OISEAUX.MB
+MU BIRDS.MB
 C 217 Vous decidez de poursuivre votre route.

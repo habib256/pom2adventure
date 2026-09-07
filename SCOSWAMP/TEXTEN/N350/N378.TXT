@@ -5,7 +5,7 @@ sorcerer's account. He then jumps down from his rock and attacks you.
 
    You can, at any time, Flee.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 10 10 PATROLLER
 CF 234 Flee
 MV 219

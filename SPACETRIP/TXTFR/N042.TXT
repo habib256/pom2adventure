@@ -1,0 +1,16 @@
+T 042 Teleportation, a peu pres
+
+   Le monde se met a scintiller, un chuintement monte, et vous voila debout
+sur un disque lumineux, dans une salle blanche. Un officier tres calme vous
+observe. Oreilles pointues, sourcil leve d'un millimetre, l'air d'avoir deja
+tout calcule avant votre arrivee.
+
+   "Bienvenue a bord. Transfert reussi a quatre-vingt-douze pour cent."
+
+   Vous baissez les yeux. Votre botte gauche est restee sur la planete. Le
+pied, lui, est bien la. Le sourcil monte d'un second millimetre.
+
+   "Fascinant", dit-il.
+
+C 043 Le suivre en boitant avec dignite
+C 047 Reclamer d'abord votre botte au telepositeur

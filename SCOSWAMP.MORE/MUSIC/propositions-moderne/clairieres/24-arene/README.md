@@ -1,6 +1,6 @@
 # Clairière 24 — La clairière des combats
 
-**`ARENE.MB.BIN` — 2 128 octets, 41,3 s, boucle.**
+**`ARENA.MB.BIN` — 2 128 octets, 41,3 s, boucle.**
 
 ## La clairière
 
@@ -9,7 +9,7 @@
 | `hub` | **227** |
 | Pages | 010 (la clairière des combats), 142 (silence après la bataille), 227 (le choix des chemins) |
 | Case | (2,5) |
-| Zone de référence | `sud` (`MARAISUD.MB`) |
+| Zone de référence | `sud` (`SOUTHSWAMP.MB`) |
 | Sorties | N → 066 (pique-nique), E → 388, O → 320 (la Licorne) |
 | Contenu | traces d'un combat, cadavre → **Aimant d'Or** (`059 G AI`, maudit : `063 GX AI`) |
 
@@ -35,7 +35,7 @@ butin, mais rester risque d'attirer l'attention d'ennemis cachés. » Page 227 :
 | Notes | 437 de hauteur + **99 coups de batterie**, **0 abandonnée** |
 
 **Ce qu'elle garde de la zone `sud` :** le **bourdon de tonique immobile** et la
-marche i-VI-III-VII (Em-C-G-D), celle de `MARAISUD.MB`.
+marche i-VI-III-VII (Em-C-G-D), celle de `SOUTHSWAMP.MB`.
 
 **Ce qui lui appartient :** le **rythme pointé**. Le long-bref du premier temps
 revient à chaque mesure de A et de A', et c'est tout ce qui sépare cette pièce
@@ -102,6 +102,6 @@ tonique est le procédé de la zone `sud`.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/24-arene
 python3 arene.py
-python3 ../../../midi_to_mb.py arene.mid ARENE.MB.BIN \
+python3 ../../../midi_to_mb.py arene.mid ARENA.MB.BIN \
     --bpm 164 --max 2304 --wav ARENE.wav
 ```

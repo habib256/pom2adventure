@@ -1,0 +1,17 @@
+T 083 Le module de bien-etre
+V 089
+
+   Le module a du etre un spa orbital de grand luxe. Il est maintenant
+plat comme une crepe, avec une porte en losange et une musique d'ambiance
+qui joue encore pour personne.
+
+   A l'interieur, tout est casse : les jets, les bancs, la fontaine a
+concombre. Tout, sauf un placard chauffant qui a tenu, on ne sait pas
+comment, et qui contient une serviette de bain. Propre. Pliee. Tiede.
+
+   Vous la prenez. Sur le moment, ca vous parait ridicule.
+
+   Vous ne connaissez pas encore Chagrin.
+
+G SERV
+C 081 Ressortir du module

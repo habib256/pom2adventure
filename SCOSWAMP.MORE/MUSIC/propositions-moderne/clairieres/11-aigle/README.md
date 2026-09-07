@@ -1,6 +1,6 @@
 # Clairière 11 — Le nid de l'Aigle (`hub` 202, case 3,2)
 
-**`AIGLE.MB.BIN` — 1 682 octets, 43,1 s, boucle.**
+**`EAGLE.MB.BIN` — 1 682 octets, 43,1 s, boucle.**
 
 ## Les pages
 
@@ -86,6 +86,6 @@ compte.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/11-aigle
 python3 aigle.py
-python3 ../../../midi_to_mb.py aigle.mid AIGLE.MB.BIN \
+python3 ../../../midi_to_mb.py aigle.mid EAGLE.MB.BIN \
     --bpm 156 --max 2304 --wav AIGLE.wav
 ```

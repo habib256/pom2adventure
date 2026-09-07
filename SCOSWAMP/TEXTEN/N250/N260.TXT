@@ -10,4 +10,4 @@ Mistress reveals her regret. The birds move away; it's already too late: you
 sink. Your body yields; your strength abandons you; the adventure ends. END OF
 ADVENTURE.
 
-MU +MORT.MB
+MU +DEATH.MB

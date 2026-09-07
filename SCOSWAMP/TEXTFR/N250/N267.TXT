@@ -5,6 +5,6 @@ que d'un poignard, mais c'est un adversaire retors. Il vous est impossible de
 prendre la fuite; le combat est ineluctable. Si vous parvenez a le tuer,
 poursuivez l'aventure.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 10 9 VOLEUR
 MV 386

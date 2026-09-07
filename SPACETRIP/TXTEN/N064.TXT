@@ -1,0 +1,16 @@
+T 064 One, four, nine
+
+   "On a moon very far from here," the soft voice says, "they found a black
+slab. It is perfect. Its three sides are in the ratio one, four, nine.
+Exactly. Nobody has ever known why."
+
+   "I know why. And if you know too, then we have something in common, and I
+shall open this door."
+
+   The red eye tilts by a hair.
+
+   "One, four, nine. What is the next number?"
+
+C 069 Answer: twelve
+C 065 Answer: sixteen
+C 069 Answer: twenty-five

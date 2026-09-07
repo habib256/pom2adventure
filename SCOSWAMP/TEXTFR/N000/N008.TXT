@@ -9,6 +9,6 @@ garanti. Peser l'avantage: la potion soigne, les pierres servent a la magie.
 
    Que faites-vous?
 
-C 141 Echanger les Pierres restantes contre la Potion
-C 316 Dire que vous les avez toutes utilisees
+CT 1 15 141 Echanger les Pierres restantes contre la Potion
+CT 0 0 316 Dire que vous les avez toutes utilisees
 C 341 Attaquer Pompatarte

@@ -1,0 +1,16 @@
+T 028 He Recognises You And Sighs
+
+   The door opens onto the black sphere. The chair turns slowly, with all the
+weight of destiny behind it.
+
+   -- You again. Kuh-hooo.
+
+   Lord Vapour looks at your Holophone, then at you, then at the ceiling.
+
+   -- You already have the shot. It is online. My mother has seen it. High
+Command has seen it. People keep asking whether I am all right. Kuh-hooo.
+
+   He sits back down. The cape settles. Somewhere inside the helmet you hear,
+very distinctly, the sigh of a radiator giving up.
+
+C 003 Leave him to meditate and get back to the Convertible

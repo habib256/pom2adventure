@@ -9,7 +9,7 @@ est etroit et borde d'arbres serres.
 
    Que faites-vous?
 
-MU HERBEUX.MB
+MU GRASSLAND.MB
 C 290 Partir vers le sud
 C 031 Emprunter le chemin de l'est
 C 118 Prendre le sentier de l'ouest

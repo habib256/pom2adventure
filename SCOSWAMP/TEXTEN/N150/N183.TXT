@@ -10,7 +10,7 @@ trail runs along the bank; several paths offer themselves to you.
 
    What do you want to do?
 
-MU FALAISE.MB
+MU CLIFF.MB
 C 066 Enter the Swamp southward
 C 295 Follow the river westward
 C 030 Dive and swim northward

@@ -12,7 +12,7 @@ you realize very quickly you're dealing with a formidable adversary.
    He has his back to the door, and if you wish to Flee, you'll have to dive
 through the window.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 14 POMPATARTE
 MS 6
 MV 372

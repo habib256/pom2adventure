@@ -8,7 +8,7 @@ coated with a greenish substance.
 (3 instead of 2). The combat will be tough: measure your strength and
 endurance.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 6 SPIDER MASTER
 MD 3
 MV 354

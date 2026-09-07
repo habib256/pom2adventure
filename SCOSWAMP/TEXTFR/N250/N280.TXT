@@ -16,7 +16,8 @@ Courbensaule.
 
    Laquelle choisirez-vous ?
 
-MU COURBENS.MB
-C 395 L'Ours Noir
-C 078 La Lance Tordue
-C 289 Le Cheval Volant de Tancrede
+MU BENTBEAKS.MB
+CG 1 395 L'Ours Noir (1 Piece d'Or)
+CG 1 078 La Lance Tordue (1 Piece d'Or)
+CG 1 289 Le Cheval Volant de Tancrede (1 Piece d'Or)
+C 343 Repartir sans passer la nuit

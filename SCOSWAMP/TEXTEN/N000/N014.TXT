@@ -11,6 +11,6 @@ him. It seems unlikely that your Magic Stones will have any effect here.
 
    What do you do?
 
-MU SCORPNAIN.MB
+MU DWARFSCORP.MB
 C 088 Leave the clearing while the monster feeds
 C 312 Attack the Scorpion to fight it

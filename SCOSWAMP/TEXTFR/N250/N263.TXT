@@ -8,6 +8,6 @@ lianes mortelles se sont refermees.
 vous pouvez reprendre votre route sans risque. Sinon, la zone reste dangereuse
 et il vaudra mieux l'eviter ou courir pour la traverser sans tarder.
 
-MU PINCES.MB
+MU PINCERS.MB
 C 187 Je suis alle jusqu'au bout: les Herbes sont mortes, je passe
 C 033 Les Herbes sont encore vivantes, je change de route ou je fuis

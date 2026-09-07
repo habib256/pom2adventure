@@ -1,0 +1,15 @@
+{
+  "commentaire": [
+    "Les jeux que l'atelier connait. Un serveur HTTP ne liste pas un",
+    "repertoire : cette liste est la seule chose qui doive etre tenue a jour",
+    "quand un jeu s'ajoute -- tout le reste est dans son descripteur.",
+    "",
+    "SCOSWAMP et SPACETRIP sont deux DONNEES du meme atelier : l'un porte 420",
+    "pages, 33 directives, une carte et un volume ProDOS ; l'autre 14 pages et",
+    "une seule directive. Le code ne fait pas la difference."
+  ],
+  "jeux": [
+    { "descripteur": "project.scoswamp.json" },
+    { "descripteur": "project.spacetrip.json" }
+  ]
+}

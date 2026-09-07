@@ -3,6 +3,6 @@ T 314 Two Directions
    You have the choice between two directions. An enormous snail slowly passes
 before you.
 
-MU MAITRELOUPS.MB
+MU WOLFMASTER.MB
 C 090 Go north
 C 195 Go east

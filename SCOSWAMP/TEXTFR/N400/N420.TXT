@@ -1,0 +1,10 @@
+T 420 Reprendre le combat
+
+   Vous refusez d'ecouter le Geant et reprenez le combat. Il est deja blesse,
+mais il peut encore se defendre. Ses coups coutent 4 points d'ENDURANCE.
+
+MU +BATTLE.MB
+M 9 12 GEANT
+MD 4
+MI 012
+MV 366

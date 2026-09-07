@@ -11,7 +11,7 @@ la clairiere.
    Lorsque vous arrivez pres de lui, il fait un geste de la main pour vous
 jeter un sort et vous perdez 3 points d'HABILETE.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 10 MAITRE DES JARDINS
 CF 363 Prendre la Fuite
 E HABILETE -3

@@ -14,8 +14,8 @@ qui a **migré** de la voix 5 (droite) à la voix 2 (gauche). Le procédé de zo
 un bourdon dans toutes les onze — est donc intact partout.
 
 Tout tient dans le **tampon de zone : 2 304 octets**. La plus grosse est
-`GRENOUILLES.MB.BIN` (2 246 o, 58 octets de marge) ; la plus légère est
-`BETE.MB.BIN` (1 467 o).
+`FROGS.MB.BIN` (2 246 o, 58 octets de marge) ; la plus légère est
+`BEAST.MB.BIN` (1 467 o).
 
 **Aucune des onze n'abandonne une seule note à la réduction** (`0 abandonnées` à
 la conversion, polyphonie maximale = 5 exactement, plus la batterie).
@@ -24,17 +24,17 @@ la conversion, polyphonie maximale = 5 exactement, plus la batterie).
 
 | # | Clairière (`hub`) | Fichier disque | Pièce | Mode | bpm | Durée | Coups | Octets |
 | ---: | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| 25 | Herbe à Pinces (187) | `PINCES.MB` | **L'Herbe qui Serre** | mi phrygien | 176 | 43,9 s | 75 | 2 184 |
-| 26 | Orques des Marais (309) | `ORQUES.MB` | **Trois Arcs dans la Brume** | ré phrygien | **166** | 40,8 s | 105 | 1 918 |
-| 27 | Cul-de-sac de la Bête (125) | `BETE.MB` | **Le Rocher qui Respire** | sol phrygien | 143 | 45,6 s | 66 | 1 467 |
-| 28 | Arbres-Épées (022) | `ARBRESEPEES.MB` | **Les Bras qui Repoussent** | fa phrygien | 166 | 40,4 s | 98 | 2 198 |
-| 29 | Tente aux araignées (165) | `ARAIGNEES.MB` | **Le Fil d'Argent** | do♯ phrygien | 150 | 45,1 s | 113 | 1 900 |
-| 30 | Clairière des grenouilles (230) | `GRENOUILLES.MB` | **Le Bal des Mares** | sol éolien | **176** | 38,5 s | 115 | **2 246** |
-| 31 | La rivière profonde (044) | `PROFONDE.MB` | **L'Eau Noire** | sol dorien | 136 | 49,7 s | 14 | 1 894 |
-| 32 | Maître des Loups (314) | `MAITRELOUPS.MB` | **Le Cor du Maître** | mi éolien | **150** | 45,9 s | 119 | 2 182 |
-| **33** | **Le large rond-point, départ (058)** | `RONDPOINT.MB` | **Le Cœur du Marais** | ré éolien | 158 | 48,9 s | 101 | 2 219 |
-| 34 | Pierres et tronc creux (390) | `TRONC.MB` | **Pierres Plates** | do éolien | 150 | 45,1 s | 97 | 2 006 |
-| 35 | Bête du bassin (082) | `BASSIN.MB` | **Ce qui Monte du Bassin** | fa éolien | **150** | 45,1 s | 88 | 2 024 |
+| 25 | Herbe à Pinces (187) | `PINCERS.MB` | **L'Herbe qui Serre** | mi phrygien | 176 | 43,9 s | 75 | 2 184 |
+| 26 | Orques des Marais (309) | `ORCS.MB` | **Trois Arcs dans la Brume** | ré phrygien | **166** | 40,8 s | 105 | 1 918 |
+| 27 | Cul-de-sac de la Bête (125) | `BEAST.MB` | **Le Rocher qui Respire** | sol phrygien | 143 | 45,6 s | 66 | 1 467 |
+| 28 | Arbres-Épées (022) | `SWORDTREES.MB` | **Les Bras qui Repoussent** | fa phrygien | 166 | 40,4 s | 98 | 2 198 |
+| 29 | Tente aux araignées (165) | `SPIDERS.MB` | **Le Fil d'Argent** | do♯ phrygien | 150 | 45,1 s | 113 | 1 900 |
+| 30 | Clairière des grenouilles (230) | `FROGS.MB` | **Le Bal des Mares** | sol éolien | **176** | 38,5 s | 115 | **2 246** |
+| 31 | La rivière profonde (044) | `DEEPWATER.MB` | **L'Eau Noire** | sol dorien | 136 | 49,7 s | 14 | 1 894 |
+| 32 | Maître des Loups (314) | `WOLFMASTER.MB` | **Le Cor du Maître** | mi éolien | **150** | 45,9 s | 119 | 2 182 |
+| **33** | **Le large rond-point, départ (058)** | `ROUNDABOUT.MB` | **Le Cœur du Marais** | ré éolien | 158 | 48,9 s | 101 | 2 219 |
+| 34 | Pierres et tronc creux (390) | `LOG.MB` | **Pierres Plates** | do éolien | 150 | 45,1 s | 97 | 2 006 |
+| 35 | Bête du bassin (082) | `POOL.MB` | **Ce qui Monte du Bassin** | fa éolien | **150** | 45,1 s | 88 | 2 024 |
 
 **Total : 22 238 octets** pour les onze. Ce qui compte n'est pas la somme mais la
 plus grosse : 2 246 o < 2 304 o. Les tempos en gras ont été **accélérés** —
@@ -139,17 +139,17 @@ Les onze concluent `OK — 6 voix employées, …, aucune note abandonnée`.
 ```sh
 cd /Users/gistair/src/pom2adventure/SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres
 M=../../../midi_to_mb.py
-(cd 25-pinces       && python3 pinces.py       && python3 $M pinces.mid       PINCES.MB.BIN       --bpm 176 --max 2304 --wav PINCES.wav)
-(cd 26-orques       && python3 orques.py       && python3 $M orques.mid       ORQUES.MB.BIN       --bpm 166 --max 2304 --wav ORQUES.wav)
-(cd 27-bete         && python3 bete.py         && python3 $M bete.mid         BETE.MB.BIN         --bpm 143 --max 2304 --wav BETE.wav)
-(cd 28-arbresepees  && python3 arbresepees.py  && python3 $M arbresepees.mid  ARBRESEPEES.MB.BIN  --bpm 166 --max 2304 --wav ARBRESEPEES.wav)
-(cd 29-araignees    && python3 araignees.py    && python3 $M araignees.mid    ARAIGNEES.MB.BIN    --bpm 150 --max 2304 --wav ARAIGNEES.wav)
-(cd 30-grenouilles  && python3 grenouilles.py  && python3 $M grenouilles.mid  GRENOUILLES.MB.BIN  --bpm 176 --max 2304 --wav GRENOUILLES.wav)
-(cd 31-profonde     && python3 profonde.py     && python3 $M profonde.mid     PROFONDE.MB.BIN     --bpm 136 --max 2304 --wav PROFONDE.wav)
-(cd 32-maitreloups  && python3 maitreloups.py  && python3 $M maitreloups.mid  MAITRELOUPS.MB.BIN  --bpm 150 --max 2304 --wav MAITRELOUPS.wav)
-(cd 33-rondpoint    && python3 rondpoint.py    && python3 $M rondpoint.mid    RONDPOINT.MB.BIN    --bpm 158 --max 2304 --wav RONDPOINT.wav)
-(cd 34-tronc        && python3 tronc.py        && python3 $M tronc.mid        TRONC.MB.BIN        --bpm 150 --max 2304 --wav TRONC.wav)
-(cd 35-bassin       && python3 bassin.py       && python3 $M bassin.mid       BASSIN.MB.BIN       --bpm 150 --max 2304 --wav BASSIN.wav)
+(cd 25-pinces       && python3 pinces.py       && python3 $M pinces.mid       PINCERS.MB.BIN       --bpm 176 --max 2304 --wav PINCES.wav)
+(cd 26-orques       && python3 orques.py       && python3 $M orques.mid       ORCS.MB.BIN       --bpm 166 --max 2304 --wav ORQUES.wav)
+(cd 27-bete         && python3 bete.py         && python3 $M bete.mid         BEAST.MB.BIN         --bpm 143 --max 2304 --wav BETE.wav)
+(cd 28-arbresepees  && python3 arbresepees.py  && python3 $M arbresepees.mid  SWORDTREES.MB.BIN  --bpm 166 --max 2304 --wav ARBRESEPEES.wav)
+(cd 29-araignees    && python3 araignees.py    && python3 $M araignees.mid    SPIDERS.MB.BIN    --bpm 150 --max 2304 --wav ARAIGNEES.wav)
+(cd 30-grenouilles  && python3 grenouilles.py  && python3 $M grenouilles.mid  FROGS.MB.BIN  --bpm 176 --max 2304 --wav GRENOUILLES.wav)
+(cd 31-profonde     && python3 profonde.py     && python3 $M profonde.mid     DEEPWATER.MB.BIN     --bpm 136 --max 2304 --wav PROFONDE.wav)
+(cd 32-maitreloups  && python3 maitreloups.py  && python3 $M maitreloups.mid  WOLFMASTER.MB.BIN  --bpm 150 --max 2304 --wav MAITRELOUPS.wav)
+(cd 33-rondpoint    && python3 rondpoint.py    && python3 $M rondpoint.mid    ROUNDABOUT.MB.BIN    --bpm 158 --max 2304 --wav RONDPOINT.wav)
+(cd 34-tronc        && python3 tronc.py        && python3 $M tronc.mid        LOG.MB.BIN        --bpm 150 --max 2304 --wav TRONC.wav)
+(cd 35-bassin       && python3 bassin.py       && python3 $M bassin.mid       POOL.MB.BIN       --bpm 150 --max 2304 --wav BASSIN.wav)
 ```
 
 Le bloc se recolle tel quel dans un shell. **Trois tempos ont changé** par

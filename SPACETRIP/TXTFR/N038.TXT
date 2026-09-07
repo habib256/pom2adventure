@@ -1,0 +1,17 @@
+T 038 Vous l'avez deja
+
+   Vous levez l'Holophone par reflexe, puis vous vous arretez.
+
+   La creature aussi. Elle se fige dans la lumiere, tourne un peu la tete,
+ouvre la double machoire de trois quarts -- son bon profil -- et attend.
+
+   Vous lui montrez l'ecran : le cliche est deja la, deja poste, deja
+commente quatre mille fois. Elle regarde longuement. Elle referme la
+machoire. On dirait presque de la deception.
+
+   Puis elle se souvient de ce qu'elle est, siffle, et se laisse tomber dans
+une bouche d'aeration en emportant un extincteur.
+
+   -- On y va, dit Ripleigh. Elle boude.
+
+C 039 Plonger dans la navette

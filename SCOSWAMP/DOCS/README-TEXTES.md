@@ -274,7 +274,7 @@ aucun fait qui ne vienne du livre.
   000 y envoie son unique choix, `roll_character` joue au passage, et la 419
   dit qui est ce personnage : l'aventurier, la vieille femme de la route du
   Roi, l'Anneau de Cuivre et ses deux pouvoirs, et les trois hommes de
-  Bourbenville. Elle garde `MU ACCUEIL.MB` : le theme d'accueil couvre
+  Bourbenville. Elle garde `MU WELCOME.MB` : le theme d'accueil couvre
   desormais la creation du personnage et ne s'arrete qu'au 001, ou VILLAGE.MB
   prend le relais.
 

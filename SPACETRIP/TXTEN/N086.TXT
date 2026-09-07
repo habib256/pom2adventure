@@ -1,0 +1,14 @@
+T 086 Trolley takes it all back
+
+   Trolley looks at your bins. Trolley looks at its binoculars. Trolley
+looks at the bins once more, in case the universe has quietly corrected
+itself.
+
+   It tips everything onto the ground with the gentleness of a librarian
+reshelving a book, and starts again. It is not angry with you. It does not
+know how to be angry. That is almost worse.
+
+   It taps the three bins again and waits. It will wait for ever.
+
+C 082 Sort them again
+C 081 Give up

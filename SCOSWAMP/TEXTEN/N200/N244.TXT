@@ -6,5 +6,5 @@ clearing further north, but warns you: "Beware of the Wolves!"
 
    You thank him and take leave, resuming your journey.
 
-MU GEANT.MB
+MU GIANT.MB
 C 161 Resume the journey northward

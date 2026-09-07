@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""forge_save.py - fabrique une sauvegarde SCS4 de SCOSWAMP et l'injecte dans
+"""forge_save.py - fabrique une sauvegarde SCS5 de SCOSWAMP et l'injecte dans
 un volume ProDOS (.hdv) sans reconstruire l'image.
 
 Prototype ecrit pour le rapport d'automatisation. Ne modifie rien de suivi.
@@ -9,6 +9,9 @@ l'index de la clairiere ou l'on se tient, que le menu MAP garde d'une page a
 l'autre. 297 pages sur 412 ne sont d'aucun lieu ; sans cet octet, une partie
 reprise en plein combat rouvrait la carte sans savoir ou. Les sauvegardes
 SCS3 sont refusees par la signature, pas lues de travers.
+
+SCS5 ajoute les blessures du dernier combat (last_loss), utilisees par DV.
+version=4 reste disponible pour verifier la lecture des anciennes parties.
 """
 import argparse, struct, sys
 
@@ -16,20 +19,22 @@ SAVE_HEADER, SAVE_TITLE = 8, 32
 # SCENE_MEM suit SCENE_MEMORY_SIZE (rules.h) : 53 depuis les pages 412-419 du
 # prologue. CLR est l'octet de clairiere courante du menu MAP, en queue.
 CHAR_SIZE, SCENE_MEM, MON_MEM, CLR = 24, 53, 160, 1
-SAVE_SIZE = SAVE_HEADER + SAVE_TITLE + CHAR_SIZE + SCENE_MEM + MON_MEM + CLR  # 278
+SAVE_SIZE = SAVE_HEADER + SAVE_TITLE + CHAR_SIZE + SCENE_MEM + MON_MEM + CLR + 1  # 279
 
 STONES = ["HABILETE","ENDURANCE","CHANCE","FEU","GLACE","ILLUSION",
           "AMITIE","CROISSANCE","BENEDICTION","TERREUR","FLETRISSURE","MALEDICTION"]
 OBJECTS = ["ANNEAU","CAPE","CHAINE","AIMANT","FIOLE","BAIE","EPEMAGIQUE",
-           "BIJOU","CORNE","PLUMES","GRAINES","ANTHERIQUE"]
+           "BIJOU","CORNE","PLUMES","GRAINES","ANTHERIQUE","MISSION_GAYOLARD","MISSION_POMPATARTE","MISSION_STRATAGUS", "POTION_NAINE"]
 AMULETS = ["LOUP","FLEUR","OISEAU","ARAIGNEE","GRENOUILLE","FAUSSE_OISEAU"]
 
 
 def build(scene, lang="F", title="", hab=(12,12), end=(20,20), cha=(11,11),
           gold=20, weapon_bonus=0, stones=None, objects=(), amulets=(),
-          visited=(), monsters=(), clairiere=0xFF):
-    b = bytearray(SAVE_SIZE)
-    b[0:4] = b"SCS4"
+          visited=(), monsters=(), clairiere=0xFF, last_loss=0, version=5):
+    if version not in (4, 5):
+        raise ValueError("version de sauvegarde attendue : 4 ou 5")
+    b = bytearray(SAVE_SIZE - (version == 4))
+    b[0:4] = b"SCS4" if version == 4 else b"SCS5"
     struct.pack_into("<H", b, 5, scene)
     b[7] = ord(lang)
     t = title.encode("ascii", "replace")[:SAVE_TITLE - 1]
@@ -57,6 +62,8 @@ def build(scene, lang="F", title="", hab=(12,12), end=(20,20), cha=(11,11),
     for i, (sc, idx, endv) in enumerate(monsters[:40]):
         struct.pack_into("<HBB", b, p + i * 4, sc, idx, endv)
     b[p + MON_MEM] = clairiere                          # 277 : clairiere du MAP
+    if version == 5:
+        b[p + MON_MEM + 1] = last_loss
     b[4] = 0
     x = 0
     for v in b[5:]:
@@ -66,7 +73,7 @@ def build(scene, lang="F", title="", hab=(12,12), end=(20,20), cha=(11,11),
 
 
 def patch_hdv(hdv, blob, entry_blk=5878, entry_off=394, key_blk=5888):
-    """Ecrit `blob` dans le bloc-cle de PARTIE9 et met l'EOF a jour."""
+    """Ecrit `blob` dans le bloc-cle de SAVE9 et met l'EOF a jour."""
     with open(hdv, "r+b") as f:
         f.seek(key_blk * 512)
         f.write(blob.ljust(512, b"\0"))
@@ -91,4 +98,4 @@ if __name__ == "__main__":
         open(a.out, "wb").write(blob)
     if a.hdv:
         patch_hdv(a.hdv, blob)
-    print("SCS4 %d octets, checksum $%02X" % (len(blob), blob[4]))
+    print("SCS5 %d octets, checksum $%02X" % (len(blob), blob[4]))

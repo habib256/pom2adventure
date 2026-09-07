@@ -6,5 +6,5 @@ soon arrive at the place where you recently fought the Swamp Orcs.
 
    You grip your sword in case you need to fight a new battle.
 
-MU ORQUES.MB
+MU ORCS.MB
 C 323 Continue

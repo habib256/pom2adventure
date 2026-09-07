@@ -1,0 +1,17 @@
+T 068 Home answers
+V 067
+
+   You unscrew the Holophone battery and slide it into his assembly: a
+broken record player, an umbrella and a circular saw. Nobody knows why it
+works. It works.
+
+   The finger blazes. The storeroom turns red. A tiny voice comes out of the
+umbrella, very far away, very clear, and says something in a language made
+of flutes.
+
+   The small grey fellow starts to cry, presses against you and holds his
+lit finger above both your heads: the best lighting of your career.
+
+G S4
+C 062 Step back out into the white corridor
+C 003 Head back to the Convertible

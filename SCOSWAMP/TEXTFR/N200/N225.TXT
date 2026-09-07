@@ -6,6 +6,6 @@ rougeoyante. Sa voix claquante vous menace: "Je vais te tuer!"
 
    L'assaut est inevitable; il vous faut engager le combat sans tarder.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 10 STRATAGUS
 MV 140

@@ -6,7 +6,7 @@ voix est avide. Il attend une reponse concrete.
 
    Que lui repondez-vous selon ce que vous avez rapporte?
 
-MU TOUR.MB
+MU TOWER.MB
 CA 0 0 054 Je n'ai pas reussi a me procurer d'Amulettes
 CA 1 2 007 J'en rapporte une ou deux
 CA 3 6 194 J'en rapporte trois ou plus

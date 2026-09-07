@@ -36,7 +36,7 @@ Ce que la revision ajoute :
 mesure longue(1) - A'(8).
 
     python3 maitreloups.py && python3 ../../../midi_to_mb.py maitreloups.mid \\
-        MAITRELOUPS.MB.BIN --bpm 150 --max 2304 --wav MAITRELOUPS.wav
+        WOLFMASTER.MB.BIN --bpm 150 --max 2304 --wav MAITRELOUPS.wav
 """
 import sys
 from pathlib import Path

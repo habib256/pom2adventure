@@ -1,0 +1,14 @@
+T 051 Trois facons de marcher
+
+   La mer de sable commence la, tiede et molle, et le premier pas s'enfonce
+jusqu'a la cheville. Trois kilometres de dune vous separent du rocher noir
+qui pointe a l'autre bout.
+
+   Vous n'entendez rien du tout. C'est justement ce qui inquiete : quelque
+chose, en dessous, est en train d'ecouter.
+
+   Il faut choisir une facon de poser les pieds, et s'y tenir.
+
+C 052 Le pas du soldat : un, un, un, un, sans jamais varier
+C 052 Deux pas vifs, une pause, deux pas vifs, une pause
+C 053 Un pas, trois pas, un arret, deux pas, une glissade, un pas

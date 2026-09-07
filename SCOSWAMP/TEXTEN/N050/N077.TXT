@@ -5,6 +5,6 @@ properties and you recover 3 STAMINA points.
 
    You then leave westward, vigilant in the silence of the swamp.
 
-MU CRISTAL.MB
+MU CRYSTAL.MB
 E ENDURANCE +3
 C 047 Leave westward

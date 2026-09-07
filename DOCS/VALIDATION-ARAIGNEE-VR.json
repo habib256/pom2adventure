@@ -1,0 +1,25 @@
+{
+  "command": "python3 -u SCOSWAMP.MORE/TOOLS/playtest.py --only araignee_retour --only araignee_feu_amitie --only araignee_malediction --port 6526",
+  "headless": true,
+  "mockingboard_slot": 2,
+  "scenarios": {
+    "araignee_retour": 15,
+    "araignee_feu_amitie": 11,
+    "araignee_malediction": 15
+  },
+  "assertions": 41,
+  "failures": [],
+  "process_exit_code": 0,
+  "before_fix": {
+    "cancel_magic_target": 345,
+    "expected_target": 144,
+    "endurance_before": 24,
+    "endurance_after": 23
+  },
+  "current_artifact_sha256": {
+    "SCOSWAMP/SCOSWAMP.BIN": "b4455cc650ed089edef54fc5b72b9bca6c73f47d6d31c66b2c460f42180a7674",
+    "SCOSWAMP/TEXTFR/N100/N144.TXT": "6078f6003ba647a563663c4528d68c10950c18dfd8b8f1dbe50327dda43f3635",
+    "SCOSWAMP/TEXTEN/N100/N144.TXT": "c6ca96c69bac0c15d017094d459e0239814ee5849f1bc7b720ca92bb27024fc8"
+  },
+  "scope": "Prepared encounter states, real keyboard choices and save/load. Not a full natural winning route."
+}

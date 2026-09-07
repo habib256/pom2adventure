@@ -16,7 +16,8 @@ dans le Marais.
    Vous ne pouvez pas vous enfuir et vous n'avez pas assez de temps pour avoir
 recours a la magie. Il ne vous reste donc plus qu'a les combattre...
 
-MU +COMBAT.MB
+MM 1
+MU +BATTLE.MB
 M 7 5 PREMIER COUPEUR DE BOUR
 M 8 5 DEUXIEME COUPEUR DE BOU
 MV 186

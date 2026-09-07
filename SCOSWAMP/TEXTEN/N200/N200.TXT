@@ -7,7 +7,7 @@ armor.
 
    If you feel you're getting the worse of it, Flee.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 8 BEAR
 CF 390 Flee
 MV 069

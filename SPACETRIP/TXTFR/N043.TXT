@@ -1,0 +1,16 @@
+T 043 L'enigme de Monsieur Spork
+
+   Deux androides identiques gardent deux portes. L'officier explique, les
+mains dans le dos : "L'un dit toujours la verite. L'autre ment toujours. Une
+seule porte mene a la passerelle. Vous avez droit a UNE question, posee a UN
+seul d'entre eux. Ensuite vous choisissez une porte."
+
+   Les deux androides sourient exactement de la meme facon. C'est
+desagreable.
+
+   "Prenez votre temps", ajoute l'officier. "Enfin : un temps raisonnable."
+
+C 044 Demander : quelle porte mene a la passerelle ?
+C 044 Demander : etes-vous celui qui ment ?
+C 045 Demander ce que l'AUTRE repondrait, puis prendre la porte opposee
+C 044 Demander ce que l'AUTRE repondrait, puis prendre la porte citee

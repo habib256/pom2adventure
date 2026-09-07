@@ -1,0 +1,41 @@
+{
+  "scenario": "jardins_parcours",
+  "command": "python3 -u SCOSWAMP.MORE/TOOLS/playtest.py --port 6526 --only jardins_parcours",
+  "assertions": 25,
+  "failures": 0,
+  "exit_code": 0,
+  "seconds": 18.5,
+  "hdv_sha256": "8785fda7dbee0948e3c9da9274baee1b669a59d71473d1e04144554566cec1db",
+  "routes": [
+    [
+      305,
+      334,
+      379,
+      251,
+      363,
+      133,
+      234,
+      238
+    ],
+    [
+      305,
+      334,
+      379,
+      363,
+      133,
+      234,
+      238
+    ]
+  ],
+  "checks": [
+    "Stratagus mission choice",
+    "initial skill loss",
+    "inventory return does not replay spell",
+    "combat played to victory with normal space input",
+    "victory amulet and luck penalty",
+    "save/load after victory",
+    "flee without amulet or murder penalty",
+    "return via paths preserves character"
+  ],
+  "limits": "Character and seed prepared at 305; neither route starts at game creation. 305 revisited through 234 redirects to 238."
+}

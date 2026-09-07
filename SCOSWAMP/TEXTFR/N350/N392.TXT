@@ -5,6 +5,6 @@ T 392 Combat contre l'Aigle
    Vous n'avez aucune possibilite de prendre la fuite, car il est plus grand
 et plus rapide que vous. Il ne vous reste plus qu'a vous fier a votre epee.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 6 AIGLE
 MV 132

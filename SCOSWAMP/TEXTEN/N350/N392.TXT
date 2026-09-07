@@ -5,6 +5,6 @@ T 392 Combat against the Eagle
    You have no possibility of fleeing, for it's larger and faster than you.
 All you can do is trust your sword.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 7 6 EAGLE
 MV 132

@@ -8,7 +8,7 @@ file a travers des bois serres et sombres.
 
    Quelle direction choisissez-vous?
 
-MU PINCES.MB
+MU PINCERS.MB
 C 144 Partir vers le sud
 C 290 Prendre la route de l'est le long de la riviere
 C 010 S'engager vers l'ouest a travers les bois

@@ -1,6 +1,6 @@
 # Zone `mort` — l'écran de mort et les onze fins fatales
 
-**Fichier proposé : `MORT.MB` (`MORT.MB.BIN`, 725 octets, 32,3 s — *sans boucle*)**
+**Fichier proposé : `DEATH.MB` (`DEATH.MB.BIN`, 725 octets, 32,3 s — *sans boucle*)**
 
 ## Ce que la zone couvre
 
@@ -30,7 +30,7 @@ l'appel à `game_over()`.
 | 375 | L'explosion de la tour |
 | 401 | La Trappe |
 
-Celles-ci sont de vraies pages : elles portent `MU +MORT.MB` comme n'importe
+Celles-ci sont de vraies pages : elles portent `MU +DEATH.MB` comme n'importe
 quelle surcouche.
 
 ## La pièce
@@ -85,7 +85,7 @@ marche funèbre en boucle serait comique au bout du troisième tour.
 ```sh
 python3 SCOSWAMP.MORE/MUSIC/midi_to_mb.py \
     SCOSWAMP.MORE/MUSIC/propositions/mort/k453a.mid \
-    SCOSWAMP.MORE/MUSIC/propositions/mort/MORT.MB.BIN \
+    SCOSWAMP.MORE/MUSIC/propositions/mort/DEATH.MB.BIN \
     --bpm 120 --vol 13,9,11 \
     --wav SCOSWAMP.MORE/MUSIC/propositions/mort/MORT.wav
 ```

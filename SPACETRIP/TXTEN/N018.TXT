@@ -1,0 +1,18 @@
+T 018 A sack of kibble
+V 019
+
+   "That? That is not mine." Hans Lonely shoves the sack with his boot.
+"That is the copilot. He buys one every stop. He will not say why. I
+stopped asking after the time he answered."
+
+   Chewpaca looks away with the dignity of a creature guarding a secret
+that is both enormous and completely ridiculous.
+
+   "Twenty credits and it is yours. Thirty if you do not film me."
+
+   You pay twenty. You film anyway. The sack weighs as much as a child and
+smells of cosmic sardine. You have no idea what you will do with it.
+
+G CROQ
+C 012 Back to the table
+C 010 Back into the room

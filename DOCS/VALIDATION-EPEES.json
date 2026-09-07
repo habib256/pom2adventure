@@ -1,0 +1,21 @@
+{
+  "sha256": "cc444251014a40012b57c71578a1fcd3c382e279a4adf9b720bd14f35f9e22a9",
+  "before_replacement": {
+    "passed": 1,
+    "failed": 1,
+    "bonus_expected": 1,
+    "bonus_actual": 2
+  },
+  "after": {
+    "epee_remplacement": 7,
+    "epees_recompenses": 18,
+    "aigle_butin_unique": 7,
+    "jardins_contrats": 23
+  },
+  "failed": 0,
+  "js_acquisitions": 36,
+  "emulator": "POM2 headless with Mockingboard",
+  "heap_bytes_before": 2065,
+  "heap_bytes_after": 2059,
+  "scope": "controlled acquisition, loss and save fixtures; not full story routes"
+}

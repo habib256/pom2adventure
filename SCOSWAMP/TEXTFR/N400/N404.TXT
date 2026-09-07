@@ -8,7 +8,7 @@ l'ouest, un sentier sombre disparait derriere les troncs humides. A l'est, un
 chemin plus clair semble serpenter a travers des herbes hautes. Au sud, le
 passage par lequel vous etes arrive reste praticable.
 
-MU RONDPOINT.MB
+MU ROUNDABOUT.MB
 C 398 Prendre le sentier qui s'enfonce vers l'ouest
 C 105 Suivre le chemin herbeux vers l'est
 C 208 Revenir sur vos pas par le sentier du sud

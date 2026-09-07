@@ -1,6 +1,6 @@
 # Clairière 13 — La Rivière Croupie
 
-**`CROUPIE.MB.BIN` — 1 595 octets, 43,9 s, boucle.**
+**`STAGNANT.MB.BIN` — 1 595 octets, 43,9 s, boucle.**
 
 ## La clairière
 
@@ -9,7 +9,7 @@
 | `hub` | **295** |
 | Pages | 295 |
 | Case | (1,3) |
-| Zone de référence | `riviere` (`RIVIERE.MB`) |
+| Zone de référence | `riviere` (`RIVER.MB`) |
 | Sorties | E → 183 (falaise), S → 094 (brume fétide) |
 
 La berge. « La rive opposée est à 200 mètres de distance au moins et le cours
@@ -95,6 +95,6 @@ bourdon sur la quinte est le procédé de la zone, on ne le retire pas.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/13-croupie
 python3 croupie.py
-python3 ../../../midi_to_mb.py croupie.mid CROUPIE.MB.BIN \
+python3 ../../../midi_to_mb.py croupie.mid STAGNANT.MB.BIN \
     --bpm 132 --max 2304 --wav CROUPIE.wav
 ```

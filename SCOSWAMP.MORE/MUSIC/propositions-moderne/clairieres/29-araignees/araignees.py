@@ -38,7 +38,7 @@ batterie de rien a tout — en une mesure.
 28 mesures a 4/4, 44,8 s. Forme intro(4) - A(8) - B(4) - incendie(4) - A'(8).
 
     python3 araignees.py && python3 ../../../midi_to_mb.py araignees.mid \\
-        ARAIGNEES.MB.BIN --bpm 150 --max 2304 --wav ARAIGNEES.wav
+        SPIDERS.MB.BIN --bpm 150 --max 2304 --wav ARAIGNEES.wav
 """
 import sys
 from pathlib import Path

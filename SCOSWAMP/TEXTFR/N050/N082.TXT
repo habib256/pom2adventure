@@ -5,7 +5,7 @@ T 082 Combat au bassin
    La BETE DU BASSIN surgit des eaux et vous frappe de ses tentacules. Ses
 coups caoutchouteux peuvent vous desarconner; le duel commence.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 8 10 BETE DU BASSIN
 CF 330 Prendre la fuite vers l'ouest
 MV 308

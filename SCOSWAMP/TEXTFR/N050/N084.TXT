@@ -9,5 +9,5 @@ avez emprunte.
 
    Vous saluez le Maitre des Jardins et revenez sur vos pas vers l'ouest.
 
-MU JARDINS.MB
+MU GARDENS.MB
 C 363 Revenir vers l'ouest

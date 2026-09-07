@@ -1,5 +1,5 @@
 T 144 The Spider Tent
-V 345 165 354
+VR 345 113 354
 
    The path is invaded by spider webs hanging from branches. A little further
 you make out a clearing studded with webs. Thousands of threads form garlands
@@ -13,7 +13,7 @@ Ring warms around your finger: an evil sign.
 
    What do you want to do?
 
-MU ARAIGNEES.MB
+MU SPIDERS.MB
 C 074 Resort to magic
 C 026 Attack without waiting
 C 332 Speak to the man in a friendly tone

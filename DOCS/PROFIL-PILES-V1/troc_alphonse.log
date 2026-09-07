@@ -1,0 +1,99 @@
+[INFO] POM2: v0.9.0 - Apple II Emulator (Dear ImGui)
+[INFO] Audio: miniaudio ready: requested 44100 Hz, got 44100 Hz
+[INFO] Settings: Loaded 167 keys from /Users/gistair/Library/Application Support/POM2/state.cfg
+[INFO] ROM: Loaded /private/tmp/scoswamp-stack-pom2/roms/apple2e.rom at $C000 (IIe)
+[INFO] ROM: Loaded char ROM (4096 B, lowercase): /private/tmp/scoswamp-stack-pom2/roms/apple2e_char.rom
+[INFO] FloppySound: loaded 10 525" samples from /private/tmp/scoswamp-stack-pom2/roms/floppy_samples
+[INFO] FloppySound: loaded 10 35" samples from /private/tmp/scoswamp-stack-pom2/roms/floppy_samples
+[INFO] Grappler: Loaded Grappler+ ROM: /private/tmp/scoswamp-stack-pom2/roms/grappler_plus.bin
+[INFO] SmartPort: Loaded real Liron controller ROM (/private/tmp/scoswamp-stack-pom2/roms/liron.rom) — slot 5 presents authentic identity ($Cn07=$00 SmartPort class, $CnFE=$BF, ProDOS entry $Cn0A)
+[INFO] Disk II: Boot PROM loaded: /private/tmp/scoswamp-stack-pom2/roms/disk2.rom
+[INFO] Disk II: P6 LSS PROM loaded: /private/tmp/scoswamp-stack-pom2/roms/diskii_p6.rom
+[INFO] Disk II: 13-sector boot PROM loaded: /private/tmp/scoswamp-stack-pom2/roms/disk2_13.rom
+[INFO] Disk II: 13-sector LSS PROM loaded: /private/tmp/scoswamp-stack-pom2/roms/diskii_p6_13.rom
+[WARN] Storage: SmartPort slot 5 bay 1: persisted path not found: SCOSWAMP-musique_aux.hdv
+[INFO] Emul: Cold boot (RAM wiped)
+[INFO] Profile: Switching to Apple //e Enhanced (1985)
+[INFO] ROM: Loaded /private/tmp/scoswamp-stack-pom2/roms/apple2e.rom at $C000 (IIe)
+[INFO] ROM: Loaded char ROM (4096 B, lowercase): /private/tmp/scoswamp-stack-pom2/roms/apple2e_char.rom
+[INFO] Grappler: Loaded Grappler+ ROM: /private/tmp/scoswamp-stack-pom2/roms/grappler_plus.bin
+[INFO] SmartPort: Loaded real Liron controller ROM (/private/tmp/scoswamp-stack-pom2/roms/liron.rom) — slot 5 presents authentic identity ($Cn07=$00 SmartPort class, $CnFE=$BF, ProDOS entry $Cn0A)
+[INFO] Disk II: Boot PROM loaded: /private/tmp/scoswamp-stack-pom2/roms/disk2.rom
+[INFO] Disk II: P6 LSS PROM loaded: /private/tmp/scoswamp-stack-pom2/roms/diskii_p6.rom
+[INFO] Disk II: 13-sector boot PROM loaded: /private/tmp/scoswamp-stack-pom2/roms/disk2_13.rom
+[INFO] Disk II: 13-sector LSS PROM loaded: /private/tmp/scoswamp-stack-pom2/roms/diskii_p6_13.rom
+[WARN] Storage: SmartPort slot 5 bay 1: persisted path not found: SCOSWAMP-musique_aux.hdv
+[INFO] Emul: Hard reset
+[INFO] Profile: Active = Apple //e Enhanced (1985), ROM = /private/tmp/scoswamp-stack-pom2/roms/apple2e.rom, CPU = 65C02
+[INFO] AICtrl: listening on 127.0.0.1:6526 — POST/GET to drive the emulator from an AI agent
+[INFO] CLI: AI control listening on 127.0.0.1:6526
+[INFO] Joystick: no pad bound
+[INFO] CRT: Universal CRT effect stack ready
+[INFO] HDV: Loaded SCOSWAMP-troc_alphonse.hdv (12992 blocks)
+[INFO] Emul: Boot via slot 5 ROM ($C500)
+[INFO] CLI: booted disk: SCOSWAMP-troc_alphonse.hdv
+[SCOS_STACK] armed at main=80F3
+[SCOS_STACK] hardware used=2 sp=FD pc=80F3
+[SCOS_STACK] c_call used=4 sp=BEFC pc=80F7
+[SCOS_STACK] hardware used=3 sp=FC pc=80F9
+[SCOS_STACK] hardware used=4 sp=FB pc=80F9
+[SCOS_STACK] hardware used=5 sp=FA pc=A5CA
+[SCOS_STACK] c_call used=6 sp=BEFA pc=80FE
+[SCOS_STACK] hardware used=6 sp=F9 pc=9C1C
+[SCOS_STACK] hardware used=7 sp=F8 pc=A81F
+[SCOS_STACK] hardware used=8 sp=F7 pc=A81F
+[SCOS_STACK] hardware used=9 sp=F6 pc=9EB2
+[SCOS_STACK] hardware used=10 sp=F5 pc=9EB2
+[SCOS_STACK] c_call used=69 sp=BEBB pc=9F08
+[SCOS_STACK] c_call used=70 sp=BEBA pc=A830
+[SCOS_STACK] hardware used=11 sp=F4 pc=B132
+[SCOS_STACK] hardware used=12 sp=F3 pc=B132
+[SCOS_STACK] hardware used=13 sp=F2 pc=BFB8
+[SCOS_STACK] hardware used=14 sp=F1 pc=E04B
+[SCOS_STACK] hardware used=15 sp=F0 pc=E0FF
+[SCOS_STACK] hardware used=16 sp=EF pc=E0FF
+[SCOS_STACK] hardware used=17 sp=EE pc=E550
+[SCOS_STACK] hardware used=18 sp=ED pc=E550
+[SCOS_STACK] hardware used=19 sp=EC pc=E562
+[SCOS_STACK] hardware used=20 sp=EB pc=E562
+[SCOS_STACK] hardware used=21 sp=EA pc=E6E7
+[SCOS_STACK] hardware used=22 sp=E9 pc=E6E7
+[SCOS_STACK] hardware used=23 sp=E8 pc=E74E
+[SCOS_STACK] hardware used=24 sp=E7 pc=E79F
+[SCOS_STACK] hardware used=25 sp=E6 pc=EBA0
+[SCOS_STACK] hardware used=26 sp=E5 pc=EBB5
+[SCOS_STACK] hardware used=27 sp=E4 pc=EBB5
+[SCOS_STACK] hardware used=28 sp=E3 pc=C571
+[SCOS_STACK] hardware used=29 sp=E2 pc=C571
+[SCOS_STACK] hardware used=30 sp=E1 pc=EBB5
+[SCOS_STACK] hardware used=31 sp=E0 pc=EBB5
+[SCOS_STACK] hardware used=32 sp=DF pc=C571
+[SCOS_STACK] hardware used=33 sp=DE pc=C571
+[SCOS_STACK] c_call used=71 sp=BEB9 pc=9F08
+[SCOS_STACK] c_call used=72 sp=BEB8 pc=A830
+[SCOS_STACK] c_call used=80 sp=BEB0 pc=9F08
+[SCOS_STACK] c_call used=81 sp=BEAF pc=A830
+[SCOS_STACK] hardware used=34 sp=DD pc=EBB5
+[SCOS_STACK] hardware used=35 sp=DC pc=EBB5
+[SCOS_STACK] hardware used=36 sp=DB pc=C571
+[SCOS_STACK] hardware used=37 sp=DA pc=C571
+[SCOS_STACK] hardware used=38 sp=D9 pc=C411
+[SCOS_STACK] hardware used=39 sp=D8 pc=C46E
+[SCOS_STACK] hardware used=40 sp=D7 pc=C472
+[SCOS_STACK] hardware used=41 sp=D6 pc=C475
+[SCOS_STACK] hardware used=42 sp=D5 pc=C478
+[SCOS_STACK] hardware used=43 sp=D4 pc=C479
+[SCOS_STACK] hardware used=44 sp=D3 pc=DF72
+[SCOS_STACK] hardware used=45 sp=D2 pc=DF72
+[SCOS_STACK] hardware used=46 sp=D1 pc=404B
+[SCOS_STACK] hardware used=47 sp=D0 pc=404B
+[SCOS_STACK] hardware used=48 sp=CF pc=B191
+[SCOS_STACK] hardware used=49 sp=CE pc=B191
+[SCOS_STACK] hardware used=50 sp=CD pc=983E
+[SCOS_STACK] hardware used=51 sp=CC pc=983E
+[SCOS_STACK] hardware used=52 sp=CB pc=97EF
+[SCOS_STACK] hardware used=53 sp=CA pc=97F2
+[SCOS_STACK] hardware used=54 sp=C9 pc=97F2
+[SCOS_STACK] hardware used=55 sp=C8 pc=961F
+[SCOS_STACK] hardware used=56 sp=C7 pc=961F
+[SCOS_STACK] hardware used=57 sp=C6 pc=961F

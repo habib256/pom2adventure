@@ -10,4 +10,4 @@ enlisant dans la vase que charrie le cours d'eau.
 
    Nous sommes au regret de vous annoncer que votre aventure se termine ici.
 
-MU +MORT.MB
+MU +DEATH.MB

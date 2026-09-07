@@ -9,4 +9,5 @@ un bain chaud a l'auberge et vous vous sentez alors nettement mieux.
 impetuosite. Il hoche la tete et esquisse un sourire. "Vous avez de la chance
 et vous etes resistant, sinon, vous ne seriez jamais revenu vivant", dit-il.
 
+E CHANCE -2
 C 205 Ecouter Grognard

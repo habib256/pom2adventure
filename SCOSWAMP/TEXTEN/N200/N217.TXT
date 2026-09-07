@@ -4,5 +4,5 @@ T 217 Forced Return
 southern direction. Soon, the air fills with a worrying perfume: the Anguish
 Flowers clearing approaches.
 
-MU OISEAUX.MB
+MU BIRDS.MB
 C 250 Head south again toward the Anguish Flowers

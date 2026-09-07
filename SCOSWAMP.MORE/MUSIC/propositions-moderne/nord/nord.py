@@ -21,7 +21,7 @@ grosse caisse, qui frappe les temps qu'il tenait.
 28 mesures a 4/4, 44,8 s.
 
     python3 nord.py && python3 ../../midi_to_mb.py nord.mid \\
-        MARAISNO.MB.BIN --bpm 150 --max 2304 --wav MARAISNO.wav
+        NORTHSWAMP.MB.BIN --bpm 150 --max 2304 --wav MARAISNO.wav
 """
 import sys
 from pathlib import Path

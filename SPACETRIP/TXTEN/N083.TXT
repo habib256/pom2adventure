@@ -1,0 +1,17 @@
+T 083 The wellness pod
+V 089
+
+   The pod must once have been a luxury orbital spa. It is now flat as a
+pancake, with a diamond-shaped door and background music still playing for
+nobody at all.
+
+   Inside, everything is broken: the jets, the benches, the cucumber
+fountain. Everything except one heated cupboard that held, nobody knows
+how, and that contains a bath towel. Clean. Folded. Warm.
+
+   You take it. At the time it seems ridiculous.
+
+   You have not met Mopey yet.
+
+G SERV
+C 081 Climb back out of the pod

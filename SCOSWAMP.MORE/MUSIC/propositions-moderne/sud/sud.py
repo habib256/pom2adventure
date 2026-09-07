@@ -24,7 +24,7 @@ du village ; c'est le seul repere tonal du jeu, et il est gratuit.
 28 mesures a 4/4, 44,8 s.
 
     python3 sud.py && python3 ../../midi_to_mb.py sud.mid \\
-        MARAISUD.MB.BIN --bpm 150 --max 2304 --wav MARAISUD.wav
+        SOUTHSWAMP.MB.BIN --bpm 150 --max 2304 --wav MARAISUD.wav
 """
 import sys
 from pathlib import Path

@@ -1,0 +1,13 @@
+T 071 Mingus recognises you
+
+   "Ah!" cries the Emperor, waving two tired fingers. "The little one with
+the vial!"
+
+   He checks nothing. An emperor never checks: that is the whole principle
+of empire. Your Holophone is returned to you, and so is your seat.
+
+   Behind the throne the purple hanging still stirs by itself, and the
+draught smells of hangar.
+
+C 074 Return to the box of honour above the arena
+C 003 Back away towards the Convertible

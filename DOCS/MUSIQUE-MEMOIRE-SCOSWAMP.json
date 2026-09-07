@@ -1,0 +1,781 @@
+{
+  "format": "MB1",
+  "streams": {
+    "ACCUEIL.MB.BIN": {
+      "bytes": 2233,
+      "ticks": 2484,
+      "seconds": 49.68,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 105,
+        "note": 466,
+        "delay": 498,
+        "off": 571,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 13,
+      "sha256": "723ab1e7654fbb5cddd0e670af2bd377a65d9e0cba61f81ac9daf1d1662598f9"
+    },
+    "AIGLE.MB.BIN": {
+      "bytes": 1682,
+      "ticks": 2168,
+      "seconds": 43.36,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 380,
+        "delay": 418,
+        "off": 414,
+        "noise": 34,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "c6238e76a512acc365fbed78acb6f690af74bd9df747687d36e471c507799fcf"
+    },
+    "ANGOISSE.MB.BIN": {
+      "bytes": 1773,
+      "ticks": 1960,
+      "seconds": 39.2,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 368,
+        "delay": 422,
+        "off": 443,
+        "noise": 75,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "a5e975e4912c4d1fade9f87910a916c574573ca1e123a1bd48a17d508b77fbc5"
+    },
+    "ARAIGNEES.MB.BIN": {
+      "bytes": 1900,
+      "ticks": 2254,
+      "seconds": 45.08,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 367,
+        "delay": 438,
+        "off": 480,
+        "noise": 113,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "24ea505e126f5d4dbbdcdb855936f7c7388417151b4eb77acd60a215f8fb4673"
+    },
+    "ARBRESEPEES.MB.BIN": {
+      "bytes": 2198,
+      "ticks": 2020,
+      "seconds": 40.4,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 465,
+        "delay": 487,
+        "off": 563,
+        "noise": 98,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "7c33150a48178ddb87678fb617f53e08634386641eb100041f5d51192e85a359"
+    },
+    "ARENE.MB.BIN": {
+      "bytes": 2128,
+      "ticks": 2063,
+      "seconds": 41.26,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 437,
+        "delay": 498,
+        "off": 536,
+        "noise": 99,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "a6cc81c690c5e6f48b1d1f0207bd46bc0a6e50a3e1e1511628eafa31015c8e2f"
+    },
+    "BASSIN.MB.BIN": {
+      "bytes": 2024,
+      "ticks": 2254,
+      "seconds": 45.08,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 439,
+        "delay": 421,
+        "off": 527,
+        "noise": 88,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "95bd7675063679ee5357dbfa6a97e6df33f0f95b10cfcf4b941e1797105d379c"
+    },
+    "BETE.MB.BIN": {
+      "bytes": 1467,
+      "ticks": 2279,
+      "seconds": 45.58,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 301,
+        "delay": 344,
+        "off": 367,
+        "noise": 66,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "e1c04a077cc8b18ff9aab07790fd5731eeba24df13600feba4554d58a90531b1"
+    },
+    "BRIGANDS.MB.BIN": {
+      "bytes": 2258,
+      "ticks": 1881,
+      "seconds": 37.62,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 420,
+        "delay": 634,
+        "off": 534,
+        "noise": 114,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "b510a750b021f1b89faa1756a7588699def6637b436f66233ff42c8a3962547a"
+    },
+    "BRUME.MB.BIN": {
+      "bytes": 1399,
+      "ticks": 2076,
+      "seconds": 41.52,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 312,
+        "delay": 333,
+        "off": 348,
+        "noise": 36,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "ff94e8875228ce7daea7263e838b9bd47164dfff41bd1aa9f5b7f19878354fd2"
+    },
+    "COMBAT.MB.BIN": {
+      "bytes": 1228,
+      "ticks": 1214,
+      "seconds": 24.28,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 80,
+        "note": 242,
+        "delay": 250,
+        "off": 312,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "821d38f23737753c3bb3b1c51d23443e7c2722cdbbf7a0543e3a6de0429f935f"
+    },
+    "COURBENS.MB.BIN": {
+      "bytes": 2276,
+      "ticks": 1923,
+      "seconds": 38.46,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 101,
+        "note": 457,
+        "delay": 580,
+        "off": 558,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "13a8bb704e1ac1f82a3038689535c366495d365688c43952ebbf041630c3b18d"
+    },
+    "CRISTAL.MB.BIN": {
+      "bytes": 2056,
+      "ticks": 2014,
+      "seconds": 40.28,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 438,
+        "delay": 525,
+        "off": 503,
+        "noise": 65,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "71b371d3a676d9580eba139c013c9ab2dca0b04bfd8801f669675a4a4c130dec"
+    },
+    "CROISEMENT.MB.BIN": {
+      "bytes": 2177,
+      "ticks": 2254,
+      "seconds": 45.08,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 432,
+        "delay": 595,
+        "off": 520,
+        "noise": 88,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "5c3e53744d31103435f0e1387edb7a966ff7f49b7e4dcfb51103e5567f979a28"
+    },
+    "CROUPIE.MB.BIN": {
+      "bytes": 1595,
+      "ticks": 2195,
+      "seconds": 43.9,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 354,
+        "delay": 376,
+        "off": 399,
+        "noise": 45,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "b994a50d052a5984315f14f70621157d5665a25c9f7ab4a6d3a08bc524413458"
+    },
+    "DANGER.MB.BIN": {
+      "bytes": 1951,
+      "ticks": 2484,
+      "seconds": 49.68,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 78,
+        "note": 416,
+        "delay": 447,
+        "off": 494,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "3d76350484fce67594a0e6817b754afb6b2ace01aaf4bfd02785b582ac011f26"
+    },
+    "FALAISE.MB.BIN": {
+      "bytes": 1447,
+      "ticks": 2014,
+      "seconds": 40.28,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 365,
+        "delay": 330,
+        "off": 365,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "b485c857b2e971b7c32b8d2d23cd2d71c0c46b9495aa83e0908702b782698cd5"
+    },
+    "FEUFOLLET.MB.BIN": {
+      "bytes": 2083,
+      "ticks": 2040,
+      "seconds": 40.8,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 405,
+        "delay": 606,
+        "off": 485,
+        "noise": 80,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "564618841a51252ebdb5241aff7496f8d8884767abc68f0b5e83789966a5cfd5"
+    },
+    "GEANT.MB.BIN": {
+      "bytes": 1624,
+      "ticks": 2101,
+      "seconds": 42.02,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 77,
+        "note": 317,
+        "delay": 420,
+        "off": 394,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "1c5d758126add9859edbaa8235a90e46aab8a033f1cef89731cd438bbc3ef4ef"
+    },
+    "GRENOUILLES.MB.BIN": {
+      "bytes": 2246,
+      "ticks": 1923,
+      "seconds": 38.46,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 459,
+        "delay": 502,
+        "off": 574,
+        "noise": 115,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "4171c17e9fd6ead91bb9508b45ab77f8b01bb4e4694fef0670ac18ed7b3ef07d"
+    },
+    "HERBEUX.MB.BIN": {
+      "bytes": 1493,
+      "ticks": 1774,
+      "seconds": 35.48,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 326,
+        "delay": 349,
+        "off": 374,
+        "noise": 48,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "7fd438f3fcfcde1bb9c34dec3025e51eed7d84e34ef24873b3af009292612b51"
+    },
+    "JARDINS.MB.BIN": {
+      "bytes": 2042,
+      "ticks": 2180,
+      "seconds": 43.6,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 414,
+        "delay": 601,
+        "off": 473,
+        "noise": 59,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "25823de850d00cc3f60722a3cb8896df85a352c937b62eebc4cf277f08e070a7"
+    },
+    "LICORNE.MB.BIN": {
+      "bytes": 1601,
+      "ticks": 2042,
+      "seconds": 40.84,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 348,
+        "delay": 382,
+        "off": 399,
+        "noise": 51,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "88785ee65f420c1224d9876e957c25492c5c4a93a9cac9164cdc9f79ee6d27c6"
+    },
+    "LOUPS.MB.BIN": {
+      "bytes": 2253,
+      "ticks": 1933,
+      "seconds": 38.66,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 69,
+        "note": 459,
+        "delay": 647,
+        "off": 528,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "29c1c468f6ed826c02afc0ac36bba15db0fbffd91c31d9f81fd8f7fe68a3cf0e"
+    },
+    "MAITRELOUPS.MB.BIN": {
+      "bytes": 2182,
+      "ticks": 2294,
+      "seconds": 45.88,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 427,
+        "delay": 522,
+        "off": 546,
+        "noise": 119,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "bdb79a6bbcc67df615cf83c6e3a8c97b95eec72dcc1809bfb064945821e72525"
+    },
+    "MARAISNO.MB.BIN": {
+      "bytes": 2262,
+      "ticks": 2254,
+      "seconds": 45.08,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 98,
+        "note": 472,
+        "delay": 530,
+        "off": 570,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "a4356b260e5e18acacf8c2813ae48c04d23c14d46b7d37728fa5eb939eb99ffb"
+    },
+    "MARAISUD.MB.BIN": {
+      "bytes": 2277,
+      "ticks": 2254,
+      "seconds": 45.08,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 112,
+        "note": 469,
+        "delay": 512,
+        "off": 581,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "c06b8b42bc31998db706412382003dda8528c10289264495b65cb19193a23e04"
+    },
+    "MORT.MB.BIN": {
+      "bytes": 673,
+      "ticks": 1550,
+      "seconds": 31.0,
+      "loop": false,
+      "commands": {
+        "volume": 6,
+        "note": 174,
+        "delay": 129,
+        "off": 174,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "8b4e89a0f577eb0f5fd61fd52cf1ad9de6bdfb0774718548b31f13d5a2ad8f46"
+    },
+    "OISEAUX.MB.BIN": {
+      "bytes": 2002,
+      "ticks": 2014,
+      "seconds": 40.28,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 430,
+        "delay": 471,
+        "off": 503,
+        "noise": 73,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "d83baa567d8018288018a786fc12c423d3e5a1fdc50f1309f54abbd78a34dbcb"
+    },
+    "ORQUES.MB.BIN": {
+      "bytes": 1918,
+      "ticks": 2038,
+      "seconds": 40.76,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 383,
+        "delay": 432,
+        "off": 488,
+        "noise": 105,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "16f24ab1c3467b3a229c41e6bb981fea0eafff99c9df7676773f2e13ceba5655"
+    },
+    "PATROUIL.MB.BIN": {
+      "bytes": 2185,
+      "ticks": 2088,
+      "seconds": 41.76,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 417,
+        "delay": 630,
+        "off": 511,
+        "noise": 94,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "768aee8013f672f42265847bb24e4b7a4c393d5f2e39cd461bbb367fd8d3f390"
+    },
+    "PINCES.MB.BIN": {
+      "bytes": 2184,
+      "ticks": 2196,
+      "seconds": 43.92,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 469,
+        "delay": 530,
+        "off": 544,
+        "noise": 75,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "01fd1feb1e1b03dd2a3083bf82fba39891739d14420f82b2b2c8bb4a18ef48cf"
+    },
+    "PIQUENIQUE.MB.BIN": {
+      "bytes": 1865,
+      "ticks": 2059,
+      "seconds": 41.18,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 370,
+        "delay": 373,
+        "off": 490,
+        "noise": 120,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "6730d4a0dbd05a8e9d71c90dcce4b860f19bcede1dd43cb1382d720352907273"
+    },
+    "PONT.MB.BIN": {
+      "bytes": 1946,
+      "ticks": 2040,
+      "seconds": 40.8,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 408,
+        "delay": 445,
+        "off": 493,
+        "noise": 85,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "f6ed0dff18600ca5db1fc8c9dd176b0cb0917a57462478ebce8e2f5945faaaa3"
+    },
+    "PROFONDE.MB.BIN": {
+      "bytes": 1894,
+      "ticks": 2484,
+      "seconds": 49.68,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 456,
+        "delay": 462,
+        "off": 470,
+        "noise": 14,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "3dfff3afddf535fe50b5baeee54a8fdb19b38b019adb20e4a190d90f49526ae9"
+    },
+    "RIVIERE.MB.BIN": {
+      "bytes": 1964,
+      "ticks": 2702,
+      "seconds": 54.04,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 487,
+        "delay": 481,
+        "off": 487,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "b7db04e850f2c7f85bb1f53f72a99fa7d4f8fa42791a225fcc54f3103a0eb461"
+    },
+    "RONDPOINT.MB.BIN": {
+      "bytes": 2219,
+      "ticks": 2444,
+      "seconds": 48.88,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 472,
+        "delay": 478,
+        "off": 573,
+        "noise": 101,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "8e7ccb8f22ccbf274f728865580d251c67df4667ac444b8241f707d518757d2a"
+    },
+    "SABLES.MB.BIN": {
+      "bytes": 1920,
+      "ticks": 2180,
+      "seconds": 43.6,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 97,
+        "note": 387,
+        "delay": 446,
+        "off": 484,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "42b3241123ea1d99c4f0d41e9dd559eaf522a26cf08d2232613b5b699d5bef3c"
+    },
+    "SCORPIONS.MB.BIN": {
+      "bytes": 2018,
+      "ticks": 1579,
+      "seconds": 31.58,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 404,
+        "delay": 463,
+        "off": 509,
+        "noise": 108,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "a926cc85f07dd826a2a558e14b3d4e32399ba77410da99be095fcb79dd8a3370"
+    },
+    "SCORPNAIN.MB.BIN": {
+      "bytes": 2076,
+      "ticks": 1840,
+      "seconds": 36.8,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 417,
+        "delay": 537,
+        "off": 505,
+        "noise": 89,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "7b9c402f2020829df0d05c4df7edc02ce5b1ed38e5664d897555f138cbd311ef"
+    },
+    "TOUR.MB.BIN": {
+      "bytes": 1045,
+      "ticks": 2318,
+      "seconds": 46.36,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 18,
+        "note": 253,
+        "delay": 210,
+        "off": 271,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "07596adc342cce73f29c1c4bbf04959fd4cacfe4e1ea5753a93cd49e4462bc82"
+    },
+    "TRONC.MB.BIN": {
+      "bytes": 2006,
+      "ticks": 2254,
+      "seconds": 45.08,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "note": 422,
+        "delay": 427,
+        "off": 519,
+        "noise": 97,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 11,
+      "sha256": "a3887cff44e19580c01ec94f6f8742aa11424216304933833a7f86509594b8ee"
+    },
+    "VASE.MB.BIN": {
+      "bytes": 1594,
+      "ticks": 2275,
+      "seconds": 45.5,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 83,
+        "note": 319,
+        "delay": 366,
+        "off": 402,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "33d30ce2be4936574061af67bce6ad916d0cf718dd8744ca91db0126026b0bd2"
+    },
+    "VICTOIRE.MB.BIN": {
+      "bytes": 1265,
+      "ticks": 1294,
+      "seconds": 25.88,
+      "loop": false,
+      "commands": {
+        "volume": 6,
+        "noise": 63,
+        "note": 255,
+        "delay": 289,
+        "off": 318,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 13,
+      "sha256": "d8ba8d2e51647fc7dc1d039d80fc780c51fd62af64afb19fb4687ffefedf0091"
+    },
+    "VILLAGE.MB.BIN": {
+      "bytes": 2254,
+      "ticks": 2038,
+      "seconds": 40.76,
+      "loop": true,
+      "commands": {
+        "volume": 6,
+        "noise": 115,
+        "note": 461,
+        "delay": 504,
+        "off": 576,
+        "fade": 1,
+        "end": 1
+      },
+      "peak_commands_per_tick": 12,
+      "sha256": "9d78dd1cd41b5aca3f609a85f28c7f5927f588c28bb0e5ba89f4affb25117fac"
+    }
+  },
+  "errors": [],
+  "largest": [
+    "MARAISUD.MB.BIN",
+    "COURBENS.MB.BIN",
+    "MARAISNO.MB.BIN",
+    "BRIGANDS.MB.BIN",
+    "VILLAGE.MB.BIN",
+    "LOUPS.MB.BIN",
+    "GRENOUILLES.MB.BIN",
+    "ACCUEIL.MB.BIN",
+    "RONDPOINT.MB.BIN",
+    "ARBRESEPEES.MB.BIN"
+  ],
+  "total_disk_bytes": 84883
+}

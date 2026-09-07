@@ -10,4 +10,4 @@ scream, the flying carpet rises higher and higher, and, soon, the sorcerer
 releases you. You fall, you fall... and everything becomes black... Your
 adventure is over.
 
-MU +MORT.MB
+MU +DEATH.MB

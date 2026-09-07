@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "trade": {
+    "objects": ["CH", "AI", "BJ", "CO"],
+    "amulets": true,
+    "limit": 3,
+    "categories": "N"
+  },
+  "save_migrations": [
+    {
+      "when_none": [".G", ".P", ".S"],
+      "first_visited": [
+        {"page": 371, "give": ".G"},
+        {"page": 173, "give": ".P"},
+        {"page": 206, "give": ".S"}
+      ]
+    }
+  ]
+}

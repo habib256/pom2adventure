@@ -12,4 +12,4 @@ aventure s'acheve ici.
 
    FIN DE L'AVENTURE.
 
-MU +MORT.MB
+MU +DEATH.MB

@@ -6,7 +6,7 @@ au bras; perdez 1 point d'HABILETE, puis atteignez quand meme la clairiere.
 
    Appliquez l'effet immediat avant de poursuivre. Ou allez-vous ensuite?
 
-MU FEUFOLLET.MB
+MU WILLOWISP.MB
 CE HABILETE 0 -1
 C 336 Prendre la direction du sud
 C 121 Prendre la direction de l'est

@@ -9,7 +9,7 @@ narrow and bordered by tight trees.
 
    What do you do?
 
-MU HERBEUX.MB
+MU GRASSLAND.MB
 C 290 Go south
 C 031 Take the east path
 C 118 Take the west path

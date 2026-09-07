@@ -16,6 +16,6 @@ votre choix (max. 3 pierres). Rayez les objets echanges de votre feuille et
 inscrivez vos nouvelles pierres. Ensuite, vous quittez la boutique et reprenez
 la route vers le sud, en direction du Marais aux Scorpions.
 
-MU COURBENS.MB
+MU BENTBEAKS.MB
 C 408 Echanger jusqu'a trois objets contre des Pierres neutres
 C 343 Quitter la boutique et repartir vers le sud

@@ -7,7 +7,7 @@ Silence weighs, only broken by the buzzing of flies.
 
    In which direction do you wish to go?
 
-MU ARENE.MB
+MU ARENA.MB
 C 066 Take the trail rising northward
 C 388 Take the narrow passage eastward
 C 320 Take the path returning westward

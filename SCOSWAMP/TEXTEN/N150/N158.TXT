@@ -13,4 +13,4 @@ year's savings will be yours, as promised."
    You thank him, satisfied: Pompatarte is a man of his word. Your mission
 succeeded and your adventure ends here.
 
-MU +VICTOIRE.MB
+MU +VICTORY.MB

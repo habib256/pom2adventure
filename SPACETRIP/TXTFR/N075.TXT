@@ -1,0 +1,17 @@
+T 075 Quarante millions de temoins
+V 077
+
+   Vous poussez l'anneau lumineux au maximum et vous le braquez sur le casque
+chrome. Le faisceau rebondit, revient, et frappe Bizz Annee-Lumiere en plein
+dans les yeux.
+
+   Il recule d'un pas, trouve le vide, et descend dans l'arene par le chemin
+le plus court en poussant un cri tres aigu pour un ranger de l'espace.
+
+   La bete a trois cornes le renifle, decide qu'il est en plastique et
+s'eloigne. C'est pire que tout. Quarante millions de personnes ont vu.
+
+   Ses douze cameramen filment. Ils sont payes pour filmer.
+
+G .BIZZ
+C 077 Vous rasseoir tranquillement pres de votre voisine de loge

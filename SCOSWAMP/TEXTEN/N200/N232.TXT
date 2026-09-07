@@ -6,7 +6,7 @@ the southern path.
 
    What do you do?
 
-MU LOUPS.MB
+MU WOLVES.MB
 G BA
-C 389 I serve Gayolard
-C 342 Leave the clearing and resume southward
+CI .G 389 I serve Gayolard
+CN .G 342 Leave the clearing and resume southward

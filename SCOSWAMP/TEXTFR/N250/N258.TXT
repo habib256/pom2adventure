@@ -9,6 +9,6 @@ approche subtile. Ne rien faire vous permet d'observer et de garder
 l'initiative, mais vous perdez l'avantage d'etre le premier a agir. Pesez la
 portee, le cout et le risque.
 
-C 198 Prononcer le sort de Peur pour briser sa volonte
-C 127 Tenter le sort d'Amitie pour semer le doute et l'hesitation
+CU TERREUR 198 Prononcer le sort de Peur pour briser sa volonte
+CU AMITIE 127 Tenter le sort d'Amitie pour semer le doute et l'hesitation
 C 212 Ne lancer aucun des deux, attendre et choisir un autre sort

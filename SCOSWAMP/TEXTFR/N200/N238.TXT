@@ -4,5 +4,5 @@ T 238 Clairiere du Maitre des Jardins
 completement deserte. Le calme regne, rien ne bouge. Vous decidez de repartir
 en suivant le sentier vers l'ouest.
 
-MU JARDINS.MB
+MU GARDENS.MB
 C 363 Reprendre la route vers l'ouest

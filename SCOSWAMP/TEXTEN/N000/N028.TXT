@@ -10,6 +10,6 @@ your attack.
 continue reading at the indicated number. Otherwise, your corpse will serve as
 fertilizer for the swamp.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 12 SWORD TREES
 MV 362

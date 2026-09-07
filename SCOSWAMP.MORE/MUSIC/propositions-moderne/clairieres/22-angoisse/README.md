@@ -1,6 +1,6 @@
 # Clairière 22 — Les Fleurs d'Angoisse
 
-**`ANGOISSE.MB.BIN` — 1 773 octets, 39,2 s, boucle.**
+**`DREAD.MB.BIN` — 1 773 octets, 39,2 s, boucle.**
 
 ## La clairière
 
@@ -105,6 +105,6 @@ tonique fait le caractère de la pièce, et c'est lui qui monte au fa.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/22-angoisse
 python3 angoisse.py
-python3 ../../../midi_to_mb.py angoisse.mid ANGOISSE.MB.BIN \
+python3 ../../../midi_to_mb.py angoisse.mid DREAD.MB.BIN \
     --bpm 148 --max 2304 --wav ANGOISSE.wav
 ```

@@ -6,6 +6,6 @@ gaze.
    It leaps with unexpected agility and you understand that no escape is
 possible. The combat will be total, to the death.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 10 FOUL BEAST
 MV 125

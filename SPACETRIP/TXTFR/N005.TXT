@@ -1,15 +1,18 @@
-Montagnes Flottantes de Myria
-------------------------------
+T 005 Le secteur exterieur
 
-La gravite ici est espiegle.
-Des iles de pierre derivent sur de doux courants au-dessus d'une vallee calme.
-Des ponts de corde relient des plateformes qui bougent un peu chaque heure.
-Des planeurs tournent comme des oiseaux lents.
+   Ici les cartes deviennent vagues, puis poetiques, puis fausses. Deux
+soleils se disputent l'horizon d'une planete qui n'a pas d'horizon.
 
-Une large corniche offre un selfie securise avec les pics derriere vous.
-Ne sautez pas entre les iles sans une corde.
+   Quatre balises, quand meme. Le vaisseau Surprise, qui explore ce que
+personne n'a demande d'explorer. Arrakoss, une planete faite de sable et
+de rien d'autre. La station CAL 9000, dont l'ordinateur repond toujours
+poliment. Et Mangeaux, ou un empereur a barbiche organise des combats
+d'arene et attend des cadeaux.
 
-C 002 Retour aux forets de Sylvaria Prime
-C 006 Observer les aurores pres du dome magnetar
-C 008 S'envoler vers la cite du vent d'Aeolis
+   Le Cabriolet attend un cap.
 
+C 040 Le vaisseau Surprise
+C 050 La planete Arrakoss
+C 060 La station CAL 9000
+C 070 La planete Mangeaux
+C 003 Rester au cockpit

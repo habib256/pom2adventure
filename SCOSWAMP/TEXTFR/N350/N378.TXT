@@ -6,7 +6,7 @@ attaque.
 
    Vous pourrez, a tout moment, prendre la Fuite.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 10 10 PATROUILLEUR
 CF 234 Prendre la Fuite
 MV 219

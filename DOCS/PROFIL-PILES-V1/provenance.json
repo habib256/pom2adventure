@@ -1,0 +1,12 @@
+{
+  "original_cpu_sha256": "db24e79bdcdcb2ee4c2f2122cd8d6ca121c5b14523f41c3315ed4c388b32483e",
+  "instrumented_cpu_sha256": "58dd5eb42397646521f8d5d7302915fec04d894f966a54c951f6021700fbd785",
+  "game_sha256": "6ffea52d01afee97bc26c4087956a81428016c89abf71651f8ae4820d95c053c",
+  "hdv_sha256": "81b14116bff5058631d29f606f52a3de48d0c88f14f537fd42ddd861f5405bb1",
+  "main_pc": 33011,
+  "exit_pc": 16396,
+  "c_sp_zp": 128,
+  "c_scope": "JSR boundaries in MAIN code only",
+  "hardware_scope": "all pushes and instruction boundaries after main until exit",
+  "instrumented_emulator_sha256": "bdb3ba84ae5a7d567a7e4e6ab1522104118332193b27217459e12b9faccb120c"
+}

@@ -16,5 +16,8 @@ You leave the village, heading north, toward the dark Scorpion Swamp, map and
 destiny in hand.
 
 MU VILLAGE.MB
+GX .G
+GX .S
+G .P
 PC 5 N
 C 009 Begin your journey in the Swamp

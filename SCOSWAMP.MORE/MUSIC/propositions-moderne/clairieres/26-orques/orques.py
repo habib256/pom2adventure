@@ -27,7 +27,7 @@ Ce que la revision ajoute :
 28 mesures a 4/4, 40,5 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8).
 
     python3 orques.py && python3 ../../../midi_to_mb.py orques.mid \\
-        ORQUES.MB.BIN --bpm 166 --max 2304 --wav ORQUES.wav
+        ORCS.MB.BIN --bpm 166 --max 2304 --wav ORQUES.wav
 """
 import sys
 from pathlib import Path

@@ -12,4 +12,4 @@ It's impossible to flee or fight them; the mud holds you from all sides.
 remains of you. Your adventure is over. Next time, without magic, you won't
 leave the Scorpion Swamp alive.
 
-MU +MORT.MB
+MU +DEATH.MB

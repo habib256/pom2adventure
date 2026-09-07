@@ -9,7 +9,7 @@ using branches.
 hear wingbeats behind you and see an enormous EAGLE flying above the clearing
 observing you attentively. Do you have:
 
-MU AIGLE.MB
+MU EAGLE.MB
 CI PL 392 Parrot Feathers
 CI FAUX 025 A Silver bird-shaped Amulet
 C 233 Neither one nor the other

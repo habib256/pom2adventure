@@ -4,7 +4,7 @@ T 309 Trois chemins
 
    Dans quelle direction souhaitez-vous aller ?
 
-MU ORQUES.MB
+MU ORCS.MB
 C 047 Au nord
 C 053 Au sud
 C 388 A l'ouest

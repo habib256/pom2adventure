@@ -1,0 +1,16 @@
+T 026 Selfie avec le Seigneur Vapeur
+V 028
+
+   Vous coupez le flash. La piece reste noire ; la seule lumiere vient des
+diodes rouges du casque, qui vous eclairent tous les deux par en dessous,
+comme deux enfants avec une lampe de poche sous une couverture.
+
+   -- Voila, dit le Seigneur Vapeur. Keuh-hooo. C'est une belle lumiere.
+
+   Il pose une main gantee sur votre epaule. Le cliche est parfait :
+menacant, chaleureux, mal cadre. Vous tenez votre premiere legende.
+
+   -- Ne me taguez pas. Keuh-hooo. Enfin si. Taguez-moi.
+
+G S1
+C 003 Redescendre au hangar et retrouver le Cabriolet

@@ -1,0 +1,21 @@
+T 015 La patte de Chewpaca
+V 019
+
+   Vous tendez la main. Han Seul dit "Mauvaise idee" avec le calme d'un
+homme qui a deja vu cette mauvaise idee.
+
+   Chewpaca vous regarde longtemps. Puis il pose sa patte dans votre main,
+et c'est enorme, et c'est chaud, et c'est etonnamment leger. Un eclat de
+chrome poli s'est plante entre deux coussinets : un morceau de drone de
+tournage, tombe d'une equipe qui court au ralenti.
+
+   Vous tirez. Le hurlement fait tomber deux bouteilles et un Klingue.
+
+   Puis le copilote fouille dans son harnais et vous met dans la main une
+carte plastifiee : une accreditation presse, encore tiede, avec un menton
+chrome sur la photo. Il l'a "trouvee". Han Seul ne dit rien du tout, ce
+qui, chez lui, est un compliment.
+
+G PASS
+C 012 Revenir a la table
+C 010 Retourner dans la salle

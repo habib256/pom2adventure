@@ -5,4 +5,5 @@ T 306 The Furious Patroller
    If you had made him lose STAMINA points, he's recovered them all since,
 thanks to a STAMINA Magic Stone he used on himself. You must fight him again.
 
+MR 255 10
 C 378 Fight the Patroller

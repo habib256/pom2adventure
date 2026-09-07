@@ -17,4 +17,4 @@ n'avez pas encore atteint la porte d'entree lorsque l'odeur de soufre devient
 insupportable. La tour tout entiere s'embrase alors et explose. C'est ainsi
 que se termine votre aventure.
 
-MU +MORT.MB
+MU +DEATH.MB

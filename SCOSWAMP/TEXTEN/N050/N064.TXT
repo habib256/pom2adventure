@@ -10,7 +10,7 @@ stagger, short of breath.
    The wound handicaps your sword hand: you lose striking power. Immediately,
 you lose 3 SKILL points and 1 STAMINA point. Only hand-to-hand combat remains.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 11 10 WOLF MASTER
 CF 314 Flee if you are in a bad position
 E HABILETE -3

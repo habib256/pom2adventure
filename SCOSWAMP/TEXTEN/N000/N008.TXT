@@ -8,6 +8,6 @@ healing. Weigh the advantage: the potion heals, the stones serve magic.
 
    What do you do?
 
-C 141 Trade the remaining Stones for the Potion
-C 316 Say that you've used them all
+CT 1 15 141 Trade the remaining Stones for the Potion
+CT 0 0 316 Say that you've used them all
 C 341 Attack Pompatarte

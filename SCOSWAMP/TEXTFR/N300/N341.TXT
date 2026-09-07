@@ -13,7 +13,7 @@ redoutable adversaire.
    Il tourne le dos a la porte, et si vous souhaitez prendre la Fuite, il vous
 faudra plonger par la fenetre.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 14 POMPATARTE
 MS 6
 MV 372

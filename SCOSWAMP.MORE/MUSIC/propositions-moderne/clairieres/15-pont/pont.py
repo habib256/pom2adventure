@@ -44,7 +44,7 @@ est le procede de la zone, on ne le retire pas.
 A'(6) la reprise, a l'octave.
 
     python3 pont.py && python3 ../../../midi_to_mb.py pont.mid \\
-        PONT.MB.BIN --bpm 154 --max 2304 --wav PONT.wav
+        BRIDGE.MB.BIN --bpm 154 --max 2304 --wav PONT.wav
 """
 import sys
 from pathlib import Path

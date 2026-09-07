@@ -1,0 +1,18 @@
+T 022 The Corridor Called Grey
+
+   -- Move along, says the trouper without looking up.
+
+   You move along. The armour is two sizes too big; you walk like a broken
+elevator. The corridor is grey, the carpet is grey, the air is grey. On one
+bulkhead, a service notice nobody has read in ten years:
+
+   WASTE CHUTES. HATCH ONE: plasma furnace. HATCH TWO: ventilation,
+   cold draught. HATCH THREE: secondary grinder.
+
+   A trouper walks past shivering. "Number two is blowing again," he
+grumbles. "We have been freezing at that post since Monday."
+
+   Boots. A patrol is coming. A great many boots.
+
+C 023 Dive into the waste chute
+C 003 Turn back towards the Convertible

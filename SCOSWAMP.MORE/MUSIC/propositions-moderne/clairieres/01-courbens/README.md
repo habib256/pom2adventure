@@ -1,6 +1,6 @@
 # Clairière 1 — Route de Courbensaule (`hub` 078, case 0,0)
 
-**`COURBENS.MB.BIN` — 2 276 octets, 38,2 s, boucle.**
+**`BENTBEAKS.MB.BIN` — 2 276 octets, 38,2 s, boucle.**
 
 ## Les pages
 
@@ -90,6 +90,6 @@ partie, page 009 puis page 280.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/01-courbens
 python3 courbens.py
-python3 ../../../midi_to_mb.py courbens.mid COURBENS.MB.BIN \
+python3 ../../../midi_to_mb.py courbens.mid BENTBEAKS.MB.BIN \
     --bpm 176 --max 2304 --wav COURBENS.wav
 ```

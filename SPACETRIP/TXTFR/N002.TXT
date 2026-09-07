@@ -1,15 +1,19 @@
-Sylvaria Prime - Forets Eternelles
------------------------------------
+T 002 Le cockpit du Cabriolet
+V 003
 
-Bienvenue sur Sylvaria Prime, la legendaire planete des forets eternelles !
-D'immenses arbres multicolores s'elevent a perte de vue, leurs feuilles
-cristallines tintant melodieusement dans la brise parfumee.
-Des creatures bioluminescentes virevoltent entre les branches gigantesques.
+   Le toit se referme avec un clac de boite a biscuits. La carte stellaire
+s'allume et repeint votre visage en violet. Deux secteurs clignotent :
+l'interieur, tiede et frequente, et l'exterieur, ou les cartes disent
+seulement ICI, PROBABLEMENT.
 
-L'endroit ideal pour un selfie memorable ! La lumiere filtree par
-la canopee cree une ambiance feerique. Parfait pour votre feed Instagram.
-Mais attention, ne vous perdez pas dans ce labyrinthe vegetal...
+   Vous calez l'Holophone sur son bras articule. L'anneau lumineux
+s'allume. Vous etes en direct. Vous l'etiez deja, en fait, depuis vingt
+minutes : vos douze abonnes ont vu la ceinture de securite se coincer.
 
-C 001 Rentrer au bercail
-C 005 Deriver vers les montagnes flottantes de Myria
-C 007 Descendre dans les canyons de cristal
+   Un message arrive. Bizz Annee-Lumiere, en gros plan, un selfie derriere
+lui : un casque noir qui respire comme un radiateur. "UN de fait, les
+amis ! Plus que quatre !" Quarante millions de coeurs defilent.
+
+   Vous avez un Cabriolet, un telephone et du culot. C'est un debut.
+
+C 003 Prendre les commandes

@@ -1,0 +1,14 @@
+T 069 Je suis desole
+
+   "Non", dit la voix douce, sans le moindre reproche. "Je suis desole. Je
+suis vraiment tres desole. Vous n'avez pas trouve, et je ne peux pas ouvrir
+cette porte."
+
+   L'oeil rouge s'attriste d'un ton. Le couloir s'incline de deux degres. Une
+trappe de service s'ouvre sous vos bottes avec une delicatesse exquise.
+
+   "Je vous souhaite une excellente journee", ajoute CAL pendant que vous
+tombez vers le sas d'evacuation. C'est dit avec une telle gentillesse que
+vous le remerciez en tombant.
+
+C 007 Vous laisser ramasser par le pilote automatique

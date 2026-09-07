@@ -1,0 +1,17 @@
+T 023 The Garbage Compactor
+
+   You land on a mattress of soft things whose origin you would rather not
+establish. Somewhere above you a door locks. Something long and lukewarm
+brushes your ankle, thinks better of it, and leaves.
+
+   A clunk. The two walls begin moving towards each other with the calm
+patience of a government department.
+
+   Three maintenance hatches at shoulder height, numbered ONE, TWO and THREE.
+You have time to open exactly one.
+
+   On the Holophone, the live viewer count is climbing. They love this.
+
+C 024 Force hatch ONE
+C 025 Force hatch TWO
+C 024 Force hatch THREE

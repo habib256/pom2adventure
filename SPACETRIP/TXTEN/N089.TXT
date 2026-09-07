@@ -1,0 +1,14 @@
+T 089 The bin is empty
+
+   You go back over your own steps and there is nothing left to take.
+
+   The heated cupboard in the pod stands open and empty. The white armour
+is a stack of plates you piled up yourself. Trolley has already sorted
+everything, twice, for the sake of its conscience.
+
+   It waves its binoculars at you. In a dump you never find the same thing
+twice: that is the one rule of the place, and it is also the definition of
+a dump.
+
+C 081 Back into the rubbish
+C 003 Back to the Convertible

@@ -4,5 +4,5 @@ T 399 Magic against the Orcs
 
 CU TERREUR 346 A Terror Stone
 CU ILLUSION 169 Illusion
-C 188 None of these
+C 309 Use no Stone and flee
 C 281 Fight with sword

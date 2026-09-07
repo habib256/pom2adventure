@@ -1,0 +1,21 @@
+T 032 Joanesy and Ripleigh
+
+   You shake the bag. The sound of kibble crosses the known universe. The
+ginger cat trots up, dignified, as though it had summoned you.
+
+   A hand comes out of the shadows and grabs it. A woman in a vest, short
+hair, a device slung on one shoulder. She looks like she has not slept in a
+month and is handling everything perfectly.
+
+   -- Joanesy. Never do that again. Ripleigh, second officer.
+
+   She holds up the device, a rectangle that beeps.
+
+   -- The tracker counts what moves. A slow, perfectly regular beep is a
+machine: a machine does not breathe. Everything else breathes. And what
+breathes on this ship hates white light. That is why it lives down in the
+holds and not up here.
+
+G .RIPL
+C 033 Follow Ripleigh to the airlocks
+C 003 Head back to the Convertible while she talks

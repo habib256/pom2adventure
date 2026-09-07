@@ -7,7 +7,7 @@ taille, un tronc creux massif, et deux chemins se dessinent un peu plus loin.
 
    Que voulez-vous faire?
 
-MU TRONC.MB
+MU LOG.MB
 C 021 S'asseoir sur une pierre pour se reposer
 C 055 Inspecter le tronc creux
 C 390 Quitter la clairiere immediatement

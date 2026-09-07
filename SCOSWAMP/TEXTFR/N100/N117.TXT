@@ -13,5 +13,5 @@ Prenez garde."
    Il reprend son Amulette et s'en va. Peu a peu, vous retrouvez vos forces et
 reprenez la route vers l'ouest.
 
-MU JARDINS.MB
+MU GARDENS.MB
 C 363 Partir vers l'ouest

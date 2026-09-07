@@ -7,6 +7,6 @@ the Antherique bush there.
 sorcerer taking with you the precious berry. The only path you can take for
 now is oriented south.
 
-MU LOUPS.MB
+MU WOLVES.MB
 G .T
 C 342 Continue south

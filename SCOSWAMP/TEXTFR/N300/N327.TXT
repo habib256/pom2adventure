@@ -15,4 +15,4 @@ annees dans les geoles de la ville.
 
    FIN DE L'AVENTURE.
 
-MU +MORT.MB
+MU +DEATH.MB

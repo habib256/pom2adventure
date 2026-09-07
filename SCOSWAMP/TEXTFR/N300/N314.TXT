@@ -3,6 +3,6 @@ T 314 Deux directions
    Vous avez le choix entre deux directions. Un enorme escargot passe
 doucement devant vous.
 
-MU MAITRELOUPS.MB
+MU WOLFMASTER.MB
 C 090 Aller au nord
 C 195 Aller a l'est

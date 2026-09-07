@@ -1,0 +1,19 @@
+T 084 L'armure blanche
+V 089
+
+   L'armure est assise contre un moteur mort, casque baisse, comme si elle
+attendait la releve depuis onze ans. Elle est vide. Elle a toujours ete un
+peu vide, cette armure-la.
+
+   Vous la demontez piece par piece. Le plastron est raye par quelque
+chose qui a rate son coup de tres loin. Le casque offre un champ de vision
+de douze degres, ce qui explique enormement de choses.
+
+   Vous l'enfilez. Les bottes sont trop grandes, les gants sont trop
+grands, tout est trop grand, et pourtant, dans un couloir mal eclaire,
+personne ne verra la difference. Personne ne regarde jamais ces gens-la.
+
+   Vous saluez la carcasse. Elle ne repond pas.
+
+G UNIF
+C 081 Repartir dans les ordures

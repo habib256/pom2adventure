@@ -13,4 +13,4 @@ fuir ou de les combattre; la vase vous retenant de toutes parts.
 qu'un squelette sous les arbres. Votre aventure est terminee. La prochaine
 fois, sans la magie, on ne sort pas vivant du Marais aux Scorpions.
 
-MU +MORT.MB
+MU +DEATH.MB

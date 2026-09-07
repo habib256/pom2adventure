@@ -1,0 +1,34 @@
+{
+  "info_seconds_observed": 0.9999096250394359,
+  "images": 3,
+  "failures": [],
+  "headless": "/Users/gistair/src/pom2adventure/SCOSWAMP.MORE/TOOLS/build/pom2_playtest",
+  "hdv_sha256": "e0a8891a41f0bcd0c9c7512bd595206130edd1f3def5cee5463f4ba1c5cefc3e",
+  "checks": [
+    "80-column English title",
+    "one-second mixed introduction then full DHGR",
+    "Bitsy Bye keyboard launch",
+    "pause stable",
+    "automatic resume",
+    "all image bytes AUX+MAIN",
+    "manual advance",
+    "ESC returns to Bitsy Bye"
+  ],
+  "verified": [
+    {
+      "index": 2,
+      "path": "IMG/N000/B026.RLE",
+      "sha256": "d6025ff665dd2de731bb0724ba90ad4c5ac020b2d3052eef03851e4338b6de35"
+    },
+    {
+      "index": 3,
+      "path": "IMG/N000/B028.RLE",
+      "sha256": "c9d2f2f9f065a8870424c326cab3f6cd16571f05fe6ed03251e45b3f69cf00da"
+    },
+    {
+      "index": 4,
+      "path": "IMG/N000/N000.RLE",
+      "sha256": "15aa2de67d61d9ef25b6ba1d6e3dd7ba93fa58dea3d83437b6f83a48daf6b947"
+    }
+  ]
+}

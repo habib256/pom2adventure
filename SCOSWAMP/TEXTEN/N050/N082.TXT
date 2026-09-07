@@ -5,7 +5,7 @@ T 082 Combat at the Pool
    The POOL BEAST surges from the water and strikes you with its tentacles.
 Its rubbery blows can unbalance you; the duel begins.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 8 10 POOL BEAST
 CF 330 Flee westward
 MV 308

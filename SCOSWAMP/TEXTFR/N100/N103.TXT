@@ -9,5 +9,5 @@ direction."
 
    Vous le remerciez puis reprenez votre route.
 
-MU GEANT.MB
+MU GIANT.MB
 C 161 Partir vers l'ouest

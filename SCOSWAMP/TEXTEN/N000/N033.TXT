@@ -9,6 +9,6 @@ it.
 
    What do you do?
 
-MU PINCES.MB
+MU PINCERS.MB
 C 134 Fight the Pincer Grass with sword strokes
 C 167 Resort to magic to contain it

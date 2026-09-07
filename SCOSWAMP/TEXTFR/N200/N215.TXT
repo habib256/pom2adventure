@@ -6,6 +6,7 @@ siffle et tranche net la gorge du premier en plein saut.
    Le second tourne autour de vous, cherchant l'angle d'attaque. Il faut tenir
 bon et combattre jusqu'au bout.
 
-MU +COMBAT.MB
+MM 1
+MU +BATTLE.MB
 M 7 6 LOUP
 MV 247

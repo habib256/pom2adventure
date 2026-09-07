@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "objects": [
+    {
+      "id": "ANNEAU",
+      "bit": 0,
+      "hidden": false,
+      "labels": {
+        "FR": "Anneau de Cuivre",
+        "EN": "Copper Ring"
+      }
+    },
+    {
+      "id": "CAPE",
+      "bit": 1,
+      "hidden": false,
+      "labels": {
+        "FR": "Cape Rouge",
+        "EN": "Red Cape"
+      }
+    },
+    {
+      "id": "CH",
+      "bit": 2,
+      "hidden": false,
+      "labels": {
+        "FR": "Chaine d'Or",
+        "EN": "Gold Chain"
+      }
+    },
+    {
+      "id": "AI",
+      "bit": 3,
+      "hidden": false,
+      "labels": {
+        "FR": "Aimant d'Or",
+        "EN": "Gold Magnet"
+      }
+    },
+    {
+      "id": "FI",
+      "bit": 4,
+      "hidden": false,
+      "labels": {
+        "FR": "Fiole scellee",
+        "EN": "Sealed Vial"
+      }
+    },
+    {
+      "id": "BA",
+      "bit": 5,
+      "hidden": false,
+      "labels": {
+        "FR": "Baie d'Antherique",
+        "EN": "Antherique Berry"
+      }
+    },
+    {
+      "id": "EP",
+      "bit": 6,
+      "hidden": false,
+      "labels": {
+        "FR": "Epee Magique",
+        "EN": "Magic Sword"
+      }
+    },
+    {
+      "id": "BJ",
+      "bit": 7,
+      "hidden": false,
+      "labels": {
+        "FR": "Bijou Violet",
+        "EN": "Purple Jewel"
+      }
+    },
+    {
+      "id": "CO",
+      "bit": 8,
+      "hidden": false,
+      "labels": {
+        "FR": "Corne de Licorne",
+        "EN": "Unicorn Horn"
+      }
+    },
+    {
+      "id": "PL",
+      "bit": 9,
+      "hidden": false,
+      "labels": {
+        "FR": "Plumes de Perroquet",
+        "EN": "Parrot Feathers"
+      }
+    },
+    {
+      "id": "GR",
+      "bit": 10,
+      "hidden": false,
+      "labels": {
+        "FR": "Graines d'Arbre-Epee",
+        "EN": "Sword Tree Seeds"
+      }
+    },
+    {
+      "id": ".T",
+      "bit": 11,
+      "hidden": true,
+      "labels": {
+        "FR": "",
+        "EN": ""
+      }
+    },
+    {
+      "id": ".G",
+      "bit": 12,
+      "hidden": true,
+      "labels": {
+        "FR": "",
+        "EN": ""
+      }
+    },
+    {
+      "id": ".P",
+      "bit": 13,
+      "hidden": true,
+      "labels": {
+        "FR": "",
+        "EN": ""
+      }
+    },
+    {
+      "id": ".S",
+      "bit": 14,
+      "hidden": true,
+      "labels": {
+        "FR": "",
+        "EN": ""
+      }
+    },
+    {
+      "id": ".D",
+      "bit": 15,
+      "hidden": true,
+      "labels": {
+        "FR": "",
+        "EN": ""
+      }
+    }
+  ]
+}

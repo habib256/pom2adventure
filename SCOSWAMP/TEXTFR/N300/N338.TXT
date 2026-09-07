@@ -4,5 +4,5 @@ T 338 Retour au Scorpion Geant
 le Nain. Il n'y reste plus rien a present, a part quelques ossements et une
 cuirasse.
 
-MU SCORPNAIN.MB
+MU DWARFSCORP.MB
 C 088 Continuer

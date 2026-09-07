@@ -28,7 +28,7 @@ a la mesure 11 ; l'harmonie se resserre a mesure que la piece avance.
 28 mesures a 4/4, 49 s de boucle.
 
     python3 accueil.py && python3 ../../midi_to_mb.py accueil.mid \\
-        ACCUEIL.MB.BIN --bpm 136 --max 2304 --wav ACCUEIL.wav
+        WELCOME.MB.BIN --bpm 136 --max 2304 --wav ACCUEIL.wav
 """
 import sys
 from pathlib import Path

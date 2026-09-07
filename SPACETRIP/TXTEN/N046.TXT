@@ -1,0 +1,13 @@
+T 046 The bridge, second visit
+
+   The officer with the pointed ears looks up from his console, identifies
+you in a quarter of a second and nods by half a centimetre.
+
+   "You already possess an image of me. Possessing two would not increase
+your follower count by any measurable amount."
+
+   At the back, the captain rehearses one line in three pieces in front of a
+mirror. Nobody is watching him. He carries on anyway.
+
+C 047 Take a detour past the transporter
+C 003 Have yourself beamed back to the Convertible

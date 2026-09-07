@@ -1,0 +1,19 @@
+T 090 L'appel au Sponsor Vortex
+
+   Vous composez la frequence du Sponsor Vortex depuis le cockpit. Trois
+notes, un souffle, et l'ecran de bord s'assombrit tout seul, ce qu'aucun
+manuel de la marque n'autorise.
+
+   Une voix arrive. Chaleureuse, amusee, et beaucoup trop proche.
+
+   -- @CosmoSelfie. Douze abonnes. Une fusee decapotable. J'attendais votre
+appel depuis... enfin. Disons que j'attendais.
+
+   Vous demandez qui il est. Il repond qu'on verra apres.
+
+   -- Le Grand Defi Selfie Galactique reclame cinq legendes de l'univers.
+Cinq. Montrez-moi votre fil, et ne trichez pas : je vois les retouches.
+
+CI S1 091 Ouvrir le fil sur le seigneur au casque noir
+CN S1 097 Ouvrir le fil en esperant qu'il ne compte pas
+C 003 Raccrocher : il vous manque encore du monde

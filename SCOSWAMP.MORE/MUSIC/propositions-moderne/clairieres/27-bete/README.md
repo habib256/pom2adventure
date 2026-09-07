@@ -1,6 +1,6 @@
 # Clairière 27 — Cul-de-sac de la Bête (`hub` 125)
 
-**`BETE.MB.BIN` — 1 467 octets, 45,6 s, boucle, avec batterie.**
+**`BEAST.MB.BIN` — 1 467 octets, 45,6 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
@@ -81,6 +81,6 @@ stéréo 60/40.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/27-bete
 python3 bete.py
-python3 ../../../midi_to_mb.py bete.mid BETE.MB.BIN \
+python3 ../../../midi_to_mb.py bete.mid BEAST.MB.BIN \
     --bpm 143 --max 2304 --wav BETE.wav
 ```

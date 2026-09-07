@@ -1,5 +1,10 @@
 # Mémoire sur Apple IIe Enhanced
 
+**Mesures actuelles de SCOSWAMP, 6 septembre 2026 :** voir
+l'[audit du binaire, des fonctions et des buffers](AUDIT-MEMOIRE-SCOSWAMP.md).
+Les valeurs historiques ci-dessous expliquent les étapes de développement ;
+elles ne remplacent pas les adresses et marges mesurées dans cet audit.
+
 Comment le projet occupe la mémoire, ce qui reste disponible, et ce qu'il en
 coûte de le récupérer. Toutes les valeurs ont été mesurées avec cc65 2.19.
 

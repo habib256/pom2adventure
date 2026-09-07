@@ -3,7 +3,7 @@
 
 Variation dans la couleur `sud` : c'est la piece des douze qui reprend le plus
 franchement le procede de la zone — la marche i-VI-III-VII (Fm-Db-Ab-Eb, celle
-de `MARAISUD.MB` transposee) sur un **bourdon de tonique** qui ne bouge pas. Le
+de `SOUTHSWAMP.MB` transposee) sur un **bourdon de tonique** qui ne bouge pas. Le
 Marais est le meme ; l'animal, non.
 
 Ce qui appartient a la clairiere, c'est la **noblesse** : la section A est en
@@ -44,7 +44,7 @@ tenus qui a cede la place — le bourdon de tonique est le procede de la zone.
 A'(4).
 
     python3 licorne.py && python3 ../../../midi_to_mb.py licorne.mid \\
-        LICORNE.MB.BIN --bpm 142 --max 2304 --wav LICORNE.wav
+        UNICORN.MB.BIN --bpm 142 --max 2304 --wav LICORNE.wav
 """
 import sys
 from pathlib import Path

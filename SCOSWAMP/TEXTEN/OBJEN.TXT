@@ -1,0 +1,16 @@
+ANNEAU Copper Ring
+CAPE Red Cape
+CH Gold Chain
+AI Gold Magnet
+FI Sealed Vial
+BA Antherique Berry
+EP Magic Sword
+BJ Purple Jewel
+CO Unicorn Horn
+PL Parrot Feathers
+GR Sword Tree Seeds
+.T
+.G
+.P
+.S
+.D

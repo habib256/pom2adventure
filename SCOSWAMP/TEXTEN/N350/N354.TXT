@@ -12,6 +12,6 @@ corpse instantly catches fire.
 behind you. The fire will quickly burn the spiders, but you must hurry to get
 to 165 if you don't want to be carbonized in turn!
 
-MU ARAIGNEES.MB
+MU SPIDERS.MB
 G ARAIGNEE
 C 165 Leave immediately

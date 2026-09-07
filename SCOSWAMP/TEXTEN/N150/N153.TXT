@@ -6,6 +6,6 @@ heavy, and you cast a last look behind you before resuming the path.
    Two directions offer themselves to you: north or west. The ground seems
 drier there, but danger remains.
 
-MU VASE.MB
+MU MUD.MB
 C 218 Go north
 C 065 Take the western path

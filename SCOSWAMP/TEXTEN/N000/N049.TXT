@@ -9,5 +9,6 @@ adventure therefore ends before it began.
 
    END OF ADVENTURE.
 
+E OR +100
 GX ANNEAU
-MU +MORT.MB
+MU +DEATH.MB

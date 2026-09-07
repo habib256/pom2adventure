@@ -6,6 +6,6 @@ T 159 Retour au Maitre
 compte de votre succes ou de votre echec.
 
 MU VILLAGE.MB
-C 006 Si vous servez Gayolard
-C 226 Si vous etes au service de Stratagus
-C 056 Si vous avez choisi Pompatarte
+CI .G 006 Si vous servez Gayolard
+CI .S 226 Si vous etes au service de Stratagus
+CI .P 056 Si vous avez choisi Pompatarte

@@ -8,5 +8,5 @@ Orques des Marais.
    Vous empoignez votre epee au cas ou il vous faudrait livrer une nouvelle
 bataille.
 
-MU ORQUES.MB
+MU ORCS.MB
 C 323 Continuer

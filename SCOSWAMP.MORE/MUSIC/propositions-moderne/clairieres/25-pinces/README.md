@@ -1,6 +1,6 @@
 # Clairière 25 — Herbe à Pinces (`hub` 187)
 
-**`PINCES.MB.BIN` — 2 184 octets, 43,9 s, boucle, avec batterie.**
+**`PINCERS.MB.BIN` — 2 184 octets, 43,9 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
@@ -76,6 +76,6 @@ stéréo 62/38.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/25-pinces
 python3 pinces.py
-python3 ../../../midi_to_mb.py pinces.mid PINCES.MB.BIN \
+python3 ../../../midi_to_mb.py pinces.mid PINCERS.MB.BIN \
     --bpm 176 --max 2304 --wav PINCES.wav
 ```

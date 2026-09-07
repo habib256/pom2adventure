@@ -43,7 +43,7 @@ le caractere de la piece, on ne le retire pas.
 24 mesures a 4/4, 43,6 s. Forme intro(4) - A(8) - B(8) - A'(4).
 
     python3 croupie.py && python3 ../../../midi_to_mb.py croupie.mid \\
-        CROUPIE.MB.BIN --bpm 132 --max 2304 --wav CROUPIE.wav
+        STAGNANT.MB.BIN --bpm 132 --max 2304 --wav CROUPIE.wav
 """
 import sys
 from pathlib import Path

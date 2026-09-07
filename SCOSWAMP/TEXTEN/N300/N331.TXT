@@ -1,8 +1,9 @@
 T 331 The Eagle's Nest
+AC
 
    You're back in the clearing where the large Eagle established its nest. You
 see nothing else than the old tree and the nest it- self.
 
-MU AIGLE.MB
-C 202 If you fought the Eagle
-C 112 Otherwise
+MU EAGLE.MB
+CV 392 202 If you fought the Eagle
+CX 392 112 Otherwise

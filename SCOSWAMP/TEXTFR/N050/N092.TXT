@@ -1,5 +1,6 @@
 T 092 Les deux loups
-V 108 232 247 389
+VR 108 020 232 389 108
+VR 247 247
 
    Le chemin vers le nord s'eleve peu a peu. Le sol devient plus sec et la
 vegetation des marais cede place a une foret profonde.
@@ -10,6 +11,6 @@ parsemee de buissons.
    Vous tendez l'oreille, mais rien d'anormal ne trouble le silence. Puis,
 soudain, deux enormes loups apparaissent et vous fixent dans l'ombre.
 
-MU LOUPS.MB
+MU WOLVES.MB
 CI LOUP 344 Si vous possedez l'Amulette en forme de Loup
 CN LOUP 068 Sinon

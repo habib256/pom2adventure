@@ -1,0 +1,17 @@
+T 045 Illogique, mais fascinant
+V 046
+
+   La bonne porte s'ouvre sur la passerelle : sieges pivotants, ecran geant,
+lumieres qui clignotent dans un ordre que personne n'a jamais explique.
+
+   "Votre raisonnement etait correct", dit l'officier. Vous sortez
+l'Holophone. Il regarde l'anneau lumineux comme on regarde un insecte rare.
+
+   "Un portrait de soi-meme, pris par soi-meme, destine a des gens qu'on ne
+connait pas." Le sourcil monte. "Illogique. Mais fascinant."
+
+   Il ne sourit pas. Il ne sourit jamais. Le cliche est parfait.
+
+G S2
+C 047 Passer reprendre votre botte au telepositeur
+C 003 Vous faire teleporter jusqu'au Cabriolet

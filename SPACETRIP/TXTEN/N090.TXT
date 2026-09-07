@@ -1,0 +1,19 @@
+T 090 Calling the Vortex Sponsor
+
+   You dial the Vortex Sponsor's frequency from the cockpit. Three notes, a
+breath, and the console dims all by itself, which no manual anywhere allows
+for.
+
+   A voice arrives. Warm, amused, and far too close.
+
+   -- @CosmoSelfie. Twelve followers. A convertible rocket. I have been
+waiting for this call since... well. Let us say I have been waiting.
+
+   You ask who he is. He says that can wait.
+
+   -- The Great Galactic Selfie Challenge asks for five legends of the
+universe. Five. Show me your feed, and do not cheat: I can see retouching.
+
+CI S1 091 Open the feed on the black helmet
+CN S1 097 Open the feed and hope he is not counting
+C 003 Hang up: you are still short of legends

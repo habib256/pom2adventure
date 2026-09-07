@@ -1,5 +1,6 @@
 T 031 Bassin de cristal
-V 364 077 394
+VR 364 077 364
+VR 394 394
 
    Vous avancez vers l'est et sentez que vous etes alle trop loin dans le
 marecage.
@@ -11,7 +12,7 @@ la piste par laquelle vous etes arrive vous relie au monde exterieur.
 
    Que faites-vous?
 
-MU CRISTAL.MB
+MU CRYSTAL.MB
 C 047 Quitter les lieux en retournant vers l'ouest
 C 394 Attendre quelques minutes pour observer
 C 077 Boire l'eau du bassin

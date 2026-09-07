@@ -6,5 +6,5 @@ comme la pierre, en souvenir de ce rude combat.
    Vous cherchez un autre chemin pour quitter la clairiere, mais il n'y en a
 aucun. Vous devez repartir par le sentier par lequel vous etes venu.
 
-MU BETE.MB
+MU BEAST.MB
 C 279 Repartir vers l'est

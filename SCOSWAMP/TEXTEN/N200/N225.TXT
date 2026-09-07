@@ -6,6 +6,6 @@ sword. His snapping voice threatens you: "I'm going to kill you!"
 
    The assault is inevitable; you must engage combat without delay.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 9 10 STRATAGUS
 MV 140

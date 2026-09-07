@@ -7,9 +7,10 @@ prepared for dwarves.
    Its effect on you is unusual: for an hour you're smaller and stockier than
 usual, and your nose becomes noticeably larger.
 
-   After an hour you'll regain your normal appearance, but you'll have to
-reduce by 1 point your SKILL total during the next combat you have to fight.
-As soon as this combat ends, your SKILL points return to their initial level.
+   After an hour you will regain your normal appearance. During your next
+combat, your SKILL will count as 1 point lower in your Attack Rounds. This
+temporary effect will cease when the combat ends.
 
+G .D
 GX FI
 C 088 Resume the journey and continue

@@ -3,5 +3,5 @@ T 338 Return to the Giant Scorpion
    You recognize the clearing where you had encountered the Giant Scorpion and
 the Dwarf. Nothing remains there now, except a few bones and armor.
 
-MU SCORPNAIN.MB
+MU DWARFSCORP.MB
 C 088 Continue

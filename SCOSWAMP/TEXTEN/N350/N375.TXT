@@ -15,4 +15,4 @@ you won't have time to escape. Indeed, you haven't yet reached the entrance
 door when the sulfur smell becomes unbearable. The tower entirely then ignites
 and explodes. Thus ends your adventure.
 
-MU +MORT.MB
+MU +DEATH.MB

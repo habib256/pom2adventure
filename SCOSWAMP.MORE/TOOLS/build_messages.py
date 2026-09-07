@@ -31,7 +31,7 @@ MESSAGES = [
     ('M_AUCUNE_PIERRE_MAGIQUE', 'Aucune Pierre Magique.', 'No Magic Stones.'),
     ('M_UNE_PIERRE_SE', "Une Pierre se desintegre a l'usage.  [A-Z] utiliser  [I/ESC] fermer", 'A Stone crumbles when used.  [A-Z] use  [I/ESC] close'),
     ('M_LE_PREMIER_COUP', 'Le premier coup a ete donne.', 'The first blow was struck.'),
-    ('M_PIERRE_ABSENTE', 'Pierre absente.', 'No such Stone.'),
+    ('M_PIERRE_ABSENTE', 'Choix indisponible.', 'Choice unavailable.'),
     ('M_LA_PIERRE_DE', 'La Pierre de %s se desintegre.', 'The %s Stone crumbles.'),
     ('M_VOUS_FUYEZ_ELLE', 'Vous fuyez : elle vous blesse au passage.', 'You flee: it wounds you on the way.'),
     ('M_CHANCEUX', 'Chanceux !', 'Lucky!'),
@@ -79,7 +79,7 @@ MESSAGES = [
     ('M_TOUCHES', 'ESPACE=VUE  A-Z=CHOIX  I=SAC  M=CARTE  Q=QUITTER', 'SPACE=VIEW  A-Z=CHOICE  I=BAG  M=MAP  Q=QUIT'),
     ('M_JET_CONTRE', 'Vous jetez : %u, contre %u.', 'You roll: %u, against %u.'),
     ('M_S_EFFONDRE', "%s s'effondre.", '%s collapses.'),
-    ('M_HELPFR', 'HELPFR', 'HELPEN'),
+    ('M_HELPFR', 'TEXTFR/HELPFR', 'TEXTEN/HELPEN'),
     ('M_FICHIER_D_AIDE', "Fichier d'aide introuvable.", 'Help file not found.'),
     ('M_VOTRE_ENDURANCE_EST', 'Votre ENDURANCE est tombee a zero.', 'Your STAMINA has fallen to zero.'),
     ('M_ESPACE_RECOMMENCER', '[ESPACE] recommencer', '[SPACE] start again'),
@@ -169,7 +169,7 @@ def main():
 
     for suffix, index in (("FR", 1), ("EN", 2)):
         lines = [m[index] for m in MESSAGES]
-        (args.root / "SCOSWAMP" / f"MSG{suffix}.TXT").write_text(
+        (args.root / "SCOSWAMP" / f"TEXT{suffix}" / f"MSG{suffix}.TXT").write_text(
             "\n".join(lines) + "\n", encoding="utf-8")
 
     longest = max(len(m[1]) for m in MESSAGES)

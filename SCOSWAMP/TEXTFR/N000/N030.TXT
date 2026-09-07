@@ -9,4 +9,4 @@ remonter a la surface, essouffle.
 epee et tentez un geste, mais il est vain. Les machoires se referment; la
 douleur est breve. Votre aventure s'acheve dans l'estomac du reptile.
 
-MU +MORT.MB
+MU +DEATH.MB

@@ -20,15 +20,15 @@ static const char* const kStoneEn[STONE_COUNT] = {
 static const char* const kObjectFr[OBJ_COUNT] = {
     "Anneau Cuivre", "Cape Rouge", "Chaine Or", "Aimant Or", "Fiole",
     "Baie Antherique", "Epee Magique", "Bijou Violet", "Corne Licorne",
-    "Plumes de Perroquet", "Graines d'Arbre-Epee", ""
+    "Plumes de Perroquet", "Graines d'Arbre-Epee", "", "", "", "", ""
 };
 static const char* const kObjectEn[OBJ_COUNT] = {
     "Copper Ring", "Red Cape", "Gold Chain", "Gold Magnet", "Vial", "Antherique Berry",
     "Magic Sword", "Purple Jewel", "Unicorn Horn", "Parrot Feathers",
-    "Sword Tree Seeds", ""
+    "Sword Tree Seeds", "", "", "", "", ""
 };
 static const char* const kObjectKey[OBJ_COUNT] = {
-    "ANNEAU", "CAPE", "CH", "AI", "FI", "BA", "EP", "BJ", "CO", "PL", "GR", ".T"
+    "ANNEAU", "CAPE", "CH", "AI", "FI", "BA", "EP", "BJ", "CO", "PL", "GR", ".T", ".G", ".P", ".S", ".D"
 };
 static const char* const kAmuletFr[AMULET_COUNT] = {
     "Amulette du Loup", "Amulette de la Fleur", "Amulette de l'Oiseau",
@@ -275,6 +275,7 @@ void combat_round(const Character* c, const Monster* m, Round* out)
     t.hero_d1    = d; t.hero_d2    = e;
     t.monster_force = (unsigned char)(a + b + m->hab);
     t.hero_force    = (unsigned char)(d + e + c->hab);
+    if (c->hab && (c->objects & (1u << OBJ_POTION_NAINE))) --t.hero_force;
     if (c->objects & (1u << OBJ_EPEMAGIQUE))
         t.hero_force = (unsigned char)(t.hero_force + c->weapon_bonus);
     if (t.hero_force > t.monster_force)      t.outcome = ROUND_HERO_HITS;
@@ -350,10 +351,7 @@ static struct {
 
 void monster_memory_reset(void)
 {
-    unsigned int i;
-    for (i = 0; i < MONSTER_SLOTS; ++i) {
-        seen[i].scene = 0; seen[i].index = 0; seen[i].end = 0;
-    }
+    memset(seen, 0, sizeof seen);
 }
 
 static int slot_of(unsigned int zone)
@@ -363,6 +361,15 @@ static int slot_of(unsigned int zone)
     return -1;
 }
 
+void monster_recover(unsigned int zone, unsigned char amount, unsigned char maximum)
+{
+    int i = slot_of(zone);
+    unsigned int total;
+    if (i < 0 || !seen[i].end || seen[i].end >= maximum) return;
+    total = (unsigned int)seen[i].end + amount;
+    seen[i].end = (unsigned char)(total > maximum ? maximum : total);
+}
+
 int monster_enter(unsigned int zone, Monster* foes, int count)
 {
     int i = slot_of(zone);
@@ -370,7 +377,13 @@ int monster_enter(unsigned int zone, Monster* foes, int count)
 
     if (i < 0) return 0;                 /* jamais combattu ici */
     idx = (int)seen[i].index;
-    if (idx >= count) return count;      /* toute la file est tombee */
+    if (idx >= count) {
+        /* Une interruption au seuil MS laisse le dernier adversaire vivant.
+         * Une nouvelle page peut reprendre ce combat avec un seuil plus bas.
+         * Un adversaire mort, ou une autre longueur de file, ne ressuscite pas. */
+        if (idx != count || !seen[i].end) return count;
+        --idx;
+    }
     foes[idx].end = seen[i].end;
     /* L'adversaire en cours peut avoir ete acheve juste avant la fuite. */
     if (monster_is_beaten(&foes[idx])) return idx + 1;
@@ -392,6 +405,11 @@ void monster_remember(unsigned int zone, int index, const Monster* m)
 
 void monster_memory_export(unsigned char* out)
 {
+#ifdef __CC65__
+    /* cc65 : unsigned int 16 bits little-endian, structure de quatre octets.
+     * La representation native est exactement celle de SCS4/SCS5. */
+    memcpy(out, seen, MONSTER_MEMORY_SIZE);
+#else
     int i;
     for (i = 0; i < MONSTER_SLOTS; ++i) {
         *out++ = (unsigned char)seen[i].scene;
@@ -399,15 +417,20 @@ void monster_memory_export(unsigned char* out)
         *out++ = seen[i].index;
         *out++ = seen[i].end;
     }
+#endif
 }
 
 void monster_memory_import(const unsigned char* in)
 {
+#ifdef __CC65__
+    memcpy(seen, in, MONSTER_MEMORY_SIZE);
+#else
     int i;
     for (i = 0; i < MONSTER_SLOTS; ++i) {
         seen[i].scene = (unsigned int)in[0] | ((unsigned int)in[1] << 8);
         seen[i].index = in[2]; seen[i].end = in[3]; in += 4;
     }
+#endif
 }
 
 /* ── Les clairieres deja parcourues ────────────────────────────────────── */
@@ -460,6 +483,7 @@ int character_has_stone(const Character* c, Stone s)
 
 int stone_usable(Stone s, int in_combat)
 {
+    if (in_combat == 2) return 0; /* rencontre interdisant toute magie */
     if (!in_combat) return 1;
     /* Seules les trois pierres de caracteristique sont bridees, et seulement
      * une fois le premier coup donne. */

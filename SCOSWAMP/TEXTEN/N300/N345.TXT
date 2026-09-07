@@ -7,6 +7,6 @@ experience an increasingly intense heat sensation.
 blaze forbidding you passage. The smoke given off by the fire half chokes you
 and you lose 1 STAMINA point.
 
-MU ARAIGNEES.MB
+MU SPIDERS.MB
 E ENDURANCE -1
 C 165 Continue

@@ -17,6 +17,6 @@ of your mission.
    Which Sorcerer's service did you enter?
 
 GX CAPE
-C 244 Gayolard
-C 317 Stratagus
-C 103 Pompatarte
+CI .G 244 Gayolard
+CI .S 317 Stratagus
+CI .P 103 Pompatarte

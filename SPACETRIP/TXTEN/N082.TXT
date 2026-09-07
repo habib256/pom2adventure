@@ -1,0 +1,20 @@
+T 082 The sorting of Trolley
+
+   The little robot lifts its binoculars towards you, swivels them, and
+emits a beep that sounds a great deal like joy. It taps three bins:
+METAL. ORGANIC. PRECIOUS.
+
+   Then it sets three things in front of you. A rusted spring. A
+fossilised sandwich, hard as a roof tile. A Martian fruit core, its pips
+still damp.
+
+   It beeps out a rule, slowly, so that you understand: here, PRECIOUS
+does not mean expensive. Precious means what is still alive. In a dump
+everything else can be replaced.
+
+   It waits. It has all eternity and you have only the live feed.
+
+C 085 Metal the spring, organic the sandwich, precious the core
+C 086 Metal the spring, organic the core, precious the sandwich
+C 086 Metal the sandwich, organic the spring, precious the core
+C 081 Step back and sort nothing

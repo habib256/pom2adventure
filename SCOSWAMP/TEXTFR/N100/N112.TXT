@@ -2,6 +2,6 @@ T 112 Le grand nid
 
    Ce grand nid attire votre attention.
 
-MU AIGLE.MB
+MU EAGLE.MB
 C 073 Grimper pour l'examiner
 C 202 Repartir

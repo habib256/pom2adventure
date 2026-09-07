@@ -1,0 +1,13 @@
+T 019 On vous a deja tout donne
+
+   Han Seul tapote le fond d'un sac vide et hausse une epaule. "Il n'en
+avait qu'un. Reviens dans six mois, ou jamais."
+
+   Chewpaca leve sa patte gauche, la fait tourner deux fois pour montrer
+qu'elle va bien, et grogne trois syllabes. Han Seul traduit sans lever les
+yeux : "Il dit bonjour."
+
+   L'orchestre a repris son morceau. C'est toujours le meme.
+
+C 012 Revenir a la table
+C 010 Retourner dans la salle

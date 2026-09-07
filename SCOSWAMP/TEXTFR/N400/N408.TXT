@@ -5,6 +5,6 @@ prend dans l'ordre ou il les trouve dans votre sac, puis vous laisse choisir
 une Pierre de Magie neutre pour chacun. Si vous n'avez rien d'acceptable,
 aucun objet ni aucune Pierre ne change de main.
 
-MU COURBENS.MB
+MU BENTBEAKS.MB
 TR
 C 343 Quitter la boutique et repartir vers le sud

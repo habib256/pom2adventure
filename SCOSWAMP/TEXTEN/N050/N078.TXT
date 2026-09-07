@@ -10,7 +10,8 @@ pillow, you fall asleep.
 crossed the Scorpion Swamp and suggests visiting a neighboring sorcerer who
 sells Magic Stones.
 
-MU COURBENS.MB
+MU BENTBEAKS.MB
+E OR -1
 E ENDURANCE +2
 C 150 Go see the sorcerer
 C 343 Leave south to cross the Swamp again

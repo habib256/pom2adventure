@@ -1,0 +1,20 @@
+T 095 Le Sponsor se montre
+
+   Le dernier cliche : l'aventuriere en combinaison de vinyle, bottes
+blanches, une main sur la hanche, une explosion derriere elle, et vous au
+milieu, tres content de vous.
+
+   -- Cinq, dit le Sponsor. Cinq sur cinq. Le contrat est a vous.
+
+   Derriere le Cabriolet, dans le vide, un son impossible : une machine qui
+racle, qui souffle, qui insiste. Une cabine bleue apparait la ou il n'y avait
+rien, se pose sur rien, et ouvre sa porte sur une lumiere beaucoup trop
+chaude.
+
+   Un homme en sort. Longue echarpe. Content de lui.
+
+   -- Le Sponsor Vortex, c'est moi. Bonjour. On m'appelle le Docteur Quoi.
+Vous n'avez pas gagne un million d'abonnes. Vous avez gagne un voyage.
+
+CI .BIZZ 098 Entrer -- et jeter un oeil derriere soi
+CN .BIZZ 099 Entrer dans la cabine bleue

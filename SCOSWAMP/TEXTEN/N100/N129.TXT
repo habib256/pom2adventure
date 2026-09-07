@@ -1,6 +1,7 @@
 T 129 After the Bear
+AC
 
    Did you kill the Bear or flee?
 
-C 268 If you killed the Bear
-C 181 If you fled
+CV 069 268 If you killed the Bear
+CX 069 181 If you fled

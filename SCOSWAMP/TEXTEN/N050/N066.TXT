@@ -13,7 +13,7 @@ don't trust him. Soon, you understand that he's a THIEF.
 
    What do you do?
 
-MU PIQUENIQUE.MB
+MU PICNIC.MB
 C 267 Attack the thief immediately
 C 017 Pay him no attention and continue
 C 147 Accept his invitation and sit beside him

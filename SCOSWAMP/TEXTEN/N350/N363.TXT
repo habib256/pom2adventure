@@ -1,10 +1,11 @@
 T 363 Return to the Patroller
+AC
 
    You return to the clearing where you met the Patroller.
 
    What happened with him?
 
-MU PATROUIL.MB
-C 133 Did you leave on good terms
-C 234 Did you kill him
-C 306 Did you Flee during a combat
+MU PATROLLER.MB
+CV !378,!219 133 Did you leave on good terms
+CV 219 234 Did you kill him
+CV 378,!219 306 Did you Flee during a combat

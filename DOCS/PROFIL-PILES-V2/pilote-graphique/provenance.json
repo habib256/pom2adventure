@@ -1,0 +1,14 @@
+{
+  "original_cpu_sha256": "db24e79bdcdcb2ee4c2f2122cd8d6ca121c5b14523f41c3315ed4c388b32483e",
+  "instrumented_cpu_sha256": "b16333614368fec5f7fc77bff123913fee8f8f053345b1550e9dd27d095cdf0c",
+  "game_sha256": "6ffea52d01afee97bc26c4087956a81428016c89abf71651f8ae4820d95c053c",
+  "hdv_sha256": "81b14116bff5058631d29f606f52a3de48d0c88f14f537fd42ddd861f5405bb1",
+  "main_pc": 33011,
+  "exit_pc": 16396,
+  "c_sp_zp": 128,
+  "c_scope": "all instruction changes to MAIN $80/$81, after initialization at $B289 until _exit",
+  "hardware_scope": "all pushes and instruction boundaries from $4003 (after startup TXS) until _exit",
+  "instrumented_emulator_sha256": "a3fcd1a4f1c6635522af314a5d5136e86825e93280276ad2eeeb6bfd4d45643d",
+  "hardware_start_pc": 16387,
+  "c_start_pc": 45705
+}

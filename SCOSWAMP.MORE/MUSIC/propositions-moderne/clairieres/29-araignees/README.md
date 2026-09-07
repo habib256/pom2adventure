@@ -1,6 +1,6 @@
 # Clairière 29 — Tente aux araignées, le Maître des Araignées (`hub` 165)
 
-**`ARAIGNEES.MB.BIN` — 1 900 octets, 45,1 s, boucle, avec batterie.**
+**`SPIDERS.MB.BIN` — 1 900 octets, 45,1 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
@@ -80,6 +80,6 @@ stéréo 60/40.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/29-araignees
 python3 araignees.py
-python3 ../../../midi_to_mb.py araignees.mid ARAIGNEES.MB.BIN \
+python3 ../../../midi_to_mb.py araignees.mid SPIDERS.MB.BIN \
     --bpm 150 --max 2304 --wav ARAIGNEES.wav
 ```

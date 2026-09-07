@@ -6,7 +6,7 @@ their bows and draw swords.
    Fortunately for you they're unskilled fighters, but you'll have to face
 them all at once....
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 6 7 FIRST SWAMP ORC
 M 7 7 SECOND SWAMP ORC
 M 6 5 THIRD SWAMP ORC

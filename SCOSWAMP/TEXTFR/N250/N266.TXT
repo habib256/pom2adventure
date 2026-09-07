@@ -5,5 +5,6 @@ tournez les talons et marchez le long du couloir sombre vers la porte a la
 hideuse sculpture. Le pas est lourd, l'air est epais; vous vous dirigez vers
 la prochaine etape.
 
-GA 250
+GA 0
+E OR +250
 C 242 Continuer vers la porte a la sculpture

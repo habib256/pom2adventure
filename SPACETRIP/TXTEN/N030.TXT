@@ -1,0 +1,18 @@
+T 030 The Freighter Nostalgo
+
+   The Nostalgo drifts, engines cold, every light dead. You clamp on to her
+flank and step aboard. Inside, the ceiling tubes flicker once every three
+seconds. When they come on, far down the passage, something big backs away
+into the dark. When they go out, it comes one step closer.
+
+   On a crate, an abandoned device beeps to itself, patiently.
+
+   Two yellow eyes watch you from a duct: a ginger cat, tail curled into a
+question mark.
+
+   -- Mrrp, says the cat, with no idea what it is about to cause.
+
+CI .RIPL 032 Rejoin Ripleigh, who is waiting for you on the gangway
+GU CROQ 032 Shake the bag of kibble
+CN CROQ 031 Call out sweetly: here, puss, puss
+C 003 Get out while the passage is still empty

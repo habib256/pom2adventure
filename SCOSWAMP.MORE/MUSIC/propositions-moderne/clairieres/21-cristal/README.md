@@ -1,6 +1,6 @@
 # Clairière 21 — Bassin de cristal
 
-**`CRISTAL.MB.BIN` — 2 056 octets, 40,3 s, boucle.**
+**`CRYSTAL.MB.BIN` — 2 056 octets, 40,3 s, boucle.**
 
 ## La clairière
 
@@ -9,7 +9,7 @@
 | `hub` | **031** |
 | Pages | 031 (le bassin), 077 (boire, `E ENDURANCE +3`), 394 (observer, le Lézard) |
 | Case | (5,4) |
-| Zone de référence | `sud` (`MARAISUD.MB`) |
+| Zone de référence | `sud` (`SOUTHSWAMP.MB`) |
 | Sorties | O → 047 — **cul-de-sac** |
 | Arbitrage | 394 rattaché à cette clairière, comme dans `../propositions/` (`CARTOGRAPHIE.md:810-820`) |
 
@@ -102,6 +102,6 @@ tonique est le procédé de la zone `sud`.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/21-cristal
 python3 cristal.py
-python3 ../../../midi_to_mb.py cristal.mid CRISTAL.MB.BIN \
+python3 ../../../midi_to_mb.py cristal.mid CRYSTAL.MB.BIN \
     --bpm 156 --max 2304 --wav CRISTAL.wav
 ```

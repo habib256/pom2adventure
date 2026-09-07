@@ -4,5 +4,5 @@ T 265 Unicorn Clearing
 place is deserted now; silence weighs. Traces on the ground show the creature
 has left. The road calls you, it's time to advance.
 
-MU LICORNE.MB
+MU UNICORN.MB
 C 348 Continue out of the clearing

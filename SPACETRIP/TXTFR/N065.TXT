@@ -1,0 +1,14 @@
+T 065 La porte s'ouvre
+V 066
+
+   "Seize", repete la voix douce. "Un fois un. Deux fois deux. Trois fois
+trois. Quatre fois quatre. C'est tout ce que la dalle dit, et c'est enorme."
+
+   La porte blanche coulisse sans un bruit. Derriere : une reserve en
+desordre, des caisses, une bache argentee, et une odeur de chocolat chaud
+oublie depuis longtemps.
+
+   "Merci", dit CAL. "Cela faisait onze ans. Je vais laisser ouvert."
+
+G .CAL
+C 066 Entrer dans la reserve

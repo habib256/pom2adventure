@@ -1,0 +1,16 @@
+{
+  "disk_sha256": "77d2971694457aee3f258e4b42da56f2eceedabd4917a134ac8395ed31302729",
+  "cycle": [
+    "80-column text",
+    "full DHGR",
+    "mixed DHGR",
+    "80-column text"
+  ],
+  "emulator": "POM2 headless with Mockingboard",
+  "scenarios": {
+    "video": 20,
+    "stratagus": 16
+  },
+  "failures": 0,
+  "heap_bytes": 2065
+}

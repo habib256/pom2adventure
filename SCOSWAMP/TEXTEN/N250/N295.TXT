@@ -6,7 +6,7 @@ infested with crocodiles and other creatures just as unwelcoming.
 
    What will you do?
 
-MU CROUPIE.MB
+MU STAGNANT.MB
 CU GLACE 089 Throw an Ice Magic Stone
 C 183 Walk eastward, along the bank
 C 094 Go southward instead

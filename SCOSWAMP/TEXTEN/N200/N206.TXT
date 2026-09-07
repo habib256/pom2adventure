@@ -15,5 +15,8 @@ Take six Magic Stones, but not those of Good."
    You feel the Swamp will be less dangerous than this gloomy tower. Your
 mission begins: bring back to Stratagus the Masters' Amulets.
 
+GX .G
+GX .P
+G .S
 PC 6 NM
 C 009 Leave the tower and go to the Swamp

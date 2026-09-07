@@ -1,0 +1,20 @@
+T 033 The Three Airlocks
+
+   The passage ends at three round airlocks. Ripleigh sets the tracker on the
+deck between them and takes a step back.
+
+   -- Behind one of them is the escape shuttle. Behind the others is the
+hold. Choose, and choose right: I open one door a night.
+
+   PORT: beep... beep... beep... beep... Slow. Always on the beat.
+
+   STARBOARD: beep. beep. beep-beep-beep-beepbeepbeep. Speeding up. Closing.
+
+   CENTRE: beep....... beep... beep......... beep. Slow, but dragging,
+stalling, starting again. Like something sleeping badly.
+
+   The cat, in Ripleigh's arms, stares at the centre. Cats are always wrong.
+
+C 035 Open the port airlock
+C 034 Open the starboard airlock
+C 034 Open the centre airlock

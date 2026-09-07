@@ -6,5 +6,5 @@ disappeared.
    As you cross the clearing, a Scorpion about thirty centimeters long watches
 you from a pond.
 
-MU ARENE.MB
+MU ARENA.MB
 C 227 Continue your journey

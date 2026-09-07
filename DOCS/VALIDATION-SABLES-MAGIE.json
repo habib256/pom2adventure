@@ -1,0 +1,14 @@
+{
+  "sha256": "b3baa699a0ff28b38089c50cff0274c8c31dfe30b1d95aa352f7bf9ac545033e",
+  "symbols_sha256": "7fe2801903234a2eda2b31f6b772d2627c7633eb37bf1d97795db04c409b40be",
+  "passed": 41,
+  "failed": 0,
+  "scenarios": {
+    "sables_magie": 17,
+    "carte_retour_dhgr": 24
+  },
+  "emulator": "POM2 headless with Mockingboard",
+  "build": "make -C SCOSWAMP/SRC -o diapo-catalog hdv",
+  "catalogue": "existing catalogue exhaustively checked against all 453 current DHRR BIN images",
+  "unrelated_pending": "SYS image migration and default catalogue generation"
+}

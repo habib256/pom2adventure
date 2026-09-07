@@ -1,15 +1,11 @@
-Trou Noir Sagittarius A*
-------------------------
+T 003 Le cockpit du Cabriolet
 
-Vous voila face au gouffre cosmique ultime : Sagittarius A*, le trou noir
-supermassif au coeur de notre galaxie ! Sa silhouette sombre se dessine
-majestueusement sur fond de disque d'accretion incandescent.
-Les forces gravitationnelles titanesques deforment l'espace-temps lui-meme.
+   La carte stellaire tourne doucement. L'anneau lumineux de l'Holophone
+attend. Quelque part, un million d'abonnes attend aussi, sans le savoir.
 
-Le spectacle est a couper le souffle. Attention toutefois a ne pas trop
-vous approcher de l'horizon des evenements, ou votre selfie risquerait
-d'etre etire jusqu'a la fin des temps !
+   Ou allez-vous ?
 
-C 001 Retour a la base
-C 006 Visiter le dome aux aurores magnetar
-C 013 Approcher l'ancienne porte de Kalyx
+C 004 Cap sur le secteur interieur
+C 005 Cap sur le secteur exterieur
+C 006 Ouvrir votre chaine
+C 090 Appeler le Sponsor Vortex

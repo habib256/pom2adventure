@@ -1,0 +1,17 @@
+T 017 Le verre qui chante
+
+   Le verre chante une note de plus, puis se tait. Le barman hausse ses
+quatre epaules. "Bois. C'est vert, c'est chaud, c'est legal ici."
+
+   C'est immonde. Vous filmez votre propre grimace : c'est le meilleur
+plan de votre carriere.
+
+   "Toi, tu cherches quelque chose", dit le barman en essuyant un verre
+qui n'existait pas avant. "Alors ecoute encore. Le contrebandier vend
+n'importe quoi a n'importe qui. Et son copilote boite depuis ce matin. Il
+ne le dira pas. Ils ne disent jamais rien, ceux-la. Regarde sa patte."
+
+   Il vous sert un deuxieme verre. Celui-la ne chante pas. Il siffle.
+
+C 012 La table du contrebandier
+C 010 Retourner dans la salle

@@ -1,9 +1,10 @@
 T 330 Le tronc creux
+AC
 
    Vous vous trouvez dans la clairiere au gros tronc creux. Le sentier est
 calme, mais vous savez que le tronc a deja abrite autre chose que des
 ossements.
 
-MU TRONC.MB
-C 129 Si vous y avez vu une creature lors d'une precedente visite
-C 268 Examiner la clairiere
+MU LOG.MB
+CV 055 129 Si vous y avez vu une creature lors d'une precedente visite
+CX 055 268 Examiner la clairiere

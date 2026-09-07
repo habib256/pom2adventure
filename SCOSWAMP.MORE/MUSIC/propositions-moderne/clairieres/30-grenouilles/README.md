@@ -1,6 +1,6 @@
 # Clairière 30 — Clairière des grenouilles (`hub` 230)
 
-**`GRENOUILLES.MB.BIN` — 2 246 octets, 38,5 s, boucle, avec batterie.**
+**`FROGS.MB.BIN` — 2 246 octets, 38,5 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
@@ -10,7 +10,7 @@
 | 329 | le champignon lumineux, des traces de dents humaines sur le chapeau, une odeur agréable |
 | 230 | la clairière silencieuse : les Grenouilles Géantes mortes, le Maître disparu |
 
-Zone de référence : **`sud`** (`MARAISUD.MB`, *Sentiers Verts*).
+Zone de référence : **`sud`** (`SOUTHSWAMP.MB`, *Sentiers Verts*).
 
 ## La pièce
 
@@ -76,6 +76,6 @@ stéréo 60/40.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/30-grenouilles
 python3 grenouilles.py
-python3 ../../../midi_to_mb.py grenouilles.mid GRENOUILLES.MB.BIN \
+python3 ../../../midi_to_mb.py grenouilles.mid FROGS.MB.BIN \
     --bpm 176 --max 2304 --wav GRENOUILLES.wav
 ```

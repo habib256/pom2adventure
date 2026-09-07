@@ -11,6 +11,6 @@ amulette d'argent en forme de grenouille pend a son cou et luit faiblement.
 
    Que faites-vous?
 
-MU GRENOUILLES.MB
+MU FROGS.MB
 C 013 Repondre avec amabilite
 C 062 Attaquer le Maitre des Grenouilles

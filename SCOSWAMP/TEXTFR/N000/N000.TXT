@@ -18,5 +18,5 @@ Smith (1984), publie en francais par Gallimard (1985).
    Commandes :
  [A-E] - Choisir   [L] - Charger une partie   [H] - Aide   [Q] - Quitter
 
-MU ACCUEIL.MB
+MU WELCOME.MB
 C 419 Creer mon personnage

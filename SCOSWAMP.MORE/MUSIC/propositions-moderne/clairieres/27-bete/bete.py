@@ -33,7 +33,7 @@ Ce que la revision ajoute :
 18 mesures a 6/4, 45,3 s. Forme intro(2) - A(6) - B(6) - A'(4).
 
     python3 bete.py && python3 ../../../midi_to_mb.py bete.mid \\
-        BETE.MB.BIN --bpm 143 --max 2304 --wav BETE.wav
+        BEAST.MB.BIN --bpm 143 --max 2304 --wav BETE.wav
 """
 import sys
 from pathlib import Path

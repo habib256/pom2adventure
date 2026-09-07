@@ -10,4 +10,7 @@ It was a Healing Potion! You empty the other vials and, against all
 expectations, none are poisoned. Your SKILL, STAMINA and LUCK points return to
 their initial total.
 
+E HABILETE +255
+E ENDURANCE +255
+E CHANCE +255
 C 206 Continue after this strange meeting

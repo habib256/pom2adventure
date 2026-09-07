@@ -7,6 +7,6 @@ soudain et se transforme en une lame dentelee.
 combat sera le dernier de votre aventure. C'est un combat a mort: il n'est pas
 question de prendre la fuite.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 13 18 STRATAGUS
 MV 340

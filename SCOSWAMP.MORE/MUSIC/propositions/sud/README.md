@@ -1,6 +1,6 @@
 # Zone `sud` — le Marais proprement dit
 
-**Fichier proposé : `MARAISUD.MB` (`MARAISUD.MB.BIN`, 574 octets, 31,5 s de boucle)**
+**Fichier proposé : `SOUTHSWAMP.MB` (`SOUTHSWAMP.MB.BIN`, 574 octets, 31,5 s de boucle)**
 
 C'est **le thème du jeu** : douze clairières, la clairière de départ comprise,
 et la majorité des pages que le joueur verra.
@@ -69,7 +69,7 @@ de 50 Hz (24 ticks à la noire).
 ```sh
 python3 SCOSWAMP.MORE/MUSIC/midi_to_mb.py \
     SCOSWAMP.MORE/MUSIC/propositions/sud/belle.mid \
-    SCOSWAMP.MORE/MUSIC/propositions/sud/MARAISUD.MB.BIN \
+    SCOSWAMP.MORE/MUSIC/propositions/sud/SOUTHSWAMP.MB.BIN \
     --bpm 125 --vol 13,9,11 \
     --wav SCOSWAMP.MORE/MUSIC/propositions/sud/MARAISUD.wav
 ```

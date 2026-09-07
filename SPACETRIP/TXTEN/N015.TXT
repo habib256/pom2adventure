@@ -1,0 +1,21 @@
+T 015 The paw of Chewpaca
+V 019
+
+   You hold out your hand. Hans Lonely says "Bad idea" with the calm of a
+man who has watched this bad idea before.
+
+   Chewpaca looks at you for a long time. Then he lays his paw in your
+hand, and it is huge, and it is warm, and it is astonishingly light. A
+sliver of polished chrome is wedged between two pads: a piece of a camera
+drone, dropped by a crew running in slow motion.
+
+   You pull. The howl brings down two bottles and one Klinger.
+
+   Then the copilot digs into his harness and presses a laminated card
+into your hand: a press pass, still warm, with a chrome chin on the
+photograph. He "found" it. Hans Lonely says nothing at all, which from him
+is a compliment.
+
+G PASS
+C 012 Back to the table
+C 010 Back into the room

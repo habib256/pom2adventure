@@ -1,4 +1,5 @@
 T 382 Retour aux Sables Mouvants
+VR 270 421
 
    Vous vous apercevez que vous etes revenu dans la clairiere aux Sables
 Mouvants, mais cette fois, vous ne vous laisserez pas surprendre. Vous avez
@@ -16,7 +17,8 @@ l'utiliser a nouveau si jamais vous repassez par la suite dans cette
 clairiere. Si vous disposez de l'une ou l'autre de ces Pierres de Magie, vous
 pouvez en faire usage.
 
-MU SABLES.MB
-C 270 Utiliser une Pierre de Magie
+MU QUICKSAND.MB
+CU GLACE 270 Geler les Sables avec une Pierre de Glace
+CU CROISSANCE 421 Creer un sentier avec une Pierre de Croissance
 C 190 Essayer de sauter par-dessus les Sables
 C 223 Rebrousser chemin

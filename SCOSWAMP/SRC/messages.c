@@ -10,9 +10,9 @@
 #include <string.h>
 #include <unistd.h>
 
-/* La langue la plus longue tient en 1248 octets ; 1408 laisse de la marge pour
- * une traduction plus bavarde. Le catalogue est decoupe en place : les
- * pointeurs visent dedans, rien n'est recopie. */
+/* MSG_BYTES est genere avec le catalogue. Le texte est decoupe en place :
+ * les pointeurs visent dedans, rien n'est recopie. Pour les tailles mesurees,
+ * voir DOCS/AUDIT-MEMOIRE-SCOSWAMP.md et messages.h. */
 
 /* Le dernier octet reste a zero : c'est la chaine vide que rend msg() quand
  * le catalogue n'a pas pu etre charge. */
@@ -32,7 +32,7 @@ int messages_load(int english)
 
     ready = 0;
     if (chdir("/SCOSWAMP") != 0) return 0;
-    f = fopen(english ? "MSGEN" : "MSGFR", "r");
+    f = fopen(english ? "TEXTEN/MSGEN" : "TEXTFR/MSGFR", "r");
     if (f == NULL) return 0;
     n = fread(pool, 1, sizeof(pool) - 1, f);
     fclose(f);

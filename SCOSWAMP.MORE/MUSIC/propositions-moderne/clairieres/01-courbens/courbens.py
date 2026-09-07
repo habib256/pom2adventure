@@ -28,7 +28,7 @@ Ce qui a change a la revision :
 28 mesures a 4/4, 38,2 s. Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 courbens.py && python3 ../../../midi_to_mb.py courbens.mid \\
-        COURBENS.MB.BIN --bpm 176 --max 2304 --wav COURBENS.wav
+        BENTBEAKS.MB.BIN --bpm 176 --max 2304 --wav COURBENS.wav
 """
 import sys
 from pathlib import Path

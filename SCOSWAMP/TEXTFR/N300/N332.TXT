@@ -18,4 +18,4 @@ une semaine ou deux, les Araignees qui vivent en ces lieux jugeront sans doute
 votre carcasse a point et s'offriront a vos depens un delectable repas. Il est
 clair, bien entendu, que votre aventure est terminee.
 
-MU +MORT.MB
+MU +DEATH.MB

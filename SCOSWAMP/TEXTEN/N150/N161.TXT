@@ -5,7 +5,7 @@ possible directions open under the trees.
 
    Choose quickly, the wind turns and carries swamp smells.
 
-MU GEANT.MB
+MU GIANT.MB
 C 092 Go north
 C 041 Go south
 C 121 Take the western road

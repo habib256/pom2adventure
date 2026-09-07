@@ -1,0 +1,19 @@
+T 054 The Dune Worm wants a tag
+V 056
+
+   Tock. Tock. Tock. Three minutes later the dune heaves and the Worm comes
+out of the sand thirty metres high, in a golden rain, jaw wide open.
+
+   It stops. It listens to you filming. A worm with no eyes knows perfectly
+well where a camera is.
+
+   You jump onto its back, grab a scale the size of a door and raise the
+Holophone. It poses. It really poses.
+
+   Then it coughs, and a vial of amber spice rolls to your feet. A gift, or a
+tip. With a worm you never can tell.
+
+G S3
+G EPIC
+C 055 Surf back down along its spine
+C 003 Walk back to the Convertible, any old how

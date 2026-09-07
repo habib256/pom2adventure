@@ -30,7 +30,7 @@ Ce qui a change a la revision :
 Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 loups.py && python3 ../../../midi_to_mb.py loups.mid \\
-        LOUPS.MB.BIN --bpm 172 --max 2304 --wav LOUPS.wav
+        WOLVES.MB.BIN --bpm 172 --max 2304 --wav LOUPS.wav
 """
 import sys
 from pathlib import Path

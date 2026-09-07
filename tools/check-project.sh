@@ -92,10 +92,10 @@ say "-- SCOSWAMP : cohérence des scènes --"
 
 fr_count=$(find SCOSWAMP/TEXTFR -name "N*.TXT" | wc -l | tr -d ' ')
 en_count=$(find SCOSWAMP/TEXTEN -name "N*.TXT" | wc -l | tr -d ' ')
-img_count=$(find SCOSWAMP/IMG -name "N*.RLE.BIN" | wc -l | tr -d ' ')
+img_count=$(find SCOSWAMP/DHGR -name "N*.RLE.BIN" | wc -l | tr -d ' ')
 # Les tableaux de bataille (B<id>) illustrent un combat, pas une page : ils se
 # comptent à part, sinon le pourcentage de scènes illustrées dépasse 100 %.
-bat_count=$(find SCOSWAMP/IMG -name "B*.RLE.BIN" | wc -l | tr -d ' ')
+bat_count=$(find SCOSWAMP/DHGR -name "B*.RLE.BIN" | wc -l | tr -d ' ')
 
 if [ "$fr_count" -ne "$en_count" ]; then
     err "déséquilibre FR/EN : $fr_count fichiers FR vs $en_count fichiers EN"
@@ -126,8 +126,8 @@ say "  Combats : $bat_count tableaux de bataille"
 # Scènes sans image : normal à ce stade du projet, comptabilisé, pas bloquant.
 say ""
 say "  Répartition des images par bloc :"
-for b in $(cd SCOSWAMP/IMG && ls -d N* 2>/dev/null | sort); do
-    c=$(find "SCOSWAMP/IMG/$b" -name "N*.RLE.BIN" | wc -l | tr -d ' ')
+for b in $(cd SCOSWAMP/DHGR && ls -d N* 2>/dev/null | sort); do
+    c=$(find "SCOSWAMP/DHGR/$b" -name "N*.RLE.BIN" | wc -l | tr -d ' ')
     t=$(find "SCOSWAMP/TEXTFR/$b" -name "*.TXT" 2>/dev/null | wc -l | tr -d ' ')
     say "    $b : $c / $t"
 done

@@ -8,5 +8,5 @@ STAMINA of your opponent before combat engages.
 go to 225 to fight him, but without changing this time the total STAMINA he
 has.
 
-MU TOUR.MB
+MU TOWER.MB
 CL 402 225

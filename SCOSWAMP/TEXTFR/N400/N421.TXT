@@ -1,0 +1,9 @@
+T 421 Le sentier sur les Sables
+
+   Les plantes poussent sous l'effet de votre Pierre de Croissance. Leurs
+racines et leurs tiges recouvrent les Sables Mouvants et forment un sentier
+solide. Vous traversez sans danger. Ce passage restera praticable lors de vos
+prochaines visites.
+
+MU QUICKSAND.MB
+C 270 Choisir un sentier pour repartir

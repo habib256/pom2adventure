@@ -77,6 +77,19 @@ export function caracApply(hero, c, d) {
 const NO_STONE = () => R.STONE_COUNT();
 const NO_OBJ = () => R.OBJ_COUNT();
 
+// Shared CV/CX predicate: comma = AND, ! = unvisited, CX = NOT(all).
+function visitedPredicate(app, cur) {
+  let matches = true;
+  for (;;) {
+    const absent = cur.s[cur.i] === '!';
+    if (absent) cur.i++;
+    const visited = R.sceneVisited(app.mem, cur.uint());
+    if (visited === absent) matches = false;
+    if (cur.s[cur.i] !== ',') return matches;
+    cur.i++;
+  }
+}
+
 function pushChoice(app, scene, grant, require, title) {
   if (app.choices.length >= app.proj.moteur.maxChoix) return;
   app.choices.push({ scene, grant, require, object: NO_OBJ(), objMode: 0, title });
@@ -93,6 +106,7 @@ function pushObjectChoice(app, scene, o, mode, title) {
  * savoir ce qu'une Pierre aurait permis fait partie de la lecture. */
 export function choiceAvailable(app, c) {
   const hero = app.hero;
+  if (c.require === 255) return false;
   if (c.require < R.STONE_COUNT() && !R.hasStone(hero, c.require)) return false;
   if (c.object < R.OBJ_COUNT()) {
     const has = R.hasObject(hero, c.object);
@@ -102,8 +116,11 @@ export function choiceAvailable(app, c) {
     const has = R.hasAmulet(hero, c.object & 0x7f);
     return c.objMode === 2 ? !has : has;
   }
-  if (c.object === 0x7f) {                    /* ligne CA : un intervalle */
-    const n = R.amuletCount(hero);
+  if (c.object === 0x7c) return Number(R.hasPayableItem(hero)) === c.objMode;
+  if (c.object === 0x7d) return hero.gold >= c.objMode;
+  if (c.object === 0x7f || c.object === 0x7e) {
+    const n = c.object === 0x7f ? R.amuletCount(hero)
+      : Math.min(15, hero.stones.reduce((sum, n) => sum + n, 0));
     return n >= (c.objMode >> 4) && n <= (c.objMode & 15);
   }
   return true;
@@ -132,6 +149,7 @@ const OPS = {
     const am = R.amuletFromName(w);
     if (am !== R.AMULET_COUNT()) { R.giveAmulet(app.hero, am); return `donne ${R.amuletName(am, app.english)}`; }
     const o = R.objectFromName(w);
+    if (o < R.OBJ_COUNT() && o === R.objectFromName('EP')) app.hero.weaponBonus = 0;
     R.giveObject(app.hero, o);
     return `donne ${R.objectName(o) || w}`;
   },
@@ -139,10 +157,41 @@ const OPS = {
   CI(app, cur) { return objCond(app, cur, 1); },
   CN(app, cur) { return objCond(app, cur, 2); },
 
+  AC(app) { app.revisit = -2; return "orientation automatique selon les visites"; },
+
+  CV(app, cur) {
+    const matches = visitedPredicate(app, cur), id = cur.uint();
+    if (app.revisit === -2 && matches) app.revisit = id;
+    else pushChoice(app, id, NO_STONE(), matches ? NO_STONE() : 255, cur.rest);
+    return `choix ${id} si toutes les conditions de visite sont remplies`;
+  },
+  CX(app, cur) {
+    const matches = visitedPredicate(app, cur), id = cur.uint();
+    if (app.revisit === -2 && !matches) app.revisit = id;
+    else pushChoice(app, id, NO_STONE(), matches ? 255 : NO_STONE(), cur.rest);
+    return `choix ${id} si les conditions de visite ne sont pas toutes remplies`;
+  },
+
+  CG(app, cur) {
+    const minimum = cur.uint(), id = cur.uint();
+    pushObjectChoice(app, id, 0x7d, minimum, cur.rest);
+    return `choix ${id} si au moins ${minimum} pieces d’or`;
+  },
+  CT(app, cur) {
+    const lo = cur.uint(), hi = cur.uint(), id = cur.uint();
+    pushObjectChoice(app, id, 0x7e, (lo << 4) | hi, cur.rest);
+    return `choix ${id} si ${lo} a ${hi} pierres (15 = quinze ou plus)`;
+  },
   CA(app, cur) {
     const lo = cur.uint(), hi = cur.uint(), id = cur.uint();
     pushObjectChoice(app, id, 0x7f, (lo << 4) | hi, cur.rest);
     return `choix ${id} si ${lo} a ${hi} amulettes`;
+  },
+
+  CB(app, cur) {
+    const has = cur.uint(), id = cur.uint();
+    pushObjectChoice(app, id, 0x7c, has, cur.rest);
+    return `choix ${id} selon presence de biens : ${has}`;
   },
 
   GU(app, cur) {
@@ -153,27 +202,26 @@ const OPS = {
 
   PD(app) { R.loseItems(app.hero, 2); return 'on vous prend deux biens'; },
   PO(app) { R.loseItems(app.hero, 1); return 'on vous prend un bien'; },
+  PS(app) { app.hero.stones.fill(0); return 'toutes les Pierres sont remises'; },
+  EH(app) { app.hero.end = Math.floor(app.hero.end / 2); return 'ENDURANCE divisee par deux'; },
   PX(app) {
     app.hero.stones = app.hero.stones.map(() => 0);
-    app.hero.objects = 0; app.hero.amulets = 0;
+    app.hero.objects &= ~((1 << R.objectFromName('.T')) - 1);
+    app.hero.amulets = 0;
     return 'le sac est vide';
   },
 
-  /* Jusqu'a trois biens troques contre autant de Pierres neutres a choisir.
-   * Les quatre objets troquables sont ceux du masque 0x018C : Chaine d'Or,
-   * Aimant d'Or, Bijou Violet, Corne de Licorne. */
   TR(app) {
-    const MASK = 0x018c;
-    let bits = app.hero.objects & MASK, n = 0;
-    while (bits && n < 3) { bits &= bits - 1; n++; }
-    app.hero.objects = (app.hero.objects & ~MASK) | bits;
-    while (app.hero.amulets && n < 3) { app.hero.amulets &= app.hero.amulets - 1; n++; }
-    app.chooseN = n;
-    app.chooseCats = 'N';
-    return `${n} bien(s) troque(s) contre autant de Pierres neutres`;
+    const result = R.tradeInventory(app.hero, app.proj.rules?.trade);
+    app.chooseN = result.count;
+    app.chooseCats = result.categories;
+    return `${result.count} bien(s) troque(s) contre autant de Pierres ${result.categories}`;
   },
 
   MD(app, cur) { const n = cur.uint(); lastFoe(app, (f) => { f.damage = n; }); return `degats ${n}`; },
+  MM(app, cur) { app.magicForbidden = cur.uint() !== 0; return `magie interdite : ${app.magicForbidden}`; },
+  MF(app, cur) { app.fleeAfter = cur.uint(); return `fuite apres ${app.fleeAfter} assauts resolus`; },
+  MR(app, cur) { const n = cur.uint(), maximum = cur.uint(); R.monsterRecover(app.mem, R.monsterZoneKey(app), n, maximum); return `recuperation ${n}, plafond ${maximum}`; },
   MS(app, cur) { const n = cur.uint(); lastFoe(app, (f) => { f.stopAt = n; }); return `combat jusqu'a ${n}`; },
   MI(app, cur) {
     const p = cur.uint();
@@ -209,12 +257,12 @@ const OPS = {
   },
 
   /* "Tentez votre Chance" qui ne branche pas : il decide d'un effet, la page
-   * continue de se lire. Le jet tombe ICI, a la lecture de la ligne. */
+   * continue apres le jet affiche. La lecture prepare uniquement son effet. */
   CE(app, cur) {
-    const k = caracOf(cur.word()), dok = cur.int(), dko = cur.int();
-    const { lucky, roll } = R.luckTest(app.hero);
-    caracApply(app.hero, k, lucky ? dok : dko);
-    return `Chance ${roll} : ${lucky ? 'Chanceux' : 'Malchanceux'}, ${CARAC_NOMS[k]} ${lucky ? dok : dko}`;
+    app.diceCarac = caracOf(cur.word());
+    app.luckDok = cur.int(); app.luckDko = cur.int();
+    app.diceN = 3;
+    return 'test de Chance visible avant de poursuivre la page';
   },
 
   /* Le jet est DIFFERE : la ligne ne fait que remplir dice_n / dice_carac, et
@@ -223,7 +271,7 @@ const OPS = {
   ED(app, cur) {
     const k = caracOf(cur.word()), n = cur.int();
     app.diceCarac = k;
-    if (k < 4) app.diceN = n;
+    if (k < 4) app.diceN = Math.min(2, n);
     return `jet de ${Math.abs(n)} de(s) sur ${CARAC_NOMS[k]} (differe)`;
   },
 
@@ -262,6 +310,17 @@ const OPS = {
    * ses choix, ni surtout ses lignes E et P qui donneraient une seconde fois
    * ce qu'on a deja pris. Les numeros qui suivent sont les AUTRES pages du
    * meme lieu : entrer par une autre porte compte aussi. */
+  VR(app, cur) {
+    const target = cur.uint();
+    while (!cur.atEnd) {
+      const page = cur.uint();
+      if (R.sceneVisited(app.mem, page)) {
+        app.revisit = target;
+        return `issue ${page} deja atteinte : detour vers ${target}`;
+      }
+    }
+    return 'aucune issue atteinte : la page se lit en entier';
+  },
   V(app, cur) {
     const cible = cur.uint();
     let b = app.currentScene;
@@ -373,7 +432,16 @@ export function classifyLine(app, l) {
 }
 
 /* Decoupe le fichier et classe chaque ligne, dans l'ordre : c'est la lecture
- * du fichier qui applique les effets d'entree (E, P, G, V...). */
+ * du fichier qui applique les effets d'entree (E, P, G, V...).
+ *
+ * D'ou vient le titre de la page est une donnee du descripteur : SCOSWAMP le
+ * porte sur une ligne `T`, SPACETRIP le met en premiere ligne du fichier,
+ * soulignee de tirets. Deux corpus, un seul analyseur. */
 export function parseScene(app, texte) {
-  for (const l of texte.split(/\r\n|\r|\n/)) classifyLine(app, l);
+  const lignes = texte.split(/\r\n|\r|\n/);
+  if ((app.proj.titrePage || {}).source === 'premiere-ligne') {
+    app.title = (lignes.shift() || '').trim();
+    if (/^[-=_]+$/.test((lignes[0] || '').trim())) lignes.shift();
+  }
+  for (const l of lignes) classifyLine(app, l);
 }

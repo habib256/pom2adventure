@@ -9,6 +9,6 @@ extinguishing the flames.
 strength, but his fury is terrible and he blocks all retreat. Confrontation is
 inevitable.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 6 12 GIANT
 MV 366

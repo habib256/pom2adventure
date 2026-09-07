@@ -10,6 +10,6 @@ Si vous survivez, vous pourrez ensuite reprendre la route.
    Voulez-vous aller au nord ou au sud ?
 
 ED ENDURANCE -1
-MU PROFONDE.MB
+MU DEEPWATER.MB
 C 157 Prendre le sentier vers le nord
 C 398 Prendre le sentier vers le sud

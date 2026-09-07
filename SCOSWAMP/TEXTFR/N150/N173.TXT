@@ -17,5 +17,8 @@ raccompagne dehors. Vous quittez le village, direction le nord, vers le sombre
 Marais aux Scorpions, carte et destin en main.
 
 MU VILLAGE.MB
+GX .G
+GX .S
+G .P
 PC 5 N
 C 009 Commencer votre voyage dans le Marais

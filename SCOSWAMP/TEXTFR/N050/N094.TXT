@@ -6,7 +6,7 @@ infecte emplit l'air et vous retenez votre souffle.
    Mais bientot, force vous est de respirer de nouveau et l'atmosphere viciee
 vous coute 2 points d'ENDURANCE.
 
-MU BRUME.MB
+MU MIST.MB
 E ENDURANCE -2
 C 295 Aller vers le nord
 C 320 Aller vers le sud

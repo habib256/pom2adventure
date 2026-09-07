@@ -1,6 +1,6 @@
 # Clairière 3 — Le Maître des Jardins (`hub` 084, case 3,0)
 
-**`JARDINS.MB.BIN` — 2 042 octets, 43,3 s, boucle.**
+**`GARDENS.MB.BIN` — 2 042 octets, 43,3 s, boucle.**
 
 ## Les pages
 
@@ -90,6 +90,6 @@ entend le plus de silence.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/03-jardins
 python3 jardins.py
-python3 ../../../midi_to_mb.py jardins.mid JARDINS.MB.BIN \
+python3 ../../../midi_to_mb.py jardins.mid GARDENS.MB.BIN \
     --bpm 144 --max 2304 --wav JARDINS.wav
 ```

@@ -1,0 +1,31 @@
+{
+  "scenarios": {
+    "chance_effet_visible": {
+      "assertions": 89,
+      "failures": 0,
+      "seconds": 35.1
+    },
+    "hasard": {
+      "assertions": 16,
+      "failures": 0,
+      "seconds": 11.0
+    },
+    "aigle_butin_unique": {
+      "assertions": 7,
+      "failures": 0,
+      "seconds": 5.4
+    }
+  },
+  "hdv_sha256": "5c61b38a496daec7924dd4267501fbb5ccbff9b349dd1748fc53baa81bcc19d6",
+  "memory": {
+    "before_heap": 2061,
+    "after_heap": 2067,
+    "code_delta": -2,
+    "bss_delta": -4,
+    "lc_delta": -2,
+    "lc_free": 2,
+    "stack_reserve": 384
+  },
+  "javascript": "test_visible_luck.mjs: four pages FR/EN, both outcomes, no early effect/RNG, restore, ED count separation",
+  "scope": "Prepared scene fixtures; four CE effects, zero CHANCE, fatal fall, bag and save/load. Existing ED/CS/CL/DV checks retained."
+}

@@ -1,17 +1,17 @@
 # Clairière 35 — Bête du bassin (`hub` 082)
 
-**`BASSIN.MB.BIN` — 2 024 octets, 45,1 s, boucle, avec batterie.**
+**`POOL.MB.BIN` — 2 024 octets, 45,1 s, boucle, avec batterie.**
 
 ## Ce que la clairière raconte
 
 | Page | Ce qu'on y lit |
 | ---: | --- |
 | 209 | « une créature énorme à la peau brune et caoutchouteuse émerge soudain du bassin et tente de vous saisir d'un tentacule » — un magnifique Bijou Violet brille à son front |
-| 082 | le duel au bord de l'eau (cette page-là passe en `+COMBAT.MB`, la surcouche) |
+| 082 | le duel au bord de l'eau (cette page-là passe en `+BATTLE.MB`, la surcouche) |
 | 308 | la Bête morte, le Bijou Violet détaché du front, et l'unique chemin qui ramène vers l'ouest |
 | 397 | la fuite : le même unique chemin |
 
-Zone de référence : **`sud`** (`MARAISUD.MB`, *Sentiers Verts*).
+Zone de référence : **`sud`** (`SOUTHSWAMP.MB`, *Sentiers Verts*).
 
 ## La pièce
 
@@ -80,6 +80,6 @@ stéréo 60/40.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/35-bassin
 python3 bassin.py
-python3 ../../../midi_to_mb.py bassin.mid BASSIN.MB.BIN \
+python3 ../../../midi_to_mb.py bassin.mid POOL.MB.BIN \
     --bpm 150 --max 2304 --wav BASSIN.wav
 ```

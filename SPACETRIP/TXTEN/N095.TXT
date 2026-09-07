@@ -1,0 +1,19 @@
+T 095 The Sponsor Shows Himself
+
+   The last shot: the adventuress in the vinyl suit, white boots, one hand on
+her hip, an explosion behind her, and you in the middle, extremely pleased
+with yourself.
+
+   -- Five, says the Sponsor. Five of five. The contract is yours.
+
+   Behind the Convertible, out in the vacuum, an impossible sound: a machine
+grinding, wheezing, insisting. A blue cabin appears where there was nothing,
+lands on nothing, and opens its door onto a light that is far too warm.
+
+   A man steps out. Long scarf. Pleased with himself.
+
+   -- I am the Vortex Sponsor. Hello. They call me Doctor Which. You have not
+won a million followers. You have won a trip.
+
+CI .BIZZ 098 Step in -- and glance back over your shoulder
+CN .BIZZ 099 Step into the blue cabin

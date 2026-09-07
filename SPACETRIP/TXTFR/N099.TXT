@@ -1,0 +1,18 @@
+T 099 Personne pour voir ca
+
+   Vous jetez un dernier regard derriere vous, par reflexe, comme on cherche
+un temoin.
+
+   Le hangar est vide. Pas de fusee blanche et rouge, pas de menton en avant,
+pas de douze cameramen. Nulle part dans l'univers Bizz Annee-Lumiere n'est en
+train de voir ce qui vous arrive, et cela vous fait un petit pincement
+ridicule que vous n'avouerez a personne.
+
+   Vous levez l'Holophone vers la cabine bleue et vous appuyez.
+
+   Douze abonnes. Douze personnes dans tout l'univers verront ca les
+premieres. C'est, tout compte fait, une assez belle statistique.
+
+   -- On y va ? demande le Docteur Quoi.
+
+C 096 Entrer pour de bon

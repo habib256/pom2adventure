@@ -6,7 +6,7 @@ ralliement.
    Lorsqu'ils vous voient, ils se relevent et vous attaquent. Il vous faut les
 combattre tous les deux a la fois...
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 8 10 PREMIER BRIGAND
 M 8 11 DEUXIEME BRIGAND
 CF 019 Prendre la Fuite

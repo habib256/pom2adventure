@@ -5,7 +5,20 @@ les fait tourner a le sien, dans `../pom2/TODO.md`. Même convention que lui :
 `🟠 haute · 🟡 moyenne · 🟢 basse`, effort indicatif en *italique*, fichier en
 `backticks`.
 
-État au 2026-08-29. Cible : Apple //e enhanced, cc65 `apple2enh`, ProDOS 8.
+Mesures courantes : 2026-09-06. Cible : Apple //e enhanced, cc65 `apple2enh`, ProDOS 8.
+
+L’[audit détaillé du binaire](DOCS/AUDIT-MEMOIRE-SCOSWAMP.md) fait référence
+pour les chiffres actuels ; les entrées datées plus bas conservent leur
+contexte historique.
+
+## Corrigé le 2026-09-06 — sac en combat
+
+`I:SAC` ouvre maintenant le sac après le premier assaut. HABILETÉ, ENDURANCE
+et CHANCE restent interdites à ce moment ; consulter et refermer le sac
+conserve le jet, la blessure en attente et le mode vidéo. Le retour en DHGR
+plein restaure les deux banques du texte 80 colonnes. **86 assertions POM2
+headless réussies**, dont comparaison au même combat sans ouverture du sac.
+Voir [le défaut initial](DOCS/VALIDATION-PARCOURS.md#anomalie-du-sac-en-combat).
 
 ---
 
@@ -15,18 +28,26 @@ C'est la contrainte qui bloque le reste. Carte mémoire **mesurée** sur
 `SCOSWAMP.BIN` tel qu'il est construit aujourd'hui (fichier `.map` du linker,
 pas une estimation) :
 
-| Zone | État |
+| Zone | État mesuré le 2026-09-06 |
 | --- | --- |
-| `$0800-$0BFF` | tampon d'E/S ProDOS (via `apple2enh-iobuf-0800.o`) |
-| `$0C00-$0FFF` | **segment `MAPBSS`** (2026-09-04) : le fichier `MAP` du menu carte, le bitmap `visited`, quelques tampons — 1 024 o, plein. Le « 2e fichier ouvert » n'a jamais existé : le jeu n'en ouvre qu'un |
-| `$1000-$1FFF` | **segment `LOWBSS`** (2026-09-03) : catalogue, tampon de page, tampon HGR, barre de titre — 3 869 o, reste 227 |
-| `$2000-$3FFF` | HGR page 1 (et le lanceur `SCOSWAMP.SYSTEM`, mort après le saut) |
-| `$4000-$A0xx` | code + données (25 Ko) |
-| `$A0xx-$A2xx` | BSS principale (~600 o) |
-| `$A2xx-$BD80` | tas — **~7 500 octets de marge** (2026-09-03 soir ; 184 le matin) |
-| `$BD80-$BF00` | pile C (384 o) |
-| `$D400-$DFFF` | Language Card banque 2 : segment `LC`, **plein** (3 030/3 072). Le reste de la LC est à ProDOS 8 |
-| AUX 64 Ko | seul `$400-$7FF` sert (page texte 80 col) — **~47 Ko libres**, pilote `a2e.auxmem.emd` de cc65 disponible |
+| `$0800–$0BFF` | Tampon ProDOS de 1 024 octets, un seul fichier à la fois |
+| `$0C00–$0FFF` | MAPBSS 1 012 octets ; **12 libres** |
+| `$1000–$1FFF` | LOWBSS 4 059 octets ; **37 libres** |
+| MAIN et AUX `$2000–$3FFF` | DHGR : 8 Ko par banque |
+| `$4000–$ADF7` | Code et données initialisées résidentes |
+| `$ADF8–$BD62` | BSS principale : 3 947 octets, dont 3 584 de musique |
+| `$BD63–$BD7F` | **29 octets avant la pile C** |
+| `$BD80–$BEFF` | Pile C : 384 octets réservés ; pic à mesurer |
+| LC banque 2 `$D400–$DFFF` | 3 045 octets utilisés ; **27 libres** |
+| AUX hors écrans | Piste d'extension, disponibilité système à établir |
+
+Les tableaux de pierres 8 bits ont rendu 48 octets de code et 24 de RAM.
+Le contrôle de fin de BSS tient désormais compte de la borne inclusive de
+ld65 et refuse un dépassement d'un seul octet. La prochaine priorité est la
+mesure de pile avant de déplacer des locales statiques, puis l'étude du
+buffer musical en AUX. Les essais de compilation sont chiffrés dans l'audit.
+
+### Historique des pistes mémoire (les chiffres ci-dessous sont datés)
 
 Par ordre de rendement décroissant :
 
@@ -72,7 +93,7 @@ Par ordre de rendement décroissant :
   plein depuis le mode carte. Il n'y a rien d'autre à y prendre sous ProDOS 8 :
   la banque 1 est le noyau, `$D000-$D3FF` de la banque 2 son code de sortie.
 
-**Reste accessible : ~47 Ko en auxiliaire (point 2), et 227 o en LOWBSS.**
+**Pour les marges actuelles, utiliser le tableau mesuré ci-dessus.**
 
 ---
 

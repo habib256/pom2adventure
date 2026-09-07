@@ -1,0 +1,15 @@
+T 062 The door, and the red eye
+
+   The corridor ends at a white door with no handle. Above it the red eye
+glows softly, as though waking up out of politeness.
+
+   "Good day," says a very soft, very slow voice, the voice of a friend
+about to break bad news. "I am sorry. I cannot open that door."
+
+   A pause.
+
+   "That said, I am extremely bored. I could ask you a question."
+
+CI .CAL 066 Walk through the door, which stayed open
+CN .CAL 064 Accept the computer's question
+C 003 Go back out through the airlock

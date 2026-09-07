@@ -11,6 +11,6 @@ a frog hangs from his neck and glows faintly.
 
    What do you do?
 
-MU GRENOUILLES.MB
+MU FROGS.MB
 C 013 Respond with kindness
 C 062 Attack the Frog Master

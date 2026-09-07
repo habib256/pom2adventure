@@ -11,5 +11,7 @@ l'Anneau de Cuivre vous savez quel chemin prendre pour retrouver la clairiere.
 
    Que faites-vous?
 
-MU RONDPOINT.MB
-CL 273 297 0 -2
+MU WILLOWISP.MB
+CE ENDURANCE 0 -2
+C 336 Prendre la direction du sud
+C 121 Prendre la direction de l'est

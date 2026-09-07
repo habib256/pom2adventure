@@ -9,6 +9,6 @@ contenir.
 
    Que faites-vous?
 
-MU PINCES.MB
+MU PINCERS.MB
 C 134 Combattre l'Herbe a Pinces a coups d'epee
 C 167 Recourir a la magie pour la contenir

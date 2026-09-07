@@ -1,6 +1,6 @@
 # Clairière 7 — Le Géant (`hub` 161, case 4,1)
 
-**`GEANT.MB.BIN` — 1 624 octets, 41,7 s, boucle.**
+**`GIANT.MB.BIN` — 1 624 octets, 41,7 s, boucle.**
 
 ## Les pages
 
@@ -84,6 +84,6 @@ de notes : trois cent dix-sept, dont quatre-vingt-trois pour l'empreinte.
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres/07-geant
 python3 geant.py
-python3 ../../../midi_to_mb.py geant.mid GEANT.MB.BIN \
+python3 ../../../midi_to_mb.py geant.mid GIANT.MB.BIN \
     --bpm 138 --max 2304 --wav GEANT.wav
 ```

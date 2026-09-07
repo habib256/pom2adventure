@@ -1,0 +1,10 @@
+T 420 Resume the fight
+
+   You refuse to listen to the Giant and resume the fight. He is already
+wounded, but can still defend himself. His blows cost 4 STAMINA points.
+
+MU +BATTLE.MB
+M 9 12 GIANT
+MD 4
+MI 012
+MV 366

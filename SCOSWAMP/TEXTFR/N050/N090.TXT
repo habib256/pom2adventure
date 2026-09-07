@@ -8,7 +8,7 @@ quelles creatures se cachent dans son lit ?
 
    Qu'allez-vous faire face a cet obstacle ?
 
-MU PROFONDE.MB
+MU DEEPWATER.MB
 CU GLACE 370 Utiliser une Pierre Magique de Glace
 CU FLETRISSURE 254 Utiliser une Pierre Magique de Fletrissure
 C 044 Traverser le cours d'eau a pied avec precautions

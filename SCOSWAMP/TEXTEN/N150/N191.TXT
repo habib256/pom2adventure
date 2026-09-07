@@ -11,8 +11,8 @@ against you if the situation isn't adapted.
    You feel the power vibrating in your hand; the slightest error could be
 fatal. Think quickly and well. Here are your options:
 
+CU TERREUR 224 Use a Terror Stone
 CU AMITIE 294 Use a Friendship Stone
 CU MALEDICTION 093 Use a Curse Stone
 CU FEU 064 Use a Fire Stone
-CU TERREUR 224 Use a Terror Stone
 C 398 Give up magic and make another choice

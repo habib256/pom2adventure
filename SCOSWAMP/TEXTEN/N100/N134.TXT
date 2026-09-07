@@ -7,7 +7,7 @@ constantly regrows and ends up surrounding you.
 implacable and infinite. The shock is brutal; keep your breath and your
 composure.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 6 16 PINCER GRASS
 CF 187 Flee
 MV 081

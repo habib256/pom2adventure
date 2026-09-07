@@ -19,5 +19,5 @@ d'amitie. Chaud devant le Mal, froid devant le Bien.
 Bourbenville, la derniere bourgade avant les terres basses, trois hommes
 cherchent un aventurier assez hardi pour s'y risquer.
 
-MU ACCUEIL.MB
+MU WELCOME.MB
 C 001 Prendre la route du Marais

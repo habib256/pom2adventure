@@ -12,7 +12,7 @@ force.
 ramene vers la riviere profonde. L'ouest presente un passage etroit, peut-etre
 moins dangereux.
 
-MU ARBRESEPEES.MB
+MU SWORDTREES.MB
 G GR
 C 320 Prendre le chemin qui monte vers le nord
 C 090 Rejoindre la riviere profonde vers le sud

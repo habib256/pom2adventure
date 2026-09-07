@@ -1,0 +1,16 @@
+T 020 Le hangar de l'Etoile du Malheur
+
+   Le Cabriolet se pose dans un hangar grand comme une cathedrale, sous mille
+projecteurs blafards. Partout des soldats en armure blanche marchent au pas
+et ratent leur virage. C'est l'Etoile du Malheur, la station de combat la
+plus mal eclairee de la galaxie : pas une fenetre, pas un reflet, pas une
+seule bonne lumiere. Un cauchemar pour un createur de contenu.
+
+   Au bas de la rampe, deux trouffions verifient les laissez-passer avec un
+serieux touchant. L'un d'eux tient la liste a l'envers.
+
+   -- Halte ! Identification !
+
+CI UNIF 022 Descendre au pas, casque bien visse
+CN UNIF 021 Sourire, saluer et tenter le charme
+C 003 Redecoller pendant qu'il est encore temps

@@ -10,7 +10,7 @@ clothes, and wade your way to the other side.
 behind damp trunks. To the east, a lighter trail winds through tall grass. To
 the south, the passage you arrived by remains usable.
 
-MU RONDPOINT.MB
+MU ROUNDABOUT.MB
 E HABILETE -1
 C 398 Take the path sinking to the west
 C 105 Follow the grassy trail to the east

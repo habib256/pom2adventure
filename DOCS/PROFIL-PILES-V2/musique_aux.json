@@ -1,0 +1,10 @@
+{
+  "scenario": "musique_aux",
+  "assertions": 10,
+  "failures": [],
+  "seconds": 9.889906883239746,
+  "maxima": {
+    "hardware": 57,
+    "c_call": 82
+  }
+}

@@ -40,7 +40,7 @@ Ce que la revision ajoute :
 28 mesures a 4/4, 44,8 s. Forme intro(4) - A(8) - B(8) - on ecoute(1) - A'(7).
 
     python3 tronc.py && python3 ../../../midi_to_mb.py tronc.mid \\
-        TRONC.MB.BIN --bpm 150 --max 2304 --wav TRONC.wav
+        LOG.MB.BIN --bpm 150 --max 2304 --wav TRONC.wav
 """
 import sys
 from pathlib import Path

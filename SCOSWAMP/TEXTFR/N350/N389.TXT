@@ -7,6 +7,6 @@ que vous avez trouve la le buisson d'Antherique.
 faut revenir aupres du sorcier en emportant avec vous la precieuse baie. Le
 seul chemin que vous puissiez prendre, pour l'instant, est oriente au sud.
 
-MU LOUPS.MB
+MU WOLVES.MB
 G .T
 C 342 Continuer vers le sud

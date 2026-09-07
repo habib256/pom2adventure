@@ -43,7 +43,7 @@ Ce que la revision ajoute :
 24 mesures a 4/4, 40,0 s. Forme intro(4) - A(8) - B(8) - A'(4).
 
     python3 falaise.py && python3 ../../../midi_to_mb.py falaise.mid \\
-        FALAISE.MB.BIN --bpm 144 --max 2304 --wav FALAISE.wav
+        CLIFF.MB.BIN --bpm 144 --max 2304 --wav FALAISE.wav
 """
 import sys
 from pathlib import Path

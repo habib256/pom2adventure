@@ -1,0 +1,16 @@
+T 040 En orbite du vaisseau Surprise
+
+   Il est enorme, blanc, une soucoupe devant et deux tubes derriere. A cote,
+le Cabriolet ressemble a un grille-pain a ailerons. Vous ouvrez le canal et
+vous saluez d'un grand geste, sourire numero trois.
+
+   Une voix tres calme repond sans monter d'un demi-ton : "Ici le Surprise.
+Identifiez-vous. Les visites non accreditees sont, statistiquement, une perte
+de temps pour tout le monde."
+
+   Douze abonnes retiennent leur souffle. Enfin, onze : votre mere fait la
+vaisselle.
+
+CI PASS 042 Brandir l'accreditation presse devant l'objectif
+CN PASS 041 Insister en agitant les deux bras
+C 003 Refermer le canal et regagner le cockpit

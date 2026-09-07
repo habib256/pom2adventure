@@ -6,6 +6,6 @@ shines and transforms into a serrated blade.
    He takes his guard. The weapon sparkles: it is clearly magical. This combat
 will be the last of your adventure. It's a duel to the death. You cannot flee.
 
-MU +COMBAT.MB
+MU +BATTLE.MB
 M 13 18 STRATAGUS
 MV 340

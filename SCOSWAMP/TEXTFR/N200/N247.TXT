@@ -6,7 +6,7 @@ et juteuse.
 
    Que faites-vous?
 
-MU LOUPS.MB
+MU WOLVES.MB
 G .T
 C 020 Manger la baie sur-le-champ
 C 232 La cueillir et la ranger soigneusement

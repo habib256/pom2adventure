@@ -5,5 +5,5 @@ T 324 Apres le combat
    Qu'allez-vous faire ?
 
 C 088 Quitter la clairiere a l'instant meme
-C 383 Lancer au Nain un sortilege de Benediction
+CU BENEDICTION 383 Lancer au Nain un sortilege de Benediction
 C 042 Fouiller le cadavre du Nain

@@ -1,0 +1,14 @@
+T 067 Ouiti se rendort
+
+   Le petit bonhomme gris regarde vos poches, puis vos mains, puis vos poches
+encore une fois. L'index s'eteint tout doucement, comme une ampoule qu'on
+debranche.
+
+   Il replie ses trois cent dix rides, se roule en boule sous la bache
+argentee et se met a ronfler. Ca fait un bruit de radiateur bien eleve.
+
+   Vous n'avez plus rien a lui offrir aujourd'hui.
+
+C 066 Soulever la bache encore une fois
+C 062 Ressortir dans le couloir blanc
+C 003 Regagner le Cabriolet

@@ -9,6 +9,6 @@ survive, you can then resume the journey.
    Do you want to go north or south?
 
 ED ENDURANCE -1
-MU PROFONDE.MB
+MU DEEPWATER.MB
 C 157 Take the path to the north
 C 398 Take the path to the south

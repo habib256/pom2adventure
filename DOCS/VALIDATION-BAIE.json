@@ -1,0 +1,15 @@
+{
+  "sha256": "3f59ff4c688c459cc12f738b6bb7eb010d9731c4572ace284c4996bb2635d849",
+  "scenario": "baie_laissee",
+  "before": {
+    "passed": 0,
+    "failed": 1,
+    "actual": 108,
+    "expected": 247
+  },
+  "after": {
+    "passed": 18,
+    "failed": 0
+  },
+  "emulator": "POM2 headless with Mockingboard"
+}

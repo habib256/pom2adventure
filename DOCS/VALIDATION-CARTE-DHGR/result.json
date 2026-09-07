@@ -1,0 +1,17 @@
+{
+  "disk_sha256": "c117c96a081099343a6a0877caef16b2d03b5592df60f143094d1e0f4960b990",
+  "emulator": "POM2 headless with Mockingboard",
+  "passed": 52,
+  "failed": 0,
+  "scenarios": {
+    "carte_retour_combat": 8,
+    "carte_retour_dhgr": 24,
+    "video": 20
+  },
+  "pixel_identical_pairs": [
+    "1-M",
+    "1-ESC",
+    "2-M",
+    "2-ESC"
+  ]
+}

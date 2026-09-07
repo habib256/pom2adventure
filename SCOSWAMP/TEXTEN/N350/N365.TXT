@@ -7,4 +7,5 @@ Stratagus and you therefore throw your Magic Stone at him.
 effects. An icy sensation immediately invades you: you're afraid, terribly
 afraid, and you lose one SKILL point.
 
+E HABILETE -1
 C 124 Fight

@@ -31,7 +31,7 @@ La mineur eolien, 162 a la noire, 28 mesures a 4/4, 41,5 s.
 Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 patrouil.py && python3 ../../../midi_to_mb.py patrouil.mid \\
-        PATROUIL.MB.BIN --bpm 162 --max 2304 --wav PATROUIL.wav
+        PATROLLER.MB.BIN --bpm 162 --max 2304 --wav PATROUIL.wav
 """
 import sys
 from pathlib import Path

@@ -4,7 +4,7 @@ T 348 Four Paths
 
    In which direction do you wish to go?
 
-MU LICORNE.MB
+MU UNICORN.MB
 C 094 North
 C 157 South
 C 010 East

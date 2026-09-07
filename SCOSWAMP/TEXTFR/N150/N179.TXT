@@ -7,7 +7,7 @@ precedente, tandis que l'est s'enfonce plus profondement dans le Marais.
    Quel chemin choisissez-vous ? Pesez vite : chaque direction vous conduira
 vers des epreuves differentes et des rencontres diverses.
 
-MU PIQUENIQUE.MB
+MU PICNIC.MB
 C 183 Prendre le sentier qui descend vers le nord
 C 010 Rejoindre la clairiere vers le sud
 C 118 Emprunter le chemin qui s'enfonce a l'est

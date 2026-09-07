@@ -1,0 +1,17 @@
+T 060 Station CAL 9000
+
+   The airlock shuts behind you on a white curved corridor, frighteningly
+clean. Far down at the end, a red eye set into a panel watches you without
+blinking.
+
+   Much nearer, a large robot sits across the passage with his head in his
+hands. He fills the whole corridor.
+
+   "Don't mind me," he says in a voice like the end of the world. "I have a
+brain the size of a planet and they ask me to hold a door. Would you like me
+to tell you about it? It takes three hours. Nobody has ever lasted."
+
+CI .CHAG 062 Step over Mopey, who sighs on principle
+GU SERV 061 Hand him the bath towel
+CN .CHAG 063 Let him tell you his life from the beginning
+C 003 Go back out through the airlock

@@ -1,11 +1,11 @@
 T 180 The Brigand's Honor
 
-   The Copper Ring is your only precious possession, but your word obliges
-you. You remove it reluctantly and hand it to the Brigand Chief. He sees your
-sadness and frowns.
+   You show your empty bag to the Brigand Chief. You have no possession to
+hand over. If you still wear the Copper Ring, you reluctantly offer it to him,
+but he refuses to take it.
 
-   "Keep it," he says in a sincere voice. "You have shown honesty and courage.
-I would be a scoundrel if I took the only thing you have left."
+   "Keep what you have left," he says. "You have shown honesty and courage. I
+release you from your payment."
 
    He gives you a friendly pat on the shoulder, and you feel mutual respect
 being born.

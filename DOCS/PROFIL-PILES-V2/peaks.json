@@ -1,0 +1,42 @@
+{
+  "demarrage": {
+    "changes": 14326,
+    "peak_bytes": 82,
+    "peak_sp": "BEAE",
+    "peak_pc": "9D1C",
+    "changed_pc_count": 16,
+    "high_byte_changes": 1
+  },
+  "sac_combat": {
+    "changes": 43185,
+    "peak_bytes": 81,
+    "peak_sp": "BEAF",
+    "peak_pc": "9D1C",
+    "changed_pc_count": 18,
+    "high_byte_changes": 1
+  },
+  "musique_aux": {
+    "changes": 26378,
+    "peak_bytes": 82,
+    "peak_sp": "BEAE",
+    "peak_pc": "9D1C",
+    "changed_pc_count": 18,
+    "high_byte_changes": 1
+  },
+  "troc_alphonse": {
+    "changes": 52087,
+    "peak_bytes": 81,
+    "peak_sp": "BEAF",
+    "peak_pc": "9D1C",
+    "changed_pc_count": 16,
+    "high_byte_changes": 1
+  },
+  "fin_transitions_175": {
+    "changes": 42125,
+    "peak_bytes": 82,
+    "peak_sp": "BEAE",
+    "peak_pc": "9D1C",
+    "changed_pc_count": 18,
+    "high_byte_changes": 1
+  }
+}
