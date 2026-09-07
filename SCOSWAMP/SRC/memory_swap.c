@@ -67,9 +67,13 @@ static void enter_graphics(void) {
     DHIRESON = 1; DHIRESOFF = 1;
     DHIRESON = 1;
 
-    TXTCLR = 1;   /* Mode graphique */
     HIRES = 1;    /* Hi-res */
     LOWSCR = 1;   /* Page 1 */
+    /* Pas de TXTCLR ici : c'est l'appelant qui allume le graphique, une fois
+     * MIXCLR ou MIXSET pose. Eteindre le texte avant d'avoir arme HIRES fait
+     * paraitre la page texte relue en basse resolution, et avant MIXSET fait
+     * clignoter les quatre lignes du bas. Quelques microsecondes, mais elles
+     * tombent parfois dans la trame affichee. */
 }
 
 /*
@@ -82,6 +86,7 @@ void switch_to_hgr(void) {
      * current_mode pouvait donc laisser l'Apple II en HGR simple. */
     enter_graphics();
     MIXCLR = 1;
+    TXTCLR = 1;   /* graphique en dernier : la page est prete */
     current_mode = 1;
 }
 
@@ -106,6 +111,7 @@ void switch_to_mixed(void) {
     COL80ON = 1;
     DHIRESON = 1;
     MIXSET = 1;
+    TXTCLR = 1;   /* graphique en dernier : la page est prete */
     current_mode = 2;
 }
 

@@ -22,6 +22,19 @@ Voir [le défaut initial](DOCS/VALIDATION-PARCOURS.md#anomalie-du-sac-en-combat)
 
 ---
 
+## Le gestionnaire de fichiers a demenage (2026-09-07)
+
+Apple IIe Total Commander s'appelle desormais **A2 Retro Cmd** et vit dans son
+propre depot, avec ses sources, ses bancs et son integration continue :
+
+> **<https://github.com/habib256/a2retrocmd>**
+
+Le jeu n'en est plus le conteneur, seulement l'hote : `SCOSWAMP/A2RETRO/`
+porte une copie des quatre fichiers publies, tiree d'une Release par
+`tools/update_a2retrocmd.py`, et la touche **[T]** de l'ecran-titre la lance.
+Les etudes qui le concernaient -- la souris, notamment -- ont suivi la-bas.
+Voir [DOCS/A2RETROCMD.md](SCOSWAMP/DOCS/A2RETROCMD.md).
+
 ## Priorité : débloquer la mémoire pour le système de combat
 
 C'est la contrainte qui bloque le reste. Carte mémoire **mesurée** sur

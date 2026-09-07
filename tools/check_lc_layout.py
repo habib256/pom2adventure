@@ -17,7 +17,7 @@ def check_layout(s, loader, length):
     require(s['__MAIN_FILEOFFS__'] == prefix, 'MAIN file offset differs from loader')
     require(s['__MAIN_START__'] == entry, 'MAIN entry address differs from loader')
     require(0x0C00 <= stage and stage + prefix <= 0x2000,
-            'LC staging overlaps ProDOS buffers or the SYSTEM launcher')
+            'LC staging overlaps ProDOS buffers or the graphics page')
     require(0xD400 <= s['__LC_START__'] <= s['__LC_LAST__'] <= 0xE000,
             'LC code crosses its bank-2 execution window')
     require(s['__LC_LAST__'] - s['__LC_START__'] <= prefix,
@@ -28,14 +28,26 @@ def check_layout(s, loader, length):
             'MAIN image is empty or overlaps the ProDOS system page')
     require(length == prefix + s['__MAIN_LAST__'] - entry,
             'game file length does not match split-load layout')
+    # Le plancher de la pile C. ld65 ne le controle pas : la zone BSS se
+    # dimensionne par __HIMEM__ - __STACKSIZE__ - __ONCE_RUN__, et quand
+    # cette difference passe en negatif il la lit en entier non signe, ne
+    # signale rien et pose la BSS dans la pile. Tout ce qui survit a
+    # l'initialisation -- CODE, RODATA, DATA, INIT, et la BSS ou qu'elle
+    # soit -- doit finir sous ce plancher. Seul ONCE a le droit de le
+    # depasser : il est mort avant le premier appel de main().
+    floor = s['__HIMEM__'] - s['__STACKSIZE__']
+    require(s['__ONCE_RUN__'] <= floor,
+            'the cold end (${:04X}) runs into the C stack (${:04X})'.format(
+                s['__ONCE_RUN__'], floor))
+    require(s['__BSS_RUN__'] + s['__BSS_SIZE__'] <= floor,
+            'BSS (${:04X}-${:04X}) runs into the C stack (${:04X})'.format(
+                s['__BSS_RUN__'], s['__BSS_RUN__'] + s['__BSS_SIZE__'] - 1, floor))
     return errors
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--src', type=Path, default=Path(__file__).resolve().parents[1]/'SCOSWAMP/SRC')
-    # TOTAL partage le lanceur et la disposition du jeu : memes controles,
-    # sur sa propre table de symboles et son propre fichier.
     ap.add_argument('--lbl', default='build.lbl', help='table de symboles ld65 (defaut : build.lbl)')
     ap.add_argument('--bin', default='../SCOSWAMP.BIN', help='image a charge separee (defaut : ../SCOSWAMP.BIN)')
     args = ap.parse_args()
@@ -54,7 +66,9 @@ def main():
             print('ERREUR LC : '+error)
         return 1
     print(f"LC : prefixe {loader['LC_BYTES']} octets en ${loader['LC_STAGE']:04X}, "
-          f"MAIN ${s['__MAIN_START__']:04X}-${s['__MAIN_LAST__']-1:04X}, disposition valide")
+          f"MAIN ${s['__MAIN_START__']:04X}-${s['__MAIN_LAST__']-1:04X}, "
+          f"froid jusqu'a ${s['__ONCE_RUN__']:04X} sous une pile de "
+          f"{s['__STACKSIZE__']} octets, disposition valide")
     return 0
 
 
