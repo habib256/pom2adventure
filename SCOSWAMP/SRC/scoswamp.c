@@ -3022,6 +3022,25 @@ static void display_language_selection(void) {
 #undef line
 }
 
+/* [D] et [T] de l'ecran-titre : DIAPO ou TOTAL, les deux autres programmes
+ * du volume. Leur lanceur SYS est lu en $2000, la ou ProDOS l'aurait mis, et
+ * l'on y saute : le jeu ne revient pas, le lanceur charge son programme en
+ * $4000 par-dessus. Bien moins cher que exec() de cc65, et la page HGR est
+ * libre a ce moment. La ROM est remise en lecture pour le demarrage cc65 du
+ * lanceur ; le prefixe, lui, est refait par le lanceur (chdir /SCOSWAMP).
+ * Bitsy Bye n'honore pas le QUIT etendu avec chemin, qui aurait ete plus
+ * court encore. */
+static void launch(const char* path)
+{
+    FILE* f = fopen(path, "rb");
+    if (!f) return;
+    fread(HGR_PAGE1, 1, 0x2000, f);
+    fclose(f);
+    music_stop();
+    __asm__("bit $C082");
+    ((void (*)(void))HGR_PAGE1)();
+}
+
 /* Fonction pour sélectionner la langue */
 static void select_language(void) {
     char key;
@@ -3039,6 +3058,10 @@ static void select_language(void) {
         } else if (key == 'E' || key == 'e') {
             strcpy(app.language, "EN");
             break;
+        } else if (key == 'D' || key == 'd') {
+            launch("DIAPO/DIAPO.SYSTEM");
+        } else if (key == 'T' || key == 't') {
+            launch("TOTAL/TOTAL.SYSTEM");
         }
     }
 }
