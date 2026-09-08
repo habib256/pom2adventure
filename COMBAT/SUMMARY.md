@@ -167,6 +167,6 @@ Le **système de combat Apple II** est **entièrement fonctionnel** et respecte 
 
 ---
 
-**Auteur** : Arnaud VERHILLE - gist974@gmail.com  
+**Auteur** : Arnaud VERHILLE - @habib256  
 **Date** : Octobre 2024  
 **Inspiration** : Document d'améliorations SPACETRIP + Code spacetrip.c

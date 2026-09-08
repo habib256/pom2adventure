@@ -376,7 +376,7 @@ bonne, supprimer l'autre, et uniformiser le nommage avec le reste du projet
 
 ## Auteur
 
-**Arnaud VERHILLE** - gist974@gmail.com
+**Arnaud VERHILLE** - @habib256
 Port Apple II - 2025
 
 Inspiré du document d'améliorations SPACETRIP et du code source spacetrip.c

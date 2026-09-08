@@ -409,7 +409,7 @@ static void title_screen(void)
         cprintf("    [ESPACE] - Basculer entre texte et image\r\n");
         cprintf("    [Q]      - Quitter l'aventure\r\n");
         cprintf("\r\n");
-        cprintf("  Un jeu de VERHILLE Arnaud - gist974@gmail.com\r\n");
+        cprintf("  Un jeu de VERHILLE Arnaud - @habib256\r\n");
         cprintf("\r\n");
         cprintf("            >>> Appuyez sur une touche pour decoller ! <<<\r\n");
     } else {
@@ -430,7 +430,7 @@ static void title_screen(void)
         cprintf("    [SPACE]  - Toggle between text and picture\r\n");
         cprintf("    [Q]      - Quit the adventure\r\n");
         cprintf("\r\n");
-        cprintf("  A game by VERHILLE Arnaud - gist974@gmail.com\r\n");
+        cprintf("  A game by VERHILLE Arnaud - @habib256\r\n");
         cprintf("\r\n");
         cprintf("              >>> Press any key to launch! <<<\r\n");
     }

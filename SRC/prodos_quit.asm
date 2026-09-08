@@ -18,7 +18,7 @@
 ; Extension .asm et non .s : le .gitignore écarte les *.s, qui sont les fichiers
 ; intermédiaires produits par cc65 à partir des .c.
 ;
-; Auteur  : Arnaud VERHILLE (gist974@gmail.com)
+; Auteur  : Arnaud VERHILLE (@habib256)
 ; Licence : GNU GPL v3.0
 ;
 

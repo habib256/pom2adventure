@@ -564,7 +564,7 @@ CREDITS
 ===============================================================================
 
 Space Explorer Trip - Data-Driven Adventure Engine
-Created by VERHILLE Arnaud (gist974@gmail.com)
+Created by VERHILLE Arnaud (@habib256)
 
 PHILOSOPHY
 ----------

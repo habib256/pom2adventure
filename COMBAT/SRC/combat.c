@@ -785,7 +785,7 @@ void main(void) {
     cprintf("                         Combat RPG System\r\n");
     cprintf("\r\n");
     cprintf("               2025 Apple II Port by : Arnaud VERHILLE\r\n");
-    cprintf("                                  (gist974@gmail.com)\r\n");
+    cprintf("                                  (@habib256)\r\n");
     cprintf("\r\n\r\n");
     cprintf("          ====================================================\r\n");
     

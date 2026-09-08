@@ -4,7 +4,7 @@
  * À utiliser à la place de exit() dans tout binaire lié avec
  * SRC/apple2enh-game.cfg, qui détruit BASIC.SYSTEM en cours d'exécution.
  *
- * Auteur  : Arnaud VERHILLE (gist974@gmail.com)
+ * Auteur  : Arnaud VERHILLE (@habib256)
  * Licence : GNU GPL v3.0
  */
 
