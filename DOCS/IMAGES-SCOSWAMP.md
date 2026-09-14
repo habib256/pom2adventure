@@ -22,9 +22,9 @@ temporaires ignorées par Git.
 ## Régénération
 
 ```sh
-python3 ADVKIT/TOOLS/build_manifest.py --root . --output SCOSWAMP.MORE/ref_manifest.jsonl --refs
-python3 ADVKIT/TOOLS/build_manifest.py --root . --output SCOSWAMP.MORE/scene_manifest.jsonl --all
-python3 ADVKIT/TOOLS/build_manifest.py --root . --output SCOSWAMP.MORE/battle_manifest.jsonl --battle
+python3 SCOSWAMP.MORE/TOOLS/build_manifest.py --root . --output SCOSWAMP.MORE/ref_manifest.jsonl --refs
+python3 SCOSWAMP.MORE/TOOLS/build_manifest.py --root . --output SCOSWAMP.MORE/scene_manifest.jsonl --all
+python3 SCOSWAMP.MORE/TOOLS/build_manifest.py --root . --output SCOSWAMP.MORE/battle_manifest.jsonl --battle
 SCOSWAMP.MORE/TOOLS/generate_images.sh SCOSWAMP.MORE/scene_manifest.jsonl 0 3
 SCOSWAMP.MORE/TOOLS/generate_images.sh SCOSWAMP.MORE/battle_manifest.jsonl 0 3
 SCOSWAMP.MORE/TOOLS/convert_images.sh

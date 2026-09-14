@@ -102,7 +102,7 @@ lieu, c'est la clairière **collante** qui parle.
 
 ### 2.1 Le fichier de données
 
-`ADVKIT/TOOLS/build_map.py` lit `SCOSWAMP.MORE/carte.json` et écrit
+`SCOSWAMP.MORE/TOOLS/build_map.py` lit `SCOSWAMP.MORE/carte.json` et écrit
 `SCOSWAMP/MAP.BIN` (**1 844 octets**), que l'empaqueteur dépose sur le volume
 sous le nom `MAP` — l'extension finale tombe, comme pour `MUSIC/<NOM>.MB.BIN`.
 Il est **nommément** dans `PAYLOAD` (`Makefile:444`) et dépendance directe de
@@ -501,7 +501,7 @@ bougé sur la branche de base.
 
 | Fichier | Ce qui change |
 | --- | --- |
-| `ADVKIT/TOOLS/build_map.py` | **nouveau** — écrit `SCOSWAMP/MAP.BIN` depuis `carte.json` |
+| `SCOSWAMP.MORE/TOOLS/build_map.py` | **nouveau** — écrit `SCOSWAMP/MAP.BIN` depuis `carte.json` |
 | `SCOSWAMP/MAP.BIN` | **nouveau** — 1 844 octets, `MAP` sur le volume |
 | `SCOSWAMP/SRC/scoswamp.c` | le bloc carte, `show_map`, `render_place`, la touche `M`, `SCS4`, `wipe()` à la place de `clrscr()`, la cure mémoire |
 | `SCOSWAMP/SRC/scoswamp.cfg` | zone `MAPRAM` `$0C00-$0400`, segment `MAPBSS`, et la règle « un seul fichier ouvert » |
@@ -509,7 +509,7 @@ bougé sur la branche de base.
 | `SCOSWAMP/SRC/hgr_loader.s` | tampon de lecture de 1 Ko à 256 octets |
 | `SCOSWAMP/SRC/Makefile` | `--codesize 100`, cible `map`, `MAP.BIN` dans `PAYLOAD` et dans `$(HDV)` |
 | `SCOSWAMP/SRC/music.h` | commentaire de `MUSIC_OVER` (valeur inchangée, voir § 8) |
-| `ADVKIT/TOOLS/build_messages.py` | `M=CARTE` dans `M_TOUCHES` ; la note sur les chaînes de l'écran MAP |
+| `SCOSWAMP.MORE/TOOLS/build_messages.py` | `M=CARTE` dans `M_TOUCHES` ; la note sur les chaînes de l'écran MAP |
 | `SCOSWAMP.MORE/TOOLS/forge_save.py` | `SCS4`, 277 octets, `clairiere=` |
 | `SCOSWAMP.MORE/TOOLS/test_rules.c` | `test_carte` : la table, le brouillard, les arbitrages |
 | `SCOSWAMP.MORE/TOOLS/playtest.py` | scénario `carte`, et deux garde-fous d'adresses remis d'aplomb |

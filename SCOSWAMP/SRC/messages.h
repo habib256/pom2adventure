@@ -1,4 +1,4 @@
-/* Genere par ADVKIT/TOOLS/build_messages.py -- ne pas editer.
+/* Genere par SCOSWAMP.MORE/TOOLS/build_messages.py -- ne pas editer.
  * L'ordre suit MSGFR / MSGEN sur le disque. */
 
 #ifndef MESSAGES_H

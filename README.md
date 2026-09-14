@@ -128,9 +128,9 @@ du combat 012 est le même géant à la page 126.
 
 ```bash
 # 1. les manifestes, un prompt par page, dérivés du corpus et des bibles
-python3 ADVKIT/TOOLS/build_manifest.py --root . \
+python3 SCOSWAMP.MORE/TOOLS/build_manifest.py --root . \
         --output SCOSWAMP.MORE/scene_manifest.jsonl --all
-python3 ADVKIT/TOOLS/build_manifest.py --root . \
+python3 SCOSWAMP.MORE/TOOLS/build_manifest.py --root . \
         --output SCOSWAMP.MORE/battle_manifest.jsonl --battle
 
 # 2. les rendus maîtres (~1400x960), 10 de front ; relançable, il reprend
@@ -141,7 +141,7 @@ bash SCOSWAMP.MORE/TOOLS/generate_images.sh SCOSWAMP.MORE/scene_manifest.jsonl 0
 sh SCOSWAMP.MORE/TOOLS/convert_images.sh
 
 # 4. l'empreinte des fiches, pour savoir plus tard ce qu'un changement périme
-python3 ADVKIT/TOOLS/build_manifest.py --root . --output /dev/null --record
+python3 SCOSWAMP.MORE/TOOLS/build_manifest.py --root . --output /dev/null --record
 ```
 
 Modifier une fiche de bible périme toutes les images qui la citent :

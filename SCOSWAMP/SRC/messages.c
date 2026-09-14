@@ -1,7 +1,7 @@
 /*
  * MESSAGES - le catalogue de l'interface, lu sur le disque.
  *
- * Voir ADVKIT/TOOLS/build_messages.py : l'enumeration de messages.h et
+ * Voir SCOSWAMP.MORE/TOOLS/build_messages.py : l'enumeration de messages.h et
  * les fichiers MSGFR / MSGEN sortent du meme script, dans le meme ordre.
  */
 

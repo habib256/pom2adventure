@@ -547,7 +547,7 @@ Quatre bugs, tous vérifiés dans l'émulateur (pas seulement au lien) :
   Card), et les numeros de clairiere du livre — la carte affichait le numero
   du PARAGRAPHE, alors que le livre demande de porter celui de la CLAIRIERE,
   et 29 des 90 seulement le donnent en clair dans la prose.
-  `ADVKIT/TOOLS/build_map.py` derivait la carte de la prose ; il a ete
+  `SCOSWAMP.MORE/TOOLS/build_map.py` derivait la carte de la prose ; il a ete
   supprime avec le reste.
 
 - **Le sac à dos demandait deux appuis.** `wait_key_at()` affiche une invite
