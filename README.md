@@ -1,6 +1,3 @@
-<!-- Déplacé le 2026-08-29 depuis ~/Emu/AppleII/apple2src/apple2adventure
-     vers ~/src/pom2adventure, à côté de l'émulateur. Historique git conservé. -->
-
 > **Hommage, gratuit, non commercial.** SCOSWAMP est un portage Apple II du
 > *Marais aux Scorpions*, huitième volume des *Défis Fantastiques* de Steve
 > Jackson et Ian Livingstone, illustré par Duncan Smith, paru chez Gallimard
@@ -9,59 +6,73 @@
 > personne ne tire un centime. Si un ayant droit souhaite qu'il disparaisse, il
 > disparaîtra.
 
-> **pom2adventure — l'atelier logiciel Apple II.**
->
-> Dépôt distinct de [POM2](../pom2), qui est l'émulateur : ici on écrit les
-> programmes *pour* la machine, chaîne cc65 `apple2enh` + ProDOS 8.
->
-> Construire SCOSWAMP :
-> `cd SCOSWAMP/SRC && make hdv` — relie le jeu, le lanceur ProDOS, et
-> reconstruit `dist/SCOSWAMP.HDV`, l'image de travail.
-> `make release` en tire les deux fichiers que télécharge un joueur :
-> `dist/scoswamp-<version>.hdv` (blocs ProDOS bruts) et
-> `dist/scoswamp-<version>.2mg` (les mêmes blocs, précédés des 64 octets
-> d'en-tête que réclament les émulateurs qui refusent de deviner la géométrie
-> d'un `.hdv`). Le numéro est tenu par `VERSION` dans `SCOSWAMP/SRC/Makefile`.
->
-> Les règles de jeu se testent sur la machine hôte, sans émulateur :
-> `cmake -S ADVKIT/TOOLS -B ADVKIT/TOOLS/build && cd $_ && ctest`.
->
-> Test dans l'émulateur voisin :
-> `../pom2/build/POM2 --preset iie <image.hdv>` — ajouter `--ai-control=PORT`
-> pour le piloter sans les mains (HTTP sur la boucle locale ; attention, son
-> parseur JSON ne décode pas les échappements `\uXXXX`, une touche de contrôle
-> se passe en octet brut dans le corps de la requête).
->
-> Le disque ne porte plus BASIC.SYSTEM : le jeu occupe sa place en mémoire et
-> démarre par `SCOSWAMP.SYSTEM`, un lanceur ProDOS. Voir `SRC/loader.c`.
->
-> Backlog : [`TODO.md`](TODO.md). Ce qui n'est pas suivi par git et pourquoi :
-> [`.gitignore`](.gitignore).
+# pom2adventure — l'atelier logiciel Apple II
 
-**Solutions SCOSWAMP (révélations)** : [les trois parcours gagnants](SCOSWAMP/DOCS/PARCOURS-GAGNANTS.md),
-avec les pierres nécessaires, les embranchements, les variantes de fin et
-le niveau de validation dans POM2.
-
-**Code et mémoire SCOSWAMP** : [audit précis du binaire et optimisations](SCOSWAMP/DOCS/AUDIT-MEMOIRE-SCOSWAMP.md),
-avec inventaire par fonction, allocations et expériences de compilation reproductibles.
-
----
-
-# Apple II - Moteurs de Jeu Pilotés par Données
-
-Deux jeux d'aventure pour Apple IIe Enhanced démontrant une architecture moderne : moteur compact (~13 Ko) + contenu illimité sur disque ProDOS.
+Deux jeux d'aventure pour Apple IIe Enhanced, et la fabrique qui les construit.
+Dépôt distinct de [POM2](../pom2), qui est l'émulateur : ici on écrit les
+programmes *pour* la machine, chaîne cc65 `apple2enh` + ProDOS 8.
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-## 📖 Philosophie
+## Trois projets
 
-**Architecture pilotée par données** : le moteur reste en mémoire (~13 Ko), seule la scène actuelle est chargée depuis le disque.
+| Projet | Ce que c'est | Son atelier |
+|---|---|---|
+| **[SCOSWAMP](#-scoswamp--le-marais-aux-scorpions)** | *Le Marais aux Scorpions*, le livre-jeu complet, bilingue, illustré | `SCOSWAMP.MORE/` |
+| **[ADVKIT](#-advkit--la-fabrique-commune)** | la fabrique commune aux deux jeux : lecteur et atelier web, outils natifs, tests | — |
+| **[SPACETRIP](#-spacetrip--space-explorer-trip)** | *Space Explorer Trip*, aventure galactique | `SPACETRIP.MORE/` |
 
-**Avantages** :
-- Contenu illimité (limité uniquement par l'espace disque, jusqu'à 32 Mo ProDOS)
-- Ajout de scènes sans recompilation
-- Contenu moddable par les joueurs
-- Ratio efficacité : 1000:1 (contenu vs. empreinte mémoire)
+```
+SCOSWAMP/          le jeu : données du volume ProDOS, SRC/ (moteur), DOCS/
+SCOSWAMP.MORE/     bibles, masters, musique, outils Python, banc POM2
+ADVKIT/            lecteur/atelier HTML-JS, TESTS/, TOOLS/ natifs, RELEASE.md
+SPACETRIP/         le jeu : moteur, textes, images, build_disk.py
+SPACETRIP.MORE/    bible, manifeste d'images, conversion
+dist/              les images produites (non suivies)
+check-project.sh   contrôle d'intégrité des deux jeux
+```
+
+Un outil qui sert aux deux jeux vit dans `ADVKIT/` ; un outil propre à un jeu
+vit dans son `.MORE/TOOLS/`.
+
+## 🚀 Démarrage rapide
+
+Prérequis : **cc65** (`brew install cc65`), **cmake**, **python3**, **node**,
+et les sources de [POM2](../pom2) à côté du dépôt pour les outils natifs.
+
+```bash
+./check-project.sh                    # intégrité des deux jeux
+make -C SCOSWAMP/SRC hdv              # dist/SCOSWAMP.2mg  (+ dist/SCOSWAMP.HDV)
+python3 SPACETRIP/build_disk.py       # dist/SPACETRIP.2mg (+ dist/SPACETRIP.hdv)
+sh ADVKIT/serve.sh                    # l'atelier : http://localhost:8765/ADVKIT/
+```
+
+`dist/` reçoit deux sortes d'images : le **`.2mg`**, que télécharge un joueur,
+et l'**image de travail** (`.HDV` / `.hdv`), les mêmes blocs sans en-tête, que
+relisent l'émulateur, les bancs et l'atelier. Voir
+[ADVKIT/RELEASE.md](ADVKIT/RELEASE.md).
+
+Tester dans l'émulateur voisin :
+
+```bash
+../pom2/build/POM2 --preset iie dist/SCOSWAMP.2mg
+```
+
+Ajouter `--ai-control=PORT` pour le piloter sans les mains (HTTP sur la boucle
+locale ; attention, son parseur JSON ne décode pas les échappements `\uXXXX`,
+une touche de contrôle se passe en octet brut dans le corps de la requête).
+
+### Les tests
+
+```bash
+cmake -S ADVKIT/TOOLS -B ADVKIT/TOOLS/build && ctest --test-dir ADVKIT/TOOLS/build
+for t in SCOSWAMP.MORE/TOOLS/test_*.py ADVKIT/TESTS/test_*.py; do python3 "$t"; done
+for t in ADVKIT/TESTS/*.mjs; do node --experimental-websocket "$t"; done
+make -C SCOSWAMP/SRC playtest         # le jeu rejoué sous POM2, ~2 minutes
+```
+
+`test_localized_layout.mjs` lit l'atelier : lancer `sh ADVKIT/serve.sh`
+avant. `test_workshop_browser.mjs` pilote un Chrome ouvert en débogage distant.
 
 ---
 
@@ -71,49 +82,56 @@ Deux jeux d'aventure pour Apple IIe Enhanced démontrant une architecture modern
 > Relancer le script après toute modification de contenu pour les mettre à jour.
 > Dernière vérification : 31 août 2026 — 0 erreur.
 
-| Module | Rôle | Moteur | Scènes | Textes | Images | État |
+| Jeu | Rôle | Moteur | Scènes | Textes | Images | État |
 |--------|------|--------|--------|--------|--------|------|
 | **SCOSWAMP** | Le Marais aux Scorpions (livre-jeu) | 13 322 o | 407 | 814 ✅ | 407 / 407 + 32 combats ✅ | ✅ Complet |
 | **SPACETRIP** | Space Explorer Trip (aventure sci-fi) | 12 835 o | 14 | 28 ✅ | 14 / 14 ✅ | ✅ Complet |
 
-**Progression par axe** (pas de pourcentage global : les axes ne sont pas comparables)
+**Intégrité** : 439 images DHGR compressées (DHRR), toutes vérifiées comme se
+décodant en 16 384 octets exactement (8 Ko auxiliaires + 8 Ko principaux).
+Aucun trou de numérotation, aucune scène FR sans équivalent EN, aucun fichier
+texte vide.
 
-```
-SCOSWAMP  texte FR/EN   [####################] 100%  (804/804 fichiers)
-SCOSWAMP  moteur        [####################] 100%
-SCOSWAMP  images DHGR   [####################] 100%  (407/407 scènes + 32 combats)
-SPACETRIP tout          [####################] 100%
-Distribution            [....................]   0%  (voir SCOSWAMP/DOCS/RELEASE.md)
-```
-
-**Intégrité** : 439 images DHGR compressées (DHRR), toutes vérifiées comme se décodant en 16 384 octets exactement (8 Ko auxiliaires + 8 Ko principaux). Aucun trou de numérotation, aucune scène FR sans équivalent EN, aucun fichier texte vide.
-
-### Vérifier soi-même
-
-```bash
-./check-project.sh          # rapport complet
-./check-project.sh --quiet  # erreurs seules (code de sortie 1 si problème)
-```
-
-Le script valide les tailles HGR, l'appariement FR/EN, la continuité des scènes, la taille des moteurs face au budget mémoire, et l'absence d'artefacts de build versionnés.
+Le script valide les tailles d'images, l'appariement FR/EN, la continuité des
+scènes, la taille des moteurs face au budget mémoire, et l'absence d'artefacts
+de build versionnés.
 
 ---
 
-## 🎮 SCOSWAMP - Le Marais aux Scorpions
+## 🎮 SCOSWAMP — Le Marais aux Scorpions
 
 Adaptation du livre-jeu « Scorpion Swamp » (1985) par Steve JACKSON & Ian LIVINGSTONE.
 
+**Solutions (révélations)** : [les trois parcours gagnants](SCOSWAMP/DOCS/PARCOURS-GAGNANTS.md),
+avec les pierres nécessaires, les embranchements, les variantes de fin et le
+niveau de validation dans POM2.
+**Code et mémoire** : [audit précis du binaire et optimisations](SCOSWAMP/DOCS/AUDIT-MEMOIRE-SCOSWAMP.md),
+avec inventaire par fonction, allocations et expériences de compilation reproductibles.
+
 ### Ce qui est terminé
 
-- **402 scènes** (N000 → N401), livre-jeu complet adapté
-- **Bilingue FR/EN** : 804 fichiers texte, appariement complet vérifié
-- **Mode texte 80 colonnes** : lecture confortable et immersive
-- **Bascule instantanée** image ↔ texte (ESPACE / RETURN / ESC)
-- **Navigation par choix** : branches narratives interactives
-- **Memory swap** : transitions optimisées
-
+- **Le livre complet**, bilingue FR/EN, appariement vérifié
+- **Mode texte 80 colonnes**, bascule instantanée image ↔ texte (ESPACE / RETURN / ESC)
 - **Toutes les scènes sont illustrées** : 407 images de page + 32 tableaux de
-  bataille, en couleur, dans la palette DHGR à seize indices.
+  bataille, en couleur, dans la palette DHGR à seize indices
+- **Combat, Chance, Pierres, sac à dos, carte, sauvegardes**, fidèles aux
+  règles des *Défis Fantastiques*
+- **Musique Mockingboard** et **DIAPO**, le diaporama lancé par `[D]` depuis
+  l'écran-titre
+
+### Construire
+
+```bash
+make -C SCOSWAMP/SRC hdv
+```
+
+relie le jeu et `SCOSWAMP.SYSTEM`, son lanceur ProDOS, puis reconstruit
+`dist/SCOSWAMP.HDV` et `dist/SCOSWAMP.2mg`. Le disque ne porte plus
+BASIC.SYSTEM : le jeu occupe sa place en mémoire et démarre par le lanceur
+(`SCOSWAMP/SRC/loader.c`). Les règles de jeu se testent sur la machine hôte,
+sans émulateur, par `ctest` (voir [Les tests](#les-tests)).
+
+**Contrôles** : `ESPACE/RETURN/ESC` = basculer image/texte | `A-Z` = choix | `Q` = quitter
 
 ### Comment les images sont faites
 
@@ -145,76 +163,89 @@ python3 SCOSWAMP.MORE/TOOLS/build_manifest.py --root . --output /dev/null --reco
 ```
 
 Modifier une fiche de bible périme toutes les images qui la citent :
-`build_manifest.py --stale` les nomme.
-
-### Compilation
-
-```bash
-cd SCOSWAMP/SRC
-make
-```
-
-Ou manuellement :
-```bash
-cl65 -t apple2enh -O -Oirs -Wl -D,__EXEHDR__=0 -Wl -S,0x4000 \
-     -o ../SCOSWAMP.BIN scoswamp.c paths.c
-```
-
-### Exécution
-
-1. Monter `SCOSWAMP/` comme disque ProDOS (Virtual ][)
-2. `]BRUN SCOSWAMP`
-3. Choisir la langue : `F` (Français) ou `E` (English)
-
-**Contrôles** : `ESPACE/RETURN/ESC` = basculer image/texte | `A-Z` = choix | `Q` = quitter
+`build_manifest.py --stale` les nomme. L'atelier ADVKIT permet ensuite de
+juger et de retoucher chaque image dans le contexte de sa page.
 
 ---
 
-## 🚀 SPACETRIP - Space Explorer Trip
+## 🧰 ADVKIT — la fabrique commune
 
-Aventure galactique interactive démontrant l'architecture pilotée par données. **Complet** : 14 scènes, 14 images, bilingue.
+Tout ce qui fabrique les deux jeux sans appartenir à l'un d'eux.
+
+| Dossier | Contenu |
+|---|---|
+| `ADVKIT/` | le **lecteur et l'atelier** HTML/JavaScript : il ouvre le volume ProDOS exactement comme la machine le démarre, joue le jeu, compare chaque image à son master et la reconvertit ; `verifier.js` passe le même moteur sur tout un corpus, sans navigateur |
+| `ADVKIT/TESTS/` | les tests node du moteur de règles et le test de l'atelier |
+| `ADVKIT/TOOLS/` | les **outils natifs** : `build_prodos_volume` et son amorce `prodos_boot.tmpl`, `wrap_2mg.py`, `pom2_playtest` (POM2 sans fenêtre, pour les bancs), les convertisseurs `scoswamp_hgr` / `scoswamp_dhgr` |
+
+```bash
+sh ADVKIT/serve.sh                                    # l'atelier dans le navigateur
+node ADVKIT/verifier.js                               # tout le volume SCOSWAMP
+node ADVKIT/verifier.js project.spacetrip.json        # le corpus de SPACETRIP
+cmake -S ADVKIT/TOOLS -B ADVKIT/TOOLS/build && cmake --build ADVKIT/TOOLS/build
+sh ADVKIT/TOOLS/build_pom2_playtest.sh                # l'hôte headless de POM2
+```
+
+Les deux jeux sont deux **données** du même atelier, décrites par
+`ADVKIT/project.scoswamp.json` et `ADVKIT/project.spacetrip.json`. Voir
+[ADVKIT/README.md](ADVKIT/README.md) et [ADVKIT/IMAGES.md](ADVKIT/IMAGES.md).
+
+---
+
+## 🚀 SPACETRIP — Space Explorer Trip
+
+Aventure galactique interactive démontrant l'architecture pilotée par données.
+**Complet** : 14 scènes, 14 images, bilingue.
 
 | Métrique | Valeur |
 |----------|--------|
 | Moteur | 12 835 o |
 | Scènes | 14 (FR + EN) |
-| Images DHGR | deux banques de 8 Ko par image, compressées sur disque |
+| Images | HGR brutes, 8 192 octets chacune |
 | Fichiers texte | 28 (14 FR + 14 EN) |
-| Ratio efficacité | 11:1 |
 
-### Compilation
+### Construire
 
 ```bash
-cd SPACETRIP
-cl65 -t apple2enh -O -Oirs -Wl -D,__EXEHDR__=0 -Wl -S,0x4000 \
-     -o SPACETRIP.BIN spacetrip.c paths.c
+python3 SPACETRIP/build_disk.py       # moteur (SPACETRIP/build.sh), puis dist/SPACETRIP.2mg
 ```
+
+`sh SPACETRIP/build.sh test` ne fait tourner que le banc hôte de l'analyseur
+de page. La bible de l'univers et le manifeste des images vivent dans
+`SPACETRIP.MORE/` ; `sh SPACETRIP.MORE/TOOLS/convert_images.sh` convertit les
+masters en pages HGR.
 
 ### Ajouter du contenu (sans recompilation)
 
 1. Créer `TXTFR/N015` et `TXTEN/N015` (description + choix)
-2. Créer `IMG/N015.HGR` (8192 octets exactement)
+2. Créer `IMG/N015.HGR.BIN` (8192 octets exactement)
 3. Lier depuis une scène : ajouter `C 015 Titre du choix`
-4. Terminé, jouable immédiatement. Valider avec `./check-project.sh`.
+4. Valider avec `./check-project.sh`, reconstruire le disque
 
 ---
 
 ## 🛠️ Développement
 
-### Prérequis
+### Philosophie : piloté par les données
 
-- **cc65** : `brew install cc65` (macOS) ou https://cc65.github.io/
-- **Virtual ][** ou autre émulateur Apple II
-- **Apple IIe Enhanced** (65C02), 64 Ko RAM, carte 80 colonnes
+Le moteur reste en mémoire, seule la scène courante est chargée depuis le
+disque. Le contenu n'est limité que par l'espace disque (jusqu'à 32 Mo ProDOS),
+une scène s'ajoute sans recompiler, et les joueurs peuvent la modifier.
+
+### Machine cible
+
+**Apple IIe Enhanced** (65C02), 64 Ko RAM, carte 80 colonnes, ProDOS 8.
 
 ### Carte mémoire
 
+Configuration cc65 standard, celle de SPACETRIP :
+
 ```
 $0000-$1FFF : Système ProDOS (page zéro, pile 6502, buffers)
-$2000-$3FFF : DHGR Page 1 (8 Ko dans chacune des deux banques)
+$2000-$3FFF : HGR Page 1
 $4000-$8DFF : Moteur : CODE + RODATA + DATA + BSS  (19 968 o utilisables)
-$8E00-$95FF : Pile C (__STACKSIZE__ = 2 Ko)
-$9600-$BFFF : ProDOS 8 — MLI, page globale ($BF00), buffers fichier (1 Ko/fichier)
+$8E00-$95FF : Pile C
+$9600-$BFFF : BASIC.SYSTEM puis ProDOS 8 — MLI, page globale ($BF00), buffers fichier
 $C000-$FFFF : I/O et ROM
 ```
 
@@ -222,63 +253,44 @@ Démarrage à `$4000` pour préserver HGR Page 1 (`$2000-$3FFF`).
 
 **`$9600-$BEFF` n'est pas perdu.** cc65 y suppose BASIC.SYSTEM résident — ce
 qu'implique `]BRUN` — et fixe par prudence `__HIMEM__ = $9600`. Un programme qui
-renonce à revenir au BASIC récupère ces **10 496 octets**. C'est l'objet de
-[`SRC/apple2enh-game.cfg`](SRC/apple2enh-game.cfg) :
-
-| | Config cc65 standard | `SRC/apple2enh-game.cfg` |
-|---|---|---|
-| `__HIMEM__` | `$9600` | `$BF00` |
-| Utilisable depuis `$4000` | 19 968 o | **30 464 o** |
-| BASIC.SYSTEM | préservé | détruit |
-| Sortie | `exit()` | `prodos_quit()` obligatoire |
+renonce à revenir au BASIC récupère ces **10 496 octets** : c'est ce que fait
+SCOSWAMP, lancé par son propre `SCOSWAMP.SYSTEM`, avec `__HIMEM__ = $BF00` et
+une zone `LOWRAM` supplémentaire en `$1000-$1FFF` (`SCOSWAMP/SRC/scoswamp.cfg`).
 
 Deux contraintes distinctes, à ne pas confondre :
 
 | Contrainte | Ce qu'elle limite | Vérifiée par |
 |------------|-------------------|--------------|
 | Taille du `.BIN` | CODE + RODATA + DATA + ONCE | `check-project.sh` |
-| Empreinte exécution | **+ BSS + tas + pile** | `check-memory.sh` (lit le `.map`) |
+| Empreinte exécution | **+ BSS + tas + pile** | `SCOSWAMP.MORE/TOOLS/check-memory.sh` (lit le `.map`) |
 
 Le `.BIN` **ne contient pas la BSS**, allouée au lancement. Un binaire de taille
-acceptable peut donc déborder à l'exécution :
-
-```bash
-cl65 ... -Wl -m,build.map -o SCOSWAMP.BIN ...
-./tools/check-memory.sh build.map                    # config standard
-./tools/check-memory.sh build.map --himem 0xBF00     # config étendue
-```
+acceptable peut donc déborder à l'exécution. `make` dans `SCOSWAMP/SRC` passe
+le `.map` au contrôle à chaque lien, et affiche la marge restante.
 
 > **Piège `ld65`.** Si la BSS démarre déjà au-delà du plafond, la taille de sa
 > zone se calcule en négatif, déborde en non signé, et le contrôle d'overflow
 > est neutralisé : **le link réussit sans le moindre avertissement**. Seule la
 > lecture du `.map` révèle le problème.
 
-> **Piège du tas.** `$0800-$1FFF` (6 Ko) est libre, mais y reloger la BSS ne
-> marche pas : dans cc65 le tas est câblé sur `__BSS_RUN__ + __BSS_SIZE__` et
-> **suit la BSS**. Relogée en bas, le tas traverse HGR page 1 puis le code, et
-> `fopen()` — 1 Ko par fichier ouvert — écrase l'image affichée. Le linker
-> accepte pourtant cette configuration sans broncher.
+> **Piège du tas.** Reloger toute la BSS en RAM basse ne marche pas : dans cc65
+> le tas est câblé sur `__BSS_RUN__ + __BSS_SIZE__` et **suit la BSS**. Relogée
+> en bas, le tas traverse HGR page 1 puis le code, et `fopen()` — 1 Ko par
+> fichier ouvert — écrase l'image affichée. Le linker accepte pourtant cette
+> configuration sans broncher. D'où un *second* segment pour les gros tampons.
 
-Analyse complète des zones récupérables, mesures et validation restante :
+Analyse complète des zones récupérables et des mesures :
 **[SCOSWAMP/DOCS/MEMOIRE.md](SCOSWAMP/DOCS/MEMOIRE.md)**.
-
-Marge actuelle de SCOSWAMP : BSS finit à `$8516`, soit 2 282 octets sous le
-plafond standard, 12 778 sous le plafond étendu.
 
 ### Format des fichiers
 
-- **Images** : flux `DHRR` — **exactement 16 384 octets décodés**, 140×192, 16 couleurs
-  Chaque plan DHGR fait 7680 octets affichés + 512 octets de « screen holes » non
-  affichés. Un fichier plus court est chargé partiellement et laisse des résidus
-  de la scène précédente à l'écran.
+- **Images SCOSWAMP** : flux `DHRR` — **exactement 16 384 octets décodés**,
+  140×192, 16 couleurs. Chaque plan DHGR fait 7680 octets affichés + 512 octets
+  de « screen holes » non affichés. Un fichier plus court est chargé
+  partiellement et laisse des résidus de la scène précédente à l'écran.
+- **Images SPACETRIP** : page HGR brute de 8192 octets.
 - **Textes** : `TEXTFR/N###/N###.TXT` et `TEXTEN/N###/N###.TXT`
 - **Choix** : `C <scene_id> <titre>` (la ligne commence par `C` + espace)
-
-### Chemins ProDOS
-
-```c
-build_paths(5, "FR", ...) → "IMG/N005.HGR", "TEXTFR/N000/N005.TXT"
-```
 
 ---
 
@@ -290,36 +302,13 @@ build_paths(5, "FR", ...) → "IMG/N005.HGR", "TEXTFR/N000/N005.TXT"
 | [SCOSWAMP/DOCS/README-TEXTES.md](SCOSWAMP/DOCS/README-TEXTES.md) | Format des fichiers texte |
 | [SCOSWAMP/DOCS/MEMOIRE.md](SCOSWAMP/DOCS/MEMOIRE.md) | Carte mémoire, zones récupérables, pièges cc65 |
 | [SCOSWAMP/DOCS/PRODOS-MLI.md](SCOSWAMP/DOCS/PRODOS-MLI.md) | Gestion des chemins ProDOS |
-| [SCOSWAMP/DOCS/RELEASE.md](SCOSWAMP/DOCS/RELEASE.md) | Génération et publication des images disque |
+| [ADVKIT/README.md](ADVKIT/README.md) | Le lecteur et l'atelier |
+| [ADVKIT/IMAGES.md](ADVKIT/IMAGES.md) | Retoucher et reconvertir une image |
+| [ADVKIT/RELEASE.md](ADVKIT/RELEASE.md) | Les images de `dist/` et leur publication |
 | [SPACETRIP/README.TXT](SPACETRIP/README.TXT) | Architecture et guide complet |
-| [DOCS/cc65/](DOCS/cc65/) | Documentation cc65 complète (HTML) |
+| [TODO.md](TODO.md) | Backlog et journal des corrections |
 
-> Le statut chiffré du projet vit **uniquement ici**, alimenté par
-> `check-project.sh`. L'ancien `SCOSWAMP/DOCS/PROJECT-STATUS.md` a été
-> fusionné dans ce README pour éviter deux sources de vérité divergentes.
-
----
-
-## 📦 Images disque
-
-Les fichiers `.2mg` **ne sont pas versionnés** : ce sont des artefacts de build
-régénérables, et les committer ajoutait 5 à 32 Mo à l'historique Git à chaque
-mise à jour, de façon définitive.
-
-Ils sont publiés en **GitHub Release**. Voir [SCOSWAMP/DOCS/RELEASE.md](SCOSWAMP/DOCS/RELEASE.md)
-pour la procédure de génération et de publication.
-
----
-
-## 🔮 Évolutions futures
-
-Pistes :
-
-- **Inventaire** : objets, clés, armes, armures (moddables via fichiers)
-- **Sauvegarde** : système multi-emplacements
-- **Fichiers de données** : `MONSTERS.DAT`, `ITEMS.DAT`, `IMG/MONSTERS/*.HGR`
-
-Le moteur resterait ~15-18 Ko, le contenu illimité sur disque.
+Ce qui n'est pas suivi par git, et pourquoi : [`.gitignore`](.gitignore).
 
 ---
 
@@ -329,42 +318,19 @@ Le moteur resterait ~15-18 Ko, le contenu illimité sur disque.
 |----------|----------|
 | Fichier non trouvé | Vérifier le format `N###` (3 chiffres) et les chemins |
 | Choix absents | Les lignes doivent commencer par `C ` (C + espace) |
-| Graphiques corrompus | Les fichiers HGR doivent faire 8192 octets — lancer `./check-project.sh` |
-| Plantage au démarrage | Compiler avec `-Wl -S,0x4000` |
+| Image corrompue | Lancer `./check-project.sh`, qui vérifie la taille décodée de chaque image |
 | Texte manquant dans une langue | `./check-project.sh` détecte les scènes non appariées FR/EN |
+| `make hdv` ne trouve pas `build_prodos_volume` | Il se construit par cmake depuis `ADVKIT/TOOLS` ; vérifier que les sources de POM2 sont en `../pom2` |
 
 ---
 
 ## 📦 Ressources
 
-- **cc65** : https://cc65.github.io/
+- **cc65** : https://cc65.github.io/ — documentation : https://cc65.github.io/doc/
+- **POM2** : l'émulateur voisin, `../pom2`
 - **Virtual ][** (macOS) : https://www.virtualii.com/
 - **AppleWin** (Windows) : https://github.com/AppleWin/AppleWin
-- **bmp2dhr** : convertisseur HGR
 - **ProDOS 8** : https://prodos8.com/
-
----
-
-## 🚀 Démarrage rapide
-
-```bash
-# 1. Installer cc65
-brew install cc65  # macOS
-
-# 2. Vérifier l'intégrité du dépôt
-./check-project.sh
-
-# 3. Compiler
-cd SCOSWAMP/SRC && make
-cd ../../SPACETRIP && cl65 -t apple2enh -O -Oirs \
-    -Wl -D,__EXEHDR__=0 -Wl -S,0x4000 -o SPACETRIP.BIN spacetrip.c paths.c
-
-# 4. Exécuter (Virtual ][)
-# - Menu → « Mount Folder as ProDOS Disk » → sélectionner SCOSWAMP/ ou SPACETRIP/
-# - ]BRUN SCOSWAMP (ou SPACETRIP)
-# - F = Français, E = English
-# - ESPACE = basculer image/texte, A-Z = choix, Q = quitter
-```
 
 ---
 
@@ -374,11 +340,7 @@ cd ../../SPACETRIP && cl65 -t apple2enh -O -Oirs \
 Licence : **GNU GPL v3.0** — libre d'utiliser, modifier, distribuer
 
 **SCOSWAMP** : adaptation de « Scorpion Swamp » (1985) par Steve JACKSON & Ian LIVINGSTONE
-- ✅ Traduction anglaise complète : octobre 2024 (402 scènes, 804 fichiers)
+- ✅ Traduction anglaise complète : octobre 2024
 - ✅ Images : 31 août 2026 (407 scènes + 32 combats, toutes en couleur)
 
 **Remerciements** : équipe cc65, communauté Apple II, équipe Virtual ][
-
----
-
-**Bon voyage dans l'univers rétro-moderne d'Apple II ! 🍎✨**

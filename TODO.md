@@ -812,7 +812,7 @@ une Pierre bénéfique au choix.
 
 ### Documentation
 
-- 🟢 Consigner dans `DOCS/` les deux pièges cc65/ProDOS payés ici : `errno`
+- 🟢 Consigner dans `SCOSWAMP/DOCS/` les deux pièges cc65/ProDOS payés ici : `errno`
   n'est **pas** numéroté comme en POSIX, et `_oserror == 0` est le signal que
   l'échec est côté runtime C, pas côté ProDOS. C'est ce qui a fait chercher un
   fichier manquant pendant longtemps alors que le problème était le tas.
