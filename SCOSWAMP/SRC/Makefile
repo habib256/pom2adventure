@@ -440,6 +440,7 @@ VOLBUILD = $(KIT)/build/build_prodos_volume
 # ici, sinon `make hdv` ne peut pas partir d'un arbre propre (dist/ est ignoré).
 BOOTTMPL = $(KIT)/prodos_boot.tmpl
 HDV      = ../../dist/SCOSWAMP.HDV
+IMG2MG   = ../../dist/SCOSWAMP.2mg
 STAGE    = ../../dist/.stage
 # DOCS et SRC : du developpement, rien a faire sur le disque du joueur.
 # BASIC.SYSTEM et STARTUP.BAS : le jeu occupe desormais $9600-$A3D9, c'est-a-dire
@@ -480,8 +481,8 @@ PAYLOAD = $(shell find $(OUTDIR)/TEXTFR $(OUTDIR)/TEXTEN $(OUTDIR)/DHGR $(OUTDIR
 # L'empaqueteur retire la derniere extension : MAP.BIN devient MAP sur le
 # volume, comme MUSIC/<NOM>.MB.BIN devient MUSIC/<NOM>.MB.
 CARTE    = ../../SCOSWAMP.MORE/carte.json
-$(OUTDIR)/MAP.BIN: $(KIT)/build_map.py $(CARTE)
-	python3 $(KIT)/build_map.py --root ../..
+$(OUTDIR)/MAP.BIN: $(TOOLS)/build_map.py $(CARTE)
+	python3 $(TOOLS)/build_map.py --root ../..
 
 map: $(OUTDIR)/MAP.BIN
 
@@ -500,7 +501,7 @@ $(OUTDIR)/DIAPO/DIAPO.CODE.BIN: diapo.c music.h music.o crt0.o hgr_loader.o memo
 	@mkdir -p $(OUTDIR)/DIAPO
 	$(CL) $(CFLAGS) -C scoswamp.cfg -Wl -D,__EXEHDR__=0 -Wl -D,__HIMEM__=$(HIMEM) -Wl -m,diapo.map -Wl -Ln,diapo.lbl -o $@ crt0.o diapo.c music.o hgr_loader.o memory_swap.o mli_safe.o $(IOBUF)
 
-hdv: $(HDV)
+hdv: $(HDV) $(IMG2MG)
 
 $(HDV): $(OUTDIR)/$(PROGRAM) $(OUTDIR)/$(LAUNCHER) $(BOOTTMPL) $(MUSICS) \
         $(OUTDIR)/MAP.BIN $(OUTDIR)/DIAPO/DIAPO.SYSTEM.SYS $(OUTDIR)/DIAPO/DIAPO.CODE.BIN diapo-catalog \
@@ -515,29 +516,25 @@ $(HDV): $(OUTDIR)/$(PROGRAM) $(OUTDIR)/$(LAUNCHER) $(BOOTTMPL) $(MUSICS) \
 	@rm -rf $(STAGE)
 	@echo "==> Image disque : $(HDV)"
 
-# ── Images de release ──────────────────────────────────────────────────────
-# `make hdv` produit l'image de travail, toujours au meme nom, que l'emulateur
-# voisin relance sans qu'on retape un chemin. `make release` en tire les deux
-# fichiers qu'un joueur telecharge, portant le numero de version :
+# ── Image de distribution ──────────────────────────────────────────────────
+# `make hdv` laisse deux fichiers dans dist/ :
 #
-#   dist/scoswamp-$(VERSION).hdv   les blocs ProDOS bruts
-#   dist/scoswamp-$(VERSION).2mg   les memes blocs + 64 octets d'en-tete 2MG
+#   dist/SCOSWAMP.HDV   l'image de travail, les blocs ProDOS bruts, que
+#                       l'emulateur voisin, `make playtest` et l'atelier ADVKIT
+#                       relisent toujours au meme nom
+#   dist/SCOSWAMP.2mg   les memes blocs + 64 octets d'en-tete 2MG : le fichier
+#                       que telecharge un joueur
 #
 # Le .2mg existe parce que plusieurs emulateurs refusent de deviner la
-# geometrie d'un .hdv d'apres sa taille ; l'en-tete la leur dit.
-VERSION  = 0.9
-RELHDV   = ../../dist/scoswamp-$(VERSION).hdv
-REL2MG   = ../../dist/scoswamp-$(VERSION).2mg
+# geometrie d'un .hdv d'apres sa taille ; l'en-tete la leur dit. Le numero de
+# version vit dans le tag Git de la release, pas dans le nom du fichier.
+# `make release` reste un synonyme.
 WRAP2MG  = $(KIT)/wrap_2mg.py
 
-release: $(REL2MG)
+release: $(IMG2MG)
 
-$(RELHDV): $(HDV)
-	@cp $(HDV) $@
-	@echo "==> Image de release : $@"
-
-$(REL2MG): $(RELHDV) $(WRAP2MG)
-	@python3 $(WRAP2MG) $(RELHDV) $@
+$(IMG2MG): $(HDV) $(WRAP2MG)
+	@python3 $(WRAP2MG) $(HDV) $@
 
 # ── Banc de traversée ──────────────────────────────────────────────────────
 # `make playtest` reconstruit l'image disque, puis rejoue le jeu sous POM2 :

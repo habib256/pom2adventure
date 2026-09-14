@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Build SPACETRIP's current standalone engine and stage only disk assets."""
+"""Build SPACETRIP's engine, then its disk images in dist/.
+
+    python3 SPACETRIP/build_disk.py
+
+dist/SPACETRIP.hdv is the working image (POM2, the ADVKIT workshop);
+dist/SPACETRIP.2mg carries the same ProDOS blocks behind a 2MG header, for
+players and for emulators that will not guess a .hdv geometry.
+"""
 from pathlib import Path
 import os
 import shutil
@@ -19,3 +26,5 @@ with tempfile.TemporaryDirectory(prefix='spacetrip-volume-') as temp:
     # Same filesystem temporary destination for atomic replacement.
     (ROOT/'dist').mkdir(exist_ok=True)
     target=ROOT/'dist'/'SPACETRIP.hdv.tmp';shutil.copyfile(out,target);os.replace(target,ROOT/'dist'/'SPACETRIP.hdv')
+subprocess.run(['python3',str(ROOT/'ADVKIT/TOOLS/wrap_2mg.py'),str(ROOT/'dist'/'SPACETRIP.hdv'),
+                str(ROOT/'dist'/'SPACETRIP.2mg')],check=True)

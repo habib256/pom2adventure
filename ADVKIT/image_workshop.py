@@ -209,7 +209,7 @@ class Handler(SimpleHTTPRequestHandler):
                 self.reply(dict(saved=str(p['output'].relative_to(ROOT)),sha256=item['previous']))
             elif self.path=='/api/build':
                 game=body['game']; project(game)
-                command=['make','-C','SCOSWAMP/SRC','hdv'] if game=='SCOSWAMP' else ['python3','SPACETRIP/build_hdv.py']
+                command=['make','-C','SCOSWAMP/SRC','hdv'] if game=='SCOSWAMP' else ['python3','SPACETRIP/build_disk.py']
                 with LOCK:
                     result=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=240)
                 if result.returncode: raise ValueError((result.stdout+result.stderr)[-3000:])

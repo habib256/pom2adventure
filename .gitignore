@@ -44,7 +44,7 @@ SCOSWAMP.MORE/CHATMAUVE-PREVIEW/
 # personnages et les objets ; elles restent donc versionnees.
 
 # Images disque ProDOS : sorties de build (37 Mo), reconstruites par TOOLS et
-# publiées en GitHub Release. Voir SCOSWAMP/DOCS/RELEASE.md.
+# publiées en GitHub Release. Voir ADVKIT/RELEASE.md.
 *.2mg
 *.2img
 *.po
