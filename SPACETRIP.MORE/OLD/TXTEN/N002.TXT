@@ -1,0 +1,15 @@
+Sylvaria Prime
+---------------
+
+Welcome to Sylvaria Prime, the legendary planet of eternal forests!
+Immense multicolored trees rise as far as the eye can see, their
+crystalline leaves tinkling melodiously in the fragrant breeze.
+Bioluminescent creatures flutter between the gigantic branches.
+
+The perfect spot for a memorable selfie! The light filtered through
+the canopy creates a magical atmosphere. Perfect for your Instagram feed.
+But be careful not to get lost in this plant labyrinth...
+
+C 001 Return home
+C 005 Drift to the floating mountains of Myria
+C 007 Descend into the crystal canyons

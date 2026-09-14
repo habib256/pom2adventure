@@ -1,0 +1,15 @@
+Dunes aux Soleils Binaires, Khepra IX
+--------------------------------------
+
+Deux soleils projettent des ombres jumelles sur de hautes dunes.
+Le sable chante quand le vent souffle bien.
+Des lignes de chaleur dansent sur les cretes.
+Une caravane se repose pres d'une voile d'ombre.
+
+Grimpez une dune sure et capturez les deux soleils dans le cadre.
+Buvez de l'eau souvent.
+
+C 008 Revenir a la cite d'Aeolis
+C 010 Retour a la mer miroir
+C 012 Marcher sur le bord du petale Dyson
+
