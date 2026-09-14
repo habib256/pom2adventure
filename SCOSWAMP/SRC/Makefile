@@ -68,10 +68,11 @@ STACK   = 0x0180
 # Reserve de croissance du moteur, distincte de la pile C ci-dessus.
 # Le deplacement musical AUX rend cette marge possible ; ne pas la consommer
 # silencieusement lors de l'ajout de regles partagees.
-# 2026-09-07 : 2048 -> 1792. Les touches [D] et [T] de l'ecran-titre, qui
-# lancent DIAPO et A2 Retro Cmd (launch() dans scoswamp.c : lecture du SYS en
-# $2000 et saut), coutent 165 octets ; la marge mesuree est de 1886. Bitsy Bye
-# n'honore pas le QUIT etendu avec chemin, qui aurait coute trois fois moins.
+# 2026-09-07 : 2048 -> 1792. Les touches [D] et [T] de l'ecran-titre
+# (launch() dans scoswamp.c : lecture du SYS en $2000 et saut) coutaient 165
+# octets ; la marge mesuree etait de 1886. [T] est partie avec le gestionnaire
+# de fichiers, [D] lance toujours DIAPO. Bitsy Bye n'honore pas le QUIT etendu
+# avec chemin, qui aurait coute trois fois moins.
 MIN_FREE = 1792
 # -C scoswamp.cfg : apple2enh.cfg plus la zone LOWRAM ($1000-$1FFF) et son
 # segment LOWBSS, ou vivent les gros tampons. Voir le fichier lui-meme.
@@ -497,29 +498,11 @@ $(OUTDIR)/DIAPO/DIAPO.CODE.BIN: diapo.c music.h music.o crt0.o hgr_loader.o memo
 	@mkdir -p $(OUTDIR)/DIAPO
 	$(CL) $(CFLAGS) -C scoswamp.cfg -Wl -D,__EXEHDR__=0 -Wl -D,__HIMEM__=$(HIMEM) -Wl -m,diapo.map -Wl -Ln,diapo.lbl -o $@ crt0.o diapo.c music.o hgr_loader.o memory_swap.o mli_safe.o $(IOBUF)
 
-# A2 Retro Cmd : le gestionnaire de fichiers a deux panneaux, autrefois
-# construit ici, vit desormais dans son propre depot avec ses sources, ses
-# bancs et son integration continue :
-#
-#     https://github.com/habib256/a2retrocmd
-#
-# Le jeu n'en est plus que l'hote. SCOSWAMP/A2RETRO/ contient une copie des
-# quatre fichiers publies, tiree de l'image de disquette d'une Release par
-# tools/update_a2retrocmd.py (qui ecrit aussi leur provenance a cote), et
-# `make hdv` la pose sur le disque comme le reste du volume. La touche [T]
-# de l'ecran-titre lance A2RETRO/A2RETRO.SYSTEM.
-#
-# Pour rafraichir la copie :
-#     python3 ../../tools/update_a2retrocmd.py            (derniere Release)
-#     python3 ../../tools/update_a2retrocmd.py --tag v1.1
-A2RETRO = $(OUTDIR)/A2RETRO/A2RETRO.SYSTEM.SYS $(OUTDIR)/A2RETRO/A2RETRO.CODE.BIN \
-          $(OUTDIR)/A2RETRO/A2RETRO.HELP.TXT $(OUTDIR)/A2RETRO/FORMAT.SYS.SYS
-
 hdv: $(HDV)
 
 $(HDV): $(OUTDIR)/$(PROGRAM) $(OUTDIR)/$(LAUNCHER) $(BOOTTMPL) $(MUSICS) \
         $(OUTDIR)/MAP.BIN $(OUTDIR)/DIAPO/DIAPO.SYSTEM.SYS $(OUTDIR)/DIAPO/DIAPO.CODE.BIN diapo-catalog \
-        $(A2RETRO) $(PAYLOAD) | $(VOLBUILD) check
+        $(PAYLOAD) | $(VOLBUILD) check
 	@rm -rf $(STAGE) && mkdir -p $(STAGE) $(dir $(HDV))
 	@for f in $(OUTDIR)/*; do \
 		b=`basename "$$f"`; \

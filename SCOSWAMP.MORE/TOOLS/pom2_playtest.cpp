@@ -71,8 +71,7 @@ int main(int argc, char** argv) {
                 if (preset == "iie-u") preset = "iie_unenh";
                 if (preset != "iie" && preset != "iic" && preset != "iie_unenh") return 2;
             } else if (a == "--speed" && i + 1 < argc) speed = std::stoi(argv[++i]);
-            // --disk : une disquette 5,25 pouces dans un Disk II en slot 6,
-            // pour le banc du formateur d'Apple IIe Total Commander.
+            // --disk : une disquette 5,25 pouces dans un Disk II en slot 6.
             else if (a == "--disk" && i + 1 < argc) floppy = argv[++i];
             // --disk2 : une seconde disquette dans le lecteur 2 du meme Disk II,
             // presente des l'amorcage (le banc des disques physiques d'A2 File
@@ -80,8 +79,8 @@ int main(int argc, char** argv) {
             else if (a == "--disk2" && i + 1 < argc) floppy2 = argv[++i];
             // --boot 6 : amorcer la disquette plutot que le disque dur.
             else if (a == "--boot" && i + 1 < argc) bootSlot = std::stoi(argv[++i]);
-            // --mouse : une AppleMouse II (HLE AppleWin) en slot 4, pour le
-            // banc de la souris d'A2 Retro Cmd ; POST /mouse la fait bouger.
+            // --mouse : une AppleMouse II (HLE AppleWin) en slot 4 ;
+            // POST /mouse la fait bouger.
             else if (a == "--mouse") mouse = true;
             // --ssc PORT : la Super Serial Card en slot 2, pont TCP en mode
             // brut, pour le banc VDrive d'A2 File Cmd (bench/vdrive.py).
