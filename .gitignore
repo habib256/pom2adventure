@@ -62,10 +62,11 @@ SCOSWAMP.MORE/CHATMAUVE-PREVIEW/
 SCOSWAMP.MORE/*.pdf
 SCOSWAMP.MORE/Le.Marais.aux.scorpions.png
 
-# ── Art de travail (16 Mo de PNG sources) ─────────────────────────────────
-# Non suivi par défaut pour garder le dépôt léger. Supprimer cette ligne si
-# tu veux qu'il voyage avec le code.
-SPACETRIP.MORE/
+# ── Art de travail de SPACETRIP ───────────────────────────────────────────
+# Les rendus maitres (208 Mo) et leurs apercus HGR se regenerent ; la bible,
+# le manifeste et l'outil de conversion, eux, voyagent avec le code.
+SPACETRIP.MORE/GENERATED/
+SPACETRIP.MORE/HGR-PREVIEW/
 
 # ── Ferraille macOS ───────────────────────────────────────────────────────
 .DS_Store
