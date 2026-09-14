@@ -9,7 +9,6 @@ memory_swap.s
 rules.s
 dice.s
 messages.s
-combat.s
 spacetrip.s
 *.o
 *.lst

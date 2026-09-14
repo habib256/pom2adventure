@@ -31,7 +31,7 @@ $D000-$FFFF  ROM / Language Card (banques commutées)
 
 Le moteur charge à `$4000` et non à l'adresse cc65 par défaut `$0803`, afin de
 préserver HGR page 1. `$1000-$1FFF` est repris depuis le 2026-09-03 par le
-segment `LOWBSS` de `SRC/scoswamp.cfg`, et `$0C00-$0FFF` depuis le 2026-09-04
+segment `LOWBSS` de `SCOSWAMP/SRC/scoswamp.cfg`, et `$0C00-$0FFF` depuis le 2026-09-04
 par le segment `MAPBSS`.
 
 ---
@@ -78,6 +78,12 @@ cl65 ... -Wl -m,build.map -o PROG.BIN ...
 ---
 
 ## Configuration standard vs étendue
+
+> **2026-09-14.** Le prototype COMBAT a quitté le dépôt, et avec lui la
+> configuration étendue commune `SRC/apple2enh-game.cfg` et `SRC/prodos_quit.asm`
+> qui n'existaient que pour lui. Ils restent dans l'historique Git (avant le
+> commit qui retire `COMBAT/`). Les mesures ci-dessous gardent leur valeur :
+> SCOSWAMP applique le même principe avec sa propre `SCOSWAMP/SRC/scoswamp.cfg`.
 
 | | `apple2enh.cfg` (cc65) | `SRC/apple2enh-game.cfg` |
 |---|---|---|
@@ -139,7 +145,7 @@ et **le tas suit la BSS, où qu'elle soit**. Relogée en `$0800`, le tas partira
 de là jusqu'à la pile, à travers HGR page 1 puis le code. Vérifié : le linker
 accepte cette configuration sans broncher, `tools/check-memory.sh` la refuse.
 
-La bonne façon est un **second segment**. `SRC/scoswamp.cfg` (copie de
+La bonne façon est un **second segment**. `SCOSWAMP/SRC/scoswamp.cfg` (copie de
 `apple2enh.cfg`) ajoute une zone `LOWRAM` `$1000-$1FFF` et un segment `LOWBSS`
 de type bss. La BSS principale reste derrière le code, le tas derrière elle ;
 seuls les gros tampons désignés partent en bas :
@@ -170,7 +176,7 @@ rabattement page → clairière : 4 073 octets, 23 restent. Deux règles :
 Le kilo-octet que la note ci-dessus réservait « pour un éventuel second tampon
 ProDOS » n'a jamais été réclamé : **le jeu n'ouvre qu'un fichier à la fois**,
 chaque `fopen` étant suivi de son `fclose` avant le suivant (texte, image,
-musique, aide, sauvegarde, catalogue, carte). `SRC/scoswamp.cfg` y pose la zone
+musique, aide, sauvegarde, catalogue, carte). `SCOSWAMP/SRC/scoswamp.cfg` y pose la zone
 `MAPRAM` et le segment `MAPBSS`, qui loge :
 
 | Contenu | Taille |

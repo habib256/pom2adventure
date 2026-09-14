@@ -181,7 +181,7 @@ readonly SCOSWAMP_MAX=32128
 #   cl65 ... -Wl -m,build.map && sed -n '/Segment list/,/^$/p' build.map
 # Vérifier que la fin du segment BSS reste inférieure à $8E00.
 
-for bin in SCOSWAMP/SCOSWAMP.BIN SPACETRIP/SPACETRIP.BIN COMBAT/COMBAT.BIN; do
+for bin in SCOSWAMP/SCOSWAMP.BIN SPACETRIP/SPACETRIP.BIN; do
     if [ -f "$bin" ]; then
         size=$(stat -c%s "$bin" 2>/dev/null || stat -f%z "$bin")
         kb=$((size / 1024))

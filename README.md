@@ -75,7 +75,6 @@ Deux jeux d'aventure pour Apple IIe Enhanced démontrant une architecture modern
 |--------|------|--------|--------|--------|--------|------|
 | **SCOSWAMP** | Le Marais aux Scorpions (livre-jeu) | 13 322 o | 407 | 814 ✅ | 407 / 407 + 32 combats ✅ | ✅ Complet |
 | **SPACETRIP** | Space Explorer Trip (aventure sci-fi) | 12 835 o | 14 | 28 ✅ | 14 / 14 ✅ | ✅ Complet |
-| **COMBAT** | Système de combat RPG | 14 490 o | — | — | 5 monstres | 🔬 Prototype autonome, **non intégré** |
 
 **Progression par axe** (pas de pourcentage global : les axes ne sont pas comparables)
 
@@ -84,8 +83,6 @@ SCOSWAMP  texte FR/EN   [####################] 100%  (804/804 fichiers)
 SCOSWAMP  moteur        [####################] 100%
 SCOSWAMP  images DHGR   [####################] 100%  (407/407 scènes + 32 combats)
 SPACETRIP tout          [####################] 100%
-COMBAT    prototype     [####################] 100%  (fonctionne isolément)
-COMBAT    intégration   [....................]   0%  (voir COMBAT/README.md)
 Distribution            [....................]   0%  (voir DOCS/RELEASE.md)
 ```
 
@@ -202,35 +199,6 @@ cl65 -t apple2enh -O -Oirs -Wl -D,__EXEHDR__=0 -Wl -S,0x4000 \
 
 ---
 
-## ⚔️ COMBAT - Système de combat RPG
-
-Prototype **fonctionnel mais autonome** : 847 lignes de C, son propre `main()`, compilé
-séparément en `COMBAT.BIN`. Il ne s'exécute pas depuis SCOSWAMP ni SPACETRIP à ce jour.
-
-C'est une **étape assumée du projet**, pas du code mort : l'intégration est planifiée.
-Le détail des mécaniques, les obstacles techniques identifiés et la feuille de route
-en 5 étapes se trouvent dans **[COMBAT/README.md](COMBAT/README.md)**.
-
-Résumé des obstacles à lever :
-
-| # | Obstacle | Nature | État |
-|---|----------|--------|------|
-| 1 | **Budget mémoire** | config étendue | ✅ **résolu** |
-| 2 | `set_video_mode()` dupliqué, avec deux comportements **incompatibles** | refactorisation | ✅ identifié |
-| 3 | Données monstres codées en dur, contraires à l'architecture pilotée par données | `MONSTERS.DAT` | à faire |
-| 4 | Bestiaire sci-fi inadapté à l'univers médiéval-fantastique de SCOSWAMP | contenu | à faire |
-| 5 | Pas de persistance HP/XP entre les scènes | moteur | à faire |
-
-> **Obstacle 1 levé.** Avec la config cc65 standard, la fusion débordait de
-> 6 219 o dans la zone ProDOS — sans que `ld65` ne signale rien. En récupérant
-> les 10 496 octets de BASIC.SYSTEM via [`SRC/apple2enh-game.cfg`](SRC/apple2enh-game.cfg),
-> le binaire fusionné (26 187 o d'empreinte) **tient, avec 4 277 octets de tas** —
-> soit plus que ce dont SCOSWAMP dispose aujourd'hui seul (2 282 o).
-> L'overlay n'est plus nécessaire. Reste à valider sur émulateur, voir
-> [DOCS/MEMOIRE.md](DOCS/MEMOIRE.md).
-
----
-
 ## 🛠️ Développement
 
 ### Prérequis
@@ -323,7 +291,6 @@ build_paths(5, "FR", ...) → "IMG/N005.HGR", "TEXTFR/N000/N005.TXT"
 | [DOCS/MEMOIRE.md](DOCS/MEMOIRE.md) | Carte mémoire, zones récupérables, pièges cc65 |
 | [DOCS/PRODOS-MLI.md](DOCS/PRODOS-MLI.md) | Gestion des chemins ProDOS |
 | [DOCS/RELEASE.md](DOCS/RELEASE.md) | Génération et publication des images disque |
-| [COMBAT/README.md](COMBAT/README.md) | Système de combat et feuille de route d'intégration |
 | [SPACETRIP/README.TXT](SPACETRIP/README.TXT) | Architecture et guide complet |
 | [DOCS/cc65/](DOCS/cc65/) | Documentation cc65 complète (HTML) |
 
@@ -346,7 +313,7 @@ pour la procédure de génération et de publication.
 
 ## 🔮 Évolutions futures
 
-Au-delà de l'intégration de COMBAT :
+Pistes :
 
 - **Inventaire** : objets, clés, armes, armures (moddables via fichiers)
 - **Sauvegarde** : système multi-emplacements

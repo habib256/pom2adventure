@@ -807,13 +807,6 @@ une Pierre bénéfique au choix.
 - 🟢 **Les Provisions et l'or** existent dans `Character` mais aucune page ne
   les touche encore.
 
-- 🟢 **Que faire de `COMBAT/SRC/combat.c`.** Ces 847 lignes ne sont **pas**
-  réutilisables : c'est le système de SPACETRIP (HP / ATK / DEF / niveaux / XP,
-  monstres de science-fiction), pas celui de *Défis Fantastiques*. Son
-  générateur aléatoire est en plus semé sur une constante (`srand(0x1234)`) :
-  toutes les parties seraient identiques. À garder pour SPACETRIP, ou à
-  supprimer.
-
 - 🟢 **Coquille dans le corpus** : `Fetrissure` apparaît 2 fois pour
   `Fletrissure` 10 — à corriger avant d'en faire une clé d'inventaire.
 
