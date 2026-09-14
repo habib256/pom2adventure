@@ -613,7 +613,11 @@ encore libres dans le banc). Dans l'ordre de valeur :
 
 6. **Verifications de parc** — //c+ (IWM, 4 MHz) et les profils PAL n'ont
    pas encore vu le jeu ; DV n'est verifie en jeu que sur la branche
-   « aucune blessure » (241) — provoquer les branches 193/326.
+   « aucune blessure » (241) — provoquer les branches 193/326. Depuis le
+   2026-09-08 `pom2_playtest` a un `--preset iic` (Apple //c, ROM 32 Ko :
+   Disk II integre en slot 6, disque dur en unite SmartPort du port arriere,
+   pas de Mockingboard) — le //c se verifie donc au banc, sans interface.
+   Le //c+ et le PAL restent a ajouter au meme endroit.
 
 ## Backlog
 

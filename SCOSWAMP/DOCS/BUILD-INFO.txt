@@ -115,7 +115,7 @@ REFERENCES
 
 AUTEUR
 ------
-VERHILLE Arnaud - gist974@gmail.com
+VERHILLE Arnaud - @habib256
 
 Date de compilation : 5 octobre 2025
 ===============================================================================

@@ -220,7 +220,7 @@ Lors de la création de nouveaux textes :
 
 ## 👨‍💻 Auteur
 
-VERHILLE Arnaud - gist974@gmail.com
+VERHILLE Arnaud - @habib256
 
 **Dates importantes** :
 - Optimisation française : 5 octobre 2024

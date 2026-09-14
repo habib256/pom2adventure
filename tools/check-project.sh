@@ -14,7 +14,7 @@
 #
 # Code de sortie : 0 = tout est valide, 1 = au moins une erreur bloquante.
 #
-# Auteur  : Arnaud VERHILLE (gist974@gmail.com)
+# Auteur  : Arnaud VERHILLE (@habib256)
 # Licence : GNU GPL v3.0
 
 set -uo pipefail

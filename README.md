@@ -403,7 +403,7 @@ cd ../../SPACETRIP && cl65 -t apple2enh -O -Oirs \
 
 ## 👨‍💻 Auteur & Licence
 
-**Arnaud VERHILLE** (gist974@gmail.com)
+**Arnaud VERHILLE** (@habib256)
 Licence : **GNU GPL v3.0** — libre d'utiliser, modifier, distribuer
 
 **SCOSWAMP** : adaptation de « Scorpion Swamp » (1985) par Steve JACKSON & Ian LIVINGSTONE

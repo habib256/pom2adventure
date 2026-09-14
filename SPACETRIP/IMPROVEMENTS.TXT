@@ -5,7 +5,7 @@
 
 DATE: 1er octobre 2024
 AUTEUR: VERHILLE Arnaud
-EMAIL: gist974@gmail.com
+GitHub: @habib256
 
 ===============================================================================
 TABLE DES MATIERES
@@ -874,7 +874,7 @@ FIN DU DOCUMENT
 ===============================================================================
 
 Pour toute question ou suggestion:
-Email: gist974@gmail.com
+GitHub: @habib256
 
 Derniere mise a jour: 1er octobre 2024
 

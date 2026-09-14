@@ -34,7 +34,7 @@
 #
 # Code de sortie : 0 = tient en mémoire, 1 = déborde.
 #
-# Auteur  : Arnaud VERHILLE (gist974@gmail.com)
+# Auteur  : Arnaud VERHILLE (@habib256)
 # Licence : GNU GPL v3.0
 
 set -uo pipefail

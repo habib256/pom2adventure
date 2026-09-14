@@ -169,4 +169,4 @@ Voir la documentation ProDOS MLI : `../DOCS/PRODOS-MLI.md`
 
 ## Auteur
 
-VERHILLE Arnaud - gist974@gmail.com
+VERHILLE Arnaud - @habib256
