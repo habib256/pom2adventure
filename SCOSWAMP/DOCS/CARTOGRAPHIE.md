@@ -901,7 +901,7 @@ contenu textuel. Si le menu MAP les affiche, il devra les lire dans le fichier
 
 > **Construit le 2026-09-04** (branche `feat/scoswamp-map`). Ce qui suit est la
 > spécification d'origine ; l'écart entre elle et ce qui a été fait est résumé
-> au § 7.9 et détaillé dans `DOCS/rapport-map.md`.
+> au § 7.9 et détaillé dans `SCOSWAMP/DOCS/rapport-map.md`.
 
 
 ### 7.1 Ce que le moteur garde déjà

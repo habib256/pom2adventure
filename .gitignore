@@ -19,7 +19,6 @@ spacetrip.s
 *.lbl
 
 # Exception : sources assembleur volontaires (pas des intermédiaires cc65)
-!DOCS/HELLO_WORLD-ASM/*.s
 
 *.bak
 *~
@@ -45,7 +44,7 @@ SCOSWAMP.MORE/CHATMAUVE-PREVIEW/
 # personnages et les objets ; elles restent donc versionnees.
 
 # Images disque ProDOS : sorties de build (37 Mo), reconstruites par TOOLS et
-# publiées en GitHub Release. Voir DOCS/RELEASE.md.
+# publiées en GitHub Release. Voir SCOSWAMP/DOCS/RELEASE.md.
 *.2mg
 *.2img
 *.po

@@ -38,11 +38,11 @@
 > Backlog : [`TODO.md`](TODO.md). Ce qui n'est pas suivi par git et pourquoi :
 > [`.gitignore`](.gitignore).
 
-**Solutions SCOSWAMP (révélations)** : [les trois parcours gagnants](DOCS/PARCOURS-GAGNANTS.md),
+**Solutions SCOSWAMP (révélations)** : [les trois parcours gagnants](SCOSWAMP/DOCS/PARCOURS-GAGNANTS.md),
 avec les pierres nécessaires, les embranchements, les variantes de fin et
 le niveau de validation dans POM2.
 
-**Code et mémoire SCOSWAMP** : [audit précis du binaire et optimisations](DOCS/AUDIT-MEMOIRE-SCOSWAMP.md),
+**Code et mémoire SCOSWAMP** : [audit précis du binaire et optimisations](SCOSWAMP/DOCS/AUDIT-MEMOIRE-SCOSWAMP.md),
 avec inventaire par fonction, allocations et expériences de compilation reproductibles.
 
 ---
@@ -67,7 +67,7 @@ Deux jeux d'aventure pour Apple IIe Enhanced démontrant une architecture modern
 
 ## 📊 État du projet
 
-> Les chiffres ci-dessous sont **produits par `./tools/check-project.sh`**, pas saisis à la main.
+> Les chiffres ci-dessous sont **produits par `./check-project.sh`**, pas saisis à la main.
 > Relancer le script après toute modification de contenu pour les mettre à jour.
 > Dernière vérification : 31 août 2026 — 0 erreur.
 
@@ -83,7 +83,7 @@ SCOSWAMP  texte FR/EN   [####################] 100%  (804/804 fichiers)
 SCOSWAMP  moteur        [####################] 100%
 SCOSWAMP  images DHGR   [####################] 100%  (407/407 scènes + 32 combats)
 SPACETRIP tout          [####################] 100%
-Distribution            [....................]   0%  (voir DOCS/RELEASE.md)
+Distribution            [....................]   0%  (voir SCOSWAMP/DOCS/RELEASE.md)
 ```
 
 **Intégrité** : 439 images DHGR compressées (DHRR), toutes vérifiées comme se décodant en 16 384 octets exactement (8 Ko auxiliaires + 8 Ko principaux). Aucun trou de numérotation, aucune scène FR sans équivalent EN, aucun fichier texte vide.
@@ -91,8 +91,8 @@ Distribution            [....................]   0%  (voir DOCS/RELEASE.md)
 ### Vérifier soi-même
 
 ```bash
-./tools/check-project.sh          # rapport complet
-./tools/check-project.sh --quiet  # erreurs seules (code de sortie 1 si problème)
+./check-project.sh          # rapport complet
+./check-project.sh --quiet  # erreurs seules (code de sortie 1 si problème)
 ```
 
 Le script valide les tailles HGR, l'appariement FR/EN, la continuité des scènes, la taille des moteurs face au budget mémoire, et l'absence d'artefacts de build versionnés.
@@ -195,7 +195,7 @@ cl65 -t apple2enh -O -Oirs -Wl -D,__EXEHDR__=0 -Wl -S,0x4000 \
 1. Créer `TXTFR/N015` et `TXTEN/N015` (description + choix)
 2. Créer `IMG/N015.HGR` (8192 octets exactement)
 3. Lier depuis une scène : ajouter `C 015 Titre du choix`
-4. Terminé, jouable immédiatement. Valider avec `./tools/check-project.sh`.
+4. Terminé, jouable immédiatement. Valider avec `./check-project.sh`.
 
 ---
 
@@ -260,7 +260,7 @@ cl65 ... -Wl -m,build.map -o SCOSWAMP.BIN ...
 > accepte pourtant cette configuration sans broncher.
 
 Analyse complète des zones récupérables, mesures et validation restante :
-**[DOCS/MEMOIRE.md](DOCS/MEMOIRE.md)**.
+**[SCOSWAMP/DOCS/MEMOIRE.md](SCOSWAMP/DOCS/MEMOIRE.md)**.
 
 Marge actuelle de SCOSWAMP : BSS finit à `$8516`, soit 2 282 octets sous le
 plafond standard, 12 778 sous le plafond étendu.
@@ -288,14 +288,14 @@ build_paths(5, "FR", ...) → "IMG/N005.HGR", "TEXTFR/N000/N005.TXT"
 |----------|---------|
 | [SCOSWAMP/SRC/README.md](SCOSWAMP/SRC/README.md) | Compilation et structure du moteur |
 | [SCOSWAMP/DOCS/README-TEXTES.md](SCOSWAMP/DOCS/README-TEXTES.md) | Format des fichiers texte |
-| [DOCS/MEMOIRE.md](DOCS/MEMOIRE.md) | Carte mémoire, zones récupérables, pièges cc65 |
-| [DOCS/PRODOS-MLI.md](DOCS/PRODOS-MLI.md) | Gestion des chemins ProDOS |
-| [DOCS/RELEASE.md](DOCS/RELEASE.md) | Génération et publication des images disque |
+| [SCOSWAMP/DOCS/MEMOIRE.md](SCOSWAMP/DOCS/MEMOIRE.md) | Carte mémoire, zones récupérables, pièges cc65 |
+| [SCOSWAMP/DOCS/PRODOS-MLI.md](SCOSWAMP/DOCS/PRODOS-MLI.md) | Gestion des chemins ProDOS |
+| [SCOSWAMP/DOCS/RELEASE.md](SCOSWAMP/DOCS/RELEASE.md) | Génération et publication des images disque |
 | [SPACETRIP/README.TXT](SPACETRIP/README.TXT) | Architecture et guide complet |
 | [DOCS/cc65/](DOCS/cc65/) | Documentation cc65 complète (HTML) |
 
 > Le statut chiffré du projet vit **uniquement ici**, alimenté par
-> `tools/check-project.sh`. L'ancien `SCOSWAMP/DOCS/PROJECT-STATUS.md` a été
+> `check-project.sh`. L'ancien `SCOSWAMP/DOCS/PROJECT-STATUS.md` a été
 > fusionné dans ce README pour éviter deux sources de vérité divergentes.
 
 ---
@@ -306,7 +306,7 @@ Les fichiers `.2mg` **ne sont pas versionnés** : ce sont des artefacts de build
 régénérables, et les committer ajoutait 5 à 32 Mo à l'historique Git à chaque
 mise à jour, de façon définitive.
 
-Ils sont publiés en **GitHub Release**. Voir [DOCS/RELEASE.md](DOCS/RELEASE.md)
+Ils sont publiés en **GitHub Release**. Voir [SCOSWAMP/DOCS/RELEASE.md](SCOSWAMP/DOCS/RELEASE.md)
 pour la procédure de génération et de publication.
 
 ---
@@ -329,9 +329,9 @@ Le moteur resterait ~15-18 Ko, le contenu illimité sur disque.
 |----------|----------|
 | Fichier non trouvé | Vérifier le format `N###` (3 chiffres) et les chemins |
 | Choix absents | Les lignes doivent commencer par `C ` (C + espace) |
-| Graphiques corrompus | Les fichiers HGR doivent faire 8192 octets — lancer `./tools/check-project.sh` |
+| Graphiques corrompus | Les fichiers HGR doivent faire 8192 octets — lancer `./check-project.sh` |
 | Plantage au démarrage | Compiler avec `-Wl -S,0x4000` |
-| Texte manquant dans une langue | `./tools/check-project.sh` détecte les scènes non appariées FR/EN |
+| Texte manquant dans une langue | `./check-project.sh` détecte les scènes non appariées FR/EN |
 
 ---
 
@@ -352,7 +352,7 @@ Le moteur resterait ~15-18 Ko, le contenu illimité sur disque.
 brew install cc65  # macOS
 
 # 2. Vérifier l'intégrité du dépôt
-./tools/check-project.sh
+./check-project.sh
 
 # 3. Compiler
 cd SCOSWAMP/SRC && make

@@ -78,7 +78,7 @@ marche funèbre en boucle serait comique au bout du troisième tour.
 
 > `midi_to_mb.py` pose le bit de boucle systématiquement. Il faut soit lui
 > ajouter un `--no-loop`, soit corriger l'octet +5 après coup. C'est l'étape 8
-> du plan de `DOCS/MUSIQUE-CLAIRIERES.md § 7`.
+> du plan de `SCOSWAMP/DOCS/MUSIQUE-CLAIRIERES.md § 7`.
 
 ## Régénérer
 

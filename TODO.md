@@ -7,7 +7,7 @@ les fait tourner a le sien, dans `../pom2/TODO.md`. Même convention que lui :
 
 Mesures courantes : 2026-09-06. Cible : Apple //e enhanced, cc65 `apple2enh`, ProDOS 8.
 
-L’[audit détaillé du binaire](DOCS/AUDIT-MEMOIRE-SCOSWAMP.md) fait référence
+L’[audit détaillé du binaire](SCOSWAMP/DOCS/AUDIT-MEMOIRE-SCOSWAMP.md) fait référence
 pour les chiffres actuels ; les entrées datées plus bas conservent leur
 contexte historique.
 
@@ -18,7 +18,7 @@ et CHANCE restent interdites à ce moment ; consulter et refermer le sac
 conserve le jet, la blessure en attente et le mode vidéo. Le retour en DHGR
 plein restaure les deux banques du texte 80 colonnes. **86 assertions POM2
 headless réussies**, dont comparaison au même combat sans ouverture du sac.
-Voir [le défaut initial](DOCS/VALIDATION-PARCOURS.md#anomalie-du-sac-en-combat).
+Voir [le défaut initial](SCOSWAMP/DOCS/VALIDATION-PARCOURS.md#anomalie-du-sac-en-combat).
 
 ---
 
@@ -85,7 +85,7 @@ Par ordre de rendement décroissant :
 - ✅ **3. `$1000-$1FFF`** — **fait le 2026-09-03** : segment `LOWBSS` dans
   `SRC/scoswamp.cfg`, les gros tampons y vont par `#pragma bss-name`. Le tas
   reste derrière la BSS principale (c'est ce qui rend la chose sûre, voir
-  DOCS/MEMOIRE.md). Le même jour : famille printf remplacée par `cfmt`
+  SCOSWAMP/DOCS/MEMOIRE.md). Le même jour : famille printf remplacée par `cfmt`
   (876 o), `-Cl` (547 o), `classify_line` et la barre de titre resserrées
   (~1 100 o). **Marge : 184 → 7 544 octets.**
 
@@ -522,7 +522,7 @@ Quatre bugs, tous vérifiés dans l'émulateur (pas seulement au lien) :
   neuf lignes redessinees neuf fois.
 
 - ✅ **Le mode carte est revenu, en texte** (2026-09-04, branche
-  `feat/scoswamp-map`, `DOCS/rapport-map.md`). Touche `M`, bascule comme `[I]`
+  `feat/scoswamp-map`, `SCOSWAMP/DOCS/rapport-map.md`). Touche `M`, bascule comme `[I]`
   et `[H]`, refusée sans l'Anneau de Cuivre. Grille 6 × 9 en texte 80
   colonnes : **aucune primitive de tracé**, c'était elles qui coûtaient les
   5 019 octets. Les données sont sur le disque (`MAP`, 1 844 octets, écrit par

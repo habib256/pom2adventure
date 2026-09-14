@@ -109,9 +109,9 @@ FONCTIONNALITES
 
 REFERENCES
 ----------
-- Documentation ProDOS MLI : DOCS/PRODOS-MLI.md
-- Documentation Apple II HGR : DOCS/APPLE2-HGR-TEXT.txt
-- cc65 documentation : ../DOCS/cc65/
+- Documentation ProDOS MLI : SCOSWAMP/DOCS/PRODOS-MLI.md
+- Documentation Apple II HGR : SCOSWAMP/DOCS/APPLE2-HGR-TEXT.txt
+- cc65 documentation : https://cc65.github.io/doc/
 
 AUTEUR
 ------

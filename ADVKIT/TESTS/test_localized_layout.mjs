@@ -30,5 +30,5 @@ for(const name of ['DIAPO.SYSTEM','DIAPO.CODE','DIAPO.LIST','DIAPO.DATA','DIAPO.
 assert.equal(D.etatSource().horsVolume.length,0);
 const tree=files.filter(f=>!f.includes('/'));
 const result={checks:checked,root:tree,files:files.length,failures:[]};
-await writeFile(new URL('../../DOCS/VALIDATION-DIAPO-MUSIC/layout.json',import.meta.url),JSON.stringify(result,null,2)+'\n');
+await writeFile(new URL('../../SCOSWAMP/DOCS/VALIDATION-DIAPO-MUSIC/layout.json',import.meta.url),JSON.stringify(result,null,2)+'\n');
 console.log('PASS HTTP editor assets in FR/EN, repeated language template, exact disk/source match, DIAPO, DHGR and JSON, clean root',tree);

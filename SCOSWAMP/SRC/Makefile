@@ -63,7 +63,7 @@ HIMEM   = 0xBF00
 # Pile logicielle C : 384 octets reserves. Le pic reel doit etre mesure
 # avant toute reduction ou changement global de -Cl (locales statiques).
 # Les anciennes estimations a 1,5 Ko ne decrivent plus ce binaire.
-# Voir DOCS/AUDIT-MEMOIRE-SCOSWAMP.md ; check-memory.sh recoit la meme valeur.
+# Voir SCOSWAMP/DOCS/AUDIT-MEMOIRE-SCOSWAMP.md ; check-memory.sh recoit la meme valeur.
 STACK   = 0x0180
 # Reserve de croissance du moteur, distincte de la pile C ci-dessus.
 # Le deplacement musical AUX rend cette marge possible ; ne pas la consommer
@@ -95,19 +95,19 @@ all: $(OUTDIR)/$(PROGRAM) $(OUTDIR)/$(LAUNCHER) check
 
 # Règle principale : lier les objets pour créer le binaire
 # Le contrôle mémoire est systématique : un link réussi ne prouve pas que le
-# binaire tient (ld65 peut manquer un débordement BSS, voir tools/check-memory.sh).
+# binaire tient (ld65 peut manquer un débordement BSS, voir SCOSWAMP.MORE/TOOLS/check-memory.sh).
 $(OUTDIR)/$(PROGRAM): $(OBJECTS) $(LDCFG)
 	$(CL) $(CFLAGS) $(LDFLAGS) -o $(OUTDIR)/$(PROGRAM) $(OBJECTS) $(IOBUF)
 	@echo "==> Compilation terminée : $(OUTDIR)/$(PROGRAM)"
 	@echo "    Adresse de démarrage : \$$4000 (HGR préservé à \$$2000-\$$3FFF)"
 	@echo ""
-	@../../tools/check-memory.sh --himem $(HIMEM) --stack $(STACK) --min-free $(MIN_FREE) $(MAPFILE)
-	@python3 ../../tools/check_lc_layout.py --src .
+	@../../SCOSWAMP.MORE/TOOLS/check-memory.sh --himem $(HIMEM) --stack $(STACK) --min-free $(MIN_FREE) $(MAPFILE)
+	@python3 ../../SCOSWAMP.MORE/TOOLS/check_lc_layout.py --src .
 
 # Contrôle mémoire seul (nécessite une compilation préalable)
 check: $(OUTDIR)/$(PROGRAM)
-	@../../tools/check-memory.sh --himem $(HIMEM) --stack $(STACK) --min-free $(MIN_FREE) $(MAPFILE)
-	@python3 ../../tools/check_lc_layout.py --src .
+	@../../SCOSWAMP.MORE/TOOLS/check-memory.sh --himem $(HIMEM) --stack $(STACK) --min-free $(MIN_FREE) $(MAPFILE)
+	@python3 ../../SCOSWAMP.MORE/TOOLS/check_lc_layout.py --src .
 
 # Le lanceur ProDOS. Charge en $2000 par ProDOS lui-meme, il lit le jeu en
 # $4000 et lui saute dedans -- BASIC.SYSTEM ne peut plus le faire depuis que
@@ -136,11 +136,11 @@ dice.o: dice.c dice.h
 	$(CC) $(CFLAGS) -o dice.s dice.c
 	$(AS) -t $(TARGET) -o dice.o dice.s
 
-../TEXTFR/OBJFR.TXT ../TEXTEN/OBJEN.TXT: ../JSON/OBJECTS.json ../../tools/compile_objects.py
-	python3 ../../tools/compile_objects.py --source ../JSON/OBJECTS.json --output-dir .. --capacity 16 --localized
+../TEXTFR/OBJFR.TXT ../TEXTEN/OBJEN.TXT: ../JSON/OBJECTS.json ../../SCOSWAMP.MORE/TOOLS/compile_objects.py
+	python3 ../../SCOSWAMP.MORE/TOOLS/compile_objects.py --source ../JSON/OBJECTS.json --output-dir .. --capacity 16 --localized
 
-game_rules.h: ../JSON/RULES.json ../TEXTFR/OBJFR.TXT ../../tools/compile_game_rules.py
-	python3 ../../tools/compile_game_rules.py --rules ../JSON/RULES.json --objects ../TEXTFR/OBJFR.TXT --output $@
+game_rules.h: ../JSON/RULES.json ../TEXTFR/OBJFR.TXT ../../SCOSWAMP.MORE/TOOLS/compile_game_rules.py
+	python3 ../../SCOSWAMP.MORE/TOOLS/compile_game_rules.py --rules ../JSON/RULES.json --objects ../TEXTFR/OBJFR.TXT --output $@
 
 scoswamp.o: scoswamp.c paths.h memory_swap.h rules.h dice.h messages.h hgr_rle.h sfx.h music.h game_rules.h
 	$(CC) $(CFLAGS) -o scoswamp.s scoswamp.c
@@ -165,7 +165,7 @@ MUSIC    = ../../SCOSWAMP.MORE/MUSIC
 MB       = python3 $(MUSIC)/midi_to_mb.py
 # Les dix musiques du disque : le dossier fantasy moderne, des compositions
 # originales (SCOSWAMP.MORE/MUSIC/propositions-moderne, compose.py + un
-# script par zone, DOCS/MUSIQUE-CLAIRIERES.md pour le plan des zones). Les
+# script par zone, SCOSWAMP/DOCS/MUSIQUE-CLAIRIERES.md pour le plan des zones). Les
 # themes de zone tiennent dans 2304 octets, les surcouches (combat, mort,
 # victoire) dans 1280 : midi_to_mb.py refuse au-dela. Le dossier Renaissance
 # (propositions/, sources dans src/) reste disponible en remplacement.
@@ -488,7 +488,7 @@ map: $(OUTDIR)/MAP.BIN
 .PHONY: diapo diapo-catalog
 
 diapo-catalog: $(MUSICS)
-	python3 ../../tools/build_diapo_catalog.py --game ..
+	python3 ../../SCOSWAMP.MORE/TOOLS/build_diapo_catalog.py --game ..
 
 diapo: $(OUTDIR)/DIAPO/DIAPO.SYSTEM.SYS $(OUTDIR)/DIAPO/DIAPO.CODE.BIN diapo-catalog
 

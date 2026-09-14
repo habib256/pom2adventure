@@ -21,7 +21,7 @@ minute, sur le tick de 50 Hz de la carte. Les valeurs qui donnent un nombre
 entier de ticks par noire tombent juste : 100 (30), 120 (25), 125 (24),
 150 (20). --tail ajoute un silence avant la boucle.
 
-Format MB1 (DOCS/MUSIQUE.md § 5.2), sous-ensemble emis :
+Format MB1 (SCOSWAMP/DOCS/MUSIQUE.md § 5.2), sous-ensemble emis :
   en-tete  'M','B','1',0, 50, drapeaux (bit0 = boucle), offset de boucle (16 bits)
   $01-$7F  DELAY n ticks     $80|v, note  NOTE     $90|v  OFF
   $A0|v, vol  VOL            $E0  END        $F0  FADE (fondu sortant de 45 ticks)

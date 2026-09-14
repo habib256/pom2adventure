@@ -15,7 +15,7 @@ Le flux MB1 joue par la Mockingboard en sort par midi_to_mb.py (Makefile).
 
 Structure : fanfare (4 mesures, unisson sur re), A (16 mesures, l'appel du
 village, Dm-C-Am-F), B (8 mesures, l'oree du Marais, G-Dm-Am) qui retombe
-sur re. Le format MB1 est decrit dans DOCS/MUSIQUE.md § 5.2 ; le sous-ensemble
+sur re. Le format MB1 est decrit dans SCOSWAMP/DOCS/MUSIQUE.md § 5.2 ; le sous-ensemble
 emis ici : DELAY, NOTE, OFF, VOL, END avec boucle.
 """
 import math

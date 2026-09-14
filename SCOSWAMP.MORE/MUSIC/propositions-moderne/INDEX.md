@@ -10,7 +10,7 @@ dépendance (`compose.py` + un script par zone), donc sous la **GPL v3** comme l
 reste du dépôt. Aucune œuvre tierce, aucune licence à vérifier, aucune
 attribution à porter. Les recherches de MIDI CC0/CC-BY n'ont pas été menées :
 elles n'auraient rien apporté qu'une composition maison ne donne pas ici, et
-elles auraient rouvert la question de compatibilité que `DOCS/MUSIQUE.md § 6.5`
+elles auraient rouvert la question de compatibilité que `SCOSWAMP/DOCS/MUSIQUE.md § 6.5`
 demande de trancher pièce par pièce.
 
 Le `.wav` de chaque dossier **est** ce que la Mockingboard jouera : six ondes

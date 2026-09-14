@@ -12,7 +12,7 @@
 
 /* MSG_BYTES est genere avec le catalogue. Le texte est decoupe en place :
  * les pointeurs visent dedans, rien n'est recopie. Pour les tailles mesurees,
- * voir DOCS/AUDIT-MEMOIRE-SCOSWAMP.md et messages.h. */
+ * voir SCOSWAMP/DOCS/AUDIT-MEMOIRE-SCOSWAMP.md et messages.h. */
 
 /* Le dernier octet reste a zero : c'est la chaine vide que rend msg() quand
  * le catalogue n'a pas pu etre charge. */

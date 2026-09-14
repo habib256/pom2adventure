@@ -2,7 +2,7 @@
 
 Ce dossier est un **atelier**, pas le disque. Rien ici n'est copié dans
 `SCOSWAMP/MUSIC/` tant que le propriétaire n'a pas écouté et tranché. La
-conception qui les commande est dans **`DOCS/MUSIQUE-CLAIRIERES.md`**.
+conception qui les commande est dans **`SCOSWAMP/DOCS/MUSIQUE-CLAIRIERES.md`**.
 
 Chaque sous-dossier contient : la source Mutopia telle quelle (`.ly` et `.mid`),
 la conversion `<NOM>.MB.BIN` par `../midi_to_mb.py`, le rendu `<NOM>.wav` (ignoré
@@ -36,7 +36,7 @@ déclarés aujourd'hui (`SCOSWAMP/SRC/music.h:11`).
 
 **Licences.** Les onze pièces sont dans le **domaine public** (Creative Commons
 No Rights Reserved chez Mutopia). Aucune n'est sous CC-BY-SA : c'est délibéré,
-`DOCS/MUSIQUE.md § 6.5` rappelle que SCOSWAMP est distribué sous GPL v3 et que la
+`SCOSWAMP/DOCS/MUSIQUE.md § 6.5` rappelle que SCOSWAMP est distribué sous GPL v3 et que la
 compatibilité en aval doit être vérifiée pièce par pièce.
 
 ---
@@ -122,7 +122,7 @@ exceptions ci-dessous sont les seules à porter une ligne `MU`.
 
 Une page peut apparaître deux fois (124 est une page de tour **et** de combat,
 297/372/375/401 sont des pages de tour **et** de mort) : c'est exactement ce que
-règle la notion de **surcouche** du § 4 de `DOCS/MUSIQUE-CLAIRIERES.md` —
+règle la notion de **surcouche** du § 4 de `SCOSWAMP/DOCS/MUSIQUE-CLAIRIERES.md` —
 `MU +BATTLE.MB` remplace le thème pour une page, sans effacer la mémoire du
 thème de zone, qui revient tout seul à la page suivante.
 
