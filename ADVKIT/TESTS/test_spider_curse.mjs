@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {Engine} from '../SCOSWAMP.MORE/TOOLS/interpreter/engine.js';
-import {parseScene,choiceAvailable} from '../SCOSWAMP.MORE/TOOLS/interpreter/scene.js';
-import * as R from '../SCOSWAMP.MORE/TOOLS/interpreter/rules.js';
-const proj=JSON.parse(await readFile(new URL('../SCOSWAMP.MORE/TOOLS/interpreter/project.scoswamp.json',import.meta.url)));
+import {Engine} from '../engine.js';
+import {parseScene,choiceAvailable} from '../scene.js';
+import * as R from '../rules.js';
+const proj=JSON.parse(await readFile(new URL('../project.scoswamp.json',import.meta.url)));
 R.setCatalogs({objets:[],pierres:proj.pierres,amulettes:proj.amulettes});
 for(const lang of ['FR','EN']) {
- const read=async(group,page)=>readFile(new URL(`../SCOSWAMP/TEXT${lang}/${group}/N${page}.TXT`,import.meta.url),'utf8');
+ const read=async(group,page)=>readFile(new URL(`../../SCOSWAMP/TEXT${lang}/${group}/N${page}.TXT`,import.meta.url),'utf8');
  const choice=new Engine(proj,{}).app;
  parseScene(choice,await read('N050','074'));
  assert.equal(choiceAvailable(choice,choice.choices[0]),false);

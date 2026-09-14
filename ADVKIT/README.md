@@ -8,7 +8,7 @@ celles d'avant la conversion DHGR.
 La premiere page choisit le jeu : **SCOSWAMP** ou **SPACETRIP**. Ce sont deux
 donnees du meme atelier.
 
-    sh SCOSWAMP.MORE/TOOLS/interpreter/serve.sh        # puis http://localhost:8765/...
+    sh ADVKIT/serve.sh        # puis http://localhost:8765/...
 
 Le script sert la RACINE DU DEPOT (le lecteur lit `SCOSWAMP/TEXTFR/...`,
 `SCOSWAMP/DHGR/...` et `SCOSWAMP.MORE/GENERATED/...`) et ouvre la page. Les
@@ -17,9 +17,9 @@ pas.
 
 Sans navigateur, le meme moteur verifie un corpus entier :
 
-    node SCOSWAMP.MORE/TOOLS/interpreter/verifier.js                       # le volume
-    node SCOSWAMP.MORE/TOOLS/interpreter/verifier.js project.scoswamp.json FR --arbre
-    node SCOSWAMP.MORE/TOOLS/interpreter/verifier.js project.spacetrip.json
+    node ADVKIT/verifier.js                       # le volume
+    node ADVKIT/verifier.js project.scoswamp.json FR --arbre
+    node ADVKIT/verifier.js project.spacetrip.json
 
 ## Les memes octets que la machine
 

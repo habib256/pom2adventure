@@ -50,7 +50,7 @@ et le retour. Les textes et illustrations existent pour chacune des trois fins.
 Pour refaire ces contrôles sur une copie du disque, sans ouvrir de fenêtre :
 
 ```sh
-sh SCOSWAMP.MORE/TOOLS/build_pom2_playtest.sh
+sh ADVKIT/TOOLS/build_pom2_playtest.sh
 python3 -u SCOSWAMP.MORE/TOOLS/playtest.py --only fin_175 --only fin_158 --only fin_358 --port 6522
 ```
 

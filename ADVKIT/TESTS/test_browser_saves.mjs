@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import {Engine} from '../SCOSWAMP.MORE/TOOLS/interpreter/engine.js';
-import * as R from '../SCOSWAMP.MORE/TOOLS/interpreter/rules.js';
+import {Engine} from '../engine.js';
+import * as R from '../rules.js';
 
 const storage = new Map();
 globalThis.localStorage = {

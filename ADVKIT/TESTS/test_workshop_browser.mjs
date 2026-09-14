@@ -1,7 +1,7 @@
 import {writeFile,readFile,copyFile,unlink,access,rmdir} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-const base=new URL('../',import.meta.url);
+const base=new URL('../../',import.meta.url);
 const files=['SCOSWAMP.MORE/GENERATED/N998.png','SCOSWAMP/DHGR/N950/N998.RLE.BIN','SCOSWAMP.MORE/HGR-PREVIEW/N998.png','SCOSWAMP.MORE/CHATMAUVE-PREVIEW/N998.png','SCOSWAMP.MORE/IMAGE-RECIPES/N998.json'];
 for(const file of files){await assert.rejects(access(new URL(file,base)),{code:'ENOENT'});}
 await copyFile(new URL('SCOSWAMP.MORE/GENERATED/B120.png',base),new URL(files[0],base));
@@ -14,7 +14,7 @@ ws.onmessage=e=>{const m=JSON.parse(e.data);if(m.id){const p=pending.get(m.id);p
 function c(method,params={}){return new Promise((resolve,reject)=>{const id=++seq;pending.set(id,{resolve,reject});ws.send(JSON.stringify({id,method,params}));});}
 async function ev(expression){const r=await c('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw Error(JSON.stringify(r.exceptionDetails));return r.result.value;}
 await c('Runtime.enable');await c('Page.enable');await c('Emulation.setDeviceMetricsOverride',{width:1280,height:800,deviceScaleFactor:1,mobile:false});
-await c('Page.navigate',{url:'http://127.0.0.1:8765/SCOSWAMP.MORE/TOOLS/interpreter/?image=N998'});
+await c('Page.navigate',{url:'http://127.0.0.1:8765/ADVKIT/?image=N998'});
 for(let i=0;i<120;i++){if(await ev('Boolean(document.querySelector("#status")?.textContent.startsWith("Aperçu prêt"))'))break;await new Promise(r=>setTimeout(r,500));}
 assert.equal(await ev('document.querySelector("#dither").checked'),false);
 assert.equal(await ev('document.querySelector("#asset-title").textContent'),'N998 / Scène');

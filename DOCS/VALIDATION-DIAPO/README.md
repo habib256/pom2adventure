@@ -34,7 +34,7 @@ dossiers V1/V2/VISUEL ; elles ne prouvent pas le rendu final.
 Depuis la racine du dépôt, avec les artefacts du même build :
 
 ```sh
-sh SCOSWAMP.MORE/TOOLS/build_pom2_playtest.sh
+sh ADVKIT/TOOLS/build_pom2_playtest.sh
 python3 -u DOCS/VALIDATION-DIAPO/validate.py /tmp/diapo-campagne-neuve
 python3 -u DOCS/VALIDATION-DIAPO-FINAL/validate.py /tmp/diapo-visuel-neuf
 ```

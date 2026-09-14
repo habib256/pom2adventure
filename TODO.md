@@ -154,11 +154,11 @@ Quatre bugs, tous vérifiés dans l'émulateur (pas seulement au lien) :
   pas reconstruite — le risque exact que l'entrée « un `make hdv` » du backlog
   annonçait, donc elle est faite. `make hdv` relie le binaire puis reconstruit
   le volume ; le boot loader ProDOS (1 Ko, les deux premiers blocs) est
-  désormais versionné en `SCOSWAMP.MORE/TOOLS/prodos_boot.tmpl` pour que la
+  désormais versionné en `ADVKIT/TOOLS/prodos_boot.tmpl` pour que la
   cible parte d'un arbre propre, `dist/` étant ignoré par git. Le volume est
   monté depuis `SCOSWAMP/` moins `DOCS` et `SRC` : un nouvel asset n'a rien à
   déclarer.
-  → `SCOSWAMP/SRC/Makefile`, `SCOSWAMP.MORE/TOOLS/prodos_boot.tmpl`
+  → `SCOSWAMP/SRC/Makefile`, `ADVKIT/TOOLS/prodos_boot.tmpl`
 
 - **Mise en page fixe des pages de scène.** Le moteur affichait le fichier tel
   quel, ligne à ligne, en laissant la ligne `T <id> <titre>` s'imprimer avec
@@ -547,7 +547,7 @@ Quatre bugs, tous vérifiés dans l'émulateur (pas seulement au lien) :
   Card), et les numeros de clairiere du livre — la carte affichait le numero
   du PARAGRAPHE, alors que le livre demande de porter celui de la CLAIRIERE,
   et 29 des 90 seulement le donnent en clair dans la prose.
-  `SCOSWAMP.MORE/TOOLS/build_map.py` derivait la carte de la prose ; il a ete
+  `ADVKIT/TOOLS/build_map.py` derivait la carte de la prose ; il a ete
   supprime avec le reste.
 
 - **Le sac à dos demandait deux appuis.** `wait_key_at()` affiche une invite

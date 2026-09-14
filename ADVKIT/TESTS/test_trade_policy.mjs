@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import * as R from '../SCOSWAMP.MORE/TOOLS/interpreter/rules.js';
-import {Engine} from '../SCOSWAMP.MORE/TOOLS/interpreter/engine.js';
-import {parseScene} from '../SCOSWAMP.MORE/TOOLS/interpreter/scene.js';
-const read = p => readFile(new URL('../'+p, import.meta.url), 'utf8');
+import * as R from '../rules.js';
+import {Engine} from '../engine.js';
+import {parseScene} from '../scene.js';
+const read = p => readFile(new URL('../../'+p, import.meta.url), 'utf8');
 const config=JSON.parse(await read('SCOSWAMP/JSON/RULES.json'));
 const catalogue=JSON.parse(await read('SCOSWAMP/JSON/OBJECTS.json')).objects;
 R.setCatalogs({objets: catalogue.map(o=>({cle:o.id,cache:o.hidden})),pierres:[],amulettes:[]});
@@ -19,7 +19,7 @@ for(let mask=0;mask<16;mask++) for(let amulets=0;amulets<64;amulets++) {
   const consumed=accepted.filter((_,i)=>mask&(1<<i)).slice(0,3);
   assert.equal(hero.objects,objects^consumed.reduce((n,b)=>n|b,0));
 }
-const proj=JSON.parse(await read('SCOSWAMP.MORE/TOOLS/interpreter/project.scoswamp.json'));
+const proj=JSON.parse(await read('ADVKIT/project.scoswamp.json'));
 proj.rules=config;
 for(const lang of ['FR','EN']) for(const restoring of [false,true]) {
   const app=new Engine(proj,{}).app;

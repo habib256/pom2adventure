@@ -19,11 +19,11 @@ fictif 058 a été retiré ; le sentier du leurre 072 reste présent.
 
 Contrôles reproductibles :
 
-- `node tools/test_visible_luck.mjs` : cinq pages CE, FR/EN, Chance 0/12,
+- `node ADVKIT/TESTS/test_visible_luck.mjs` : cinq pages CE, FR/EN, Chance 0/12,
   jet différé, coût et restauration sans répétition.
 - `python3 SCOSWAMP.MORE/TOOLS/audit_contracts.py --output DOCS/CONTRATS-FEUFOLLET.json` :
   842 textes, 73 contrats explicitement revus, zéro erreur.
-- `node SCOSWAMP.MORE/TOOLS/interpreter/verifier.js project.scoswamp.json FR`
+- `node ADVKIT/verifier.js project.scoswamp.json FR`
   et même commande EN : 421 pages par langue, sans lien cassé, page
   inaccessible ou différence entre disque et dépôt.
 - `python3 -u SCOSWAMP.MORE/TOOLS/playtest.py --port 6527 --only chance_effet_visible --only feufollet_parcours` :

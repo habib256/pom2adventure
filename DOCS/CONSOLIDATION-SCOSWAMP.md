@@ -255,7 +255,7 @@ preparee sur l'instantane detache avant tout remplacement de l'etat actif.
 Le menu utilise le meme lecteur : un emplacement corrompu ne fait plus lever
 une exception qui empechait d'afficher ou de quitter la liste.
 
-`node tools/test_browser_saves.mjs` verifie les JSON invalides, les feuilles
+`node ADVKIT/TESTS/test_browser_saves.mjs` verifie les JSON invalides, les feuilles
 incompletes, les tailles et valeurs invalides, une migration impossible,
 la conservation de l'etat et du RNG en cas de refus, la sortie du menu et
 une reprise valide. Un emplacement invalide apparait actuellement vide ; son
@@ -470,7 +470,7 @@ réapplique cette recette dans la chaîne de conversion. Le bouton final,
 toujours visible, génère et enregistre le RLE dans `IMG/N<bucket>/` ; celui de
 SPACETRIP conserve son format HGR actuel. La construction des deux HDV est
 accessible dans l’atelier. Mode d’emploi et limites :
-`SCOSWAMP.MORE/TOOLS/interpreter/IMAGES.md`.
+`ADVKIT/IMAGES.md`.
 
 Corrections issues de la relecture humaine : ratio d’affichage du mode blocs
 140 pixels (fit POM2 interprétait ses pixels comme carrés), accès direct à la
@@ -534,7 +534,7 @@ leur endurance initiale nulle.
 `lastLoss` cumule maintenant les blessures effectivement appliquées, comme
 sur Apple II, au lieu de soustraire l’endurance finale de celle de départ : un
 soin entre adversaires ne doit pas annuler des blessures pour une directive DV.
-`tools/test_browser_combat_inventory.mjs` vérifie les transitions avec le vrai
+`ADVKIT/TESTS/test_browser_combat_inventory.mjs` vérifie les transitions avec le vrai
 moteur et ses dés, l’interdiction sans consommation, les morts dans / hors du
 combat, les nettoyages de menus et le cas sans feuille. Les tests de sauvegarde
 et de rencontre JavaScript restent verts. Aucun binaire Apple II n’est modifié
@@ -591,7 +591,7 @@ le champ d’interdiction existant du choix. Aucun format de sauvegarde ni état
 spécifique au Patrouilleur n’est ajouté.
 
 Le validateur vérifie les références, les bornes et la syntaxe des listes.
-`tools/test_visited_predicates.mjs` parcourt les 16 combinaisons de quatre
+`ADVKIT/TESTS/test_visited_predicates.mjs` parcourt les 16 combinaisons de quatre
 conditions, pour CV et CX, à l’entrée et à la reprise ; il couvre également
 l’ancienne syntaxe et les issues FR/EN du Patrouilleur, dont les quatre sorties
 de dialogue amical. Le corpus comprend 29 contrats explicitement revus, sans
@@ -976,7 +976,7 @@ vide ; pour chaque sort : une seule Pierre ouvre la bonne lettre, mène à
 la conséquence attendue et est consommée, puis sac et S/L conservent l'état.
 Ces cas utilisent une préparation injectée, pas un itinéraire naturel.
 
-JS : `tools/test_spell_choices.mjs` couvre ces quatre pages et le 256 corrigé
+JS : `ADVKIT/TESTS/test_spell_choices.mjs` couvre ces quatre pages et le 256 corrigé
 précédemment : 152 combinaisons de possession, deux langues et entrée/reprise.
 Il vérifie aussi les conditions après changement du sac sans reparsage et
 l'absence de consommation lors de l'affichage. Sa première exécution avait

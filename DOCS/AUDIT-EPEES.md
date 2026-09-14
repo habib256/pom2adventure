@@ -43,7 +43,7 @@ FR/EN sur 842 textes. La correction de réacquisition décrite ci-dessus modifie
 Résultat natif : 18 assertions réussies, zéro échec, POM2 headless avec
 Mockingboard.
 
-Test JavaScript complémentaire : `node tools/test_weapon_replacement.mjs`,
+Test JavaScript complémentaire : `node ADVKIT/TESTS/test_weapon_replacement.mjs`,
 36 acquisitions FR/EN, bonus antérieur 0/1/2, objet présent/absent, restauration
 et dons non concernés.
 

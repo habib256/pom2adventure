@@ -75,7 +75,7 @@ Apple IIe, un disque dur en slot 5 et une Mockingboard en slot 2. Il ne lit
 ni ne modifie la configuration de l'application graphique. Compilation macOS :
 
 ```sh
-sh SCOSWAMP.MORE/TOOLS/build_pom2_playtest.sh
+sh ADVKIT/TOOLS/build_pom2_playtest.sh
 python3 -u SCOSWAMP.MORE/TOOLS/win_gayolard.py --only victoire_reelle --port 6523
 ```
 

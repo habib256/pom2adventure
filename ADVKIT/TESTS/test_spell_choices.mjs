@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {Engine} from '../SCOSWAMP.MORE/TOOLS/interpreter/engine.js';
-import {parseScene, choiceAvailable} from '../SCOSWAMP.MORE/TOOLS/interpreter/scene.js';
-import {stoneFromName, setCatalogs} from '../SCOSWAMP.MORE/TOOLS/interpreter/rules.js';
-const proj = JSON.parse(await readFile(new URL('../SCOSWAMP.MORE/TOOLS/interpreter/project.scoswamp.json', import.meta.url)));
-const objects = JSON.parse(await readFile(new URL('../SCOSWAMP/JSON/OBJECTS.json', import.meta.url))).objects;
+import {Engine} from '../engine.js';
+import {parseScene, choiceAvailable} from '../scene.js';
+import {stoneFromName, setCatalogs} from '../rules.js';
+const proj = JSON.parse(await readFile(new URL('../project.scoswamp.json', import.meta.url)));
+const objects = JSON.parse(await readFile(new URL('../../SCOSWAMP/JSON/OBJECTS.json', import.meta.url))).objects;
 setCatalogs({objets: objects.map(o=>({cle:o.id, cache:o.hidden})), pierres:proj.pierres, amulettes:proj.amulettes});
 const cases = [
   [399, [309,281], [[346,'TERREUR'],[169,'ILLUSION']]],
@@ -17,7 +17,7 @@ const cases = [
 let checks = 0;
 for (const lang of ['FR','EN']) for (const [page, free, spells] of cases) {
   const dir=String(Math.floor(page/50)*50).padStart(3,'0');
-  const text=await readFile(new URL(`../SCOSWAMP/TEXT${lang}/N${dir}/N${String(page).padStart(3,'0')}.TXT`,import.meta.url),'utf8');
+  const text=await readFile(new URL(`../../SCOSWAMP/TEXT${lang}/N${dir}/N${String(page).padStart(3,'0')}.TXT`,import.meta.url),'utf8');
   for (const restoring of [false,true]) {
     const app=new Engine(proj,{}).app;app.restoring=restoring;
     parseScene(app,text);
@@ -37,7 +37,7 @@ for (const lang of ['FR','EN']) for (const [page, free, spells] of cases) {
 }
 for (const lang of ['FR','EN']) {
   const app=new Engine(proj,{}).app;
-  parseScene(app, await readFile(new URL(`../SCOSWAMP/TEXT${lang}/N300/N346.TXT`,import.meta.url),'utf8'));
+  parseScene(app, await readFile(new URL(`../../SCOSWAMP/TEXT${lang}/N300/N346.TXT`,import.meta.url),'utf8'));
   assert.deepEqual(app.foes.map(f=>[f.hab,f.end]),[[6,7],[7,7]]);
   assert.deepEqual(app.foeImg.slice(0,2),[281,281]);
   assert.equal(app.choices.length,0,'la variante engage directement les deux survivants');

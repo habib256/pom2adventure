@@ -1161,7 +1161,7 @@ Coût d'état côté moteur : **1 octet** (`app.clairiere_courante`). Le bitmap
 2. **Ajouter le contrôle FR/EN manquant** à `reflow_txt.py` : « même
    multi-ensemble de cibles dans les deux langues ». 20 lignes, et les bugs des
    pages 347 et 382 apparaissent (§ 6.1 J).
-3. **Écrire `SCOSWAMP.MORE/TOOLS/build_map.py`** : il lit `carte.json`, applique
+3. **Écrire `ADVKIT/TOOLS/build_map.py`** : il lit `carte.json`, applique
    les trois arbitrages de rabattement (§ 6.1 I) et écrit `SCOSWAMP/MAP`. Sa
    source est `carte.json`, pas la prose — c'est ce qui rend la génération
    reproductible et le retrait des numéros du texte (§ 6.3) sans conséquence.

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(scoswamp_hgr LANGUAGES C CXX)
+project(advkit LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -35,7 +35,7 @@ target_compile_options(scoswamp_hgr PRIVATE -Wall -Wextra -Wpedantic)
 
 enable_testing()
 add_executable(test_hgr_rle
-    test_hgr_rle.c
+    ../../SCOSWAMP.MORE/TOOLS/test_hgr_rle.c
     ../../SCOSWAMP/SRC/hgr_rle.c
 )
 target_include_directories(test_hgr_rle PRIVATE ../../SCOSWAMP/SRC)
@@ -43,7 +43,7 @@ target_compile_options(test_hgr_rle PRIVATE -Wall -Wextra -Wpedantic)
 add_test(NAME hgr_rle COMMAND test_hgr_rle)
 
 add_executable(test_rules
-    test_rules.c
+    ../../SCOSWAMP.MORE/TOOLS/test_rules.c
     ../../SCOSWAMP/SRC/rules.c
     ../../SCOSWAMP/SRC/dice.c
 )

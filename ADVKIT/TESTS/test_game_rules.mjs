@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import * as R from '../SCOSWAMP.MORE/TOOLS/interpreter/rules.js';
+import * as R from '../rules.js';
 
 // Independent game vocabulary and bit positions, with two unrelated groups.
 R.setCatalogs({objets: ['TOOL', '.CREW', '.PILOT', '.SEEN'].map(cle => ({cle, cache: cle[0] === '.'})),
@@ -60,15 +60,15 @@ assert.equal(recovery.seen[0].end,8);
 R.monsterRemember(recovery, 34, 1, {end:0});
 R.monsterRecover(recovery, 34, 255, 8);
 assert.equal(recovery.seen[0].end,0);
-const {Engine}=await import('../SCOSWAMP.MORE/TOOLS/interpreter/engine.js');
-const {parseScene}=await import('../SCOSWAMP.MORE/TOOLS/interpreter/scene.js');
+const {Engine}=await import('../engine.js');
+const {parseScene}=await import('../scene.js');
 const {readFile}=await import('node:fs/promises');
-const proj=JSON.parse(await readFile(new URL('../SCOSWAMP.MORE/TOOLS/interpreter/project.scoswamp.json',import.meta.url),'utf8'));
+const proj=JSON.parse(await readFile(new URL('../project.scoswamp.json',import.meta.url),'utf8'));
 const e=new Engine(proj,{});e.app.mapHere=33;e.app.currentScene=181;
 R.monsterRemember(e.app.mem,34,0,{end:3});
 for(const lang of ['FR','EN']){
   e.app.restoring=lang==='EN';
-  parseScene(e.app,await readFile(new URL(`../SCOSWAMP/TEXT${lang}/N150/N181.TXT`,import.meta.url),'utf8'));
+  parseScene(e.app,await readFile(new URL(`../../SCOSWAMP/TEXT${lang}/N150/N181.TXT`,import.meta.url),'utf8'));
   assert.equal(e.app.mem.seen[0].end,4,'MR is an entry effect, not replayed on restore');
 }
 console.log('recovery: gain, cap, isolation, no resurrection and bilingual restore guard passed');

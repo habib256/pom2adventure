@@ -8,7 +8,7 @@ octets de libre. Ils vivent maintenant dans MSGFR / MSGEN, et le binaire n'en
 charge qu'une langue.
 
 Les chaines de l'ecran MAP, elles, ne passent PAS par ici : elles voyagent
-dans le fichier MAP (SCOSWAMP.MORE/TOOLS/build_map.py), avec les noms des
+dans le fichier MAP (ADVKIT/TOOLS/build_map.py), avec les noms des
 clairieres. Le catalogue vit en RAM basse, ou il ne restait que quelques
 dizaines d'octets ; le bloc MAP vit dans le kilo-octet de $0C00, ou il y a
 de la place.
@@ -139,7 +139,7 @@ def main():
     ap.add_argument("--root", type=Path, required=True)
     args = ap.parse_args()
 
-    header = ["/* Genere par SCOSWAMP.MORE/TOOLS/build_messages.py -- ne pas editer.",
+    header = ["/* Genere par ADVKIT/TOOLS/build_messages.py -- ne pas editer.",
               " * L'ordre suit MSGFR / MSGEN sur le disque. */",
               "",
               "#ifndef MESSAGES_H",

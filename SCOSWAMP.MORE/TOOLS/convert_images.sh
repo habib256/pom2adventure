@@ -9,12 +9,12 @@
 # 400 scenes prend plusieurs minutes.
 set -e
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-DHGR="$(dirname "$0")/build/scoswamp_dhgr"
+DHGR="$(dirname "$0")/../../ADVKIT/TOOLS/build/scoswamp_dhgr"
 
 [ -x "$DHGR" ] || {
     echo "Absent : $DHGR"
     echo "  cmake -S $(dirname "$0") -B $(dirname "$0")/build"
-    echo "  cmake --build $(dirname "$0")/build --target scoswamp_dhgr"
+    echo "  cmake --build $(dirname "$0")/../../ADVKIT/TOOLS/build --target scoswamp_dhgr"
     exit 1
 }
 
@@ -31,7 +31,7 @@ for png in "$ROOT"/SCOSWAMP.MORE/GENERATED/[NB][0-9][0-9][0-9].png; do
     recipe="$ROOT/SCOSWAMP.MORE/IMAGE-RECIPES/$name.json"
     if [ -e "$recipe" ]; then
         if [ ! -e "$out" ] || [ "$png" -nt "$out" ] || [ "$recipe" -nt "$out" ]; then
-            python3 "$ROOT/SCOSWAMP.MORE/TOOLS/interpreter/image_workshop.py" --replay SCOSWAMP "$name"
+            python3 "$ROOT/ADVKIT/image_workshop.py" --replay SCOSWAMP "$name"
             converted=$((converted + 1))
         else
             skipped=$((skipped + 1))

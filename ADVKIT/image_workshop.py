@@ -20,8 +20,8 @@ import threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 
-ROOT = Path(__file__).resolve().parents[3]
-CONVERTER = ROOT / 'SCOSWAMP.MORE/TOOLS/build/scoswamp_dhgr'
+ROOT = Path(__file__).resolve().parents[1]
+CONVERTER = ROOT / 'ADVKIT/TOOLS/build/scoswamp_dhgr'
 DEFAULTS = dict(colourNoise=.30, brightness=1., contrast=1., gamma=1.,
                 diffusion=.7, kernel=1, model=1, dither=False, stretch=False, crop=None)
 RANGES = dict(colourNoise=(0,1), brightness=(.3,2), contrast=(.4,2.5),
@@ -209,11 +209,11 @@ class Handler(SimpleHTTPRequestHandler):
                 self.reply(dict(saved=str(p['output'].relative_to(ROOT)),sha256=item['previous']))
             elif self.path=='/api/build':
                 game=body['game']; project(game)
-                command=['make','-C','SCOSWAMP/SRC','hdv'] if game=='SCOSWAMP' else ['python3','SCOSWAMP.MORE/TOOLS/interpreter/build_spacetrip.py']
+                command=['make','-C','SCOSWAMP/SRC','hdv'] if game=='SCOSWAMP' else ['python3','SPACETRIP/build_hdv.py']
                 with LOCK:
                     result=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=240)
                 if result.returncode: raise ValueError((result.stdout+result.stderr)[-3000:])
-                self.reply(dict(volume='/dist/SCOSWAMP.HDV' if game=='SCOSWAMP' else '/SPACETRIP.hdv'))
+                self.reply(dict(volume='/dist/SCOSWAMP.HDV' if game=='SCOSWAMP' else '/dist/SPACETRIP.hdv'))
             else: self.reply(dict(error='Action inconnue'),404)
         except (ValueError,KeyError,OSError,subprocess.TimeoutExpired) as e:
             self.reply(dict(error=str(e)),400)
@@ -231,7 +231,7 @@ def main():
         # Keep the path, not a second temporary directory owner.
         class Cache: name=cache
         server.cache=Cache()
-        print(f'Atelier: http://127.0.0.1:{args.port}/SCOSWAMP.MORE/TOOLS/interpreter/',flush=True)
+        print(f'Atelier: http://127.0.0.1:{args.port}/ADVKIT/',flush=True)
         server.serve_forever()
 
 if __name__=='__main__': main()

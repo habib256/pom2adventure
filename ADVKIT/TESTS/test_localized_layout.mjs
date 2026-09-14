@@ -2,8 +2,8 @@
 import assert from 'node:assert/strict';
 import {writeFile} from 'node:fs/promises';
 globalThis.RACINE_DONNEES='http://127.0.0.1:8765/';
-const D=await import('../SCOSWAMP.MORE/TOOLS/interpreter/data.js');
-const proj=await D.loadProject('http://127.0.0.1:8765/SCOSWAMP.MORE/TOOLS/interpreter/project.scoswamp.json');
+const D=await import('../data.js');
+const proj=await D.loadProject('http://127.0.0.1:8765/ADVKIT/project.scoswamp.json');
 const volume=await D.ouvrirVolume(proj);
 const files=volume.liste();
 for(const name of ['HELPFR','HELPEN','MSGFR','MSGEN','OBJFR','OBJEN','OBJECTS.JSON','RULES.JSON','DIAPO','DIAPO.CODE','DIAPO.LIST'])assert.ok(!files.includes(name),name+' must leave root');
@@ -30,5 +30,5 @@ for(const name of ['DIAPO.SYSTEM','DIAPO.CODE','DIAPO.LIST','DIAPO.DATA','DIAPO.
 assert.equal(D.etatSource().horsVolume.length,0);
 const tree=files.filter(f=>!f.includes('/'));
 const result={checks:checked,root:tree,files:files.length,failures:[]};
-await writeFile(new URL('../DOCS/VALIDATION-DIAPO-MUSIC/layout.json',import.meta.url),JSON.stringify(result,null,2)+'\n');
+await writeFile(new URL('../../DOCS/VALIDATION-DIAPO-MUSIC/layout.json',import.meta.url),JSON.stringify(result,null,2)+'\n');
 console.log('PASS HTTP editor assets in FR/EN, repeated language template, exact disk/source match, DIAPO, DHGR and JSON, clean root',tree);

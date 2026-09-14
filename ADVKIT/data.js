@@ -13,14 +13,14 @@
 import { VolumeProDOS, cheminVolume } from './prodos.js';
 
 /* La racine du depot, deduite de l'emplacement de ce module : le lecteur vit
- * dans SCOSWAMP.MORE/TOOLS/interpreter/, trois crans sous la racine.
+ * dans ADVKIT/, trois crans sous la racine.
  *
  * `globalThis.RACINE_DONNEES` la remplace : c'est la couture par laquelle un
  * banc d'essai sans navigateur (node, fetch branche sur le disque) monte les
  * memes modules. Le moteur ne connait pas d'autre chemin que celui-la. */
 export const ROOT = globalThis.RACINE_DONNEES
   ? new URL(globalThis.RACINE_DONNEES)
-  : new URL('../../../', import.meta.url);
+  : new URL('../', import.meta.url);
 
 export function url(p) { return new URL(p, ROOT).href; }
 

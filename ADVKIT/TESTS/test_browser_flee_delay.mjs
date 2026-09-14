@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import {Engine,ISSUE} from '../SCOSWAMP.MORE/TOOLS/interpreter/engine.js';
-import {parseScene} from '../SCOSWAMP.MORE/TOOLS/interpreter/scene.js';
-import * as R from '../SCOSWAMP.MORE/TOOLS/interpreter/rules.js';
+import {Engine,ISSUE} from '../engine.js';
+import {parseScene} from '../scene.js';
+import * as R from '../rules.js';
 import {readFile} from 'node:fs/promises';
-const proj=JSON.parse(await readFile(new URL('../SCOSWAMP.MORE/TOOLS/interpreter/project.scoswamp.json',import.meta.url)));
+const proj=JSON.parse(await readFile(new URL('../project.scoswamp.json',import.meta.url)));
 function fixture(steps,minimum=2,hab=1,foeHab=100){
  const e=new Engine(proj,{render(){},async key(){assert.ok(steps.length,'unexpected prompt');const k=steps.shift();return typeof k==='function'?k(e.app):k;}});
  Object.assign(e.app.hero,{hab,hab0:hab,end:20,end0:20,cha:6,cha0:6});e.app.heroReady=true;
@@ -31,7 +31,7 @@ const dodgeSteps=[' ',a=>{assert.equal(a.combat.fuite,false);assert.equal(a.comb
 const draw=fixture(dodgeSteps,2,9,9);R.diceSeed(seed);assert.equal(await draw.runCombat(),ISSUE.FUITE);assert.equal(dodgeSteps.length,0);
 for(const lang of ['FR','EN']){
  const app=new Engine(proj,{}).app;app.restoring=true;
- parseScene(app,await readFile(new URL(`../SCOSWAMP/TEXT${lang}/N200/N221.TXT`,import.meta.url),'utf8'));
+ parseScene(app,await readFile(new URL(`../../SCOSWAMP/TEXT${lang}/N200/N221.TXT`,import.meta.url),'utf8'));
  assert.equal(app.fleeAfter,2,'MF is structural and restored when reading the scene');
 }
 console.log('PASS MF: early key ignored, two resolved wounds, menu preserves delay, zero delay, draws count, bilingual restore');

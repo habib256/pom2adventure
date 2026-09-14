@@ -432,11 +432,13 @@ hgr_loader.o: hgr_loader.s hgr_rle.h
 # C'est ce qui est arrivé le 2026-08-29 — le disque portait le binaire d'avant
 # le correctif iobuf, et le jeu rejouait un "errno=2 ProDOS=$$00" déjà corrigé.
 TOOLS    = ../../SCOSWAMP.MORE/TOOLS
-VOLBUILD = $(TOOLS)/build/build_prodos_volume
+# Les outils communs aux deux jeux : constructeur de volume, amorce, 2MG.
+KIT      = ../../ADVKIT/TOOLS
+VOLBUILD = $(KIT)/build/build_prodos_volume
 # Les deux premiers blocs (1 Ko) du volume : le boot loader ProDOS, que le
 # constructeur recopie tel quel. Extrait d'une image amorçable connue et versionné
 # ici, sinon `make hdv` ne peut pas partir d'un arbre propre (dist/ est ignoré).
-BOOTTMPL = $(TOOLS)/prodos_boot.tmpl
+BOOTTMPL = $(KIT)/prodos_boot.tmpl
 HDV      = ../../dist/SCOSWAMP.HDV
 STAGE    = ../../dist/.stage
 # DOCS et SRC : du developpement, rien a faire sur le disque du joueur.
@@ -478,8 +480,8 @@ PAYLOAD = $(shell find $(OUTDIR)/TEXTFR $(OUTDIR)/TEXTEN $(OUTDIR)/DHGR $(OUTDIR
 # L'empaqueteur retire la derniere extension : MAP.BIN devient MAP sur le
 # volume, comme MUSIC/<NOM>.MB.BIN devient MUSIC/<NOM>.MB.
 CARTE    = ../../SCOSWAMP.MORE/carte.json
-$(OUTDIR)/MAP.BIN: $(TOOLS)/build_map.py $(CARTE)
-	python3 $(TOOLS)/build_map.py --root ../..
+$(OUTDIR)/MAP.BIN: $(KIT)/build_map.py $(CARTE)
+	python3 $(KIT)/build_map.py --root ../..
 
 map: $(OUTDIR)/MAP.BIN
 
@@ -526,7 +528,7 @@ $(HDV): $(OUTDIR)/$(PROGRAM) $(OUTDIR)/$(LAUNCHER) $(BOOTTMPL) $(MUSICS) \
 VERSION  = 0.9
 RELHDV   = ../../dist/scoswamp-$(VERSION).hdv
 REL2MG   = ../../dist/scoswamp-$(VERSION).2mg
-WRAP2MG  = $(TOOLS)/wrap_2mg.py
+WRAP2MG  = $(KIT)/wrap_2mg.py
 
 release: $(REL2MG)
 
@@ -561,7 +563,7 @@ playtest: $(HDV) $(OUTDIR)/$(PROGRAM)
 # chaque fois que l'outil est relié.
 # Le constructeur de volume se CONSTRUIT, il ne se reclame pas. Cette regle
 # imprimait les deux lignes cmake puis `exit 1`, ce qui donnait le piege
-# suivant : $(TOOLS)/build/ est gitignore, donc il disparait au premier
+# suivant : $(KIT)/build/ est gitignore, donc il disparait au premier
 # nettoyage ou sur un clone frais ; `make hdv` s'arretait alors AVANT de
 # toucher l'image ; et comme $(HDV) est lui aussi gitignore mais survit dans
 # l'arbre de travail, on continuait a lancer l'emulateur sur une image
@@ -571,8 +573,8 @@ playtest: $(HDV) $(OUTDIR)/$(PROGRAM)
 # mode de panne.
 $(VOLBUILD):
 	@echo "==> Construction de l'outil : $(VOLBUILD)"
-	cmake -S $(TOOLS) -B $(TOOLS)/build
-	cmake --build $(TOOLS)/build --target build_prodos_volume
+	cmake -S $(KIT) -B $(KIT)/build
+	cmake --build $(KIT)/build --target build_prodos_volume
 
 # Nettoyage des fichiers intermédiaires
 clean:

@@ -67,7 +67,7 @@ say "  $hgr_total image(s) brute(s) vérifiée(s), $hgr_bad invalide(s)"
 # plus rien ici.
 say ""
 say "-- Images DHGR compressées (doivent se décoder en $DHGR_SIZE octets) --"
-readonly HGRTOOL=SCOSWAMP.MORE/TOOLS/build/scoswamp_dhgr
+readonly HGRTOOL=ADVKIT/TOOLS/build/scoswamp_dhgr
 rle_total=0
 rle_bad=0
 if [ -x "$HGRTOOL" ]; then
@@ -81,7 +81,7 @@ if [ -x "$HGRTOOL" ]; then
     say "  $rle_total image(s) compressée(s) vérifiée(s), $rle_bad invalide(s)"
 else
     warn "$HGRTOOL absent : images compressées non vérifiées"
-    say "    cmake -S SCOSWAMP.MORE/TOOLS -B SCOSWAMP.MORE/TOOLS/build"
+    say "    cmake -S ADVKIT/TOOLS -B ADVKIT/TOOLS/build"
 fi
 
 # ---------------------------------------------------------------------------

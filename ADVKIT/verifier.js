@@ -1,6 +1,6 @@
 /* verifier.js -- le meme moteur, sans navigateur, pour verifier un corpus.
  *
- *   node SCOSWAMP.MORE/TOOLS/interpreter/verifier.js [descripteur] [langue] [--arbre]
+ *   node ADVKIT/verifier.js [descripteur] [langue] [--arbre]
  *
  * Il monte les modules du lecteur tels quels -- pas une copie, pas une
  * seconde implementation -- et branche `fetch` sur le disque. Ce qu'il dit
@@ -24,7 +24,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const ICI = dirname(fileURLToPath(import.meta.url));
-globalThis.RACINE_DONNEES = pathToFileURL(resolve(ICI, '../../..') + '/').href;
+globalThis.RACINE_DONNEES = pathToFileURL(resolve(ICI, '..') + '/').href;
 globalThis.localStorage = { getItem: () => null, setItem() {}, removeItem() {} };
 globalThis.fetch = async (u) => {
   try {

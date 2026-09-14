@@ -12,7 +12,7 @@ le compteur de réaffichages complets reste constant.
 Captures finales inspectées : `mixed.png`, `music-columns.png`.
 Les titres des 453 images proviennent tous d’une directive T existante.
 
-`tools/test_localized_layout.mjs` utilise le serveur HTTP de l’éditeur :
+`ADVKIT/TESTS/test_localized_layout.mjs` utilise le serveur HTTP de l’éditeur :
 six catalogues français/anglais identiques dans le dépôt et dans ProDOS,
 JSON dans JSON, DIAPO dans TOOLS, SAVE0 à SAVE9 dans SAVE. Aucun recours aux
 anciens chemins. `layout.json` contient le résultat.

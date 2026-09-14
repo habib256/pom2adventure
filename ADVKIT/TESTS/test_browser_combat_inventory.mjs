@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {parseScene} from '../SCOSWAMP.MORE/TOOLS/interpreter/scene.js';
-import {Engine,ISSUE} from '../SCOSWAMP.MORE/TOOLS/interpreter/engine.js';
-import * as R from '../SCOSWAMP.MORE/TOOLS/interpreter/rules.js';
-const proj=JSON.parse(await readFile(new URL('../SCOSWAMP.MORE/TOOLS/interpreter/project.scoswamp.json',import.meta.url)));
+import {parseScene} from '../scene.js';
+import {Engine,ISSUE} from '../engine.js';
+import * as R from '../rules.js';
+const proj=JSON.parse(await readFile(new URL('../project.scoswamp.json',import.meta.url)));
 R.setCatalogs({objets:[],pierres:proj.pierres,amulettes:[]});
 function fixture(steps){
  const engine=new Engine(proj,{render(){},async key(){assert.ok(steps.length,'unexpected extra key prompt');const step=steps.shift();return typeof step==='function'?step(engine.app):step;}});
@@ -59,7 +59,7 @@ console.log('PASS encounter magic prohibition before first assault, all 12 stone
 for (const lang of ['FR','EN']) for (const page of [215,355]) for (const restoring of [false,true]) {
  const app=new Engine(proj,{}).app;app.restoring=restoring;
  const group=page===215?'N200':'N350';
- parseScene(app,await readFile(new URL(`../SCOSWAMP/TEXT${lang}/${group}/N${page}.TXT`,import.meta.url),'utf8'));
+ parseScene(app,await readFile(new URL(`../../SCOSWAMP/TEXT${lang}/${group}/N${page}.TXT`,import.meta.url),'utf8'));
  assert.equal(app.magicForbidden,true);
  assert.equal(app.fleeTarget,-1);
  assert.equal(app.foes.length,page===215?1:2);

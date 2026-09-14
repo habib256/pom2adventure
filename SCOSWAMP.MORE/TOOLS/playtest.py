@@ -24,7 +24,7 @@ produit par `ld65 -Ln`) et de la carte memoire, jamais d'une constante ecrite
 a la main -- voir la classe Symbols.
 
 Usage :
-    sh SCOSWAMP.MORE/TOOLS/build_pom2_playtest.sh     # hote headless macOS
+    sh ADVKIT/TOOLS/build_pom2_playtest.sh     # hote headless macOS
     python3 SCOSWAMP.MORE/TOOLS/playtest.py            # tout le banc
     python3 SCOSWAMP.MORE/TOOLS/playtest.py --list
     python3 SCOSWAMP.MORE/TOOLS/playtest.py --only combat_degats --keep
@@ -52,7 +52,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))          # le depot
 SRCDIR = os.path.join(ROOT, "SCOSWAMP", "SRC")
 HDV_SRC = os.path.join(ROOT, "dist", "SCOSWAMP.HDV")
-POM2 = os.environ.get("POM2", os.path.join(HERE, "build", "pom2_playtest"))
+POM2 = os.environ.get("POM2", os.path.join(ROOT, "ADVKIT", "TOOLS", "build", "pom2_playtest"))
 
 # 6503..6506, 6510 sont pris (POM2 par defaut, et les bancs voisins) : on
 # commence a 6520.
@@ -3009,7 +3009,7 @@ def main():
         print("Image absente : %s\n  make -C SCOSWAMP/SRC hdv" % args.hdv)
         return 2
     if not os.path.exists(args.pom2):
-        print("Emulateur absent : %s\n  sh SCOSWAMP.MORE/TOOLS/build_pom2_playtest.sh" % args.pom2)
+        print("Emulateur absent : %s\n  sh ADVKIT/TOOLS/build_pom2_playtest.sh" % args.pom2)
         return 2
 
     try:

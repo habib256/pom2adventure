@@ -3,11 +3,11 @@
 Lancement depuis le dépôt :
 
 ```sh
-cmake --build SCOSWAMP.MORE/TOOLS/build --target scoswamp_dhgr build_prodos_volume
-sh SCOSWAMP.MORE/TOOLS/interpreter/serve.sh 8765
+cmake --build ADVKIT/TOOLS/build --target scoswamp_dhgr build_prodos_volume
+sh ADVKIT/serve.sh 8765
 ```
 
-Ouvrir `http://127.0.0.1:8765/SCOSWAMP.MORE/TOOLS/interpreter/`.
+Ouvrir `http://127.0.0.1:8765/ADVKIT/`.
 Le serveur Python statique ne suffit plus pour convertir et enregistrer.
 Le serveur de l’atelier écoute uniquement sur la machine locale.
 
@@ -78,9 +78,9 @@ par session serveur ; les recettes persistantes ne sont pas limitées.
 ## Vérification
 
 ```sh
-python3 tools/test_image_workshop.py
+python3 ADVKIT/TESTS/test_image_workshop.py
 # Avec Chrome headless exposant CDP sur 9228 et le serveur sur 8765 :
-node --experimental-websocket tools/test_workshop_browser.mjs
+node --experimental-websocket ADVKIT/TESTS/test_workshop_browser.mjs
 ```
 
 Six tests natifs couvrent le ratio sur une mire carrée, les quatre modèles,

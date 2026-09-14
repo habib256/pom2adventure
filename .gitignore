@@ -26,7 +26,7 @@ spacetrip.s
 __pycache__/
 
 # ── Artefacts de build ─────────────────────────────────────────────────────
-SCOSWAMP.MORE/TOOLS/build/
+ADVKIT/TOOLS/build/
 dist/
 
 # ── Sorties dérivées, régénérables depuis les sources ci-dessus ────────────

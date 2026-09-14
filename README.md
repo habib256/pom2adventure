@@ -24,7 +24,7 @@
 > d'un `.hdv`). Le numéro est tenu par `VERSION` dans `SCOSWAMP/SRC/Makefile`.
 >
 > Les règles de jeu se testent sur la machine hôte, sans émulateur :
-> `cmake -S SCOSWAMP.MORE/TOOLS -B SCOSWAMP.MORE/TOOLS/build && cd $_ && ctest`.
+> `cmake -S ADVKIT/TOOLS -B ADVKIT/TOOLS/build && cd $_ && ctest`.
 >
 > Test dans l'émulateur voisin :
 > `../pom2/build/POM2 --preset iie <image.hdv>` — ajouter `--ai-control=PORT`
@@ -128,9 +128,9 @@ du combat 012 est le même géant à la page 126.
 
 ```bash
 # 1. les manifestes, un prompt par page, dérivés du corpus et des bibles
-python3 SCOSWAMP.MORE/TOOLS/build_manifest.py --root . \
+python3 ADVKIT/TOOLS/build_manifest.py --root . \
         --output SCOSWAMP.MORE/scene_manifest.jsonl --all
-python3 SCOSWAMP.MORE/TOOLS/build_manifest.py --root . \
+python3 ADVKIT/TOOLS/build_manifest.py --root . \
         --output SCOSWAMP.MORE/battle_manifest.jsonl --battle
 
 # 2. les rendus maîtres (~1400x960), 10 de front ; relançable, il reprend
@@ -141,7 +141,7 @@ bash SCOSWAMP.MORE/TOOLS/generate_images.sh SCOSWAMP.MORE/scene_manifest.jsonl 0
 sh SCOSWAMP.MORE/TOOLS/convert_images.sh
 
 # 4. l'empreinte des fiches, pour savoir plus tard ce qu'un changement périme
-python3 SCOSWAMP.MORE/TOOLS/build_manifest.py --root . --output /dev/null --record
+python3 ADVKIT/TOOLS/build_manifest.py --root . --output /dev/null --record
 ```
 
 Modifier une fiche de bible périme toutes les images qui la citent :

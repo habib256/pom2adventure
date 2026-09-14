@@ -78,7 +78,7 @@ sépare désormais l'accès au sac de l'autorisation d'utiliser une pierre.
 ## Reproduire
 
 ```sh
-sh SCOSWAMP.MORE/TOOLS/build_pom2_playtest.sh
+sh ADVKIT/TOOLS/build_pom2_playtest.sh
 python3 -u SCOSWAMP.MORE/TOOLS/validate_routes.py --attempts 16 --port 6523 --output /tmp/scoswamp-validation-nouvelle
 ```
 

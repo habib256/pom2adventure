@@ -279,7 +279,7 @@ bloc 5888 (offset fichier 3 014 656)  ← les 276 octets SCS3
 entrée 5878×512+394, champ EOF (+$15) ← 14 01 00   (=276, 3 octets LE)
 ```
 
-`SCOSWAMP.MORE/TOOLS/build_prodos_volume.cpp` (85 l.) montre la même
+`ADVKIT/TOOLS/build_prodos_volume.cpp` (85 l.) montre la même
 manipulation d'entrées : offsets `[0x00]` storage<<4|namelen, `[0x01..]` nom,
 `[0x10]` type, `[0x11..0x12]` clé, `[0x13..0x14]` blocs, `[0x15..0x17]` EOF,
 `[0x1F..0x20]` aux type — il patche l'aux type de `SCOSWAMP` à `$4000`

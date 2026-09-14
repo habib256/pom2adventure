@@ -6,7 +6,7 @@
  * apercu peut dater d'une conversion precedente, le flux, lui, est celui que
  * le jeu chargera.
  *
- * Portage direct de SCOSWAMP.MORE/TOOLS/scoswamp_dhgr.cpp (decode, preview)
+ * Portage direct de ADVKIT/TOOLS/scoswamp_dhgr.cpp (decode, preview)
  * et de pom2/src/hgrpaint/HgrPaintModel.cpp (dhgrColorAt, hgrRowAddress).
  */
 

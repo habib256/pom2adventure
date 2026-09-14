@@ -65,7 +65,7 @@ puis construire le cœur et l'hôte headless :
 ```sh
 cmake -S /tmp/scoswamp-stack-pom2 -B /tmp/scoswamp-stack-pom2/build -DPOM2_ENABLE_TESTS=OFF -DCMAKE_BUILD_TYPE=Release
 cmake --build /tmp/scoswamp-stack-pom2/build --target pom2_core -j 6
-c++ -std=c++17 -O2 -DNDEBUG -I/tmp/scoswamp-stack-pom2/src -I/tmp/scoswamp-stack-pom2/include -I/tmp/scoswamp-stack-pom2/build/generated -I/tmp/scoswamp-stack-pom2/imgui '-DPOM2_ROOT="/tmp/scoswamp-stack-pom2"' SCOSWAMP.MORE/TOOLS/pom2_playtest.cpp /tmp/scoswamp-stack-pom2/build/libpom2_core.a -framework CoreAudio -framework AudioToolbox -framework AudioUnit -o /tmp/scoswamp-stack-pom2/build/pom2_playtest
+c++ -std=c++17 -O2 -DNDEBUG -I/tmp/scoswamp-stack-pom2/src -I/tmp/scoswamp-stack-pom2/include -I/tmp/scoswamp-stack-pom2/build/generated -I/tmp/scoswamp-stack-pom2/imgui '-DPOM2_ROOT="/tmp/scoswamp-stack-pom2"' ADVKIT/TOOLS/pom2_playtest.cpp /tmp/scoswamp-stack-pom2/build/libpom2_core.a -framework CoreAudio -framework AudioToolbox -framework AudioUnit -o /tmp/scoswamp-stack-pom2/build/pom2_playtest
 python3 -u DOCS/PROFIL-PILES-V2/run_profile.py /tmp/nouveau-profil-piles
 python3 DOCS/PROFIL-PILES-V2/analyze.py /tmp/nouveau-profil-piles
 ```

@@ -29,7 +29,7 @@ Validation :
 
 - `baie_laissee` dans POM2 headless avec Mockingboard : 18 assertions réussies,
   zéro échec (revisite, repas, cueillette, sac, sauvegarde, épuisement).
-- `node tools/test_automatic_returns.mjs` : historiques FR/EN, priorité des
+- `node ADVKIT/TESTS/test_automatic_returns.mjs` : historiques FR/EN, priorité des
   règles, restauration sans rejouer les règles d'entrée, anciens routeurs.
 - Vérificateur FR et EN : 421 pages chacune, aucun lien cassé, aucune page
   inaccessible, disque identique au dépôt.

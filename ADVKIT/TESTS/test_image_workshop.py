@@ -9,7 +9,7 @@ import tempfile
 import unittest
 import zlib
 
-MODULE=Path(__file__).resolve().parents[1]/'SCOSWAMP.MORE/TOOLS/interpreter/image_workshop.py'
+MODULE=Path(__file__).resolve().parents[1]/'image_workshop.py'
 spec=importlib.util.spec_from_file_location('workshop',MODULE)
 w=importlib.util.module_from_spec(spec);spec.loader.exec_module(w)
 
