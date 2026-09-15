@@ -154,19 +154,48 @@ say "  Images  : $st_img / $st_fr scènes illustrées"
 say ""
 say "-- Moteurs compilés --"
 
-# Le moteur est chargé à $4000. Le plafond dépend du __HIMEM__ que son
-# Makefile impose, et il n'est plus le même pour les trois :
+# Le moteur est charge a $4000. Le plafond depend du __HIMEM__ que son
+# Makefile impose, et de la forme du fichier :
 #
-#   SPACETRIP, COMBAT : __HIMEM__ = $9600, le "presumed RAM end" de cc65 sous
-#     ProDOS 8, parce que $9600-$BFFF appartient à ProDOS (MLI, page globale
-#     $BF00, tampons fichier de 1 Ko). Plafond : $9600 - $4000 = 22016.
+#   SPACETRIP : image plate, __HIMEM__ = $9600, le "presumed RAM end" de cc65
+#     sous ProDOS 8, parce que $9600-$BFFF appartient a ProDOS (MLI, page
+#     globale $BF00, tampons fichier de 1 Ko). Plafond : $9600 - $4000 = 22016.
 #   SCOSWAMP : __HIMEM__ = $BF00 depuis le 2026-08-29 -- le moteur de combat
-#     n'entrait pas sous $9600. Il prend la place de BASIC.SYSTEM, ce qui lui
-#     coûte le retour au BASIC et lui vaut son propre lanceur SYS. Moins la
-#     pile C de 384 octets, le plafond est $BD80, soit 32128 octets depuis
-#     $4000. Chiffre unique, tenu par SCOSWAMP/SRC/Makefile.
+#     n'entrait pas sous $9600 -- et, depuis 242819e, une image a CHARGEMENT
+#     SCINDE. Les LC_BYTES premiers octets du fichier (3072) sont le code de
+#     la Language Card : SCOSWAMP.SYSTEM (loader.c) les pose en LC_STAGE
+#     ($1000), crt0.s les recopie en banque 2 ($D400). Le reste est lu en
+#     GAME_ADDR ($4000) et doit finir sous le plancher de la pile C,
+#     __HIMEM__ - STACK ($BD80). Le fichier peut donc peser jusqu'a
+#         LC_BYTES + (__HIMEM__ - STACK - GAME_ADDR) = 3072 + 32128 = 35200
+#     octets. L'ancien plafond de 32128 ignorait le prefixe et refusait un
+#     binaire que make validait.
+#     Aucun de ces chiffres n'est recopie ici : HIMEM, STACK et MIN_FREE sont
+#     lus dans SCOSWAMP/SRC/Makefile (ce que make passe a check-memory.sh),
+#     LC_BYTES et GAME_ADDR dans loader.c (ce que lit check_lc_layout.py).
+#     Les valeurs de repli ne servent que si ces lignes disparaissent, et un
+#     avertissement le dit.
 readonly ENGINE_MAX=22016
-readonly SCOSWAMP_MAX=32128
+
+lire_make()   { sed -nE "s/^$1[[:space:]]*=[[:space:]]*([0-9A-Fa-fx]+).*/\1/p" "$2" 2>/dev/null | head -1; }
+lire_define() { sed -nE "s/^#define[[:space:]]+$1[[:space:]]+(0x[0-9A-Fa-f]+|[0-9]+).*/\1/p" "$2" 2>/dev/null | head -1; }
+
+sc_src=SCOSWAMP/SRC
+sc_himem=$(lire_make HIMEM "$sc_src/Makefile")
+sc_stack=$(lire_make STACK "$sc_src/Makefile")
+sc_min_free=$(lire_make MIN_FREE "$sc_src/Makefile")
+sc_lc=$(lire_define LC_BYTES "$sc_src/loader.c")
+sc_addr=$(lire_define GAME_ADDR "$sc_src/loader.c")
+if [ -z "$sc_himem" ] || [ -z "$sc_stack" ] || [ -z "$sc_min_free" ] \
+   || [ -z "$sc_lc" ] || [ -z "$sc_addr" ]; then
+    warn "SCOSWAMP : disposition introuvable dans $sc_src/Makefile ou loader.c, valeurs de repli"
+    # Les valeurs du 2026-09-14, celles que decrit le commentaire ci-dessus.
+    : "${sc_himem:=0xBF00}" "${sc_stack:=0x0180}" "${sc_min_free:=1792}" \
+      "${sc_lc:=0x0C00}" "${sc_addr:=0x4000}"
+fi
+readonly SCOSWAMP_LC=$((sc_lc))
+readonly SCOSWAMP_FLOOR=$((sc_himem - sc_stack))
+readonly SCOSWAMP_MAX=$((SCOSWAMP_LC + SCOSWAMP_FLOOR - sc_addr))
 
 # ATTENTION : ce contrôle est NÉCESSAIRE MAIS PAS SUFFISANT.
 # Le fichier .BIN ne contient pas le segment BSS (variables non initialisées),
@@ -186,18 +215,56 @@ for bin in SCOSWAMP/SCOSWAMP.BIN SPACETRIP/SPACETRIP.BIN; do
         size=$(stat -c%s "$bin" 2>/dev/null || stat -f%z "$bin")
         kb=$((size / 1024))
         case "$bin" in
-            SCOSWAMP/*) max=$SCOSWAMP_MAX; top='$BD80' ;;
-            *)          max=$ENGINE_MAX;   top='$9600' ;;
+            SCOSWAMP/*)
+                max=$SCOSWAMP_MAX
+                top=$(printf 'préfixe LC de %d + $%04X-$%04X' \
+                      "$SCOSWAMP_LC" "$((sc_addr))" "$SCOSWAMP_FLOOR") ;;
+            *)  max=$ENGINE_MAX; top='$4000-$9600' ;;
         esac
         if [ "$size" -gt "$max" ]; then
-            err "$bin : $size octets, dépasse la limite de $max (\$4000-$top)"
+            err "$bin : $size octets, dépasse la limite de $max ($top)"
+        elif [ "$bin" = SCOSWAMP/SCOSWAMP.BIN ] && [ "$size" -le "$SCOSWAMP_LC" ]; then
+            # Le lanceur lit d'abord LC_BYTES octets : un fichier plus court
+            # n'a pas d'image principale ("Image LC incomplete").
+            err "$bin : $size octets, pas plus que son préfixe LC de $SCOSWAMP_LC"
         else
-            say "  $bin : $size octets (~$kb Ko)"
+            say "  $bin : $size octets (~$kb Ko, limite $max : $top)"
         fi
     else
         warn "$bin absent (non compilé)"
     fi
 done
+
+# Le plafond de fichier de SCOSWAMP reste necessaire mais pas suffisant, pour
+# la raison dite plus bas a propos de la BSS. Quand la carte de lien de make
+# est la (build.map et build.lbl, ignores par git) et pas plus ancienne que le
+# binaire, on rejoue donc les deux controles de make, avec ses valeurs. Sur un
+# clone sans build, seul le plafond ci-dessus s'applique : check-project.sh ne
+# demande aucune compilation.
+sc_bin=SCOSWAMP/SCOSWAMP.BIN
+sc_map=$sc_src/build.map
+sc_lbl=$sc_src/build.lbl
+if [ -f "$sc_bin" ] && [ -f "$sc_map" ] && [ -f "$sc_lbl" ] \
+   && ! [ "$sc_bin" -nt "$sc_map" ] && ! [ "$sc_bin" -nt "$sc_lbl" ]; then
+    if out=$(bash SCOSWAMP.MORE/TOOLS/check-memory.sh --himem "$sc_himem" \
+             --stack "$sc_stack" --min-free "$sc_min_free" "$sc_map" 2>&1); then
+        say "  check-memory.sh : $(printf '%s\n' "$out" | grep '^OK' | head -1)"
+    else
+        err "$sc_map : check-memory.sh refuse l'empreinte de $sc_bin"
+        printf '%s\n' "$out" | grep -i 'erreur' | sed 's/^/           /'
+    fi
+    if ! command -v python3 >/dev/null 2>&1; then
+        warn "python3 absent : disposition LC de $sc_bin non vérifiée"
+    elif out=$(python3 SCOSWAMP.MORE/TOOLS/check_lc_layout.py --src "$sc_src" 2>&1); then
+        say "  $out"
+    else
+        err "$sc_lbl : check_lc_layout.py refuse la disposition de $sc_bin"
+        printf '%s\n' "$out" | sed 's/^/           /'
+    fi
+else
+    say "  ($sc_map ou $sc_lbl absent ou plus ancien que $sc_bin :"
+    say "   BSS et disposition LC non vérifiées, voir make -C $sc_src check)"
+fi
 
 # ---------------------------------------------------------------------------
 # 5. Hygiène du dépôt
