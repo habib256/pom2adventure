@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« La Maitresse des Oiseaux » — clairiere 16. Mi dorien, 168.
+"""« La Maitresse des Oiseaux » — clairiere 16. Mi dorien, 166,7.
 
 Variation dans la couleur `sud` : le **bourdon de tonique qui ne bouge jamais**
 et la large marche modale de la zone, mais en dorien au lieu d'eolien — le do
@@ -39,17 +39,17 @@ pleine en A'. Elle prend la voix 5 a droite ; il ne reste que cinq parties de
 hauteur, et c'est la voix d'accords tenus qui a cede la place — le bourdon de
 tonique est le procede de la zone.
 
-28 mesures a 4/4, 40,0 s. Forme intro(4) - A(8) - B(8) - A'(8).
+28 mesures a 4/4, 40,3 s. Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 oiseaux.py && python3 ../../../midi_to_mb.py oiseaux.mid \\
-        BIRDS.MB.BIN --bpm 168 --max 2304 --wav OISEAUX.wav
+        BIRDS.MB.BIN --bpm 166.667 --max 2304 --wav OISEAUX.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 168, 4, 28
+BPM, BAR, BARS = 3000 / 18, 4, 28
 LEN = BAR * BARS
 
 # une entree par mesure ; « A|Bm » change d'accord au milieu de la mesure

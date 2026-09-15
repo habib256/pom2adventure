@@ -8,5 +8,10 @@
   "model": 1,
   "dither": false,
   "stretch": false,
-  "crop": null
+  "crop": [
+    53,
+    159,
+    960,
+    781
+  ]
 }

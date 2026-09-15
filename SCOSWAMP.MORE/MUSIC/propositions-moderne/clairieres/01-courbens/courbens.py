@@ -3,7 +3,7 @@
 
 Variation de la couleur `village` : mode majeur a septieme mineure, arpege de
 croches en guise de tambourin, basse balancee. On n'est pas SUR la place du
-village, on y ARRIVE — d'ou le re mixolydien, le tempo de 176 et la forme
+village, on y ARRIVE — d'ou le re mixolydien, le tempo de 166,7 et la forme
 batie sur une seule idee, la marche qui s'elargit.
 
 Ce qui a change a la revision :
@@ -25,17 +25,17 @@ Ce qui a change a la revision :
   au A'. Elle prend la voix 5 : le bourdon de re a donc cede la place, la
   grosse caisse en tient lieu.
 
-28 mesures a 4/4, 38,2 s. Forme intro(4) - A(8) - B(8) - A'(8).
+28 mesures a 4/4, 40,3 s. Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 courbens.py && python3 ../../../midi_to_mb.py courbens.mid \\
-        BENTBEAKS.MB.BIN --bpm 176 --max 2304 --wav COURBENS.wav
+        BENTBEAKS.MB.BIN --bpm 166.667 --max 2304 --wav COURBENS.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 176, 4, 28
+BPM, BAR, BARS = 3000 / 18, 4, 28
 LEN = BAR * BARS
 HALF = BAR / 2.0                           # la grille harmonique est au demi-temps
 SILENCE = (BAR * 19 + 3.5, BAR * 20)       # le demi-temps ou tout se tait

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« Le Seul Passage » — clairiere 15, le pont sur la Croupie. Si bemol dorien, 154.
+"""« Le Seul Passage » — clairiere 15, le pont sur la Croupie. Si bemol dorien, 150.
 
 Variation dans la couleur `riviere` : dorien, **bourdon sur la quinte** (fa),
 arpege de croches sans arret. Mais la zone regarde l'eau ; cette piece la
@@ -40,18 +40,18 @@ La batterie prend la voix 5 a droite : il ne reste que cinq parties de hauteur,
 et c'est la voix d'accords tenus qui a cede la place. Le bourdon sur la quinte
 est le procede de la zone, on ne le retire pas.
 
-26 mesures a 4/4, 40,5 s. Forme intro(4) - A(8) la traversee - B(8) le soupcon -
+26 mesures a 4/4, 41,6 s. Forme intro(4) - A(8) la traversee - B(8) le soupcon -
 A'(6) la reprise, a l'octave.
 
     python3 pont.py && python3 ../../../midi_to_mb.py pont.mid \\
-        BRIDGE.MB.BIN --bpm 154 --max 2304 --wav PONT.wav
+        BRIDGE.MB.BIN --bpm 150 --max 2304 --wav PONT.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 154, 4, 26
+BPM, BAR, BARS = 3000 / 20, 4, 26
 LEN = BAR * BARS
 
 # une entree par mesure ; « Eb|Fm » change d'accord au milieu de la mesure

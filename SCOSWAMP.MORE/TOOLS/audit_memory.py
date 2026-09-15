@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Mesures reproductibles du lien SCOSWAMP et de ses objets, sans relier le jeu.
 
-python3 SCOSWAMP.MORE/TOOLS/audit_memory.py --output DOCS/MEMOIRE-SCOSWAMP.json
+python3 SCOSWAMP.MORE/TOOLS/audit_memory.py --output SCOSWAMP/DOCS/MEMOIRE-SCOSWAMP.json
 Les tailles de fonctions proviennent de listings assembles par ca65, pas
  de comptages de lignes C. Les bornes end_exclusive evitent les ambiguites.
 """

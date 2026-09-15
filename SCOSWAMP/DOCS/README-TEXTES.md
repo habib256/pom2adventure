@@ -196,7 +196,7 @@ l'appariement FR ↔ EN scène par scène, les trous de numérotation et les fic
 vides :
 
 ```bash
-./tools/check-project.sh
+./check-project.sh
 ```
 
 Pour un comptage manuel rapide :

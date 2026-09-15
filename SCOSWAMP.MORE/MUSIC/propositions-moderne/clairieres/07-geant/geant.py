@@ -27,19 +27,19 @@ Ce qui a change a la revision :
   claire s'ajoute. Elle prend la voix 5 : le bourdon de do a cede la place, et
   la grosse caisse en tient lieu, ce qui est exactement son emploi ici.
 
-Do mineur eolien, 138 a la noire — un geant ne court pas, mais quatre noires a
-138 restent une marche. 24 mesures a 4/4, 41,7 s.
+Do mineur eolien, 150 a la noire — un geant ne court pas, mais quatre noires a
+150 restent une marche. 24 mesures a 4/4, 38,4 s.
 Forme intro(4) - A(8) - B(6) - A'(6).
 
     python3 geant.py && python3 ../../../midi_to_mb.py geant.mid \\
-        GIANT.MB.BIN --bpm 138 --max 2304 --wav GEANT.wav
+        GIANT.MB.BIN --bpm 150 --max 2304 --wav GEANT.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 138, 4, 24
+BPM, BAR, BARS = 3000 / 20, 4, 24
 LEN = BAR * BARS
 HALF = BAR / 2.0
 MASSUE = (BAR * 12, BAR * 18)              # les six mesures ou la massue tourne

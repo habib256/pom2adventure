@@ -10,13 +10,15 @@ dépendance (`compose.py` + un script par zone), donc sous la **GPL v3** comme l
 reste du dépôt. Aucune œuvre tierce, aucune licence à vérifier, aucune
 attribution à porter. Les recherches de MIDI CC0/CC-BY n'ont pas été menées :
 elles n'auraient rien apporté qu'une composition maison ne donne pas ici, et
-elles auraient rouvert la question de compatibilité que `DOCS/MUSIQUE.md § 6.5`
+elles auraient rouvert la question de compatibilité que `SCOSWAMP/DOCS/MUSIQUE.md § 6.5`
 demande de trancher pièce par pièce.
 
-Le `.wav` de chaque dossier **est** ce que la Mockingboard jouera : six ondes
-carrées, deux puces, la même réduction, le même tempo, la même stéréo. C'est le
-seul objet à écouter pour juger. Il n'est pas suivi par git
-(`.gitignore:76`).
+Le `.wav` de chaque dossier est l'**aperçu fidèle** de ce que la Mockingboard
+jouera : `midi_to_mb.py` rejoue le flux écrit comme `music.s` le joue (volumes
+sur la table logarithmique de l'AY, fondu d'entrée de 0,9 s, coupure nette au
+OFF, bruit de la voix 5, puce 1 à gauche et puce 2 à droite) puis synthétise les
+deux AY comme POM2. C'est un modèle : rien n'a encore été écouté sur une carte.
+Il n'est pas suivi par git (`.gitignore:76`).
 
 ---
 
@@ -24,18 +26,18 @@ seul objet à écouter pour juger. Il n'est pas suivi par git
 
 | Zone | Fichier disque | Pièce | Mode | bpm | Durée | Octets | Tampon | Percussion |
 | --- | --- | --- | --- | ---: | ---: | ---: | :---: | --- |
-| `accueil` | `WELCOME.MB` | **L'Appel du Marais** | ré dorien | 136 | 49,7 s | 2 233 | zone | motif complet |
-| `village` | `VILLAGE.MB` | **Les Feux de Bourbenville** | sol mixolydien | **166** | 40,8 s | 2 254 | zone | danse |
+| `accueil` | `WELCOME.MB` | **L'Appel du Marais** | ré dorien | 136,4 | 49,6 s | 2 233 | zone | motif complet |
+| `village` | `VILLAGE.MB` | **Les Feux de Bourbenville** | sol mixolydien | **166,7** | 40,6 s | 2 254 | zone | danse |
 | `nord` | `NORTHSWAMP.MB` | **Le Bois des Guetteurs** | mi éolien | 150 | 45,1 s | 2 262 | zone | marche de guet |
 | `riviere` | `RIVER.MB` | **Le Pont sur la Croupie** | la dorien | 125 | 54,0 s | 1 964 | zone | **aucune** |
 | `sud` | `SOUTHSWAMP.MB` | **Sentiers Verts** | ré éolien | 150 | 45,1 s | 2 277 | zone | marche |
-| `danger` | `DANGER.MB` | **Ce qui Attend Sous l'Eau** | do phrygien | 136 | 49,7 s | 1 951 | zone | **un cœur**, grosse caisse seule |
+| `danger` | `DANGER.MB` | **Ce qui Attend Sous l'Eau** | do phrygien | 136,4 | 49,6 s | 1 951 | zone | **un cœur**, grosse caisse seule |
 | `tour` | `TOWER.MB` | **La Tour de Stratagus** | sol mineur harm. | 125 | 46,4 s | 1 045 | zone | un pas, toutes les 2 mesures |
-| `combat` | `BATTLE.MB` | **Le Fer et la Pince** | si éolien | **200** | 24,3 s | 1 228 | **surcouche** | c'est elle qui court |
+| `combat` | `BATTLE.MB` | **Le Fer et la Pince** | si éolien | **187,5** | 25,9 s | 1 249 | **surcouche** | c'est elle qui court |
 | `mort` | `DEATH.MB` | **Le Marais Referme** | do éolien | 125 | 31,0 s | 673 | **surcouche** | **aucune** |
 | `victoire` | `VICTORY.MB` | **Par la Trouée de Ciel** | ré mixolydien | 150 | 25,9 s | 1 265 | **surcouche** | fanfare |
 
-**Total sur le volume : 17 152 octets**, sur ~28 Mo libres — le nombre de pièces
+**Total sur le volume : 17 173 octets**, sur ~28 Mo libres — le nombre de pièces
 ne coûte rien.
 
 ⚠ **Ce qui coûte, c'est la plus grosse de chaque tampon.** Le moteur en a deux,
@@ -51,10 +53,10 @@ Les commandes des `README.md` passent `--max 2304` pour les thèmes de zone et
 `--max 1280` pour les trois surcouches : la conversion **échoue** au lieu de
 livrer un flux qui déborderait à l'exécution.
 
-Quatre pièces sont à moins de 80 octets de leur limite — `sud` 27, `victoire`
-15, `nord` 42, `village` 50 : **toute retouche doit être reconvertie avant
-d'être crue.** Les six autres ont entre 71 et 1 259 octets de marge, `tour` et
-`mort` étant très au large.
+Cinq pièces sont à moins de 80 octets de leur limite — `sud` 27, `victoire` 15,
+`combat` 31, `nord` 42, `village` 50 : **toute retouche doit être reconvertie
+avant d'être crue.** Les cinq autres ont entre 71 et 1 259 octets de marge,
+`tour` et `mort` étant très au large.
 
 `mort` et `victoire` se convertissent en plus avec **`--no-loop`** : elles se
 jouent une fois et laissent le silence.
@@ -286,14 +288,14 @@ On peut prendre `DANGER.MB` ici et `TOWER.MB` là.
 ```sh
 cd /Users/gistair/src/pom2adventure/SCOSWAMP.MORE/MUSIC/propositions-moderne
 M=../../midi_to_mb.py
-(cd accueil  && python3 accueil.py   && python3 $M accueil.mid   WELCOME.MB.BIN  --bpm 136 --max 2304 --wav ACCUEIL.wav)
-(cd village  && python3 village.py   && python3 $M village.mid   VILLAGE.MB.BIN  --bpm 166 --max 2304 --wav VILLAGE.wav)
+(cd accueil  && python3 accueil.py   && python3 $M accueil.mid   WELCOME.MB.BIN  --bpm 136.364 --max 2304 --wav ACCUEIL.wav)
+(cd village  && python3 village.py   && python3 $M village.mid   VILLAGE.MB.BIN  --bpm 166.667 --max 2304 --wav VILLAGE.wav)
 (cd nord     && python3 nord.py      && python3 $M nord.mid      NORTHSWAMP.MB.BIN --bpm 150 --max 2304 --wav MARAISNO.wav)
 (cd riviere  && python3 riviere.py   && python3 $M riviere.mid   RIVER.MB.BIN  --bpm 125 --max 2304 --wav RIVIERE.wav)
 (cd sud      && python3 sud.py       && python3 $M sud.mid       SOUTHSWAMP.MB.BIN --bpm 150 --max 2304 --wav MARAISUD.wav)
-(cd danger   && python3 danger.py    && python3 $M danger.mid    DANGER.MB.BIN   --bpm 136 --max 2304 --wav DANGER.wav)
+(cd danger   && python3 danger.py    && python3 $M danger.mid    DANGER.MB.BIN   --bpm 136.364 --max 2304 --wav DANGER.wav)
 (cd tour     && python3 tour.py      && python3 $M tour.mid      TOWER.MB.BIN     --bpm 125 --max 2304 --wav TOUR.wav)
-(cd combat   && python3 combat.py    && python3 $M combat.mid    BATTLE.MB.BIN   --bpm 200 --max 1280 --wav COMBAT.wav)
+(cd combat   && python3 combat.py    && python3 $M combat.mid    BATTLE.MB.BIN   --bpm 187.5 --max 1280 --wav COMBAT.wav)
 (cd mort     && python3 mort.py      && python3 $M mort.mid      DEATH.MB.BIN     --bpm 125 --no-loop --max 1280 --wav MORT.wav)
 (cd victoire && python3 victoire.py  && python3 $M victoire.mid  VICTORY.MB.BIN --bpm 150 --no-loop --max 1280 --wav VICTOIRE.wav)
 ```
@@ -302,9 +304,11 @@ Chaque ligne entre dans son sous-dossier, d'où le `../../midi_to_mb.py` : c'est
 aussi la forme utilisée dans les `README.md`. Le bloc entier se recolle tel quel
 dans un shell ; il s'arrête à la première erreur si l'on a fait `set -e`.
 
-`--vol` reste au défaut `13,11,11,12,11,11` partout : mélodie et arpège un cran
-devant, le reste au même niveau. Rien ne justifie d'en changer avant d'avoir
-écouté sur la carte.
+`--vol` reste partout à `10,8,8,9,8,8`, le défaut de `midi_to_mb.py` : sur la
+table logarithmique de l'AY, la mélodie (voix 0) sort à +7 dB et le contre-chant
+(voix 3) à +4 dB de l'accompagnement, et non +2 dB comme le faisait entendre
+l'ancien aperçu linéaire. Rien ne justifie d'en changer avant d'avoir écouté
+l'aperçu fidèle, et mieux la carte.
 
 ---
 

@@ -7,19 +7,34 @@
 # Le bucket est celui du moteur : (id / 50) * 50. Un PNG plus recent que son
 # RLE est reconverti, les autres sont laisses tranquilles -- la conversion des
 # 400 scenes prend plusieurs minutes.
+#
+# RESAMPLE=area reduit le master par moyenne de zone avant la quantification
+# (voir ADVKIT/IMAGES.md) ; bilinear, le defaut, reproduit les RLE a l'octet.
+# Apres le lot, les dix pires conversions sont imprimees
+# (ADVKIT/TOOLS/image_quality.py, dE moyen contre le master) : on ne relit pas
+# 450 apercus, on relit ceux que la mesure denonce.
 set -e
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-DHGR="$(dirname "$0")/build/scoswamp_dhgr"
+DHGR="$(dirname "$0")/../../ADVKIT/TOOLS/build/scoswamp_dhgr"
 
 [ -x "$DHGR" ] || {
     echo "Absent : $DHGR"
     echo "  cmake -S $(dirname "$0") -B $(dirname "$0")/build"
-    echo "  cmake --build $(dirname "$0")/build --target scoswamp_dhgr"
+    echo "  cmake --build $(dirname "$0")/../../ADVKIT/TOOLS/build --target scoswamp_dhgr"
     exit 1
 }
 
+resample="${RESAMPLE:-bilinear}"
+case "$resample" in
+    bilinear) resample_opt="" ;;
+    area) resample_opt="--resample area" ;;
+    *) echo "RESAMPLE : bilinear ou area, pas $resample"; exit 1 ;;
+esac
+
 converted=0
 skipped=0
+lot=$(mktemp)
+trap 'rm -f "$lot"' EXIT
 for png in "$ROOT"/SCOSWAMP.MORE/GENERATED/[NB][0-9][0-9][0-9].png; do
     [ -e "$png" ] || continue
     name=$(basename "$png" .png)
@@ -31,7 +46,8 @@ for png in "$ROOT"/SCOSWAMP.MORE/GENERATED/[NB][0-9][0-9][0-9].png; do
     recipe="$ROOT/SCOSWAMP.MORE/IMAGE-RECIPES/$name.json"
     if [ -e "$recipe" ]; then
         if [ ! -e "$out" ] || [ "$png" -nt "$out" ] || [ "$recipe" -nt "$out" ]; then
-            python3 "$ROOT/SCOSWAMP.MORE/TOOLS/interpreter/image_workshop.py" --replay SCOSWAMP "$name"
+            python3 "$ROOT/ADVKIT/image_workshop.py" --replay SCOSWAMP "$name" --resample "$resample"
+            echo "$name" >> "$lot"
             converted=$((converted + 1))
         else
             skipped=$((skipped + 1))
@@ -44,10 +60,24 @@ for png in "$ROOT"/SCOSWAMP.MORE/GENERATED/[NB][0-9][0-9][0-9].png; do
     fi
     mkdir -p "$(dirname "$out")" "$ROOT/SCOSWAMP.MORE/HGR-PREVIEW" \
         "$ROOT/SCOSWAMP.MORE/CHATMAUVE-PREVIEW"
-    "$DHGR" convert "$png" "$out" \
+    # $resample_opt est vide ou deux mots : non cite expres.
+    "$DHGR" convert $resample_opt "$png" "$out" \
         "$ROOT/SCOSWAMP.MORE/HGR-PREVIEW/$name.png" \
         "$ROOT/SCOSWAMP.MORE/CHATMAUVE-PREVIEW/$name.png"
     echo "  $name -> $bucket/$name.RLE.BIN"
+    echo "$name" >> "$lot"
     converted=$((converted + 1))
 done
 echo "==> $converted converti(s), $skipped a jour"
+
+# La mesure veut numpy et Pillow, que le python3 de Homebrew n'a pas toujours.
+[ -s "$lot" ] || exit 0
+for py in ${IMAGE_QUALITY_PYTHON:-} python3 /usr/bin/python3; do
+    if "$py" -c 'import numpy, PIL' 2>/dev/null; then
+        echo "== 10 pires conversions du lot (dE moyen contre le master 140x192) =="
+        # shellcheck disable=SC2046
+        "$py" "$ROOT/ADVKIT/TOOLS/image_quality.py" worst --count 10 $(cat "$lot") || true
+        exit 0
+    fi
+done
+echo "(rapport des pires saute : numpy et Pillow introuvables, voir IMAGE_QUALITY_PYTHON)"

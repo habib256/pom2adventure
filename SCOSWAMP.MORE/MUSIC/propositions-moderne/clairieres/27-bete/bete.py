@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« Le Rocher qui Respire » — clairiere 27, le cul-de-sac de la Bete. Sol phrygien, 143.
+"""« Le Rocher qui Respire » — clairiere 27, le cul-de-sac de la Bete. Sol phrygien, 136,4.
 
 Pages 011, 210, 299, 125, 228, 243. « Soudain, le rocher bouge : ce n'etait pas
 de la pierre. Une BETE IMMONDE a six pattes griffues s'avance. Sa respiration
@@ -30,17 +30,17 @@ Ce que la revision ajoute :
 * **la cadence** : la bemol - sol, le demi-ton phrygien pose a la basse, mesure
   18, et la boucle repart sur le meme sol.
 
-18 mesures a 6/4, 45,3 s. Forme intro(2) - A(6) - B(6) - A'(4).
+18 mesures a 6/4, 47,5 s. Forme intro(2) - A(6) - B(6) - A'(4).
 
     python3 bete.py && python3 ../../../midi_to_mb.py bete.mid \\
-        BEAST.MB.BIN --bpm 143 --max 2304 --wav BETE.wav
+        BEAST.MB.BIN --bpm 136.364 --max 2304 --wav BETE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 143, 6, 18
+BPM, BAR, BARS = 3000 / 22, 6, 18
 LEN = BAR * BARS
 
 GRILLE = [

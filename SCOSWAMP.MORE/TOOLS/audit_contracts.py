@@ -167,7 +167,7 @@ def audit():
     names = re.findall(r"\bD_(\w+)", enum)[:-1]
     if len(table) != 4 * len(names):
         errors.append("native opcode table and enum have different lengths")
-    project = json.loads((ROOT / "SCOSWAMP.MORE/TOOLS/interpreter/project.scoswamp.json").read_text())
+    project = json.loads((ROOT / "ADVKIT/project.scoswamp.json").read_text())
     declared = {d["jeton"]: d for d in project["directives"]}
     for i, name in enumerate(names):
         row = table[i*4:i*4+4]

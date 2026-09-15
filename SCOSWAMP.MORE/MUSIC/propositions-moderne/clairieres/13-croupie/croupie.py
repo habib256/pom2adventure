@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« La Berge aux Crocodiles » — clairiere 13, la Riviere Croupie. Sol dorien, 132.
+"""« La Berge aux Crocodiles » — clairiere 13, la Riviere Croupie. Sol dorien, 136,4.
 
 Variation dans la couleur `riviere` : meme famille modale (dorien), meme procede
 identifiable — le **bourdon sur la quinte**, jamais sur la tonique, si bien que
@@ -40,17 +40,17 @@ B se resserre. Elle prend la voix 5 a droite ; il ne reste que cinq parties de
 hauteur, et c'est la voix d'accords tenus qui a cede la place — le bourdon fait
 le caractere de la piece, on ne le retire pas.
 
-24 mesures a 4/4, 43,6 s. Forme intro(4) - A(8) - B(8) - A'(4).
+24 mesures a 4/4, 42,2 s. Forme intro(4) - A(8) - B(8) - A'(4).
 
     python3 croupie.py && python3 ../../../midi_to_mb.py croupie.mid \\
-        STAGNANT.MB.BIN --bpm 132 --max 2304 --wav CROUPIE.wav
+        STAGNANT.MB.BIN --bpm 136.364 --max 2304 --wav CROUPIE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 132, 4, 24
+BPM, BAR, BARS = 3000 / 22, 4, 24
 LEN = BAR * BARS
 
 # une entree par mesure ; « F|C » change d'accord au milieu de la mesure

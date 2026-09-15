@@ -1,6 +1,6 @@
 ; music.s -- la Mockingboard joue les musiques du disque, sur six voix.
 ;
-; Un lecteur de flux MB1 (DOCS/MUSIQUE.md § 5.2) en interruption : le Timer 1
+; Un lecteur de flux MB1 (SCOSWAMP/DOCS/MUSIQUE.md § 5.2) en interruption : le Timer 1
 ; du premier 6522 de la carte bat a 50 Hz, et chaque tick decode les paquets
 ; du flux jusqu'au prochain DELAY. Tout est en assembleur et en segment CODE :
 ; jamais en LC, ProDOS commute l'autre banque sous IRQ.
@@ -10,7 +10,7 @@
 ; vont a la premiere puce (a gauche sur POM2), les voix 3-5 a la seconde (a
 ; droite) : la voix v >= 3 s'ecrit dans la puce 2 sous le numero v-3.
 ;
-; Trois regles apprises a la lecture de POM2 (DOCS/MUSIQUE.md § 1) :
+; Trois regles apprises a la lecture de POM2 (SCOSWAMP/DOCS/MUSIQUE.md § 1) :
 ;  - acquitter l'IRQ en ECRIVANT $7F dans l'IFR ($Cn0D), jamais en lisant un
 ;    registre : l'entree IRQ du Moniteur //e route $C100-$CFFF vers la ROM ;
 ;  - balayer les slots de $C7 a $C1 en sautant le 3 : POM2 met la carte en

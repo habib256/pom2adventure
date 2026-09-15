@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« Le Bassin de Cristal » — clairiere 21. Do dorien, 156.
+"""« Le Bassin de Cristal » — clairiere 21. Do dorien, 150.
 
 Variation dans la couleur `sud` : **bourdon de tonique immobile**, marche modale
 large, mais le mode est dorien et la **sixte majeure** (le la naturel) revient a
@@ -41,18 +41,18 @@ demarche du Lezard en B, le charleston ouvert dans l'eclat. Elle prend la voix 5
 a droite ; il ne reste que cinq parties de hauteur, et c'est la voix d'accords
 tenus qui a cede la place — le bourdon de tonique est le procede de la zone.
 
-26 mesures a 4/4, 40,0 s. Forme intro(4) - A(8) l'eau pure - B(8) le Lezard -
+26 mesures a 4/4, 41,6 s. Forme intro(4) - A(8) l'eau pure - B(8) le Lezard -
 A'(6) l'eclat.
 
     python3 cristal.py && python3 ../../../midi_to_mb.py cristal.mid \\
-        CRYSTAL.MB.BIN --bpm 156 --max 2304 --wav CRISTAL.wav
+        CRYSTAL.MB.BIN --bpm 150 --max 2304 --wav CRISTAL.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 156, 4, 26
+BPM, BAR, BARS = 3000 / 20, 4, 26
 LEN = BAR * BARS
 ECLAT = 20                                 # la mesure ou le mode bascule
 

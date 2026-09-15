@@ -1,0 +1,16 @@
+Base de Lancement Spatiale
+--------------------------
+
+Vous voici au seuil d'une aventure cosmique extraordinaire !
+Votre vaisseau spatial flambant neuf attend sur le pas de tir.
+Les moteurs ioniques ronronnent doucement, prets a vous propulser
+vers les confins de l'univers connu... et au-dela !
+
+Cette expedition sera l'occasion revee de collectionner des selfies
+spectaculaires aux quatre coins de la galaxie. Vos amis sur l'Instagram
+intergalactique en seront verts de jalousie (ou bleus, selon leur planete
+d'origine). Alors, cap sur quelle destination ?
+
+C 002 Direction la planete des forets eternelles
+C 003 Foncer vers le trou noir supermassif
+C 004 Explorer la comete au perihelie

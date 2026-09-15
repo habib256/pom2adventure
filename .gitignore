@@ -9,7 +9,6 @@ memory_swap.s
 rules.s
 dice.s
 messages.s
-combat.s
 spacetrip.s
 *.o
 *.lst
@@ -20,14 +19,13 @@ spacetrip.s
 *.lbl
 
 # Exception : sources assembleur volontaires (pas des intermédiaires cc65)
-!DOCS/HELLO_WORLD-ASM/*.s
 
 *.bak
 *~
 __pycache__/
 
 # ── Artefacts de build ─────────────────────────────────────────────────────
-SCOSWAMP.MORE/TOOLS/build/
+ADVKIT/TOOLS/build/
 dist/
 
 # ── Sorties dérivées, régénérables depuis les sources ci-dessus ────────────
@@ -46,7 +44,7 @@ SCOSWAMP.MORE/CHATMAUVE-PREVIEW/
 # personnages et les objets ; elles restent donc versionnees.
 
 # Images disque ProDOS : sorties de build (37 Mo), reconstruites par TOOLS et
-# publiées en GitHub Release. Voir DOCS/RELEASE.md.
+# publiées en GitHub Release. Voir ADVKIT/RELEASE.md.
 *.2mg
 *.2img
 *.po
@@ -64,10 +62,11 @@ SCOSWAMP.MORE/CHATMAUVE-PREVIEW/
 SCOSWAMP.MORE/*.pdf
 SCOSWAMP.MORE/Le.Marais.aux.scorpions.png
 
-# ── Art de travail (16 Mo de PNG sources) ─────────────────────────────────
-# Non suivi par défaut pour garder le dépôt léger. Supprimer cette ligne si
-# tu veux qu'il voyage avec le code.
-SPACETRIP.MORE/
+# ── Art de travail de SPACETRIP ───────────────────────────────────────────
+# Les rendus maitres (208 Mo) et leurs apercus HGR se regenerent ; la bible,
+# le manifeste et l'outil de conversion, eux, voyagent avec le code.
+SPACETRIP.MORE/GENERATED/
+SPACETRIP.MORE/HGR-PREVIEW/
 
 # ── Ferraille macOS ───────────────────────────────────────────────────────
 .DS_Store

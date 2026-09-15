@@ -738,7 +738,12 @@ static void test_clairieres_vues(void)
  * clairiere la touche M montre.
  */
 #define MAP_CLR    35
-#define MAP_PAGES  115
+/* 116 et non plus 115 depuis 242819e : N421, le sentier que la Pierre de
+ * Croissance ouvre dans les Sables mouvants, appartient a la clairiere 270
+ * (SCOSWAMP/DOCS/CORRECTION-SABLES-MAGIE.md). Meme valeur que MAP_PAGES dans
+ * scoswamp.c : le moteur refuse un fichier MAP qui porte un autre compte, et
+ * une valeur perimee ici decale de deux octets tout ce qui suit la table. */
+#define MAP_PAGES  116
 #define MAP_NAMEW  13
 #define MAP_HEAD   20
 #define MAP_POOL   (MAP_HEAD + 3 * MAP_CLR)
@@ -790,19 +795,35 @@ static void charger_carte(void)
         "SCOSWAMP/MAP.BIN", "../SCOSWAMP/MAP.BIN", "../../SCOSWAMP/MAP.BIN",
         "../../../SCOSWAMP/MAP.BIN", "../../../../SCOSWAMP/MAP.BIN"
     };
+    /* Le chemin tire de __FILE__ passe en premier : ctest lance le banc
+     * depuis le dossier de build, qui peut etre n'importe ou. Sans lui un
+     * build hors du depot ne trouvait pas la carte, sautait ces tests et
+     * les declarait reussis. */
+    static char depuis_source[512];
+    const char* const source = __FILE__;
+    const char* const more = strstr(source, "SCOSWAMP.MORE/TOOLS/test_rules.c");
     unsigned i;
     FILE* f = NULL;
     size_t n;
 
+    if (more && (size_t)(more - source) + sizeof "SCOSWAMP/MAP.BIN" <= sizeof depuis_source) {
+        memcpy(depuis_source, source, (size_t)(more - source));
+        strcpy(depuis_source + (more - source), "SCOSWAMP/MAP.BIN");
+        f = fopen(depuis_source, "rb");
+    }
     for (i = 0; i < sizeof chemins / sizeof *chemins && !f; ++i)
         f = fopen(chemins[i], "rb");
-    if (!f) { printf("SAUTE carte : MAP.BIN introuvable\n"); return; }
+    /* MAP.BIN est versionne : son absence est un echec, pas un saut. */
+    CHECK(f != NULL, "MAP.BIN introuvable, ni depuis %s ni depuis le dossier courant",
+          source);
+    if (!f) return;
     n = fread(carte, 1, sizeof carte, f);
     fclose(f);
     CHECK(n > MAP_POOL + 2 * MAP_PAGES, "MAP.BIN tronque : %u octets", (unsigned)n);
     CHECK(memcmp(carte, "MAP\3", 4) == 0, "MAP.BIN : signature absente");
     CHECK(carte[4] == MAP_CLR, "MAP.BIN : %u clairieres, 35 attendues", carte[4]);
-    CHECK(carte[5] == MAP_PAGES, "MAP.BIN : %u pages, 115 attendues", carte[5]);
+    CHECK(carte[5] == MAP_PAGES, "MAP.BIN : %u pages, %u attendues",
+          carte[5], (unsigned)MAP_PAGES);
     CHECK(carte[6] == MAP_NAMEW, "MAP.BIN : noms de %u octets", carte[6]);
     if (n <= MAP_POOL + 2 * MAP_PAGES) return;
     memcpy(carte_pages, carte + MAP_POOL, sizeof carte_pages);
@@ -831,7 +852,10 @@ static void test_carte(void)
     for (i = 0; i < MAP_PAGES; ++i) {
         p = prec + *t++;
         CHECK(p > prec || i == 0, "table des pages non croissante en %u", i);
-        CHECK(p < 412u, "page %u hors du corpus", p);
+        /* La borne est celle du bitmap des pages vues, et non plus les 412
+         * paragraphes du livre : N421 existe, et map_seen() ne peut allumer
+         * qu'une page que scene_visited() sait retenir. */
+        CHECK(p < 8u * SCENE_MEMORY_SIZE, "page %u hors du bitmap des pages vues", p);
         CHECK(*t < MAP_CLR, "page %u renvoie a la clairiere %u", p, *t);
         ++t;
         prec = p;
@@ -853,6 +877,11 @@ static void test_carte(void)
     CHECK(map_of_page(118) == map_of_page(303),
           "118 et 303 devraient etre la meme clairiere");
     CHECK(map_of_page(118) != MAP_NONE, "118 n'est rattachee a aucun lieu");
+
+    /* La 116e page : le sentier de la Pierre de Croissance reste dans les
+     * Sables mouvants. */
+    CHECK(map_of_page(421) == map_of_page(270), "421 va aux Sables mouvants (clr 30)");
+    CHECK(map_of_page(421) != MAP_NONE, "421 n'est rattachee a aucun lieu");
 
     /* Les trois arbitrages de CARTOGRAPHIE.md Sec. 6.1 I. */
     CHECK(map_of_page(363) == map_of_page(234), "363 va au Patrouilleur (clr 19)");

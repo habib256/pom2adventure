@@ -24,13 +24,13 @@ produit par `ld65 -Ln`) et de la carte memoire, jamais d'une constante ecrite
 a la main -- voir la classe Symbols.
 
 Usage :
-    sh SCOSWAMP.MORE/TOOLS/build_pom2_playtest.sh     # hote headless macOS
+    sh ADVKIT/TOOLS/build_pom2_playtest.sh     # hote headless macOS
     python3 SCOSWAMP.MORE/TOOLS/playtest.py            # tout le banc
     python3 SCOSWAMP.MORE/TOOLS/playtest.py --list
     python3 SCOSWAMP.MORE/TOOLS/playtest.py --only combat_degats --keep
     make -C SCOSWAMP/SRC playtest
 
-Documentation de conception : DOCS/AUTOMATISATION.md.
+Documentation de conception : SCOSWAMP/DOCS/AUTOMATISATION.md.
 """
 
 import argparse
@@ -52,7 +52,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))          # le depot
 SRCDIR = os.path.join(ROOT, "SCOSWAMP", "SRC")
 HDV_SRC = os.path.join(ROOT, "dist", "SCOSWAMP.HDV")
-POM2 = os.environ.get("POM2", os.path.join(HERE, "build", "pom2_playtest"))
+POM2 = os.environ.get("POM2", os.path.join(ROOT, "ADVKIT", "TOOLS", "build", "pom2_playtest"))
 
 # 6503..6506, 6510 sont pris (POM2 par defaut, et les bancs voisins) : on
 # commence a 6520.
@@ -1434,7 +1434,7 @@ def sc_carte_retour_combat(g, b):
 @scenario("carte_retour_dhgr", "La carte restaure le texte et les deux banques DHGR")
 def sc_carte_retour_dhgr(g, b):
     from pathlib import Path
-    folder=Path(ROOT)/"DOCS/VALIDATION-CARTE-DHGR";folder.mkdir(exist_ok=True)
+    folder=Path(ROOT)/"SCOSWAMP/DOCS/VALIDATION-CARTE-DHGR";folder.mkdir(exist_ok=True)
     def shot(name):
         data=urllib.request.urlopen(g.p.base+"/screen.ppm").read()
         (folder/(name+".ppm")).write_bytes(data)
@@ -2378,7 +2378,7 @@ def sc_chance_effet_visible(g, b):
             b.has("le verdict est affiche",rows,"Malchanceux" if chance==0 else "Chanceux")
             if page==249 and chance==0:
                 from pathlib import Path
-                folder=Path(ROOT)/"DOCS/VALIDATION-CHANCE-VISIBLE";folder.mkdir(exist_ok=True)
+                folder=Path(ROOT)/"SCOSWAMP/DOCS/VALIDATION-CHANCE-VISIBLE";folder.mkdir(exist_ok=True)
                 (folder/"malchance-habilete.txt").write_text("\n".join(rows)+"\n")
             b.eq("CHANCE debitee sans debordement",g.hero()["cha"],max(0,chance-1))
             b.eq("seule la caracteristique prevue est touchee",g.hero()[field],(24 if field=="end" else 12)-(loss if chance==0 else 0))
@@ -2948,7 +2948,7 @@ def run_one(spec, args, sym, workdir):
     C'est plus lent qu'un snapshot, mais c'est la seule facon d'etre sur qu'un
     scenario n'herite pas de l'etat du precedent -- et le cache de blocs de
     POM2 rend de toute facon obligatoire une relance apres chaque patch du
-    .hdv (DOCS/AUTOMATISATION.md, §1.3).
+    .hdv (SCOSWAMP/DOCS/AUTOMATISATION.md, §1.3).
     """
     b = Bench(spec["name"], args.verbose)
     hdv = os.path.join(workdir, "SCOSWAMP-%s.hdv" % spec["name"])
@@ -3009,7 +3009,7 @@ def main():
         print("Image absente : %s\n  make -C SCOSWAMP/SRC hdv" % args.hdv)
         return 2
     if not os.path.exists(args.pom2):
-        print("Emulateur absent : %s\n  sh SCOSWAMP.MORE/TOOLS/build_pom2_playtest.sh" % args.pom2)
+        print("Emulateur absent : %s\n  sh ADVKIT/TOOLS/build_pom2_playtest.sh" % args.pom2)
         return 2
 
     try:

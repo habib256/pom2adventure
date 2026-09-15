@@ -29,18 +29,18 @@ Ce qui a change a la revision :
   plongeon. La voix 5 lui revient, le bourdon de do diese a cede la place :
   entre la cellule tres haute et la basse tres grave, il ne manque rien.
 
-Fa diese mineur eolien, 156 a la noire, 28 mesures a 4/4, 43,1 s.
+Fa diese mineur eolien, 150 a la noire, 28 mesures a 4/4, 44,8 s.
 Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 aigle.py && python3 ../../../midi_to_mb.py aigle.mid \\
-        EAGLE.MB.BIN --bpm 156 --max 2304 --wav AIGLE.wav
+        EAGLE.MB.BIN --bpm 150 --max 2304 --wav AIGLE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 156, 4, 28
+BPM, BAR, BARS = 3000 / 20, 4, 28
 LEN = BAR * BARS
 HALF = BAR / 2.0
 PLONGEON = (16, 20)                        # les mesures ou la cellule se retourne

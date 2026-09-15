@@ -38,7 +38,7 @@ grep -l '^M ' SCOSWAMP/TEXTFR/N*/N*.TXT
 
 Le combat est une **surcouche** : il remplace le thème de zone le temps de la
 page, puis la page suivante rend la main à la zone. Voir
-`DOCS/MUSIQUE-CLAIRIERES.md` § 4 pour le mécanisme (`MU +NOM.MB`).
+`SCOSWAMP/DOCS/MUSIQUE-CLAIRIERES.md` § 4 pour le mécanisme (`MU +NOM.MB`).
 
 ## La pièce
 
@@ -76,7 +76,7 @@ qui perdra le moins à la conversion.
 
 `SCOSWAMP/SRC/sfx.s` synthétise les bruitages du combat par **boucles de délai
 cycle-comptées** (`sfx.s:29-35`). Une IRQ musicale de 500 cycles au milieu d'un
-balayage le désaccorde audiblement (`DOCS/MUSIQUE.md § 3.4`). Aujourd'hui le
+balayage le désaccorde audiblement (`SCOSWAMP/DOCS/MUSIQUE.md § 3.4`). Aujourd'hui le
 problème est théorique — la musique ne joue nulle part ailleurs qu'à l'accueil.
 Dès qu'une musique de combat existe, **il devient obligatoire** d'encadrer
 chaque `_sfx_*` d'un `php / sei … plp` (8 octets, politique 1 de § 3.4).

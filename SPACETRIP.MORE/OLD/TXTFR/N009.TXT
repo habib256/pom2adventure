@@ -1,0 +1,15 @@
+Station de Surf d'Anneaux, Tethys
+-----------------------------------
+
+Un petit avant-poste orbite a l'interieur d'une bande d'anneau brillante.
+Des blocs de glace derivent comme des vaisseaux silencieux.
+Des guides dirigent des luges le long de chemins stables dans l'anneau.
+Tout scintille dans la lumiere solaire brute.
+
+Posez a cote d'une luge avec le plan de l'anneau derriere vous.
+Attention a la derive douce mais constante des debris.
+
+C 004 Retour a la comete
+C 010 Naviguer sur la mer miroir d'Epsilon
+C 012 Atteindre le petale Dyson
+

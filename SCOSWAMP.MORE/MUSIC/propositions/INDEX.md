@@ -2,14 +2,16 @@
 
 Ce dossier est un **atelier**, pas le disque. Rien ici n'est copié dans
 `SCOSWAMP/MUSIC/` tant que le propriétaire n'a pas écouté et tranché. La
-conception qui les commande est dans **`DOCS/MUSIQUE-CLAIRIERES.md`**.
+conception qui les commande est dans **`SCOSWAMP/DOCS/MUSIQUE-CLAIRIERES.md`**.
 
 Chaque sous-dossier contient : la source Mutopia telle quelle (`.ly` et `.mid`),
 la conversion `<NOM>.MB.BIN` par `../midi_to_mb.py`, le rendu `<NOM>.wav` (ignoré
 par git, `.gitignore:76`) et un `README.md` qui dit ce qu'il couvre et pourquoi.
 
-Le `.wav` **est** ce que la Mockingboard jouera : trois ondes carrées, la même
-réduction, le même tempo. C'est le seul objet à écouter pour juger.
+Le `.wav` a été rendu par l'**ancien** aperçu de `midi_to_mb.py`, à volumes
+linéaires et sans fondu d'entrée : il ne dit pas l'équilibre que la carte
+jouera. Reconvertir avec le `midi_to_mb.py` actuel, dont l'aperçu rejoue
+`music.s` sur la table de volume de l'AY, avant de juger.
 
 ---
 
@@ -36,7 +38,7 @@ déclarés aujourd'hui (`SCOSWAMP/SRC/music.h:11`).
 
 **Licences.** Les onze pièces sont dans le **domaine public** (Creative Commons
 No Rights Reserved chez Mutopia). Aucune n'est sous CC-BY-SA : c'est délibéré,
-`DOCS/MUSIQUE.md § 6.5` rappelle que SCOSWAMP est distribué sous GPL v3 et que la
+`SCOSWAMP/DOCS/MUSIQUE.md § 6.5` rappelle que SCOSWAMP est distribué sous GPL v3 et que la
 compatibilité en aval doit être vérifiée pièce par pièce.
 
 ---
@@ -122,7 +124,7 @@ exceptions ci-dessous sont les seules à porter une ligne `MU`.
 
 Une page peut apparaître deux fois (124 est une page de tour **et** de combat,
 297/372/375/401 sont des pages de tour **et** de mort) : c'est exactement ce que
-règle la notion de **surcouche** du § 4 de `DOCS/MUSIQUE-CLAIRIERES.md` —
+règle la notion de **surcouche** du § 4 de `SCOSWAMP/DOCS/MUSIQUE-CLAIRIERES.md` —
 `MU +BATTLE.MB` remplace le thème pour une page, sans effacer la mémoire du
 thème de zone, qui revient tout seul à la page suivante.
 
@@ -180,7 +182,8 @@ $C $P/mort/k453a.mid               $P/mort/DEATH.MB.BIN             --bpm 120 --
 $C $P/victoire/Old100.mid          $P/victoire/VICTORY.MB.BIN     --bpm 150 --wav $P/victoire/VICTOIRE.wav
 ```
 
-`--vol` reste au défaut `13,9,11` partout : mélodie en avant, voix médiane
-retenue, basse au milieu. C'est le réglage des trois pièces déjà sur le disque
-(`SCOSWAMP/SRC/Makefile:139-149`), et il n'y a aucune raison d'en changer avant
-d'avoir écouté sur la carte.
+`--vol 13,9,11` était le réglage de l'ancien convertisseur à trois voix ; le
+convertisseur actuel, à six voix, a pour défaut `10,8,8,9,8,8`. Sur la table
+logarithmique de l'AY, 13 contre 9 fait +11,6 dB, et non +3 dB. Il n'y a aucune
+raison de fixer ces valeurs avant d'avoir écouté l'aperçu fidèle, et mieux la
+carte.

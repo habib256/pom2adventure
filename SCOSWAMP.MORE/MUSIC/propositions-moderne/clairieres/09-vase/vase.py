@@ -30,18 +30,18 @@ Ce qui a change a la revision :
   souleve ; des toms qui doublent au B ; et le battement seul pour finir. Aucun
   charleston : rien ne brille dans deux metres de vase.
 
-Re phrygien, 138 a la noire, 26 mesures a 4/4, 45,2 s.
+Re phrygien, 136,4 a la noire, 26 mesures a 4/4, 45,7 s.
 Forme intro(4) - A(8) - B(8) - A'(6).
 
     python3 vase.py && python3 ../../../midi_to_mb.py vase.mid \\
-        MUD.MB.BIN --bpm 138 --max 2304 --wav VASE.wav
+        MUD.MB.BIN --bpm 136.364 --max 2304 --wav VASE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 138, 4, 26
+BPM, BAR, BARS = 3000 / 22, 4, 26
 LEN = BAR * BARS
 HALF = BAR / 2.0
 SERRE = (BAR * 6, BAR * 16)                # les deux resserrements de la fange

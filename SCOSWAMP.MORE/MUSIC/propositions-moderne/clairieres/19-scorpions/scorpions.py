@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""« La Nuee » — clairiere 19, la clairiere des scorpions. Re phrygien, 184.
+"""« La Nuee » — clairiere 19, la clairiere des scorpions. Re phrygien, 187,5.
 
 Variation dans la couleur `danger` : le mode **phrygien**, donc le demi-ton pose
 juste au-dessus de la tonique — ici mi bemol contre re — et le **bourdon de
 tonique** immobile, exactement le procede de `DANGER.MB`. Ce qui change, c'est
-la vitesse : 184 a la noire, le tempo le plus rapide des trente-cinq, parce que
+la vitesse : 187,5 a la noire, le tempo le plus rapide des trente-cinq (a egalite
+avec les clairieres 8 et 10), parce que
 la page 118 ne laisse pas le choix (« des dizaines de petits scorpions accourent
 vers vous. Tentez votre Chance ») et que la page 319 s'appelle « Vous vous hatez
 de choisir une direction ».
@@ -41,17 +42,17 @@ prend la voix 5 a droite ; il ne reste que cinq parties de hauteur, et c'est la
 voix d'accords tenus qui a cede la place — le bourdon de tonique est le procede
 de la zone `danger`.
 
-24 mesures a 4/4, 31,3 s. Forme intro(4) - A(8) - B(8) l'assaut - A'(4).
+24 mesures a 4/4, 30,7 s. Forme intro(4) - A(8) - B(8) l'assaut - A'(4).
 
     python3 scorpions.py && python3 ../../../midi_to_mb.py scorpions.mid \\
-        SCORPIONS.MB.BIN --bpm 184 --max 2304 --wav SCORPIONS.wav
+        SCORPIONS.MB.BIN --bpm 187.5 --max 2304 --wav SCORPIONS.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 184, 4, 24
+BPM, BAR, BARS = 3000 / 16, 4, 24
 LEN = BAR * BARS
 GEL = 16                                   # la mesure ou tout se fige
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""« Ce qui Reste du Combat » — clairiere 24. Mi eolien, 164.
+"""« Ce qui Reste du Combat » — clairiere 24. Mi eolien, 166,7.
 
 Variation dans la couleur `sud` : **bourdon de tonique immobile** et la marche
-i-VI-III-VII de la zone (Em-C-G-D), mais prise a 164 et jouee **pointee**. Le
+i-VI-III-VII de la zone (Em-C-G-D), mais prise a 166,7 et jouee **pointee**. Le
 rythme long-bref du premier temps est le procede propre a la clairiere : il
 revient a chaque mesure de A et de A', et c'est tout ce qui separe cette piece
 d'un theme de voyage. On n'est pas dans un combat — la page 010 ne montre que
@@ -41,18 +41,18 @@ troisieme. Elle prend la voix 5 a droite ; il ne reste que cinq parties de
 hauteur, et c'est la voix d'accords tenus qui a cede la place — le bourdon de
 tonique est le procede de la zone.
 
-28 mesures a 4/4, 41,0 s. Forme intro(4) - A(8) les traces - B(8) la fouille -
+28 mesures a 4/4, 40,3 s. Forme intro(4) - A(8) les traces - B(8) la fouille -
 A'(8).
 
     python3 arene.py && python3 ../../../midi_to_mb.py arene.mid \\
-        ARENA.MB.BIN --bpm 164 --max 2304 --wav ARENE.wav
+        ARENA.MB.BIN --bpm 166.667 --max 2304 --wav ARENE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 164, 4, 28
+BPM, BAR, BARS = 3000 / 18, 4, 28
 LEN = BAR * BARS
 
 # une entree par mesure ; « C|G » change d'accord au milieu de la mesure

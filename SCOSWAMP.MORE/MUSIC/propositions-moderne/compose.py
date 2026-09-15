@@ -438,7 +438,11 @@ class Piece:
 
     @property
     def tpb(self):
-        """Ticks de 50 Hz par temps — 20 a 150 bpm, 24 a 125, 15 a 200."""
+        """Ticks de 50 Hz par temps — 20 a 150 bpm, 24 a 125, 16 a 187,5.
+
+        Un tempo qui tombe entre deux ticks rend deux notes de meme valeur en
+        longueurs differentes : on ecrit `BPM = 3000 / ticks`, avec un nombre
+        de ticks qui rend entiere la plus petite subdivision de la piece."""
         return TICK_HZ * 60.0 / self.bpm
 
     @property
@@ -555,7 +559,7 @@ class Piece:
         sur le **canal 10** (index 9), la seule que `midi_to_mb.py` transforme
         en bruit. Les coups de batterie ne sont pas raccourcis par `gate` : leur
         duree est deja calee en ticks de 50 Hz, et c'est elle qui fait la frappe."""
-        tempo = b"\x00\xFF\x51\x03" + struct.pack(">I", 60_000_000 // int(self.bpm))[1:]
+        tempo = b"\x00\xFF\x51\x03" + struct.pack(">I", int(60_000_000 / self.bpm))[1:]
         num = self.bar
         chunks = [self._track([], tempo + bytes([0, 0xFF, 0x58, 0x04, num, 2, 0x18, 8]))]
         chans = [c for c in range(16) if c != 9][:len(self.parts)]

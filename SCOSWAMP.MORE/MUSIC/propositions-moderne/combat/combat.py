@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""« Le Fer et la Pince » — surcouche de combat, 32 pages. Si eolien, 200.
+"""« Le Fer et la Pince » — surcouche de combat, 32 pages. Si eolien, 187,5.
 
-200 a la noire, quinze ticks par temps : la valeur la plus rapide qui tombe
-juste sur l'horloge de la carte. Maintenant que le lecteur sait faire du bruit,
+187,5 a la noire, seize ticks par temps : la valeur la plus proche de 200 qui
+rend la croche entiere sur l'horloge de la carte (a 200, quinze ticks par temps
+faisaient des croches de 7 et 8 ticks). Maintenant que le lecteur sait faire du bruit,
 c'est la **batterie** qui court — grosse caisse, caisse claire, charleston en
 croches — et les quintes a vide n'ont plus qu'a frapper les temps. Le morceau y
 gagne : avant, cinq voix de hauteur essayaient de faire un rythme.
@@ -18,18 +19,18 @@ milieu de la melee. Puis les huit dernieres mesures ne lachent plus.
 Le bourdon de fa diese a cede sa voix a la batterie ; c'est la grosse caisse qui
 tient la dominante desormais, et rien ne se resout tant que le combat dure.
 
-20 mesures a 4/4, 24 s — la duree d'une melee, et le flux tient dans le tampon
+20 mesures a 4/4, 26 s — la duree d'une melee, et le flux tient dans le tampon
 de surcouche de 1 280 octets.
 
     python3 combat.py && python3 ../../midi_to_mb.py combat.mid \\
-        BATTLE.MB.BIN --bpm 200 --max 1280 --wav COMBAT.wav
+        BATTLE.MB.BIN --bpm 187.5 --max 1280 --wav COMBAT.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 200, 4, 20
+BPM, BAR, BARS = 3000 / 16, 4, 20
 LEN = BAR * BARS
 
 CH = (["Bm", "Bm", "F#m"] + ["Bm", "G", "D", "A", "Bm", "G", "A", "F#m"]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« Les Bras qui Repoussent » — clairiere 28, les Arbres-Epees. Fa phrygien, 166.
+"""« Les Bras qui Repoussent » — clairiere 28, les Arbres-Epees. Fa phrygien, 166,7.
 
 Pages 157, 279, 022. « Chaque bras tient une epee a son extremite. » Et si l'on
 revient : « les branches des terribles Arbres-Epees ont deja repousse. »
@@ -31,18 +31,18 @@ Ce que la revision ajoute :
 La batterie, ce sont les lames : la caisse claire seche sur les temps faibles,
 la grosse caisse sur le premier, et trois coups nus dans la mesure amputee.
 
-28 mesures a 4/4 moins un temps, 40,3 s. Forme intro(4) - A(8) - B(8) -
+28 mesures a 4/4 moins un temps, 40,1 s. Forme intro(4) - A(8) - B(8) -
 mesure courte(1) - A'(7).
 
     python3 arbresepees.py && python3 ../../../midi_to_mb.py arbresepees.mid \\
-        SWORDTREES.MB.BIN --bpm 166 --max 2304 --wav ARBRESEPEES.wav
+        SWORDTREES.MB.BIN --bpm 166.667 --max 2304 --wav ARBRESEPEES.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 166, 4, 28
+BPM, BAR, BARS = 3000 / 18, 4, 28
 COURTE = 20                             # la mesure amputee : trois temps
 BEATS = [3 if i == COURTE else 4 for i in range(BARS)]
 T = [sum(BEATS[:i]) for i in range(BARS + 1)]

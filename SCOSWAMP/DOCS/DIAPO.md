@@ -72,7 +72,7 @@ le tampon RLE occupe `$1000–$107F`. Les deux fichiers ouverts simultanément
 n'utilise pas MAPBSS. La sortie suit le QUIT ProDOS du démarrage cc65.
 
 Les preuves POM2 headless sont dans
-[VALIDATION-DIAPO-MUSIC](../../DOCS/VALIDATION-DIAPO-MUSIC/result.json).
+[VALIDATION-DIAPO-MUSIC](VALIDATION-DIAPO-MUSIC/result.json).
 
 The slideshow reads images from `/SCOSWAMP/DHGR` and the shared tracks from
 `/SCOSWAMP/MUSIC`. Music filenames and selection titles are in English.

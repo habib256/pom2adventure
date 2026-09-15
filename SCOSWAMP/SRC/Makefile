@@ -63,15 +63,16 @@ HIMEM   = 0xBF00
 # Pile logicielle C : 384 octets reserves. Le pic reel doit etre mesure
 # avant toute reduction ou changement global de -Cl (locales statiques).
 # Les anciennes estimations a 1,5 Ko ne decrivent plus ce binaire.
-# Voir DOCS/AUDIT-MEMOIRE-SCOSWAMP.md ; check-memory.sh recoit la meme valeur.
+# Voir SCOSWAMP/DOCS/AUDIT-MEMOIRE-SCOSWAMP.md ; check-memory.sh recoit la meme valeur.
 STACK   = 0x0180
 # Reserve de croissance du moteur, distincte de la pile C ci-dessus.
 # Le deplacement musical AUX rend cette marge possible ; ne pas la consommer
 # silencieusement lors de l'ajout de regles partagees.
-# 2026-09-07 : 2048 -> 1792. Les touches [D] et [T] de l'ecran-titre, qui
-# lancent DIAPO et A2 Retro Cmd (launch() dans scoswamp.c : lecture du SYS en
-# $2000 et saut), coutent 165 octets ; la marge mesuree est de 1886. Bitsy Bye
-# n'honore pas le QUIT etendu avec chemin, qui aurait coute trois fois moins.
+# 2026-09-07 : 2048 -> 1792. Les touches [D] et [T] de l'ecran-titre
+# (launch() dans scoswamp.c : lecture du SYS en $2000 et saut) coutaient 165
+# octets ; la marge mesuree etait de 1886. [T] est partie avec le gestionnaire
+# de fichiers, [D] lance toujours DIAPO. Bitsy Bye n'honore pas le QUIT etendu
+# avec chemin, qui aurait coute trois fois moins.
 MIN_FREE = 1792
 # -C scoswamp.cfg : apple2enh.cfg plus la zone LOWRAM ($1000-$1FFF) et son
 # segment LOWBSS, ou vivent les gros tampons. Voir le fichier lui-meme.
@@ -94,19 +95,19 @@ all: $(OUTDIR)/$(PROGRAM) $(OUTDIR)/$(LAUNCHER) check
 
 # Règle principale : lier les objets pour créer le binaire
 # Le contrôle mémoire est systématique : un link réussi ne prouve pas que le
-# binaire tient (ld65 peut manquer un débordement BSS, voir tools/check-memory.sh).
+# binaire tient (ld65 peut manquer un débordement BSS, voir SCOSWAMP.MORE/TOOLS/check-memory.sh).
 $(OUTDIR)/$(PROGRAM): $(OBJECTS) $(LDCFG)
 	$(CL) $(CFLAGS) $(LDFLAGS) -o $(OUTDIR)/$(PROGRAM) $(OBJECTS) $(IOBUF)
 	@echo "==> Compilation terminée : $(OUTDIR)/$(PROGRAM)"
 	@echo "    Adresse de démarrage : \$$4000 (HGR préservé à \$$2000-\$$3FFF)"
 	@echo ""
-	@../../tools/check-memory.sh --himem $(HIMEM) --stack $(STACK) --min-free $(MIN_FREE) $(MAPFILE)
-	@python3 ../../tools/check_lc_layout.py --src .
+	@../../SCOSWAMP.MORE/TOOLS/check-memory.sh --himem $(HIMEM) --stack $(STACK) --min-free $(MIN_FREE) $(MAPFILE)
+	@python3 ../../SCOSWAMP.MORE/TOOLS/check_lc_layout.py --src .
 
 # Contrôle mémoire seul (nécessite une compilation préalable)
 check: $(OUTDIR)/$(PROGRAM)
-	@../../tools/check-memory.sh --himem $(HIMEM) --stack $(STACK) --min-free $(MIN_FREE) $(MAPFILE)
-	@python3 ../../tools/check_lc_layout.py --src .
+	@../../SCOSWAMP.MORE/TOOLS/check-memory.sh --himem $(HIMEM) --stack $(STACK) --min-free $(MIN_FREE) $(MAPFILE)
+	@python3 ../../SCOSWAMP.MORE/TOOLS/check_lc_layout.py --src .
 
 # Le lanceur ProDOS. Charge en $2000 par ProDOS lui-meme, il lit le jeu en
 # $4000 et lui saute dedans -- BASIC.SYSTEM ne peut plus le faire depuis que
@@ -135,11 +136,11 @@ dice.o: dice.c dice.h
 	$(CC) $(CFLAGS) -o dice.s dice.c
 	$(AS) -t $(TARGET) -o dice.o dice.s
 
-../TEXTFR/OBJFR.TXT ../TEXTEN/OBJEN.TXT: ../JSON/OBJECTS.json ../../tools/compile_objects.py
-	python3 ../../tools/compile_objects.py --source ../JSON/OBJECTS.json --output-dir .. --capacity 16 --localized
+../TEXTFR/OBJFR.TXT ../TEXTEN/OBJEN.TXT: ../JSON/OBJECTS.json ../../SCOSWAMP.MORE/TOOLS/compile_objects.py
+	python3 ../../SCOSWAMP.MORE/TOOLS/compile_objects.py --source ../JSON/OBJECTS.json --output-dir .. --capacity 16 --localized
 
-game_rules.h: ../JSON/RULES.json ../TEXTFR/OBJFR.TXT ../../tools/compile_game_rules.py
-	python3 ../../tools/compile_game_rules.py --rules ../JSON/RULES.json --objects ../TEXTFR/OBJFR.TXT --output $@
+game_rules.h: ../JSON/RULES.json ../TEXTFR/OBJFR.TXT ../../SCOSWAMP.MORE/TOOLS/compile_game_rules.py
+	python3 ../../SCOSWAMP.MORE/TOOLS/compile_game_rules.py --rules ../JSON/RULES.json --objects ../TEXTFR/OBJFR.TXT --output $@
 
 scoswamp.o: scoswamp.c paths.h memory_swap.h rules.h dice.h messages.h hgr_rle.h sfx.h music.h game_rules.h
 	$(CC) $(CFLAGS) -o scoswamp.s scoswamp.c
@@ -164,7 +165,7 @@ MUSIC    = ../../SCOSWAMP.MORE/MUSIC
 MB       = python3 $(MUSIC)/midi_to_mb.py
 # Les dix musiques du disque : le dossier fantasy moderne, des compositions
 # originales (SCOSWAMP.MORE/MUSIC/propositions-moderne, compose.py + un
-# script par zone, DOCS/MUSIQUE-CLAIRIERES.md pour le plan des zones). Les
+# script par zone, SCOSWAMP/DOCS/MUSIQUE-CLAIRIERES.md pour le plan des zones). Les
 # themes de zone tiennent dans 2304 octets, les surcouches (combat, mort,
 # victoire) dans 1280 : midi_to_mb.py refuse au-dela. Le dossier Renaissance
 # (propositions/, sources dans src/) reste disponible en remplacement.
@@ -185,11 +186,11 @@ musics: $(MUSICS)
 $(MODERNE)/accueil/accueil.mid: $(MODERNE)/accueil/accueil.py $(MODERNE)/compose.py
 	cd $(MODERNE)/accueil && python3 accueil.py
 $(OUTDIR)/MUSIC/WELCOME.MB.BIN: $(MODERNE)/accueil/accueil.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 136 --max 2304 --wav $(MODERNE)/accueil/ACCUEIL.wav --notes-inc ay_notes.inc
+	$(MB) $< $@ --bpm 136.364 --max 2304 --wav $(MODERNE)/accueil/ACCUEIL.wav --notes-inc ay_notes.inc
 $(MODERNE)/village/village.mid: $(MODERNE)/village/village.py $(MODERNE)/compose.py
 	cd $(MODERNE)/village && python3 village.py
 $(OUTDIR)/MUSIC/VILLAGE.MB.BIN: $(MODERNE)/village/village.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 166 --max 2304 --wav $(MODERNE)/village/VILLAGE.wav
+	$(MB) $< $@ --bpm 166.667 --max 2304 --wav $(MODERNE)/village/VILLAGE.wav
 $(MODERNE)/nord/nord.mid: $(MODERNE)/nord/nord.py $(MODERNE)/compose.py
 	cd $(MODERNE)/nord && python3 nord.py
 $(OUTDIR)/MUSIC/NORTHSWAMP.MB.BIN: $(MODERNE)/nord/nord.mid $(MUSIC)/midi_to_mb.py
@@ -205,7 +206,7 @@ $(OUTDIR)/MUSIC/SOUTHSWAMP.MB.BIN: $(MODERNE)/sud/sud.mid $(MUSIC)/midi_to_mb.py
 $(MODERNE)/danger/danger.mid: $(MODERNE)/danger/danger.py $(MODERNE)/compose.py
 	cd $(MODERNE)/danger && python3 danger.py
 $(OUTDIR)/MUSIC/DANGER.MB.BIN: $(MODERNE)/danger/danger.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 136 --max 2304 --wav $(MODERNE)/danger/DANGER.wav
+	$(MB) $< $@ --bpm 136.364 --max 2304 --wav $(MODERNE)/danger/DANGER.wav
 $(MODERNE)/tour/tour.mid: $(MODERNE)/tour/tour.py $(MODERNE)/compose.py
 	cd $(MODERNE)/tour && python3 tour.py
 $(OUTDIR)/MUSIC/TOWER.MB.BIN: $(MODERNE)/tour/tour.mid $(MUSIC)/midi_to_mb.py
@@ -213,7 +214,7 @@ $(OUTDIR)/MUSIC/TOWER.MB.BIN: $(MODERNE)/tour/tour.mid $(MUSIC)/midi_to_mb.py
 $(MODERNE)/combat/combat.mid: $(MODERNE)/combat/combat.py $(MODERNE)/compose.py
 	cd $(MODERNE)/combat && python3 combat.py
 $(OUTDIR)/MUSIC/BATTLE.MB.BIN: $(MODERNE)/combat/combat.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 200 --max 1280 --wav $(MODERNE)/combat/COMBAT.wav
+	$(MB) $< $@ --bpm 187.5 --max 1280 --wav $(MODERNE)/combat/COMBAT.wav
 $(MODERNE)/mort/mort.mid: $(MODERNE)/mort/mort.py $(MODERNE)/compose.py
 	cd $(MODERNE)/mort && python3 mort.py
 $(OUTDIR)/MUSIC/DEATH.MB.BIN: $(MODERNE)/mort/mort.mid $(MUSIC)/midi_to_mb.py
@@ -267,23 +268,23 @@ musics: $(CLAIRS)      # la cible musics est definie plus haut : ses prerequis s
 $(CLAIR)/01-courbens/courbens.mid: $(CLAIR)/01-courbens/courbens.py $(MODERNE)/compose.py
 	cd $(CLAIR)/01-courbens && python3 courbens.py
 $(OUTDIR)/MUSIC/BENTBEAKS.MB.BIN: $(CLAIR)/01-courbens/courbens.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 176 --max 2304 --wav $(CLAIR)/01-courbens/COURBENS.wav
+	$(MB) $< $@ --bpm 166.667 --max 2304 --wav $(CLAIR)/01-courbens/COURBENS.wav
 $(CLAIR)/02-patrouil/patrouil.mid: $(CLAIR)/02-patrouil/patrouil.py $(MODERNE)/compose.py
 	cd $(CLAIR)/02-patrouil && python3 patrouil.py
 $(OUTDIR)/MUSIC/PATROLLER.MB.BIN: $(CLAIR)/02-patrouil/patrouil.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 162 --max 2304 --wav $(CLAIR)/02-patrouil/PATROUIL.wav
+	$(MB) $< $@ --bpm 166.667 --max 2304 --wav $(CLAIR)/02-patrouil/PATROUIL.wav
 $(CLAIR)/03-jardins/jardins.mid: $(CLAIR)/03-jardins/jardins.py $(MODERNE)/compose.py
 	cd $(CLAIR)/03-jardins && python3 jardins.py
 $(OUTDIR)/MUSIC/GARDENS.MB.BIN: $(CLAIR)/03-jardins/jardins.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 144 --max 2304 --wav $(CLAIR)/03-jardins/JARDINS.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/03-jardins/JARDINS.wav
 $(CLAIR)/04-loups/loups.mid: $(CLAIR)/04-loups/loups.py $(MODERNE)/compose.py
 	cd $(CLAIR)/04-loups && python3 loups.py
 $(OUTDIR)/MUSIC/WOLVES.MB.BIN: $(CLAIR)/04-loups/loups.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 172 --max 2304 --wav $(CLAIR)/04-loups/LOUPS.wav
+	$(MB) $< $@ --bpm 166.667 --max 2304 --wav $(CLAIR)/04-loups/LOUPS.wav
 $(CLAIR)/05-feufollet/feufollet.mid: $(CLAIR)/05-feufollet/feufollet.py $(MODERNE)/compose.py
 	cd $(CLAIR)/05-feufollet && python3 feufollet.py
 $(OUTDIR)/MUSIC/WILLOWISP.MB.BIN: $(CLAIR)/05-feufollet/feufollet.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 154 --max 2304 --wav $(CLAIR)/05-feufollet/FEUFOLLET.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/05-feufollet/FEUFOLLET.wav
 $(CLAIR)/06-croisement/croisement.mid: $(CLAIR)/06-croisement/croisement.py $(MODERNE)/compose.py
 	cd $(CLAIR)/06-croisement && python3 croisement.py
 $(OUTDIR)/MUSIC/CROSSROADS.MB.BIN: $(CLAIR)/06-croisement/croisement.mid $(MUSIC)/midi_to_mb.py
@@ -291,55 +292,55 @@ $(OUTDIR)/MUSIC/CROSSROADS.MB.BIN: $(CLAIR)/06-croisement/croisement.mid $(MUSIC
 $(CLAIR)/07-geant/geant.mid: $(CLAIR)/07-geant/geant.py $(MODERNE)/compose.py
 	cd $(CLAIR)/07-geant && python3 geant.py
 $(OUTDIR)/MUSIC/GIANT.MB.BIN: $(CLAIR)/07-geant/geant.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 138 --max 2304 --wav $(CLAIR)/07-geant/GEANT.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/07-geant/GEANT.wav
 $(CLAIR)/08-brigands/brigands.mid: $(CLAIR)/08-brigands/brigands.py $(MODERNE)/compose.py
 	cd $(CLAIR)/08-brigands && python3 brigands.py
 $(OUTDIR)/MUSIC/BRIGANDS.MB.BIN: $(CLAIR)/08-brigands/brigands.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 180 --max 2304 --wav $(CLAIR)/08-brigands/BRIGANDS.wav
+	$(MB) $< $@ --bpm 187.5 --max 2304 --wav $(CLAIR)/08-brigands/BRIGANDS.wav
 $(CLAIR)/09-vase/vase.mid: $(CLAIR)/09-vase/vase.py $(MODERNE)/compose.py
 	cd $(CLAIR)/09-vase && python3 vase.py
 $(OUTDIR)/MUSIC/MUD.MB.BIN: $(CLAIR)/09-vase/vase.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 138 --max 2304 --wav $(CLAIR)/09-vase/VASE.wav
+	$(MB) $< $@ --bpm 136.364 --max 2304 --wav $(CLAIR)/09-vase/VASE.wav
 $(CLAIR)/10-scorpnain/scorpnain.mid: $(CLAIR)/10-scorpnain/scorpnain.py $(MODERNE)/compose.py
 	cd $(CLAIR)/10-scorpnain && python3 scorpnain.py
 $(OUTDIR)/MUSIC/DWARFSCORP.MB.BIN: $(CLAIR)/10-scorpnain/scorpnain.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 184 --max 2304 --wav $(CLAIR)/10-scorpnain/SCORPNAIN.wav
+	$(MB) $< $@ --bpm 187.5 --max 2304 --wav $(CLAIR)/10-scorpnain/SCORPNAIN.wav
 $(CLAIR)/11-aigle/aigle.mid: $(CLAIR)/11-aigle/aigle.py $(MODERNE)/compose.py
 	cd $(CLAIR)/11-aigle && python3 aigle.py
 $(OUTDIR)/MUSIC/EAGLE.MB.BIN: $(CLAIR)/11-aigle/aigle.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 156 --max 2304 --wav $(CLAIR)/11-aigle/AIGLE.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/11-aigle/AIGLE.wav
 $(CLAIR)/12-sables/sables.mid: $(CLAIR)/12-sables/sables.py $(MODERNE)/compose.py
 	cd $(CLAIR)/12-sables && python3 sables.py
 $(OUTDIR)/MUSIC/QUICKSAND.MB.BIN: $(CLAIR)/12-sables/sables.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 144 --max 2304 --wav $(CLAIR)/12-sables/SABLES.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/12-sables/SABLES.wav
 $(CLAIR)/13-croupie/croupie.mid: $(CLAIR)/13-croupie/croupie.py $(MODERNE)/compose.py
 	cd $(CLAIR)/13-croupie && python3 croupie.py
 $(OUTDIR)/MUSIC/STAGNANT.MB.BIN: $(CLAIR)/13-croupie/croupie.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 132 --max 2304 --wav $(CLAIR)/13-croupie/CROUPIE.wav
+	$(MB) $< $@ --bpm 136.364 --max 2304 --wav $(CLAIR)/13-croupie/CROUPIE.wav
 $(CLAIR)/14-falaise/falaise.mid: $(CLAIR)/14-falaise/falaise.py $(MODERNE)/compose.py
 	cd $(CLAIR)/14-falaise && python3 falaise.py
 $(OUTDIR)/MUSIC/CLIFF.MB.BIN: $(CLAIR)/14-falaise/falaise.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 144 --max 2304 --wav $(CLAIR)/14-falaise/FALAISE.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/14-falaise/FALAISE.wav
 $(CLAIR)/15-pont/pont.mid: $(CLAIR)/15-pont/pont.py $(MODERNE)/compose.py
 	cd $(CLAIR)/15-pont && python3 pont.py
 $(OUTDIR)/MUSIC/BRIDGE.MB.BIN: $(CLAIR)/15-pont/pont.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 154 --max 2304 --wav $(CLAIR)/15-pont/PONT.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/15-pont/PONT.wav
 $(CLAIR)/16-oiseaux/oiseaux.mid: $(CLAIR)/16-oiseaux/oiseaux.py $(MODERNE)/compose.py
 	cd $(CLAIR)/16-oiseaux && python3 oiseaux.py
 $(OUTDIR)/MUSIC/BIRDS.MB.BIN: $(CLAIR)/16-oiseaux/oiseaux.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 168 --max 2304 --wav $(CLAIR)/16-oiseaux/OISEAUX.wav
+	$(MB) $< $@ --bpm 166.667 --max 2304 --wav $(CLAIR)/16-oiseaux/OISEAUX.wav
 $(CLAIR)/17-brume/brume.mid: $(CLAIR)/17-brume/brume.py $(MODERNE)/compose.py
 	cd $(CLAIR)/17-brume && python3 brume.py
 $(OUTDIR)/MUSIC/MIST.MB.BIN: $(CLAIR)/17-brume/brume.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 128 --max 2304 --wav $(CLAIR)/17-brume/BRUME.wav
+	$(MB) $< $@ --bpm 125 --max 2304 --wav $(CLAIR)/17-brume/BRUME.wav
 $(CLAIR)/18-piquenique/piquenique.mid: $(CLAIR)/18-piquenique/piquenique.py $(MODERNE)/compose.py
 	cd $(CLAIR)/18-piquenique && python3 piquenique.py
 $(OUTDIR)/MUSIC/PICNIC.MB.BIN: $(CLAIR)/18-piquenique/piquenique.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 176 --max 2304 --wav $(CLAIR)/18-piquenique/PIQUENIQUE.wav
+	$(MB) $< $@ --bpm 166.667 --max 2304 --wav $(CLAIR)/18-piquenique/PIQUENIQUE.wav
 $(CLAIR)/19-scorpions/scorpions.mid: $(CLAIR)/19-scorpions/scorpions.py $(MODERNE)/compose.py
 	cd $(CLAIR)/19-scorpions && python3 scorpions.py
 $(OUTDIR)/MUSIC/SCORPIONS.MB.BIN: $(CLAIR)/19-scorpions/scorpions.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 184 --max 2304 --wav $(CLAIR)/19-scorpions/SCORPIONS.wav
+	$(MB) $< $@ --bpm 187.5 --max 2304 --wav $(CLAIR)/19-scorpions/SCORPIONS.wav
 $(CLAIR)/20-herbeux/herbeux.mid: $(CLAIR)/20-herbeux/herbeux.py $(MODERNE)/compose.py
 	cd $(CLAIR)/20-herbeux && python3 herbeux.py
 $(OUTDIR)/MUSIC/GRASSLAND.MB.BIN: $(CLAIR)/20-herbeux/herbeux.mid $(MUSIC)/midi_to_mb.py
@@ -347,35 +348,35 @@ $(OUTDIR)/MUSIC/GRASSLAND.MB.BIN: $(CLAIR)/20-herbeux/herbeux.mid $(MUSIC)/midi_
 $(CLAIR)/21-cristal/cristal.mid: $(CLAIR)/21-cristal/cristal.py $(MODERNE)/compose.py
 	cd $(CLAIR)/21-cristal && python3 cristal.py
 $(OUTDIR)/MUSIC/CRYSTAL.MB.BIN: $(CLAIR)/21-cristal/cristal.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 156 --max 2304 --wav $(CLAIR)/21-cristal/CRISTAL.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/21-cristal/CRISTAL.wav
 $(CLAIR)/22-angoisse/angoisse.mid: $(CLAIR)/22-angoisse/angoisse.py $(MODERNE)/compose.py
 	cd $(CLAIR)/22-angoisse && python3 angoisse.py
 $(OUTDIR)/MUSIC/DREAD.MB.BIN: $(CLAIR)/22-angoisse/angoisse.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 148 --max 2304 --wav $(CLAIR)/22-angoisse/ANGOISSE.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/22-angoisse/ANGOISSE.wav
 $(CLAIR)/23-licorne/licorne.mid: $(CLAIR)/23-licorne/licorne.py $(MODERNE)/compose.py
 	cd $(CLAIR)/23-licorne && python3 licorne.py
 $(OUTDIR)/MUSIC/UNICORN.MB.BIN: $(CLAIR)/23-licorne/licorne.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 142 --max 2304 --wav $(CLAIR)/23-licorne/LICORNE.wav
+	$(MB) $< $@ --bpm 136.364 --max 2304 --wav $(CLAIR)/23-licorne/LICORNE.wav
 $(CLAIR)/24-arene/arene.mid: $(CLAIR)/24-arene/arene.py $(MODERNE)/compose.py
 	cd $(CLAIR)/24-arene && python3 arene.py
 $(OUTDIR)/MUSIC/ARENA.MB.BIN: $(CLAIR)/24-arene/arene.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 164 --max 2304 --wav $(CLAIR)/24-arene/ARENE.wav
+	$(MB) $< $@ --bpm 166.667 --max 2304 --wav $(CLAIR)/24-arene/ARENE.wav
 $(CLAIR)/25-pinces/pinces.mid: $(CLAIR)/25-pinces/pinces.py $(MODERNE)/compose.py
 	cd $(CLAIR)/25-pinces && python3 pinces.py
 $(OUTDIR)/MUSIC/PINCERS.MB.BIN: $(CLAIR)/25-pinces/pinces.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 176 --max 2304 --wav $(CLAIR)/25-pinces/PINCES.wav
+	$(MB) $< $@ --bpm 166.667 --max 2304 --wav $(CLAIR)/25-pinces/PINCES.wav
 $(CLAIR)/26-orques/orques.mid: $(CLAIR)/26-orques/orques.py $(MODERNE)/compose.py
 	cd $(CLAIR)/26-orques && python3 orques.py
 $(OUTDIR)/MUSIC/ORCS.MB.BIN: $(CLAIR)/26-orques/orques.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 166 --max 2304 --wav $(CLAIR)/26-orques/ORQUES.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/26-orques/ORQUES.wav
 $(CLAIR)/27-bete/bete.mid: $(CLAIR)/27-bete/bete.py $(MODERNE)/compose.py
 	cd $(CLAIR)/27-bete && python3 bete.py
 $(OUTDIR)/MUSIC/BEAST.MB.BIN: $(CLAIR)/27-bete/bete.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 143 --max 2304 --wav $(CLAIR)/27-bete/BETE.wav
+	$(MB) $< $@ --bpm 136.364 --max 2304 --wav $(CLAIR)/27-bete/BETE.wav
 $(CLAIR)/28-arbresepees/arbresepees.mid: $(CLAIR)/28-arbresepees/arbresepees.py $(MODERNE)/compose.py
 	cd $(CLAIR)/28-arbresepees && python3 arbresepees.py
 $(OUTDIR)/MUSIC/SWORDTREES.MB.BIN: $(CLAIR)/28-arbresepees/arbresepees.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 166 --max 2304 --wav $(CLAIR)/28-arbresepees/ARBRESEPEES.wav
+	$(MB) $< $@ --bpm 166.667 --max 2304 --wav $(CLAIR)/28-arbresepees/ARBRESEPEES.wav
 $(CLAIR)/29-araignees/araignees.mid: $(CLAIR)/29-araignees/araignees.py $(MODERNE)/compose.py
 	cd $(CLAIR)/29-araignees && python3 araignees.py
 $(OUTDIR)/MUSIC/SPIDERS.MB.BIN: $(CLAIR)/29-araignees/araignees.mid $(MUSIC)/midi_to_mb.py
@@ -383,11 +384,11 @@ $(OUTDIR)/MUSIC/SPIDERS.MB.BIN: $(CLAIR)/29-araignees/araignees.mid $(MUSIC)/mid
 $(CLAIR)/30-grenouilles/grenouilles.mid: $(CLAIR)/30-grenouilles/grenouilles.py $(MODERNE)/compose.py
 	cd $(CLAIR)/30-grenouilles && python3 grenouilles.py
 $(OUTDIR)/MUSIC/FROGS.MB.BIN: $(CLAIR)/30-grenouilles/grenouilles.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 176 --max 2304 --wav $(CLAIR)/30-grenouilles/GRENOUILLES.wav
+	$(MB) $< $@ --bpm 166.667 --max 2304 --wav $(CLAIR)/30-grenouilles/GRENOUILLES.wav
 $(CLAIR)/31-profonde/profonde.mid: $(CLAIR)/31-profonde/profonde.py $(MODERNE)/compose.py
 	cd $(CLAIR)/31-profonde && python3 profonde.py
 $(OUTDIR)/MUSIC/DEEPWATER.MB.BIN: $(CLAIR)/31-profonde/profonde.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 136 --max 2304 --wav $(CLAIR)/31-profonde/PROFONDE.wav
+	$(MB) $< $@ --bpm 136.364 --max 2304 --wav $(CLAIR)/31-profonde/PROFONDE.wav
 $(CLAIR)/32-maitreloups/maitreloups.mid: $(CLAIR)/32-maitreloups/maitreloups.py $(MODERNE)/compose.py
 	cd $(CLAIR)/32-maitreloups && python3 maitreloups.py
 $(OUTDIR)/MUSIC/WOLFMASTER.MB.BIN: $(CLAIR)/32-maitreloups/maitreloups.mid $(MUSIC)/midi_to_mb.py
@@ -395,7 +396,7 @@ $(OUTDIR)/MUSIC/WOLFMASTER.MB.BIN: $(CLAIR)/32-maitreloups/maitreloups.mid $(MUS
 $(CLAIR)/33-rondpoint/rondpoint.mid: $(CLAIR)/33-rondpoint/rondpoint.py $(MODERNE)/compose.py
 	cd $(CLAIR)/33-rondpoint && python3 rondpoint.py
 $(OUTDIR)/MUSIC/ROUNDABOUT.MB.BIN: $(CLAIR)/33-rondpoint/rondpoint.mid $(MUSIC)/midi_to_mb.py
-	$(MB) $< $@ --bpm 158 --max 2304 --wav $(CLAIR)/33-rondpoint/RONDPOINT.wav
+	$(MB) $< $@ --bpm 150 --max 2304 --wav $(CLAIR)/33-rondpoint/RONDPOINT.wav
 $(CLAIR)/34-tronc/tronc.mid: $(CLAIR)/34-tronc/tronc.py $(MODERNE)/compose.py
 	cd $(CLAIR)/34-tronc && python3 tronc.py
 $(OUTDIR)/MUSIC/LOG.MB.BIN: $(CLAIR)/34-tronc/tronc.mid $(MUSIC)/midi_to_mb.py
@@ -431,12 +432,15 @@ hgr_loader.o: hgr_loader.s hgr_rle.h
 # C'est ce qui est arrivé le 2026-08-29 — le disque portait le binaire d'avant
 # le correctif iobuf, et le jeu rejouait un "errno=2 ProDOS=$$00" déjà corrigé.
 TOOLS    = ../../SCOSWAMP.MORE/TOOLS
-VOLBUILD = $(TOOLS)/build/build_prodos_volume
+# Les outils communs aux deux jeux : constructeur de volume, amorce, 2MG.
+KIT      = ../../ADVKIT/TOOLS
+VOLBUILD = $(KIT)/build/build_prodos_volume
 # Les deux premiers blocs (1 Ko) du volume : le boot loader ProDOS, que le
 # constructeur recopie tel quel. Extrait d'une image amorçable connue et versionné
 # ici, sinon `make hdv` ne peut pas partir d'un arbre propre (dist/ est ignoré).
-BOOTTMPL = $(TOOLS)/prodos_boot.tmpl
+BOOTTMPL = $(KIT)/prodos_boot.tmpl
 HDV      = ../../dist/SCOSWAMP.HDV
+IMG2MG   = ../../dist/SCOSWAMP.2mg
 STAGE    = ../../dist/.stage
 # DOCS et SRC : du developpement, rien a faire sur le disque du joueur.
 # BASIC.SYSTEM et STARTUP.BAS : le jeu occupe desormais $9600-$A3D9, c'est-a-dire
@@ -485,7 +489,7 @@ map: $(OUTDIR)/MAP.BIN
 .PHONY: diapo diapo-catalog
 
 diapo-catalog: $(MUSICS)
-	python3 ../../tools/build_diapo_catalog.py --game ..
+	python3 ../../SCOSWAMP.MORE/TOOLS/build_diapo_catalog.py --game ..
 
 diapo: $(OUTDIR)/DIAPO/DIAPO.SYSTEM.SYS $(OUTDIR)/DIAPO/DIAPO.CODE.BIN diapo-catalog
 
@@ -497,29 +501,11 @@ $(OUTDIR)/DIAPO/DIAPO.CODE.BIN: diapo.c music.h music.o crt0.o hgr_loader.o memo
 	@mkdir -p $(OUTDIR)/DIAPO
 	$(CL) $(CFLAGS) -C scoswamp.cfg -Wl -D,__EXEHDR__=0 -Wl -D,__HIMEM__=$(HIMEM) -Wl -m,diapo.map -Wl -Ln,diapo.lbl -o $@ crt0.o diapo.c music.o hgr_loader.o memory_swap.o mli_safe.o $(IOBUF)
 
-# A2 Retro Cmd : le gestionnaire de fichiers a deux panneaux, autrefois
-# construit ici, vit desormais dans son propre depot avec ses sources, ses
-# bancs et son integration continue :
-#
-#     https://github.com/habib256/a2retrocmd
-#
-# Le jeu n'en est plus que l'hote. SCOSWAMP/A2RETRO/ contient une copie des
-# quatre fichiers publies, tiree de l'image de disquette d'une Release par
-# tools/update_a2retrocmd.py (qui ecrit aussi leur provenance a cote), et
-# `make hdv` la pose sur le disque comme le reste du volume. La touche [T]
-# de l'ecran-titre lance A2RETRO/A2RETRO.SYSTEM.
-#
-# Pour rafraichir la copie :
-#     python3 ../../tools/update_a2retrocmd.py            (derniere Release)
-#     python3 ../../tools/update_a2retrocmd.py --tag v1.1
-A2RETRO = $(OUTDIR)/A2RETRO/A2RETRO.SYSTEM.SYS $(OUTDIR)/A2RETRO/A2RETRO.CODE.BIN \
-          $(OUTDIR)/A2RETRO/A2RETRO.HELP.TXT $(OUTDIR)/A2RETRO/FORMAT.SYS.SYS
-
-hdv: $(HDV)
+hdv: $(HDV) $(IMG2MG)
 
 $(HDV): $(OUTDIR)/$(PROGRAM) $(OUTDIR)/$(LAUNCHER) $(BOOTTMPL) $(MUSICS) \
         $(OUTDIR)/MAP.BIN $(OUTDIR)/DIAPO/DIAPO.SYSTEM.SYS $(OUTDIR)/DIAPO/DIAPO.CODE.BIN diapo-catalog \
-        $(A2RETRO) $(PAYLOAD) | $(VOLBUILD) check
+        $(PAYLOAD) | $(VOLBUILD) check
 	@rm -rf $(STAGE) && mkdir -p $(STAGE) $(dir $(HDV))
 	@for f in $(OUTDIR)/*; do \
 		b=`basename "$$f"`; \
@@ -530,29 +516,25 @@ $(HDV): $(OUTDIR)/$(PROGRAM) $(OUTDIR)/$(LAUNCHER) $(BOOTTMPL) $(MUSICS) \
 	@rm -rf $(STAGE)
 	@echo "==> Image disque : $(HDV)"
 
-# ── Images de release ──────────────────────────────────────────────────────
-# `make hdv` produit l'image de travail, toujours au meme nom, que l'emulateur
-# voisin relance sans qu'on retape un chemin. `make release` en tire les deux
-# fichiers qu'un joueur telecharge, portant le numero de version :
+# ── Image de distribution ──────────────────────────────────────────────────
+# `make hdv` laisse deux fichiers dans dist/ :
 #
-#   dist/scoswamp-$(VERSION).hdv   les blocs ProDOS bruts
-#   dist/scoswamp-$(VERSION).2mg   les memes blocs + 64 octets d'en-tete 2MG
+#   dist/SCOSWAMP.HDV   l'image de travail, les blocs ProDOS bruts, que
+#                       l'emulateur voisin, `make playtest` et l'atelier ADVKIT
+#                       relisent toujours au meme nom
+#   dist/SCOSWAMP.2mg   les memes blocs + 64 octets d'en-tete 2MG : le fichier
+#                       que telecharge un joueur
 #
 # Le .2mg existe parce que plusieurs emulateurs refusent de deviner la
-# geometrie d'un .hdv d'apres sa taille ; l'en-tete la leur dit.
-VERSION  = 0.9
-RELHDV   = ../../dist/scoswamp-$(VERSION).hdv
-REL2MG   = ../../dist/scoswamp-$(VERSION).2mg
-WRAP2MG  = $(TOOLS)/wrap_2mg.py
+# geometrie d'un .hdv d'apres sa taille ; l'en-tete la leur dit. Le numero de
+# version vit dans le tag Git de la release, pas dans le nom du fichier.
+# `make release` reste un synonyme.
+WRAP2MG  = $(KIT)/wrap_2mg.py
 
-release: $(REL2MG)
+release: $(IMG2MG)
 
-$(RELHDV): $(HDV)
-	@cp $(HDV) $@
-	@echo "==> Image de release : $@"
-
-$(REL2MG): $(RELHDV) $(WRAP2MG)
-	@python3 $(WRAP2MG) $(RELHDV) $@
+$(IMG2MG): $(HDV) $(WRAP2MG)
+	@python3 $(WRAP2MG) $(HDV) $@
 
 # ── Banc de traversée ──────────────────────────────────────────────────────
 # `make playtest` reconstruit l'image disque, puis rejoue le jeu sous POM2 :
@@ -578,7 +560,7 @@ playtest: $(HDV) $(OUTDIR)/$(PROGRAM)
 # chaque fois que l'outil est relié.
 # Le constructeur de volume se CONSTRUIT, il ne se reclame pas. Cette regle
 # imprimait les deux lignes cmake puis `exit 1`, ce qui donnait le piege
-# suivant : $(TOOLS)/build/ est gitignore, donc il disparait au premier
+# suivant : $(KIT)/build/ est gitignore, donc il disparait au premier
 # nettoyage ou sur un clone frais ; `make hdv` s'arretait alors AVANT de
 # toucher l'image ; et comme $(HDV) est lui aussi gitignore mais survit dans
 # l'arbre de travail, on continuait a lancer l'emulateur sur une image
@@ -588,8 +570,8 @@ playtest: $(HDV) $(OUTDIR)/$(PROGRAM)
 # mode de panne.
 $(VOLBUILD):
 	@echo "==> Construction de l'outil : $(VOLBUILD)"
-	cmake -S $(TOOLS) -B $(TOOLS)/build
-	cmake --build $(TOOLS)/build --target build_prodos_volume
+	cmake -S $(KIT) -B $(KIT)/build
+	cmake --build $(KIT)/build --target build_prodos_volume
 
 # Nettoyage des fichiers intermédiaires
 clean:

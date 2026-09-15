@@ -1,0 +1,15 @@
+Promenade sur la Comete
+------------------------
+
+Vous arrivez sur une petite comete pres de son perihelie.
+Des jets de gaz rugissent depuis les fissures dans la glace.
+Une passerelle securisee suit la crete au-dessus d'une queue brillante.
+La lumiere est crue et les ombres sont tranchantes.
+
+C'est l'endroit parfait pour un selfie audacieux avec la queue derriere vous.
+Gardez vos bottes verrouillees au pont pendant les explosions de gaz.
+
+C 001 Retourner a la base
+C 005 Flotter parmi les montagnes de Myria
+C 009 Surfer vers la Station Tethys
+

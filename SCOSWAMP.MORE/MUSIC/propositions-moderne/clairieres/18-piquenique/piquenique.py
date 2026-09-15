@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« Le Repas du Voleur » — clairiere 18, le pique-nique suspect. Fa dorien, 176.
+"""« Le Repas du Voleur » — clairiere 18, le pique-nique suspect. Fa dorien, 166,7.
 
 Variation dans la couleur `sud` : **bourdon de tonique immobile**, marche modale
 large — mais a **3/4**, la seule des trente-cinq clairieres a ne pas etre a
@@ -44,18 +44,18 @@ charleston aux deux autres — jusqu'a l'hemiole, ou elle frappe sur les temps 1
 droite ; il ne reste que cinq parties de hauteur, et c'est la voix d'accords
 tenus qui a cede la place — le bourdon de tonique est le procede de la zone.
 
-40 mesures a 3/4, 40,9 s. Forme intro(4) - A(12) le repas - B(12) l'Anneau
+40 mesures a 3/4, 43,2 s. Forme intro(4) - A(12) le repas - B(12) l'Anneau
 chauffe - A'(12) la reprise empoisonnee.
 
     python3 piquenique.py && python3 ../../../midi_to_mb.py piquenique.mid \\
-        PICNIC.MB.BIN --bpm 176 --max 2304 --wav PIQUENIQUE.wav
+        PICNIC.MB.BIN --bpm 166.667 --max 2304 --wav PIQUENIQUE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 176, 3, 40
+BPM, BAR, BARS = 3000 / 18, 3, 40
 LEN = BAR * BARS
 HEMIOLE = (24, 25)                         # les deux mesures qui trebuchent
 

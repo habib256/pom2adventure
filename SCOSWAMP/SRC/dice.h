@@ -19,7 +19,7 @@ unsigned char roll_2d6(void);   /* 2..12 */
 /* Attend une touche en comptant, seme le generateur avec le compte, et rend
  * la touche. Sur Apple II il n'y a pas d'horloge : le seul hasard disponible
  * au demarrage est le temps que met le joueur a appuyer. Une constante en dur
- * (`srand(0x1234)`, comme dans COMBAT/SRC/combat.c) donnerait la meme partie a
+ * (`srand(0x1234)`) donnerait la meme partie a
  * chaque lancement, des a la creation du personnage.
  * Passe par kbhit/cgetc et non par $C000 : voir dice.c. */
 char dice_seed_from_keypress(void);

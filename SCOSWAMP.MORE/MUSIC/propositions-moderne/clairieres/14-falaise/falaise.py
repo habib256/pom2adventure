@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« Le Ciel s'Ouvre » — clairiere 14, sommet de la falaise. Si dorien, 144.
+"""« Le Ciel s'Ouvre » — clairiere 14, sommet de la falaise. Si dorien, 150.
 
 Variation dans la couleur `riviere` : dorien, et le **bourdon sur la quinte**
 (fa diese), la marque de la zone. Ce qui change, c'est la direction : la riviere
@@ -40,17 +40,17 @@ Ce que la revision ajoute :
 - une **fin qui prepare la boucle** : la derniere mesure retombe de si a fa
   diese, la quinte par laquelle la piece va repartir.
 
-24 mesures a 4/4, 40,0 s. Forme intro(4) - A(8) - B(8) - A'(4).
+24 mesures a 4/4, 38,4 s. Forme intro(4) - A(8) - B(8) - A'(4).
 
     python3 falaise.py && python3 ../../../midi_to_mb.py falaise.mid \\
-        CLIFF.MB.BIN --bpm 144 --max 2304 --wav FALAISE.wav
+        CLIFF.MB.BIN --bpm 150 --max 2304 --wav FALAISE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 144, 4, 24
+BPM, BAR, BARS = 3000 / 20, 4, 24
 LEN = BAR * BARS
 
 # une entree par mesure ; « A|E » change d'accord au milieu de la mesure

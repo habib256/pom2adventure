@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« L'Appel du Marais » — theme d'accueil, page 000. Re dorien, 136 a la noire.
+"""« L'Appel du Marais » — theme d'accueil, page 000. Re dorien, 136,4 a la noire.
 
 Cinq voix de hauteur et une batterie : la voix 5 est le bruit, donc le bourdon
 de re a disparu — la grosse caisse en tient lieu, et elle frappe au lieu de
@@ -28,14 +28,14 @@ a la mesure 11 ; l'harmonie se resserre a mesure que la piece avance.
 28 mesures a 4/4, 49 s de boucle.
 
     python3 accueil.py && python3 ../../midi_to_mb.py accueil.mid \\
-        WELCOME.MB.BIN --bpm 136 --max 2304 --wav ACCUEIL.wav
+        WELCOME.MB.BIN --bpm 136.364 --max 2304 --wav ACCUEIL.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 136, 4, 28
+BPM, BAR, BARS = 3000 / 22, 4, 28
 LEN = BAR * BARS
 
 #            intro      A1 (crochet)      A2 (crochet, autre harmonie)
