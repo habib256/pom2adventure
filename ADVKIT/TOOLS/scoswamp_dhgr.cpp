@@ -108,6 +108,61 @@ std::vector<std::uint8_t> encode(const std::vector<std::uint8_t>& raw) {
     return out;
 }
 
+/* Moyenne de zone exacte, en lumiere lineaire, vers la grille W x H du
+ * quantifieur. Le bilineaire de resampleToLinearRgb ne lit que 2x2 texels par
+ * cellule : sur un master de 1500 px, il en ignore plus de 99 % et le detail
+ * fin revient en mouchetis. Ici chaque cellule recoit la moyenne de toute la
+ * surface source qu'elle recouvre, poids au prorata du recouvrement. Meme
+ * cadrage et meme letterbox que le resampler ; l'image rendue est etiree a
+ * W x H, que celui-ci relit ensuite texel pour texel. Les bandes noires
+ * deviennent donc des cellules noires, comme dans l'adaptateur 35:24. */
+std::vector<std::uint8_t> areaReduce(const std::uint8_t* rgba, int w, int h, int W, int H,
+                                     double aspect, hgrpaint::ImportOptions& opt) {
+    int cx0=opt.cropX0, cy0=opt.cropY0, cx1=opt.cropX1, cy1=opt.cropY1;
+    if (cx1<=cx0 || cy1<=cy0) { cx0=0; cy0=0; cx1=w; cy1=h; }
+    cx0=std::clamp(cx0,0,w-1); cy0=std::clamp(cy0,0,h-1);
+    cx1=std::clamp(cx1,cx0+1,w); cy1=std::clamp(cy1,cy0+1,h);
+    const int cw=cx1-cx0, ch=cy1-cy0;
+    int ox0=0, oy0=0, ow=W, oh=H;
+    if (!opt.stretch) {
+        const double s=std::min(W*aspect/cw, double(H)/ch);
+        ow=std::min(W,std::max(1,int(std::lround(cw*s/aspect))));
+        oh=std::min(H,std::max(1,int(std::lround(ch*s))));
+        ox0=(W-ow)/2; oy0=(H-oh)/2;
+    }
+    struct Tap { int i; float w; };
+    // Cellule o de n : intervalle source [o*len/n, (o+1)*len/n), un texel i couvre [i, i+1).
+    auto taps=[](int c0, int len, int n) {
+        std::vector<std::vector<Tap>> t(n);
+        for (int o=0; o<n; ++o) {
+            const double a=double(o)*len/n, b=double(o+1)*len/n;
+            for (int i=int(a); i<len && i<b; ++i) {
+                const double f=std::min<double>(i+1,b)-std::max<double>(i,a);
+                if (f>0) t[o].push_back({c0+i, float(f*n/len)});
+            }
+        }
+        return t;
+    };
+    const auto tx=taps(cx0,cw,ow), ty=taps(cy0,ch,oh);
+    std::vector<std::uint8_t> out(std::size_t(W)*H*4, 0);
+    for (std::size_t i=3; i<out.size(); i+=4) out[i]=255;
+    std::vector<float> row(std::size_t(w)*3);
+    for (int oy=0; oy<oh; ++oy) {
+        std::fill(row.begin()+std::size_t(cx0)*3, row.begin()+std::size_t(cx1)*3, 0.0f);
+        for (const auto& t : ty[oy])
+            for (int x=cx0; x<cx1; ++x) for (int c=0; c<3; ++c)
+                row[std::size_t(x)*3+c]+=t.w*hgrpaint::srgb8ToLinearF(rgba[(std::size_t(t.i)*w+x)*4+c]);
+        for (int ox=0; ox<ow; ++ox) {
+            float lin[3]{};
+            for (const auto& t : tx[ox]) for (int c=0; c<3; ++c) lin[c]+=t.w*row[std::size_t(t.i)*3+c];
+            const auto o=(std::size_t(oy0+oy)*W+(ox0+ox))*4;
+            for (int c=0; c<3; ++c) out[o+c]=std::uint8_t(hgrpaint::linearToSrgbF(lin[c])*255.0f+0.5f);
+        }
+    }
+    opt.stretch=true; opt.cropX0=opt.cropY0=opt.cropX1=opt.cropY1=0;
+    return out;
+}
+
 std::vector<std::uint8_t> preview(const std::vector<std::uint8_t>& pair,
                                   const Rgb (&palette)[16]) {
     constexpr int w = 280, h = 192;
@@ -122,7 +177,7 @@ std::vector<std::uint8_t> preview(const std::vector<std::uint8_t>& pair,
 
 // Stable machine interface for the local workshop. Options are validated by
 // its recipe reader; the legacy convert command deliberately keeps its defaults.
-int importImage(int argc, char** argv) {
+int importImage(int argc, char** argv, bool area) {
     if (argc != 8) return 2;
     hgrpaint::ImportOptions opt;
     int model = 1;
@@ -169,6 +224,14 @@ int importImage(int argc, char** argv) {
         w=pw;h=ph;input=padded.data();opt.stretch=true;
         opt.cropX0=opt.cropY0=opt.cropX1=opt.cropY1=0;
     }
+    // --resample area : la reduction se fait ici, apres cadrage et bandes,
+    // a la grille exacte de chaque modele (pixelAspect de HgrConvert).
+    std::vector<uint8_t> reduced;
+    if (area) {
+        const int gw=hgr?280:(model==1?140:560);
+        reduced=areaReduce(input,w,h,gw,192,hgr?1.0:(model==1?2.0:0.5),opt);
+        w=gw;h=192;input=reduced.data();
+    }
     std::vector<uint8_t> raw(hgr?kHgrBytes:kDhgrBytes);
     if (hgr) hgrpaint::imageToHgrPage(input,w,h,opt,raw.data());
     else if (model==0) hgrpaint::imageToDhgrPage560(input,w,h,opt,raw.data());
@@ -200,7 +263,17 @@ int importImage(int argc, char** argv) {
 }
 
 int main(int argc, char** argv) {
-    if (argc>1 && std::string(argv[1])=="import") return importImage(argc,argv);
+    // --resample area|bilinear, n'importe ou apres la commande. bilinear est
+    // le defaut et ne change pas un octet des sorties historiques.
+    std::vector<char*> args; bool area=false;
+    for (int i=0; i<argc; ++i) {
+        if (std::string(argv[i])!="--resample") { args.push_back(argv[i]); continue; }
+        const std::string v=i+1<argc?argv[i+1]:"";
+        if (v!="area" && v!="bilinear") { std::cerr<<"--resample: area ou bilinear\n"; return 2; }
+        area=v=="area"; ++i;
+    }
+    argc=int(args.size()); argv=args.data();
+    if (argc>1 && std::string(argv[1])=="import") return importImage(argc,argv,area);
     if (argc>=3 && std::string(argv[1])=="validate") {
         std::vector<std::uint8_t> packed,raw;
         if(!readFile(argv[2],packed)||!decode(packed,raw)){std::cerr<<"invalid DHRR v1 stream\n";return 1;}
@@ -216,13 +289,17 @@ int main(int argc, char** argv) {
         return 0;
     }
     if (argc < 4 || std::string(argv[1]) != "convert") {
-        std::cerr << "usage:\n  scoswamp_dhgr convert INPUT.png OUTPUT.DHGR.RLE.BIN [COMPOSITE_PREVIEW.png [CHAT_MAUVE_PREVIEW.png]]\n  scoswamp_dhgr migrate-hgr INPUT.HGR.RLE.BIN OUTPUT.DHGR.RLE.BIN\n  scoswamp_dhgr validate INPUT.DHGR.RLE.BIN\n"; return 2;
+        std::cerr << "usage:\n  scoswamp_dhgr convert [--resample area|bilinear] INPUT.png OUTPUT.DHGR.RLE.BIN [COMPOSITE_PREVIEW.png [CHAT_MAUVE_PREVIEW.png]]\n  scoswamp_dhgr import [--resample area|bilinear] INPUT.png dhgr|hgr OPTIONS.txt OUTPUT.BIN COMPOSITE.png CHAT_MAUVE.png\n  scoswamp_dhgr migrate-hgr INPUT.HGR.RLE.BIN OUTPUT.DHGR.RLE.BIN\n  scoswamp_dhgr validate INPUT.DHGR.RLE.BIN\n"
+                  << "  --resample bilinear (defaut) : 2x2 texels par cellule, sortie historique\n"
+                  << "  --resample area : moyenne de zone exacte en lumiere lineaire avant quantification\n"; return 2;
     }
     int w=0,h=0,n=0; auto* rgba = stbi_load(argv[2], &w, &h, &n, 4);
     if (!rgba) { std::cerr << "cannot decode " << argv[2] << "\n"; return 1; }
     std::vector<std::uint8_t> pair(kDhgrBytes);
     hgrpaint::ImportOptions opt; opt.stretch=true; opt.dither=false; opt.chromaWeight=2.4f;
-    hgrpaint::imageToDhgrPage(rgba, w, h, opt, pair.data()); stbi_image_free(rgba);
+    std::vector<std::uint8_t> reduced; const std::uint8_t* input=rgba;
+    if (area) { reduced=areaReduce(rgba,w,h,140,192,2.0,opt); w=140; h=192; input=reduced.data(); }
+    hgrpaint::imageToDhgrPage(input, w, h, opt, pair.data()); stbi_image_free(rgba);
     const auto packed = encode(pair);
     if (!writeFile(argv[3], packed)) { std::cerr << "cannot write output\n"; return 1; }
     if (argc >= 5) { const auto rgb=preview(pair,kPaletteComposite); if (!stbi_write_png(argv[4],280,192,3,rgb.data(),280*3)) return 1; }

@@ -90,14 +90,16 @@ def validate(recipe, width, height):
     return recipe
 
 
-def convert(source, mode, recipe, dest):
+def convert(source, mode, recipe, dest, resample='bilinear'):
     validate(recipe,*dimensions(source))
     opts={k:v for k,v in recipe.items() if k!='crop'}
     if recipe['crop']:
         opts.update(zip(('cropX0','cropY0','cropX1','cropY1'),recipe['crop']))
     settings=dest/'options.txt'
     settings.write_text(''.join(f'{k} {int(v) if isinstance(v,bool) else v}\n' for k,v in opts.items()))
-    result=subprocess.run([str(CONVERTER),'import',str(source),mode,str(settings),
+    # bilinear reste la ligne de commande historique ; area ajoute l'option.
+    extra=[] if resample=='bilinear' else ['--resample',resample]
+    result=subprocess.run([str(CONVERTER),'import',*extra,str(source),mode,str(settings),
                            str(dest/'image.bin'),str(dest/'composite.png'),str(dest/'chat.png')],
                           capture_output=True,text=True,timeout=180)
     if result.returncode: raise ValueError(result.stderr[-2000:] or 'Échec de conversion native')
@@ -129,12 +131,12 @@ def install(p, folder, recipe):
         raise
 
 
-def replay(game, asset):
+def replay(game, asset, resample='bilinear'):
     p=paths(game,asset)
     recipe=json.loads(p['recipe'].read_text())
     with tempfile.TemporaryDirectory(prefix='image-replay-') as tmp:
         dest=Path(tmp)
-        convert(p['source'],p['mode'],recipe,dest)
+        convert(p['source'],p['mode'],recipe,dest,resample)
         install(p,dest,recipe)
 
 
@@ -223,8 +225,9 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--port',type=int,default=8765)
     parser.add_argument('--replay',nargs=2,metavar=('GAME','ASSET'))
+    parser.add_argument('--resample',choices=('bilinear','area'),default='bilinear')
     args=parser.parse_args()
-    if args.replay: replay(*args.replay); return
+    if args.replay: replay(*args.replay,args.resample); return
     server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
     server.csrf=secrets.token_hex(24); server.previews={}
     with tempfile.TemporaryDirectory(prefix='image-workshop-') as cache:
