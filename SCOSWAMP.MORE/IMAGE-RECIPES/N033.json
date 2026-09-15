@@ -1,0 +1,17 @@
+{
+  "colourNoise": 0.3,
+  "brightness": 1.27,
+  "contrast": 1.7,
+  "gamma": 1,
+  "diffusion": 0.7,
+  "kernel": 1,
+  "model": 1,
+  "dither": false,
+  "stretch": false,
+  "crop": [
+    650,
+    25,
+    1136,
+    358
+  ]
+}
