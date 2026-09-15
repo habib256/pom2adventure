@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""« Trois Arcs dans la Brume » — clairiere 26, les Orques des Marais. Re phrygien, 166.
+"""« Trois Arcs dans la Brume » — clairiere 26, les Orques des Marais. Re phrygien, 150.
 
 Pages 290, 323, 352, 309. Trois orques a la peau rongee, trois arcs, et une
 fleche qui frole la tete des l'entree. Le procede de la zone `danger` est garde —
 demi-ton phrygien **mi bemol-re**, bourdon de re — mais la piece est desormais
 une **marche** : la grosse caisse tient le pas et le bourdon, libere de la voix
 5, n'a plus besoin d'etre refrappe toutes les deux mesures. Le tempo passe de
-158 a **166** : la troupe avance.
+158 a **166** : la troupe avance ; puis a 150, vingt ticks par temps, pour
+que les doubles croches pointees tombent juste.
 
 Ce que la revision ajoute :
 
@@ -24,17 +25,17 @@ Ce que la revision ajoute :
 * **l'arc** : rien a l'intro qu'un coup de caisse lointain, puis la marche, puis
   la marche doublee en A', puis la cadence.
 
-28 mesures a 4/4, 40,5 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8).
+28 mesures a 4/4, 44,8 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8).
 
     python3 orques.py && python3 ../../../midi_to_mb.py orques.mid \\
-        ORCS.MB.BIN --bpm 166 --max 2304 --wav ORQUES.wav
+        ORCS.MB.BIN --bpm 150 --max 2304 --wav ORQUES.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 166, 4, 28
+BPM, BAR, BARS = 3000 / 20, 4, 28
 LEN = BAR * BARS
 
 GRILLE = [

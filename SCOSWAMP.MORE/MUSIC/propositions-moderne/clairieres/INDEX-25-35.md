@@ -14,8 +14,8 @@ qui a **migré** de la voix 5 (droite) à la voix 2 (gauche). Le procédé de zo
 un bourdon dans toutes les onze — est donc intact partout.
 
 Tout tient dans le **tampon de zone : 2 304 octets**. La plus grosse est
-`FROGS.MB.BIN` (2 246 o, 58 octets de marge) ; la plus légère est
-`BEAST.MB.BIN` (1 467 o).
+`FROGS.MB.BIN` (2 248 o, 56 octets de marge) ; la plus légère est `BEAST.MB.BIN`
+(1 469 o).
 
 **Aucune des onze n'abandonne une seule note à la réduction** (`0 abandonnées` à
 la conversion, polyphonie maximale = 5 exactement, plus la batterie).
@@ -24,24 +24,28 @@ la conversion, polyphonie maximale = 5 exactement, plus la batterie).
 
 | # | Clairière (`hub`) | Fichier disque | Pièce | Mode | bpm | Durée | Coups | Octets |
 | ---: | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| 25 | Herbe à Pinces (187) | `PINCERS.MB` | **L'Herbe qui Serre** | mi phrygien | 176 | 43,9 s | 75 | 2 184 |
-| 26 | Orques des Marais (309) | `ORCS.MB` | **Trois Arcs dans la Brume** | ré phrygien | **166** | 40,8 s | 105 | 1 918 |
-| 27 | Cul-de-sac de la Bête (125) | `BEAST.MB` | **Le Rocher qui Respire** | sol phrygien | 143 | 45,6 s | 66 | 1 467 |
-| 28 | Arbres-Épées (022) | `SWORDTREES.MB` | **Les Bras qui Repoussent** | fa phrygien | 166 | 40,4 s | 98 | 2 198 |
+| 25 | Herbe à Pinces (187) | `PINCERS.MB` | **L'Herbe qui Serre** | mi phrygien | 166,7 | 46,4 s | 75 | 2 185 |
+| 26 | Orques des Marais (309) | `ORCS.MB` | **Trois Arcs dans la Brume** | ré phrygien | **150** | 45,2 s | 105 | 1 918 |
+| 27 | Cul-de-sac de la Bête (125) | `BEAST.MB` | **Le Rocher qui Respire** | sol phrygien | 136,4 | 47,8 s | 66 | 1 469 |
+| 28 | Arbres-Épées (022) | `SWORDTREES.MB` | **Les Bras qui Repoussent** | fa phrygien | 166,7 | 40,2 s | 98 | 2 198 |
 | 29 | Tente aux araignées (165) | `SPIDERS.MB` | **Le Fil d'Argent** | do♯ phrygien | 150 | 45,1 s | 113 | 1 900 |
-| 30 | Clairière des grenouilles (230) | `FROGS.MB` | **Le Bal des Mares** | sol éolien | **176** | 38,5 s | 115 | **2 246** |
-| 31 | La rivière profonde (044) | `DEEPWATER.MB` | **L'Eau Noire** | sol dorien | 136 | 49,7 s | 14 | 1 894 |
+| 30 | Clairière des grenouilles (230) | `FROGS.MB` | **Le Bal des Mares** | sol éolien | **166,7** | 40,7 s | 115 | **2 248** |
+| 31 | La rivière profonde (044) | `DEEPWATER.MB` | **L'Eau Noire** | sol dorien | 136,4 | 49,6 s | 14 | 1 893 |
 | 32 | Maître des Loups (314) | `WOLFMASTER.MB` | **Le Cor du Maître** | mi éolien | **150** | 45,9 s | 119 | 2 182 |
-| **33** | **Le large rond-point, départ (058)** | `ROUNDABOUT.MB` | **Le Cœur du Marais** | ré éolien | 158 | 48,9 s | 101 | 2 219 |
+| **33** | **Le large rond-point, départ (058)** | `ROUNDABOUT.MB` | **Le Cœur du Marais** | ré éolien | 150 | 51,5 s | 101 | 2 219 |
 | 34 | Pierres et tronc creux (390) | `LOG.MB` | **Pierres Plates** | do éolien | 150 | 45,1 s | 97 | 2 006 |
 | 35 | Bête du bassin (082) | `POOL.MB` | **Ce qui Monte du Bassin** | fa éolien | **150** | 45,1 s | 88 | 2 024 |
 
-**Total : 22 238 octets** pour les onze. Ce qui compte n'est pas la somme mais la
-plus grosse : 2 246 o < 2 304 o. Les tempos en gras ont été **accélérés** —
-jamais ralentis : la troupe d'orques avance, les grenouilles dansent, la meute
+**Total : 22 242 octets** pour les onze. Ce qui compte n'est pas la somme mais la
+plus grosse : 2 248 o < 2 304 o. Les tempos en gras ont été **accélérés** à la
+révision : la troupe d'orques avance, les grenouilles dansent, la meute
 part et la Bête du bassin sort plus vite.
 
-Les durées tiennent toutes entre **38,5 s et 49,7 s**. Le fondu de fin (`FADE`,
+Tous les tempos ont ensuite été recalés sur un nombre entier de ticks de 50 Hz
+par temps (16, 18, 20, 22 ou 24) : deux notes de même valeur durent enfin le
+même nombre de ticks.
+
+Les durées tiennent toutes entre **40,2 s et 51,5 s**. Le fondu de fin (`FADE`,
 0,9 s avant la dernière note) est automatique : aucune ne finit sur un accord
 tenu, toutes finissent sur une cadence qui prépare la reprise.
 
@@ -129,7 +133,7 @@ Vérification d'une pièce :
 
 ```sh
 cd SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres
-python3 ../verifier.py 33-rondpoint/rondpoint.mid --bpm 158
+python3 ../verifier.py 33-rondpoint/rondpoint.mid --bpm 150
 ```
 
 Les onze concluent `OK — 6 voix employées, …, aucune note abandonnée`.
@@ -139,27 +143,33 @@ Les onze concluent `OK — 6 voix employées, …, aucune note abandonnée`.
 ```sh
 cd /Users/gistair/src/pom2adventure/SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres
 M=../../../midi_to_mb.py
-(cd 25-pinces       && python3 pinces.py       && python3 $M pinces.mid       PINCERS.MB.BIN       --bpm 176 --max 2304 --wav PINCES.wav)
-(cd 26-orques       && python3 orques.py       && python3 $M orques.mid       ORCS.MB.BIN       --bpm 166 --max 2304 --wav ORQUES.wav)
-(cd 27-bete         && python3 bete.py         && python3 $M bete.mid         BEAST.MB.BIN         --bpm 143 --max 2304 --wav BETE.wav)
-(cd 28-arbresepees  && python3 arbresepees.py  && python3 $M arbresepees.mid  SWORDTREES.MB.BIN  --bpm 166 --max 2304 --wav ARBRESEPEES.wav)
+(cd 25-pinces       && python3 pinces.py       && python3 $M pinces.mid       PINCERS.MB.BIN       --bpm 166.667 --max 2304 --wav PINCES.wav)
+(cd 26-orques       && python3 orques.py       && python3 $M orques.mid       ORCS.MB.BIN       --bpm 150 --max 2304 --wav ORQUES.wav)
+(cd 27-bete         && python3 bete.py         && python3 $M bete.mid         BEAST.MB.BIN         --bpm 136.364 --max 2304 --wav BETE.wav)
+(cd 28-arbresepees  && python3 arbresepees.py  && python3 $M arbresepees.mid  SWORDTREES.MB.BIN  --bpm 166.667 --max 2304 --wav ARBRESEPEES.wav)
 (cd 29-araignees    && python3 araignees.py    && python3 $M araignees.mid    SPIDERS.MB.BIN    --bpm 150 --max 2304 --wav ARAIGNEES.wav)
-(cd 30-grenouilles  && python3 grenouilles.py  && python3 $M grenouilles.mid  FROGS.MB.BIN  --bpm 176 --max 2304 --wav GRENOUILLES.wav)
-(cd 31-profonde     && python3 profonde.py     && python3 $M profonde.mid     DEEPWATER.MB.BIN     --bpm 136 --max 2304 --wav PROFONDE.wav)
+(cd 30-grenouilles  && python3 grenouilles.py  && python3 $M grenouilles.mid  FROGS.MB.BIN  --bpm 166.667 --max 2304 --wav GRENOUILLES.wav)
+(cd 31-profonde     && python3 profonde.py     && python3 $M profonde.mid     DEEPWATER.MB.BIN     --bpm 136.364 --max 2304 --wav PROFONDE.wav)
 (cd 32-maitreloups  && python3 maitreloups.py  && python3 $M maitreloups.mid  WOLFMASTER.MB.BIN  --bpm 150 --max 2304 --wav MAITRELOUPS.wav)
-(cd 33-rondpoint    && python3 rondpoint.py    && python3 $M rondpoint.mid    ROUNDABOUT.MB.BIN    --bpm 158 --max 2304 --wav RONDPOINT.wav)
+(cd 33-rondpoint    && python3 rondpoint.py    && python3 $M rondpoint.mid    ROUNDABOUT.MB.BIN    --bpm 150 --max 2304 --wav RONDPOINT.wav)
 (cd 34-tronc        && python3 tronc.py        && python3 $M tronc.mid        LOG.MB.BIN        --bpm 150 --max 2304 --wav TRONC.wav)
 (cd 35-bassin       && python3 bassin.py       && python3 $M bassin.mid       POOL.MB.BIN       --bpm 150 --max 2304 --wav BASSIN.wav)
 ```
 
 Le bloc se recolle tel quel dans un shell. **Trois tempos ont changé** par
-rapport à la version précédente — 26 (158 → 166), 30 (166 → 176), 32 et 35
-(143 → 150) : les lignes ci-dessus sont les seules à jour.
+rapport à la version précédente — 26 (158 → 166), 30 (166 → 176), 32 et 35 (143
+→ 150). Le recalage sur ticks entiers a ensuite changé 25, 26, 27, 28, 30, 31 et
+33 : les lignes ci-dessus sont les seules à jour.
 
-`--vol` reste au défaut `13,11,11,12,11,11` partout. Le `.wav` de chaque dossier
-**est** ce que la Mockingboard jouera — six ondes carrées, deux puces, la même
-réduction, le même tempo, la même stéréo, la même batterie. Il n'est pas suivi
-par git (`.gitignore:76`).
+`--vol` reste partout à `10,8,8,9,8,8`, le défaut de `midi_to_mb.py` : sur la
+table logarithmique de l'AY, la mélodie (voix 0) sort à +7 dB et le contre-chant
+(voix 3) à +4 dB de l'accompagnement, et non +2 dB comme le faisait entendre
+l'ancien aperçu linéaire. Le `.wav` de chaque dossier est l'**aperçu fidèle** de
+ce que la Mockingboard jouera : `midi_to_mb.py` rejoue le flux écrit comme
+`music.s` le joue (volumes sur la table logarithmique de l'AY, fondu d'entrée de
+0,9 s, coupure nette au OFF, bruit de la voix 5, puce 1 à gauche et puce 2 à
+droite) puis synthétise les deux AY comme POM2. C'est un modèle : rien n'a
+encore été écouté sur une carte. Il n'est pas suivi par git (`.gitignore:76`).
 
 Rien n'est copié dans `SCOSWAMP/MUSIC/` : ce dossier reste un atelier tant que
 le propriétaire n'a pas écouté et tranché.

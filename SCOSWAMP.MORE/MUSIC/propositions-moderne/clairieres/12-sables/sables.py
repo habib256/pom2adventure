@@ -33,18 +33,18 @@ Ce qui a change a la revision :
   dessous, et le tom seul dans le silence. Pas un charleston : rien ne claque
   dans du sable.
 
-Fa mineur phrygien, 144 a la noire, 26 mesures a 4/4, 43,3 s.
+Fa mineur phrygien, 150 a la noire, 26 mesures a 4/4, 41,6 s.
 Forme intro(4) - A(8) - B(8) - A'(6).
 
     python3 sables.py && python3 ../../../midi_to_mb.py sables.mid \\
-        QUICKSAND.MB.BIN --bpm 144 --max 2304 --wav SABLES.wav
+        QUICKSAND.MB.BIN --bpm 150 --max 2304 --wav SABLES.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 144, 4, 26
+BPM, BAR, BARS = 3000 / 20, 4, 26
 LEN = BAR * BARS
 HALF = BAR / 2.0
 CEDE = 8                                   # la mesure ou le terrain cede

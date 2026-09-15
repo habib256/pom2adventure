@@ -26,18 +26,19 @@ Ce qui a change a la revision :
 - **la batterie** : le cliquetis. Charleston ferme en croches serrees, caisse
   claire seche, grosse caisse au premier temps. Rien dans l'intro, rien au B.
 
-La phrygien, 184 a la noire — le tempo le plus vif des douze, celui de la lutte.
-28 mesures a 4/4, 36,5 s. Forme intro(4) - A(8) - B(8) - A'(8).
+La phrygien, 187,5 a la noire — le tempo le plus vif des douze (a egalite
+avec les brigands), celui de la lutte.
+28 mesures a 4/4, 35,8 s. Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 scorpnain.py && python3 ../../../midi_to_mb.py scorpnain.mid \\
-        DWARFSCORP.MB.BIN --bpm 184 --max 2304 --wav SCORPNAIN.wav
+        DWARFSCORP.MB.BIN --bpm 187.5 --max 2304 --wav SCORPNAIN.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 184, 4, 28
+BPM, BAR, BARS = 3000 / 16, 4, 28
 LEN = BAR * BARS
 HALF = BAR / 2.0
 NAIN = (12, 20)                            # les mesures du Nain, en index

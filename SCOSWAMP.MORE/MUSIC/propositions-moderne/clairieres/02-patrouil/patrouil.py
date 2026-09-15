@@ -27,18 +27,18 @@ Ce qui a change a la revision :
   comme la ronde : les deux decalages ne retombent ensemble qu'une mesure sur
   trois. Elle prend la voix 5, le bourdon de mi a cede la place.
 
-La mineur eolien, 162 a la noire, 28 mesures a 4/4, 41,5 s.
+La mineur eolien, 166,7 a la noire, 28 mesures a 4/4, 40,3 s.
 Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 patrouil.py && python3 ../../../midi_to_mb.py patrouil.mid \\
-        PATROLLER.MB.BIN --bpm 162 --max 2304 --wav PATROUIL.wav
+        PATROLLER.MB.BIN --bpm 166.667 --max 2304 --wav PATROUIL.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 162, 4, 28
+BPM, BAR, BARS = 3000 / 18, 4, 28
 LEN = BAR * BARS
 HALF = BAR / 2.0
 SILENCE = (BAR * 19 + 3.0, BAR * 20)       # le temps ou la ronde s'arrete

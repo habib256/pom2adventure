@@ -31,18 +31,18 @@ Ce qui a change a la revision :
   claire qu'une mesure sur cinq. Rien dans l'intro. La voix 5 lui revient, le
   bourdon de re a cede la place.
 
-Sol mineur eolien, 154 a la noire, 26 mesures a 4/4, 40,5 s.
+Sol mineur eolien, 150 a la noire, 26 mesures a 4/4, 41,6 s.
 Forme intro(4) - A(8) - B(8) - A'(6).
 
     python3 feufollet.py && python3 ../../../midi_to_mb.py feufollet.mid \\
-        WILLOWISP.MB.BIN --bpm 154 --max 2304 --wav FEUFOLLET.wav
+        WILLOWISP.MB.BIN --bpm 150 --max 2304 --wav FEUFOLLET.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 154, 4, 26
+BPM, BAR, BARS = 3000 / 20, 4, 26
 LEN = BAR * BARS
 HALF = BAR / 2.0
 STOP = BAR * 20                            # la lueur s'immobilise, mesure 21

@@ -453,8 +453,9 @@ Le détail — pages couvertes, citations, tempos, justifications, commandes de
 régénération — est dans **`SCOSWAMP.MORE/MUSIC/propositions/`**, un dossier par
 zone, plus un `INDEX.md` qui donne la table complète des 35 clairières. Les onze
 pièces sont **déjà téléchargées, converties et rendues en `.wav`** : le `.wav`
-est exactement ce que la carte jouera, trois ondes carrées, même tempo, même
-réduction.
+sort de l'ancien aperçu, à volumes linéaires : reconvertir avec le
+`midi_to_mb.py` actuel, qui rejoue `music.s` sur la table de volume de l'AY,
+avant de juger.
 
 ### 5.1 Les onze musiques
 

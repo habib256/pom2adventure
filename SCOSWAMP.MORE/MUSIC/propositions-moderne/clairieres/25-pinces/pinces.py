@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« L'Herbe qui Serre » — clairiere 25, l'Herbe a Pinces. Mi phrygien, 176.
+"""« L'Herbe qui Serre » — clairiere 25, l'Herbe a Pinces. Mi phrygien, 166,7.
 
 Pages 388, 263, 033, 187. « Elle pousse si vite qu'on peut la voir bouger. Et
 tandis que vous l'observez, des pinces apparaissent aux extremites de ses
@@ -27,17 +27,17 @@ La batterie ne joue pas partout : rien dans l'intro, deux coups par mesure en A,
 la grosse caisse en B, la pince complete en A', et plus rien a la derniere mesure
 pour que la boucle reparte a nu.
 
-32 mesures a 4/4, 43,6 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8) - coda(4).
+32 mesures a 4/4, 46,0 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8) - coda(4).
 
     python3 pinces.py && python3 ../../../midi_to_mb.py pinces.mid \\
-        PINCERS.MB.BIN --bpm 176 --max 2304 --wav PINCES.wav
+        PINCERS.MB.BIN --bpm 166.667 --max 2304 --wav PINCES.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 176, 4, 32
+BPM, BAR, BARS = 3000 / 18, 4, 32
 LEN = BAR * BARS
 
 # La grille se lit au demi-temps de mesure : un accord seul tient la mesure,

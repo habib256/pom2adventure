@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« Le Bal des Mares » — clairiere 30, les grenouilles. Sol eolien, 176.
+"""« Le Bal des Mares » — clairiere 30, les grenouilles. Sol eolien, 166,7.
 
 Pages 053, 329, 230. « Le coassement de milliers de grenouilles vous accompagne.
 Le sentier debouche sur une clairiere parsemee de mares. D'immenses champignons
@@ -10,7 +10,8 @@ C'est la seule clairiere comique des onze, et la seule ou le Marais fait du
 bruit. Le procede de la zone `sud` est garde tel quel — la marche i-VI-III-VII
 (Gm-Eb-Bb-F) posee sur un bourdon de sol qui ne bouge pas — et le caractere
 aussi : la melodie **saute** l'octave en croches et retombe, la basse alterne
-fondamentale et quinte grave. Le tempo passe de 166 a **176** : on danse.
+fondamentale et quinte grave. Le tempo passe de 166 a **176** : on danse ;
+puis a 166,7, dix-huit ticks par temps, pour que les croches tombent juste.
 
 Ce que la revision ajoute :
 
@@ -32,17 +33,17 @@ Ce que la revision ajoute :
 * **l'arc** : intro sans batterie et arpege en noires ; A' avec le charleston
   ouvert sur chaque temps faible.
 
-28 mesures a 4/4, 38,2 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8).
+28 mesures a 4/4, 40,3 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8).
 
     python3 grenouilles.py && python3 ../../../midi_to_mb.py grenouilles.mid \\
-        FROGS.MB.BIN --bpm 176 --max 2304 --wav GRENOUILLES.wav
+        FROGS.MB.BIN --bpm 166.667 --max 2304 --wav GRENOUILLES.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 176, 4, 28
+BPM, BAR, BARS = 3000 / 18, 4, 28
 LEN = BAR * BARS
 
 GRILLE = [

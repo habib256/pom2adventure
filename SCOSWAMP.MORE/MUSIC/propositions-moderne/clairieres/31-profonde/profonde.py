@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« L'Eau Noire » — clairiere 31, la riviere profonde. Sol dorien, 136.
+"""« L'Eau Noire » — clairiere 31, la riviere profonde. Sol dorien, 136,4.
 
 Pages 090, 044, 254, 370. « Celui qui se trouve devant vous est beaucoup plus
 profond. La riviere tourbillonne en remous et n'inspire guere confiance : qui
@@ -35,17 +35,17 @@ Ce que la revision ajoute :
 * **l'arc** : la basse passe de la ronde a la noire pointee, le contre-chant du
   souffle tenu a la blanche, les nappes de bruit de une a quatre par phrase.
 
-28 mesures a 4/4, 49,4 s. Forme intro(4) - A(8) - B(8) - A'(8).
+28 mesures a 4/4, 49,3 s. Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 profonde.py && python3 ../../../midi_to_mb.py profonde.mid \\
-        DEEPWATER.MB.BIN --bpm 136 --max 2304 --wav PROFONDE.wav
+        DEEPWATER.MB.BIN --bpm 136.364 --max 2304 --wav PROFONDE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 136, 4, 28
+BPM, BAR, BARS = 3000 / 22, 4, 28
 LEN = BAR * BARS
 
 GRILLE = [

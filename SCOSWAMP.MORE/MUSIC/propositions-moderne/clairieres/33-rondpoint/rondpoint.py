@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« Le Coeur du Marais » — clairiere 33, le large rond-point. Re eolien, 158.
+"""« Le Coeur du Marais » — clairiere 33, le large rond-point. Re eolien, 150.
 
 C'est la premiere clairiere du Marais : le joueur y arrive page 195, le sol est
 instable, trois sentiers partent de la et le brouillard monte. La piece est donc
@@ -37,17 +37,17 @@ Ce que la revision ajoute :
   de nouveau a la derniere mesure. La piece s'ouvre et se referme sur le meme
   vide.
 
-32 mesures a 4/4, 48,6 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8) - coda(4).
+32 mesures a 4/4, 51,2 s. Forme intro(4) - A(8) - B(8) - A' a l'octave(8) - coda(4).
 
     python3 rondpoint.py && python3 ../../../midi_to_mb.py rondpoint.mid \\
-        ROUNDABOUT.MB.BIN --bpm 158 --max 2304 --wav RONDPOINT.wav
+        ROUNDABOUT.MB.BIN --bpm 150 --max 2304 --wav RONDPOINT.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 158, 4, 32
+BPM, BAR, BARS = 3000 / 20, 4, 32
 LEN = BAR * BARS
 
 GRILLE = [

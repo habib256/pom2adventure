@@ -26,18 +26,18 @@ Ce qui a change a la revision :
   voix 5 lui revient : le bourdon de fa diese a cede la place, et c'est mieux
   ainsi — un affut ne bourdonne pas, il bat.
 
-28 mesures dont une a 2/4, 110 temps, 38,4 s a 172 a la noire.
+28 mesures dont une a 2/4, 110 temps, 39,6 s a 166,7 a la noire.
 Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 loups.py && python3 ../../../midi_to_mb.py loups.mid \\
-        WOLVES.MB.BIN --bpm 172 --max 2304 --wav LOUPS.wav
+        WOLVES.MB.BIN --bpm 166.667 --max 2304 --wav LOUPS.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 172, 4, 28
+BPM, BAR, BARS = 3000 / 18, 4, 28
 BEATS = [BAR] * BARS
 BEATS[11] = 2                              # la mesure boiteuse : on recule d'un pas
 T = [sum(BEATS[:i]) for i in range(BARS)]  # le debut de chaque mesure

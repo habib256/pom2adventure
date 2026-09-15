@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« Ce qui Attend Sous l'Eau » — les dix clairieres mortelles. Do phrygien, 136.
+"""« Ce qui Attend Sous l'Eau » — les dix clairieres mortelles. Do phrygien, 136,4.
 
 Ici la batterie n'est pas un rythme : c'est un **coeur**. Une grosse caisse
 seule, deux coups par mesure, sourde, sans charleston ni caisse claire — et
@@ -20,17 +20,17 @@ et le fa mineur qui suit tombe dans le vide. C'est le seul silence complet du
 dossier avec celui de l'accueil, et il ne dure pas assez pour qu'on croie a une
 panne — juste assez pour qu'on retienne son souffle.
 
-28 mesures a 4/4, 49,4 s.
+28 mesures a 4/4, 49,3 s.
 
     python3 danger.py && python3 ../../midi_to_mb.py danger.mid \\
-        DANGER.MB.BIN --bpm 136 --max 2304 --wav DANGER.wav
+        DANGER.MB.BIN --bpm 136.364 --max 2304 --wav DANGER.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 136, 4, 28
+BPM, BAR, BARS = 3000 / 22, 4, 28
 LEN = BAR * BARS
 
 CH = (["Cm", "Db"] + ["Cm", "Db", "Cm", "Bbm"] + ["Cm", "Db", "Ab", "Bbm", "Cm"]

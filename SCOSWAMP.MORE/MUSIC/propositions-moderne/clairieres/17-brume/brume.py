@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""« La Brume Fetide » — clairiere 17. Do eolien, 128.
+"""« La Brume Fetide » — clairiere 17. Do eolien, 125.
 
 Variation dans la couleur `sud` : eolien comme la zone, **bourdon de tonique
 immobile** comme la zone, mais transpose sur do et pris par le bas. Le procede
 propre a la clairiere est la **descente** : la page 094 commence par « le sentier
 descend », et la piece descend en effet, du do aigu jusqu'au do grave.
 
-C'est la piece la plus lente des douze — 128, le plancher du dossier — et elle
+C'est la piece la plus lente des douze — 125, le plancher du dossier — et elle
 le reste : on ne court pas dans une odeur pareille.
 
 Ce que la revision ajoute :
@@ -38,18 +38,18 @@ la reprise arrive. Elle prend la voix 5 a droite ; il ne reste que cinq parties
 de hauteur, et c'est la voix d'accords tenus qui a cede la place — le bourdon de
 tonique est le procede de la zone.
 
-22 mesures a 4/4, 41,3 s. Forme intro(4) - A(6) la descente - B(6) l'odeur -
+22 mesures a 4/4, 42,3 s. Forme intro(4) - A(6) la descente - B(6) l'odeur -
 A'(6) la brume se referme.
 
     python3 brume.py && python3 ../../../midi_to_mb.py brume.mid \\
-        MIST.MB.BIN --bpm 128 --max 2304 --wav BRUME.wav
+        MIST.MB.BIN --bpm 125 --max 2304 --wav BRUME.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 128, 4, 22
+BPM, BAR, BARS = 3000 / 24, 4, 22
 LEN = BAR * BARS
 
 # une entree par mesure ; « Bb|Ab » change d'accord au milieu de la mesure

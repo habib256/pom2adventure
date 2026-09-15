@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« La Licorne Blessee » — clairiere 23. Fa eolien, 142.
+"""« La Licorne Blessee » — clairiere 23. Fa eolien, 136,4.
 
 Variation dans la couleur `sud` : c'est la piece des douze qui reprend le plus
 franchement le procede de la zone — la marche i-VI-III-VII (Fm-Db-Ab-Eb, celle
@@ -40,18 +40,18 @@ Ce que la revision ajoute :
 5 a droite ; il ne reste que cinq parties de hauteur, et c'est la voix d'accords
 tenus qui a cede la place — le bourdon de tonique est le procede de la zone.
 
-24 mesures a 4/4, 40,6 s. Forme intro(4) - A(8) l'animal couche - B(8) le defi -
+24 mesures a 4/4, 42,3 s. Forme intro(4) - A(8) l'animal couche - B(8) le defi -
 A'(4).
 
     python3 licorne.py && python3 ../../../midi_to_mb.py licorne.mid \\
-        UNICORN.MB.BIN --bpm 142 --max 2304 --wav LICORNE.wav
+        UNICORN.MB.BIN --bpm 136.364 --max 2304 --wav LICORNE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 142, 4, 24
+BPM, BAR, BARS = 3000 / 22, 4, 24
 LEN = BAR * BARS
 
 # une entree par mesure ; « Db|Ab » change d'accord au milieu de la mesure

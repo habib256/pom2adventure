@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""« Les Fleurs d'Angoisse » — clairiere 22. Mi phrygien, 148.
+"""« Les Fleurs d'Angoisse » — clairiere 22. Mi phrygien, 150.
 
 Variation dans la couleur `danger` : le mode **phrygien**, donc le demi-ton pose
 juste au-dessus de la tonique — ici fa contre mi — le **bourdon de tonique** qui
@@ -42,18 +42,18 @@ applique a un instrument que la zone n'avait pas. Elle prend la voix 5 a droite 
 il ne reste que cinq parties de hauteur, et c'est la voix d'accords tenus qui a
 cede la place — le bourdon de tonique fait le caractere de la piece.
 
-24 mesures a 4/4, 38,9 s. Forme intro(4) - A(8) les fleurs - B(8) le
+24 mesures a 4/4, 38,4 s. Forme intro(4) - A(8) les fleurs - B(8) le
 tremblement - A'(4).
 
     python3 angoisse.py && python3 ../../../midi_to_mb.py angoisse.mid \\
-        DREAD.MB.BIN --bpm 148 --max 2304 --wav ANGOISSE.wav
+        DREAD.MB.BIN --bpm 150 --max 2304 --wav ANGOISSE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 148, 4, 24
+BPM, BAR, BARS = 3000 / 20, 4, 24
 LEN = BAR * BARS
 CUT = 12                                   # la mesure ou la basse passe en noires
 

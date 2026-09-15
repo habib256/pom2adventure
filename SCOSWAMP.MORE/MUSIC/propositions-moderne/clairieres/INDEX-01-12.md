@@ -6,16 +6,21 @@ Douze compositions originales, écrites avec `../compose.py`, converties par
 identifiable — mais avec son propre thème, son propre caractère tiré des pages
 de la clairière, et sa propre forme.
 
-Le `.wav` de chaque dossier **est** ce que la Mockingboard jouera : six voix,
-deux puces, la même réduction, le même tempo, la même stéréo. C'est le seul
-objet à écouter pour juger ; il n'est pas suivi par git.
+Le `.wav` de chaque dossier est l'**aperçu fidèle** de ce que la Mockingboard
+jouera : `midi_to_mb.py` rejoue le flux écrit comme `music.s` le joue (volumes
+sur la table logarithmique de l'AY, fondu d'entrée de 0,9 s, coupure nette au
+OFF, bruit de la voix 5, puce 1 à gauche et puce 2 à droite) puis synthétise les
+deux AY comme POM2. C'est le seul objet à écouter pour juger, et c'est un modèle
+: rien n'a encore été écouté sur une carte ; il n'est pas suivi par git.
 
-> **Révision.** Les douze pièces ont été réécrites. Elles ont toutes gagné
-> **une batterie**, **un crochet mélodique énoncé au moins deux fois**, **une
-> réponse écrite entre la voix 0 et la voix 3**, **un rythme harmonique
-> variable**, **une surprise** et **un silence général**. Toutes ont accéléré.
-> Le mode, la tonique, le procédé de zone et le caractère de chaque clairière
-> sont inchangés : ce sont des acquis.
+> **Révision.** Les douze pièces ont été réécrites. Elles ont toutes gagné **une
+> batterie**, **un crochet mélodique énoncé au moins deux fois**, **une réponse
+> écrite entre la voix 0 et la voix 3**, **un rythme harmonique variable**,
+> **une surprise** et **un silence général**. Toutes ont accéléré. Tous les
+> tempos ont ensuite été recalés sur un nombre entier de ticks de 50 Hz par
+> temps (16, 18, 20, 22 ou 24) : deux notes de même valeur durent enfin le même
+> nombre de ticks. Le mode, la tonique, le procédé de zone et le caractère de
+> chaque clairière sont inchangés : ce sont des acquis.
 
 ---
 
@@ -23,35 +28,36 @@ objet à écouter pour juger ; il n'est pas suivi par git.
 
 | # | `hub` | Clairière | Zone | Fichier disque | Pièce | Mode | bpm | Durée | Octets |
 | ---: | ---: | --- | --- | --- | --- | --- | ---: | ---: | ---: |
-| 1 | 078 | Route de Courbensaule | `village` | `BENTBEAKS.MB` | **La Route des Trois Auberges** | ré mixolydien | **176** | 38,2 s | **2 276** |
-| 2 | 234 | Le Patrouilleur vert | `nord` | `PATROLLER.MB` | **La Question du Patrouilleur** | la éolien | 162 | 41,5 s | 2 185 |
-| 3 | 084 | Le Maître des Jardins | `nord` | `GARDENS.MB` | **L'Amulette de Fleur** | ré dorien | 144 | 43,3 s | 2 042 |
-| 4 | 232 | Les deux loups | `nord` | `WOLVES.MB` | **Deux Paires d'Yeux** | si éolien | 172 | 38,4 s | **2 253** |
-| 5 | 218 | Feu follet à l'orée | `nord` | `WILLOWISP.MB` | **La Lumière qui Recule** | sol éolien | 154 | 40,5 s | 2 083 |
+| 1 | 078 | Route de Courbensaule | `village` | `BENTBEAKS.MB` | **La Route des Trois Auberges** | ré mixolydien | **166,7** | 40,3 s | **2 293** |
+| 2 | 234 | Le Patrouilleur vert | `nord` | `PATROLLER.MB` | **La Question du Patrouilleur** | la éolien | 166,7 | 40,3 s | 2 189 |
+| 3 | 084 | Le Maître des Jardins | `nord` | `GARDENS.MB` | **L'Amulette de Fleur** | ré dorien | 150 | 41,6 s | 2 052 |
+| 4 | 232 | Les deux loups | `nord` | `WOLVES.MB` | **Deux Paires d'Yeux** | si éolien | 166,7 | 39,6 s | **2 285** |
+| 5 | 218 | Feu follet à l'orée | `nord` | `WILLOWISP.MB` | **La Lumière qui Recule** | sol éolien | 150 | 41,6 s | 2 083 |
 | 6 | 121 | Le croisement | `nord` | `CROSSROADS.MB` | **Quatre Chemins** | mi éolien | 150 | 44,8 s | 2 177 |
-| 7 | 161 | Le Géant | `nord` | `GIANT.MB` | **Il Est Interdit de Passer** | do éolien | **138** | 41,7 s | **1 624** |
-| 8 | 019 | Clairière aux brigands | `nord` | `BRIGANDS.MB` | **Cinq Voix derrière l'Arbre** | ré éolien → **majeur** | **180** | **37,3 s** | **2 258** |
-| 9 | 153 | Le bassin de Vase | `danger` | `MUD.MB` | **Ce qui Sort du Bassin** | ré phrygien | 138 | **45,2 s** | 1 594 |
-| 10 | 088 | Scorpion et nain | `danger` | `DWARFSCORP.MB` | **Les Pinces et l'Os** | la phrygien | **184** | **36,5 s** | 2 076 |
-| 11 | 202 | Le nid de l'Aigle | `nord` | `EAGLE.MB` | **Le Grand Nid** | fa♯ éolien | 156 | 43,1 s | 1 682 |
-| 12 | 270 | Sables mouvants | `danger` | `QUICKSAND.MB` | **Le Sol qui Cède** | fa phrygien | 144 | 43,3 s | 1 920 |
+| 7 | 161 | Le Géant | `nord` | `GIANT.MB` | **Il Est Interdit de Passer** | do éolien | **150** | 38,4 s | **1 624** |
+| 8 | 019 | Clairière aux brigands | `nord` | `BRIGANDS.MB` | **Cinq Voix derrière l'Arbre** | ré éolien → **majeur** | **187,5** | **35,8 s** | **2 242** |
+| 9 | 153 | Le bassin de Vase | `danger` | `MUD.MB` | **Ce qui Sort du Bassin** | ré phrygien | 136,4 | **45,7 s** | 1 594 |
+| 10 | 088 | Scorpion et nain | `danger` | `DWARFSCORP.MB` | **Les Pinces et l'Os** | la phrygien | **187,5** | **35,8 s** | 2 078 |
+| 11 | 202 | Le nid de l'Aigle | `nord` | `EAGLE.MB` | **Le Grand Nid** | fa♯ éolien | 150 | 44,8 s | 1 682 |
+| 12 | 270 | Sables mouvants | `danger` | `QUICKSAND.MB` | **Le Sol qui Cède** | fa phrygien | 150 | 41,6 s | 1 921 |
 
-**Total : 24 170 octets** sur le volume, pour douze fichiers — **4 824 notes de
+**Total : 24 220 octets** sur le volume, pour douze fichiers — **4 824 notes de
 hauteur et 985 coups de batterie**. Ce qui coûte n'est pas le nombre de pièces
-mais la plus grosse : **`BENTBEAKS.MB`, 2 276 octets**, à **28 octets** de la
+mais la plus grosse : **`BENTBEAKS.MB`, 2 293 octets**, à **11 octets** de la
 limite du tampon de zone (2 304).
 
 ⚠ Trois pièces sont serrées et doivent être **reconverties avant d'être crues**
-après toute retouche : `COURBENS` (marge 28), `BRIGANDS` (46), `LOUPS` (51).
-Les neuf autres ont entre 119 et 710 octets de marge.
+après toute retouche : `COURBENS` (marge 11), `LOUPS` (19), `BRIGANDS` (62). Les
+neuf autres ont entre 115 et 710 octets de marge.
 
 Douze modes, douze toniques, **aucun doublon** : chaque clairière a sa propre
 paire mode/tonique, et aucune ne reprend celle de sa zone sauf `CROISEMENT`,
 délibérément en mi éolien parce qu'il est le centre du Marais nord.
 
 Toutes les pièces : **cinq parties de hauteur plus la batterie, polyphonie
-maximale 5/5, zéro note abandonnée par la réduction**, tempo entre 138 et 184,
-boucle entre 36,5 et 45,2 s. `verifier.py` conclut **`OK` sur les douze**.
+maximale 5/5, zéro note abandonnée par la réduction**, tempo entre 136,4 et
+187,5, boucle entre 35,8 et 45,7 s. `verifier.py` conclut **`OK` sur les
+douze**.
 
 ## 2. Ce que la révision a apporté, pièce par pièce
 
@@ -137,34 +143,37 @@ Depuis `SCOSWAMP.MORE/MUSIC/propositions-moderne/clairieres` :
 
 ```sh
 M=../../../midi_to_mb.py
-(cd 01-courbens   && python3 courbens.py   && python3 $M courbens.mid   BENTBEAKS.MB.BIN   --bpm 176 --max 2304 --wav COURBENS.wav)
-(cd 02-patrouil   && python3 patrouil.py   && python3 $M patrouil.mid   PATROLLER.MB.BIN   --bpm 162 --max 2304 --wav PATROUIL.wav)
-(cd 03-jardins    && python3 jardins.py    && python3 $M jardins.mid    GARDENS.MB.BIN    --bpm 144 --max 2304 --wav JARDINS.wav)
-(cd 04-loups      && python3 loups.py      && python3 $M loups.mid      WOLVES.MB.BIN      --bpm 172 --max 2304 --wav LOUPS.wav)
-(cd 05-feufollet  && python3 feufollet.py  && python3 $M feufollet.mid  WILLOWISP.MB.BIN  --bpm 154 --max 2304 --wav FEUFOLLET.wav)
+(cd 01-courbens   && python3 courbens.py   && python3 $M courbens.mid   BENTBEAKS.MB.BIN   --bpm 166.667 --max 2304 --wav COURBENS.wav)
+(cd 02-patrouil   && python3 patrouil.py   && python3 $M patrouil.mid   PATROLLER.MB.BIN   --bpm 166.667 --max 2304 --wav PATROUIL.wav)
+(cd 03-jardins    && python3 jardins.py    && python3 $M jardins.mid    GARDENS.MB.BIN    --bpm 150 --max 2304 --wav JARDINS.wav)
+(cd 04-loups      && python3 loups.py      && python3 $M loups.mid      WOLVES.MB.BIN      --bpm 166.667 --max 2304 --wav LOUPS.wav)
+(cd 05-feufollet  && python3 feufollet.py  && python3 $M feufollet.mid  WILLOWISP.MB.BIN  --bpm 150 --max 2304 --wav FEUFOLLET.wav)
 (cd 06-croisement && python3 croisement.py && python3 $M croisement.mid CROSSROADS.MB.BIN --bpm 150 --max 2304 --wav CROISEMENT.wav)
-(cd 07-geant      && python3 geant.py      && python3 $M geant.mid      GIANT.MB.BIN      --bpm 138 --max 2304 --wav GEANT.wav)
-(cd 08-brigands   && python3 brigands.py   && python3 $M brigands.mid   BRIGANDS.MB.BIN   --bpm 180 --max 2304 --wav BRIGANDS.wav)
-(cd 09-vase       && python3 vase.py       && python3 $M vase.mid       MUD.MB.BIN       --bpm 138 --max 2304 --wav VASE.wav)
-(cd 10-scorpnain  && python3 scorpnain.py  && python3 $M scorpnain.mid  DWARFSCORP.MB.BIN  --bpm 184 --max 2304 --wav SCORPNAIN.wav)
-(cd 11-aigle      && python3 aigle.py      && python3 $M aigle.mid      EAGLE.MB.BIN      --bpm 156 --max 2304 --wav AIGLE.wav)
-(cd 12-sables     && python3 sables.py     && python3 $M sables.mid     QUICKSAND.MB.BIN     --bpm 144 --max 2304 --wav SABLES.wav)
+(cd 07-geant      && python3 geant.py      && python3 $M geant.mid      GIANT.MB.BIN      --bpm 150 --max 2304 --wav GEANT.wav)
+(cd 08-brigands   && python3 brigands.py   && python3 $M brigands.mid   BRIGANDS.MB.BIN   --bpm 187.5 --max 2304 --wav BRIGANDS.wav)
+(cd 09-vase       && python3 vase.py       && python3 $M vase.mid       MUD.MB.BIN       --bpm 136.364 --max 2304 --wav VASE.wav)
+(cd 10-scorpnain  && python3 scorpnain.py  && python3 $M scorpnain.mid  DWARFSCORP.MB.BIN  --bpm 187.5 --max 2304 --wav SCORPNAIN.wav)
+(cd 11-aigle      && python3 aigle.py      && python3 $M aigle.mid      EAGLE.MB.BIN      --bpm 150 --max 2304 --wav AIGLE.wav)
+(cd 12-sables     && python3 sables.py     && python3 $M sables.mid     QUICKSAND.MB.BIN     --bpm 150 --max 2304 --wav SABLES.wav)
 ```
 
 **Les tempos ont changé** : ce bloc n'est plus interchangeable avec l'ancien.
 Une pièce convertie au mauvais `--bpm` sonnera juste mais ne durera pas ce que
 le tableau annonce, et le tampon peut déborder.
 
-Le bloc entier se recolle tel quel dans un shell ; avec `set -e` il s'arrête à la
-première erreur. `--max 2304` fait **échouer** la conversion au lieu de livrer un
-flux qui déborderait le tampon de zone à l'exécution. `--vol` reste au défaut
-`13,11,11,12,11,11` partout, comme pour les dix pièces de zone.
+Le bloc entier se recolle tel quel dans un shell ; avec `set -e` il s'arrête à
+la première erreur. `--max 2304` fait **échouer** la conversion au lieu de
+livrer un flux qui déborderait le tampon de zone à l'exécution. `--vol` reste
+partout à `10,8,8,9,8,8`, le défaut de `midi_to_mb.py` : sur la table
+logarithmique de l'AY, la mélodie (voix 0) sort à +7 dB et le contre-chant (voix
+3) à +4 dB de l'accompagnement, et non +2 dB comme le faisait entendre l'ancien
+aperçu linéaire, comme pour les dix pièces de zone.
 
 Pour contrôler ce que la carte fera réellement d'une pièce — voix par voix, côté
 par côté, batterie comprise :
 
 ```sh
-python3 ../verifier.py 11-aigle/aigle.mid --bpm 156
+python3 ../verifier.py 11-aigle/aigle.mid --bpm 150
 ```
 
 Les douze finissent par `OK`.

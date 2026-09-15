@@ -33,18 +33,18 @@ Ce qui a change a la revision :
   derriere l'arbre — l'intro est muette. La voix 5 lui revient, le bourdon de
   re a cede la place.
 
-Re mineur eolien (majeur a la fin), 180 a la noire, 28 mesures a 4/4, 37,3 s.
+Re mineur eolien (majeur a la fin), 187,5 a la noire, 28 mesures a 4/4, 35,8 s.
 Forme intro(4) - A(8) - B(8) - A'(8).
 
     python3 brigands.py && python3 ../../../midi_to_mb.py brigands.mid \\
-        BRIGANDS.MB.BIN --bpm 180 --max 2304 --wav BRIGANDS.wav
+        BRIGANDS.MB.BIN --bpm 187.5 --max 2304 --wav BRIGANDS.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 180, 4, 28
+BPM, BAR, BARS = 3000 / 16, 4, 28
 LEN = BAR * BARS
 HALF = BAR / 2.0
 ALIGNE = BAR * 24                          # la cellule retombe d'aplomb

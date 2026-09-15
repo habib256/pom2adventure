@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """« Les Feux de Bourbenville » — le village, le prologue, Courbensaule.
 
-Sol mixolydien, 166 a la noire, 28 mesures a 4/4, 40 s. Cinq voix de hauteur et
+Sol mixolydien, 166,7 a la noire, 28 mesures a 4/4, 40 s. Cinq voix de hauteur et
 une batterie de danse : le bourdon a cede sa voix a la grosse caisse, ce qui
 convient — un village ne bourdonne pas, il tape du pied.
 
@@ -21,14 +21,14 @@ RYTHME HARMONIQUE : huit temps sur sol a l'intro, quatre en A, deux aux mesures
 11 et 23, huit sur la cadence finale.
 
     python3 village.py && python3 ../../midi_to_mb.py village.mid \\
-        VILLAGE.MB.BIN --bpm 166 --max 2304 --wav VILLAGE.wav
+        VILLAGE.MB.BIN --bpm 166.667 --max 2304 --wav VILLAGE.wav
 """
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from compose import *                                          # noqa: E402,F403
 
-BPM, BAR, BARS = 166, 4, 28
+BPM, BAR, BARS = 3000 / 18, 4, 28
 LEN = BAR * BARS
 
 CH = (["G", "F", "C"] + ["G", "F", "C", "G"] + ["G", "F", "C", "Dm", "G"]
