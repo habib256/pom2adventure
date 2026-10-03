@@ -353,11 +353,13 @@ def scene_rows(root, characters, all_pages):
     game = root / "SCOSWAMP"
     more = root / "SCOSWAMP.MORE"
     rows = []
-    # 402-406 : la page jumelle du Stratagus affaibli et les relais d'effets
-    # (chute, piqure, bond parfait) -- voir TODO, "six pages inexprimables".
-    # Le corpus contient aussi la page 419 "Qui vous etes", atteinte apres la
-    # creation du personnage ; les pages 407-418 sont des numeros absents.
-    for scene_id in range(420):
+    # Les pages viennent du corpus, pas d'une borne ecrite ici. Au-dela des 400
+    # du livre il porte des pages du moteur (le Stratagus affaibli, les relais
+    # d'effets, "Qui vous etes" en 419, le sentier sur les Sables en 421...),
+    # et l'ancienne boucle range(420) ignorait en silence toute page ajoutee
+    # apres elle : N421 est restee sans planche.
+    pages = sorted(int(p.stem[1:]) for p in (game / "TEXTFR").glob("N*/N[0-9][0-9][0-9].TXT"))
+    for scene_id in pages:
         sid = f"{scene_id:03d}"
         bucket = f"N{(scene_id // 50) * 50:03d}"
         text_path = game / "TEXTFR" / bucket / f"N{sid}.TXT"
