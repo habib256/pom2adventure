@@ -24,3 +24,4 @@
 .apply-actions .primary{order:-2}.apply-actions>p{order:-1;margin:8px 0 0}.apply-actions .check{margin:8px 0 0}
 .apply-actions #preview{margin-top:6px}.apply-actions #build{margin-top:6px}.apply-actions button{padding:8px}
 @media(max-width:800px){.adjustments{height:auto;position:static;overflow:visible}.studio #settings{overflow:visible}.apply-actions{position:sticky;bottom:0;background:#191c1e;padding:10px 0}}
+.regen-tools{border-top:1px solid var(--trait);padding-top:12px;display:flex;flex-direction:column;gap:10px}.regen-tools button{font-size:11px;align-self:flex-start}.regen-tools summary{font-size:11px;color:#b9a48b;cursor:pointer}.regen-tools pre{font:10px/1.5 var(--mono);color:#a9b0b5;white-space:pre-wrap;max-height:220px;overflow:auto;background:#121416;border:1px solid var(--trait);padding:10px;margin:8px 0 0}

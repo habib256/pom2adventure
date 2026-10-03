@@ -40,7 +40,9 @@ jobs="${3:-1}"
 root="$(cd "$(dirname "$0")/../.." && pwd)"
 
 work="$(mktemp -d "${TMPDIR:-/tmp}/scoswamp-gen.XXXXXX")"
-trap 'rm -rf "$work"' EXIT
+# Hors de $work : chaque sous-dossier de $work est une tache.
+rundir="$(mktemp -d "${TMPDIR:-/tmp}/scoswamp-gen-bilan.XXXXXX")"
+trap 'rm -rf "$work" "$rundir"' EXIT
 
 # ── Decoupage du manifeste en taches ────────────────────────────────────────
 # Un fichier par image : le prompt contient des retours a la ligne et des
@@ -89,6 +91,9 @@ run_one() {
     base="$(basename "$dest" .png)"
     rejets="$GEN_ROOT/$(dirname "$dest")/.rejets"
     stamp="$(date +%Y%m%d-%H%M%S)"
+    # Les comptes rendus d'un passage precedent sur CETTE image seulement : un
+    # lot lance a cote (terminal, atelier) garde les siens.
+    rm -f "$GEN_FAILDIR/$base.log" "$GEN_FAILDIR/$base.hors-seuils"
     # FORCE=1 : codex va ecraser un master existant. On en garde une copie.
     if [ -f "$GEN_ROOT/$dest" ]; then
         mkdir -p "$rejets"
@@ -165,6 +170,7 @@ run_one() {
         mv "${meilleur#* }" "$GEN_ROOT/$dest"
         printf '%s garde %s (ecart %s)\n' "$dest" "$(basename "${meilleur#* }")" "${meilleur%% *}" \
             > "$GEN_FAILDIR/$base.hors-seuils"
+        cp "$GEN_FAILDIR/$base.hors-seuils" "$GEN_RUNDIR/"
         printf 'HORS %s apres %d essai(s), garde %s -- a relire\n' \
             "$dest" "$essai" "$(basename "${meilleur#* }")"
     elif [ "$etat" = ok ]; then
@@ -173,7 +179,20 @@ run_one() {
         printf 'ok   %s (%d ref, non mesure)\n' "$dest" "$nrefs"
     else
         cp "$d/log" "$GEN_FAILDIR/$base.log" 2>/dev/null || true
+        : > "$GEN_RUNDIR/$base.log"
         printf 'ECHEC %s -- journal %s/%s.log\n' "$dest" "$GEN_FAILDIR" "$base"
+    fi
+
+    # Un master REMPLACE (FORCE=1) rend sa recette d'atelier caduque : le
+    # cadrage et la tonalite visaient l'ancienne composition, et
+    # convert_images.sh les rejouerait sur la nouvelle -- le PNG est plus recent
+    # que le RLE. La recette rejoint l'ancien master dans .rejets/.
+    recipe="$GEN_ROOT/SCOSWAMP.MORE/IMAGE-RECIPES/$base.json"
+    if [ -f "$d/avant.png" ] && [ -f "$GEN_ROOT/$dest" ] && [ -f "$recipe" ] \
+       && ! cmp -s "$d/avant.png" "$GEN_ROOT/$dest"; then
+        mkdir -p "$rejets"
+        mv "$recipe" "$rejets/$base.avant-$stamp.json"
+        printf 'recette %s.json mise de cote : %s\n' "$base" "$rejets/$base.avant-$stamp.json"
     fi
 }
 export -f run_one
@@ -190,21 +209,22 @@ if [ -x "$root/ADVKIT/TOOLS/build/scoswamp_dhgr" ]; then
 fi
 [ -n "$GEN_QUALITY_PY" ] || echo "controle qualite desactive : numpy, Pillow ou scoswamp_dhgr absent"
 export GEN_QUALITY_PY
-# Vide a chaque passage : le decompte final se lit dedans, et un journal
-# laisse par un lot precedent ferait denoncer un echec deja repris.
+# Les journaux restent dans .failed/, partage : chaque tache n'y efface que les
+# siens. Le decompte de CE passage se lit dans GEN_RUNDIR, propre au lot -- un
+# rm -rf global effacait les journaux d'un lot lance en parallele.
 GEN_FAILDIR="$root/SCOSWAMP.MORE/GENERATED/.failed"
-rm -rf "$GEN_FAILDIR"
-mkdir -p "$GEN_FAILDIR"
-export GEN_FAILDIR
+GEN_RUNDIR="$rundir"
+mkdir -p "$GEN_FAILDIR" "$GEN_RUNDIR"
+export GEN_FAILDIR GEN_RUNDIR
 
 find "$work" -mindepth 1 -maxdepth 1 -type d | sort \
     | xargs -P "$jobs" -I{} bash -c 'run_one "$@"' _ {}
 
 made=$(find "$work" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')
-failed=$(find "$GEN_FAILDIR" -name '*.log' | wc -l | tr -d ' ')
+failed=$(find "$GEN_RUNDIR" -name '*.log' | wc -l | tr -d ' ')
 echo "$(( made - failed )) image(s) generee(s), $failed echec(s)"
-outside=$(find "$GEN_FAILDIR" -name '*.hors-seuils' | wc -l | tr -d ' ')
+outside=$(find "$GEN_RUNDIR" -name '*.hors-seuils' | wc -l | tr -d ' ')
 if [ "$outside" -gt 0 ]; then
     echo "$outside master(s) hors seuils garde(s) faute de mieux :"
-    cat "$GEN_FAILDIR"/*.hors-seuils
+    cat "$GEN_RUNDIR"/*.hors-seuils
 fi

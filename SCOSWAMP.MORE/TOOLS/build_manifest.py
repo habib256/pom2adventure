@@ -460,8 +460,29 @@ def main() -> int:
     parser.add_argument("--battle", action="store_true",
                         help="manifeste des illustrations de bataille (une par "
                              "clairiere avec adversaire) au lieu des scenes")
+    parser.add_argument("--only", metavar="IMAGE",
+                        help="la seule ligne de N012 ou B012, que son image "
+                             "existe ou non : ce que regenere l'atelier ADVKIT")
     args = parser.parse_args()
     characters = load_characters(args.root)
+
+    if args.only:
+        # Le meme prompt que le lot, ni plus ni moins : on filtre les lignes que
+        # produirait --all ou --battle. Une page sans adversaire n'a pas de B.
+        if not re.fullmatch(r"[NB][0-9]{3}", args.only):
+            parser.error("--only attend N### ou B###")
+        rows = (battle_rows(args.root, characters) if args.only[0] == "B"
+                else scene_rows(args.root, characters, all_pages=True))
+        rows = [r for r in rows if r["scene"] == args.only]
+        if not rows:
+            print(f"{args.only} : aucune ligne de manifeste (page absente, "
+                  f"ou pas d'adversaire pour une image de bataille)")
+            return 1
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(rows[0], ensure_ascii=False) + "\n",
+                               encoding="utf-8")
+        print(f"wrote 1 prompt for {args.only} to {args.output}")
+        return 0
 
     # ── Perimees ────────────────────────────────────────────────────────
     # Modifier une fiche change le prompt de toutes les images qui la citent.

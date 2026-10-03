@@ -3,8 +3,12 @@
 import copy
 import importlib.util
 import json
+import os
 from pathlib import Path
+import shutil
 import struct
+import threading
+import time
 import tempfile
 import unittest
 import zlib
@@ -90,5 +94,83 @@ class WorkshopTests(unittest.TestCase):
         self.recipe.update(stretch=True,dither=True)
         w.convert(self.p['source'],'dhgr',self.recipe,self.dest)
         unpack((self.dest/'image.bin').read_bytes())
+
+class RegenerateTests(unittest.TestCase):
+    """Le bouton de l'atelier : generate_images.sh reel, codex remplace par GEN_COMMAND."""
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name).resolve()
+        self.original=(w.ROOT,w.manifest_row);w.ROOT=self.root
+        tools=self.root/'SCOSWAMP.MORE/TOOLS';tools.mkdir(parents=True)
+        shutil.copy(self.original[0]/'SCOSWAMP.MORE/TOOLS/generate_images.sh',tools)
+        self.master=self.root/'SCOSWAMP.MORE/GENERATED/N421.png'
+        png(self.master,280,192,lambda x,y:(0,0,0))
+        self.fresh=self.root/'fresh.png';png(self.fresh,280,192,lambda x,y:(255,255,255))
+        w.manifest_row=lambda game,asset:dict(scene=asset,prompt='un sentier',refs=[],
+                                              source_png=f'SCOSWAMP.MORE/GENERATED/{asset}.png')
+        self.env=os.environ.get('GEN_COMMAND')
+    def tearDown(self):
+        w.ROOT,w.manifest_row=self.original
+        if self.env is None:os.environ.pop('GEN_COMMAND',None)
+        else:os.environ['GEN_COMMAND']=self.env
+        self.temp.cleanup()
+    def run_job(self,command):
+        os.environ['GEN_COMMAND']=command
+        job=dict(state='running');self.assertTrue(w.REGEN.acquire(blocking=False))
+        w.regenerate('SCOSWAMP','N421',job)
+        self.assertTrue(w.REGEN.acquire(blocking=False),'le verrou doit etre rendu');w.REGEN.release()
+        return job
+    def test_new_master_replaces_old_which_is_kept(self):
+        old=self.master.read_bytes()
+        job=self.run_job(f'cat > /dev/null; cp "{self.fresh}" "$GEN_DEST"')
+        self.assertEqual(job['state'],'done',job)
+        self.assertEqual(self.master.read_bytes(),self.fresh.read_bytes())
+        kept=list((self.master.parent/'.rejets').glob('N421.avant-*.png'))
+        self.assertEqual([k.read_bytes() for k in kept],[old])
+    def test_nothing_written_is_a_failure_and_master_survives(self):
+        old=self.master.read_bytes()
+        job=self.run_job('cat > /dev/null')
+        self.assertEqual(job['state'],'failed',job)
+        self.assertEqual(self.master.read_bytes(),old)
+    def test_master_lost_mid_run_is_restored(self):
+        # Comme un essai refuse deplace dans .rejets/ puis un codex tue : plus de master.
+        old=self.master.read_bytes()
+        job=self.run_job('cat > /dev/null; rm -f "$GEN_DEST"')
+        self.assertEqual(job['state'],'failed',job)
+        self.assertEqual(self.master.read_bytes(),old)
+    def test_stopping_the_workshop_kills_codex_and_restores_master(self):
+        old=self.master.read_bytes()
+        # Le faux codex efface le master puis ecrirait le nouveau bien plus tard.
+        os.environ['GEN_COMMAND']=f'cat > /dev/null; rm -f "$GEN_DEST"; sleep 3; cp "{self.fresh}" "$GEN_DEST"'
+        job=dict(state='running');self.assertTrue(w.REGEN.acquire(blocking=False))
+        worker=threading.Thread(target=w.regenerate,args=('SCOSWAMP','N421',job));worker.start()
+        for _ in range(100):
+            if w.RUNNING.get('proc') and not self.master.exists():break
+            time.sleep(.05)
+        self.assertFalse(self.master.exists(),'le faux codex devait avoir efface le master')
+        t=time.time();w.stop_regeneration();worker.join(10)
+        self.assertLess(time.time()-t,5);self.assertFalse(worker.is_alive())
+        time.sleep(4)   # le codex tue ne doit plus rien ecrire
+        self.assertEqual(self.master.read_bytes(),old)
+        self.assertEqual(job['state'],'failed')
+    def test_master_shown_during_its_regeneration(self):
+        server=type('S',(),{})();p=w.paths('SCOSWAMP','N421')
+        server.job=dict(game='SCOSWAMP',asset='N421',state='running')
+        self.assertEqual(w.master_for(server,'SCOSWAMP','N421',p),self.master)
+        backup=self.master.parent/'.rejets/N421.avant-20260101-000000.png';backup.parent.mkdir()
+        shutil.copy(self.master,backup);self.master.unlink()
+        self.assertEqual(w.master_for(server,'SCOSWAMP','N421',p),backup)
+        server.job['state']='done'
+        self.assertEqual(w.master_for(server,'SCOSWAMP','N421',p),self.master)
+    def test_only_scoswamp_has_a_manifest(self):
+        w.manifest_row=self.original[1]
+        with self.assertRaises(ValueError):w.manifest_row('SPACETRIP','N001')
+
+class PromptTests(unittest.TestCase):
+    def test_prompt_is_the_batch_prompt(self):
+        row=w.manifest_row('SCOSWAMP','N421')
+        self.assertEqual(row['scene'],'N421')
+        self.assertIn('T 421 Le sentier sur les Sables',row['prompt'])
+        self.assertEqual(row['source_png'],'SCOSWAMP.MORE/GENERATED/N421.png')
+        with self.assertRaises(ValueError):w.manifest_row('SCOSWAMP','B013')
 
 if __name__=='__main__':unittest.main()
