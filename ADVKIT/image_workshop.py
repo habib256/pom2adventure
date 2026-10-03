@@ -13,10 +13,12 @@ from pathlib import Path
 import re
 import secrets
 import shutil
+import signal
 import struct
 import subprocess
 import tempfile
 import threading
+import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 
@@ -27,6 +29,10 @@ DEFAULTS = dict(colourNoise=.30, brightness=1., contrast=1., gamma=1.,
 RANGES = dict(colourNoise=(0,1), brightness=(.3,2), contrast=(.4,2.5),
               gamma=(.4,2.5), diffusion=(0,1), kernel=(0,1), model=(0,3))
 LOCK = threading.Lock()
+# Une seule generation codex a la fois : elle dure plusieurs minutes et coute.
+REGEN = threading.Lock()
+# Le generate_images.sh en cours : arreter l'atelier doit l'arreter AVEC codex.
+RUNNING = {}
 
 
 def digest(path):
@@ -140,6 +146,120 @@ def replay(game, asset, resample='bilinear'):
         install(p,dest,recipe)
 
 
+def manifest_row(game, asset):
+    """La ligne de manifeste de CETTE image : le prompt et les planches du lot.
+
+    Elle sort de build_manifest.py --only, pas d'une copie du prompt ici : le
+    bouton de l'atelier et generate_images.sh doivent demander la meme image."""
+    if game != 'SCOSWAMP':
+        raise ValueError('Régénération codex : SCOSWAMP seulement')
+    paths(game, asset)
+    with tempfile.TemporaryDirectory(prefix='image-prompt-') as tmp:
+        out = Path(tmp)/'row.jsonl'
+        result = subprocess.run(['python3', str(ROOT/'SCOSWAMP.MORE/TOOLS/build_manifest.py'),
+                                 '--root', str(ROOT), '--only', asset, '--output', str(out)],
+                                capture_output=True, text=True, timeout=120)
+        if result.returncode:
+            raise ValueError((result.stdout+result.stderr).strip()[-500:] or 'Manifeste introuvable')
+        return json.loads(out.read_text(encoding='utf-8'))
+
+
+def regenerate(game, asset, job):
+    """Remplace le master par une generation codex, dans un fil a part.
+
+    generate_images.sh fait tout le reste, comme pour un lot : FORCE=1 copie
+    d'abord l'ancien master dans GENERATED/.rejets/<id>.avant-*.png, le controle
+    qualite refuse et relance, le moins mauvais revient si rien ne passe. Le DHGR
+    du disque n'est PAS touche : on l'enregistre ensuite depuis l'atelier."""
+    source = before = None
+    try:
+        row = manifest_row(game, asset)
+        source = ROOT/row['source_png']
+        before = digest(source) if source.exists() else None
+        with tempfile.TemporaryDirectory(prefix='image-regen-') as tmp:
+            manifest = Path(tmp)/'manifest.jsonl'
+            manifest.write_text(json.dumps(row, ensure_ascii=False)+'\n', encoding='utf-8')
+            # Son propre groupe de processus : un delai depasse ou l'arret de
+            # l'atelier tue bash ET le codex qu'il a lance, qui sinon ecrirait
+            # le master plus tard, sans que personne ne le sache.
+            proc = subprocess.Popen(['bash', str(ROOT/'SCOSWAMP.MORE/TOOLS/generate_images.sh'), str(manifest), '1', '1'],
+                                    cwd=ROOT, env={**os.environ, 'FORCE': '1'}, stdout=subprocess.PIPE,
+                                    stderr=subprocess.STDOUT, text=True, start_new_session=True)
+            RUNNING.update(proc=proc, source=source, before=before)
+            try:
+                out, _ = proc.communicate(timeout=3600)
+            except subprocess.TimeoutExpired:
+                kill_group(proc)
+                raise
+            finally:
+                RUNNING.clear()
+        result = subprocess.CompletedProcess(proc.args, proc.returncode, out, '')
+        log = (result.stdout+result.stderr).strip()
+        job['log'] = log[-3000:]
+        restore_master(source, before)
+        lines = log.splitlines()
+        after = digest(source) if source.exists() else None
+        if result.returncode or after is None or after == before or any(l.startswith('ECHEC') for l in lines):
+            job['state'] = 'failed'
+            job['error'] = 'Aucun nouveau master : ' + (lines[-1] if lines else 'generate_images.sh muet')
+        else:
+            job['state'] = 'done'
+            job['warning'] = next((l for l in lines if l.startswith('HORS')), None)
+    except (ValueError, OSError, KeyError, subprocess.TimeoutExpired) as e:
+        if source is not None: restore_master(source, before)
+        job.update(state='failed', error=str(e))
+    finally:
+        job['finished'] = time.time()
+        REGEN.release()
+
+
+def kill_group(proc):
+    try:
+        os.killpg(proc.pid, signal.SIGTERM)
+        proc.wait(timeout=10)
+    except subprocess.TimeoutExpired:
+        os.killpg(proc.pid, signal.SIGKILL); proc.wait()
+    except ProcessLookupError:
+        pass
+
+
+def stop_regeneration():
+    """A l'arret de l'atelier : tuer la generation et rendre son master."""
+    # Copie d'abord : une fois codex tue, le fil de generation vide RUNNING.
+    running = dict(RUNNING)
+    proc = running.get('proc')
+    if proc and proc.poll() is None:
+        kill_group(proc)
+        restore_master(running['source'], running['before'])
+
+
+def regenerating(server, game, asset):
+    job = server.job
+    return bool(job and job['state'] == 'running' and job['game'] == game and job['asset'] == asset)
+
+
+def master_for(server, game, asset, p):
+    """Le master a montrer. Pendant sa regeneration il peut manquer un instant
+    (un essai refuse part dans .rejets/ avant le suivant) : on montre alors la
+    copie de l'ancien que FORCE=1 a prise au depart."""
+    if p['source'].exists() or not regenerating(server, game, asset):
+        return p['source']
+    kept = sorted((p['source'].parent/'.rejets').glob(f'{asset}.avant-*.png'))
+    return kept[-1] if kept else p['source']
+
+
+def restore_master(source, before):
+    """generate_images.sh deplace un essai refuse dans .rejets/ AVANT d'en
+    redemander un : interrompu la (delai depasse, codex tue), il laisse le jeu
+    sans master. On remet alors la copie FORCE=1 de l'ancien."""
+    if before is None or source.exists():
+        return
+    for kept in sorted((source.parent/'.rejets').glob(f'{source.stem}.avant-*.png'), reverse=True):
+        if digest(kept) == before:
+            shutil.copy2(kept, source)
+            return
+
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs): super().__init__(*args,directory=str(ROOT),**kwargs)
     def end_headers(self):
@@ -156,19 +276,38 @@ class Handler(SimpleHTTPRequestHandler):
             try:
                 game=parse_qs(url.query).get('game',['SCOSWAMP'])[0]
                 probe=paths(game,'N000'); assets=[]
-                for source in sorted(probe['source'].parent.glob('*.png')):
-                    if not re.fullmatch(r'[NB][0-9]{3}',source.stem): continue
-                    p=paths(game,source.stem)
-                    assets.append(dict(id=source.stem,source='/'+str(source.relative_to(ROOT)),
+                ids={s.stem for s in probe['source'].parent.glob('*.png')}
+                if self.server.job and self.server.job['state']=='running' and self.server.job['game']==game:
+                    ids.add(self.server.job['asset'])
+                for asset in sorted(ids):
+                    if not re.fullmatch(r'[NB][0-9]{3}',asset): continue
+                    p=paths(game,asset);source=master_for(self.server,game,asset,p)
+                    if not source.exists(): continue
+                    assets.append(dict(id=asset,source='/'+str(source.relative_to(ROOT)),
                                        corrected=p['recipe'].exists()))
-                self.reply(dict(assets=assets,defaults=DEFAULTS,mode=probe['mode'],csrf=self.server.csrf))
+                self.reply(dict(assets=assets,defaults=DEFAULTS,mode=probe['mode'],csrf=self.server.csrf,
+                                regenerable=game=='SCOSWAMP',job=self.server.job))
             except (ValueError,OSError) as e: self.reply(dict(error=str(e)),400)
         elif url.path=='/api/recipe':
             try:
                 q=parse_qs(url.query); p=paths(q['game'][0],q['asset'][0])
                 recipe=json.loads(p['recipe'].read_text()) if p['recipe'].exists() else DEFAULTS.copy()
-                self.reply(dict(recipe=recipe,width=dimensions(p['source'])[0],height=dimensions(p['source'])[1]))
+                width,height=dimensions(master_for(self.server,q['game'][0],q['asset'][0],p));warning=None
+                # Un master regenere n'a plus la composition que visait le cadrage.
+                try: validate(recipe,width,height)
+                except ValueError:
+                    if recipe.get('crop') is None: raise
+                    recipe={**recipe,'crop':None};validate(recipe,width,height)
+                    warning='Cadrage enregistré hors du master actuel : retiré.'
+                self.reply(dict(recipe=recipe,width=width,height=height,warning=warning))
             except (ValueError,OSError,KeyError) as e: self.reply(dict(error=str(e)),400)
+        elif url.path=='/api/prompt':
+            try:
+                q=parse_qs(url.query);row=manifest_row(q['game'][0],q['asset'][0])
+                self.reply(dict(prompt=row['prompt'],refs=row.get('refs',[])))
+            except (ValueError,OSError,KeyError,subprocess.TimeoutExpired) as e: self.reply(dict(error=str(e)),400)
+        elif url.path=='/api/regenerate':
+            self.reply(dict(job=self.server.job))
         elif url.path.startswith('/api/preview/'):
             parts=url.path.split('/')
             if len(parts)!=5 or parts[3] not in self.server.previews or parts[4] not in ('composite.png','chat.png'):
@@ -184,6 +323,12 @@ class Handler(SimpleHTTPRequestHandler):
             length=int(self.headers.get('Content-Length','0'))
             if not 0<length<=16384: raise ValueError('Requête trop grande ou vide')
             body=json.loads(self.rfile.read(length))
+            if self.path in ('/api/convert','/api/apply'):
+                # Pendant sa regeneration, le master de cette image change sous nos pieds.
+                item=self.server.previews.get(body.get('token')) or {}
+                game,asset=(body['game'],body['asset']) if self.path=='/api/convert' else (item.get('game'),item.get('asset'))
+                if game and regenerating(self.server,game,asset):
+                    raise ValueError(f'{asset} : régénération en cours, attendez le nouveau master')
             if self.path=='/api/convert':
                 p=paths(body['game'],body['asset']); recipe=validate(body['recipe'],*dimensions(p['source']))
                 # Bound CPU/memory use; UI queues one conversion at a time.
@@ -193,6 +338,7 @@ class Handler(SimpleHTTPRequestHandler):
                     convert(p['source'],p['mode'],recipe,dest)
                     if digest(p['source'])!=source_hash: raise ValueError('Master modifié pendant la conversion')
                     self.server.previews[token]=dict(folder=dest,paths=p,recipe=recipe,source_hash=source_hash,
+                                                    game=body['game'],asset=body['asset'],
                                                     previous=digest(p['output']) if p['output'].exists() else None)
                     while len(self.server.previews)>48:
                         old=next(iter(self.server.previews)); shutil.rmtree(self.server.previews.pop(old)['folder'])
@@ -209,6 +355,16 @@ class Handler(SimpleHTTPRequestHandler):
                     if current!=item['previous']: raise ValueError('Image modifiée ailleurs: refaites un aperçu')
                     install(p,item['folder'],item['recipe']); item['previous']=digest(p['output'])
                 self.reply(dict(saved=str(p['output'].relative_to(ROOT)),sha256=item['previous']))
+            elif self.path=='/api/regenerate':
+                game,asset=body['game'],body['asset'];manifest_row(game,asset)
+                if not REGEN.acquire(blocking=False):
+                    raise ValueError(f"Une régénération est déjà en cours ({(self.server.job or {}).get('asset','?')})")
+                # Toutes les cles des maintenant : le fil ne fait ensuite que changer
+                # des valeurs, jamais la taille du dict qu'un GET est en train de lire.
+                job=dict(game=game,asset=asset,state='running',started=time.time(),finished=None,log='',error=None,warning=None)
+                self.server.job=job
+                threading.Thread(target=regenerate,args=(game,asset,job),daemon=True).start()
+                self.reply(dict(job=job))
             elif self.path=='/api/build':
                 game=body['game']; project(game)
                 command=['make','-C','SCOSWAMP/SRC','hdv'] if game=='SCOSWAMP' else ['python3','SPACETRIP/build_disk.py']
@@ -229,12 +385,16 @@ def main():
     args=parser.parse_args()
     if args.replay: replay(*args.replay,args.resample); return
     server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
-    server.csrf=secrets.token_hex(24); server.previews={}
+    server.csrf=secrets.token_hex(24); server.previews={}; server.job=None
     with tempfile.TemporaryDirectory(prefix='image-workshop-') as cache:
         # Keep the path, not a second temporary directory owner.
         class Cache: name=cache
         server.cache=Cache()
         print(f'Atelier: http://127.0.0.1:{args.port}/ADVKIT/',flush=True)
-        server.serve_forever()
+        # kill (SIGTERM) passe par le meme chemin que Ctrl-C.
+        signal.signal(signal.SIGTERM, lambda *_: (_ for _ in ()).throw(KeyboardInterrupt()))
+        try: server.serve_forever()
+        except KeyboardInterrupt: pass
+        finally: stop_regeneration()
 
 if __name__=='__main__': main()

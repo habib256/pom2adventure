@@ -36,6 +36,8 @@ export class Workshop {
               <div class="source-stage"><div class="source-frame" id="source-frame"><img id="source" draggable="false" alt="Master original"><div id="crop" tabindex="0" role="slider" aria-label="Cadrage, flèches pour déplacer"><i></i><i></i><i></i><i></i><button id="crop-handle" aria-label="Redimensionner le cadrage"></button></div></div></div>
               <div class="crop-tools"><button id="crop-toggle">Activer le cadrage</button><label>Zoom <input id="zoom" type="range" min="1" max="8" step=".01" value="1"><output id="zoom-value">1×</output></label></div>
               <p id="crop-info" class="subtle">Original conservé · cadrage non destructif</p>
+              <div class="regen-tools"><button id="regen" title="Demande à codex un nouveau master avec le prompt du manifeste pour cette image. L’ancien est gardé dans GENERATED/.rejets/.">Régénérer le master avec codex</button>
+                <details id="prompt-box"><summary>Prompt de cette image</summary><pre id="prompt-text">…</pre></details></div>
             </section>
             <section class="result-panel"><div class="panel-caption"><strong>Résultat Apple II</strong><select id="display" aria-label="Rendu"><option value="composite">Composite · POM2</option><option value="chat">Chat Mauve · blocs</option></select></div>
               <div class="result-stage"><div class="result-frame"><img id="result" alt="Aperçu converti" hidden><canvas id="overlay" hidden></canvas><div id="text-mask" hidden>ZONE DE TEXTE · 4 LIGNES</div><p id="placeholder">L’aperçu apparaîtra ici.</p></div></div>
@@ -64,6 +66,8 @@ export class Workshop {
     this.el.preview.onclick=()=>this.preview();
     this.el.apply.onclick=()=>this.apply();
     this.el.build.onclick=()=>this.build();
+    this.el.regen.onclick=()=>this.regenerate();
+    this.el['prompt-box'].ontoggle=()=>{if(this.el['prompt-box'].open)this.loadPrompt();};
     this.el.auto.onchange=()=>{if(this.el.auto.checked)this.schedule();};
     this.el.display.onchange=()=>this.showResult();
     this.el.layout.onchange=()=>this.el.canvases.dataset.layout=this.el.layout.value;
@@ -83,11 +87,12 @@ export class Workshop {
   async loadGame(){
     this.keepDraft();this.asset=null;this.recipe=null;this.game=this.el.project.value;this.version++;this.token=null;this.dirty=false;this.el.apply.disabled=true;
     const version=this.version, game=this.game;
-    try {const data=await this.api('/api/images?game='+game);if(version!==this.version)return;this.assets=data.assets;this.defaults=data.defaults;this.mode=data.mode;this.csrf=data.csrf;
+    try {const data=await this.api('/api/images?game='+game);if(version!==this.version)return;this.assets=data.assets;this.defaults=data.defaults;this.mode=data.mode;this.csrf=data.csrf;this.regenerable=data.regenerable;this.job=data.job;
       this.el.apply.textContent=this.mode==='hgr'?'Générer & enregistrer le HGR':'Générer & enregistrer le DHGR RLE';this.el.model.disabled=this.mode==='hgr';this.el.display.options[1].disabled=this.mode==='hgr';this.el.display.value='composite';
       this.el['play-mode'].href=`?mode=jeu&jeu=${this.game.toLowerCase()}&source=arbre&langue=FR`;
       this.renderAssets();const requested=new URLSearchParams(location.search).get('image');const first=this.assets.find(a=>a.id===requested)||this.assets.find(a=>a.id==='B120')||this.assets[0];
       if(first)await this.select(first.id);else this.status('Aucun master PNG dans ce projet.');
+      if(this.job?.state==='running')this.watchJob();
     }catch(e){this.status(e.message,true);}
   }
   keepDraft(){this.drafts??=new Map();if(this.asset&&this.recipe)this.drafts.set(this.game+':'+this.asset,{recipe:structuredClone(this.recipe),dirty:this.dirty});}
@@ -104,11 +109,11 @@ export class Workshop {
     // Keep unsaved edits per image while browsing this session.
     this.keepDraft();this.recipe=null;this.el.settings.disabled=true;this.el.zoom.disabled=true;this.el['crop-toggle'].disabled=true;
     const version=++this.version;this.asset=id;const url=new URL(location.href);url.searchParams.set('image',id);url.searchParams.set('jeu',this.game.toLowerCase());history.replaceState(null,'',url);this.token=null;this.el.apply.disabled=true;this.result=null;this.el.result.hidden=true;this.el.placeholder.hidden=false;
-    this.el['asset-title'].textContent=`${id} / ${id[0]==='B'?'Combat':'Scène'}`;this.renderAssets();this.status('Chargement du master…');
+    this.el['asset-title'].textContent=`${id} / ${id[0]==='B'?'Combat':'Scène'}`;this.el['prompt-box'].open=false;this.el['prompt-text'].textContent='…';this.regenControls();this.renderAssets();this.status('Chargement du master…');
     try{const data=await this.api(`/api/recipe?game=${this.game}&asset=${id}`);if(version!==this.version)return;
-      const draft=this.drafts.get(this.game+':'+id);this.recipe=draft?.recipe||data.recipe;this.dirty=draft?.dirty||false;this.w=data.width;this.h=data.height;
+      const draft=this.drafts.get(this.game+':'+id);this.recipe=draft?.recipe||data.recipe;this.recipeWarning=data.warning;this.dirty=draft?.dirty||false;this.w=data.width;this.h=data.height;
       this.el.source.src=this.assets.find(a=>a.id===id).source;await this.el.source.decode();if(version!==this.version)return;
-      this.el.apply.disabled=false;this.el.settings.disabled=false;this.el.zoom.disabled=false;this.el['crop-toggle'].disabled=false;this.sync();this.el['saved-state'].textContent=this.dirty?'Correction non enregistrée':'Master intact';this.status('Réglages prêts.');this.preview();
+      this.el.apply.disabled=false;this.el.settings.disabled=false;this.el.zoom.disabled=false;this.el['crop-toggle'].disabled=false;this.sync();this.el['saved-state'].textContent=this.dirty?'Correction non enregistrée':'Master intact';this.status(this.recipeWarning||'Réglages prêts.',!!this.recipeWarning);this.preview();
     }catch(e){if(version===this.version)this.status(e.message,true);}
   }
   labels(){for(const [id] of controls)this.el[id+'-value'].textContent=Number(this.recipe[id]).toFixed(2);}
@@ -125,12 +130,12 @@ export class Workshop {
     const end=()=>{this.el.crop.removeEventListener('pointermove',move);this.el.crop.removeEventListener('pointerup',end);this.el.crop.removeEventListener('pointercancel',end);this.schedule();};
     this.el.crop.addEventListener('pointermove',move);this.el.crop.addEventListener('pointerup',end);this.el.crop.addEventListener('pointercancel',end);
   }
-  changed(schedule=true){this.version++;this.token=null;this.dirty=true;this.el.apply.disabled=false;this.el['saved-state'].textContent='Correction non enregistrée';this.status('Réglages modifiés · aperçu à actualiser');this.drawOverlay();if(schedule)this.schedule();}
+  changed(schedule=true){this.notice=null;this.version++;this.token=null;this.dirty=true;this.el.apply.disabled=false;this.el['saved-state'].textContent='Correction non enregistrée';this.status('Réglages modifiés · aperçu à actualiser');this.drawOverlay();if(schedule)this.schedule();}
   schedule(){clearTimeout(this.timer);if(this.el.auto.checked)this.timer=setTimeout(()=>this.preview(),120);}
   async preview(){
     clearTimeout(this.timer);if(!this.recipe)return;if(this.busy){this.pending=true;return;}this.busy=true;this.pending=false;
     const version=this.version;this.status('Conversion native en cours…');this.el.preview.disabled=true;
-    try{const data=await this.api('/api/convert',{game:this.game,asset:this.asset,recipe:structuredClone(this.recipe)});if(version!==this.version)return;this.result=data;this.token=data.token;this.el.apply.disabled=false;this.showResult();if(!this.saving)this.status('Aperçu prêt · vous pouvez enregistrer cette correction.');this.el['result-info'].textContent=`${data.bytes.toLocaleString('fr')} octets · ${this.mode.toUpperCase()} · aperçu issu des octets convertis`;
+    try{const data=await this.api('/api/convert',{game:this.game,asset:this.asset,recipe:structuredClone(this.recipe)});if(version!==this.version)return;this.result=data;this.token=data.token;this.el.apply.disabled=false;this.showResult();if(!this.saving)this.status(this.notice?.asset===this.asset?this.notice.text:'Aperçu prêt · vous pouvez enregistrer cette correction.',this.notice?.asset===this.asset&&this.notice.error);this.el['result-info'].textContent=`${data.bytes.toLocaleString('fr')} octets · ${this.mode.toUpperCase()} · aperçu issu des octets convertis`;
     }catch(e){if(version===this.version)this.status(e.message,true);}finally{this.busy=false;this.el.preview.disabled=false;if(this.pending){this.pending=false;this.preview();}}
   }
   showResult(){if(!this.result)return;this.el.result.src=this.result[this.el.display.value];this.el.result.hidden=false;this.el.placeholder.hidden=true;}
@@ -151,6 +156,54 @@ export class Workshop {
       this.el['saved-state'].textContent='DHGR RLE enregistré';
       this.status(`${data.saved} enregistré · reconstruisez le disque pour POM2.`);
     }catch(e){this.status(e.message,true);}finally{this.saving=false;this.el.apply.disabled=!this.recipe;}
+  }
+  regenControls(){
+    const running=this.job?.state==='running';clearTimeout(this.armed);this.armedFor=null;
+    this.el.regen.hidden=!this.regenerable;this.el['prompt-box'].hidden=!this.regenerable;this.el.regen.disabled=running||!this.asset;
+    this.el.regen.textContent=running?`Régénération de ${this.job.asset} en cours…`:'Régénérer le master avec codex';
+  }
+  async loadPrompt(){
+    const asset=this.asset;this.el['prompt-text'].textContent='Lecture du manifeste…';
+    try{const data=await this.api(`/api/prompt?game=${this.game}&asset=${asset}`);if(asset!==this.asset)return;
+      this.el['prompt-text'].textContent=data.prompt+(data.refs.length?`\n\nPlanches de référence :\n${data.refs.join('\n')}`:'');
+    }catch(e){if(asset===this.asset)this.el['prompt-text'].textContent=e.message;}
+  }
+  // Deux clics plutôt qu'une boîte modale : une génération dure plusieurs minutes.
+  async regenerate(){
+    if(!this.asset||this.job?.state==='running')return;
+    if(this.armedFor!==this.asset){this.armedFor=this.asset;this.el.regen.textContent=`Confirmer : nouveau master pour ${this.asset}`;
+      clearTimeout(this.armed);this.armed=setTimeout(()=>this.regenControls(),5000);return;}
+    clearTimeout(this.armed);this.armedFor=null;this.el.regen.disabled=true;
+    try{const data=await this.api('/api/regenerate',{game:this.game,asset:this.asset});this.job=data.job;this.regenControls();this.watchJob();}
+    catch(e){this.status(e.message,true);this.regenControls();}
+  }
+  async watchJob(){
+    clearTimeout(this.jobTimer);const job=this.job;if(!job)return;
+    const tick=async()=>{
+      try{this.job=(await this.api('/api/regenerate')).job;}catch(e){this.status(e.message,true);this.jobTimer=setTimeout(tick,5000);return;}
+      const j=this.job;this.regenControls();
+      // Serveur relance pendant la generation : la tache et son fil sont perdus.
+      if(!j||j.asset!==job.asset||j.started!==job.started){this.status(`${job.asset} : suivi perdu, le serveur de l’atelier a redémarré. Vérifiez GENERATED/${job.asset}.png.`,true);return;}
+      if(j.state==='running'){const s=Math.round(Date.now()/1000-j.started);this.status(`codex dessine ${j.asset} · ${Math.floor(s/60)} min ${String(s%60).padStart(2,'0')} s (souvent 2 à 6 min)`);this.jobTimer=setTimeout(tick,3000);return;}
+      if(j.state==='failed'){this.status(`${j.asset} : ${j.error}`,true);return;}
+      // Le message survit a l'apercu qui suit, jusqu'au prochain reglage.
+      this.notice={asset:j.asset,error:!!j.warning,text:j.warning?`${j.asset} : nouveau master hors seuils de qualité, gardé quand même · ${j.warning}`:`${j.asset} : nouveau master · ajustez puis enregistrez le DHGR.`};
+      this.status(this.notice.text,this.notice.error);
+      await this.masterReplaced(j.game,j.asset);
+    };
+    tick();
+  }
+  // Le master a change sous la meme URL : on casse le cache, et l'ancienne
+  // recette (cadrage, tonalite) visait une autre composition. Le DHGR du disque
+  // reste l'ancien tant que la correction n'est pas enregistree.
+  // Le brouillon est remis a zero meme si l'on regarde un autre projet : il
+  // garderait sinon un cadrage pris sur l'ancien master.
+  async masterReplaced(game,id){
+    this.drafts??=new Map();this.drafts.set(game+':'+id,{recipe:structuredClone(this.defaults),dirty:true});
+    if(game!==this.game)return;
+    const a=this.assets.find(a=>a.id===id);if(!a)return;a.source=`/${this.game}.MORE/GENERATED/${id}.png?v=${Date.now()}`;a.corrected=false;
+    if(this.asset===id){this.asset=null;await this.select(id);}else this.renderAssets();
+    if(this.asset===id)this.el['saved-state'].textContent='Nouveau master · DHGR à enregistrer';
   }
   async build(){this.el.build.disabled=true;this.status('Construction du disque…');try{const data=await this.api('/api/build',{game:this.game});this.el.download.href=data.volume;this.el.download.hidden=false;this.el.download.download='';this.status('Disque construit avec les corrections enregistrées.');}catch(e){this.status(e.message,true);}finally{this.el.build.disabled=false;}}
 }

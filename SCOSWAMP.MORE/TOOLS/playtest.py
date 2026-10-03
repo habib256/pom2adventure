@@ -2883,7 +2883,7 @@ def sc_images(g, b):
             p = int(f[1:4])
             if not os.path.exists(os.path.join(img, d, "N%03d.RLE.BIN" % p)):
                 manquantes.append(p)
-    b.check("les 412 pages ont toutes leur planche", not manquantes,
+    b.check("toutes les pages du corpus ont leur planche", not manquantes,
             "il en manque %d : %s" % (len(manquantes), manquantes))
     # Et le moteur la charge vraiment, pour une page prise au hasard.
     g.goto(195)

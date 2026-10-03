@@ -353,11 +353,13 @@ def scene_rows(root, characters, all_pages):
     game = root / "SCOSWAMP"
     more = root / "SCOSWAMP.MORE"
     rows = []
-    # 402-406 : la page jumelle du Stratagus affaibli et les relais d'effets
-    # (chute, piqure, bond parfait) -- voir TODO, "six pages inexprimables".
-    # Le corpus contient aussi la page 419 "Qui vous etes", atteinte apres la
-    # creation du personnage ; les pages 407-418 sont des numeros absents.
-    for scene_id in range(420):
+    # Les pages viennent du corpus, pas d'une borne ecrite ici. Au-dela des 400
+    # du livre il porte des pages du moteur (le Stratagus affaibli, les relais
+    # d'effets, "Qui vous etes" en 419, le sentier sur les Sables en 421...),
+    # et l'ancienne boucle range(420) ignorait en silence toute page ajoutee
+    # apres elle : N421 est restee sans planche.
+    pages = sorted(int(p.stem[1:]) for p in (game / "TEXTFR").glob("N*/N[0-9][0-9][0-9].TXT"))
+    for scene_id in pages:
         sid = f"{scene_id:03d}"
         bucket = f"N{(scene_id // 50) * 50:03d}"
         text_path = game / "TEXTFR" / bucket / f"N{sid}.TXT"
@@ -458,8 +460,29 @@ def main() -> int:
     parser.add_argument("--battle", action="store_true",
                         help="manifeste des illustrations de bataille (une par "
                              "clairiere avec adversaire) au lieu des scenes")
+    parser.add_argument("--only", metavar="IMAGE",
+                        help="la seule ligne de N012 ou B012, que son image "
+                             "existe ou non : ce que regenere l'atelier ADVKIT")
     args = parser.parse_args()
     characters = load_characters(args.root)
+
+    if args.only:
+        # Le meme prompt que le lot, ni plus ni moins : on filtre les lignes que
+        # produirait --all ou --battle. Une page sans adversaire n'a pas de B.
+        if not re.fullmatch(r"[NB][0-9]{3}", args.only):
+            parser.error("--only attend N### ou B###")
+        rows = (battle_rows(args.root, characters) if args.only[0] == "B"
+                else scene_rows(args.root, characters, all_pages=True))
+        rows = [r for r in rows if r["scene"] == args.only]
+        if not rows:
+            print(f"{args.only} : aucune ligne de manifeste (page absente, "
+                  f"ou pas d'adversaire pour une image de bataille)")
+            return 1
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(rows[0], ensure_ascii=False) + "\n",
+                               encoding="utf-8")
+        print(f"wrote 1 prompt for {args.only} to {args.output}")
+        return 0
 
     # ── Perimees ────────────────────────────────────────────────────────
     # Modifier une fiche change le prompt de toutes les images qui la citent.

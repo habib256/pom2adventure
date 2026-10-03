@@ -274,5 +274,26 @@ class GenerateImagesTest(unittest.TestCase):
         self.assertEqual(len(self.rejects('N007')), 2)   # la copie + l'essai refuse
 
 
+    def test_other_images_failure_reports_survive(self):
+        # Un lot parallele (terminal, atelier) ne doit pas effacer les comptes
+        # rendus des autres ; ceux de l'image regeneree, si.
+        failed = self.gen / '.failed'; failed.mkdir()
+        (failed / 'N099.log').write_text('autre lot')
+        (failed / 'N008.log').write_text('ancien echec')
+        out = self.generate(dict(N008=['good']))
+        self.assertIn('1 image(s) generee(s), 0 echec(s)', out)
+        self.assertEqual(sorted(p.name for p in failed.iterdir()), ['N099.log'])
+
+    def test_replaced_master_sets_its_recipe_aside(self):
+        recipes = self.root / 'SCOSWAMP.MORE/IMAGE-RECIPES'; recipes.mkdir()
+        save(self.gen / 'N009.png', cells(checker(60))); (recipes / 'N009.json').write_text('{"crop": [1, 2, 3, 4]}')
+        save(self.gen / 'N010.png', cells(checker(60))); (recipes / 'N010.json').write_text('{}')
+        out = self.generate(dict(N009=['good'], N010=['none']), force=True)
+        self.assertFalse((recipes / 'N009.json').exists(), out)
+        kept = list((self.gen / '.rejets').glob('N009.avant-*.json'))
+        self.assertEqual([k.read_text() for k in kept], ['{"crop": [1, 2, 3, 4]}'])
+        self.assertTrue((recipes / 'N010.json').exists(), 'master inchange : recette gardee')
+
+
 if __name__ == '__main__':
     unittest.main()
