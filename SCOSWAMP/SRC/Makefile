@@ -96,7 +96,14 @@ all: $(OUTDIR)/$(PROGRAM) $(OUTDIR)/$(LAUNCHER) check
 # Règle principale : lier les objets pour créer le binaire
 # Le contrôle mémoire est systématique : un link réussi ne prouve pas que le
 # binaire tient (ld65 peut manquer un débordement BSS, voir SCOSWAMP.MORE/TOOLS/check-memory.sh).
-$(OUTDIR)/$(PROGRAM): $(OBJECTS) $(LDCFG)
+# build.map et build.lbl ne sortent que de ce lien et sont ignores par git,
+# alors que SCOSWAMP.BIN est versionne. Sur un clone neuf, les .o se compilent
+# dans la seconde du checkout : make 3.81 (resolution d'une seconde sur macOS)
+# juge alors le .BIN a jour, saute le lien, et `check` tombait sur une carte
+# absente -- `make hdv` echouait. Une carte ou une table manquante force le lien.
+LINK_FORCE = $(if $(and $(wildcard $(MAPFILE)),$(wildcard $(LBLFILE))),,FORCE)
+
+$(OUTDIR)/$(PROGRAM): $(OBJECTS) $(LDCFG) $(LINK_FORCE)
 	$(CL) $(CFLAGS) $(LDFLAGS) -o $(OUTDIR)/$(PROGRAM) $(OBJECTS) $(IOBUF)
 	@echo "==> Compilation terminée : $(OUTDIR)/$(PROGRAM)"
 	@echo "    Adresse de démarrage : \$$4000 (HGR préservé à \$$2000-\$$3FFF)"
@@ -606,7 +613,10 @@ install: all
 	@echo "==> Binaire disponible dans $(OUTDIR)/$(PROGRAM)"
 
 # Déclaration des cibles "phony" (ne correspondent pas à des fichiers)
-.PHONY: all hdv map release check playtest clean distclean rebuild info install
+.PHONY: all hdv map release check playtest clean distclean rebuild info install FORCE
+
+# Prerequis toujours perime : voir LINK_FORCE.
+FORCE:
 
 crt0.o: crt0.s
 	$(AS) -t $(TARGET) -o $@ $<
