@@ -20,6 +20,7 @@ SUITES = {
     "integrity": "intégrité des données et binaires présents (check-project.sh)",
     "http": "volume et données FR/EN (serveur 8765 et HDV à jour)",
     "browser": "atelier Chrome (serveur 8765, CDP 9228, WebSocket Node)",
+    "a2shot": "volumes livrés sur le SDK POM2 (a2shot de ../pom2games, volumes de dist/)",
 }
 PROFILES = {
     "quick": ("python", "node", "native"),
@@ -63,6 +64,8 @@ def commands(suite, python, pom2_src=None):
                 *[([python, p], False) for p in scripts(HERE, "test_image_*.py")]]
     if suite == "integrity":
         return [(["bash", "check-project.sh"], False)]
+    if suite == "a2shot":
+        return [([python, "ADVKIT/TESTS/scenario_a2shot.py"], False)]
     name = "test_localized_layout.mjs" if suite == "http" else "test_workshop_browser.mjs"
     flags = ["--experimental-websocket"] if suite == "browser" else []
     return [(["node", *flags, f"ADVKIT/TESTS/{name}"], False)]

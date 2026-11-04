@@ -180,3 +180,69 @@ sauvegarde sur sa copie privée**. Cela débloquera l'intégration d'un harnais
 de type `a2shot` sans réduire le jeu pour l'adapter à l'outil.
 
 Merci.
+
+---
+
+## Réponse de POM2
+
+4 novembre 2026 — livré sur `main` au commit
+[`0d1d388e`](https://github.com/habib256/pom2/commit/0d1d388e98b2268629cc65269c1aba161720585a).
+Le contrat est dans `docs/SDK.md` de POM2. `pom2games` embarque ce SDK sur macOS
+depuis `77ca031`.
+
+Le §1 décrit l'état d'avant. Le volume a été reconstruit depuis : SCOSWAMP compte
+aujourd'hui 14 684 blocs, et non 14 690.
+
+### §3 : critères d'acceptation
+
+| Cas | Résultat | Où c'est vérifié |
+| --- | --- | --- |
+| SCOSWAMP, brut et 2MG | amorçage, FR, entrée dans le jeu | suite `a2shot` du harnais |
+| SPACETRIP, brut et 2MG | amorçage, FR, entrée dans le jeu | suite `a2shot` |
+| Volume de 65 535 blocs | capacité exacte, bloc `$FFFE` lu et écrit, `$FFFF` refusé par `$27` | `pom2_core_hdd` (//e, //c) |
+| Sauvegarde, flush, remontage | `SAVE3` passe de 2 à 279 octets, seuls 2 blocs changent, la partie reprend | suite `a2shot` ; vrai ProDOS sur //e, //c, //c+ dans `pom2_core_hdd` |
+| Copie privée | SHA-256 de `dist/` inchangé | suite `a2shot` |
+| Média protégé | écriture refusée par `$2B`, fichier inchangé | `pom2_core_hdd`, suite `a2shot` |
+| En-tête, offset, longueur, capacité invalides | refus nommé, rien de monté ni d'écrit | `pom2_core_hdd` |
+| Régression 400/800 Kio et Disk II | chemins inchangés | `ctest` de POM2 (434 sur 434), `make test` de `pom2games` |
+| Même script, mêmes ROM et disque | mêmes octets, même écran, même cycle | suite `a2shot`, `pom2_core_hdd` |
+
+Une image physique de 65 536 blocs est aussi acceptée : STATUS y répond `$FFFF`, le
+bloc `$FFFF` reste accessible, et seul `hardDiskBlockCount` dit 65 536. Ce travail a
+corrigé un bug de l'émulateur : sur //c, cette image répondait 0 bloc.
+
+Le //c+ est couvert aussi. Le disque dur y est le drive 2 du slot 5 : il n'amorce que
+lecteur interne vide, et un 3,5 pouces externe le masque aux appels ProDOS.
+
+### §4 : autres besoins
+
+| Besoin | Livré |
+| --- | --- |
+| Mémoire sans effet de bord | `readRam`, `writeRam`, huit banques nommées |
+| État du clavier | `keyboardState` ; `keywait` dans `a2shot` |
+| Rendu identifiable | `docs/SDK.md` § Rendering : `renderFrame` est la table composite de MAME, **pas** le CRT OpenEmulator, qui n'est pas dans le SDK |
+| Livraison reproductible | `sdkInfo`, `sha256`, `tools/package_core_sdk.sh` et son manifeste, étape `provenance` |
+| Convertisseurs sans sources POM2 | paquet `pom2_imageconv`, `-DPOM2_SDK_PREFIX` ; sortie identique octet par octet sur 30 conversions |
+
+L'utilisateur reste seul juge des images : rien de ce qui précède n'en valide une.
+
+### Le banc
+
+`playtest.py` a deux hôtes, tous deux conservés. HTTP pilote l'émulateur POM2 complet ;
+`--host a2shot` passe par le SDK. Sur les 79 scénarios, `pom2_playtest` et `a2shot`
+donnent chacun 1 133 assertions et 0 échec. Sur l'émulateur complet, `demarrage`,
+`combat`, `musique` et `musique_transitions` passent.
+
+Les 19 échecs d'avant venaient du banc, pas du jeu : le lecteur de symboles ignorait
+les `.ifdef` de `music.s`, et trois scénarios attendaient autre chose que ce que le
+livre demande (pages 058 et 374).
+
+### Ce qui reste ouvert
+
+- L'archive Linux du SDK : tant qu'elle n'est pas reconstruite depuis ce commit,
+  `a2shot` sous Linux refuse les disques durs.
+- `build_prodos_volume` a encore besoin des sources POM2 : il n'est pas dans le paquet,
+  donc l'atelier n'est pas encore constructible sans checkout complet.
+- Le job `core-sdk` de `release.yml` n'a jamais tourné : il tournera au prochain tag.
+
+Merci.

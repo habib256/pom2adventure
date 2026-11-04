@@ -116,9 +116,10 @@ Il reste ce qu'elle a ouvert, et qui demande une oreille ou une décision :
 
 - 🟠 **Passer le banc à un hôte du type `a2shot` avec le SDK POM2** —
   reprendre les sessions déterministes et copies privées de `pom2games`.
-  Blocage reproduit le 2026-11-04 : le SDK expose les disquettes SmartPort
-  400/800 Kio, pas le HDD nécessaire à notre volume complet. Demande et
-  critères de validation dans la [lettre à POM2](SCOSWAMP/DOCS/LETTRE-POM2-SDK-HDD.md).
+  Le SDK monte notre volume complet : la suite `a2shot` du
+  [harnais](ADVKIT/TESTS/README.md) le joue et `playtest.py --host a2shot` y
+  rejoue le banc. L'hôte HTTP reste celui de l'émulateur POM2 complet ; les
+  deux doivent rester au vert.
   Ne pas remplacer la validation du volume livré par celle d'un sous-ensemble.
 - 🟡 **Évaluer les primitives optimisées de `pom2games/dev/lib`** — comparer
   d'abord les contrats C/ASM, ZP, banques et IRQ, puis mesurer cycles,

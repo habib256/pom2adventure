@@ -23,8 +23,10 @@ symboles du binaire courant ; voir [AUTOMATISATION](SCOSWAMP/DOCS/AUTOMATISATION
 
 Pour l'évolution du banc et les optimisations Apple II, consulter les outils
 et contrats de `../pom2games/dev/` : `a2shot`, `a2test.py`, `lib/ABI.md` et
-`bench/`. Préférer le SDK public POM2 aux en-têtes internes. L'API HDD reste
-à exposer : voir la [lettre à POM2](SCOSWAMP/DOCS/LETTRE-POM2-SDK-HDD.md).
+`bench/`. Préférer le SDK public POM2 aux en-têtes internes. Le SDK monte nos
+volumes : la suite `a2shot` du harnais les joue et `playtest.py --host a2shot`
+y rejoue le banc. L'hôte HTTP reste celui de l'émulateur POM2 complet ; les deux
+doivent rester au vert (voir [le harnais](ADVKIT/TESTS/README.md)).
 Mesurer les primitives dans notre moteur avant de reprendre une optimisation.
 
 ## Travail sur les images

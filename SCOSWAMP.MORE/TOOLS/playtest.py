@@ -53,6 +53,7 @@ ROOT = os.path.dirname(os.path.dirname(HERE))          # le depot
 SRCDIR = os.path.join(ROOT, "SCOSWAMP", "SRC")
 HDV_SRC = os.path.join(ROOT, "dist", "SCOSWAMP.HDV")
 POM2 = os.environ.get("POM2", os.path.join(ROOT, "ADVKIT", "TOOLS", "build", "pom2_playtest"))
+A2SHOT = os.path.join(os.path.dirname(ROOT), "pom2games", "dev", "tools", "a2shot", "a2shot")
 
 # 6503..6506, 6510 sont pris (POM2 par defaut, et les bancs voisins) : on
 # commence a 6520.
@@ -87,6 +88,8 @@ class Symbols(object):
     # grammaire suffit pour les deux.
     MODULES = ["scoswamp", "paths", "memory_swap", "rules", "dice",
                "messages", "hgr_loader", "sfx", "music"]
+    # Les -D passes a ca65 par le Makefile (aucun pour l'instant).
+    DEFINED = frozenset()
 
     def __init__(self, srcdir=SRCDIR):
         self.srcdir = srcdir
@@ -169,9 +172,29 @@ class Symbols(object):
         seq, seg = {}, None
         pending = []          # labels vus sans directive de taille encore
         equ = {}              # les `NOM = valeur` du fichier (music.s en a)
+        # L'assemblage conditionnel compte : music.s ne place _music_buf en
+        # LOWBSS que sous `.ifdef LOWBUF`, et lire ses deux `.segment` sans les
+        # conditions posait mb_slot sur _music_buf, en silence. Un symbole est
+        # defini s'il l'est sur la ligne de commande (DEFINED) ou dans le fichier.
+        live = []             # une entree par .if ouvert : ce bloc s'assemble-t-il ?
         for raw in open(path, errors="replace"):
             line = raw.split(";")[0].rstrip()
             if not line.strip():
+                continue
+            m = re.match(r"^\s*\.(ifdef|ifndef|if\w*|else|elseif|endif)\b\s*(\w*)", line)
+            if m:
+                word, name = m.group(1), m.group(2)
+                if word == "endif":
+                    live.pop()
+                elif word in ("else", "elseif"):
+                    live[-1] = not live[-1]
+                elif word in ("ifdef", "ifndef"):
+                    known = name in self.DEFINED or name in equ
+                    live.append(known if word == "ifdef" else not known)
+                else:
+                    live.append(True)   # .if EXPR : le banc n'evalue pas, il garde
+                continue
+            if not all(live):
                 continue
             m = re.match(r"^\s*(\w+)\s*=\s*([^;]+)$", line)
             if m and not line.lstrip().startswith("."):
@@ -353,7 +376,17 @@ class Pom2(object):
     """Un emulateur, sa copie du disque, et l'API AI-control."""
 
     def __init__(self, hdv, port=DEFAULT_PORT, speed=200000, pom2=POM2,
-                 verbose=False):
+                 verbose=False, card_probe=None):
+        # L'emulateur complet traite --speed comme un accelerateur : le CPU va
+        # plus vite que le bus des cartes, ou le 6522 reste a 1 MHz. Or le jeu
+        # reconnait la Mockingboard en lisant T1 a 8 cycles d'ecart (t1_probe,
+        # music.s) : a 12x il ne la voit pas et reste muet. Une partie a vitesse
+        # normale n'a pas ce probleme. Ce banc demarre donc a 1x et n'accelere
+        # qu'une fois la carte trouvee, ce que dit `card_probe` (mb_slot).
+        self.card_probe = card_probe
+        self.full_emulator = (card_probe is not None
+                              and os.path.basename(pom2) != "pom2_playtest")
+        self.accelerate = self.full_emulator
         self.port = port
         self.base = "http://127.0.0.1:%d" % port
         self.hdv = hdv
@@ -366,9 +399,9 @@ class Pom2(object):
     def start(self):
         cwd = os.path.dirname(self.hdv)          # le jail de safeCwdRelativePath
         log = open(os.path.join(cwd, "pom2.log"), "w")
+        speed = [] if self.accelerate else ["--speed", str(self.speed)]
         self.proc = subprocess.Popen(
-            [self.exe, "--preset", "iie",
-             "--ai-control=%d" % self.port, "--speed", str(self.speed),
+            [self.exe, "--preset", "iie", "--ai-control=%d" % self.port, *speed,
              os.path.basename(self.hdv)],
             cwd=cwd, stdout=log, stderr=subprocess.STDOUT,
             start_new_session=True)
@@ -481,8 +514,8 @@ class Pom2(object):
 
     def stable(self, tries=200, pause=0.05, need=6):
         """Attend que l'ecran ne bouge plus `need` releves de suite. C'est
-        l'indicateur que le jeu est retourne dans son cgetc() : POM2 n'expose
-        pas pendingPasteSize(), il n'y a pas mieux.
+        l'indicateur que le jeu est retourne dans son cgetc() : le serveur HTTP
+        de POM2 n'expose pas pendingPasteSize(), il n'y a pas mieux.
 
         La fenetre de silence doit etre GENEREUSE. Une page de combat ecrit
         son texte, puis lit son image RLE au disque -- 160 ms d'ecran fige a
@@ -500,7 +533,7 @@ class Pom2(object):
             else:
                 same = 0
             prev = cur
-            time.sleep(pause)
+            self.pause(pause)
         raise TimeoutError("l'ecran ne se stabilise pas")
 
     def wait_for(self, needle, tries=200, pause=0.1):
@@ -509,8 +542,142 @@ class Pom2(object):
             rows = self.screen()
             if any(needle in r for r in rows):
                 return self.stable()
-            time.sleep(pause)
+            self.pause(pause)
         raise TimeoutError("« %s » n'apparait pas" % needle)
+
+    def pause(self, seconds):
+        """Laisser tourner le jeu. Ici le temps de l'horloge ; un hote sans
+        horloge (A2shotHost) en deduit des cycles."""
+        if self.full_emulator:
+            if self.accelerate and self.peek(self.card_probe, 1)[0]:
+                self.rq("/speed", {"cycles_per_frame": self.speed})
+                self.accelerate = False
+            # Encore a 1x, les silences du banc, comptes a --speed, sont douze
+            # fois trop courts pour une lecture disque. Accelere, un fondu suit
+            # encore le 6522 de la carte, donc l'horloge : l'air change apres que
+            # l'ecran s'est tu, et six fois le silence couvre le plus long.
+            seconds *= self.speed / 17045 if self.accelerate else 6
+        time.sleep(seconds)
+
+    def pc(self):
+        return self.rq("/cpu")["pc"]
+
+    def run_from(self, pc, status):
+        self.rq("/cpu", {"pc": pc, "p": status})
+
+    def capture(self, folder, name):
+        """L'image courante, pour la comparer a une autre ; le fichier reste
+        comme preuve technique, pas comme jugement visuel."""
+        data = urllib.request.urlopen(self.base + "/screen.ppm").read()
+        (folder / (name + ".ppm")).write_bytes(data)
+        return data
+
+
+class A2shotHost(Pom2):
+    """Le meme contrat sur le SDK public de POM2, par `a2shot --stdin`.
+
+    Pas de serveur, pas de thread : la machine n'avance que quand on le lui
+    demande, donc un meme scenario refait le meme chemin au cycle pres. Une
+    attente n'est plus du temps d'horloge mais les cycles que POM2 aurait
+    executes pendant ce temps a --speed. a2shot travaille sur une copie privee :
+    stop() la recopie sur `hdv`, comme POM2 ecrit son image a l'arret."""
+
+    FRAME_CYCLES = 17030
+    HOST_HZ = 60
+
+    def __init__(self, hdv, tool, speed=200000, verbose=False):
+        super().__init__(hdv, speed=speed, verbose=verbose)
+        self.tool = tool
+        self.tmp = None
+
+    def start(self):
+        self.tmp = tempfile.mkdtemp(prefix="scoswamp-a2shot-")
+        log = open(os.path.join(self.tmp, "a2shot.log"), "w")
+        self.proc = subprocess.Popen(
+            [self.tool, "--iie", "--mockingboard", "--hdd=5", "--disk", self.hdv, "--stdin"],
+            stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=log,
+            text=True, errors="replace", bufsize=1, start_new_session=True)
+        return self
+
+    def stop(self):
+        if self.proc is None:
+            return
+        try:
+            if self.proc.poll() is None:
+                self.step("hddsave:%s" % self.hdv)
+                self.proc.stdin.close()
+                self.proc.wait(timeout=10)
+        finally:
+            if self.proc.poll() is None:
+                self.proc.kill()
+            self.proc = None
+            shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def step(self, *steps):
+        """Une etape, sa reponse. Le journal du coeur n'en fait pas partie."""
+        out = []
+        for one in steps:
+            self.proc.stdin.write(one + "\n")
+            self.proc.stdin.flush()
+            while True:
+                line = self.proc.stdout.readline()
+                if not line:
+                    raise RuntimeError("a2shot s'est arrete sur %r" % one)
+                if line == "a2shot:done\n":
+                    break
+                if not line.startswith("["):
+                    out.append(line.rstrip("\n"))
+        return out
+
+    def pause(self, seconds):
+        frames = int(seconds * self.HOST_HZ * self.speed / self.FRAME_CYCLES)
+        self.step("wait:%d" % max(frames, 1))
+
+    def peek(self, addr, n, bank="main"):
+        out = bytearray()
+        for row in self.step("ram:%s:%X:%d" % (bank, addr, n)):
+            out += bytes.fromhex(row.split(":", 1)[1])
+        return bytes(out)
+
+    def poke(self, addr, data):
+        if addr + len(data) > 0xC000:
+            raise ValueError("poke refuse l'espace d'E/S et la ROM")
+        self.step("ramset:main:%X:%s" % (addr, bytes(data).hex()))
+        return len(data)
+
+    def keys(self, text):
+        return self.raw(text)
+
+    def raw(self, data):
+        if isinstance(data, str):
+            data = data.encode("latin-1")
+        self.step("rawkey:%s" % data.hex())
+        return len(data)
+
+    def keys_taken(self):
+        state = self.step("keyinfo")[0]
+        return "strobe=0" in state and state.endswith("queued=0")
+
+    def stable(self, tries=200, pause=0.05, need=6):
+        """D'abord la touche prise : l'etat du clavier se lit maintenant sans
+        l'acquitter. Reste a laisser la page se peindre, ce que seul l'ecran dit."""
+        for _ in range(tries):
+            if self.keys_taken():
+                break
+            self.pause(pause)
+        return super().stable(tries, pause, need)
+
+    def pc(self):
+        return int(re.search(r"PC=([0-9A-F]{4})", self.step("cpu")[0]).group(1), 16)
+
+    def run_from(self, pc, status):
+        self.step("cpuset:%X:%X" % (pc, status))
+
+    def capture(self, folder, name):
+        path = os.path.join(self.tmp, name + ".png")
+        self.step("shot:%s" % path)
+        with open(path, "rb") as f:
+            return f.read()
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -1354,14 +1521,13 @@ def sc_aux_music_probe(g, b):
         subprocess.check_call(["ld65", "-t", "none", "--start-addr", "0x9000", obj, "-o", binary])
         with open(binary, "rb") as f:
             g.p.poke(0x9000, f.read())
-    g.p.rq("/cpu", {"pc": 0x9000, "p": 0x24})
-    deadline = time.time() + 3
+    g.p.run_from(0x9000, 0x24)
     result = 0
-    while time.time() < deadline:
+    for _ in range(150):
         result = g.p.peek(0x0800, 1)[0]
         if result in (0xa5, 0xff):
             break
-        time.sleep(0.02)
+        g.p.pause(0.02)
     b.eq("tous les octets AUX relus, MAIN preservee et banques restaurees", result, 0xa5)
 
 
@@ -1436,9 +1602,7 @@ def sc_carte_retour_dhgr(g, b):
     from pathlib import Path
     folder=Path(ROOT)/"SCOSWAMP/DOCS/VALIDATION-CARTE-DHGR";folder.mkdir(exist_ok=True)
     def shot(name):
-        data=urllib.request.urlopen(g.p.base+"/screen.ppm").read()
-        (folder/(name+".ppm")).write_bytes(data)
-        return data
+        return g.p.capture(folder,name)
     for presses,mode in ((1,1),(2,2)):
         for close in ("M","ESC"):
             g.goto(195,objects=("ANNEAU",))
@@ -1496,8 +1660,10 @@ def sc_graines(g, b):
           rows, "Croissance")
     b.eq("il ajoute exactement une lettre prenable",
          len(g.letters(rows)), n_sans + 1)
-    b.check("plus aucun choix barre", "-" not in g.choices(rows),
-            repr(g.choices(rows)))
+    # Terreur, Illusion et Amitie restent barres : ils demandent chacun une
+    # Pierre (CU) que ce heros n'a pas, et c'est le livre qui le veut.
+    b.eq("Croissance n'est plus barre", g.choices(rows)[0], "A")
+    b.eq("les sortileges sans leur Pierre le restent", g.choices(rows)[1:4], ["-", "-", "-"])
     rows = g.choose(g.letters(rows)[0])
     b.eq("le sortilege mene aux graines-armes (page 228)", g.scene(), 228)
     b.check("les Graines sont consommees (GU)", "GRAINES" not in g.objects(),
@@ -1725,7 +1891,7 @@ def sc_musique(g, b):
             "playing=%d" % m1["playing"])
     b.check("elle porte un nom", bool(m1["cur"]), repr(m1["cur"]))
     c1 = m1["cursor"]
-    time.sleep(0.6)
+    g.p.pause(0.6)
     b.check("le curseur de lecture avance", g.music()["cursor"] != c1,
             "cur reste a %d" % c1)
     b.eq("l'air de la clairiere 1 est celui du rond-point", m1["cur"],
@@ -1772,7 +1938,7 @@ def sc_musique_aux(g, b):
     stream("GIANT.MB", 0, 0)
     cursor = g.music()["cursor"]
     g.press("I")
-    time.sleep(0.1)
+    g.p.pause(0.1)
     b.check("l'IRQ continue pendant le sac", g.music()["cursor"] != cursor)
     g.press("I")
     for _ in range(40):
@@ -2147,11 +2313,12 @@ def sc_lc_integrite(g, b):
     stop = 0x9000 + len(code)
     code.extend([0x4c, stop & 255, stop >> 8])
     g.p.poke(0x9000, code)
-    g.p.rq("/cpu", {"pc": 0x9000, "p": 0x24})
-    deadline = time.time() + 3
-    while g.p.rq("/cpu")["pc"] != stop and time.time() < deadline:
-        time.sleep(.02)
-    b.eq("la copie de controle est terminee", g.p.rq("/cpu")["pc"], stop)
+    g.p.run_from(0x9000, 0x24)
+    for _ in range(150):
+        if g.p.pc() == stop:
+            break
+        g.p.pause(.02)
+    b.eq("la copie de controle est terminee", g.p.pc(), stop)
     with open(os.path.join(ROOT, "SCOSWAMP/SCOSWAMP.BIN"), "rb") as f:
         f.seek(0)  # fixed LC prefix, staged at __LCIMAGE_START__
         expected = f.read(size)
@@ -2790,8 +2957,9 @@ def sc_carte(g, b):
           rows[19:20], "(Rond-point)")
 
     # L'ecran lui-meme. Le brouillard de guerre sort du seul bitmap visited :
-    # une clairiere est vue des qu'UNE de ses pages l'est.
-    g.goto(58, objects=("ANNEAU",), visited=(195,))
+    # une clairiere est vue des qu'UNE de ses pages l'est. replay=False : la 058
+    # tente la Chance a l'entree (CE), et cette invite avalerait le [M].
+    g.goto(58, replay=False, objects=("ANNEAU",), visited=(195,))
     rows = g.press("M")
     b.has("la carte s'ouvre", rows, "CARTE DU MARAIS")
     b.has("elle compte les clairieres vues", rows, "1 clairieres sur 35")
@@ -2807,7 +2975,7 @@ def sc_carte(g, b):
 
     # Deux pages d'une meme clairiere allument la meme case, quelle que soit
     # la porte : c'est le rabattement page -> clairiere du fichier MAP.
-    g.goto(58, objects=("ANNEAU",), visited=(195, 118, 303))
+    g.goto(58, replay=False, objects=("ANNEAU",), visited=(195, 118, 303))
     rows = g.press("M")
     b.has("118 et 303 sont la meme clairiere, comptee une fois",
           rows, "2 clairieres sur 35")
@@ -2817,7 +2985,7 @@ def sc_carte(g, b):
 
     # « Les boussoles elles-memes en perdent le nord » : sans l'Anneau, la
     # touche est refusee. Vendre l'anneau (page 049), c'est perdre la carte.
-    g.goto(58, objects=(), visited=(195,))
+    g.goto(58, replay=False, objects=(), visited=(195,))
     rows = g.press("M")
     b.hasnt("sans l'Anneau, la carte ne s'ouvre pas", rows, "CARTE DU MARAIS")
     b.has("elle dit pourquoi", rows, "boussoles")
@@ -2840,7 +3008,10 @@ def sc_carte_effets(g, b):
     b.eq("ouvrir la carte ne declenche pas V",
          struct.unpack("<h", g.p.peek(g.A("revisit"), 2))[0], -1)
 
-    g.goto(58, objects=("ANNEAU",))
+    # Texte, puis DHGR plein, puis mixte ; sans le jet d'entree, qui prendrait
+    # le premier [ESPACE] pour lui.
+    g.goto(58, replay=False, objects=("ANNEAU",))
+    g.press(" ")
     g.press(" ")
     g.press("M")
     g.press("M")
@@ -2956,7 +3127,11 @@ def run_one(spec, args, sym, workdir):
     if spec["forge"]:
         blob = spec["forge"]() if callable(spec["forge"]) else forge_save.build(**spec["forge"])
         install_save(hdv, blob, slot=9)
-    pom = Pom2(hdv, port=args.port, speed=args.speed, pom2=args.pom2)
+    if args.host == "a2shot":
+        pom = A2shotHost(hdv, args.a2shot, speed=args.speed)
+    else:
+        pom = Pom2(hdv, port=args.port, speed=args.speed, pom2=args.pom2,
+                   card_probe=sym["mb_slot"])
     t0 = time.time()
     try:
         pom.start()
@@ -2972,7 +3147,7 @@ def run_one(spec, args, sym, workdir):
             traceback.print_exc()
     finally:
         if args.keep:
-            print("      (--keep : POM2 reste ouvert sur le port %d)" % args.port)
+            print("      (--keep : l'emulateur reste ouvert, port %d avec --host http)" % args.port)
         else:
             pom.stop()
             os.unlink(hdv)
@@ -2989,6 +3164,10 @@ def main():
     ap.add_argument("--hdv", default=HDV_SRC,
                     help="l'image de reference ; elle n'est JAMAIS modifiee")
     ap.add_argument("--pom2", default=POM2, help="le binaire de l'emulateur")
+    ap.add_argument("--host", choices=("http", "a2shot"), default="http",
+                    help="http : POM2 et son serveur ; a2shot : le SDK public, sans fenetre")
+    ap.add_argument("--a2shot", default=os.environ.get("A2SHOT", A2SHOT),
+                    help="le binaire a2shot (--host a2shot)")
     ap.add_argument("--src", default=SRCDIR, help="ou lire build.map et build.lbl")
     ap.add_argument("--speed", type=int, default=200000,
                     help="cycles par trame (17045 = 1x)")
@@ -3008,7 +3187,11 @@ def main():
     if not os.path.exists(args.hdv):
         print("Image absente : %s\n  make -C SCOSWAMP/SRC hdv" % args.hdv)
         return 2
-    if not os.path.exists(args.pom2):
+    if args.host == "a2shot":
+        if not os.path.exists(args.a2shot):
+            print("a2shot absent : %s\n  make -C ../pom2games/dev/tools/a2shot" % args.a2shot)
+            return 2
+    elif not os.path.exists(args.pom2):
         print("Emulateur absent : %s\n  sh ADVKIT/TOOLS/build_pom2_playtest.sh" % args.pom2)
         return 2
 

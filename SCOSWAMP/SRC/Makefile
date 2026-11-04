@@ -555,7 +555,9 @@ $(IMG2MG): $(HDV) $(WRAP2MG)
 # pas seulement de l'image. Un .lbl périmé avec un binaire neuf, c'est un banc
 # qui écrit au hasard dans le tas — d'où la dépendance sur $(PROGRAM).
 #
-# Arguments : `make playtest PLAYTEST=--list`, `PLAYTEST="--only combat --keep"`
+# Arguments : `make playtest PLAYTEST=--list`, `PLAYTEST="--only combat --keep"`,
+# `PLAYTEST="--host a2shot"` (le SDK public POM2, sans fenetre ni serveur),
+# `PLAYTEST="--pom2 ../pom2/build/POM2"` (l'emulateur complet, par HTTP)
 # (--keep laisse l'émulateur ouvert pour regarder), `PLAYTEST="--port 6530"`.
 # Les ports 6503-6506 et 6510 sont déjà pris ailleurs : le défaut est 6520.
 PLAYTEST =
