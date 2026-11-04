@@ -51,10 +51,20 @@ Il reste ce qu'elle a ouvert, et qui demande une oreille ou une décision :
 
 ## 2. Ensuite — qualité des images et de la musique
 
-- 🟡 **Régénérer les pires masters** avec un seul modèle et une taille fixe —
-  *moyen* — N144, N089, N313, N248, N125, N243, N209, N066, N339, N227, N216,
-  N163, N065, N082, N308, N371, N040, N113, B028, B215, puis ce que désigne
-  `ADVKIT/TOOLS/image_quality.py worst`.
+- 🟠 **Accompagner la revue des illustrations dans l'atelier web** — *moyen* —
+  l'utilisateur est seul juge de leur qualité. Préparer le
+  [parcours de revue](ADVKIT/IMAGES.md#préparer-une-revue-détaillée) et fiabiliser
+  sélection, crop, régénération, comparaison et enregistrement. Depuis le
+  2026-11-04 : scènes FR/EN, avant-après, sélection et avis persistants,
+  brouillons récupérables, reprise du master précédent et vérification des
+  images dans le disque sont disponibles. La revue artistique reste à faire
+  par l’utilisateur ; le rendu CRT OE reste à intégrer. Appliquer ses
+  décisions ; les métriques ne décident pas quelles planches refaire.
+- 🟡 **Régénérer les masters choisis par l'utilisateur** avec un seul modèle
+  et une taille fixe — *moyen* — les mesures historiques signalaient N144,
+  N089, N313, N248, N125, N243, N209, N066, N339, N227, N216, N163, N065,
+  N082, N308, N371, N040, N113, B028 et B215 ; cette liste n'est pas une
+  décision de remplacement. Mesures : `ADVKIT/TOOLS/image_quality.py worst`.
 - 🟡 **Enveloppe logicielle par voix** (attaque, décroissance, palier) — *moyen* —
   `SCOSWAMP/SRC/music.s` (`@note`, tick), `compose.py` (`GATE`). C'est la
   cause principale du son terne : chaque note est un bloc carré coupé net.
@@ -69,8 +79,8 @@ Il reste ce qu'elle a ouvert, et qui demande une oreille ou une décision :
 - 🟡 **Règle de cadrage des images** — *petit* — les gros plans des batailles
   (B225–B402 ne gardent que 2 à 15 % du master, B392 réduite à une tête
   d'aigle ; B012–B224 coupent le héros ; N017, N023) sont-ils voulus ? Si oui,
-  les demander dans le prompt. Abandonner les retouches de tonalité : elles
-  n'améliorent aucune mesure et faussent les couleurs (B028).
+  les demander dans le prompt. Faire juger les retouches de tonalité par
+  l'utilisateur dans l'atelier, notamment B028 ; les mesures ne tranchent pas.
 - 🟢 **Commande de répétition dans le flux MB1** — *moyen* — `music.s`,
   `midi_to_mb.py`, `SCOSWAMP.MORE/TOOLS/audit_music.py` : environ 50 o CODE
   estimés, flux ramenés à 44–76 % ; de quoi faire boucler les zones, qui se
@@ -104,6 +114,16 @@ Il reste ce qu'elle a ouvert, et qui demande une oreille ou une décision :
 
 ## 4. Outillage et parc
 
+- 🟠 **Passer le banc à un hôte du type `a2shot` avec le SDK POM2** —
+  reprendre les sessions déterministes et copies privées de `pom2games`.
+  Blocage reproduit le 2026-11-04 : le SDK expose les disquettes SmartPort
+  400/800 Kio, pas le HDD nécessaire à notre volume complet. Demande et
+  critères de validation dans la [lettre à POM2](SCOSWAMP/DOCS/LETTRE-POM2-SDK-HDD.md).
+  Ne pas remplacer la validation du volume livré par celle d'un sous-ensemble.
+- 🟡 **Évaluer les primitives optimisées de `pom2games/dev/lib`** — comparer
+  d'abord les contrats C/ASM, ZP, banques et IRQ, puis mesurer cycles,
+  empreinte et piles dans SCOSWAMP. Reprendre la méthode de `dev/bench` ;
+  choisir les primitives sur ces mesures avant de modifier le moteur.
 - 🟡 **SPACETRIP et le tas de 270 octets** — *petit* — `SPACETRIP/build.sh`
   ne lie pas `apple2enh-iobuf-0800.o` et `spacetrip.c` ouvre 4 fichiers :
   vérifier qu'il ne souffre pas du `fopen` impossible corrigé dans SCOSWAMP

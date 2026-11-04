@@ -5,6 +5,7 @@ Masters are never overwritten. A preview token binds source, recipe and exact
 output bytes. Apply consumes that result, rather than converting it again.
 """
 import argparse
+import base64
 import hashlib
 import json
 import math
@@ -203,6 +204,7 @@ def regenerate(game, asset, job):
             job['state'] = 'failed'
             job['error'] = 'Aucun nouveau master : ' + (lines[-1] if lines else 'generate_images.sh muet')
         else:
+            with LOCK: mark_pending_master(game, asset)
             job['state'] = 'done'
             job['warning'] = next((l for l in lines if l.startswith('HORS')), None)
     except (ValueError, OSError, KeyError, subprocess.TimeoutExpired) as e:
@@ -260,6 +262,109 @@ def restore_master(source, before):
             return
 
 
+def fingerprint(p):
+    return {key: digest(p[key]) if p[key].exists() else None
+            for key in ('source', 'recipe', 'output')}
+
+
+def review_records(game):
+    project(game)
+    path = ROOT / f'{game}.MORE/IMAGE-REVIEW.json'
+    return json.loads(path.read_text()) if path.exists() else {}
+
+
+def review_state(record, current):
+    if record.get('state') == 'accepted' and record.get('fingerprint') != current:
+        return 'changed'
+    return record.get('state', 'todo')
+
+
+def save_review(game, asset, body):
+    p = paths(game, asset)
+    current = fingerprint(p)
+    if body.get('fingerprint') != current:
+        raise ValueError('Image ou réglages modifiés ailleurs : rechargez cette image avant de décider.')
+    state, notes, selected = body.get('state'), body.get('notes'), body.get('selected')
+    if state not in ('todo', 'accepted', 'rework') or not isinstance(notes, str) or len(notes) > 2000 or type(selected) is not bool:
+        raise ValueError('Décision de revue invalide')
+    if state == 'accepted' and (current['source'] is None or current['output'] is None):
+        raise ValueError('Master et image enregistrée requis pour valider.')
+    records = review_records(game)
+    record = {**records.get(asset, {}), **dict(state=state, notes=notes, selected=selected, fingerprint=current, updated=time.time())}
+    records[asset] = record
+    atomic_write(ROOT / f'{game}.MORE/IMAGE-REVIEW.json', (json.dumps(records, ensure_ascii=False, indent=2)+'\n').encode())
+    return record
+
+
+def mark_pending_master(game, asset):
+    records = review_records(game)
+    records.setdefault(asset, {})['pending_master'] = digest(paths(game, asset)['source'])
+    atomic_write(ROOT/f'{game}.MORE/IMAGE-REVIEW.json', (json.dumps(records, ensure_ascii=False, indent=2)+'\n').encode())
+
+
+def restore_previous_master(game, asset, expected, previous):
+    p = paths(game, asset)
+    if fingerprint(p) != expected:
+        raise ValueError('Master ou réglages modifiés : rechargez cette image.')
+    candidates = { '/'+str(path.relative_to(ROOT)): path
+                   for path in (p['source'].parent/'.rejets').glob(f'{asset}.avant-*.png') }
+    if previous not in candidates: raise ValueError('Master précédent introuvable')
+    source = candidates[previous]
+    dimensions(source)
+    backup = p['source'].parent/'.rejets'/f'{asset}.avant-{time.strftime("%Y%m%d-%H%M%S")}-{time.time_ns()}.png'
+    if p['source'].exists(): atomic_write(backup, p['source'].read_bytes())
+    atomic_write(p['source'], source.read_bytes())
+    mark_pending_master(game, asset)
+
+
+def scene_context(game, asset):
+    proj = project(game)
+    template = proj['assets']['texte'].replace('{LANG}', 'FR').replace('{BUCKET}', '*').replace('{PAGE}', 'N*')
+    number = int(asset[1:])
+    scenes = []
+    for path in sorted(ROOT.glob(template)):
+        text = path.read_text(encoding='utf-8')
+        same = path.stem == f'N{number:03d}'
+        if not same and not (asset.startswith('B') and re.search(rf'^MI\s+0*{number}\s*$', text, re.M)):
+            continue
+        scene = dict(page=int(path.stem[1:]), titles={}, texts={})
+        for lang in ('FR', 'EN'):
+            localized = ROOT / str(path.relative_to(ROOT)).replace('TEXTFR', 'TEXT'+lang).replace('TXTFR', 'TXT'+lang)
+            if not localized.exists(): continue
+            source = localized.read_text(encoding='utf-8')
+            title = re.search(r'^T\s+\d+\s+(.*)', source, re.M)
+            scene['titles'][lang] = title[1] if title else path.stem
+            scene['texts'][lang] = source
+        scenes.append(scene)
+    return scenes
+
+
+def review_details(game, asset):
+    p = paths(game, asset)
+    current = fingerprint(p)
+    record = review_records(game).get(asset, {})
+    previous = sorted((p['source'].parent/'.rejets').glob(f'{asset}.avant-*.png'))
+    return dict(fingerprint=current, record=record, state=review_state(record, current),
+                scenes=scene_context(game, asset),
+                saved=base64.b64encode(p['output'].read_bytes()).decode() if current['output'] else None,
+                previous_master='/'+str(previous[-1].relative_to(ROOT)) if previous else None)
+
+
+def verify_volume(game, expected=None):
+    result = subprocess.run(['node', str(Path(__file__).parent/'TOOLS/verify_image_volume.mjs'),
+                             str(ROOT), game], input=json.dumps(expected) if expected is not None else '',
+                            capture_output=True, text=True, timeout=60)
+    if result.returncode:
+        raise ValueError((result.stderr or result.stdout)[-2000:] or 'Vérification du disque impossible')
+    return json.loads(result.stdout)
+
+
+def image_hashes(game):
+    probe = paths(game, 'N000')
+    directory = ROOT / game / ('DHGR' if probe['mode'] == 'dhgr' else 'IMG')
+    return {str(p.relative_to(ROOT)): digest(p) for p in directory.rglob('*.BIN')}
+
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs): super().__init__(*args,directory=str(ROOT),**kwargs)
     def end_headers(self):
@@ -275,16 +380,19 @@ class Handler(SimpleHTTPRequestHandler):
         if url.path=='/api/images':
             try:
                 game=parse_qs(url.query).get('game',['SCOSWAMP'])[0]
-                probe=paths(game,'N000'); assets=[]
+                probe=paths(game,'N000'); assets=[]; records=review_records(game)
                 ids={s.stem for s in probe['source'].parent.glob('*.png')}
+                image_dir=ROOT/game/('DHGR' if probe['mode']=='dhgr' else 'IMG')
+                ids.update(p.name.split('.')[0] for p in image_dir.rglob('*.BIN'))
                 if self.server.job and self.server.job['state']=='running' and self.server.job['game']==game:
                     ids.add(self.server.job['asset'])
                 for asset in sorted(ids):
                     if not re.fullmatch(r'[NB][0-9]{3}',asset): continue
                     p=paths(game,asset);source=master_for(self.server,game,asset,p)
-                    if not source.exists(): continue
-                    assets.append(dict(id=asset,source='/'+str(source.relative_to(ROOT)),
-                                       corrected=p['recipe'].exists()))
+                    record=records.get(asset,{})
+                    assets.append(dict(id=asset,source='/'+str(source.relative_to(ROOT)) if source.exists() else None,
+                                       corrected=p['recipe'].exists(), selected=record.get('selected',False),
+                                       review=review_state(record,fingerprint(p)) if record else 'todo'))
                 self.reply(dict(assets=assets,defaults=DEFAULTS,mode=probe['mode'],csrf=self.server.csrf,
                                 regenerable=game=='SCOSWAMP',job=self.server.job))
             except (ValueError,OSError) as e: self.reply(dict(error=str(e)),400)
@@ -292,14 +400,24 @@ class Handler(SimpleHTTPRequestHandler):
             try:
                 q=parse_qs(url.query); p=paths(q['game'][0],q['asset'][0])
                 recipe=json.loads(p['recipe'].read_text()) if p['recipe'].exists() else DEFAULTS.copy()
-                width,height=dimensions(master_for(self.server,q['game'][0],q['asset'][0],p));warning=None
+                source=master_for(self.server,q['game'][0],q['asset'][0],p)
+                if not source.exists():
+                    self.reply(dict(recipe=recipe,width=0,height=0,warning='Master absent : régénérez-le ou replacez son fichier PNG.',fingerprint=fingerprint(p),missing_master=True));return
+                width,height=dimensions(source);warning=None
+                pending=review_records(q['game'][0]).get(q['asset'][0],{}).get('pending_master')==digest(source)
+                if pending: recipe=DEFAULTS.copy()
                 # Un master regenere n'a plus la composition que visait le cadrage.
                 try: validate(recipe,width,height)
                 except ValueError:
                     if recipe.get('crop') is None: raise
                     recipe={**recipe,'crop':None};validate(recipe,width,height)
                     warning='Cadrage enregistré hors du master actuel : retiré.'
-                self.reply(dict(recipe=recipe,width=width,height=height,warning=warning))
+                self.reply(dict(recipe=recipe,width=width,height=height,warning=warning,fingerprint=fingerprint(p),pending_master=pending))
+            except (ValueError,OSError,KeyError) as e: self.reply(dict(error=str(e)),400)
+        elif url.path=='/api/review':
+            try:
+                q=parse_qs(url.query)
+                self.reply(review_details(q['game'][0],q['asset'][0]))
             except (ValueError,OSError,KeyError) as e: self.reply(dict(error=str(e)),400)
         elif url.path=='/api/prompt':
             try:
@@ -333,45 +451,76 @@ class Handler(SimpleHTTPRequestHandler):
                 p=paths(body['game'],body['asset']); recipe=validate(body['recipe'],*dimensions(p['source']))
                 # Bound CPU/memory use; UI queues one conversion at a time.
                 with LOCK:
+                    if regenerating(self.server,body['game'],body['asset']): raise ValueError('Régénération en cours')
                     source_hash=digest(p['source'])
                     token=secrets.token_hex(16); dest=Path(self.server.cache.name)/token; dest.mkdir()
                     convert(p['source'],p['mode'],recipe,dest)
                     if digest(p['source'])!=source_hash: raise ValueError('Master modifié pendant la conversion')
                     self.server.previews[token]=dict(folder=dest,paths=p,recipe=recipe,source_hash=source_hash,
                                                     game=body['game'],asset=body['asset'],
+                                                    previous_recipe=digest(p['recipe']) if p['recipe'].exists() else None,
                                                     previous=digest(p['output']) if p['output'].exists() else None)
                     while len(self.server.previews)>48:
                         old=next(iter(self.server.previews)); shutil.rmtree(self.server.previews.pop(old)['folder'])
                 self.reply(dict(token=token,bytes=(dest/'image.bin').stat().st_size,
-                                sha256=digest(dest/'image.bin'),composite=f'/api/preview/{token}/composite.png',
+                                sha256=digest(dest/'image.bin'),binary=base64.b64encode((dest/'image.bin').read_bytes()).decode(),composite=f'/api/preview/{token}/composite.png',
                                 chat=f'/api/preview/{token}/chat.png'))
             elif self.path=='/api/apply':
                 with LOCK:
                     item=self.server.previews.get(body['token'])
                     if item is None: raise ValueError('Aperçu expiré: relancez la conversion')
+                    if regenerating(self.server,item['game'],item['asset']): raise ValueError('Régénération en cours')
                     p=item['paths']
                     if digest(p['source'])!=item['source_hash']: raise ValueError('Master modifié: refaites un aperçu')
                     current=digest(p['output']) if p['output'].exists() else None
                     if current!=item['previous']: raise ValueError('Image modifiée ailleurs: refaites un aperçu')
+                    recipe_hash=digest(p['recipe']) if p['recipe'].exists() else None
+                    if recipe_hash!=item['previous_recipe']: raise ValueError('Recette modifiée ailleurs: refaites un aperçu')
                     install(p,item['folder'],item['recipe']); item['previous']=digest(p['output'])
-                self.reply(dict(saved=str(p['output'].relative_to(ROOT)),sha256=item['previous']))
+                    item['previous_recipe']=digest(p['recipe'])
+                    records=review_records(item['game'])
+                    if 'pending_master' in records.get(item['asset'],{}):
+                        del records[item['asset']]['pending_master']
+                        atomic_write(ROOT/f"{item['game']}.MORE/IMAGE-REVIEW.json",(json.dumps(records,ensure_ascii=False,indent=2)+'\n').encode())
+                self.reply(dict(saved=str(p['output'].relative_to(ROOT)),sha256=item['previous'],fingerprint=fingerprint(p)))
+            elif self.path=='/api/review':
+                with LOCK:
+                    if regenerating(self.server,body['game'],body['asset']):
+                        raise ValueError('Attendez la fin de la régénération avant de décider.')
+                    if body.get('state')=='accepted':
+                        item=self.server.previews.get(body.get('token'))
+                        current=fingerprint(paths(body['game'],body['asset']))
+                        if not item or item['game']!=body['game'] or item['asset']!=body['asset'] or item['source_hash']!=current['source'] or digest(item['folder']/'image.bin')!=current['output']:
+                            raise ValueError('Enregistrez la proposition affichée avant de la valider.')
+                    record=save_review(body['game'],body['asset'],body)
+                self.reply(dict(record=record))
+            elif self.path=='/api/restore-master':
+                with LOCK:
+                    if regenerating(self.server,body['game'],body['asset']):
+                        raise ValueError('Attendez la fin de la régénération.')
+                    restore_previous_master(body['game'],body['asset'],body['fingerprint'],body['previous_master'])
+                self.reply(dict(restored=True))
             elif self.path=='/api/regenerate':
                 game,asset=body['game'],body['asset'];manifest_row(game,asset)
-                if not REGEN.acquire(blocking=False):
-                    raise ValueError(f"Une régénération est déjà en cours ({(self.server.job or {}).get('asset','?')})")
-                # Toutes les cles des maintenant : le fil ne fait ensuite que changer
-                # des valeurs, jamais la taille du dict qu'un GET est en train de lire.
-                job=dict(game=game,asset=asset,state='running',started=time.time(),finished=None,log='',error=None,warning=None)
-                self.server.job=job
+                with LOCK:
+                    if not REGEN.acquire(blocking=False):
+                        raise ValueError(f"Une régénération est déjà en cours ({(self.server.job or {}).get('asset','?')})")
+                    # Mark the job while holding the same lock as apply/restore.
+                    job=dict(game=game,asset=asset,state='running',started=time.time(),finished=None,log='',error=None,warning=None)
+                    self.server.job=job
                 threading.Thread(target=regenerate,args=(game,asset,job),daemon=True).start()
                 self.reply(dict(job=job))
             elif self.path=='/api/build':
                 game=body['game']; project(game)
                 command=['make','-C','SCOSWAMP/SRC','hdv'] if game=='SCOSWAMP' else ['python3','SPACETRIP/build_disk.py']
                 with LOCK:
+                    expected=image_hashes(game)
                     result=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=240)
-                if result.returncode: raise ValueError((result.stdout+result.stderr)[-3000:])
-                self.reply(dict(volume='/dist/SCOSWAMP.HDV' if game=='SCOSWAMP' else '/dist/SPACETRIP.hdv'))
+                    if result.returncode: raise ValueError((result.stdout+result.stderr)[-3000:])
+                    verification=verify_volume(game,expected)
+                    if not verification['ok']:
+                        raise ValueError('Disque construit, mais images différentes ou absentes : '+', '.join(verification['mismatches']))
+                self.reply(dict(volume='/dist/SCOSWAMP.HDV' if game=='SCOSWAMP' else '/dist/SPACETRIP.hdv',verification=verification))
             else: self.reply(dict(error='Action inconnue'),404)
         except (ValueError,KeyError,OSError,subprocess.TimeoutExpired) as e:
             self.reply(dict(error=str(e)),400)

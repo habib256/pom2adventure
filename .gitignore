@@ -26,6 +26,8 @@ __pycache__/
 
 # ── Artefacts de build ─────────────────────────────────────────────────────
 ADVKIT/TOOLS/build/
+ADVKIT/TOOLS/build-host/
+.venv/
 dist/
 
 # ── Sorties dérivées, régénérables depuis les sources ci-dessus ────────────

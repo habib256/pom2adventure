@@ -1,5 +1,7 @@
 {
   "id": "SPACETRIP",
+  "volume": "dist/SPACETRIP.hdv",
+  "racineVolume": "SPACETRIP/",
   "titre": "Space Trip",
   "commentaire": [
     "Le second jeu du depot, decrit pour le meme lecteur. Depuis la Partie 1",

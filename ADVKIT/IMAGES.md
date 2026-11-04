@@ -20,14 +20,25 @@ Le serveur de l’atelier écoute uniquement sur la machine locale.
    Choisir le noyau Floyd–Steinberg / Jarvis-mod et le modèle DHGR.
    **Le tramage est désactivé par défaut et après Réinitialiser.**
    Une correction déjà enregistrée retrouve ses propres réglages.
-4. Comparer original et résultat, éventuellement en vue agrandie. Le calque
+4. Comparer master et proposition, éventuellement en vue agrandie.
+   **Avant-après** affiche le fichier Apple II enregistré et la proposition
+   avec le même décodeur : blocs Chat Mauve en DHGR, palette HGR en SPACETRIP.
+   Cette comparaison ne simule pas le CRT OpenEmulator. Le calque
    source superpose l’original cadré ; la zone de texte matérialise les quatre
    lignes du mode mixte. Ces deux aides ne sont pas inscrites dans l’image.
 5. Cliquer **Générer & enregistrer le DHGR RLE**. Le bouton reste visible sous
    les réglages, même quand ceux-ci défilent. Si l’aperçu n’est pas à jour,
    cette action réalise la conversion finale avant d’enregistrer.
-6. **Construire le disque .HDV**, puis télécharger le disque pour POM2.
-   Seules les corrections enregistrées sont incluses dans ce disque.
+6. Dans **Mon avis**, choisir À revoir, À retoucher ou Validée par vous,
+   ajouter une note et éventuellement cocher Ma sélection, puis cliquer
+   **Enregistrer mon avis**. Une proposition doit être enregistrée avant
+   de pouvoir la valider. Les filtres et Précédente/Suivante suivent la sélection.
+7. Le panneau **Scènes et texte associés** donne le texte FR/EN et ouvre la scène
+   depuis les fichiers ou depuis le dernier volume construit.
+8. **Construire le disque .HDV**, puis télécharger le disque pour POM2.
+   Le serveur relit le volume ProDOS et compare chaque image aux octets
+   enregistrés au début de la construction. Le téléchargement est proposé
+   seulement si tout correspond. Les brouillons ne sont pas inclus.
 
 Pour B120, les sorties sont :
 
@@ -38,9 +49,21 @@ Pour B120, les sorties sont :
 
 Le master `GENERATED/B120.png` reste intact. Les scripts `convert_images.sh`
 relisent la recette si le master ou les réglages changent. Les images sans
-recette gardent leur ancienne chaîne de conversion. Les brouillons conservés
-pendant la navigation entre images restent en mémoire du navigateur : il faut
-les enregistrer avant de fermer la page.
+recette gardent leur ancienne chaîne de conversion. Les brouillons de cadrage
+et de réglages sont conservés dans le stockage local du navigateur, y compris
+après rechargement. Un changement du master ou de la recette les invalide.
+Ils ne remplacent pas les fichiers enregistrés et ne suivent pas un changement
+de navigateur ou de port du serveur.
+
+Les avis et la sélection sont conservés dans `<JEU>.MORE/IMAGE-REVIEW.json`.
+Une validation est liée aux empreintes du master, de la recette et du fichier
+Apple II : si un de ces fichiers change, elle apparaît comme **Modifiée depuis
+votre avis**. Aucun avis artistique n’est attribué automatiquement.
+
+Après régénération, le panneau **Master précédent** permet de le revoir et
+de le reprendre. Le master remplacé est sauvegardé dans `GENERATED/.rejets/` ;
+le fichier Apple II reste inchangé jusqu’à un nouvel enregistrement. Les
+réglages repartent des valeurs par défaut pour recadrer le master choisi.
 
 SPACETRIP utilise actuellement le format HGR brut : le même atelier écrit
 `SPACETRIP/IMG/Nxxx.HGR.BIN` (8 192 octets) et sa recette, sans modifier le
@@ -158,22 +181,22 @@ Ces seuils sont sévères : 203 des 452 masters actuels les dépassent (168 sous
 ## Vérification
 
 ```sh
-python3 ADVKIT/TESTS/test_image_workshop.py
-# Avec Chrome headless exposant CDP sur 9228 et le serveur sur 8765 :
-node --experimental-websocket ADVKIT/TESTS/test_workshop_browser.mjs
+python3 ADVKIT/TESTS/run.py images --report dist/checks/images.json
+# Avec Chrome exposant CDP sur 9228 et le serveur sur 8765 :
+python3 ADVKIT/TESTS/run.py browser
 ```
 
-```sh
-/usr/bin/python3 ADVKIT/TESTS/test_image_quality.py
-```
+Le Python choisi doit disposer de NumPy et Pillow ; installation et choix
+des sources POM2 dans [le harnais](TESTS/README.md#images-et-dépendances).
+La suite reconstruit les convertisseurs et le constructeur ProDOS avant les tests.
 
-Ce second fichier vérifie, sur des images synthétiques, le décodage RLE (contre
+`test_image_quality.py` vérifie, sur des images synthétiques, le décodage RLE (contre
 l’aperçu du convertisseur), les mesures, les codes de `check`, `worst`, le
 défaut `bilinear` à l’octet, la moyenne de zone, le cadrage conservé en `area`
 pour les quatre modèles, et le refus / la relance / la conservation du moins
 mauvais dans une copie de `generate_images.sh`.
 
-Six tests natifs couvrent le ratio sur une mire carrée, les quatre modèles,
+Les tests de l’atelier couvrent le ratio sur une mire carrée, les quatre modèles,
 le cadrage, le HGR, les bornes RLE, les recettes invalides, l’enregistrement et
 la reconversion identique sans modification du master. Le test navigateur
 utilise une image temporaire N998 et retire ses fichiers ensuite : clics,
@@ -185,6 +208,59 @@ luminosité à l’aperçu natif, modèle 140 pixels, master 1514 × 1039 cadré
 L’attente avant conversion est de 120 ms ; le convertisseur est compilé avec
 `-O2` hors Debug. Cette mesure ne garantit pas ce délai pour les modèles 560
 points, qui font davantage de calculs.
+
+## Préparer une revue détaillée
+
+**L'utilisateur est seul juge de la qualité des images.** La revue se fait
+dans l'interface web, avec ses outils de crop, régénération, réglage et
+comparaison. Le rôle du harnais est de fiabiliser ce parcours : charger la
+bonne image, conserver ses réglages, produire un flux valide et enregistrer
+le résultat choisi. Aucune métrique ne vaut acceptation ou rejet artistique.
+
+Commencer par la suite `images` ci-dessus et `./check-project.sh`. Cela
+contrôle le pipeline et les flux livrés, pas la qualité artistique. Sur un
+clone neuf, les masters `SCOSWAMP.MORE/GENERATED/` et
+`SPACETRIP.MORE/GENERATED/` peuvent manquer : ils ne sont pas suivis par Git.
+Relever ces absences avant de comparer, sans les confondre avec des planches
+validées. Les références SCOSWAMP dans `REF/`, les recettes et les flux livrés
+constituent des sources distinctes à conserver.
+
+Pour fournir, si utile à l'utilisateur, des mesures SCOSWAMP sur les masters
+disponibles (les tris ci-dessous ne sont pas une liste d'images à refaire) :
+
+```sh
+mkdir -p dist/checks
+python3 ADVKIT/TOOLS/image_quality.py worst --count 30 --sort isolated --json > dist/checks/images-isolated.json
+python3 ADVKIT/TOOLS/image_quality.py worst --count 30 --sort ssim --json > dist/checks/images-ssim.json
+# Une planche précise, avec sa recette si elle existe :
+python3 ADVKIT/TOOLS/image_quality.py measure \
+  --master SCOSWAMP.MORE/GENERATED/B120.png \
+  --rle SCOSWAMP/DHGR/N100/B120.RLE.BIN \
+  --recipe SCOSWAMP.MORE/IMAGE-RECIPES/B120.json --json
+```
+
+`worst` parcourt les masters SCOSWAMP présents : ce classement ne prouve pas
+la couverture de toutes les images livrées. Les métriques DHGR ne s'appliquent
+pas directement au HGR de SPACETRIP. Les chiffres de septembre cités plus haut
+sont une référence historique ; les recalculer pour le corpus examiné.
+
+L'utilisateur peut sélectionner une image, la recadrer ou la régénérer dans
+l'atelier, comparer les variantes, puis enregistrer celle qu'il retient.
+Pour accompagner ses décisions, les informations utiles sont :
+
+| Champ | À relever |
+| --- | --- |
+| Identité | jeu, scène ou combat, langue/contexte, chemins master/recette/flux |
+| Avis utilisateur | ses observations sur le sujet, le cadrage et le rendu |
+| Comparaison | master, flux actuel, variante ; profil de rendu POM2 employé |
+| Décision utilisateur | garder, recadrer, régler la recette ou régénérer |
+| Preuve | captures avant/après, métriques disponibles, version du dépôt et des convertisseurs |
+
+L'atelier permet de comparer master et rendu en contexte ; le profil CRT
+OpenEmulator indiqué ci-dessous reste la cible finale. Présenter les variantes
+à l'utilisateur et conserver son choix, même si une autre variante obtient de
+meilleures métriques. Après enregistrement, reconstruire le disque et vérifier
+la même scène depuis le volume, pour lui montrer ce qui sera réellement livré.
 
 ## Cible des prochaines améliorations DHGR
 
@@ -200,3 +276,9 @@ l’atelier, fixer un profil de référence, puis optimiser les motifs DHGR cont
 ce rendu et comparer les variantes. La palette à fenêtre de huit points du
 convertisseur est un point de départ, pas une preuve d’équivalence avec la
 chaîne complète démodulation + CRT. Ces améliorations restent à réaliser.
+
+`test_image_review.py` vérifie les décisions persistantes, leur invalidation,
+la reprise des masters, les liens de scènes et les octets d’un vrai volume
+ProDOS temporaire, y compris le refus d’un disque périmé. Le test navigateur
+couvre aussi l’avant-après, les avis, le rechargement des brouillons et la
+reprise d’un master après une régénération simulée.

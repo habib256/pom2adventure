@@ -4,7 +4,9 @@ project(advkit LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(POM2_SRC "/Users/gistair/src/pom2/src" CACHE PATH "POM2 source directory")
+option(ADVKIT_BUILD_TOOLS "Build converters and ProDOS tools (requires POM2 sources)" ON)
+set(POM2_SRC "${CMAKE_CURRENT_SOURCE_DIR}/../../../pom2/src" CACHE PATH "POM2 source directory")
+if(ADVKIT_BUILD_TOOLS)
 if(NOT EXISTS "${POM2_SRC}/hgrpaint/Cam16.cpp")
     message(FATAL_ERROR "Set POM2_SRC to the POM2 src directory")
 endif()
@@ -33,6 +35,13 @@ target_include_directories(scoswamp_hgr PRIVATE
 )
 target_compile_options(scoswamp_hgr PRIVATE -Wall -Wextra -Wpedantic)
 
+add_executable(build_prodos_volume
+    build_prodos_volume.cpp
+    "${POM2_SRC}/ProDOSVolume.cpp"
+)
+target_include_directories(build_prodos_volume PRIVATE "${POM2_SRC}")
+endif()
+
 enable_testing()
 add_executable(test_hgr_rle
     ../../SCOSWAMP.MORE/TOOLS/test_hgr_rle.c
@@ -51,8 +60,6 @@ target_include_directories(test_rules PRIVATE ../../SCOSWAMP/SRC)
 target_compile_options(test_rules PRIVATE -Wall -Wextra -Wpedantic)
 add_test(NAME rules COMMAND test_rules)
 
-add_executable(build_prodos_volume
-    build_prodos_volume.cpp
-    "${POM2_SRC}/ProDOSVolume.cpp"
-)
-target_include_directories(build_prodos_volume PRIVATE "${POM2_SRC}")
+add_executable(test_spacetrip_parse ../../SPACETRIP/test_parse.c)
+target_compile_options(test_spacetrip_parse PRIVATE -Wall -Wextra -Wpedantic)
+add_test(NAME spacetrip_parse COMMAND test_spacetrip_parse)

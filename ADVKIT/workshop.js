@@ -1,5 +1,6 @@
 /* Human correction workspace. Crops are always 35:24 in source coordinates;
  * the master stays intact. Only native conversion results can be applied. */
+import {reviewMethods,reviewLabels,draftKey} from './workshop_review.js';
 const $ = (s, root=document) => root.querySelector(s);
 const ratio = 35/24;
 export function cropAt(width,height,zoom=1,cx=width/2,cy=height/2) {
@@ -25,24 +26,30 @@ export class Workshop {
       <div class="studio-body">
         <aside class="library"><div class="library-heading"><h2>Illustrations</h2><span id="count"></span></div>
           <input id="search" type="search" placeholder="Rechercher N012, B120…" aria-label="Rechercher une image">
-          <select id="filter" aria-label="Filtrer"><option value="">Toutes les images</option><option value="N">Scènes</option><option value="B">Combats</option><option value="saved">Corrigées</option></select>
+          <select id="filter" aria-label="Filtrer"><option value="">Toutes les images</option><option value="selected">Ma sélection</option><option value="todo">À revoir ou retoucher</option><option value="N">Scènes</option><option value="B">Combats</option><option value="saved">Corrigées</option></select>
           <div id="assets" class="asset-list"></div></aside>
         <main class="image-desk">
           <div class="desk-title"><div><p class="eyebrow">CORRECTION D’IMAGE</p><h1 id="asset-title">Choisir une illustration</h1></div><span class="badge">35:24 · ratio verrouillé</span></div>
-          <div class="view-toolbar"><label>Image <select id="asset-select" aria-label="Sélectionner une image"></select></label><label>Affichage <select id="layout"><option value="side">Côte à côte</option><option value="result">Résultat agrandi</option></select></label>
+          <div class="review-navigation"><button id="previous">← Précédente</button><span id="review-progress"></span><button id="next">Suivante →</button></div>
+          <details class="scene-context"><summary>Scènes et texte associés</summary><div class="scene-links"><select id="scene-select" aria-label="Scène associée"></select><select id="scene-language" aria-label="Langue du contexte"><option>FR</option><option>EN</option></select><a id="scene-tree" target="_blank" rel="noopener">Voir en jeu ↗</a><a id="scene-volume" target="_blank" rel="noopener">Voir depuis le disque ↗</a></div><pre id="scene-text"></pre></details>
+          <div class="view-toolbar"><label>Image <select id="asset-select" aria-label="Sélectionner une image"></select></label><label>Affichage <select id="layout"><option value="side">Master & proposition</option><option value="compare">Avant / après</option><option value="result">Résultat agrandi</option></select></label>
             <label><input id="mask" type="checkbox"> Zone de texte</label><label><input id="onion" type="checkbox"> Calque source</label></div>
           <div class="canvases" id="canvases">
+            <section class="before-panel"><div class="panel-caption"><strong>Avant · image enregistrée</strong></div><div class="result-stage"><div class="result-frame"><canvas id="before-image" hidden></canvas><p id="before-empty">Lecture de l’image enregistrée…</p></div></div></section>
             <section class="source-panel"><div class="panel-caption"><strong>Original & cadrage</strong><span>Glisser pour déplacer</span></div>
               <div class="source-stage"><div class="source-frame" id="source-frame"><img id="source" draggable="false" alt="Master original"><div id="crop" tabindex="0" role="slider" aria-label="Cadrage, flèches pour déplacer"><i></i><i></i><i></i><i></i><button id="crop-handle" aria-label="Redimensionner le cadrage"></button></div></div></div>
               <div class="crop-tools"><button id="crop-toggle">Activer le cadrage</button><label>Zoom <input id="zoom" type="range" min="1" max="8" step=".01" value="1"><output id="zoom-value">1×</output></label></div>
               <p id="crop-info" class="subtle">Original conservé · cadrage non destructif</p>
               <div class="regen-tools"><button id="regen" title="Demande à codex un nouveau master avec le prompt du manifeste pour cette image. L’ancien est gardé dans GENERATED/.rejets/.">Régénérer le master avec codex</button>
+                <details id="previous-master-box" hidden><summary>Master avant la dernière régénération</summary><img id="previous-master" alt="Master précédent"><button id="restore-master">Reprendre ce master</button></details>
                 <details id="prompt-box"><summary>Prompt de cette image</summary><pre id="prompt-text">…</pre></details></div>
             </section>
-            <section class="result-panel"><div class="panel-caption"><strong>Résultat Apple II</strong><select id="display" aria-label="Rendu"><option value="composite">Composite · POM2</option><option value="chat">Chat Mauve · blocs</option></select></div>
-              <div class="result-stage"><div class="result-frame"><img id="result" alt="Aperçu converti" hidden><canvas id="overlay" hidden></canvas><div id="text-mask" hidden>ZONE DE TEXTE · 4 LIGNES</div><p id="placeholder">L’aperçu apparaîtra ici.</p></div></div>
+            <section class="result-panel"><div class="panel-caption"><strong>Proposition Apple II</strong><select id="display" aria-label="Rendu"><option value="composite">Composite · POM2</option><option value="chat">Chat Mauve · blocs</option></select></div>
+              <div class="result-stage"><div class="result-frame"><img id="result" alt="Aperçu converti" hidden><canvas id="after-image" hidden></canvas><canvas id="overlay" hidden></canvas><div id="text-mask" hidden>ZONE DE TEXTE · 4 LIGNES</div><p id="placeholder">L’aperçu apparaîtra ici.</p></div></div>
               <p id="result-info" class="subtle">Conversion native HGRImport</p></section>
           </div>
+          <p id="comparison-note" class="subtle" hidden>Avant : fichier enregistré · Après : proposition. Même rendu en blocs pour comparer les changements ; l’aperçu composite reste disponible dans « Master & proposition ».</p>
+          <details class="review-card"><summary>Mon avis · <span id="review-state">À revoir</span></summary><label class="check"><input id="review-selected" type="checkbox"> Ajouter à ma sélection</label><label>Décision <select id="review-decision"><option value="todo">À revoir</option><option value="rework">À retoucher</option><option value="accepted">Valider l’image enregistrée</option></select></label><label for="review-notes">Mes notes</label><textarea id="review-notes" rows="2" maxlength="2000" placeholder="Cadrage à reprendre, variante préférée…"></textarea><button id="save-review" disabled>Enregistrer mon avis</button></details>
           <div class="desk-bottom"><div><span class="status-dot"></span><span id="status" role="status" aria-live="polite">Chargement du catalogue…</span></div><span id="saved-state">Master intact</span></div>
         </main>
         <aside class="adjustments"><div class="adjust-heading"><h2>Réglages</h2><button id="reset">Réinitialiser</button></div>
@@ -71,6 +78,7 @@ export class Workshop {
     this.el.auto.onchange=()=>{if(this.el.auto.checked)this.schedule();};
     this.el.display.onchange=()=>this.showResult();
     this.el.layout.onchange=()=>this.el.canvases.dataset.layout=this.el.layout.value;
+    this.setupReview();
     this.el.mask.onchange=()=>this.el['text-mask'].hidden=!this.el.mask.checked;
     this.el.onion.onchange=()=>this.drawOverlay();
     this.el['crop-toggle'].onclick=()=>{this.recipe.crop=this.recipe.crop?null:cropAt(this.w,this.h);this.zoom=1;this.syncCrop();this.changed();};
@@ -85,7 +93,8 @@ export class Workshop {
   status(text,error=false){this.el.status.textContent=text;this.el.status.classList.toggle('error',error);}
   async api(path,body){const r=await fetch(path,body?{method:'POST',headers:{'Content-Type':'application/json','X-Workshop-Token':this.csrf},body:JSON.stringify(body)}:{});let data;try{data=await r.json();}catch{throw Error('Démarrez serve.sh pour activer la conversion et l’enregistrement.');}if(!r.ok)throw Error(data.error||r.statusText);return data;}
   async loadGame(){
-    this.keepDraft();this.asset=null;this.recipe=null;this.game=this.el.project.value;this.version++;this.token=null;this.dirty=false;this.el.apply.disabled=true;
+    if(this.saving){this.el.project.value=this.game;return;}
+    this.el.download.hidden=true;this.keepDraft();this.asset=null;this.recipe=null;this.game=this.el.project.value;this.version++;this.token=null;this.dirty=false;this.el.apply.disabled=true;
     const version=this.version, game=this.game;
     try {const data=await this.api('/api/images?game='+game);if(version!==this.version)return;this.assets=data.assets;this.defaults=data.defaults;this.mode=data.mode;this.csrf=data.csrf;this.regenerable=data.regenerable;this.job=data.job;
       this.el.apply.textContent=this.mode==='hgr'?'Générer & enregistrer le HGR':'Générer & enregistrer le DHGR RLE';this.el.model.disabled=this.mode==='hgr';this.el.display.options[1].disabled=this.mode==='hgr';this.el.display.value='composite';
@@ -95,23 +104,26 @@ export class Workshop {
       if(this.job?.state==='running')this.watchJob();
     }catch(e){this.status(e.message,true);}
   }
-  keepDraft(){this.drafts??=new Map();if(this.asset&&this.recipe)this.drafts.set(this.game+':'+this.asset,{recipe:structuredClone(this.recipe),dirty:this.dirty});}
+  keepDraft(){this.drafts??=new Map();this.storeDraft();}
   renderAssets(){
-    const q=this.el.search.value.toUpperCase(), f=this.el.filter.value;
-    const assets=this.assets.filter(a=>a.id.includes(q)&&(!f||(f==='saved'?a.corrected:a.id.startsWith(f))));
+    const assets=this.visibleAssets();
     this.el.count.textContent=assets.length;const scroll=this.el.assets.scrollTop;this.el.assets.replaceChildren();
     if(this.el['asset-select'].dataset.game!==this.game){this.el['asset-select'].replaceChildren(...this.assets.map(a=>new Option(a.id,a.id)));this.el['asset-select'].dataset.game=this.game;}
     this.el['asset-select'].value=this.asset||'';
-    for(const a of assets){const b=document.createElement('button');b.className='asset'+(this.asset===a.id?' selected':'');b.dataset.asset=a.id;b.innerHTML=`<img loading="lazy" src="${a.source}" alt=""><span><strong>${a.id}</strong><small>${a.id[0]==='B'?'Combat':'Scène'}${a.corrected?' · corrigée':''}</small></span>`;b.onclick=()=>this.select(a.id);this.el.assets.append(b);}
+    for(const a of assets){const b=document.createElement('button');b.className='asset'+(this.asset===a.id?' selected':'');b.dataset.asset=a.id;b.innerHTML=`${a.source?`<img loading="lazy" src="${a.source}" alt="">`:''}<span><strong>${a.id}${a.selected?' ★':''}</strong><small>${a.source?(reviewLabels[a.review]||'À revoir'):'Master absent'}</small></span>`;b.onclick=()=>this.select(a.id);this.el.assets.append(b);}
     this.el.assets.scrollTop=scroll;
+    this.reviewNavigation();
   }
   async select(id){
-    // Keep unsaved edits per image while browsing this session.
+    if(this.saving)return;
+    // Keep unsaved edits per image across navigation and reloads.
     this.keepDraft();this.recipe=null;this.el.settings.disabled=true;this.el.zoom.disabled=true;this.el['crop-toggle'].disabled=true;
-    const version=++this.version;this.asset=id;const url=new URL(location.href);url.searchParams.set('image',id);url.searchParams.set('jeu',this.game.toLowerCase());history.replaceState(null,'',url);this.token=null;this.el.apply.disabled=true;this.result=null;this.el.result.hidden=true;this.el.placeholder.hidden=false;
+    const version=++this.version;this.selectionVersion=version;this.asset=id;const url=new URL(location.href);url.searchParams.set('image',id);url.searchParams.set('jeu',this.game.toLowerCase());history.replaceState(null,'',url);this.token=null;this.el.apply.disabled=true;this.result=null;this.el.result.hidden=true;this.el.placeholder.hidden=false;
+    this.loadReview(version);
     this.el['asset-title'].textContent=`${id} / ${id[0]==='B'?'Combat':'Scène'}`;this.el['prompt-box'].open=false;this.el['prompt-text'].textContent='…';this.regenControls();this.renderAssets();this.status('Chargement du master…');
     try{const data=await this.api(`/api/recipe?game=${this.game}&asset=${id}`);if(version!==this.version)return;
-      const draft=this.drafts.get(this.game+':'+id);this.recipe=draft?.recipe||data.recipe;this.recipeWarning=data.warning;this.dirty=draft?.dirty||false;this.w=data.width;this.h=data.height;
+      if(data.missing_master){this.fingerprint=data.fingerprint;this.el.source.removeAttribute('src');this.el.crop.hidden=true;this.el.layout.value='compare';this.el.canvases.dataset.layout='compare';this.drawComparison();this.status(data.warning,true);return;}
+      this.fingerprint=data.fingerprint;const draft=this.readDraft(this.game,id,data.fingerprint);this.recipe=draft?.recipe||data.recipe;this.recipeWarning=data.warning;this.dirty=draft?.dirty||data.pending_master||false;this.w=data.width;this.h=data.height;
       this.el.source.src=this.assets.find(a=>a.id===id).source;await this.el.source.decode();if(version!==this.version)return;
       this.el.apply.disabled=false;this.el.settings.disabled=false;this.el.zoom.disabled=false;this.el['crop-toggle'].disabled=false;this.sync();this.el['saved-state'].textContent=this.dirty?'Correction non enregistrée':'Master intact';this.status(this.recipeWarning||'Réglages prêts.',!!this.recipeWarning);this.preview();
     }catch(e){if(version===this.version)this.status(e.message,true);}
@@ -130,7 +142,7 @@ export class Workshop {
     const end=()=>{this.el.crop.removeEventListener('pointermove',move);this.el.crop.removeEventListener('pointerup',end);this.el.crop.removeEventListener('pointercancel',end);this.schedule();};
     this.el.crop.addEventListener('pointermove',move);this.el.crop.addEventListener('pointerup',end);this.el.crop.addEventListener('pointercancel',end);
   }
-  changed(schedule=true){this.notice=null;this.version++;this.token=null;this.dirty=true;this.el.apply.disabled=false;this.el['saved-state'].textContent='Correction non enregistrée';this.status('Réglages modifiés · aperçu à actualiser');this.drawOverlay();if(schedule)this.schedule();}
+  changed(schedule=true){this.notice=null;this.version++;this.token=null;this.dirty=true;this.keepDraft();this.el.apply.disabled=false;this.el['saved-state'].textContent='Correction non enregistrée';this.status('Réglages modifiés · aperçu à actualiser');this.drawOverlay();if(schedule)this.schedule();}
   schedule(){clearTimeout(this.timer);if(this.el.auto.checked)this.timer=setTimeout(()=>this.preview(),120);}
   async preview(){
     clearTimeout(this.timer);if(!this.recipe)return;if(this.busy){this.pending=true;return;}this.busy=true;this.pending=false;
@@ -138,7 +150,7 @@ export class Workshop {
     try{const data=await this.api('/api/convert',{game:this.game,asset:this.asset,recipe:structuredClone(this.recipe)});if(version!==this.version)return;this.result=data;this.token=data.token;this.el.apply.disabled=false;this.showResult();if(!this.saving)this.status(this.notice?.asset===this.asset?this.notice.text:'Aperçu prêt · vous pouvez enregistrer cette correction.',this.notice?.asset===this.asset&&this.notice.error);this.el['result-info'].textContent=`${data.bytes.toLocaleString('fr')} octets · ${this.mode.toUpperCase()} · aperçu issu des octets convertis`;
     }catch(e){if(version===this.version)this.status(e.message,true);}finally{this.busy=false;this.el.preview.disabled=false;if(this.pending){this.pending=false;this.preview();}}
   }
-  showResult(){if(!this.result)return;this.el.result.src=this.result[this.el.display.value];this.el.result.hidden=false;this.el.placeholder.hidden=true;}
+  showResult(){if(this.result){this.el.result.src=this.result[this.el.display.value];this.el.result.hidden=false;this.el.placeholder.hidden=true;}this.drawComparison();}
   drawOverlay(){const canvas=this.el.overlay;canvas.hidden=!this.el.onion.checked;if(!this.recipe||!this.el.source.complete)return;canvas.width=560;canvas.height=384;const ctx=canvas.getContext('2d');const c=this.recipe.crop||[0,0,this.w,this.h],w=c[2]-c[0],h=c[3]-c[1];let dw=560,dh=384;if(!this.recipe.stretch){const scale=Math.min(dw/w,dh/h);dw=w*scale;dh=h*scale;}ctx.drawImage(this.el.source,...[c[0],c[1],w,h],(560-dw)/2,(384-dh)/2,dw,dh);}
   async apply(){
     if(!this.recipe || this.saving)return;
@@ -152,9 +164,10 @@ export class Workshop {
         this.result=result;this.token=token=result.token;this.showResult();}
       const data=await this.api('/api/apply',{token});
       if(version!==this.version)return;
-      this.dirty=false;this.keepDraft();this.assets.find(a=>a.id===asset).corrected=true;this.renderAssets();
-      this.el['saved-state'].textContent='DHGR RLE enregistré';
+      this.el.download.hidden=true;this.fingerprint=data.fingerprint;this.dirty=false;this.keepDraft();this.assets.find(a=>a.id===asset).corrected=true;this.renderAssets();
+      await this.loadReview(this.selectionVersion);
       this.status(`${data.saved} enregistré · reconstruisez le disque pour POM2.`);
+      this.el['saved-state'].textContent=this.mode==='hgr'?'HGR enregistré':'DHGR RLE enregistré';
     }catch(e){this.status(e.message,true);}finally{this.saving=false;this.el.apply.disabled=!this.recipe;}
   }
   regenControls(){
@@ -199,11 +212,12 @@ export class Workshop {
   // Le brouillon est remis a zero meme si l'on regarde un autre projet : il
   // garderait sinon un cadrage pris sur l'ancien master.
   async masterReplaced(game,id){
-    this.drafts??=new Map();this.drafts.set(game+':'+id,{recipe:structuredClone(this.defaults),dirty:true});
+    this.drafts??=new Map();this.drafts.delete(game+':'+id);try{localStorage.removeItem(draftKey(game,id));}catch{}
     if(game!==this.game)return;
     const a=this.assets.find(a=>a.id===id);if(!a)return;a.source=`/${this.game}.MORE/GENERATED/${id}.png?v=${Date.now()}`;a.corrected=false;
     if(this.asset===id){this.asset=null;await this.select(id);}else this.renderAssets();
-    if(this.asset===id)this.el['saved-state'].textContent='Nouveau master · DHGR à enregistrer';
+    if(this.asset===id)this.el['saved-state'].textContent='Nouveau master · proposition à enregistrer';
   }
-  async build(){this.el.build.disabled=true;this.status('Construction du disque…');try{const data=await this.api('/api/build',{game:this.game});this.el.download.href=data.volume;this.el.download.hidden=false;this.el.download.download='';this.status('Disque construit avec les corrections enregistrées.');}catch(e){this.status(e.message,true);}finally{this.el.build.disabled=false;}}
+  async build(){const game=this.game;this.el.build.disabled=true;this.el.download.hidden=true;this.status('Construction du disque…');try{const data=await this.api('/api/build',{game});if(game!==this.game)return;this.el.download.href=data.volume;this.el.download.hidden=false;this.el.download.download='';const drafts=this.dirty||[...(this.drafts?.entries()||[])].some(([key,d])=>key.startsWith(game+':')&&d.dirty);this.status(`Disque vérifié : ${data.verification.checked} images identiques aux fichiers enregistrés.${drafts?' Vos brouillons ne sont pas inclus.':''}`);}catch(e){this.status(e.message,true);}finally{this.el.build.disabled=false;}}
 }
+Object.assign(Workshop.prototype,reviewMethods);

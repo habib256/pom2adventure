@@ -30,6 +30,7 @@ SPACETRIP/         le jeu : moteur, textes, images, build_disk.py
 SPACETRIP.MORE/    bible, manifeste d'images, conversion
 dist/              les images produites (non suivies)
 check-project.sh   contrôle d'intégrité des deux jeux
+AGENTS.md          repères pour contribuer et choisir les validations
 ```
 
 Un outil qui sert aux deux jeux vit dans `ADVKIT/` ; un outil propre à un jeu
@@ -65,14 +66,16 @@ une touche de contrôle se passe en octet brut dans le corps de la requête).
 ### Les tests
 
 ```bash
-cmake -S ADVKIT/TOOLS -B ADVKIT/TOOLS/build && ctest --test-dir ADVKIT/TOOLS/build
-for t in SCOSWAMP.MORE/TOOLS/test_*.py ADVKIT/TESTS/test_*.py; do python3 "$t"; done
-for t in ADVKIT/TESTS/*.mjs; do node --experimental-websocket "$t"; done
+python3 ADVKIT/TESTS/run.py           # Python, Node et C autonomes
+python3 ADVKIT/TESTS/run.py --list    # suites, dont images, HTTP et Chrome
+python3 ADVKIT/TESTS/run.py images    # NumPy/Pillow et sources POM2 requis
 make -C SCOSWAMP/SRC playtest         # le jeu rejoué sous POM2, ~2 minutes
 ```
 
-`test_localized_layout.mjs` lit l'atelier : lancer `sh ADVKIT/serve.sh`
-avant. `test_workshop_browser.mjs` pilote un Chrome ouvert en débogage distant.
+Le [harnais](ADVKIT/TESTS/README.md) détaille les prérequis, les rapports JSON
+et l'ajout de tests. Les tests C autonomes ne demandent ni POM2 ni cc65.
+La [revue des images](ADVKIT/IMAGES.md#préparer-une-revue-détaillée) distingue
+les contrôles automatiques de la comparaison visuelle dans l'atelier.
 
 ---
 

@@ -25,3 +25,19 @@
 .apply-actions #preview{margin-top:6px}.apply-actions #build{margin-top:6px}.apply-actions button{padding:8px}
 @media(max-width:800px){.adjustments{height:auto;position:static;overflow:visible}.studio #settings{overflow:visible}.apply-actions{position:sticky;bottom:0;background:#191c1e;padding:10px 0}}
 .regen-tools{border-top:1px solid var(--trait);padding-top:12px;display:flex;flex-direction:column;gap:10px}.regen-tools button{font-size:11px;align-self:flex-start}.regen-tools summary{font-size:11px;color:#b9a48b;cursor:pointer}.regen-tools pre{font:10px/1.5 var(--mono);color:#a9b0b5;white-space:pre-wrap;max-height:220px;overflow:auto;background:#121416;border:1px solid var(--trait);padding:10px;margin:8px 0 0}
+.review-navigation{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:18px 0 12px;font-size:11px}
+.review-navigation span{color:#c3b39f;text-align:center}
+.scene-context,.review-card{border:1px solid var(--trait);border-radius:6px;padding:10px 12px;font-size:12px;margin:8px 0}
+.scene-context summary,.review-card summary{cursor:pointer;color:#d6c1a6}
+.scene-links{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.scene-links select{max-width:100%;font-size:11px}.scene-links a{color:var(--accent)}
+.scene-context pre{white-space:pre-wrap;max-height:200px;overflow:auto;font:12px/1.6 var(--mono)}
+.review-card>label:not(.check){display:block;margin:10px 0}
+.review-card textarea{width:100%;box-sizing:border-box;background:#101214;color:#e0d6ca;border:1px solid var(--trait);border-radius:4px;padding:8px;font:inherit;resize:vertical}
+.review-card button{margin-top:8px;font-size:12px}
+.before-panel{display:none}.canvases[data-layout=compare] .before-panel{display:block}.canvases[data-layout=compare] .source-panel{display:none}
+.result-frame #before-image,.result-frame #after-image{opacity:1;image-rendering:pixelated}
+.canvases[data-layout=compare] #overlay{display:none}
+#previous-master{max-width:100%;max-height:220px;object-fit:contain;margin-top:10px;display:block}
+#comparison-note{margin-bottom:8px}
+.studio [hidden]{display:none!important}
