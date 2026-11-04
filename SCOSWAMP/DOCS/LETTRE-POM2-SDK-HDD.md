@@ -229,9 +229,8 @@ L'utilisateur reste seul juge des images : rien de ce qui précède n'en valide 
 ### Le banc
 
 `playtest.py` a deux hôtes, tous deux conservés. HTTP pilote l'émulateur POM2 complet ;
-`--host a2shot` passe par le SDK. Sur les 79 scénarios, `pom2_playtest` et `a2shot`
-donnent chacun 1 133 assertions et 0 échec. Sur l'émulateur complet, `demarrage`,
-`combat`, `musique` et `musique_transitions` passent.
+`--host a2shot` passe par le SDK. Sur les 79 scénarios, l'émulateur complet,
+`pom2_playtest` et `a2shot` donnent chacun 1 133 assertions et 0 échec.
 
 Les 19 échecs d'avant venaient du banc, pas du jeu : le lecteur de symboles ignorait
 les `.ifdef` de `music.s`, et trois scénarios attendaient autre chose que ce que le
